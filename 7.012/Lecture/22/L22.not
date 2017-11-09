@@ -1,0 +1,102 @@
+\documentclass{article} 
+\usepackage{indentfirst} 
+\usepackage[utf8]{inputenc}
+
+\title{7.012 Lecture 22 - Cell Signaling} 
+\author{Robert Durfee} 
+\date{November 6, 2017}
+
+\begin{document}
+
+\maketitle
+
+\section{Intercommunication}
+
+We talk about how to make complex organisms. The architecture of complex tissues
+requires that the constituent cells continuously talk with one another through
+\textbf{intercommunication}. Without this ongoing communication, there is chaos. 
+
+Cell-surface receptors transmit signals through the membrane. Cells express a
+diverse array of transmembrane proteins in their plasma membranes.
+
+\section{Receptors}
+
+These transmembrane proteins transduce signals from outside the cell into the
+cytoplasm of the cell. The cell then responds with appropriate signaling. There
+are downstream responses, but we won't discuss these in class today.
+
+In the relaxed state of receptors, the receptor binds to GDP. This is only there
+to provide as a marker. This labels the receptor as inactive.
+
+A \textbf{ligand} is something whose presence causes a receptor to activate.
+When a ligand binds to the ectodomain, GTP is kicked off and floats into the
+cytoplasm. Now the GDP can bind. This is not used as energy, it only allows the
+receptor to become active.
+
+After some time, the GTP will be hydrolyzed back to GDP. This resets the
+receptor to its relaxed state. This is, again, not to store energy. This is a
+way to create a binary switch.
+
+Receptors are divided into \textbf{ectodomain}, \textbf{transmembrane domain},
+and \textbf{cytoplasmic domains}. There are \textbf{kinase} domains inside the
+cytoplasmic domain which is responsible for signaling when the ectodomain
+receives a signal.
+
+In general, kinase takes the phosphate off of ATP and transfers it to amino acid
+side chains of various substrate proteins.
+
+Transmembrane receptors can move laterally in the plane of the plasma membrane.
+Ligand receptors will bind causing \textbf{dimerization} where two receptors
+come together within the plane of the membrane. This then brings the cytoplasmic
+domains together. This causes \textbf{transphosphorylation}. 
+
+Receptor transphosphorylation activates different docking sites. As a result,
+multi-protein cytoplasmic signals can be formed.
+
+Negative feedback is necessary to shut down positive signals after a certain
+amount of time.
+
+A cell cannot decided whether or not to start proliferating. This is decided by
+its neighbors. This is called an \textbf{autocrine loop}.
+
+\subsection{Cell Proliferation Example}
+
+We put some cells at the bottom of a petri dish with a medium. These cells will
+do nothing. If you add plasma, still nothing happens. When you add serum, they
+multiply rapidly. Somehow the serum contains materials that are lacking in the
+plasma. Nutrients by themselves are not enough to persuade a cell to
+proliferate.
+
+Plasma exists before clotting, but after clotting, serums exists with the blood
+clot. When you have a wound, the surviving cells are stimulated to grow by a
+growth factor \textbf{PDGF}. This will cause a wound to proliferate immediately
+after the wound is incurred. This is done through platelet
+\textbf{degranulation}.
+
+Growth factor receptors are responsive to the PDGF that is released in the
+degranulation. They respond by emitting signals into the cytoplasm that
+stimulate the cell to proliferate. 
+
+Tyrosine kinases are the kinases related to growth factor receptors. This kinase
+can have many different substrates that result in different intracelluar
+signals.
+
+There are many different ectodomains of receptors designed to bind to a variety
+of different growth factor ligands. These all have different downstream
+substrates.
+
+\subsection{Cancer Cell Example}
+
+The GTP-ase is inhibited. Therefore the proliferation signal is stuck in the
+active state for an indefinite period of time.
+
+Also, mutant receptors can allow ligand-independent firing. The ectodomain can
+either be mutated or even borken off.
+
+\subsection{Extracellular Matrix Example}
+
+A cell will bind to its extracellular matrix on receptors called
+\textbf{integrins}. This assures the cell that proliferation is appropriate. If
+the cell is disconnected, it will not proliferate.
+
+\end{document}

@@ -1,0 +1,178 @@
+\documentclass{article} 
+\usepackage{tikz} 
+\usepackage{float}
+\usepackage{enumerate} 
+\usepackage{amsmath} 
+\usepackage{bm}
+\usepackage{indentfirst} 
+\usepackage{siunitx} 
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} 
+\graphicspath{ {Images/} } 
+\usepackage{float}
+\usepackage{mhchem} 
+\usepackage{chemfig} 
+\allowdisplaybreaks
+
+\title{ 14.01 Lecture 18 } 
+\author{ Robert Durfee } 
+\date{ November 8, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Present Value }
+
+The key insight is that a dollar today is worth less than a dollar tomorrow.
+This is because a dollar today, you can put it in the bank, you can have more
+tomorrow. You can't just add up dollars in different periods as if they are the
+same thing. For example, you can give you three pounds of apples, steak, and
+gold, but the ratio matters. You need to put things in commons terms. This is
+the \textbf{present value} in terms of dollars. 
+
+Supppose the interest rate $i=10\%$. In period zero, you put an amount $Y$ in
+the bank. In period two, you will have $Y(1+i)=1.1Y$.
+
+$$PV=\frac{FV}{(1+i)^t}$$
+
+Suppose that you loan someone 30 dollars and they will pay back 10 dollars each
+year.
+
+$$PV=10+\frac{10}{1.1}+\frac{10}{(1.1)^2}=24.87$$
+
+This is a bad deal as you are getting less.
+
+$$PV=F(1+\frac{1}{(1+i)^1}+...)$$
+
+A \textbf{perpetuity} is a payment that you get every year forever. A dollar
+forever is worth $1/i$.
+
+\section{ Future Value }
+
+What is the \textbf{future value} of saving money? Suppose I save 10 dollars. If
+the interest rate is 10\%, I will have 11 dollars at the end of the next year.
+The end of the second year I will have 12.10 dollars.  Therefore, the longer I
+leave the money in the bank, the more money I will have. This is called
+\textbf{compounding}. By leaving money in the bank, you are making interest on
+your interest.
+
+$$FV=Y(1+i)^t$$
+
+Lets imagine you plan to work fulltime and you want to save for your retirement.
+Approach one is to save 3,000 dollars for years 1-15, but you don't save from
+years 16-48. Say that interest equals 7\%. 
+
+After 15 years, you will have 75,387 dollars. Then you will put that money in
+the bank and earn 7\% interest for 30 years. When you retire, you will have
+703,010 dollars. 
+
+Approach two is to save nothing for years 1-15 and save 3,000 dollars each year
+for 16-48. When he retires, he will have 356,800 dollars. The earlier you save,
+the more you can make in the future. This is through the miracle of compounding.
+
+\section { Inflation and the Real Interest Rate }
+
+When we talk about interest, we have to also take \textbf{inflation} into
+account. Stores are surveyed and determine what stores are charging for things
+at different times. They then use this to create an \textbf{index}. This is
+shown in \textit{Figure 1}. Before now, we ignored inflation. But this is
+something too big to ignore.
+
+\begin{figure}[H] 
+    \centering 
+    \includegraphics[scale=0.50]{"Figure 1"}
+    \caption{Historical CPI} 
+\end{figure}
+
+When we talk about $i$, this is the \textbf{nominal interest}, but this is not
+what matters to you. What matters is how much you can consume next year. The
+\textbf{real interest} rate is $r$. This incorporates how much stuff is going to
+cost you in the future as well.
+
+Suppose Skittles are a dollar a bag. You have 100 dollars and the interest is
+10\%. Then in the future you can have 110 bags of Skittles. But if inflation is
+also 10\%, you can only buy the same number of Skittles. Therefore, you are not
+better off waiting. This is becasue the real interest rate is zero.
+
+$$r=i-inflation$$
+
+\section{ Choices Over Time }
+
+How do we think about making decisions over time? You want to pick the option
+with the highest present value (PV).
+
+A professional athelete is looking at two contracts. Contract A pays 1 million
+dollars today and contract B pays 500,000 today and 1.5 million dollars in 10
+years. Contract A is actually worth more. Contract B is worth $500,000 +
+1,500,000/(1+r)^{10}$. The higher the inflation, the lower the real interest
+rate, the better contract B becomes.
+
+Then there is the lottery example. The billions of dollars that you win, you
+actually get that paid out in equal installments over 20 years. This is worth
+significantly less than what they tell you that you win. More like about half of
+what is stated.
+
+\section{ Investment Decisions }
+
+We want to model the capital market. What do firms do with the interest rate?
+They always have to make investment decision. This is diverting money you make
+today to make money in the future. They compute the \textbf{net present value}.
+
+$$NPV = [(R_0-C_0)+\frac{P_1-C_1}{(1+r)}+...]$$
+
+If this is value is positive, you invest. If it is negative, you don't invest.
+
+For example, in period zero, revenue is zero and cost is 100 dollars. The
+revenue in period two is 200 dollars and the cost is 50. In this case, you would
+invest given the period of one year.
+
+$$NPV = -100 + \frac{150}{1.1}=36.36 > 0$$
+
+But how do you decide the interest rate? You measure this in terms of  the
+opportunity cost through the next best use of that money. You can put the money
+in the bank or buy stock shares. This is the interest rate you want to use. A
+firm's \textbf{discount rate} is their next best way they can spend that money.
+If the other option was money in the bank, you just use the real interest rate
+of the bank. But the world is not that simple. This is a key aspect of corporate
+and consumer decision making.
+
+Think of insulating a house. There are high heating costs. But you have to pay
+for the insulation installation. The heating bill is 2,000 dollar and if I
+reinsulate, I will save 500 dollars per year forever. The perpetuity is 500
+dollars over the interst rate. The cost of installation is 4,000 dollars.
+
+$$PV=-4000+\frac{500}{r}$$
+
+\subsection{ Human Capital }
+
+\begin{figure}[H] 
+    \centering 
+    \includegraphics[scale=0.75]{"Figure 2"}
+    \caption{Annual Incomes} 
+\end{figure}
+
+Right now, we are investing in human capital. Assume that the cost of college is
+20,000 dollars.  There is also an opportunity cost of forgone earnings. The
+benefit is that you make more in the future, but future worth is worth less. In
+\textit{Figure 2}, the light line shows if you don't go to college.  This
+assumes the high school graduate would make 18,000 dollars. From age 18 to 22,
+you are losing money.  Once you reach 22, you make more than high school
+graduate and in the future you make much, much more.  \textit{Figure 3} shows
+the discount rate for high school and college graduate. If the discount rate is
+greater than 10.42, you are better off not going to college. Governments can
+decrease the interest rates of student loans to encourage people to go to
+college.
+
+\begin{figure}[H] 
+    \centering 
+    \includegraphics[scale=0.75]{"Figure 3"}
+    \caption{Net Present Value} 
+\end{figure}
+
+You can extend this graph and compare this to MIT versus the next school that
+offered you a scholarship.  If you did this calculation, you either had a low
+interest rate or overvalued an MIT education.
+
+\end{document}
+
