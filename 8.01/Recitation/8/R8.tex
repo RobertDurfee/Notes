@@ -13,17 +13,24 @@
 
 \maketitle
 
-A cylinder of mass $m$ and radius $R$ is rotated in a V-groove with constant angular velocity $\omega$. The coefficient of friction between the cylinder and the surface is $\mu$. What external torque must be applied to the cylinder to keep it rolling at a constant angular speed?
+A cylinder of mass $m$ and radius $R$ is rotated in a V-groove with constant
+angular velocity $\omega$. The coefficient of friction between the cylinder and
+the surface is $\mu$. What external torque must be applied to the cylinder to
+keep it rolling at a constant angular speed?
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}
         \draw [thick] (-2.5,2.5) -- (0,0) -- (2.5,2.5);
         \draw [thick] (0,2.5) circle (1.76777);
-        \draw [thick, ->] (0.06,3.7) arc (90:180:1.2) node[pos=0.5, anchor=north west]{$\omega$};
+        \draw [thick, ->] (0.06,3.7) arc (90:180:1.2) node[pos=0.5, anchor=north
+            west]{$\omega$};
         \draw [thick, dashed] (-2.5,0) -- (2.5,0);
-        \draw [thick, <->] (-0.625,0.625) arc (135:180:0.88388) node[pos=0.5, anchor=south east]{$45^{\circ}$};
-        \draw [thick, <->] (0.625,0.625) arc (45:0:0.88388) node[pos=0.5, anchor=south west]{$45^{\circ}$};
-        \draw [thick, <->] (0.0,2.5) -- (1.76777,2.5) node[pos=0.5, anchor=south]{$R$};
+        \draw [thick, <->] (-0.625,0.625) arc (135:180:0.88388) node[pos=0.5,
+            anchor=south east]{$45^{\circ}$};
+        \draw [thick, <->] (0.625,0.625) arc (45:0:0.88388) node[pos=0.5,
+            anchor=south west]{$45^{\circ}$};
+        \draw [thick, <->] (0.0,2.5) -- (1.76777,2.5) node[pos=0.5,
+            anchor=south]{$R$};
         \fill [] (-1.25,1.25) circle (0pt) node[anchor=north east]{$\mu$};
     \end{tikzpicture}
 \end{figure}
@@ -34,13 +41,16 @@ Identify all forces acting on the cylinder.
     \begin{tikzpicture}
         \draw [thick, dashed] (-2.5,2.5) -- (-0.5,0.5);
         \draw [thick, dashed] (0.5,0.5) -- (2.5,2.5);
-        %\fill [] (0,2.5) circle (1.5pt);
         \draw [thick] (0,2.5) circle (1.76777);
-        \draw [thick, ->] (-1.25,1.25) -- (-2,2) node[pos=0.5, anchor=east]{$f_{k1}$};
-        \draw [thick, ->] (1.25,1.25) -- (1.00,1.00) node[pos=0.5, anchor=west]{$f_{k2}$};
+        \draw [thick, ->] (-1.25,1.25) -- (-2,2) node[pos=0.5,
+            anchor=east]{$f_{k1}$};
+        \draw [thick, ->] (1.25,1.25) -- (1.00,1.00) node[pos=0.5,
+            anchor=west]{$f_{k2}$};
         \draw [thick, ->] (0,2.5) -- (0, 0.25) node[pos=1, anchor=north]{$mg$};
-        \draw [thick, ->] (-1.25,1.25) -- (-0.25,2.25) node[pos=0.5, anchor=north west]{$N_{1}$};
-        \draw [thick, ->] (1.25,1.25) -- (0.50,2.00) node[pos=0.5, anchor=north east]{$N_{2}$};
+        \draw [thick, ->] (-1.25,1.25) -- (-0.25,2.25) node[pos=0.5,
+            anchor=north west]{$N_{1}$};
+        \draw [thick, ->] (1.25,1.25) -- (0.50,2.00) node[pos=0.5, anchor=north
+            east]{$N_{2}$};
     \end{tikzpicture}
 \end{figure}
 
@@ -50,12 +60,18 @@ Draw a free-body diagram for the cylinder.
     \begin{tikzpicture}
         \fill [] (0,0) circle (2pt);
         \draw [thick, ->] (0,0) -- (0,-2) node[pos=1, anchor=north east]{$mg$};
-        \draw [thick, ->] (0,0) -- (1.41421,1.41421) node[pos=1, anchor=north west]{$N_{1}$};
-        \draw [thick, ->] (0,0) -- (-1.2,1.2) node[pos=1, anchor=north east]{$N_{2}$};
-        \draw [thick, ->] (0,0) -- (-0.5,-0.5) node[pos=1, anchor=north east]{$f_{k2}$};
-        \draw [thick, ->] (0,0) -- (-0.707107,0.707107) node[pos=1, anchor=south west]{$f_{k1}$};
-        \draw [thick, ->] (4,0) -- (3.5,0.5) node[pos=1, anchor=south east]{$+\hat{j}$};
-        \draw [thick, ->] (4,0) -- (4.5,0.5) node[pos=1, anchor=south west]{$+\hat{i}$};
+        \draw [thick, ->] (0,0) -- (1.41421,1.41421) node[pos=1, anchor=north
+            west]{$N_{1}$};
+        \draw [thick, ->] (0,0) -- (-1.2,1.2) node[pos=1, anchor=north
+            east]{$N_{2}$};
+        \draw [thick, ->] (0,0) -- (-0.5,-0.5) node[pos=1, anchor=north
+            east]{$f_{k2}$};
+        \draw [thick, ->] (0,0) -- (-0.707107,0.707107) node[pos=1, anchor=south
+            west]{$f_{k1}$};
+        \draw [thick, ->] (4,0) -- (3.5,0.5) node[pos=1, anchor=south
+            east]{$+\hat{j}$};
+        \draw [thick, ->] (4,0) -- (4.5,0.5) node[pos=1, anchor=south
+            west]{$+\hat{i}$};
     \end{tikzpicture}
 \end{figure}
 
@@ -64,14 +80,22 @@ Then resolve the free-body diagram within the coordinate system.
     \centering
     \begin{tikzpicture}
         \fill [] (0,0) circle (2pt);
-        \draw [thick, ->] (0,0) -- (1.41421,1.41421) node[pos=1, anchor=north west]{$N_{1}$};
-        \draw [thick, ->] (0,0) -- (-1.2,1.2) node[pos=1, anchor=north east]{$N_{2}$};
-        \draw [thick, ->] (0,0) -- (-0.5,-0.5) node[pos=1, anchor=south east]{$f_{k2}$};
-        \draw [thick, ->] (0,0) -- (-0.707107,0.707107) node[pos=1, anchor=south west]{$f_{k1}$};
-        \draw [thick, dashed, ->] (0,0) -- (-1.41421,-1.41421) node[pos=1, anchor=north east]{$\frac{mg\sqrt{2}}{2}$};
-        \draw [thick, dashed, ->] (0,0) -- (1.41421,-1.41421) node[pos=1, anchor=north west]{$\frac{mg\sqrt{2}}{2}$};
-        \draw [thick, ->] (4,0) -- (3.5,0.5) node[pos=1, anchor=south east]{$+\hat{j}$};
-        \draw [thick, ->] (4,0) -- (4.5,0.5) node[pos=1, anchor=south west]{$+\hat{i}$};
+        \draw [thick, ->] (0,0) -- (1.41421,1.41421) node[pos=1, anchor=north
+            west]{$N_{1}$};
+        \draw [thick, ->] (0,0) -- (-1.2,1.2) node[pos=1, anchor=north
+            east]{$N_{2}$};
+        \draw [thick, ->] (0,0) -- (-0.5,-0.5) node[pos=1, anchor=south
+            east]{$f_{k2}$};
+        \draw [thick, ->] (0,0) -- (-0.707107,0.707107) node[pos=1, anchor=south
+            west]{$f_{k1}$};
+        \draw [thick, dashed, ->] (0,0) -- (-1.41421,-1.41421) node[pos=1,
+            anchor=north east]{$\frac{mg\sqrt{2}}{2}$};
+        \draw [thick, dashed, ->] (0,0) -- (1.41421,-1.41421) node[pos=1,
+            anchor=north west]{$\frac{mg\sqrt{2}}{2}$};
+        \draw [thick, ->] (4,0) -- (3.5,0.5) node[pos=1, anchor=south
+            east]{$+\hat{j}$};
+        \draw [thick, ->] (4,0) -- (4.5,0.5) node[pos=1, anchor=south
+            west]{$+\hat{i}$};
     \end{tikzpicture}
 \end{figure}
 
@@ -137,7 +161,8 @@ Write out angular analog for Newton's 2nd Law for the cylinder:
     \tau_{ext}-f_{k1}R-f_{k2}R&=I\alpha
 \end{align*}
 
-Since we know the cylinder is moving at a constant angular velocity, there is no angular acceleration:
+Since we know the cylinder is moving at a constant angular velocity, there is no
+angular acceleration:
 \begin{align*}
     \tau_{ext}-f_{k1}R-f_{k2}R&=0\\
     R\left(f_{k1}+f_{k2}\right)&=\tau_{ext}

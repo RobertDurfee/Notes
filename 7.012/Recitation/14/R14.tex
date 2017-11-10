@@ -14,51 +14,103 @@
 
 \subsection{Embryonic Stem Cells}
 
-First, we take \textbf{embryonic stem cells} from a mouse. These stem cells come from the \textbf{blastocyst} of a newly fertilized egg, from the inner cell mass. We want to get embryonic stem cells that have been edited and put them into a new blastocyst.
+First, we take \textbf{embryonic stem cells} from a mouse. These stem cells come
+from the \textbf{blastocyst} of a newly fertilized egg, from the inner cell
+mass. We want to get embryonic stem cells that have been edited and put them
+into a new blastocyst.
 
-We would take a DNA template with a defective gene that you want to be taken up by the stem cell. Every so often, a cell will incorporate this into their genome. How do we determine which ones have knocked out genes? We do this through \textbf{positive} and \textbf{negative} selection markers. The positive selection marker will be within the section we are trying to incorporate into the cell. This could be a type of antibiotic resistant. The negative marker will be directly directly adjacent to the construct that we want the cell to integrate. If it isn't integrated properly, positive and negative markers will both be included.
+We would take a DNA template with a defective gene that you want to be taken up
+by the stem cell. Every so often, a cell will incorporate this into their
+genome. How do we determine which ones have knocked out genes? We do this
+through \textbf{positive} and \textbf{negative} selection markers. The positive
+selection marker will be within the section we are trying to incorporate into
+the cell. This could be a type of antibiotic resistant. The negative marker will
+be directly directly adjacent to the construct that we want the cell to
+integrate. If it isn't integrated properly, positive and negative markers will
+both be included.
 
-Once we have our edited embryonic stem cells, we inject them into another blastocyst's inner cell mass. Now we have a blastocyst with both types of cells: the edited ones and the non-edited ones. This embryo grows into a \textbf{chimera} which has a mixture of both genomes. The patches are easily identified if the ES cells are from a black mouse. 
+Once we have our edited embryonic stem cells, we inject them into another
+blastocyst's inner cell mass. Now we have a blastocyst with both types of cells:
+the edited ones and the non-edited ones. This embryo grows into a
+\textbf{chimera} which has a mixture of both genomes. The patches are easily
+identified if the ES cells are from a black mouse. 
 
-But we want a mouse that is homozygous for out knockout gene. We can breed a chimeric mouse with a black ES cells injected with a white, wild type mouse. Now we have heterozygous knockout mice that are black (or brown). Now you cross these to get homozygous knockout mice.
+But we want a mouse that is homozygous for out knockout gene. We can breed a
+chimeric mouse with a black ES cells injected with a white, wild type mouse. Now
+we have heterozygous knockout mice that are black (or brown). Now you cross
+these to get homozygous knockout mice.
 
 \subsection{RNA Interference}
 
-\textbf{RNAi} is a way to silence, or knock down, genes that are expressed. Reducing the level of proteins expressed. This can be done by preventing translation of target mRNA or by causing degradation of the target mRNA. 
+\textbf{RNAi} is a way to silence, or knock down, genes that are expressed.
+Reducing the level of proteins expressed. This can be done by preventing
+translation of target mRNA or by causing degradation of the target mRNA. 
 
-Given a cell with a specific mRNA, we can introduce double stranded RNA. When this dsRNA gets incorporated into the cell, a protein, called a \textbf{dicer}, will chop it up. Once we have these fragments, protein complex \textbf{RISC} will bind your mRNA to the target mRNA. This will degrade the mRNA.
+Given a cell with a specific mRNA, we can introduce double stranded RNA. When
+this dsRNA gets incorporated into the cell, a protein, called a \textbf{dicer},
+will chop it up. Once we have these fragments, protein complex \textbf{RISC}
+will bind your mRNA to the target mRNA. This will degrade the mRNA.
 
 This arose as an immune mechanism against dsRNA viruses.
 
 \subsection{CRISPR/Cas9}
 
-\textbf{Clustered Regularly Inter-Spaced Short Palindromic Repeats} is an adaptive immune system in bacteria against viruses. In the cell, there is a \textbf{CRISPR} array where there are a bunch of repeats and little \textbf{spacers} between the palindromic repeats that are the same as viral sequences.
+\textbf{Clustered Regularly Inter-Spaced Short Palindromic Repeats} is an
+adaptive immune system in bacteria against viruses. In the cell, there is a
+\textbf{CRISPR} array where there are a bunch of repeats and little
+\textbf{spacers} between the palindromic repeats that are the same as viral
+sequences.
 
-\textbf{CRISPR associative proteins} (Cas), in combination with the CRISPR array, are able to target specific DNA sequences (also RNA) and create a double stranded break.
+\textbf{CRISPR associative proteins} (Cas), in combination with the CRISPR
+array, are able to target specific DNA sequences (also RNA) and create a double
+stranded break.
 
-This can be used for genome editing by damaging the genome and forcing the cell to repair the damage. When the cell tries to repair it, it will either use non-homologous end joining (NHEJ) or homologous recombination (HR). 
+This can be used for genome editing by damaging the genome and forcing the cell
+to repair the damage. When the cell tries to repair it, it will either use
+non-homologous end joining (NHEJ) or homologous recombination (HR). 
 
-With NHEJ, there is a lot of error with insertions or deletions as the ends will often be cut back. These cause frame shift mutations which destroy the entire genome. 
+With NHEJ, there is a lot of error with insertions or deletions as the ends will
+often be cut back. These cause frame shift mutations which destroy the entire
+genome. 
 
-With HR, the cell looks for a region that looks very similar to this region. This will be used as a template for repair. The cell will then copy that template perfectly in the repair sequence and you end up with a sequence identical to the original, pre-damaged DNA.
+With HR, the cell looks for a region that looks very similar to this region.
+This will be used as a template for repair. The cell will then copy that
+template perfectly in the repair sequence and you end up with a sequence
+identical to the original, pre-damaged DNA.
 
-In a human cell, HR will look at the chromosome copy and you will end up a homozygote for that gene because it is copying that sequence in a diploid. 
+In a human cell, HR will look at the chromosome copy and you will end up a
+homozygote for that gene because it is copying that sequence in a diploid. 
 
-If we only introduce CRISPR and single guide RNA, CRISPR will keep cutting until a NHEJ repair happens and it no longer looks like a cut site. This will cause a gene to be knocked out. If we introduce CRISPR, single guide RNA, and a repair template, we will have HR which will insert our template into the genome.
+If we only introduce CRISPR and single guide RNA, CRISPR will keep cutting until
+a NHEJ repair happens and it no longer looks like a cut site. This will cause a
+gene to be knocked out. If we introduce CRISPR, single guide RNA, and a repair
+template, we will have HR which will insert our template into the genome.
 
-It is important to note that the single guide RNA can be used on either the coding or non-coding strand of DNA.
+It is important to note that the single guide RNA can be used on either the
+coding or non-coding strand of DNA.
 
 \section{Cell Signalling}
 
-\textbf{Cell signalling} is a set of cascading sequence of actions that result in a downstream change in the function of a cell.
-$$\rm{Receptor \rightarrow G\ Protein \rightarrow Adenylyl\ Cyclase \rightarrow CAMP \rightarrow Protein\ Kinase}$$
+\textbf{Cell signalling} is a set of cascading sequence of actions that result
+in a downstream change in the function of a cell.
+$$\rm{Receptor \rightarrow G\ Protein \rightarrow Adenylyl\ Cyclase \rightarrow
+CAMP \rightarrow Protein\ Kinase}$$
 
-When looking at a diagram of a cell signal, an arrow means activate. A line with a blunt end means to inhibit. If you inactivate A, D will be activated. If you activate A, D will be inactivated.
+When looking at a diagram of a cell signal, an arrow means activate. A line with
+a blunt end means to inhibit. If you inactivate A, D will be activated. If you
+activate A, D will be inactivated.
 
 $$A \dashv B \dashv C \dashv D$$
 
-\textbf{Cyclic AMP} is a second messenger because it is a downstream effect of the initial activation scheme. This can then activate a bunch of different downstream \textbf{kinase}. This is important because second messengers amplify signals.
+\textbf{Cyclic AMP} is a second messenger because it is a downstream effect of
+the initial activation scheme. This can then activate a bunch of different
+downstream \textbf{kinase}. This is important because second messengers amplify
+signals.
 
-One of the main receptors are G-protein coupled receptors. The receptor activates a G-protein by pairing with either GDP (inactive) or GTP (active). This G-protein changes the GDP/GTP bound state. They also include a GTPase which will cause the slow hydrolysis of GTP to GDP. Therefore, over time, they will become inactive.
+One of the main receptors are G-protein coupled receptors. The receptor
+activates a G-protein by pairing with either GDP (inactive) or GTP (active).
+This G-protein changes the GDP/GTP bound state. They also include a GTPase which
+will cause the slow hydrolysis of GTP to GDP. Therefore, over time, they will
+become inactive.
 
 \end{document}
