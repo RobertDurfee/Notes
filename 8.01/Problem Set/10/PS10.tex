@@ -274,6 +274,72 @@ energy:
 
 \section{Elastic Collision of Object and Pivoted Ring}
 
+Setting initial and final angular momentum equal:
+$$R m v_0 = I \omega - R m v_f$$
 
+Setting initial and final kinetic energy equal:
+$$\frac{1}{2} m v_0^2 = \frac{1}{2} I \omega^2 + \frac{1}{2} m v_f^2$$
+
+Solving the angular momentum equation for $\omega$:
+$$\omega = \frac{R m (v_0 + v_f)}{I}$$
+
+Substituting $\omega$ into the kinetic energy equation:
+\begin{align*}
+    m v_0^2 &= I \left( \frac{R m (v_0 + v_f)}{I} \right)^2 + m v_f^2 \\
+    m v_0^2 &= \frac{ R^2 m^2 }{I} \left( v_0^2 + 2 v_0 v_f + v_f^2) + m v_f^2
+\end{align*}
+
+Rearranging into a quadratic equation:
+\begin{align*}
+    0 &= -v_0^2 \left( 1 - \frac{R^2 m}{I} \right) + \left( \frac{2 R^2 m
+    v_0}{I} \right) v_f + \left( \frac{R^2 m}{I} + 1 \right) v_f^2
+\end{align*}
+
+Solving for $I$ using the parallel axis theorem:
+\begin{align*}
+    I &= I_{cm} + m d^2 \\
+    I &= m_R R^2 + m_R R^2 \\
+    I &= 2 m_R R^2
+\end{align*}
+
+Substituting $I$ into quadratic equation:
+$$ 0 = -v_0^2 \left( 1 - \frac{m}{2 m_R} \right) + \left( \frac{m v_0}{m_R}
+\right) v_f + \left( \frac{m}{2 m_R} + 1 \right) v_f^2$$
+
+Solving using quadratic formula:
+$$ v_f = \frac{ -\frac{m v_0}{m_R} + \sqrt{ \left( \frac{m v_0}{m_R} \right)^2 +
+v_0^2 \left( \frac{m}{m_R} + 2 \right) \left( 2 - \frac{m}{m_R}
+\right) }}{ \left( \frac{m}{m_R} + 2 \right)}$$
+
+\section{Sand Leaking from a Drum}
+
+First of all, it is important to note that there are no external forces (or
+torques) acting on this system. As a result, angular momentum will be conserved.
+Additionally, the sand is free to move within the first drum. As a result, as
+the sand is flowing from the inner drum to the outer drum, there will be no
+effect on the inner drums motion.
+$$\omega_A(t) = \omega_{A0}$$
+
+However, after the sand hits the outer drum, it sticks to it. This creates an
+inelastic angular collision that will alter the motion of the second drum.
+Equating the initial and final momentum of the system (assuming for now all the
+sand is transfered):
+\begin{align*}
+    m_A a^2 \omega_{A0} + m_S a^2 \omega_{A0} &= m_A a^2 \omega_{A0} + (m_B +
+    m_S) b^2 \omega_{Bf} \\
+    m_S a^2 \omega_{A0} &= (m_B + m_S) b^2 \omega_{Bf}
+\end{align*}
+
+Solving for $\omega_{Bf}$:
+$$\omega_{Bf} = \frac{m_S a^2 \omega_{A0}}{(m_B + m_S) b^2}$$
+
+Given that we know the rate of transfer of sand, 
+$$m_s(t) = \lambda t$$
+
+Substituting this into the conservation of momentum equation:
+\begin{align*}
+    \omega_{Bf}(t) &= \frac{m_S(t) a^2 \omega_{A0}}{(m_B + m_S(t)) b^2} \\
+    \omega_{Bf}(t) &= \frac{\lambda t a^2 \omega_{A0}}{(m_B + \lambda t) b^2}
+\end{align*}
 
 \end{document}
