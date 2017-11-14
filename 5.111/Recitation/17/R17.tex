@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 5.111 Recitation 17 }
+\author{ Robert Durfee }
+\date{ November 14, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Buffers }
+
+$$\ce{H_2CO_3 + H_2O <=> HCO_3- + H_2O}$$
+
+Say you are given you have a solution of 0.50 M $\ce{H_2CO_3}$ and 0.50 M
+$\ce{HCO_3-}$.
+
+$$\rm{pH} = \rm{pK_a} + \log \left( \frac{[\ce{HCO_3-}]}{[\ce{H_2CO_3}]}
+\right)$$
+$$\rm{pH} = 6.15$$
+
+\section{Titration}
+
+Four types of titrations that we look at: strong acid/strong base, strong
+base/strong acid, weak acid/strong base, weak base/strong acid.
+
+\subsection{Strong-Strong}
+
+For a strong acid/strong base, the equivalence point will be where we have added
+the same number of moles of base as acid. This is the theoretical value. Since
+they are both strong, it should come to a pH of 7. For a strong base/strong
+acid, the same results are shown, however the S-curve will start high rather
+than low.
+
+You can solve for the volume of base/acid added using dilution rules. 
+$$V_{base} = \frac{M_{acid}}{M_{base}} V_{acid}$$
+
+\subsection{Weak-Strong}
+
+For a weak acid titrated with a strong base, there will initially be a strong
+increase in pH. But then we enter the \textbf{buffer region} and the pH will
+platteau for awhile. Then the equivalence point will be reached and surpassed.
+
+The half-equivalence point is when you add half the amout of base/acid required
+to neutralize the acid/base you started with. This point is important because it
+is where the pH equals the $\rm{pK_a}$. This is because in the
+Henderson-Hasselbalch equation, the logarithm will be zero.
+
+For a weak base titrated with a strong acid, the same effects will exists, but
+the graph will be flipped.
+
+\end{document}
+
