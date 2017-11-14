@@ -16,7 +16,7 @@
 
 \title{ 5.111 Problem Set 8 }
 \author{ Robert Durfee }
-\date{ November 14, 2017 }
+\date{ November 15, 2017 }
 
 \begin{document}
 
@@ -162,10 +162,146 @@ $$\ce{H_2PO_4- <=> H+ + HPO_4^{2-} }$$
 The pH of equivalency should be higher than 7.
 
 \section{Titration Problem}
-$$\ce{C_6H_5OOH <=> H+ + C_6H_500-}$$
 
 \begin{enumerate}[(a)]
-    \item 
+    \item Deprotonation of benzoic acid:
+        $$\ce{C_6H_5COOH + H_2O <=> H_3O+ + C_6H_5COO-}$$
+
+        Setting up ICE chart:
+        \begin{center}
+            \begin{tabular}{c c c c}
+                & $\ce{C_6H_5COOH}$ & $\ce{H_3O+}$ & $\ce{C_6H_5COO-}$ \\
+                Initial & 0.15 M & 0 M & 0 M \\
+                Change & $-x$ & $+x$ & $+x$ \\
+                Final & $0.15 - x$ & $x$ & $x$
+            \end{tabular}
+        \end{center}
+
+        Equating to $\rm{K_a}$
+        \begin{align*}
+            6.5 \cdot 10^{-5} &= \frac{x^2}{0.15 - x} \\
+            x &= 3.12 \cdot 10^{-3}
+        \end{align*}
+
+        Solving for pH:
+        \begin{align*}
+            \rm{pH} &= -\log(3.12 \cdot 10^{-3}) \\
+            \rm{pH} &= 2.51
+        \end{align*}
+
+    \item Deprotonation of benzoic acid with addition of $\ce{OH-}$:
+        $$\ce{C_6H_5COO- + H_2O <=> OH- + C_6H_5COOH}$$
+
+        Calculate moles of NaOH added:
+        \begin{align*}
+            n_{\ce{NaOH}} &= (0.0014\ \si{L})(0.30\ \si{M}) \\
+            n_{\ce{NaOH}} &= 0.00042\ \si{mol}
+        \end{align*}
+
+        Calculate moles of $\ce{C_6H_5COOH}$:
+        \begin{align*}
+            n_{\ce{C_6H_5COOH}} &= (0.015\ \si{L})(0.15\ \si{M}) \\
+            n_{\ce{C_6H_5COOH}} &= 0.00225\ \si{mol}
+        \end{align*}
+
+        Setting up ICE chart:
+        \begin{center}
+            \begin{tabular}{c c c c}
+                & $\ce{C_6H_5COO-}$ & $\ce{OH-}$ & $\ce{C_6H_5COOH}$ \\
+                Initial & 0 mol & 0.00042 mol  & 0.00225 mol \\
+                Change & +0.00042 & -0.00042 & -0.00042 \\
+                Final & 0.00042 & 0 & 0.00183
+            \end{tabular}
+        \end{center}
+
+        Using the Henderson-Hasselbalch equation:
+        \begin{align*}
+            \rm{pH} &= \rm{pK_a} + \log \left( \frac{[\ce{A-}]}{[\ce{HA}]}
+            \right) \\
+            \rm{pH} &= 4.19 + \log \left( \frac{0.00042}{0.00183} \right) \\
+            \rm{pH} &= 3.55
+        \end{align*}
+
+    \item At the half-equivalency point, half the number of moles of the given
+        acid will be neutralized by the added base.
+        $$\frac{n_{\ce{C_6H_5COOH}}}{2} = 0.001125\ \si{mol}$$
+
+        Calculating the volume of NaOH needed to reach 0.001125 moles:
+        \begin{align*}
+            V &= \frac{0.001125\ \si{mol}}{0.30\ \si{M}} \\
+            V &= 3.75\ \si{mL}
+        \end{align*}
+
+    \item The pH at half-equivalency is the value of $\rm{pK_a}$.
+        \begin{align*}
+            \rm{pH} &= \rm{pK_a} \\
+            \rm{pH} &= 4.19
+        \end{align*}
+
+    \item The number of moles of added base will equal the number of moles of
+        the acid.
+        \begin{align*}
+            V_{base} &= \frac{(M_{acid}(V_{acid})}{M_{base}} \\
+            V_{base} &= 7.5\ \si{mL}
+        \end{align*}
+
+    \item Calculate the concentration of the conjugate base by using the total
+        number of moles and the new volume at equivalency.
+        \begin{align*}
+            [\ce{C_6H_5COO-}] &= \frac{n_{\ce{C_6H5COO-}}}{V_{acid} + V_{base}}
+            \\
+            [\ce{C_6H_5COO-}] &= \frac{0.00225}{0.015 + 0.0075} \\
+            [\ce{C_6H_5COO-}] &= 0.1\ \si{M}
+        \end{align*}
+
+        Setting up ICE chart:
+        \begin{center}
+            \begin{tabular}{c c c c}
+                & $\ce{C_6H_5COO-}$ & $\ce{OH-}$ & $\ce{C_6H_5COOH}$ \\
+                Initial & 0.1 M & 0 M  & 0 M \\
+                Change & $-x$ & $+x$ & $+x$ \\
+                Final & 0.01 - $x$ & $x$ & $x$
+            \end{tabular}
+        \end{center}
+
+        Convert $\rm{K_a}$ to $\rm{K_b}$:
+        \begin{align*}
+            \rm{K_b} &= \frac{\rm{K_w}}{\rm{K_a}} \\
+            \rm{K_b} &= \frac{10^{-14}}{6.5 \cdot 10^{-5}} \\
+            \rm{K_b} &= 1.538 \cdot 10^{-10}
+        \end{align*}
+        
+        Equating to $\rm{K_b}$:
+        \begin{align*}
+            1.538 \cdot 10^{-10} &= \frac{x^2}{0.1 - x} \\
+            x &= 3.922 \cdot 10^{-6}
+        \end{align*}
+
+        Convert to pH:
+        \begin{align*}
+            \rm{pH} &= 14 + \log (3.922 \cdot 10^{-6}) \\
+            \rm{pH} &= 8.59
+        \end{align*}
+
+    \item Calculate number of moles added past equivalency:
+        \begin{align*}
+            n_{\ce{NaOH}} &= (0.0045\ \si{L})(0.30\ \si{M}) \\
+            n_{\ce{NaOH}} &= 0.00135\ \si{mol}
+        \end{align*}
+
+        Calculate the concentration of the $\ce{OH-}$ added past equivalency:
+        \begin{align*}
+            [\ce{OH-}] &= \frac{0.00135\ \si{mol}}{0.0045\ \si{L} + 0.015\
+            \si{L} + 0.0075\ \si{L}} \\
+            [\ce{OH-}] &= 0.05\ \si{M}
+        \end{align*}
+
+        Convert to pH:
+        \begin{align*}
+            \rm{pH} &= 14 + \log(0.05) \\
+            \rm{pH} &= 12.70
+        \end{align*}
+
 \end{enumerate}
 
 \end{document}
