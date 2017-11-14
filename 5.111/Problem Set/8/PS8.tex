@@ -1,0 +1,172 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 5.111 Problem Set 8 }
+\author{ Robert Durfee }
+\date{ November 14, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ pH, pOH, and pK }
+
+Writing out the deprotonation chemcial equation for lactic acid:
+$$\ce{C_3H_6O_3 <=> H+ + C_3H_5O_3-}$$
+
+Convert the $\rm{pK_a}$ to a $\rm{K_a}$:
+\begin{align*}
+    \rm{K_a} &= 10^{-\rm{pK_a}} \\
+    \rm{K_a} &= 8.317 \cdot 10^{-4}
+\end{align*}
+
+Writing out the equilibrium chart:
+
+\begin{center}
+    \begin{tabular}{c c c c}
+         & $\ce{C_3H_6O_3}$ & $\ce{H+}$ & $\ce{C_3H_5O_3-}$ \\
+        Initial & $1.5 \cdot 10^{-3}$ & 0 & 0 \\
+        Change & $-x$ & $+x$ & $+x$ \\
+        Equilibrium & $1.5 \cdot 10^{-3} - x$ & x & x
+    \end{tabular}
+\end{center}
+
+Set equalibrium equal to $\rm{K_a}$:
+\begin{align*}
+    8.317 \cdot 10^{-4} &= \frac{x^2}{1.5 \cdot 10^{-3} - x} \\
+    1.2476 \cdot 10^{-6} &= x^2 \\
+    1.1170 \cdot 10^{-3} &= x
+\end{align*}
+
+The 5\% assumption doesn't hold. Using the quadratic equation:
+\begin{align*}
+    x &= \frac{8.317 \cdot 10^{-4} - \sqrt{ (-8.317 \cdot 10^{-4} )^2 -
+    4(-1)(1.24755 \cdot 10^{-6})}}{2(-1)} \\
+    x &= 7.7599 \cdot 10^{-4}\ \si{M}
+\end{align*}
+
+Thus, this value of $x$ equals the concentration of hydrogen ion:
+\begin{align*}
+    \rm{pH} &= -\log([\ce{H+}]) \\
+    \rm{pH} &= -\log(7.7 \cdot 10^{-4}) \\
+    \rm{pH} &= 3.11
+\end{align*}
+
+Solving for the pOH:
+\begin{align*}
+    \rm{pOH} &= 14 - \rm{pH} \\
+    \rm{pOH} &= 14 - 3.11 \\
+    \rm{pOH} &= 10.9
+\end{align*}
+
+Solving for the percent deprotonation:
+$$\frac{7.7599 \cdot 10^{-4}}{1.5 \cdot 10^{-3}} = 52.7 \%$$
+
+\section{Buffer Problems}
+
+$\ce{KH_2PO_4}$ is the acid and $\ce{Na_2HPO_4}$ is the conjugate base.
+$$\ce{H_2PO_4- <=> H+ + HPO_4^{2-} }$$
+
+\begin{enumerate}[(a)]
+    \item Calculating moles of $\ce{H_2PO_4-}$:
+        $$(0.1\ \si{L})(0.100\ \si{M}) = 0.01\ \si{mol}$$
+
+        Calculating moles of $\ce{HPO_4^{2-}}$:
+        $$(0.1\ \si{L})(0.150\ \si{M}) = 0.015\ \si{mol}$$
+
+        Solving for initial pH using the Henderson-Hasselbalch equation:
+        \begin{align*}
+            \rm{pH} &= \rm{pK_a} + \log \left( \frac{[\ce{A-}]}{[\ce{HA}]}
+            \right) \\
+            \rm{pH} &= 7.21 + \log \left( \frac{0.150}{0.100} \right) \\
+            \rm{pH} &= 7.39
+        \end{align*}
+
+        Solving for moles of added base:
+        $$(0.0800\ \si{L})(0.0100\ \si{M}) = 0.0008\ \si{mol}$$
+        
+        Setting up an ICE chart:
+        \begin{center}
+            \begin{tabular}{c c c c}
+                & $\ce{H_2PO_4-}$ & $\ce{H+}$ & $\ce{HPO_4^{2-}}$ \\
+                Initial & 0.01 &  & 0.015 \\
+                Change & -0.0008 &  & +0.0008 \\
+                Equilibrium & 0.0092 & x & 0.0158
+            \end{tabular}
+        \end{center}
+
+        Solving for final pH using the Henderson-Hasselbalch equation:
+        \begin{align*}
+            \rm{pH} &= \rm{pK_a} + \log \left( \frac{[\ce{A-}]}{[\ce{HA}]}
+            \right) \\
+            \rm{pH} &= 7.21 + \log \left( \frac{0.0158}{0.0092} \right) \\
+            \rm{pH} &= 7.44
+        \end{align*}
+
+        Change in pH:
+        \begin{align*}
+            \Delta \rm{pH} &= \rm{pH}_f - \rm{pH}_i \\
+            \Delta \rm{pH} &= 7.44 - 7.39 \\
+            \Delta \rm{pH} &= 0.05
+        \end{align*}
+
+    \item Solving for moles of added acid:
+        $$(0.010\ \si{L})(1.0\ \si{M}) = 0.010\ \si{mol}$$
+        
+        Setting up an ICE chart:
+        \begin{center}
+            \begin{tabular}{c c c c}
+                & $\ce{H_2PO_4-}$ & $\ce{H+}$ & $\ce{HPO_4^{2-}}$ \\
+                Initial & 0.01 & 0.010 & 0.015 \\
+                Change & +0.010 & -0.010 & -0.010 \\
+                Equilibrium & 0.020 & x & 0.005
+            \end{tabular}
+        \end{center}
+
+        Solving for final pH using the Henderson-Hasselbalch equation:
+        \begin{align*}
+            \rm{pH} &= \rm{pK_a} + \log \left( \frac{[\ce{A-}]}{[\ce{HA}]}
+            \right) \\
+            \rm{pH} &= 7.21 + \log \left( \frac{0.005}{0.020} \right) \\
+            \rm{pH} &= 6.61
+        \end{align*}
+
+        Change in pH:
+        \begin{align*}
+            \Delta \rm{pH} &= \rm{pH}_f - \rm{pH}_i \\
+            \Delta \rm{pH} &= 6.61 - 7.39 \\
+            \Delta \rm{pH} &= -0.78
+        \end{align*}
+
+\end{enumerate}
+
+\section{Titration Curves}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{"Figure 1"}
+\end{figure}
+
+The pH of equivalency should be higher than 7.
+
+\section{Titration Problem}
+$$\ce{C_6H_5OOH <=> H+ + C_6H_500-}$$
+
+\begin{enumerate}[(a)]
+    \item 
+\end{enumerate}
+
+\end{document}
+
