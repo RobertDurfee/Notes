@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 7.012 Recitation 16 }
+\author{ Robert Durfee }
+\date{ November 14, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Protein Localization }
+
+This is important because we need to localize proteins to appropriate
+compartments in eukaryotic cells for proper function. We can accomplish this in
+multiple different ways. The first, most basic way, is through signal sequences. 
+
+A \textbf{signal peptide} is an N-terminal signal sequence that tells the cell
+whether to make the protein in the cytoplasm or the ER. If this is present, the
+translation occurs in the ER and it if is not present, translation occurs in the
+cytoplasm.
+
+A \textbf{signal recognition particle} (SRP) pauses translation. Then the
+ribosome and mRNA are brought to the ER by the SRP. Once they reach the ER,
+translation starts again and the protein is synthesized into the ER through a
+pathway.
+
+Once the protein is fully synthesized into the ER, the signal sequence will be
+cleaved off and you will have a free-floating protein in the ER. This is for a
+protein that is soluble in the lumen of the ER.
+
+Some proteins have hydrophobic areas that don't want to be in the ER lumen. Then
+the signal sequence is not cleaved off and you have a membrane-associated 
+protein with transmembrane regions.
+
+It is important to remember that the lumen of the ER is \textbf{topologically
+equivalent} to the outside of the cell's plasma membrane. 
+
+\section{Secretory Pathway}
+
+This only applies to proteins synthesized into the ER. Once these proteins are
+synthesized into the ER, the ER will send \textbf{vesicles} containing proteins
+to the golgi apparatus. These vesicles are essentially small, transient ER
+compartments. Once in the golgi, there are \textbf{covalent modifications} made
+to the protein such as additions of sugars called \textbf{glycosylation}.
+
+After the vesicle leaves the golgi, it will reach the plasma membrane and fuse
+expelled the protein outside the cell. Now that protein has been secreted. 
+
+For a transmembrane protein, the same parts of the protein that are in the lumen
+of the ER will be the parts that are outside the cell. This is because of the
+topological equivalency of the lumen of the ER and the outside of the cell.
+
+If a protein only has a signal peptide, that protein will be secreted (or end up
+in the plasma membrane if it is a transmembrane protein). If proteins want to end
+up in the ER, golgi, or lysosomes, you need a signal peptide and an
+ER/golgi/lysosome retention signal to allow the protein to be localized to any
+of those respective locations.
+
+If a protein does not have a signal peptide, the protein will be synthesized in
+the cytosol. In that case, the protein can localize to the cytoplasm or it can
+localize to other organelles. If the protein has a \textbf{nulclear localization
+signal}, that protein will localize to the nucleus. If ths protein has a
+\textbf{mitochondrial localization signal}, it will localize to the
+mitochondria.
+
+\end{document}
+
