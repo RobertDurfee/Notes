@@ -1,0 +1,157 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 5.111 Recitation 18 }
+\author{ Robert Durfee }
+\date{ November 16, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Redox Reactions }
+
+Redox stands for reduction-oxidation. This specifices whether a compound is
+gaining or losing electrons. Oxidation means losing electrons and reduction
+means gaining electrons. "Leo says ger." Reducing agent is the thing that is
+oxidized and that causes reduction. Oxidizing agent is the thing that is reduced
+and that causes oxidation.
+
+$$\ce{2MnO_4^- + 5 C_2O_4^{2-} + 16H+ -> 2Mn^{2+} + 10CO_2 + 8H_2O}$$
+
+Manganese oxidation number is +7 and carbon is +3. On the right, Manganese is +2
+and carbon in +4. The oxidation number of manganese went down, thus it gained
+electrons, thus is is reduced, thus it is the oxidizing agent. The oxidation
+number of carbon went up, thus it lost electrons, thus it is oxidized, thus it
+is the reducing agent.
+
+\subsection{ How to Find Oxidation Numbers}
+
+There are several rules:
+
+\begin{itemize}
+    \item If the element is in its natural state, then the oxidation number is
+        0. This applies to diatomic molecules as well where the whole
+        compound has an oxidation number of 0.
+    \item If you are in group 1, the oxidation number is +1.
+    \item If you are in group 2, the oxidation number is +2.
+    \item Oxygen is probably -2. Almost always except in the case of a
+        peroxide, then it is -1, a superperoxide, then it is -1/2, or an
+        ozonide, then it is -1/3.
+    \item Hydrogen is +1 if it is bonded to a nonmetal and is -1 if bonded to a
+        metal.
+    \item Flourine is always -1. Other halogens are usually -1 and the exception is if they are bonded
+        to oxygen.
+\end{itemize}
+
+You can also fall back on lewis structures and calculate the oxidation number
+similar to formal charge. However, the more electronegative atom in a bond will
+take all the electrons from that bond. If they have the same electronegatively,
+they each pull half of the electrons. Once again, the sum of oxidation numbers
+equals the charge on the compound.
+
+\subsection{Balancing Example}
+
+$$\ce{MnO_4^- + C_2O_4^{2-} -> Mn^{2+} + CO_2}$$
+
+Separate into two half-reactions.
+
+$$\ce{MnO_4^- -> Mn^{2+}}$$
+$$\ce{C_2O_4^{2-} -> CO_2}$$
+
+Now balance everything except hydrogen and oxygen and charge.
+
+$$\ce{MnO_4^- -> Mn^{2+}}$$
+$$\ce{C_2O_4^{2-} -> 2CO_2}$$
+
+Balance oxygen by adding $\ce{H_2O}$
+
+$$\ce{MnO_4^- -> Mn^{2+} + 4H_2O}$$
+$$\ce{C_2O_4^{2-} -> CO_2}$$
+
+Balance hydrogen by adding $\ce{H+}$ (assuming acidic)
+
+$$\ce{MnO_4^- + 8H+ -> Mn^{2+} + 4H_2O}$$
+$$\ce{C_2O_4^{2-} -> CO_2}$$
+
+Now all the mass is balanced. Now we balanced charge by adding electrons.
+
+$$\ce{MnO_4^- + 8H+ + 5e- -> Mn^{2+} + 4H_2O}$$
+$$\ce{C_2O_4^{2-} -> CO_2 + 2e-}$$
+
+Multiply so that the number of electrons cancel.
+
+$$\ce{2MnO_4^- + 16H+ + 10e- -> 2Mn^{2+} + 8H_2O}$$
+$$\ce{5C_2O_4^{2-} -> 5CO_2 + 10e-}$$
+
+Add the two together.
+
+$$\ce{2MnO_4^- + 5 C_2O_4^{2-} + 16H+ -> 2Mn^{2+} + 10CO_2 + 8H_2O}$$
+
+If in base, neutralize.
+
+$$\ce{2MnO_4^- + 5 C_2O_4^{2-} + 8H_2O -> 2Mn^{2+} + 10CO_2 + 16OH-}$$
+
+There is a faster way which involves calculating the oxidation numbers for the
+two half reactions. Calculate the number of electrons released or acquired in
+each reaction and multiply until they equal. Then add the equations together and
+balanced oxygen and then hydrogen until balanced.
+
+\section{Electrochemical Cells}
+
+There are two different types: galvanic cells and electrolytic cells. Galvanic
+cells are spontaneous and release electricity and electrolytic cells are
+nonsponstaneous and require an electric current.
+
+For a galvanic cell, there is an anode on the left (typically) and a cathode on
+the right (typically). These elctrodes are connected with a wire and a load.
+
+Lets say we have a zinc anode and a copper cathode.
+$$\ce{Zn -> Zn^{2+} + 2e-}$$
+$$\ce{Cu^{2+} + 2e- -> Cu}$$
+
+In order to prevent a build up of charge in either beaker, there is a salt
+bridge that connects the two solutions. These have unreactive ions that travel
+to balance the charge build up in the solutions.
+
+Electrons go from the anode to the cathode. A salt bridge is necessary for
+charge neutrality. This can be remembered through "an ox" and "red cat".
+
+There is also a shorthand notation:
+$$\ce{Zn\ \vert\ Zn^{2+}\ \vert\vert\ Cu^{2+}\ \vert\ Cu}$$
+
+The anode is on the left adn the cathode is on the right. The lines are phase
+changes. The reaction always goes from the left to the right.
+
+If your anode had chromium in solution and platinum as a cataylst, a comma would
+be used beause there is no phase change:
+$$\ce{Pt\ \vert\ Cr^{2+}\comma Cr^{3+}\ \vert\vert\ ...}$$
+
+Standard H electrode (SHE) anode and cathode:
+$$\ce{Pt\ \vert\ H_2\ \vert\ H+\ \vert\vert\ ...}$$
+$$\ce{...\ \vert\vert\ H+\ \vert\ H_2\ \vert\ Pt}$$
+
+Relating the electrochemical cell to Gibbs free energy:
+
+$$\Delta G = -n F \Delta E_{cell}$$
+
+Where $F$ is Faraday's constant with a value of 96485 $\si{C\ mol^{-1}}$.
+
+$$\Delta E_{cell} = E_{\rm{cathode}} - E_{\rm{anode}}$$
+
+Where $E$ is always the reduction potential, not oxidation potential.
+
+\end{document}
