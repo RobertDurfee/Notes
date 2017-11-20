@@ -25,13 +25,39 @@
 \section*{ Problem 1 }
 
 Overall reaction:
-$$\ce{Cr_2O^-_{7(aq)} + 14H_3O^+_{(aq)} -> 2Cr^{3+}_{(aq)} + 3I_2_{(s)} +
-21H_2O_{(l)}}$$
+$$\ce{Cr_2O^{2-}_{7(aq)} + 14H^+_{(aq)} + 6I^-_{(aq)} -> 2Cr^{3+}_{(aq)} + 3I_2_{(s)} +
+7H_2O_{(l)}}$$
 
 \begin{enumerate}[a.]
-    \item 
-
-    \item
+    \item Splitting into two half-reactions:
+        \begin{center}
+            \begin{tabular}{c c}
+                $$\ce{Cr_2O^{2-}_7 + 14H+ + 6e- -> 2Cr^{3+} + 7H_2O}$$ &
+                $E^o_{\rm{red}}=1.33\ \si{V}$ \\
+                $$\ce{I_2 + 2e- -> 2I^- }$$ & $E^o_{red}=0.535\ \si{V}$ 
+            \end{tabular}
+        \end{center}
+        Solving for $\Delta E^o_{\rm{cell}}$:
+        \begin{align*}
+            \Delta E^o_{\rm{cell}} &= E^o_{\rm{reduced}} - E^o_{\rm{oxidized}} \\
+            \Delta E^o_{\rm{cell}} &= 1.33 - 0.535 \\
+            \Delta E^o_{\rm{cell}} &= 0.795
+        \end{align*}
+    \item Writing out the reaction quotient:
+        $$Q=\frac{[\ce{Cr^{3+}}]^2}{[\ce{Cr_2O_7^{2-}}][\ce{H+}]^{14}[\ce{I-}]^6}$$
+        Covert pH to $[\ce{H+}]$:
+        $$[\ce{H+}] = 10^{-0}$$
+        $$[\ce{H+}] = 1$$
+        Using the Nernst Equation:
+        \begin{align*}
+            E_{\rm{cell}} &= E_{\rm{cell}}^o -
+            \frac{RT}{nF}\ln\left(\frac{[\ce{Cr^{3+}}]^2}
+            {[\ce{Cr_2O_7^{2-}}][\ce{H+}]^{14}[\ce{I-}]^6}\right) \\
+            0.87 &= 0.795 - \frac{0.0257}{6}\ln\left(\frac{[\ce{Cr^{3+}}]^2}
+            {[1.5][1]^{14}[0.40]^6}\right)
+        \end{align*}
+        Rearranging to find $[\ce{Cr^{3+}}]$:
+        $$[\ce{Cr^{3+}}] = 1.2 \cdot 10^{-5}\ \si{M}$$
 \end{enumerate}
 
 \section*{ Problem 2 }
