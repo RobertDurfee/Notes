@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 5.111 Recitation 19 }
+\author{ Robert Durfee }
+\date{ November 21, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{Gibb's Free Energy }
+$$\ce{Cu + 2 Ag+ -> Cu^{2+} + 2 Ag}$$
+$$\ce{Cu^{2+} + 2e- -> Cu}$$
+$$\ce{Ag+ + e- -> Ag}$$
+
+Where the half reaction's potentials are as follows:
+$$E^o_{\ce{Cu}} = +0.34\ \si{V}$$
+$$E^o_{\ce{Ag}} = +0.80\ \si{V}$$
+
+We will solve this cell's potential using Gibb's Free Energy. For copper half
+reaction:
+$$\Delta G = -nFE$$
+$$\Delta G = -(2)(96485)(+0.34 V)$$
+$$\Delta G = -65.5\ \si{kJ\ mol^{-1}}$$
+
+For silver half reaction:
+$$\Delta G = -nFE$$
+$$\Delta G = -(1)(96485)(+0.80 V)$$
+$$\Delta G = -77.2\ \si{kJ\ mol^{-1}}$$
+
+Now we add these reactions together to get the original reaction:
+$$\ce{Cu -> Cu^{2+} + 2e-}$$
+$$\ce{Ag+ + e- -> Ag}$$
+
+The resulting Gibb's Free Energy is:
+$$\Delta G = 65.6 + 2(-77.2) = -88.8\ \si{kJ\ mol^{-1}}$$
+
+\subsection{Example}
+
+\begin{center}
+    \begin{tabular}{c c c}
+        $\ce{Cu+ + e- -> Cu}$ & $E^o = +0.52\ \si{V}$ & $\Delta G = -50\ \si{kJ\
+        mol^{-1}}$ \\
+        $\ce{Cu^{2+} + e- -> Cu+}$ & $E^o = +0.16\ \si{V}$ & $\Delta G = -15\
+        \si{kJ\ mol^{-1}}$ \\
+        $\ce{Cu^{2+} + 2e- -> Cu}$ & $E^o \neq +0.68\ \si{V}$ & $\Delta G = -65\
+        \si{kJ\ mol^{-1}}$
+    \end{tabular}
+\end{center}
+
+The first solution is incorrect. We can't just add the two half reactions
+potential. This is because in each half reaction, one electron is consumed, but
+in the end, two electrons are consumed. 
+
+$$\Delta G^o = -nFE^o$$
+$$+0.34 = -(2)(96485)E^o$$
+$$E^o = +0.34$$
+
+\subsection{Example}
+
+Nernst Equation
+$$E = E^o - \frac{RT}{nF}\ln(Q)$$
+
+The cell's reduction potential away from standard conditions:
+$$E = 0.249\ \si{V}$$
+
+Balancing the overall cell reaction:
+$$\ce{H_2 -> H+ + 2e-}$$
+$$\ce{AgCl + e- -> Ag + Cl-}$$
+$$\ce{2AgCl + H_2 + 2e- -> 2e- + 2Ag + 2Cl- + H+}$$
+
+Where the cell reduction for hydrogen reaction is $E^o = 0.00\ \si{V}$ and the
+cell reduction for silver reaction is $E^o = 0.22\ \si{V}$.
+
+The overall reaction cell standard reduction potential is $E^o = 0.22\ \si{V}$.
+
+The reaction quotient can be written as:
+$$Q = \frac{[\ce{H+}]^2[\ce{Cl-}]^2}{(P_{\ce{H_2}})}$$
+
+Then the Nernst equation can be written out by combining all of these
+components.
+
+\end{document}
+
