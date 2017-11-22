@@ -1,0 +1,102 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 7.012 Lecture 27 }
+\author{ Robert Durfee }
+\date{ November 22, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Virology }
+
+The basic scheme: The virus first attaches to the cell. Then it penetrates the
+cell membrane and injects nucleic acids. Then the nucleic acid replicates using
+host cellular machinery. Lastly, new viral nucleic acids are packaged into viral
+particles and released from the cell. The cell may or may not be destroyed in
+this process.
+
+Viruses are much smaller than the cell that they infect. Because they have
+smaller genomes, they can be smaller and replicate faster. With the small
+genome, how can they encapsulate their genome? They use simple genometry.
+
+\subsection{Physical Properties}
+
+The simplest form of geometry is \textbf{helical}. Another type of symmetry is
+\textbf{icosahedral}, which is the symmetry used with human papilloma virus. The
+proteins involved with these capsals can self-assemble.
+
+The proteins that encapsulate the genome protect the viral genome, enable the
+particle to attach to the surface, and inject the genome into the host.
+
+Many viruses also have a membrane that surround the virus's genome. The inner
+portion is called the nucleocapsid. This often includes reverse transcriptase in
+the case where the virus's genome is ssRNA. On the outside of the membrane,
+there are \textbf{glycoprotein spikes}. These spikes allow \textbf{adsorbing} to
+specfic cell proteins.
+
+\subsection{Biological Properties}
+
+A \textbf{plaque} is a cell that has died as the result of virus infection. This
+is done as a result of a \textbf{cytopathic effect}. This basically means that
+the cell becomes very sick. Using the number of plaques created and give a good
+idea of how many viruses are in a virus solution. You can't simply count them,
+because that number is basically meaningless. This is because there may need to
+be 100 viruses to cause just one plaque. Many of the viral particles could be
+inactive because they are not correctly formed.
+
+Viral growth first has an \textbf{eclipse period} where there is no increase in
+number of particles. Then, there are exponentially increasing viral particles
+within the cell. Shortly after, the number of viral particles outside the cell
+will increase exponentially.
+
+Viruses with plasma membranes push their way through the host cell's plasma
+membrane. As it does so, it envelopes itself with the host cell's plasma mebrane
+as its own. It acquires its glycoprotein spikes by hijacking the host cell's
+golgi apparatus.
+
+\subsection{Types}
+
+\textbf{Class I}: This type has a dsDNA genome. It uses the host cell's DNA and
+RNA polymerase to replicate and create mRNA. Thus, it limits the number of
+enzymes needed to bring into the cell and carry with its own genome. In this
+class, there is almost total parasitism on the host cell for DNA, RNA, and
+protein synthesis. However, most host cells are not undergoing proliferation.
+This is a problem for this type of virus, because its dsDNA genome cannot be
+replicated because there is no DNA polymerase. Thus, it needs to persuade the
+cell to undergo proliferation. As a result, the virus must include oncogenes to
+cause the cell to proliferate.
+
+\textbf{Class II}: This type has ssDNA genome. It's first step is to convert the
+ssDNA into dsDNA. Once they do this, they can use the cell's DNA and RNA
+polymerase for DNA, mRNA, and protein synthesis.
+
+\textbf{Class III}: This type has dsRNA genome. It must include it's own RNA
+polymerase enzyme to replicate it's own genome and create mRNA. Once the mRNA is
+made, it can serve to make protein and serves as a template for the dsRNA which
+must be included in the virus particle's prodgeny. 
+
+\textbf{Class IV}: This type has (+)ssRNA genome. In this case, the virus must
+encode it's own RNA polymerase. First the ssRNA is translated by the host cell.
+This translation process then creates the RNA polymerase needed to replicate the
+virus's genome. 
+
+\textbf{Class V}: This type has (-)ssRNA genome. This strand is complementary
+to the viral genome. Thus, they first need to create the (+)ssRNA for their
+genome. They must also encode their own RNA polymerase. 
+
+\end{document}
