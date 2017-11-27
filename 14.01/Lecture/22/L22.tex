@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 14.01 Lecture 22 }
+\author{ Robert Durfee }
+\date{ November 27, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Efficiency vs Equity }
+
+Before, we have only focuesd on maximizing the efficiency, but we didn't really
+care how the "pie" was divided up. We have talked about the deadweight loss and
+adding consumer and producer surplus to get total surplus. To think about this,
+we can compare perfect competition and perfect price discrimination. The
+triangles are the same size, but there are very different divisions. What if, in
+order to make society more fair, we have to give something up. 
+
+\textbf{Okun's Leaky Bucket} is a thought process we can use to think about
+this. Lets assume that we think the rich should give money to the poor. This
+money is put into a bucket and dumped in front of a poor person. What if, as you
+carry the bucket to the poor person, you lose a certain percentage which is
+wasted. At what point do say it is not worth it? Typically, it is not painless
+to give money to the poor. How much leakage do we have to deal with?
+
+We have to look at different parts to come to a solution. Firstly, how do we
+value transfers? What is the distribution to begin with and end with? Where is
+this leakage? And, lastly, what does this look like in practice?
+
+\section{ Socially Optimal Allocation }
+
+You can't get away from the fact you have to decided how society feels when you
+transfer goods. To do this, we introduce a \textbf{social welfare function}.
+This is a function of the utility of all the people involved. Essentiall,y it is
+a utility function for society. We will deal with them the same way: we will
+draw \textbf{isowelfare curves} which are the same as indifference curves. 
+
+\textit{Figure 1} shows all combinations of utility of Homer and Ned. Holding
+all of society resources constant, how is society indifferent between the
+utility of multiple individuals.
+
+\subsection{ Utilitarian }
+
+What isowelfare curve function can we use? The \textbf{utilitarian isowelfare
+curve} simply adds all the utility of all individuals. This says that we are
+indifferent over who has the next unit of utility. This implies a massive shift
+of wealth from the rich to the poor. This is because of \textbf{diminishing
+marginal utility}. The effect of wealth on richer is less on utility than for
+poorer. This also assumes no leaking. This is a centerist view.
+
+$$ SWF = U_{1} + U_{2} + ... + U_{N} $$
+
+\subsection{ Rawlsian }
+
+A more liberal view is the \textbf{Rawlsian social welfare function}. Image that
+you are just born and you know nothing. What would you want society to look like
+"behind the vale of ignorance". This says that we would be better off destroying
+any amount wealth to increase utility of the poorest. This essential means that
+we should transfer no matter how much leakage.
+
+$$ SWF = min( U_{1}, U_{2}, ..., U_{N} ) $$
+
+\subsection{ Nozick }
+
+The conservative view is that everyone has eqaul opportinuty. This is the
+\textbf{Nozick social welfare}. We only care that everyon starts off equally,
+and then let the "chips roll". The first problem is what means starting off
+equal? The notion of equalizing opportunity is very difficult. Also, a lot of
+succes comes from luck. Why would we want to reward this? This essentially says
+that all wealth is achived through hard work.
+
+\subsection{ Commodity Egalitarianism }
+
+A midway view is the \textbf{Commodity Egalitarianism}. Lets say we are in a
+society where everyone is in a decent standard. If one person is way better off,
+that doesn't hurt you. This only cares about reaching a certain threshold and
+not caring beyond this point.
+
+\section{ Inequality }
+
+\textit{Figure 2} shows income distribution. If everything were equal, all these
+rows ( except the last ) would be 20\%. There has never been a society where
+everything is equal. \textit{Figure 3} shows the amount of income held by the
+top 1%. 
+
+\textit{Figure 4} shows the comparison of income distribution between countries.
+The US has the second worst income inequality behind Mexico ( among major
+economies ). 
+
+\textit{Figure 5} shows the inequality in Baltimore. Roland Park adn Sandtown
+are 3 miles apart, yet their life expectancy varies dramatically. One is above
+US average, and the other is below North Korea. This is also the case for
+poverty rate and average income. 
+
+Maybe we shouldn't care about relative equality, rather, use \textbf{absolute
+deprivation}. We do this using the poverty line which says that people below
+which cannot live in the United States. We accomplished this my multiply the
+cost of a meal and multiply it by 3. In \textit{Figure 6}, the poverty line is
+shown for families of different sizes. This is quite a small number.
+
+In \textit{Figure 7}, the percent of different age groups below the poverty line
+has gone down. Essentially, the poor have not gotten worse or better while the
+rich got way richer. All of the social welfare curves show that we should be
+redistribute more.
+
+\section{ Leakage }
+
+Where do the leakages arise in practice? The proce of taking money from the
+rich and giving to the poor causes both to work less. This is \textbf{behavioral
+response to tax and transfer system}.
+
+In \textit{Figure 8}, everyone makes \$20. We introduce a transfer system where
+everyone has to get \$10,000. 
+$$ T = max( 0, 10000 - Y ) $$
+
+To finance this, there will also be a tax. This tax will be 20\% of whatever is
+earned above \$20,000. 
+
+For point $C$, the budget constraint has been lowered because of the tax. This
+only starts at \$20,000. In other words, the opportunity cost of leisure has
+been lowered. Assuming upward sloping labor supply, you will work less.
+
+For point $A$, they can work less and consume more. They can quit and get more
+of both. For point $B$, he is willing to give up a little consumption to get a
+lot more leisure. We have now reduced the labor supply of the rich and the poor.
+If people work less, society is poorer, as shown in \textit{Figure 9}. There is
+now a deadweight loss as we reduced the size of the economy. This is the
+\textbf{equity efficiency trade-off}. We have made society more fair, but we
+have also created deadweight loss. How much are we willing to shrink the pie to
+redistribute wealth. 
+
+\end{document}
