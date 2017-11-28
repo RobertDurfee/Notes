@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 8.01 Problem Set 11 }
+\author{ Robert Durfee - Lecture 7 - Table 9 }
+\date{ November 27, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Cubical Block Collision with Low Ridge }
+
+\subsection*{ Part A }
+
+Since the axis of rotation is not around the center of mass, the moment of
+interia about the edge of the cube must be computed using the paralell axis
+theorem.
+\begin{align*}
+    I &= I_{cm} + md^{2} \\
+    I &= \frac{1}{6} ms^{2} + \frac{1}{\sqrt{ 2 }} ms^{2} \\
+    I &= \frac{2}{3} ms^{2}
+\end{align*}
+
+Using an axis along the horizontal surface, angular momentum is conserved:
+\begin{align*}
+    \frac{1}{2} mvs &= \frac{2}{3} ms^{2}\omega \\
+    \omega &= \frac{3v}{4s}
+\end{align*}
+
+\subsection*{ Part B }
+
+After the collision, the mechanical energy of the block is conserved. Thus,
+using the angular speed calculated in Part B:
+\begin{align*}
+    \frac{1}{2} I\omega^{2} + mgh_{cm,0} &= mgh_{cm,f} \\
+    \frac{3}{16} msv^{2} + \frac{1}{2} mgs &= \frac{1}{\sqrt{ 2 }} mgs \\
+    v &= 2 \sqrt{ \frac{2gs}{3} \left( \sqrt{ 2 } - 1 \right) }
+\end{align*}
+
+\section{ Yo-Yo Rolling on Inclined Plane }
+
+
+
+\end{document}
+
