@@ -239,11 +239,30 @@ $$ \Omega = \frac{ mgl }{ I \omega_{s} } $$
 Note: the $\cos( \phi )$ cancels out because we use the horizontal component of
 angular momentum above.
 
-Since this value is positive, the procession is clockwise.
+Using the right hand rule, the direction of orbiting is counter-clockwise.
 
 \subsection*{ Part C }
 
+There is angular momentum due to the object's orbiting and spining around it's
+center of mass. The angular momentum due to orbiting is simply:
+$$ \vec{ L }_{orb} = ml^{2}\Omega \hat{ k } $$
 
+The angular momentum due to rotation is due to two different types of rotation,
+about an axis perpendicular to the face and parallel to the face (each with two
+different moments of inertia).
+$$ \vec{ L }_{rot} = I_{\perp} \omega \hat{ r } + I_{\parallel} \Omega \hat{ k } $$
+
+Unfortunately, the radial unit vector is not defined. Converting $\hat{ r }$ in
+terms of $\hat{ i }$ and $\hat{ j }$:
+$$ \hat{ r } = \cos \theta \hat{ i } + \sin{ \theta } \hat{ j } $$
+
+In this case, $\theta$ is given in terms of $\Omega$
+$$ \hat{ r } = \cos ( \Omega t ) \hat{ i } + \sin( \Omega t ) \hat{ j } $$
+
+Combining all these equations along with the provided definition for the
+parallel moment of interia:
+$$ \vec{ L } = I \omega \cos( \Omega t ) \hat{ i } + I \omega \sin( \Omega t )
+\hat{ j } + \frac{ I \Omega }{ 2 } \hat{ k } + ml^{2} \Omega \hat{ k }$$
 
 \end{document}
 
