@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 5.111 Lecture 32 }
+\author{ Robert Durfee }
+\date{ December 4, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Chemical Kinetics }
+
+When considering a chemical reaction, we must consider if a reaction occurs
+spontaneously and then we must consider how quickly it will proceed. The first a
+thermodynamics question and the second is a \textbf{kinetics} question. 
+
+When referring to \textbf{stability}, we refer to the spontaneous tendency.
+\textbf{Labile} refers to the rate at which this tendency is realized. A
+chemical kinetics experiment measures the rate at which the concentration of a
+substance taking part in a chemical reaction changes with time. The reaction
+rate is sensitive to the initial concentration and temperature. 
+
+The average reaction rate is:
+$$ \frac{ \rm{ \Delta Concentration } }{ \rm{ \Delta Time } } $$
+
+The instantaneous reaction rate is:
+$$ \lim_{\Delta t \rightarrow 0} \frac{ \Delta \rm{ Concentration } }{ \Delta t }$$
+
+The initial rate is the instantaneous rate when $t=0$. When we rate "rate" in
+problem set and textbooks, we typically refer to the instantaneous rate, not the
+average. For \textbf{rate expression}, the reactants have negative rates and the
+products have positive rates. 
+$$ \ce{ aA + bB -> cC + dD } $$
+
+Assuming no intermediate species and the concentrations are independent of time:
+$$ -\frac{ 1 }{ a }\frac{ dA }{ dt } = -\frac{ 1 }{ b }\frac{ dB }{ dt } =
+\frac{ 1 }{ c }\frac{ dC }{ dt } = \frac{ 1 }{ d }\frac{ dD }{ dt } $$
+
+\section{ Rate Laws }
+
+The instantaneous rate is related to the concentration at that time by a
+proportionality constant, $k$, called the \textbf{rate constant}. 
+$$ k [ \ce{ A } ]^{m}[ \ce{ B } ]^{n} $$
+
+Where $m$ and $n$ are the rate order's of A and B. This is for the initial rate,
+far from equilibrium. For closer to equilibrium, the net rate is the difference
+between the forward and reverse reaction rates.
+
+Rate law is only determined through experimentation. Also, the rate order is not
+by default the coefficient of the chemical equation. Additionally, $m$ and $n$
+can be more than just integers, they can be fractions, etc. 
+
+\subsection{ First Order }
+
+$$ k[ \ce{ A } ] $$
+
+This means that double the concentration means double the rate.
+
+\subsection{ Second Order }
+
+$$ k[ \ce{ A } ]^{2} $$
+
+This means that double the concentration means four times the rate.
+
+\subsection{ Inverse Order }
+
+$$ k[ \ce{ A } ]^{-1} $$
+
+This means double the concentation means half the rate.
+
+\subsection{ Half Order }
+
+$$ k[ \ce{ A } ]^{1/2} $$
+
+This means double the concentration means 1.4 times the rate
+
+\subsection{ Zero Order}
+
+$$ k[ \ce{ A } ]^{0} $$
+
+This means that the concentration is independent of the reaction rate.
+
+\section{ Rate Laws }
+
+The overall reaction rate is the sume of all the orders of individual
+components. Also, the units for $k$ vary depending on the number of species and
+their orders. The end result must be concentration over time.
+
+\section{ Integrated Rate Law }
+
+You can separate the time and concentration terms and then integrate. This will
+show the concentration after a certain amount of time given the initial
+concentration. for first order:
+$$ \ln[ \ce{ A } ]_{t} = -kt + \ln[ \ce{ A } ]_{0} $$
+$$ [ \ce{ A } ]_{t} = [ \ce{ A } ]_{0} \cdot e^{-kt} $$
+
+\section{ Half-Life of First-Order }
+
+\textbf{Half-life}  is the time it takes for the original concentration to be
+reduced by half ($t_{1/2}$).
+$$ t_{1/2} = \frac{ \ln( 2 ) }{ k } $$
+
+Importantly, this does not depend on the initial concentration of the solution.
+
+\end{document}
+
