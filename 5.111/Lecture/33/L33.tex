@@ -1,0 +1,116 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 5.111 Lecture 33 }
+\author{ Robert Durfee }
+\date{ December 6, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Radioactive Decay }
+
+In nucleal chemistry, there are changes that occur in the nucleus. 
+$$ {}^{A}_{Z}X_{N}$$
+
+In the above diagram, $A$ is the total number of nucleons (atomic mass). $Z$ is
+the number of protons. $N$ is the number of neutrons. The minimum amount of
+specificity is simply $A$ and $X$. 
+
+An isotope is defined by $Z$ and the total number of nucleons, $A$. 
+
+\subsection{ Spontaneous Nuclear Decay }
+
+This does not occur for stable elements. Atomic mass and atomic number can both
+change. Both mass an charge must balance in a nuclear decay reaction. The
+reaction must be spontaneous, even if it is very slow.
+
+The first type of nuclear decay is alpha decay.
+$$ \ce{ {}^{A}_{Z}X -> {}^{A - 4}_{Z - 2}Y + {}^{4}_{2} \alpha^{} + 2e- } $$
+
+This is exclusive to heavy elements with $Z > 83$. These alpha particles are
+easily absorbed and cannot travel very far.
+
+The second type is beta decay:
+$$ \ce{ {}^{A}_{Z}X -> {}^{A}_{Z + 1}Y + {}_{-1}^{0} \beta } $$
+
+These occur where there is a high difference in number of neutrons and protons.
+
+The last is gamma radiation:
+$$ \ce{ {}^{A}_{Z}X -> {}^{A}_{Z} + {}_{0}^{0} \gamma } $$
+
+This occurs after beta or alpha decay leaves the particle in an excited state.
+This type of radiation goes very far and doesn't really interact much with
+compounds. 
+
+\subsection{ Radioactive Kinetics }
+
+The number of nuclei, $N$, decays with first order kinetics. The rate of this
+decay is measured using a \textbf{Geiger counter}.
+$$ N = N_{0}e^{-kt} $$
+
+Nuclear decay rate is also called the \textbf{activity}. 
+$$ A = -\frac{ dN }{ dt } = kN $$
+$$ A( t ) = A_{0}e^{-kt} $$
+
+The half-life for radioactive materials is given as:
+$$ t_{1/2} = \frac{ N_{0} \ln 2 }{ A_{0} } $$
+
+Initial activity and half lives are inversely related. 
+
+\section{ Second Order Rate Laws }
+
+The rate law is defined as:
+$$ k[ \ce{ A } ]^{2} $$
+
+The second order integrated rate law is:
+$$ \frac{ 1 }{ [ \ce{ A } ] } = kt + \frac{ 1 }{ [ \ce{ A } ]_{0} } $$
+
+The half-life is, then:
+$$ t_{1/2} = \frac{ 1 }{ k [ \ce{ A } ]_{0} } $$
+
+The higher the concentration, the shorter the half-life. To determine the order
+of a reaction, plot the natural log and the inverse and see which has a linear
+relation.
+
+\section{ Realtion Between Rate Constant and Equilibrium Constant }
+
+$$ \ce{ A + B <=> C + D } $$
+
+For the forward reaction:
+$$ k_{1} [ \ce{ A } ] [ \ce{ B } ] $$
+
+For the reverse reaction:
+$$ k_{-1} [ \ce{ C } ] [ \ce{ D } ]$$
+
+This shows the following relation:
+$$ K_{eq} = \frac{ k_{1} }{ k_{-1} } $$
+
+\section{ Elementary Steps and Molecularity }
+
+Reactions do not typically occur in one step, but proceed through a series of
+steps. Each step is called an \textbf{elementary reaction}. The overall
+reaciton, the order and the rate law cannot be derived from the stoichiometry of
+the balanced reaction. But the elementary reactions can as they occur exactly as
+they are written. 
+
+The number of reactant molecules that come together to form a product is the
+\textbf{molecularity}. \textbf{Unimolecular} deals with a single reactant.
+\textbf{Bimolecular} deals with two reactants, etc.
+
+\end{document}
+
