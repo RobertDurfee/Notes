@@ -117,7 +117,7 @@ This can also be seen by comparing the potential energy equation to a spring's
 potential energy equation which is also proportional the the squared
 displacement from the equilibrium:
 $$ \frac{ 1 }{ 2 } k x^{2} $$
-$$ \frac{ 1 }{ 2 } \frac{ G m M_{E} }{ R_{E}^{3}} } r^{2} $$ 
+$$ \frac{ 1 }{ 2 } \frac{ G m M_{E} }{ R_{E}^{3} } r^{2} $$ 
 
 \subsection*{ Part C }
 
@@ -182,18 +182,49 @@ $$ \frac{ d\theta }{ dt } = \sqrt{ \frac{ g }{ R } ( 1 - \cos \theta ) } $$
 
 \subsection*{ Part A }
 
+Plugging the given force equation into the provided integral:
+$$ U( r ) - U( \infty ) = - \int \limits_{\infty}^{r} \left( -\frac{ G m_{1}
+m_{2} }{ r^{2} } + \frac{ C }{ r^{3} } \right) dr $$
 
+Solving this definite integral yields:
+$$ U( r ) = -\frac{ G m_{1} m_{2} }{ r } + \frac{ C }{ 2 r^{2} } $$
 
 \subsection*{ Part B }
 
+Taking the derivative of the previous equation to find minimum:
+$$ U'( r ) = \frac{ G m_{1} m_{2} }{ r^{2} } - \frac{ C }{ r^{3} } $$
 
+Setting derivative equal to zero and solving for $r$:
+$$ 0 = \frac{ G m_{1} m_{2} }{ r^{2} } - \frac{ C }{ r^{3} }  $$
+$$ r_{0} = \frac{ C }{ G m_{1} m_{2} } $$
+
+Plugging $r_{0}$ back into potential energy function:
+$$ U( r_{0} ) = -\frac{ ( G m_{1} m_{2} )^{2} }{ 2 C } $$
 
 \subsection*{ Part C }
 
+Taking the second derivative of the potential energy equation:
+$$ U''( r ) = -\frac{ 2 G m_{1} m_{2} }{ r^{3} } + \frac{ 3 C }{ r^{4} } $$
 
+Substituting our value for $r_{0}$ to get the $k$ constant:
+$$ k \approx U''( r_{0} ) = \frac{ G^{4} m_{1}^{4} m_{2}^{4} }{ C^{3} } $$
+
+Using the relation to angular frequency:
+$$ \omega_{0} = \sqrt{  \frac{ k }{ m } } $$
+
+Since $m_{1} \ll m_{2}$, only $m_{1}$ oscillates:
+$$ \omega_{0} = \sqrt{ \frac{ G^{4} m_{1}^{3} m_{2}^{4} }{ C^{3} } } $$
 
 \subsection*{ Part D }
 
+At the extreme locations closest and furthest apart, there is no kinetic energy.
+As a result, the total mechanical energy is equal to the potential energy:
+$$ E = -\frac{ G m_{1} m_{2} }{ r } + \frac{ C }{ 2 r^{2} } $$
 
+Solving this for $r$ yeilds two solutions (for when $U( r ) < E < 0$):
+$$ r_{1} = - \frac{ \sqrt{ 2 C E + G^{2} m_{1}^{2} m_{2}^{2} } + G m_{1} m_{2}
+}{ 2 E } $$
+$$ r_{2} = \frac{ \sqrt{ 2 C E + G^{2} m_{1}^{2} m_{2}^{2} } - G m_{1} m_{2}
+}{ 2 E } $$
 
 \end{document}
