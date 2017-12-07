@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 5.111 Recitation 23 }
+\author{ Robert Durfee }
+\date{ December 7, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Kinetics }
+
+This is the study of how fast reactions occur. This is in contrast to
+equilibrium, which assumes that you wait a long time for everything to be
+converted. 
+
+$$ \ce{ AuCl^{-}_{2} -> 2Au + AuCl^{-}_{4} + 2Cl- } $$
+
+We want to find some way to track how fast this reaction is going. In this case,
+only one molecule has a color: $\ce{ Au }$. Over time, we can track the
+absorbtion wavelength, which will increase with the amount of $\ce{ Au }$
+produced. 
+
+$$ \Delta n_{\ce{ AuCl_{2}^{-} }} = -3 \cdot \Delta t \cdot V $$
+
+This can then be related to the other species stoichiometrically. The rate of
+the reaction can be written:
+$$ \mathrm{ rate } = -\frac{ 1 }{ 3 } \frac{ \Delta n_{\ce{ AuCl_{2}^{-} }} }{ V
+\cdot \Delta t} $$
+
+This can be simplified into the following, which can relate rates of different
+species to each other:
+$$ \mathrm{ rate } = -\frac{ 1 }{ 3 } \frac{ \Delta [ \ce{ AuCl_{2}^{-} } ] }{
+\Delta t } $$
+
+To get the initial rates, use the following. Note: the exponent only corresponds
+stoichiometrically when the reaction is elementary.
+$$ \mathrm{ rate } = k[ \ce{ AuCl_{2}^{-} } ]^{3} $$
+
+For a simple reaction:
+$$ \ce{ A + B -> C }$$
+
+The probability of the reaction is specified as:
+$$ P( \mathrm{ reaction } ) = P( \mathrm{ collide } ) \cdot P( \mathrm{ react
+\mid collide } ) \cdot P( A\ \mathrm{ in }\ \phi ) \cdot P( B\ \mathrm{ in }\
+\phi )$$
+
+Where $\phi$ is a small area. 
+$$ P( A\ \mathrm{ in }\ \phi ) = [ \ce{ A } ] \phi N_{A} $$
+$$ P( B\ \mathrm{ in }\ \phi ) = [ \ce{ B } ] \phi N_{A} $$ 
+
+Substituting:
+$$ P( \mathrm{ reaction } ) = P( \mathrm{ collide } ) \cdot P( \mathrm{ react
+\mid collide } ) \cdot ( \phi N_{A} )^{2} \cdot [ \ce{ A } ] \cdot [ \ce{ B } ]
+$$
+
+Where all the terms prior to the concentration terms are incorporated into $k$.
+
+\subsection{ Multiple Step Reactions }
+
+$$ \ce{ 2A + B -> 2C } $$
+$$ \ce{ A + C -> D } $$
+
+Where the first reaction is slow and the second is fast. As a result, the
+slowest reaction dictates, approximately, the overall reaction.
+$$ \mathrm{ rate } = k [ \ce{ A } ]^{2} [ \ce{ B } ] $$
+
+This rate changes dramatically depending on the rate determining step. 
+
+\bigbreak
+
+The \textbf{order} of the reaction is the sum of all the exponents. 
+
+\section{ Integrated Rate Laws }
+
+\subsection{ First Order }
+
+$$ \ln [ \ce{ A } ] = -kt + \ln[ \ce{ A } ]_{0} $$
+
+\subsection{ Second Order }
+
+$$ \frac{ 1 }{ [ \ce{ A } ] } = kt + \frac{ 1 }{ [ \ce{ A } ]_{0} } $$
+\end{document}
