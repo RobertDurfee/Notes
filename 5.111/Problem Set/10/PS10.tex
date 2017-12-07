@@ -1,0 +1,452 @@
+\documentclass{article}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\usepackage{modiagram}
+\allowdisplaybreaks
+
+\title{ 5.111 Problem Set 10 }
+\author{ Robert Durfee }
+\date{ December 6, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section*{ Transition Metals and Coordination Compounds }
+
+\begin{enumerate}[1.]
+    \item 
+        \begin{enumerate}[a.]
+            \item The bond angles for square planar molecules are $90^{\circ}$.
+                
+                $$ \chemfig{ Pt( <:[ :25 ] NH_{3} ) ( <:[ :155 ] Cl ) ( <[ :-155
+                ] Cl ) ( <[ :-25 ] NH_{3} ) } $$
+
+            \item Cisplatin crystal field energy level diagram: 
+                \begin{center}
+                \begin{MOdiagram}[labels-fs = \tiny]
+                    \AO{s}{1.75; pair}
+                    \AO(20pt){s}{1.75; pair}
+                    \AO(40pt){s}{1.75; pair}
+                    \AO(60pt){s}{1.75; up}
+                    \AO(80pt){s}{1.75; up}
+                    \AO(110pt){s}[label={$\mathrm{d_{xz}}$}]{0}
+                    \AO(130pt){s}[label={$\mathrm{d_{yz}}$}]{0}
+                    \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{0.75}
+                    \AO(120pt){s}[label={$\mathrm{d_{xy}}$}]{2.5; up}
+                    \AO(120pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{4; up}
+                    \connect{AO5 & AO6, AO5 & AO8, AO5 & AO9, AO5 & AO10}
+                    \draw[->] (-0.5,0) -- (-0.5,4) node[pos=0.75, anchor=south
+                    west]{$E$};
+                \end{MOdiagram}
+                \end{center}
+
+            \item There are unpaired electrons. As a result, this will be
+                paramagnetic. 
+        \end{enumerate}
+    \item
+        \begin{enumerate}[a.]
+            \item $\ce{ Co^{3+} }$
+                \begin{figure}[H]
+                    \centering
+                    \begin{subfigure}{.5\textwidth}
+                        \centering
+                        \begin{MOdiagram}[labels-fs = \tiny]
+                            \AO{s}{1; pair}
+                            \AO(20pt){s}{1; up}
+                            \AO(40pt){s}{1; up}
+                            \AO(60pt){s}{1; up}
+                            \AO(80pt){s}{1; up}
+                            \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; pair}
+                            \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; pair}
+                            \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; pair}
+                            \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2;}
+                            \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2;}
+                            \connect{AO5 & AO6, AO5 & AO9}
+                            \connect{AO5 & AO6, AO5 & AO9}
+                            \draw [->] (-0.5,0) -- (-0.5,2) node[pos=0.75,
+                            anchor=south west]{$E$};
+                        \end{MOdiagram}
+                        \caption{Strong (Low Spin)}
+                    \end{subfigure}%
+                    \begin{subfigure}{.5\textwidth}
+                        \centering
+                        \begin{MOdiagram}[labels-fs = \tiny]
+                            \AO{s}{1; pair}
+                            \AO(20pt){s}{1; up}
+                            \AO(40pt){s}{1; up}
+                            \AO(60pt){s}{1; up}
+                            \AO(80pt){s}{1; up}
+                            \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; pair}
+                            \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; up}
+                            \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; up}
+                            \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2; up}
+                            \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2; up}
+                            \connect{AO5 & AO6, AO5 & AO9}
+                            \draw (AO8) node[anchor=west, xshift=10]{$\mathrm{t_{2g}}$};
+                            \draw (AO10) node[anchor=west, xshift=10]{$\mathrm{e_{g}}$};
+                        \end{MOdiagram}                        
+                        \caption{Weak (High Spin)}
+                    \end{subfigure}%
+                \end{figure}
+            \item $\ce{ Zn^{2+} }$
+                \begin{figure}[H]
+                    \centering
+                    \begin{subfigure}{.5\textwidth}
+                        \centering
+                        \begin{MOdiagram}[labels-fs = \tiny]
+                            \AO{s}{1; pair}
+                            \AO(20pt){s}{1; pair}
+                            \AO(40pt){s}{1; pair}
+                            \AO(60pt){s}{1; pair}
+                            \AO(80pt){s}{1; up}
+                            \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; pair}
+                            \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; pair}
+                            \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; pair}
+                            \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2; pair}
+                            \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2; up}
+                            \connect{AO5 & AO6, AO5 & AO9}
+                            \draw [->] (-0.5,0) -- (-0.5,2) node[pos=0.75,
+                            anchor=south west]{$E$};
+                        \end{MOdiagram}                        
+                        \caption{Strong}
+                    \end{subfigure}%
+                    \begin{subfigure}{.5\textwidth}
+                        \centering
+                        \begin{MOdiagram}[labels-fs = \tiny]
+                            \AO{s}{1; pair}
+                            \AO(20pt){s}{1; pair}
+                            \AO(40pt){s}{1; pair}
+                            \AO(60pt){s}{1; pair}
+                            \AO(80pt){s}{1; up}
+                            \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; pair}
+                            \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; pair}
+                            \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; pair}
+                            \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2; pair}
+                            \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2; up}
+                            \connect{AO5 & AO6, AO5 & AO9}
+                            \draw (AO8) node[anchor=west, xshift=10]{$\mathrm{t_{2g}}$};
+                            \draw (AO10) node[anchor=west, xshift=10]{$\mathrm{e_{g}}$};
+                        \end{MOdiagram}                        
+                        \caption{Weak}
+                    \end{subfigure}%
+                \end{figure}
+            \item $\ce{ Nb^{3+} }$
+                \begin{figure}[H]
+                    \centering
+                    \begin{subfigure}{.5\textwidth}
+                        \centering
+                        \begin{MOdiagram}[labels-fs = \tiny]
+                            \AO{s}{1; up}
+                            \AO(20pt){s}{1; up}
+                            \AO(40pt){s}{1; }
+                            \AO(60pt){s}{1; }
+                            \AO(80pt){s}{1; }
+                            \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; up}
+                            \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; up}
+                            \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; }
+                            \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2; }
+                            \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2; }
+                            \connect{AO5 & AO6, AO5 & AO9}
+                            \draw [->] (-0.5,0) -- (-0.5,2) node[pos=0.75,
+                            anchor=south west]{$E$};
+                        \end{MOdiagram}                        
+                        \caption{Strong}
+                    \end{subfigure}%
+                    \begin{subfigure}{.5\textwidth}
+                        \centering
+                        \begin{MOdiagram}[labels-fs = \tiny]
+                            \AO{s}{1; up}
+                            \AO(20pt){s}{1; up}
+                            \AO(40pt){s}{1; }
+                            \AO(60pt){s}{1; }
+                            \AO(80pt){s}{1; }
+                            \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; up}
+                            \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; up}
+                            \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; }
+                            \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2; }
+                            \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2; }
+                            \connect{AO5 & AO6, AO5 & AO9}
+                            \draw (AO8) node[anchor=west, xshift=10]{$\mathrm{t_{2g}}$};
+                            \draw (AO10) node[anchor=west, xshift=10]{$\mathrm{e_{g}}$};
+                        \end{MOdiagram}                        
+                        \caption{Weak}
+                    \end{subfigure}%
+                \end{figure}
+
+        \end{enumerate}
+    \item 
+        \begin{enumerate}[a.]
+            \item $\ce{ [ Mn( CO)_{6} ]Cl_{3} }$ (two unpaired electrons)
+                \begin{center}
+                    \begin{MOdiagram}[labels-fs = \tiny]
+                        \AO{s}{1; up}
+                        \AO(20pt){s}{1; up}
+                        \AO(40pt){s}{1; up}
+                        \AO(60pt){s}{1; up}
+                        \AO(80pt){s}{1; }
+                        \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; pair}
+                        \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; up}
+                        \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; up}
+                        \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2; }
+                        \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2; }
+                        \connect{AO5 & AO6, AO5 & AO9}
+                        \draw (AO8) node[anchor=west, xshift=10]{$\mathrm{t_{2g}}$};
+                        \draw (AO10) node[anchor=west, xshift=10]{$\mathrm{e_{g}}$};
+                        \draw [->] (-0.5,0) -- (-0.5,2) node[pos=0.75,
+                        anchor=south west]{$E$};
+                    \end{MOdiagram}
+                \end{center}
+            \item $\ce{ [ Ni( OH_{2} )_{4} ]^{2+} }$ (two upaired electrons)
+                \begin{center}
+                    \begin{MOdiagram}[labels-fs = \tiny]
+                        \AO{s}{1; pair}
+                        \AO(20pt){s}{1; pair}
+                        \AO(40pt){s}{1; pair}
+                        \AO(60pt){s}{1; up}
+                        \AO(80pt){s}{1; up}
+                        \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{2; pair}
+                        \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{2; up}
+                        \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{2; up}
+                        \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{0; pair}
+                        \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{0; pair}
+                        \connect{AO5 & AO6, AO5 & AO9}
+                        \draw (AO8) node[anchor=west,
+                        xshift=10]{$\mathrm{t_{2}}$};
+                        \draw (AO10) node[anchor=west, xshift=10]{$\mathrm{e}$};
+                        \draw [->] (-0.5,0) -- (-0.5,2) node[pos=0.75,
+                        anchor=south west]{$E$};
+                    \end{MOdiagram}
+                \end{center}
+
+                \bigbreak
+                \bigbreak
+                \bigbreak
+                \bigbreak
+                
+            \item $\ce{ [ VCl_{6} ]^{3-} }$ (two unpaired electrons)
+                \begin{center}
+                    \begin{MOdiagram}[labels-fs = \tiny]
+                        \AO{s}{1; up}
+                        \AO(20pt){s}{1; up}
+                        \AO(40pt){s}{1; }
+                        \AO(60pt){s}{1; }
+                        \AO(80pt){s}{1; }
+                        \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; up}
+                        \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; up}
+                        \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; }
+                        \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2; }
+                        \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2; }
+                        \connect{AO5 & AO6, AO5 & AO9}
+                        \draw (AO8) node[anchor=west, xshift=10]{$\mathrm{t_{2g}}$};
+                        \draw (AO10) node[anchor=west, xshift=10]{$\mathrm{e_{g}}$};
+                        \draw [->] (-0.5,0) -- (-0.5,2) node[pos=0.75,
+                        anchor=south west]{$E$};
+                    \end{MOdiagram}
+                \end{center}
+       \end{enumerate}
+    \item For the first complex, $\ce{ CN- }$ is a strong ligand which results
+        in the following crystal field splitting diagrams:
+
+        \begin{figure}[H]
+            \centering
+            \begin{subfigure}{.5\textwidth}
+                \centering
+                \begin{MOdiagram}[labels-fs = \tiny]
+                    \AO{s}{1; pair}
+                    \AO(20pt){s}{1; pair}
+                    \AO(40pt){s}{1; up}
+                    \AO(60pt){s}{1; up}
+                    \AO(80pt){s}{1; up}
+                    \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; pair}
+                    \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; pair}
+                    \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; pair}
+                    \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2; up}
+                    \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2; }
+                    \connect{AO5 & AO6, AO5 & AO9}
+                    \draw [->] (-0.5,0) -- (-0.5,2) node[pos=0.75,
+                    anchor=south west]{$E$};
+                \end{MOdiagram}                        
+                \caption{$\ce{ [ Co( CN )_{6} ]^{4-} }$}
+            \end{subfigure}%
+            \begin{subfigure}{.5\textwidth}
+                \centering
+                \begin{MOdiagram}[labels-fs = \tiny]
+                    \AO{s}{1; pair}
+                    \AO(20pt){s}{1; up}
+                    \AO(40pt){s}{1; up}
+                    \AO(60pt){s}{1; up}
+                    \AO(80pt){s}{1; up}
+                    \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; pair}
+                    \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; pair}
+                    \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; pair}
+                    \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2; }
+                    \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2; }
+                    \connect{AO5 & AO6, AO5 & AO9}
+                    \draw (AO8) node[anchor=west, xshift=10]{$\mathrm{t_{2g}}$};
+                    \draw (AO10) node[anchor=west, xshift=10]{$\mathrm{e_{g}}$};
+                \end{MOdiagram}                        
+                \caption{$\ce{ [ Co( CN )_{6} ]^{3-} }$}
+            \end{subfigure}%
+        \end{figure}
+
+        On ther other hand, we don't know the strength of bidentate chelating
+        ligand. If it is a weak ligand, the observation that it remains
+        paramagnetic can be explained by the following diagrams:
+
+        \begin{figure}[H]
+            \centering
+            \begin{subfigure}{.5\textwidth}
+                \centering
+                \begin{MOdiagram}[labels-fs = \tiny]
+                    \AO{s}{1; pair}
+                    \AO(20pt){s}{1; pair}
+                    \AO(40pt){s}{1; up}
+                    \AO(60pt){s}{1; up}
+                    \AO(80pt){s}{1; up}
+                    \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; pair}
+                    \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; pair}
+                    \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; up}
+                    \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2; up}
+                    \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2; up}
+                    \connect{AO5 & AO6, AO5 & AO9}
+                    \draw [->] (-0.5,0) -- (-0.5,2) node[pos=0.75,
+                    anchor=south west]{$E$};
+                \end{MOdiagram}                        
+                \caption{$\ce{ [ Co( ox )_{3} ]^{4-} }$}
+            \end{subfigure}%
+            \begin{subfigure}{.5\textwidth}
+                \centering
+                \begin{MOdiagram}[labels-fs = \tiny]
+                    \AO{s}{1; pair}
+                    \AO(20pt){s}{1; up}
+                    \AO(40pt){s}{1; up}
+                    \AO(60pt){s}{1; up}
+                    \AO(80pt){s}{1; up}
+                    \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; pair}
+                    \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; up}
+                    \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; up}
+                    \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2; up}
+                    \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2; up}
+                    \connect{AO5 & AO6, AO5 & AO9}
+                    \draw (AO8) node[anchor=west, xshift=10]{$\mathrm{t_{2g}}$};
+                    \draw (AO10) node[anchor=west, xshift=10]{$\mathrm{e_{g}}$};
+                \end{MOdiagram}                        
+                \caption{$\ce{ [ Co( ox )_{3} ]^{3-} }$}
+            \end{subfigure}%
+        \end{figure}
+
+    \item $\ce{ [ MnCl_{6} ]^{3-} }$ with four unpaired electrons. $\ce{ Cl- }$
+        is a weak ligand with high spin.
+        \begin{center}
+            \begin{MOdiagram}[labels-fs = \tiny]
+                \AO{s}{1; up}
+                \AO(20pt){s}{1; up}
+                \AO(40pt){s}{1; up}
+                \AO(60pt){s}{1; up}
+                \AO(80pt){s}{1; }
+                \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; up}
+                \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; up}
+                \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; up}
+                \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2; up}
+                \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2; }
+                \connect{AO5 & AO6, AO5 & AO9}
+                \draw (AO8) node[anchor=west, xshift=10]{$\mathrm{t_{2g}}$};
+                \draw (AO10) node[anchor=west, xshift=10]{$\mathrm{e_{g}}$};
+                \draw [->] (-0.5,0) -- (-0.5,2) node[pos=0.75,
+                anchor=south west]{$E$};
+            \end{MOdiagram}                        
+        \end{center}
+
+        $\ce{ [ Mn( CN )_{6} } ]^{3-}$ with two upaired electrons. $\ce{ CN- }$
+        is a strong ligand with low spin.
+        \begin{center}
+            \begin{MOdiagram}[labels-fs = \tiny]
+                \AO{s}{1; up}
+                \AO(20pt){s}{1; up}
+                \AO(40pt){s}{1; up}
+                \AO(60pt){s}{1; up}
+                \AO(80pt){s}{1; }
+                \AO(110pt){s}[label={$\mathrm{d_{xy}}$}]{0; pair}
+                \AO(130pt){s}[label={$\mathrm{d_{xz}}$}]{0; up}
+                \AO(150pt){s}[label={$\mathrm{d_{yz}}$}]{0; up}
+                \AO(120pt){s}[label={$\mathrm{d_{z^2}}$}]{2; }
+                \AO(140pt){s}[label={$\mathrm{d_{x^2 - y^2}}$}]{2; }
+                \connect{AO5 & AO6, AO5 & AO9}
+                \draw (AO8) node[anchor=west, xshift=10]{$\mathrm{t_{2g}}$};
+                \draw (AO10) node[anchor=west, xshift=10]{$\mathrm{e_{g}}$};
+                \draw [->] (-0.5,0) -- (-0.5,2) node[pos=0.75,
+                anchor=south west]{$E$};
+            \end{MOdiagram}                        
+        \end{center}
+\end{enumerate}
+
+\section*{ Introduction to Chemical Kinetics }
+
+\begin{enumerate}[1.]
+    \setcounter{enumi}{5}
+    \item 
+        \begin{enumerate}[a.]
+            \item By plotting the natural logarithm of the known values, it is
+                clear that there is a linear relationship. As a result, this
+                reaction is first order governed by the integrated rate law:
+                $$ \ln [ \ce{ A } ] = -kt + \ln [ \ce{ A } ]_{0} $$
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[scale=0.75]{"Linear Trendline"}
+                    \caption{Linear Trendline}
+                \end{figure}
+
+                Note: y-axis is $\ln [ A ]$ in molars and x-axis is $t$ in days.
+
+            \item From the trendline, the slope is -0.3735. From the integrated
+                rate law:
+                $$ k = 0.3735\ \si{ s^{-1} } $$
+
+                Using the equation for half-life for a first order reaction:
+                $$ t_{1/2} = \frac{ \ln 2 }{ k } = 1.856\ \si{ s } $$
+
+            \item Using the trendline equation:
+                $$ [ \ce{ A } ](t) = e^{-kt + \ln [ \ce{ A } ]_{0}} $$
+                $$ e^{-0.3735 \cdot 3 + \ln( 6.000 )} = 1.960 $$
+
+        \end{enumerate}
+    \item 
+        \begin{enumerate}[a.]
+            \item Using the first order rate law:
+                $$ \frac{ 1 }{ 8 } = e^{-6.85 \cdot 10^{-2} \cdot t} $$
+
+                Solving for $t$:
+                $$ t = 30.36\ \si{ min } $$
+
+            \item Using the first order rate law:
+                $$ 0.10 = e^{-6.85 \cdot 10^{-2} \cdot t} $$
+
+                Solving for $t$:
+                $$ t = 33.61\ \si{ min } $$
+
+            \item Using the first order rate law:
+                $$ \frac{ 1 }{ 3 } = e^{-6.85 \cdot 10^{-2} \cdot t} $$
+
+                Solving for $t$:
+                $$ t = 16.04\ \si{ min } $$
+
+        \end{enumerate}
+\end{enumerate}
+
+\end{document}
+
