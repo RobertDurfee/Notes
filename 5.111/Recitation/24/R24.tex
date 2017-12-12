@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 5.111 Recitation 24 }
+\author{ Robert Durfee }
+\date{ December 12, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Arrhenius Equation }
+
+$$ k = A e^{-E_{a} / RT} $$
+
+This is the equation which shows the temperature dependency of the rate constant
+with temperature and the activation energy. The $E_{a}$ term is the activation
+energy for the reaction. This can be rearranged:
+$$ \ln(k) = \ln(A) - \frac{ E_{a} }{ RT }$$
+
+Using this equation, we can plot the natural logarithm of the rate constant and
+the inverse time to get a linear graph with a slope containing the activation
+energy. As the activation energy increase, the slope becomes steeper. As a
+result, if temperature increases, the rate will be more responsive to
+temperature changes. This is consistent with what we learned before:
+$$ \Delta G = -RT \ln(K) $$
+$$  K = e^{-\Delta G / RT} $$
+
+Since the equilibrium is related to the speed of the forward and reverse
+reactions, we can relate this to rate constants:
+$$ k_{f} = Ae^{-E_{a} / RT},\ k_{r} = Ae^{-E_{a} - \Delta G / RT} $$
+
+For a simple reaction at equilibrium,
+$$ \ce{ A <=> B } $$
+$$ \mathrm{rate} = k_{f}[ A ] - k_{r}[ B ] = 0$$
+$$ \frac{ k_{f} }{ k_{r} } = \frac{ [B] }{ [A] } = K$$
+
+Substituting back in:
+$$  \frac{ k_{f} }{ k_{r} } = e^{-\Delta G / RT} = K $$
+
+\subsection{Example}
+
+$$ \ce{ BH_{4}- + NH_{4}+ -> BH_{3}NH_{3} + H_{2} } $$
+$$ k = 1.94 \cdot 10^{-4}\ \si{ M^{-1}\ s^{-1} },\ T = 30.0\ \si{ C },\ \
+E_{a} = 161\ \si{ kJ\ mol^{-1} },\ t_{1/2} = 1.00 \cdot 10^{4}\ \si{ s }$$
+
+What is $k$ at $40^{\circ}$?
+$$ 1.94 \cdot 10^{-4} = A e^{-161000 / (8.314) (303) } $$
+
+Solving for $A$:
+$$ A = 1.11 \cdot 10^{24} $$
+
+Plugging in $A$ to solve for $k$ at new temperature:
+$$ k = (1.1 \cdot 10^{24}) e^{-161000 / (8.314)(313)} = 1.49 \cdot 10^{-3} $$
+
+What is the half-life at the new temperature?
+$$ \frac{ t_{1/2, 40} }{ t_{1/2, 30} } = \frac{k_{30}}{k_{40}} $$
+$$ t_{1/2, 40} = 1.30 \cdot 10^{3} $$
+
+\section{Mechanisms}
+
+Steps:
+$$ \ce{ H_{2}O_{2} -> H_{2}O + O } $$
+$$ \ce{ O + CF_{2}Cl_{2} -> ClO + CF_{2} + CF_{2}Cl } $$
+$$ \ce{ ClO + O_{3} -> Cl + 2O_{2} } $$
+$$ \ce{ Cl + CF_{2}Cl -> CF_{2}Cl_{2} } $$
+
+Overall:
+$$ \ce{ H_{2}O_{2} + O_{3} -> H_{2}O + 2O_{2} } $$
+
+The \textbf{molecularity} represents the number of reactants. For example, the
+first reaction is unimolecular, the second is bimolecular, etc. The
+\textbf{reaction intermediates} are any reactants that are generates and then
+consumed and the \textbf{catalysts} are any reactants/products that are supplied
+and then are produced in the end. In this case, $\ce{ CF_{2}Cl_{2} }$ is the
+catalyst.
+
+Above, the slow reaction is the second. All the rest are fast. This is the
+\textbf{rate-determining step}.
+
+\section{Michaelis-Menten}
+
+$$ \ce{ E + S <=> ES -> E + P } $$
+There are two rates for the above reaction:
+$$ \mathrm{rate} = k_{2}[ ES ] $$
+$$ \frac{ d[\ce{ES}] }{ dt } = k_{1}[E][S] - k_{-1}[ES] - k_{2}[ES] = 0 $$
+$$ [E_{TOT}] = [E] + [ES] $$
+$$ \mathrm{rate} = \frac{ k_{2}[E_{TOT}][S] }{ K_{M} + [S] },\ K_{M} = \frac{
+k_{-1} + k_{2} }{ k_{1} }$$
+
+\end{document}
+
