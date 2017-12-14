@@ -1,0 +1,274 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 7.012 Review I }
+\author{ Robert Durfee }
+\date{ December 14, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Gene Linkage }
+
+$$ F_{0}: \mathrm{AABB \times aabb} $$
+$$ F_{1}: \mathrm{AaBb \times aabb} $$
+
+\begin{center}
+  \begin{tabular}{ c c }
+    AaBb & 40 (Parental)\\
+    aaBb & 10 (Recombinant)\\
+    Aabb & 10 (Recombinant)\\
+    aabb & 40 (Parental)\\
+  \end{tabular}
+\end{center}
+
+The distance between the genes is equal to the number of recombinant offspring
+over the total population size.
+
+\section{Epistasis}
+
+$$ \ce{A -> B -> C -> Lys} $$
+
+Each step is controlled by a certain enzyme, $x$, $y$, or $z$ (in order from
+left to right). First, grow the organism on a rich medium, then mutagenize and
+place on a minimal medium (without lysine). If cells die, they are lysine
+mutants.
+
+\begin{center}
+  \begin{tabular}{ c c c c c }
+    Mutant & A & B & C & Lys \\
+    x-mutant & - & + & + & + \\
+    y-mutant & - & - & + & + \\
+    z-mutant & - & - & - & +
+  \end{tabular}
+\end{center}
+
+\section{Neural Action Potential}
+
+The membrane at resting is $-70\ \si{ mV }$. To remain at this potential, there
+is a \textbf{sodium-potassium pump} that exchanges sodium out and potassium in.
+There is also an open, \textbf{passive potassium pump}. This allows the
+potassium to reach an electrical and chemical gradient.
+
+When the signal accumulates, once it reaches $-50\ \si{ mV }$, the
+\textbf{voltage-gated sodium channel} opens. This causes
+\textbf{depolarization}. At $+30\ \si{ mV }$, the \textbf{voltage-gated
+potassium channel} opens. This causes \textbf{repolarization}.  These gates take
+some time to close, this results in a dip below the normal resting potential
+causing \textbf{hyperpolarization}. Eventually, this will reach equilibrium once
+again after the voltage-gated potassium channel closes.
+
+\section{Immunology}
+
+A \textbf{antigen} is a foreign particle that is recognized by
+\textbf{antibodies}. These antibodies are proteins with a Y structure. In this
+structure, there are two heavy and light chains. These chains are joined
+together by disulfide bonds. On both of these chains, there are variable and
+constant regions. The base of the Y is constant and only the tips of the Y are
+variable. Within the variable region on the heavy chain, there are VDJ regions
+(the V region is on the very end of the Y). The variable region on the light
+chain is made up of VJ regions. The different orders of VDJ are decided through
+\textbf{V(D)J recombination} which randomly chooses V(D)J sections from the
+genome.
+
+There are \textbf{memory cells} that are stored in the bone marrow that remember
+infections it has come across before. This allows the body to quickly react to
+the antigen when reinfected.
+
+The body is able to recognize the different between self and non-self cells. If
+there is a problem with this system, you can develop an \textbf{autoimmune}
+disease where your body targets your own proteins.
+
+\section{Stem Cells}
+
+The zygote is the only \textbf{totipotent} stem cell. They then differentiate
+into emmbryo, \textbf{pluripotent} stem cells. These differentiate into
+\textbf{multipotent} stem cells. These are more specialized. The
+\textbf{hematopoetic} stem cells produce the \textbf{B cells} that can be
+memory or plasma cells.
+
+\section{Cholesterol}
+
+This is a very prominent cause of heart attacks which arises when plaque builds
+up in a blood vessel causing a blockage. In the case of a heart attack, this is
+a blockage of an artery going to the heart. A main type of plaque is
+cholesterol. Cholesterol is a very hydrophobic molecule. This is not very
+soluble in the blood, so cholesterol is packaged into \textbf{lipoproteins}.
+Lipoproteins are made up of a single layer of phospholipids, creating a
+hydrophobic region inside. There are also proteins that stick out of this.
+\textbf{HDL} is a small package and \textbf{LDL} is a large package.
+
+Cholesterol is used in the plasma membrane to keep it flexible. It is also used
+to produce bile acids and make steroids. Your body can get cholesterol through
+your diet or it can synthesize it using \textbf{HMGCoA reductase enzyme}. Drugs
+typically target this enzyme because, without it, you are unable to synthesis
+cholesterol.
+
+On the surface of cells, there are \textbf{LDL receptors} which regulate the
+uptake of cholesterol in the cell. This remove the cholesterol from the
+bloodstream.  If these fail, there can be excess LDL in the blood stream, which
+will lead plaque formation and, eventually, a heart attack.
+
+With \textbf{familiar hypocholesteroleimia}, if an individual is heterozygous,
+there are fewer LDL receptors and these individuals will likely get heart
+disease earlier. In homozygous individuals, there are no LDL receptors. This
+individual will get heart disease in their teens.
+
+We can treat this through diet, statins, or bile acid sequesterant. Diet may not
+work because the body will produce more cholesterol to compensate. Statins are
+most effective because they target the HMG-CoA reductase enzyme. Bile acid
+sequesterant will lower LDL by preventing the recycling of bile acids.
+
+\section{Traditional Gene Knock Out}
+
+Support you have one gene with two regions: A and B, separated by an intron. The
+antibiotic resistance will let you know whether or on the insert was
+incorporated into cell. The negative selection marker will, when incorporated
+into a different gene, will kill the cell.
+
+\section{CRISPR}
+
+This is a way that cell protect themselves from viruses. There are repeat
+sequences in your genome with sequences in between that match the genome of
+certain viruses. The \textbf{Cas9} protein will perform a double stranded cut of
+the DNA. It uses a single guide RNA to determine where it will cut. Once the
+stranded is cut, the cell will try to repair the damage through homologous
+recombination (you can add an insert so the cell will fix the cut with your
+provided DNA). Or, if no insert is provided, there will be non-homologous end
+joining which will knock out the gene.
+
+\section{RNA Interference}
+
+You insert both the positive and negative strand of the RNA sequence you are
+trying to knockout. The positive is the coding strand and the negative is its
+complement. The cell will then destroy the double stranded RNA because it will
+think it is a virus.
+
+It is important to note that is is a \textbf{knock down}, not a knock out as
+there is no permanent damage to the genome. Removing the double stranded insert
+will resume the expression.
+
+\section{Cre-Lox}
+
+You take a gene and put lox sites around it. In certain cell types, you can
+supply a promoter to express the Cre protein. This Cre protein will recombine
+the lox sites with themselves, essentially expelling the gene in between the
+sites.
+
+\section{Ras Protein}
+
+The Ras protein can be in two states: active and inactive. Ras is active when
+bound to GTP and inactive when bound to GDP. To go from inactive to active,
+\textbf{GEF} (quanine nucleotide exchange factor) is used. This turns the GDP
+into a GTP. To go from active to inactive, \textbf{GAP} (GTPase activated
+protein) is used. This hydrolyzes the GTP and takes away the phosphate.
+
+\section{Signals}
+
+We have two neurons: pre-synaptic and post-synaptic. \textbf{Excitatory} signals
+release a ligand that results in a ligand-gated channel that brings in a
+positive ion. \textbf{Inhibitory} signals release a ligand that results in a
+ligand-gated channel that bring is a negative ion.
+
+\section{PCR (Polymerase Chain Reaction)}
+
+This is the process used to synthetically replicate DNA. For this procedure, you
+need a DNA polymerase, a template, a reaction buffer, a forward primer, a
+reverse primer, and dNTPs.
+
+You start with a double stranded DNA. Then you heat it to separate the two
+strands. DNA polymerase always synthesizes 5' to 3'. You need both the forward
+and backward primers so that both strands are replicated. These primers will
+stick after the temperature is lowered a little. Raising the temperature a
+little will allow the DNA polymerase to complete the copy. This process is then
+cycled to exponentially create copies of the DNA.
+
+\section{Sequencing DNA}
+
+This is the process used to determine the base pair order of DNA strands. You
+need a DNA polymerase, a template, a reaction buffer, a forward \textbf{or}
+reverse primer, normal dNTPs, and ddNTPs. The ddNTP prevents the DNA polymerase
+from continuing the synthesis. These are in lower concentration than the dNTPs
+to allow several lengths of DNA strands. Depending on the position on an
+electro-gel, you can determine the sequence of the genome.
+
+\section{Viruses}
+
+There are different genomes: ssDNA, dsDNA, dsRNA, (+/-)ssRNA, and retroviruses.
+
+\subsection{ssDNA}
+
+This virus uses host RNA polymerase and ribosomes. This virus also needs to
+replicate, so it uses host DNA polymerase. This will enter the nucleus.
+
+\subsection{dsDNA}
+
+This is very similar to the above one. It will also use host RNA and DNA
+polymerase and ribosomes. This will also enter the nucleus.
+
+\subsection{dsRNA}
+
+This virus uses the host ribosomes. The virus needs to bring it's own RNA
+dependent RNA polymerase. This will not enter the nucleus.
+
+\subsection{(+)ssRNA}
+
+This virus can be directly converted into protein. To replicated, you need to
+create the (-)ssRNA. This will turn into a dsRNA intermediate. The (-)ssRNA will
+be used as the template for replication. They also need to bring their own RNA
+dependent RNA polymerase. This will not enter the nucleus.
+
+\subsection{(-)ssRNA}
+
+This virus cannot be directly converted into protein, the (+)ssRNA must first be
+created. This will turn into a dsRNA intermediate. The (+)ssRNA will work as the
+template for the RNA dependent RNA polymerase to replicated the (-)ssRNA genome.
+This will not enter the nucleus.
+
+\subsection{Retrovirus}
+
+These viruses have an RNA genome that is reverse transcribed into DNA. It must
+brings its own reverse transcriptase. Once it is turned into DNA, the host
+processes can complete. This will enter the nucleus. Once in the nucleus, it
+will embed into the host's genome. The other DNA viruses also have the ability
+embed into the host's genome.
+
+\section{Operons}
+
+If we want to break down something, a regulator is made and it will stick to the
+operator. This will prevent RNA polymerase from binding and transcribing the
+gene needed to break down the material. When in the presence of the substance,
+the substance will bind to the regulatory protein and it can no longer bind to
+the operator. This is a \textbf{repressor}. With nothing left to bind to, the
+repressor will be able to bind to the operator.
+
+In the case of an \textbf{activator}, the regulatory protein will be floating
+around until the presence of the substance. Then it will be able to bind to the
+operator and block transcription.
+
+\section{Cellular Respiration}
+
+Start with glucose, then glycolysis results in 2 pyruvates. This can either go
+\textbf{anaerobically}, without oxygen, through fermentation and produce a net
+of 2 ATPs. This can also go \textbf{aerobically}, with oxygen, can enter the
+citric acid cycle. Then the electron transport chain uses oxygen as an electron
+receptor to make water. The electron transport chain will create an electrical
+gradient and pumping in protons creates more ATP. This produces a net of 34-38
+ATPs.
+
+\end{document}
+
