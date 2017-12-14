@@ -1,0 +1,148 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 5.111 Recitation 25 }
+\author{ Robert Durfee }
+\date{ December 14, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Catalysis }
+
+The goal of \textbf{catalysis} is to speed up reactions that normally take a
+really long time. To get from reactants to the products, the reaction must
+overcome an energy barrier, or activation energy, $E_{a}$. Catalysts lower this
+activation energy. Looking at the Ahrennius Equation:
+$$ k = a e^{-E_{a} / RT} $$
+
+The exponent term is increased by decreasing $E_{a}$. However, it is important
+to notice that the overall $\Delta G$ of the reaction remains unchanged, as it
+is a state function. As a result, the equilibrium constant also remains the
+same.
+
+\section{Enzymes}
+
+\textbf{Enzymes} are the biological catalysts in organisms. A \textbf{substrate}
+is bound to the enzyme and the enzyme performs a conformational change to the
+substrate causing it to release from the enzyme in its new state. The general
+reaction is:
+$$ \ce{ S + E <=> ES -> P + E } $$
+
+The rate of this reaction is:
+$$ \mathrm{rate} \frac{ d[P] }{ dt } = k_{2}[ES] $$
+
+However, it is hard to know the concentration of ES. So we will alter this
+equation into terms that we know: $[E]_{0},\ [S]$. To do this, we will assume
+the \textbf{steady-state approximation} which says the intermediate
+concentration is unchanged.
+$$ \frac{ d[ES] }{ dt } = k_{1}[E][S] - k_{-1}[ES] - k_{2}[ES] = 0 $$
+$$ [E]_{0} = [E] + [ES] $$
+$$ \frac{ d[ES] }{ dt } = k_{1}[E]_{0}[S] - k_{1}[ ES ][ S ] -k_{-1}[ES] -
+k_{2}[ES] = 0 $$
+$$ [ES] = \frac{ k_{1}[E]_{0}[S] }{ k_{-1} + k_{2} + k_{1}[S] } $$
+
+We define a constant to simplify this even more, $K_{M}$ and $V_{max}=k_{2}[ E
+]_{0}$:
+$$ K_{M} = \frac{ k_{-1} + k_{2} }{ k_{1} }$$
+
+Then, the rate becomes:
+$$ \mathrm{rate} = \frac{ V_{max}[S] }{ K_{M} + [S] } $$
+
+We can do some qualitative analysis on this equation. If $[S]$ is really large,
+then the rate will be equal to $V_{max}$. If $K_{M} = [S]$, then the rate will
+be half the maximum rate. This gives a physical meaning to the quantity of
+$K_{M}$: it is essentially the affinity of the enzyme to the substrate.
+
+\subsection{Example}
+
+$$  K_{M} = 5 \cdot 10^{-5}\ \si{ M },\ k_{2} = 2 \cdot 10^{3} $$
+$$ [E]_{0} = 6 \cdot 10^{-7}\ \si{ M } $$
+
+What is $V_{max}$?
+$$ V_{max} = k_{2}[E]_{0} = (2 \cdot 10^{3})(6 \cdot 10^{-7}) = 1.2 \cdot 10^{-3} $$
+
+What is the concentration of the substrate if the rate is half of $V_{max}$?
+$$ [S] = K_{M} = 5 \cdot 10^{-5} $$
+
+\section{Nuclear Chemistry}
+
+\subsection{Introduction}
+
+Everything we have talked about so far is different elements binding to each
+other and exchanging electrons, but the elements remain the same during the
+interaction. \textbf{Nuclear chemistry} is the study of reactions that change
+the nucleus of an element.
+
+Notation:
+$$ {}^{A}_{Z}X $$
+
+$A$ is the number of \textbf{nucleons}, $Z$ is the number of protons, and $X$ is
+the elemental symbol.
+
+An electron is written as: ${}_{-1}^{0}e^{-}$. A \textbf{positron} is written as
+${}_{1}^{0}e^{+}$. A proton is written as ${}_{1}^{1}p^{+}$. A neutron is
+written as ${}_{0}^{1}n$.
+
+An \textbf{isotope} has the same number of protons, different number of
+neutrons. An \textbf{isotone} has the same number of neutrons, different number
+of protons. An \textbf{isobar} has the same total mass, but a different number
+of protons and neutrons.
+
+\subsection{Nuclear Decay}
+
+\textbf{Nuclear decay} is the decomposition reaction, but for nuclear chemistry.
+Most elements found in nature have stable decomposition reactions, meaning that
+they will, not decay into another element spontaneously. This makes sense
+because if the reaction was non-spontaneous, it would've decayed into something
+else.
+
+The graph of number of neutrons vs number of protons is skewed towards higher
+neutrons. This means that as the number of protons increases, the higher the
+number of neutrons is needed.
+
+In \textbf{alpha emission}, the alpha particle, ${}_{2}^{4}\ce{He}$, is emitted.
+This usually occurs for atomic numbers greater than 83. These particles are
+easily blocked and don't travel very far.
+$$ \ce{{}_{92}^{238}U -> {}_{2}^{4}He + {}_{90}^{234}Th} $$
+
+In \textbf{beta emission}, an electron is emitted from a neutron to form a
+proton. This typically happens for elements on the top left of the stability
+line. You can also have positron emission. This is medium dangerous: it can be
+blocked by aluminum foil.
+$$ \ce{{}^{234}_{90}Th -> {}_{-1}^{0}e^{-} + {}_{91}^{234}Th} $$
+$$  \ce{{}^{11}_{6}C -> {}_{1}^{0}e^{+} + {}^{11}_{5}B } $$
+
+In \textbf{gamma emission}, a high energy light particle is release. There is no
+change in atomic number of number of nucleons. These are very dangerous. This
+needs to be blocked by lead or concrete.
+
+\subsection{Energy Changes}
+$$ \ce{{}^{1}_{0}n -> {}^{1}_{1}p^{+} + {}_{-1}^{0}e^{-} } $$
+
+We can calculate the change in mass during this reaction. This results in a
+small, non-zero change in the mass of the products and reactants. Using
+Einstein's famous equation, we can find the change in energy:
+$$ \Delta E = \Delta m c^{2} $$
+
+\subsection{Kinetics}
+
+This is a decomposition reaction in the first order. This means the reaction is
+unimolecular, as well. All the usual kinetics equations apply here.
+
+\end{document}
+
