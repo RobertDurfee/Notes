@@ -1,0 +1,275 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 8.01 Problem Set 12 }
+\author{ Robert Durfee }
+\date{ December 8, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Two Oscillating Springs }
+
+\subsection*{ Part A }
+
+Since the object is at equilibrium, the forces acting on it sum to zero. Since
+there are only two (important) forces, they must be equal. Using Hooke's law:
+$$ k l_{e} = 2k( l - l_{e} ) $$
+$$ l_{e} = \frac{ 2l }{ 3 } $$
+
+\subsection*{ Part B }
+
+Suppose the block is offset to the right. (Which makes sense in the context of
+the problem considering the initial velocity is negative.) Then the force
+applied to the block by the left spring will be a restoring force equal to:
+$$ \vec{ F }_{1} = -k \left( \frac{ 2l }{ 3 } + x \right) \hat{ i } $$
+
+The force applied to the block by the right spring will also be a restoring
+force, but in the opposite direction:
+$$ \vec{ F }_{2} = 2k \left( \frac{ l }{ 3 } - x \right) \hat{ i } $$
+
+Using Newton's second law:
+$$ m \frac{ d^{2}x }{ dt^{2} } =  -k \left( \frac{ 2l }{ 3 } + x \right) $$
+$$ m \frac{ d^{2}x }{ dt^{2} } =  2k \left( \frac{ l }{ 3 } - x \right) $$
+
+Combining these two expressions results in:
+$$ m \frac{ d^{2}x }{ dt^{2} } = -3kx $$
+
+\subsection*{ Part C }
+
+A solution to the differential equation above, as shown in class:
+$$ x( t ) = A \cos( \omega_{0} t ) + B \sin( \omega_{0} t )$$
+$$ v( t ) = -A \omega_{0} \sin( \omega_{0} t ) + B \omega_{0} \cos( \omega_{0} t ) $$
+
+From the differential equation, we know $\omega_{0}$
+$$ \omega_{0} = \sqrt{ \frac{ 3k }{ m } } $$
+
+Solving for $A$ using the initial position:
+$$ x_{0} = A \cdot 1 + B \cdot 0 $$
+$$ A = x_{0} $$
+
+Solving for $B$ using the initial velocity:
+$$ -v_{0} = A \omega_{0} \cdot 0 + B \omega_{0} \cdot 1 $$
+$$ B = -\frac{ v_{0} }{ \omega_{0} } = -v_{0} \sqrt{ \frac{ m }{ 3k } } $$
+
+Plugging these values into the equation for position:
+$$ x( t ) = x_{0} \cos \left( \sqrt{ \frac{ 3k }{ m } } t \right) - v_{0} \sqrt{
+\frac{ m }{ 3k } } \sin \left( \sqrt{ \frac{ 3k }{ m } } t \right) $$
+
+Plugging these values into the equation for velocity:
+$$ v( t ) = -x_{0} \sqrt{ \frac{ 3k }{ m } } \sin \left( \sqrt{ \frac{ 3k }{ m }
+} t \right) - v_{0} \cos \left( \sqrt{ \frac{ 3k }{ m } } t \right) $$
+
+\section{ Journey to the Center of the Earth }
+
+\subsection*{ Part A }
+
+The force acting on the mass as it moves through the center of the Earth is
+pointed towards the center of the Earth. Its magnitude is proportional to the
+amount of mass contained within the smaller radius $r$.
+
+\bigbreak
+
+Given that the mass of the Earth is considered uniform:
+$$ \rho = \frac{ M_{E} }{ 4/3 \pi R_{E}^{3} } $$
+
+Converting this to the mass enclosed within the smaller radiu:
+$$ m_{e} = \rho V_{e} = \frac{ M_{E} r^{3} }{ R_{E}^{3} } $$
+
+Now we can use the gravitaional force equation to calculate the magnitude of the
+force at any given radius $r$:
+$$ \vec{ F } = -\frac{ G m m_{e} }{ r^{2} } \hat{ r } = -\frac{ G m M_{E} r }{
+R_{E}^{3} } \hat{ r } $$
+
+Using the work-kinetic energy theorem (and the knowledge that gravitational
+force is conservative):
+$$ U_{f} - U_{i} = - \int F dx $$
+
+Substituting force expression and eliminating $U_{i}$ by setting $r_{i} = 0$
+where potential energy is zero.
+$$ U( r ) = \int \limits_{0}^{r} \frac{ G m M_{E} r }{ R_{E}^{3} } dr = \frac{ G
+m M_{E} r^{2} }{ 2 R_{E}^{2} }$$
+
+\subsection*{ Part B }
+
+Using Netwon's second law, the force can be rewritten in terms of acceleration:
+$$ m \frac{ d^{2}r }{ dt^{2} } = - \frac{ G m M_{E} }{ R_{E}^{3} } r $$
+
+This forms the standard differential equation utilized in SHM.
+
+\bigbreak
+
+This can also be seen by comparing the potential energy equation to a spring's
+potential energy equation which is also proportional the the squared
+displacement from the equilibrium:
+$$ \frac{ 1 }{ 2 } k x^{2} $$
+$$ \frac{ 1 }{ 2 } \frac{ G m M_{E} }{ R_{E}^{3} } r^{2} $$ 
+
+\subsection*{ Part C }
+
+Calculating the initial energy (all potential):
+$$ PE = \frac{ G m M_{E} R_{E}^{2} }{ 2 R_{E}^{3} } = \frac{ G m M_{E} }{ 2 R_{E} } $$
+
+Setting this equal to final energy (all kinetic):
+$$ \frac{ 1 }{ 2 } m v^{2} = \frac{ G m M_{E} }{ 2 R_{E} } $$
+
+Solving for final velocity:
+$$ v = \sqrt{ \frac{ G M_{E} }{ R_{E} } } $$
+
+\section{ Physical Pendulum Pivoted Ring }
+
+\subsection*{ Part A }
+
+The energy is conserved throughout swinging because we assume only gravity (a
+conservative force) acts on the pendulum. Potential energy:
+$$ U( \theta ) = 2 m g R ( 1 - \cos \theta ) $$
+
+Kinetic energy:
+$$ K( \theta ) = \frac{ 1 }{ 2 } m v^{2} = 2 m R^{2} \left( \frac{ d\theta }{ dt }
+\right)^{2} $$
+
+Expressing total mechanical energy:
+$$ E =  2 m g R ( 1 - \cos \theta ) + 2 m R^{2} \left( \frac{ d\theta }{ dt }
+\right)^{2} $$
+
+Since there is no change in mechanical energy:
+$$ 0 = 2 m g R \sin \theta \frac{ d\theta }{ dt } + 4 m R^{2} \frac{ d\theta }{
+dt} \frac{ d^{2}\theta }{ dt^{2} } $$
+$$ 0 = 4 m R^{2} \frac{ d\theta }{ dt } \left( \frac{ d^{2}\theta }{ dt^{2} } +
+\frac{ g }{ 2 R } \sin \theta \right) $$
+
+Using the small angle approximation ($\sin \theta \approx \theta$):
+$$ \frac{ d^{2}\theta }{ dt^{2} } = -\frac{ g }{ 2 R } \theta $$
+
+Extracting $\omega_{0}$ from SHM:
+$$ \omega_{0} = \sqrt{ \frac{ g }{ 2 R } } $$
+
+Using the ratio of angular frequency and period:
+$$ T = 2 \pi \frac{ 1 }{ \omega_{0} } $$
+$$ T = 2 \pi \sqrt{ \frac{ 2 R }{ g } } $$
+
+Equating kinetic and potential energies equal:
+$$ 2 m g R ( 1 - \cos \theta ) = 2 m R^{2} \left( \frac{ d\theta }{ dt }
+\right)^{2} $$
+
+Solving for angular speed:
+$$ \frac{ d\theta }{ dt } = \sqrt{ \frac{ g }{ R } ( 1 - \cos \theta ) } $$
+
+Using small angle approximation ($\cos \theta \approx 1 - \theta / 2$):
+$$ \frac{ d\theta }{ dt } = \sqrt{ \frac{ g }{ 2 R } } \theta $$
+
+\subsection{ Part B }
+
+Without the small angle approximation, we just go back one simplification step
+from the last part:
+$$ \frac{ d\theta }{ dt } = \sqrt{ \frac{ g }{ R } ( 1 - \cos \theta ) } $$
+
+\section{ Small Oscillations }
+
+\subsection*{ Part A }
+
+Plugging the given force equation into the provided integral:
+$$ U( r ) - U( \infty ) = - \int \limits_{\infty}^{r} \left( -\frac{ G m_{1}
+m_{2} }{ r^{2} } + \frac{ C }{ r^{3} } \right) dr $$
+
+Solving this definite integral yields:
+$$ U( r ) = -\frac{ G m_{1} m_{2} }{ r } + \frac{ C }{ 2 r^{2} } $$
+
+\subsection*{ Part B }
+
+Taking the derivative of the previous equation to find minimum:
+$$ U'( r ) = \frac{ G m_{1} m_{2} }{ r^{2} } - \frac{ C }{ r^{3} } $$
+
+Setting derivative equal to zero and solving for $r$:
+$$ 0 = \frac{ G m_{1} m_{2} }{ r^{2} } - \frac{ C }{ r^{3} }  $$
+$$ r_{0} = \frac{ C }{ G m_{1} m_{2} } $$
+
+Plugging $r_{0}$ back into potential energy function:
+$$ U( r_{0} ) = -\frac{ ( G m_{1} m_{2} )^{2} }{ 2 C } $$
+
+\subsection*{ Part C }
+
+Taking the second derivative of the potential energy equation:
+$$ U''( r ) = -\frac{ 2 G m_{1} m_{2} }{ r^{3} } + \frac{ 3 C }{ r^{4} } $$
+
+Substituting our value for $r_{0}$ to get the $k$ constant:
+$$ k \approx U''( r_{0} ) = \frac{ G^{4} m_{1}^{4} m_{2}^{4} }{ C^{3} } $$
+
+Using the relation to angular frequency:
+$$ \omega_{0} = \sqrt{  \frac{ k }{ m } } $$
+
+Since $m_{1} \ll m_{2}$, only $m_{1}$ oscillates:
+$$ \omega_{0} = \sqrt{ \frac{ G^{4} m_{1}^{3} m_{2}^{4} }{ C^{3} } } $$
+
+\subsection*{ Part D }
+
+At the extreme locations closest and furthest apart, there is no kinetic energy.
+As a result, the total mechanical energy is equal to the potential energy:
+$$ E = -\frac{ G m_{1} m_{2} }{ r } + \frac{ C }{ 2 r^{2} } $$
+
+Solving this for $r$ yeilds two solutions (for when $U( r ) < E < 0$):
+$$ r_{1} = - \frac{ \sqrt{ 2 C E + G^{2} m_{1}^{2} m_{2}^{2} } + G m_{1} m_{2}
+}{ 2 E } $$
+$$ r_{2} = \frac{ \sqrt{ 2 C E + G^{2} m_{1}^{2} m_{2}^{2} } - G m_{1} m_{2}
+}{ 2 E } $$
+
+\section{ MICA Cube Experiment }
+
+\begin{enumerate}[1.]
+    \item One of our group members will hold the cube in her hand and spin her
+        arms and pull her arms in. 
+
+        \begin{enumerate}[a.]
+            \item A typical rate of angular speed for spinning with arms
+                extended is about 2 revolutions per second. For spinning with
+                arms pulled in, a typical angular speed is 24 revolutions per
+                second. Converting to radians per second:
+                $$ \omega_{min} \approx 4 \pi\ \si{ rad\ s^{-1} } $$
+                $$ \omega_{max} \approx 48 \pi\ \si{ rad\ s^{-1} } $$
+
+            \item Sketch of expected angular speed (x-axis is time and y-axis is
+                angular speed):
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[scale=0.60]{"Sketch"}
+                    \caption{Approximate Expected Angular Speed}
+                \end{figure}
+                
+        \end{enumerate}
+
+    \item Link submitting via the Google form: https://youtu.be/6pC5VcIHj9Q
+
+    \item Actual data collected by MICA cube:
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.5]{"Experiment"}
+            \caption{Experiment}
+        \end{figure}
+
+        The first point, a, represents the initial speed. Point b shows the
+        angular speed increasing her arms are drawn inwards. Point c shows the
+        maximum speed with arms fully drawn in. point d shows her slowing down.
+
+    \item Since angular momentum is nearly conserved (thanks to the ice), since
+        our group member's moment of inertia is decreasing as her arms are
+        pulled in, he angular speed must increase to cancel the change.
+
+\end{enumerate}
+
+\end{document}

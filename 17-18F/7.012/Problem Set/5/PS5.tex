@@ -1,0 +1,171 @@
+\documentclass{article}
+\usepackage{indentfirst}
+\usepackage{enumerate}
+\usepackage[utf8]{inputenc}
+
+\title{7.012 Problem Set 5}
+\author{Robert Durfee}
+\date{November 8, 2017}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question 1}
+
+\begin{enumerate}[A.]
+    \item Protein Y acts as a repressor for the genes to produce enzymes A and B
+        for the amino acid xynine. When xynine is added to the growth medium, it
+        binds to the repressor protein Y which allows the protein to bind to the
+        DNA and stop enzyme production.
+    
+    \item If there was a mutation in the gene for $P_{E}$ or in both genes for
+        $A$ and $B$, enzymes A and B would be low activity always. Since it was
+        specified there is only a single mutation, this must be in $P_{E}$. With
+        a defective promoter for both enzymes, neither will be transcribed.
+    
+    \item If there was a mutation in the genes for $P_{Y}$, $Y$, or $O$, the
+        repressor wouldn't be functional, therefore enzymes A and B would be
+        high activity always. To create the repressor protein, $P_{Y}$ is needed
+        to start transcription and $Y$ is needed for the sequence of the
+        protein. It was also stated that $O$ is necessary for regulation by
+        protein $Y$, most likely the binding site. Without this, the repressor
+        couldn't stop enzyme production.
+    
+    \item If there was a mutation in the gene for only one enzyme, $A$ or $B$,
+        that respective enzyme would have low activity always. In this case,
+        that enzyme would be $B$.
+    
+    \item Now the mutations are limited to genes $P_{Y}$ and $Y$. If there was a
+        mutation in either of these, the wild type plasmid could step in and
+        create the repressor. 
+    
+    \item Now the mutation is limited to gene $O$. If there was a mutation in
+        $O$, the binding site of the repressor, there would still be activity of
+        both enzyme A and B with xynine from the mutated genomic region.
+    
+    \item Yes, the plasmid would supply the $P_{E}$ for mutant 2 allowing for
+        the production of both enzyme A and B in the plasmid-supplemented mutant
+        as shown in the second diagram. For mutant 4, the plasmid would supply
+        the gene for $B$ (along with the promoter necessary for transcription)
+        and allow the production of enzyme B in the plasmid-supplemented mutant
+        as shown in the second diagram.
+    
+\end{enumerate}
+
+\section*{Question 2}
+
+\begin{enumerate}[A.]
+    \item The A SNP allele is tightly associated with the disease locus in the
+        family of individuals 1 and 2.
+    
+    \item List of genotypes:
+    \begin{center}\begin{tabular}{c c}
+        \textbf{Individuals} & \textbf{Genotype} \\
+        1 & Dd \\
+        2 & Dd \\
+        3 & DD \\
+        4 & Dd \\
+        5 & dd \\
+        6 & DD \\
+        7 & dd \\
+        8 & Dd \\
+        9 & dd
+    \end{tabular}\end{center}
+    
+    \item Probability that individual 10 is affected or carrier:
+    \begin{center}
+        \begin{tabular}{c c c}
+            \textbf{Individual} & \textbf{Carrier} & \textbf{Affected} \\
+            10 & 50\% & 0\%
+        \end{tabular}
+    \end{center}
+    
+    \item A/C or C/C.
+    
+    \item Genotypes of the expected twins:
+    \begin{center}
+        \begin{tabular}{c c}
+            \textbf{Individual} & \textbf{Genotype} \\
+            11 & dd \\
+            12 & Dd \\
+        \end{tabular}
+    \end{center}
+    
+    \item The difference between the SNP genotypes and the disease phenotypes in
+        individuals 3 and 5 can be described by the disease developing in the
+        the family of individual 5 and has not spread to become associated with
+        that SNP in all genomes.
+    
+\end{enumerate}
+
+\section*{Question 3}
+
+\begin{enumerate}
+    \item Use the \textbf{embryonic stem cells} from a black mouse to knockout a
+        gene.
+    
+    \item Perform a selection with \textbf{both a positive and a negative
+        selection marker}.
+    
+    \item Inject the hemizygous cells into inner cell mass of an embryo of a
+        mouse with coat color \textbf{white}. Implant the modified embryo into a
+        surrogate and choose chimeric mouse with coat color \textbf{black and
+        white}.
+    
+    \item Breed chimeric mice to white mice. The hemizygous knockout mice will
+        have coat color that is \textbf{black}.
+\end{enumerate}
+
+\section*{Question 4}
+
+\begin{center}
+    \begin{tabular}{c c c}
+        & \textbf{Target} & \textbf{Replacement} \\
+        \textbf{Stem Cell} & DNA & Yes \\
+        \textbf{RNAi} & RNA & No\\
+        \textbf{CRISPR} & DNA & Yes
+    \end{tabular}
+\end{center}
+
+\section*{Question 5}
+
+\begin{enumerate}[A.]
+    \item The CRISPR locus of the phage-resistant strains of bacteria contained
+        sequences that matched the phage that they were resistant to. The
+        ability to identify a previously encountered phage allowed the bacteria
+        to target and attack the phage before it could do damage.
+    
+    \item CRISPR/Cas9 can be used to introduce mutations into diploid cells by
+        targeting a certain sequence using single guide RNA. Once this sequence
+        is found, Cas9 will cut the DNA there and continue to cut it after
+        homologous recombination until it is repaired using NHEJ where there
+        will very likely be a frame shift mutation caused by an insertion or
+        deletion. Additionally, CRISPR will make an individual homozygous for a
+        specific gene.
+    
+    \item CRISPR/Cas9 is much more efficient as it is easier to do in less time.
+        Additionally, it will work more often with fewer complications.
+    
+    \item Both constructs should work the same. The Cas9 will cause a double
+        stranded break at the site the single guide RNA matches to.
+    
+    \item Using CRISPR/Cas9, you can target any part of the genome: introns,
+        exons, and promoters so long as you can match the sequence using single
+        guide RNA.
+    
+    \item 
+        \begin{enumerate}[i.]
+            \item Exon 2.
+            
+            \item The amount of protein A found in the cell would be little as
+                the the CRISPR cut occurred in an exon and the cell would repair
+                the cut and cause a frame shift mutation.
+            
+            \item No, they would also need to provide an insert that the cell
+                could use homologous recombination to insert into the genome at
+                the break site created by the Cas9.
+        \end{enumerate}
+\end{enumerate}
+
+\end{document}

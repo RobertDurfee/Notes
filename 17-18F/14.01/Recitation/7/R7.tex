@@ -1,0 +1,122 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage[utf8]{inputenc}
+
+\title{14.01 Recitation 7}
+\author{Robert Durfee}
+\date{November 2017}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\begin{enumerate}
+    \item \textbf{Under perfect discrimination, there is no dead weight loss.
+            True or false?}
+    
+    True. All of the consumer surplus is extracted. Each consumer pays their
+    willingness to pay. Marginal revenue equals the demand.
+    
+    \item \textbf{Under oligopolistic competition, consumers are weakly worse
+            off than in a perfectly competitive market. True or False?}
+    
+    True. When there isn't perfect competition, there is market power. The
+    consumer is forced to pay what the seller wants.
+    
+\end{enumerate}
+
+\section*{Problem 2}
+
+There are $n$ firms where $n \geq 2$. 
+
+$$P(Q)=\alpha-Q$$
+$$Q=q_{1}+q_{2}+...+q_{n}$$
+$$C(q_{i})=\frac{1}{2}q_{i}^{2}$$
+
+\begin{enumerate}
+    \item \textbf{What is firm i's profit?}
+    
+    $$\pi_{i}(q_{1},...,q_{n})=q_{i}(\alpha-[q_{1}+...+q_{n}])-\frac{1}{2}q_{i}^{2}$$
+    
+    \item \textbf{Find the Cournot Equilibrium.}
+    
+    \begin{enumerate}[i]
+        \item Assume that firm 1 will know all the quantities produced by the
+                other firms ($q_{1},...,q_{n}$).
+
+        \item Find the best response of firm 1. You have to maximize the profit.
+        $$\frac{\partial \pi_{1}(q_{1},...,q_{n})}{\partial
+        q_{1}}=\alpha-[q_{1}+...+q_{n}]-q_{1}-q_{1}=0$$
+        $$q_{i}^{*}(q_{1},...,q_{i-1},q_{i+1},...,q_{n})=\frac{\alpha-\sum_{j\neq
+        i} q_{j}}{3}$$
+        $$\alpha-3q_{i}-\sum_{j\neq i}q_{j}=0$$
+        The cost for each firm is the same.
+        \item Solve the equations.
+        $$\alpha - 3q^{*}-\sum_{j\neq i}q^{*}=0$$
+        $$\alpha - 3q^{*}-(n-1)q^{*}$$
+        $$q^{*}=\frac{\alpha}{n+2}$$
+    \end{enumerate}
+    
+    \item \textbf{Find the price.}
+    
+    $$P(Q^{*})=\alpha-Q^{*}$$
+    $$P(Q^{*})=\alpha-n q^{*}$$
+    $$P(Q^{*})=\alpha-n \frac{\alpha}{n+2}=\alpha\frac{2}{n+2}$$
+    
+\end{enumerate}
+
+\section*{Problem 3}
+
+Same as problem 2, but with non-symmetrical cost equation:
+
+$$C(q_{i})=c_{1}q_{i}+\frac{c_{2}q_{i}^{2}}{2}$$
+
+\section*{Problem 4}
+
+There are two firms, A and B.
+
+$$P(Q)=10-Q$$
+$$Q=Q_{A}+Q_{B}$$
+$$C_{A}(Q_{A})=2Q_{A}$$
+$$C_{B}(Q_{B})=4Q_{B}$$
+
+\begin{enumerate}
+    \item \textbf{Find the joint profit maximizing price, quantity, and total
+            profit.}
+    
+    Firm B shuts down.
+    
+    $$MR=MC_{A}$$
+    $$MR=10-2Q_{A}^{*}$$
+    $$MC_{A}=4$$
+    $$Q^{*}=4$$
+    $$P^{*}=6$$
+    $$\pi=P^{*}Q^{*}-2Q^{*}=16$$
+    
+    \item \textbf{Find the equilibrium price.}
+    
+    \begin{enumerate}[i]
+        \item Find the profit for each firm.
+        
+        $$\pi_{A}=(10-Q_{A}-Q_{B})Q_{A}-2Q_{A}$$
+        $$\pi_{B}=(10-Q_{A}-Q_{B})Q_{B}-4Q_{B}$$
+        
+        \item Find the best response for each firm.
+        
+        $$\frac{\partial \pi_{A}}{\partial Q_{A}}=8-Q_{B}-2Q_{A}=0$$
+        $$\frac{\partial \pi_{B}}{\partial Q_{B}}=6-Q_{A}-2Q_{B}=0$$
+        
+        \item Solve the system of equations.
+        
+        $$Q_{A}^{*}=10/3\ Q_{B}^{*}=4/3$$
+        $$P^{*}=16/3$$
+        
+    \end{enumerate}
+    
+    
+    
+\end{enumerate}
+
+\end{document}

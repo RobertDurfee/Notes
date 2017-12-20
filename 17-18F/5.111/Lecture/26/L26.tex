@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 5.111 Lecture 26 }
+\author{ Robert Durfee }
+\date{ November 15, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{Electrochemistry }
+
+\textbf{Electrochemistry} is the study of redox reactions at electrodes. We can
+obtain electricity from a spontaneous reaciton, or we can apply electricity to
+push forward a nonspontaneous reaction.
+
+A \textbf{galvanic cell} is one where extract electricity from a spontaneous
+reaction. A \textbf{electrolytic cell} is a cell where we apply electricity to
+causes a nonspontaneous reaction to occur.
+
+\subsection{Components}
+
+There are two \textbf{electrodes} used in each types of electrolytic cell. The
+\textbf{anode} is oxidized and electrons flow out. The \textbf{cathode} is
+reduced and electrons is used. (This can be rememberd by "an ox" and "red cat".)
+Thus, the electrons flow through the wire from the anoode to the cathode. In a
+galvanic cell, we seperate the parts of the reaction into two parts and connect
+them electrically. The \textbf{salt bridge} allows the cations to flow to the
+cathode. 
+
+The special part of a galvanic cell is that we can extract the energy from the
+electron transport by splitting the reaction into two half-reactions.
+
+Electrodes configuration, whether they are anodes or cathodes, depends on the
+other electrode they are paired with.
+
+\subsection{Notation}
+
+$$\ce{Zn\ \vert\ Zn^{2+}\ \vert\vert\ Cu^{2+}\ \vert\ Cu}$$
+
+The anode reaction is on the left and the cathode reaction is on the right. The
+electrodes used are on the far left and right and the salt bridge transformation
+is what appears in between the electrodes. The reaction proceeds from the left
+to the right as the direction of electrons transferred.
+
+\subsection{Faraday's Law}
+
+The amount of product formed or reatant consumed is stoichiometrically equal to
+the amount of electrons transferred. Farrady's constant allows us to convert
+between number of moles of electrons and charge transfered. 
+
+You can also use inert electrodes, such as platinum, and in conjunction with
+another solution. A hydrogen electrode can be constructred with a platinum
+electrode.
+
+\subsection{Cell Potential}
+
+The ability of an electrochemical reaction to move electrons is called the cell
+potential or electromotive force.
+$$\Delta G_{cell} = nFE_{cell} = W_c$$
+
+This turns into the following at standard conditions:
+$$\Delta G_{cell}^{\circ} = n F E_{cell}^{\circ}$$
+
+The standard reduction potential of a cell can be determined by:
+$$\Delta E^{\circ}_{cell} = E_{red}^{\circ}(\rm{cathode}) -
+E_{red}^{\circ}(\rm{anode})$$
+
+If this reduction potential is positive, the reaction is spontaneous. If this
+value is negative, the reaction is nonspontaneous.
+
+\end{document}
+

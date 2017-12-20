@@ -1,0 +1,164 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 14.01 Recitation 10 }
+\author{ Robert Durfee }
+\date{ December 8, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ True or False }
+
+In the following economy, the US never trades.
+\begin{center}
+    \begin{tabular}{ c c c }
+        & US & Spain \\
+        Cost of Apples & 3 & 6 \\
+        Cost of Oranges & 11 & 12 \\
+    \end{tabular}
+\end{center}
+
+\textbf{False}. Although US has an absolute advantage in both, Spain has
+a comparative advantage in apples.
+
+\bigbreak
+
+If the cost of producing Oranges in the US reduces to 6, then there is
+no absolute advantage for Spain and the US has no incentive to trade.
+
+\section{ Consumption Problem }
+
+There is one individual, Shelby, who cares only about two goods ($T$, $M$). Her
+utility function is:
+$$ U = 2 \cdot \sqrt{ T \cdot M } $$
+
+The cost for tea is \$4 and the cost of oatmeal is \$9. Shelby's income is
+\$288. 
+
+\begin{enumerate}[1.]
+    \item Draw the indifference curve.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.25]{"Indifference Curves"}
+            \caption{Indifference Curves}
+        \end{figure}
+
+    \item Find Shelby's optimal consumption bundle ($T^{*}$, $M^{*}$).
+
+        The slope of the indifference curve:
+        $$ - \frac{ \partial U / \partial T}{ \partial U / \partial M } = - \frac{
+        M}{ \sqrt{ M \cdot T } } \frac{ \sqrt{ T \cdot M } }{ T } = - \frac{ M }{
+        T}$$
+
+        Setting this equal to the slope of the budget constraint:
+        $$ -\frac{ M }{ T } = -\frac{ P_{T} }{ P_{M} } $$
+        $$ \frac{ M }{ T } = \frac{ 4 }{ 9 }$$
+
+        Substituting into the budget constraint:
+        $$ M^{*} = 16$$
+        $$ T^{*} = 36$$
+        $$ U^{*} = 48 $$
+
+\end{enumerate}
+
+\section{ Production Problem }
+
+Consider a producer with the production function:
+$$ F( K,L ) = 4K + L$$
+
+The factor prices are:
+$$ w = 3,\ r = 6 $$
+
+\begin{enumerate}[1.]
+    \item Does the production function exhibit increasing, decreases, or
+        constant returns to scale?
+        $$ F( 2K, 2L ) = 4( 2K ) + 2L = 2 F( K, L ) $$
+
+        As a result, this is constant returns to scale.
+
+    \item Write the cost function in terms of capital, labor, return to capital
+        and wage.
+
+        $$ C( K, L ) = rK + wL$$
+
+    \item Find optimal choice of capital and labor in terms of $q$. 
+
+        Slope of production function:
+        $$ -\frac{ \partial F / \partial K }{ \partial F / \partial L } = 4 $$
+
+        Slope of budget constraint:
+        $$ -\frac{ r }{ w } = 2 $$
+
+        This shows that there will be no labor consumed and only capital.
+        $$ L^{*} = 0,\ K^{*} = q/4 $$
+
+        The isoquant:
+        $$ q = 4K + L $$
+
+        The isocost:
+        $$ C = 3L + 6K $$
+
+        These curves only intercept at the K-axis. This is what causes the firm
+        to only purchase capital.
+
+    \item TBD
+
+    \item Find long-term supply curve.
+
+        $$ C( q ) = r K( q ) = \frac{ 6 q }{ 4 } = 1.5 q $$
+        $$ MC( q ) = 1.5 $$
+
+    \item Suppose the demand is given by $P = 11.5 - 2Q$. Find the equilibrium
+        P, Q in a competitive market. 
+
+        We know that the price has to be $1.5$ because the market is perfectly
+        competitive. 
+
+        Setting supply equal to demand:
+        $$ 1.5 = 11.5 - 2Q $$
+        $$ Q^{*} = 5,\ P^{*} = 1.5 $$
+
+    \item Suppose the market were run by a monopolist. How many units will he
+        monopolist sell?
+
+        Determine the revenue:
+        $$ R( Q ) = Q( 11.5 - 2Q ) $$
+        $$ MR( Q ) = 11.5 - 4Q $$
+
+        Set marginal revenue equal to marginal cost:
+        $$ 1.5 = 11.5 - 4Q $$
+        $$ Q^{*} = 10/4 $$
+
+        Plugging this back into the demand function for price:
+        $$ P = 11.5 - 2Q  $$
+        $$ P^{*} = 6.5 $$
+
+    \item How much would a firm be willing to pay the government for monopoly
+        rights?
+
+        The firm will be willing to pay up to its profit to allow the right to
+        act as a monopoly. This is what their profits would be in a perfectly
+        competitve market. 
+
+        $$ \pi = R - C $$
+        $$ \pi = 2.5 ( 6.5 - 1.5 ) = 12.5 $$
+\end{enumerate}
+
+\end{document}
+

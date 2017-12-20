@@ -1,0 +1,248 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 14.01 Problem Set 6 }
+\author{ Robert Durfee }
+\date{ November 17, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ True or False }
+
+\begin{enumerate}
+    \item \textbf{False}. In general, the price markup depends on the inverse
+        number of firms in the market so the price markup will decrease as the
+        number of firms increase. However, price markup also depends on the
+        elasticity of demand. Thus, if the demand is perfectly elastic, there
+        will be no price markup independent from the number of firms.
+    \item \textbf{False}. Whether the firms in oligopoly act cooperatively or
+        competitively, consumers will be worse off, so long as demand is not
+        perfectly elastic. In general, the price markup will be lessened by the
+        increase in number of firms, reaching zero with infinite firms (perfect
+        competition).     
+    \item 
+        \begin{enumerate}[a.]
+            \item \textbf{False}. If one cost is sufficiently high, the quantity
+                produced will become negative. However, a negative quantity
+                doesn't make sense. This means the firm will shutdown.
+            \item \textbf{True}. For the linear cost curves given, subject to
+                the same linear demand, the equilibrium quantity for the lower
+                cost firm will be higher than the higher cost firm.
+        \end{enumerate}
+    \item \textbf{False}. Depending on the strength of the substitution and
+        income effects, the market labor supply curve can be upward or downward
+        sloping. For example, if someone is working only to purchase a single
+        item of fixed cost, an increase in wages will result in a decrease in
+        working time (income effect dominates).
+    \item \textbf{False}. Many firms exercise a monopsony over their employees
+        and thus pay them less than what they are worth to the company. As a
+        result, there is already a deadweight loss, in many cases. If the
+        minimum wage is increased within this range, the deadweight loss would
+        decrease and an improvement for workers.
+    \item \textbf{True}. Like in question 1.4, there are both income and
+        substitution effects to be considered with an increase in interest
+        rate. 
+\end{enumerate}
+
+\section{Cournot Duopoly}
+
+\begin{enumerate}
+    \item The inverse demand function is
+        $$P(Q) = 200 - Q$$
+        Where $Q = q_F + q_G$. The cost functions for the two firms are
+        $$C_F(q_F) = 5 q_F$$
+        $$C_G(q_G) = \frac{1}{2} q_G^2$$
+        The firms' profits are then given by:
+        $$\pi_F(q_F, q_G) = q_F (200 - (q_F + q_G)) - 5 q_F$$
+        $$\pi_G(q_F, q_G) = q_G (200 - (q_F + q_G)) - \frac{1}{2} q_G^2$$
+        Maximizing profits individually:
+        $$\frac{\partial \pi_F}{\partial q_F} = 195 - 2 q_F - q_G = 0$$
+        $$\frac{\partial \pi_G}{\partial q_G} = 200 - q_F - 3 q_G = 0$$
+        Solving this system of equations: 
+        $$q_F^* =  77,\ q_G^* = 41$$
+        Summing these individual quantities yields the total quantity:
+        $$Q_T^* = 118$$
+        Plugging this quantity back into the inverse demand function yields the
+        market equilibrium price:
+        $$P^* = 82$$
+        In the following graph, the red curve is the best response for Ford
+        and the blue curve is the best response for General Motors with $q_F$ on
+        the horizontal axis and $q_G$ on the vertical axis. The equilibrium is
+        the selected intersection of the two curves.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.8]{"Figure 1"}
+        \end{figure}
+    \item The firms' joint profit is given by:
+        $$\pi_T = 195 q_F + 200 q_G - 2 q_F q_G - q_F^2 - \frac{3}{2} q_G^2$$
+        Maximizing joint profits:
+        $$\frac{\partial \pi_T}{\partial q_F} = 195 - 2 q_G - 2 q_F = 0$$
+        $$\frac{\partial \pi_T}{\partial q_G} = 200 - 2 q_F - 3 q_G = 0$$
+        Solving this system of equations:
+        $$q_F^* = 92.50,\ q_G^* = 5.00$$
+        Summing these individual quantities yields the total quantity:
+        $$Q_T^* = 97.50$$
+        Plugging this quantity back into the inverse demand function yields the
+        market equilibrium price:
+        $$P^* = 102.50$$
+        This quantity is lower than Cournot equilibrium and thus the price is
+        higher. This is because the two firms can work together, assessing which
+        has the lower cost and use that company to produce more of the output at
+        lower cost. In addition, by working together, the two firms can act more
+        like a monopoly, increasing price markup and avoiding the poisoning
+        effect by producing less.
+    \item Calculating each firms' marginal cost:
+        $$MC_F(q_F) = 5$$
+        $$MC_G(q_G) = q_G$$
+        Setting each marginal cost equal to the inverse demand function:
+        $$5 = 200 - (q_F + q_G)$$
+        $$q_G = 200 - (q_F+q_G)$$
+        Solving this system of equations:
+        $$q_F^* = 190.00,\ q_G^* = 5.00$$
+        Summing these individual quantities yeilds the total quantity:
+        $$Q_T^* = 195.00$$
+        Plugging this quantity back into the inverse demand function yields the
+        market equilibrium price: 
+        $$P^* = 5.00$$
+        This quantity is higher than the Cournot competition and collusion cases
+        because the government essentially sets the price for the two firms.
+        Thus the firms cannot charge a markup and there is no poisoning effect.
+        Since General motors is initially more efficient, it will provide the
+        first 5 cars. Then, Ford becomes more efficient and will provide the
+        remaining amount.
+\end{enumerate}
+
+\section{Cournot with $N$ Firms}
+
+\begin{enumerate}
+    \item Firm $i$'s profits:
+        $$\pi_i(q_1, ..., q_N) = q_i \left(200 - \sum
+        \limits^N q_j\right) - 5 q_i$$
+        Maximizing profits:
+        $$\frac{ \partial \pi_i(q_1, ..., q_N)}{\partial q_i} = \left(200 -
+        \sum \limits^N q_j\right) - q_i - 5 = 0$$
+        Solving for $q_i$ to get best response:
+        $$ q_i(q_1, ..., q_{i-1}, q_{i+1}, ..., q_N) = 97.5 - \frac{1}{2} \sum
+        \limits_{ j \neq i}^{N} q_j $$
+    \item Setting each firms quantity equal to $q_i$:
+        $$q_i^* = \frac{195}{N+1}$$
+        Multiplying this individual quantity by the number of firms:
+        $$Q_T^* = \frac{195 N}{N + 1}$$
+        Plugging this quantity back in inverse demand to find price:
+        $$P^* = \frac{5(N + 40)}{N + 1}$$
+        The quantity value will increase as $N$ increases until perfect
+        competition is met ($N = \infty$) where quantity produced will be 195.
+        The price value decreases as $N$ increases until perfect competition is
+        met ($N = \infty$)  where the price will be 5.
+\end{enumerate}
+
+\section{Labor Market}
+
+\begin{enumerate}
+    \item The worker's budget constraint in terms of leisure is:
+        $$ 16 w = c + w l$$
+        Leisure can be related to work in the following equation assuming if you
+        aren't working, you are leisuring:
+        $$ l = 16 - L $$
+        Thus, the budget constraint can be rewritten as:
+        $$ 16 w = c + w (16 - L)$$
+    \item Solving for the slope of the budget curve:
+        $$-\frac{P_l}{P_c} = -\frac{w}{1} = -w$$
+        Solving for the slope of the utility function:
+        $$-\frac{\partial U / \partial l}{\partial U / \partial c} =
+        -\frac{c}{l}$$
+        Equating slopes:
+        $$w = \frac{c}{l}$$
+        Plugging into the budget constraint to get leisure:
+        $$16 w = w l + w l$$
+        $$l^* = 8$$
+        Plugging into the budget constraint to get consumption:
+        $$16 w = c + c$$
+        $$c^* = 8 w$$
+        Converting leisure to work:
+        $$L = 16 - 8$$
+        $$L^* = 8$$
+    \item Each laborer supplies $L^*$ units of labor, thus for 100 laborers,
+        the labor supply curve will be:
+        $$S_L(w) = 100 \cdot 8 = 800$$
+        Each firm will produce $\sqrt{L}$ units:
+        $$Y = \sqrt{L}$$
+        The demand for labor is given by $MP_L \cdot P$ where $P=1$:
+        $$D_L(w) = \frac{1}{4 w^2}$$
+        Multiply this by 100 firms:
+        $$D_L(w) = \frac{25}{w^2}$$
+        Equating the supply and demand functions:
+        $$w = 0.177$$
+    \item Given that the labor supply curve is completely inelastic and does not
+        depend on $w$, there will be no change in the equilibrium. Also, the tax
+        is felt by the labor supplier, not the demander thus the demand curve
+        will not change either.
+\end{enumerate}
+
+\section{Intertemporal Choice}
+
+\begin{enumerate}
+    \item The price of \$1 of consumption in the second period is \$($1+r$) in
+        terms of the first period. This is because the a dollar saved will gain
+        interest.
+    \item The budget constraint in the first period is given by:
+        $$1,000,000 = c_1 + s$$
+        The budget constraint in the second period is given by:
+        $$(1 + r)s = c_2$$
+        Summing these two equations and eliminating $s$:
+        $$1,000,000 = c_1 + \frac{c_2}{1 + r}$$
+    \item Solving for the slope of the budget curve:
+        $$-\frac{P_{c1}}{P_{c2}} = -(r+1)$$
+        Solving for the slope of the utility function:
+        $$-\frac{\partial U / \partial c_1}{\partial U / \partial c_2} = -
+        \frac{c_2}{c_1}$$
+        Equating slopes: 
+        $$\frac{c_2}{c_1} = r+1$$
+        Plugging into the constraint to get consumption in period 1:
+        $$1,000,000 = c_1 + \frac{c_1(1+r)}{1+r}$$
+        $$c_1^* = 500,000$$
+        Plugging into the constraint to get consumption in period 2:
+        $$1,000,000 = \frac{c_2}{r+1} + \frac{c_2}{r+1}$$
+        $$c_2^* = 500,000(r+1)$$
+        Thus, the income consumed will be \$500,000 and the income saved will be
+        \$500,000.
+    \item The consumption in period one is independent of the interest rate. As
+        a result, the amount of income saved and spent in period one will be the
+        same irrespective of the interest rate. However, the amount of
+        consumption in the second period will increase as the interest rate
+        increases. For $r=0.50$, $c_2=750,000$. For $r=0.60$, $c_2=800,000$
+
+        In the following graphs, the orange curve is the indiference curve and
+        the blue curve is the budget constraint with $c_1$ on the horizontal
+        axis and $c_2$ on the vertical axis. The equilibrium is the selected
+        interection of the two curves. The first graph shows $r=0.5$ and the
+        second graph shows $r=0.6$.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.8]{"Figure 2"}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.8]{"Figure 3"}
+        \end{figure}
+
+\end{enumerate}
+
+\end{document}

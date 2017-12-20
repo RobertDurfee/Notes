@@ -1,0 +1,226 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 5.111 Review }
+\author{ Robert Durfee }
+\date{ December 14, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Transition Metals }
+
+These are all the elements in the d-block on the periodic table. These are the
+elements that begin to fill the d-orbitals. The electron configurations are
+pretty normal, except chromium and manganese which will fill half of the d-shell
+because that is more favorable. Copper and zinc  will the entire d-shell.
+
+When forming ions, you always lose the 4s electrons first. Note that none of
+these ions are negative, they will always be positive. Additionally, all these
+ions do not have any 4s electrons remaining.
+
+\section{Coordination Complex}
+
+A \textbf{coordination complex} is not a bunch of covalent bonds. The ligands are
+Lewis bases and the transition metal cations are Lewis acids. The Lewis acids
+accept the electrons and the Lewis bases donate the electrons.
+
+\subsection{Geometry of Complexes}
+
+For 6 ligands, the geometry is octahedral. For 5 ligands, the geometry is square
+pyramidal. For 4 ligands, we will tell you if it is tetrahedral or square
+planar.
+
+\subsection{Isomers}
+
+Cis molecules have 90 degrees between them. Trans molecules have 180 degrees
+between them. The order of the ligands is important. Cis essentially also means
+on the same side and trans essentially means opposite sides.
+
+\subsection{Chirality}
+
+These molecules reflect a molecule across a mirror plane. If the images are
+non-superimposable, they are chiral.
+
+\subsection{Shapes of D-Orbitals}
+
+Note that for the $d_{x^{2}-y^{2}}$ orbital, the lobes are on the axes. For
+$d_{xy}$, $d_{yz}$, $d_{xz}$ orbitals, the lobes are in between the axes.
+
+\subsection{Energy Gap}
+
+Certain orbitals have higher energy than others. This energy is determined by
+the clash between the orbitals and the ligands. The closer the ligands are
+brought to the orbitals, the higher the clash.
+
+\subsection{Assinging Electrons}
+
+First, assign the oxidation numbers. The oxidation number of an ion is its
+charge. Charges must add up to overall charge. Then, calculate the d-count of
+the metal: d-count = group number - oxidation number. Then draw the appropriate
+splitting diagram. Lastly, fill in the electrons. If the ligand is strong, low
+spin, match spin before filling orbitals. If the ligand is weak, high spin,
+fill orbitals before matching spin. For the strong ligands, there is a high
+energy gap and the weak ligands have a small energy gap.
+
+\section{Kinetics}
+
+To determine the rate order with respect to a certain reactant, hold one
+concentration constant and adjust the other. If the rate increases directly,
+then the reaction is first order. If the rate doesn't change, then the reaction
+is zero order. If the rate increases by a power of 2, then the rate is second.
+
+\section{Nuclear Chemistry}
+
+$$ A = k N $$
+
+Activity is rate of decomposition. The number of nuclei is the analogue to
+concentration. For nuclear chemistry, the reactions follow the first order.
+$$ A_{t} = A_{0}e^{-kt} $$
+
+\section{Reaction Mechanisms}
+
+You cannot determine the rate of a reaction simply by the overall chemical
+equation. However, you can do this by using reaction mechanisms. For example:
+$$\ce{2A + B <=> D}$$
+$$ \ce{D + B -> E + F} $$
+$$ \ce{F -> G} $$
+
+You can determine the overall reaction by canceling terms on each side:
+$$ \ce{2A + 2B -> E + G} $$
+
+In this case, D and F are the \textbf{intermediates}. We can also determine the
+rate of the overall reaction using the elementary steps.
+$$ r_{1} = k_{1}[A]^{2}[B] $$
+$$ r_{2} = k_{2}[D][B] $$
+$$ r_{3} = k_{3}[F] $$
+
+The first reaction has a double arrow. Thus, you need to incorporate the reverse
+reaction.
+$$ r_{-1} = k_{-1}[D] $$
+
+To determine the rate of the overall reaction, you take the rate of the rate
+determining step. This step is the slowest step.  For this reaction, this rate
+will be:
+$$ r = k_{2}[D][B] $$
+
+In the overall rate, D is an intermediate. We cannot use this in the overall
+rate equation. The \textbf{steady state approximation} states that the rate of
+consumption equals the rate of formation. As a result:
+$$ r_{1} = r_{-1} + r_{2} $$
+$$ k_{1}[A]^{2}[B] = k_{-1}[D] + k_{2}[ D ][ B ]$$
+
+Factoring out D:
+$$ [D] = \frac{ k_{1}[A]^{2}[B] }{ k_{-1} + k_{2}[B] } $$
+
+But this is not the rate law yet. You must plug this back into the equation
+above:
+$$  r = k_{2}[B] \frac{ k_{1}[A]^{2}[B] }{ k_{-1} + k_{2}[B] } $$
+
+\section{Enzymes}
+
+Enzyme catalysis reduced the activation energy required in an overall reaction.
+The basic equation looks like:
+$$ \ce{E + S <=> ES } $$
+$$ \ce{ES -> E + P} $$
+
+It is important to note that the enzyme is \textbf{not} consumed in the overall
+reaction. This is the definition for the enzyme.
+$$ K_{M} = \frac{ k_{-1} + k_{2} }{ k_{1} } $$
+
+\section{Electrochemistry}
+
+Loss electrons is oxidation. Oxidation occurs at the anode. Gain electrons is
+reduction. Reduction occurs at the cathode. Electrons flow from the anode to
+the cathode. The cathode gets plated and the anode gets corroded.
+
+\section{Acid/Base Titrations}
+
+Equivalency point is reached when the number of moles of base equals the number
+of moles of base. The pH is determined by using the reverse reaction and an ICE
+chart.
+
+When you have a strong acid reacting with a strong base, you need to determine
+which you will have more of. Once you know the number of moles more of one, you
+can determine the concentration of either $\ce{OH-}$ or $\ce{H+}$.
+
+\section{Molecular Orbital Diagrams}
+
+Remember the energy axis. The more electronegative element is lower in energy.
+Nitrogen to the left elements has the pi bonds below the sigma bonds. For oxygen
+and right elements, the pi bonds are above the sigma bonds. The anti-bonding
+sigma is always above the anti-bonding pi.
+
+The bond order is calculated by taking the number of bonding electrons and
+subtracting the anti-bonding electrons and dividing by two. Diamagnetic is when
+there are no unpaired electrons. Paramagnetic is when there is at least one
+unpaired electron.
+
+\section{Valence Bond Theory}
+
+Steric number represents the number of things attached to the central atom,
+including lone pairs of electrons. To determine the hybridization, you only need
+to know the steric number.
+
+\begin{center}
+  \begin{tabular}{ c c }
+    SN & Hyb \\
+    2 & $sp$ \\
+    3 & $sp^{2}$ \\
+    4 & $sp^{3}$ \\
+  \end{tabular}
+\end{center}
+
+Double ($\pi$) bonds are formed either by two $p_{x}$ orbitals or two $p_{y}$
+orbitals.  By convention, the axis of the bond is the z-axis.
+
+\section{Photoelectric Effect}
+
+Classical physics predicted that the number of electrons ejected from a metal
+surface would be unaffected by increasing the intensity of light. However,
+experiments showed that an increase number of electrons were ejected as the
+intensity of light was increased. This is because the intensity is the number of
+photons per second. By increasing the number of photons, you increase the number
+of electrons expelled.
+$$ E = h\nu = \frac{ h c }{ \lambda } $$
+
+The intensity of light is the number of photons per second. Only by increasing
+the energy of light will you be able to increase the kinetic energy of the
+electrons.
+
+The threshold frequency is the minimum frequency of light needed for ejection of
+an electron. It depends on the metal because different metals binds the
+electrons with different strength.
+$$ \lambda = \frac{h}{p} $$
+
+\section{Wavefunctions}
+
+A wavefunction is spherically symmetric if the wavefunction only depends on $r$.
+This implies that the wavefunction is an s orbital. If there is a $\theta$ term,
+then this has to be a  p or d orbital. The general equation for a wavefunction
+is:
+$$ \Psi = R(r) \cdot Y(\theta, \phi) $$
+$$ \Psi = \mathrm{constant} \cdot \mathrm{polynomial} \cdot \mathrm{constant}
+\cdot f(\theta, \phi)$$
+
+A node is a point where there is zero probability of an electron being in that
+position. To find the location of a radial node, set the polynomial equal to
+zero. An angular node is located when the function of $\theta$ and $\phi$ is set
+to zero. Note that $\theta$ is constrained between $0$ and $\pi$ and $\phi$ is
+constrained between $0$ and $2\pi$.
+
+\end{document}

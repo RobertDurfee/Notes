@@ -1,0 +1,243 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 7.012 Problem Set 7 }
+\author{ Robert Durfee }
+\date{ December 6, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section*{ Question 1 }
+
+\begin{enumerate}[A.]
+    \item It is evolutionarily good for a virus that humans can survive
+        contraction of the virus because it has a chance to replicate and spread
+        to other hosts (as is the overall goal of all viruses).
+        
+    \item Negative, Single-Stranded RNA: \textbf{Not affected.} The
+        transcription and translation occurs in the cytoplasm.
+
+        Double-Stranded RNA: \textbf{Not affected.} The transcription and
+        translation occurs in the cytoplasm.
+        
+        Retrovirus: \textbf{Affected.} The RNA will be reverse transcribed into
+        DNA which then infiltrates the chromosomal DNA in the nucleus.
+       
+        Single-Stranded DNA: \textbf{Affected.} The virus takes advantage of the
+        host cell's DNA polymerase for replication within the nucleus.
+       
+        Double-Stranded DNA: \textbf{Affected.} The virus takes advantage of the
+        host cell's DNA polymerase for replication within the nucleus.
+
+    \item The best way to get a viral count in an infected organism is through a
+        plaque forming unit assay because the production of viral particles is
+        sloppy and often results in non-functioning viral particles. If you
+        count the particles by hand using EM, then you would include these
+        non-functioning particles in addition to the functioning ones where a
+        plaque forming unit assay only counts the functioning viral particles.
+
+    \item Positive, single-stranded RNA viruses make a double-stranded RNA
+        intermediate in order to replicate its genome. The negative RNA can then
+        be transcribed into the virus' positive, signle-stranded RNA genome.
+
+\end{enumerate}
+
+\section*{ Question 2 }
+
+\begin{enumerate}[A.]
+    \item Cancer takes a long time to develop because several mutations are
+        necessary. A cell has several functions that keep uncontrolled
+        proliferation in-check, such as tumor-suppressing genes, which must also
+        acquire mutations to result in cancer. Multiple mutations take time to
+        develop.
+
+    \item 
+        \begin{enumerate}[i.]
+            \item There is a linear relationship because the varius toxins cause
+                mutations in cells and both tumors and revertants are caused by
+                mutations (mutagenicity is directly linked to carcinogenicity).
+                The amount of toxin to cause revertants is thus directly
+                correlated to the amount of toxin to cause tumors since it is a
+                mutagenizing compound.
+
+            \item \textbf{Toxin A} is the most effective among the mentioned
+                toxins as it requires the least amount of toxin to create the
+                same revertant and tumor effect.
+
+            \item When the toxin is injested, it is metabolized by the liver in
+                the organism. The byproducts can be more or less mutagenic than
+                the original toxin. Either way, the compound will be just as
+                carcinogenic before and after metabolism. However, the toxin
+                will diverge from the curve. In this case, \textbf{Toxin B-2}
+                diverged from the curve and its thus altered by the liver
+                enzymes.
+        
+        \end{enumerate}
+
+    \item Amino acid in position 12 in Ras protein is critical for GDP-GTP
+        exchange and GTP hydrolysis. By changing the amino acid at this
+        position, the binding to GDP/GTP is altered and can no longer function
+        properly. The permanent binding of GTP causes a constant proliferation.
+        RAS is a proto-oncogene as a mutation causes cancer where a
+        tumor-supressor will prevent cancer unless it is mutated.
+
+    \item Gene table:
+        \begin{center}
+            \begin{tabular}{ c c c c }
+                \textbf{Gene} & \textbf{Type} & \textbf{Function} &
+                \textbf{ Zygosity } \\
+                Gene 1 & Proto-Oncogene & Gain-of-Function & Heterozygous \\
+                Gene 2 & Tumor Suppressor & Loss-of-Function & Homozygous 
+            \end{tabular}
+        \end{center}
+\end{enumerate}
+
+\section*{ Question 3 }
+
+\begin{enumerate}[A.]
+    \item Axon: \textbf{C}
+
+        Axon Hillock: \textbf{H}
+
+        Cell Body: \textbf{B}
+
+        Dendrite: \textbf{A}
+
+        Nerve Terminal: \textbf{F}
+
+    \item 
+        \begin{enumerate}[i.]
+            \item Excitatory Neuron: Action potential flows from \textbf{C to E}.
+
+            \item Inhibitory Neuron: Action potential flows from \textbf{C to E}.
+        \end{enumerate} 
+
+    \item As the action potential travels down the axon, the section before the
+        action potential will have closed sodium channels, the section with the
+        action potential will have open sodium channels, and the section the
+        action potential just left will have refractory sodium channels. Thus,
+        from C to E, if the action potential is peaked at D, the order is:
+        \textbf{Refractory, Open, Closed}.
+
+    \item Voltage-Gated Calcium Channels: \textbf{Nerve Terminal}.
+
+        Acetylcholine-Gated Channels: \textbf{Neuromuscular Junction}.
+
+        Acetylcholine Vesicles: \textbf{Nerve Terminal}.
+
+        Voltage-Gated Sodium Channels: \textbf{Axon}.
+
+        Resting Potassium Channels: \textbf{Axon} and \textbf{Dendrites} of
+        pre-synaptic neuron.
+
+    \item Action Potentials (Total: Black, Neuron 1: Red, Neuron 2: Green, Neuron 3: Blue.)
+        \begin{enumerate}[i.]
+            \item Neuron 1: Inhibitory, Neuron 3: Excitory:
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[scale=1.00]{"Part I"}
+                    \caption{Part I}
+                \end{figure}
+
+            \item Neurons 1 and 2: Inhibitory, Neuron 3: Either:
+                \begin{figure}[H]
+                    \centering
+                    \begin{subfigure}{.5\textwidth}
+                        \centering
+                        \includegraphics[width=.75\linewidth]{"Part IIa"}
+                        \caption{Part IIa}
+                    \end{subfigure}%
+                    \begin{subfigure}{.5\textwidth}
+                        \centering
+                        \includegraphics[width=.75\linewidth]{"Part IIb"}
+                        \caption{Part IIb}
+                    \end{subfigure}
+                    \caption{Part II}
+                \end{figure}
+          
+            \item Neurons 1 and 2: Excitory, Neuron 3: Inhibitory:
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[scale=1.00]{"Part III"}
+                    \caption{Part III}
+                \end{figure}
+            
+            \item Neurons 1, 2, and 3: Excitory:
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[scale=1.00]{"Part IV"}
+                    \caption{Part IV}
+                \end{figure}
+
+        \end{enumerate}
+
+    \item Shown above in Figure 3.
+\end{enumerate}
+
+\section*{ Question 4 }
+
+\begin{enumerate}[A.]
+    \item The gates that control the flow of both negative and positive ions can
+        be triggered by various molecules. A glutamate molecule can, for
+        example, trigger a sodium channel which will cause sodium to flow into
+        the cell.
+
+    \item 
+        \begin{enumerate}[i.]
+            \item The acetylcholine will not release from its receptor site
+                which will result in rigid paralysis as the muscle cannot relax.
+                The action potentials will increase.
+
+            \item Calcium channels free up neurotransmitters. Without their
+                function, the muscle will not be signalled to contract and the
+                action potential will stop at the nerve terminal. The action
+                potentials will decrease.
+
+            \item Chloride ions decrease the potential in the cell having an
+                inhibitory effect. If the gates are always open, there will be
+                less activation. The action potentials will decrease.
+        \end{enumerate}
+\end{enumerate}
+
+\section*{ Question 5 }
+
+\begin{enumerate}[A.]
+    \item After cells produce an antibody to an antigen, they store them in the
+        bone marrow. When the antigen appears again, these cells in the bone
+        marrow begin proliferating. This is important for vaccines because
+        exposure to a weakened form of a disease will cause our body to store
+        antibodies for quick retrieval when exposed in the future.
+
+    \item The adaptive immune system uses V(D)J recombination to alter the
+        variable sections of an antibody by randomly combining different gene
+        segments and by intentionally applying point mutations during this
+        process.
+
+    \item Each plasma cell makes its own specific antibody. The majority of
+        antibodies found in the blood of a myeloma patient are all the same as
+        they originate from a single, constantly proliferating plasma cell
+        (which has its own specific antibody).
+\end{enumerate}
+
+\section*{ Bonus Question }
+
+I am already familiar with the melody of "Hey Jude" by The Beatles.
+
+\end{document}

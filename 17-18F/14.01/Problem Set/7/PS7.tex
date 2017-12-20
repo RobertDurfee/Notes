@@ -1,0 +1,282 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 14.01 Problem Set 7 }
+\author{ Robert Durfee }
+\date{ November 30, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ True or False }
+
+\begin{enumerate}[i.]
+    \item \textbf{True.} As long as the person is maximizing their present
+        value, they will prefer option two.
+        
+        Calculating the present value for option one:
+        \begin{align*}
+            PV_{1} &= \$1200 + \frac{ \$120 }{ 1 + r } + \frac{ \$120 }{ ( 1 + r
+        )^{ 2 } } + \frac{ \$120 }{ ( 1 + r )^{3} }
+        \end{align*}
+
+        Calculating the present value for option two:
+        \begin{align*}
+            PV_{2} &= \$360 + \frac{ \$240 }{ 1 + r } + \frac{ \$240 }{ ( 1
+        + r )^{2} } + \frac{ \$240 }{ ( 1 + r )^{3} }
+        \end{align*}
+        
+    \item \textbf{False.} People can be risk loving, averse, or neutral
+        depending on their utility function. As a result, a risk loving person
+        could prefer the \$50 risky investment, just because it involves risk.
+
+        Using a risk-loving utility function:
+        $$ U(x) = x^{2} $$
+
+        Consider a possible (extremely) risky investment:
+        $$ E_{1}( x ) =  0.99 \cdot 0 + 0.01 \cdot 5000 = 50 $$
+        $$ E_{1}( U( x ) ) = 0.99 \cdot 0^{2} + 0.01 \cdot
+        5000^{2} = 250,000 $$
+
+        Now the safe money:
+        $$  E_{2}( x ) = 1.0 \cdot 100 = 100 $$
+        $$ E_{2}(U( x )) = 1.0 \cdot 100^{2} = 10,000 $$
+
+        Therefore, since people maximize expected utility, not expected return,
+        this person would prefer the risky investment.
+
+    \item \textbf{False.} As we saw in the last problem set, ther are utility
+        function for which a rise in interest rate has no effect on the
+        consumption in the first period.
+        $$ U( c_{1}, c_{2} ) = \ln( c_{1} ) + \ln( c_{2} ) $$
+
+        For this intertemporal utility function, a rise in interest will not
+        effect $c_{1}$.
+
+    \item \textbf{False.} As long as there is an end to the prisoners dilemma
+        (it is finite), there will be incentive to cheat on the last round, if
+        cooperation exists. Once this fact is established, the first person to
+        cheat gets the most beneft. As a result, they will both cheat on the
+        first round.
+
+\end{enumerate}
+
+\section{ International Trade }
+
+\begin{enumerate}[i.]
+    \item Both France and Spain have an absolute advantage in cheese.  However,
+        France has a comparative advantage in cheese and Spain has a comparative
+        advantage in wine. France is 1.5 times better at producing cheese than
+        Spain, and only 1.1 times better at producing wine. Conversely,
+        Spain is 1.5 times worse at producing cheese than France is, but only
+        1.1 times worse at producing wine.
+
+    \item Yes, it is in both countries best interest to trade (just looking at
+        efficiency, ignoring job displacement). Both countries can consume more
+        of each good becuase the joint PPF surpasses each individual PPF. France
+        may be better at producing each good, however, it is not better at
+        producing each good equally. As a result, there is still incentive to
+        trade.
+
+\end{enumerate}
+
+\section{ Decision-Making Under Uncertainty }
+
+\begin{enumerate}[i.]
+    \item Expected value for government bonds purchased at a price of \$100:
+        $$ E_{B} = \frac{ 1 }{ 4 } \cdot \frac{ 103 }{ 1 - 0.01 } + \frac{ 1 }{
+        2 } \cdot \frac{ 103 }{ 1 + 0.02 } + \frac{ 1 }{ 4 } \cdot \frac{ 103 }{
+        1 + 0.05 } = 101.024 $$
+
+        Expected value for treasury inflation protected securities purchased at
+        a price of \$102:
+        $$ E_{T} = \frac{ 1 }{ 4 } \cdot \frac{ 103 \cdot ( 1 - 0.01 ) }{ 1 -
+        0.01 } + \frac{ 1 }{ 2 } \cdot \frac{ 103 \cdot ( 1 + 0.02 ) }{ 1 + 0.02
+        } + \frac{ 1 }{ 4 } \cdot \frac{ 103 \cdot ( 1 + 0.05 ) }{ 1 + 0.05 } $$
+
+        Canceling inflation terms:
+        $$ E_{T} = 103 $$
+
+    \item Original utility:
+        $$ U( 100 ) = 10 $$
+        
+        Expected utility of the payoff of government bonds:
+        $$ E_{B}[ U( x ) ] = \frac{ 1 }{ 4 } \sqrt{ \frac{ 103 }{ 1 - 0.01 } }
+        + \frac{ 1 }{ 2 } \sqrt{ \frac{ 103 }{ 1 + 0.02 } } + \frac{ 1 }{ 4 }
+        \sqrt{ \frac{ 103 }{ 1 + 0.05 } } = 10.0505$$
+
+        Expected utility of the payoff of treasury inflation protected
+        securities (with inflation terms cancelled):
+        $$ E_{T}[ U( x ) ] = \frac{ 1 }{ 4 } \sqrt{ \frac{ 103  }{ 1 + 0.02 } }
+        + \frac{ 1 }{ 2 } \sqrt{ \frac{ 103 }{ 1 + 0.02 } } + \frac{ 1 }{ 4 }
+        \sqrt{ \frac{ 103 } { 1 + 0.02 } } = 10.0489$$
+
+        To maximize expected utility, the best investment is the government
+        bond. This is surprising because, at first glance, the phrase "inflation
+        protected" seems more secure and the expected value seems to be higher.
+        However, the premium payed causes the TIPS to cost more and reduces the
+        payoff.
+
+    \item Setting expected utility of the payoff of government bonds equal to
+        the expected utility of the payoff of treasury inflation protected
+        securities:
+        $$ \sqrt{ \frac{ 103 }{ 1 + P } } = 10.0505 $$
+
+        The maximum premium is:
+        $$ P = 0.01967 $$
+
+    \item Original uttility:
+        $$ U( 100 ) = 10 $$
+
+        Expected utility of the payoff of government bonds:
+        $$ E_{B}[ U( x ) ] = \frac{ 1 }{ 4 } \sqrt{ \frac{ 103 }{ 1 - 0 } }
+        + \frac{ 1 }{ 2 } \sqrt{ \frac{ 103 }{ 1 + 0.05 } } + \frac{ 1 }{ 4 }
+        \sqrt{ \frac{ 103 }{ 1 + 0.30 } } = 9.71467$$
+
+        Expected utility of the payoff of treasury inflation protected
+        securities (with inflation terms cancelled):
+        $$ E_{T}[ U( x ) ] = \frac{ 1 }{ 4 } \sqrt{ \frac{ 103  }{ 1 + 0.02 } }
+        + \frac{ 1 }{ 2 } \sqrt{ \frac{ 103 }{ 1 + 0.02 } } + \frac{ 1 }{ 4 }
+        \sqrt{ \frac{ 103 } { 1 + 0.02 } } = 10.0489$$
+
+        Setting expected utility of the payoff of government bonds equal to
+        the expected utility of the payoff of treasury inflation protected
+        securities:
+        $$ \sqrt{ \frac{ 103 }{ 1 + P } } = 9.71467 $$
+
+        The maximum premium is:
+        $$ P = 0.091393 $$
+
+\end{enumerate}
+
+\section{ Diversification }
+
+\begin{enumerate}[i.]
+    \item Original utility:
+        $$ U( 10,000 ) = 100 $$
+
+        Expected utility of buying bonds:
+        $$ E_{B}[ U( x ) ] = 1.0 \cdot \sqrt{ 10,000 \cdot ( 1 + 0.01 )} = 100.499 $$
+
+        Expected utility of buying Amazon stock:
+        $$ E_{A}[ U( x ) ] = 0.5 \cdot \sqrt{ 10,000 \cdot 4 } + 0.5 \cdot \sqrt{ 0 }
+        = 100 $$
+
+        Oliver prefers to buy bonds over Amazon stock.
+
+    \item There are four possibilities for this strategy: 
+
+        \begin{itemize}
+        
+            \item Amazon increases and Walmart decreases with a worth of
+                \$20,000 (payoff of \$10,000) at a probability of 25\%.  
+        
+            \item Walmart increases and Amazon decreases with a worth of
+                \$20,000 (payoff of \$10,000) and a probability of 25\%. 
+        
+            \item Both Amazon and Walmart increase with a worth of \$40,000
+                (payoff of \$30,000) and a probability of 25\%.  
+                
+            \item Both Amazon and Walmart decrease with a worth of \$0 (payoff
+                of -\$10,000) and a  probability of 25\%.
+
+        \end{itemize}
+
+    \item The expected value of this strategy:
+        $$ E = 0.25 \cdot 10,000 \cdot 4 + 0.50 \cdot 5,000 \cdot 4 + 0,25 \cdot
+        0 = 20,000$$
+
+        The expected utility of this strategy:
+        $$ E[ U( x) ) ] = 0.25 \cdot \sqrt{ 10,000 \cdot 4 } + 0.5 \cdot \sqrt{
+        5,000 \cdot 4 } + 0.25 \cdot \sqrt{ 0 } =  120.711$$
+
+        Yes, Oliver prefers this strategy over buying bonds. This is because of
+        diversification where investing in multiple, uncorrelated stocks will
+        reduce risk.
+
+    \item It depends on what Oliver's timeline is. If he needs the money in the
+        near future, less risky options are better because the value only
+        approaches the expected value over a long period of time. In general, it
+        is probably best for Oliver to invest in bonds as well, from the money
+        he needs short term.
+
+\end{enumerate}
+
+\section{ European Potatoes }
+
+\begin{enumerate}[i.]
+    \item Yes, the European producers will still sell to European consumers, but
+        not as much as they have before. \textit{Figure 1} and \textit{Figure 2}
+        show the supply and demand in Europe along with the world price before
+        the subsidy and the perceived world price after the subsidy (the green
+        line in both graphs).  The x-axis is quantity and the y-axis is price.
+        The red line is supply and the blue line is demand with Europe.
+        Importantly, the European consumers can still consume at the world
+        price, they will import the difference.
+
+    \item Exports will increase as a result of the subsidy as the producers will
+        receive a higher, subsidized price for exporting. This is shown
+        graphically in \textit{Figure 2} as the length of the green line between
+        the supply and demand curves, which has increased from \textit{Figure
+        1}.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.40]{"Before Subsidy"}
+            \caption{Before Subsidy}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.40]{"After Subsidy"}
+            \caption{After Subsidy}
+        \end{figure}
+
+    \item Initial consumer surplus (under demand
+        curve, above world price):
+        $$ CS_{i} = \frac{ 1 }{ 2 } \cdot ( 1000 - 950 ) \cdot ( 25 - 0 ) = 625 $$
+
+        Since consumers can still consume at the world price, through imports,
+        their surplus remains the same after the subsidy.
+        $$ \Delta CS = 0 $$
+
+    \item Initial producer surplus (above supply curve, below world price):
+        $$ PS_{i} = \frac{ 1 }{ 2 } \cdot ( 950 - 400 ) \cdot ( 55 - 0 ) = 15,125 $$
+
+        Final producer surplus:
+        $$ PS_{f} = \frac{ 1 }{ 2 } \cdot ( 990 - 400 ) \cdot ( 59 - 0 ) = 17,405 $$
+
+        Change in producer surplus:
+        $$ \Delta PS = 17,405 - 15,125 = 2,280 $$
+
+    \item The cost of the subsidy is given by the amount of exports multiplied
+        by the unit subsidy where the amount of exports is the quantity supplied
+        at the perceived world price:
+        $$ C = ( 59 - 0 ) \cdot ( 990 - 950 ) = 2,360 $$
+
+    \item The initial total welfare is:
+        $$ W_{i} = 625 + 15,125 = 15,750 $$
+
+        The final total welfare is:
+        $$ W_{f} = 625 + 17,405 -2,360 = 15,670 $$
+
+        Change in total welfare is:
+        $$ \Delta W = 15,670 - 15,750 = -80 $$
+
+\end{enumerate}
+
+\end{document}

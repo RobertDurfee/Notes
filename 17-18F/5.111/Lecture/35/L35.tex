@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 5.111 Lecture 35 }
+\author{ Robert Durfee }
+\date{ December 11, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Reaction Mechanism }
+
+A reaction mechanism is a series of steps, or \textbf{elementary reactions} that
+take place to convert reactants to products. We will address which reactions are
+fast and slow and whether the reaction mechanisms are consistent with
+experimental data. 
+
+$$ \ce{ 2NO + O_{2} <=> 2NO_{2} } $$
+
+The observed rate of formation is: $\ce{ NO_{2} } = k[ \ce{ NO } ]^{2}[ \ce{
+O_{2} } ] $. However, there is a very low chance that these molecules combine in
+one step. Proposed:
+$$ \ce{ NO + NO <=> N_{2}O_{2} } $$
+$$ \ce{ N_{2}O_{2} + O_{2} -> NO_{2} } $$
+
+Rate of formation of the first reaction: $\ce{ N_{2}O_{2} } = k_{1} [ \ce{ NO }
+]^{2}$. The rate of decomposition of the first reaction is $ \ce{ N_{2}O_{2} } =
+k_{-1} [ \ce{ N_{2}O_{2} } ]$. The rate of consumption in the second reaction is
+$ \ce{ N_{2}O_{2} } = k_{2}[ \ce{ N_{2}O_{2} } ][ \ce{ O_{2} } ]$. The rate of
+formation of $\ce{ NO_{2} }$ is $2k_{2}[ \ce{ N_{2}O_{2} } ][ \ce{ O_{2} } ]$. The overall
+net rate of change of $\ce{ N_{2}O_{2} }$ is $k_{1}[ \ce{ NO } ]^{2} - k_{-1}[
+\ce{ N_{2}O_{2} } ] - k_{2}[ \ce{ N_{2}O_{2} } ][ \ce{ O_{2} } ]$.
+
+We then assume that there is not change in the concentration of the
+intermediate. Then we can solve for $\ce{ N_{2}O_{2} }$ concentration. 
+$$ [ \ce{ N_{2}O_{2} } ] = \frac{ 2 k_{2}k_{1} [ \ce{ NO } ]^{2} }{ k_{-1} +
+k_{2} [ \ce{ O_{2} } ] } $$
+
+Plugging this into the equation for $[ \ce{ NO_2 } ]$:
+$$ \mathrm{ Rate\ of\ formation\ of\ } \ce{ NO_{2} } = \frac{ 2 k_{2} k_{1} [
+\ce{ NO } ]^{2} [ \ce{ O_{2} } ] }{ k_{-1} + k_{2}[ \ce{ O_{2} } ] }$$
+
+But, this is not what was observed. This is because the above equation doesn't
+take into account the fast and slow steps. If $k_{-1} \gg k_{2}$, then we can
+simplify this equation:
+$$ \mathrm{ Rate\ of\ formation\ of } \ce{ NO_{2} } = \frac{ k_{2}k_{1} [ \ce{
+NO } ]^{2}[ \ce{ O_{2} } ] }{ k_{-1} } $$
+
+This is consistent with what was described before. 
+
+\end{document}
+

@@ -1,0 +1,113 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 7.012 Lecture 33 }
+\author{ Robert Durfee }
+\date{ December 8, 2017 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Cancer }
+
+Cancer is when cells grow and divide without end in a multicellular organism. It
+is bad for an individual cell to keep growing in a multicellular organism. There
+are many different regulation techniques to keep them in check. When this all
+breaks down, you get a \textbf{neoplast}. This is essentially a tumor. Tumors
+can be \textbf{benign} or \textbf{malignent}. Benign tumors simply mean that
+they don't spread. Usually this means it is safe, but it could press against
+something. This can be fixed by removing the tumor. Malignant, or
+\textbf{metastatic}, cancer moves and invades surrounding tissue.  This causes
+\textbf{metastasis} where the cancer is spread all around the body.
+
+Cancer is very common. There are 12 million who have it in the US. Half of those
+who get it will die. This accounts for one quarter of all deaths. The common
+forms are lung, stomach, breast, prostate, colon, etc. Stomach cancer is more
+common in Asia. 
+
+Cancers arise from mutations in the genome. This can come from diet, exposure to
+harmful elements, predisposition, etc. In you lifetime, you have $10^{16}$
+different cell divisions. In a given gene, there is a $10^{-6}$ chance of
+getting mutated. This sayes that each gene in your body is mutated $10^{10}$
+times in your lifetime. These are usually harmless because the mutation knocks
+out only one copy of the gene. 
+
+You can increase the chance of mutation by exposing to radiation. This is one of
+the best ways to mutate DNA. Another way is through smoking. Strong sunlight for
+long periods of time. Charred meats have lots of mutagens. Most mutagens are
+carcinogens as well. 
+
+Looking at the graph of onset of cancer, it matches about $x^{5}$. This suggests
+that is requires multiple events to cause cancer over lifetime. However,
+different cancers requires different mutations. There are also predispositions. 
+
+In order to detect cancer on an x-ray, you need over $10^{8}$ cancer cells. To
+feel the cancer, you need over $10^{9}$ cells. At $10^{12}$ cancer cells, the
+patient is dead. 
+
+\section{ Regulation of Cell Growth }
+
+Well behaved cells grow and then stop at some point. They do this by recieving
+growth signals causing them to grow. When they stop getting these signals, they
+should stop growing. If they don't they are cancerous. 
+
+On the surface of cells, there are growth factor receptors. In the presence of a
+growth factor, two half-growth factor receptors come together. Inside the cell,
+there are tyrosine residues which become phosphorolyzed in the presence of the
+other growth factor receptor. These phosphoralized tyrosines are recognized by
+the Grb2 adapter. This then binds to the Sos molecule which "tickles" the Ras
+protein and activates it.
+
+\section{ Ras Protein }
+
+Ras can bind to either GDP or GTP. When Ras binds to GTP, there is a
+conformational change that causes the Ras to be active. GDP-bound Ras is
+inactive. Ras is a \textbf{GTPase}. \textbf{GTPase Activating Proteins} can
+stimulate Ras to inactive. \textbf{Guanine Exchange Factors} then stimulate Ras
+to become active. 
+
+\section{ Ras Signaling }
+
+After Ras undergoes a conformational change after being activated by the Sos
+GEF. This activates RAF which is a kinase. This activates NEK, which activates,
+ERK, which activates a whole bunch on different things which are involving in
+proliferation (such as transcription factors).
+
+\section{ Cancer-Causing Mutations }
+
+\subsection{ Receptor Always Active }
+
+This can occur by the overproduction of growth factor by a cell (which then
+signals itself to proliferate). This causes \textbf{autocrine stimulation}.
+
+Another way is through \textbf{ligand-independent dimerization}. THis can occur
+through amino acid changes or there is a deletion of the receptor part of the
+growth factor receptor. This can also happen through the overproduction of the
+growth factor receptor.
+
+\subsection{ Ras Always Active}
+
+This can occur by a mutation in Ras that simply causes sticking to GTP, thus
+always being active. This can also occur through the deletion of GAP, which
+prevents the exchange of GTP for GDP. 
+
+\subsection{ Constituently Active Kinase }
+
+These kinases could each have a mutation that results in an always-active
+kinases. This can occur in RAF, NEK, and ERK.
+
+\end{document}
