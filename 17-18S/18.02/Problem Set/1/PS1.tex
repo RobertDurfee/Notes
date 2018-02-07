@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 18.02 Problem Set 1 }
+\author{ Robert Durfee }
+\date{ February 7, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Level Curves and Partial Derivatives }
+
+\begin{enumerate}[1.]
+  \item \begin{enumerate}[a.]
+      \item $f_{x}(0, 1)$ is positive.
+      \item $f_{x}(0, -1)$ is negative.
+      \item $f_{y}(1, 0)$ is larger that $f_{y}(0, 0)$.
+      \item $f_{y}(1, 0) \approx 3$.
+    \end{enumerate}
+  \item \begin{enumerate}[a.]
+      \item $$ f_{x}(x, y) = -e^{y - x} $$
+        $$ f_{x}(3, 2) = -\frac{ 1 }{ e } $$
+      \item $$ g'(x) = -e^{2 - x} $$
+        $$ g'(3) = -\frac{ 1 }{ e }$$
+      \item When computing the partial derivative of $f$ with respect to $x$, we
+        treat $y$ as a constant. When solving for $f_{x}(3, 2)$, we set $y = 2$
+        and $x = 3$.  In $g$, the variable $y$ is replaced with the constant 2.
+        As a result, when solving for $g'(3)$, the answer is the same.
+    \end{enumerate}
+  \item \begin{enumerate}[a.]
+      \item $$ f_{x}(x, y) = y^{2} $$
+        $$ f_{y}(x, y) = 2xy + 1 $$
+      \item $$ f_{x}(x, y) = \frac{ y }{ (x + y)^{2} } $$
+        $$ f_{y}(x, y) = -\frac{ x }{ (x + y)^{2} } $$
+      \item $$ f_{x}(x, y) = y^{2} \cos(xy^{2}) $$
+        $$ f_{y}(x, y) = 2xy \cos(xy^{2}) $$
+    \end{enumerate}
+  \item \begin{enumerate}[a.]
+      \item
+      \item
+    \end{enumerate}
+  \item \begin{enumerate}[a.]
+      \item $$ f_{x}(x, y) = -2x $$
+        $$ f_{y}(x, y) = 2y $$
+      \item $f_{y}(1, -1)$ is negative. This can be seen in the level curve
+        graph by starting at point $(1, -1)$ and keeping $x$ constant as you
+        move one unit in the positive $y$ direction. Since the curves go down in
+        height, the partial derivative is negative.
+      \item $f_{y}(2, 2)$ is larger than $f_{y}(1, 1)$. This can be seen on the
+        picture by starting at $(1, 1)$ and $(2, 2)$ can advancing one unit in
+        the $y$ direction while keeping $x$ constant. When the more level curves
+        crossed will indicate a larger difference in height and, therefore, the
+        larger partial derivative.
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
+
