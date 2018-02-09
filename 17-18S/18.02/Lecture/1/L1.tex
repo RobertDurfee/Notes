@@ -1,0 +1,141 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 18.02 Lecture 1 }
+\author{ Robert Durfee }
+\date{ February 6, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Multivariable Calculus in Life }
+
+Most things in life depend on more than one variable. For example, when someone
+is studying the weather, they must think in three dimensions, if not four when
+thinking about time. When designing an engine, you need to maximize efficiency.
+This efficiency does not only depend on a single variable, rather, many.
+
+\section{ 18.01 Graphs }
+
+When we think of the function $ f(x) = x^{2} $, the graph becomes $ y = f(x) $.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.40]{"Parabola"}
+  \caption{Parabola}
+\end{figure}
+
+\section{ 18.02 Graphs }
+
+When dealing with two variables, the function $ f(x, y) = x^{2} + y^{2} $ is
+graphed as $ z = f(x, y) $. The problem then becomes, how do we visualize these
+graphs in three dimensions? For this, we use \textbf{level curves}.
+
+\subsection{ Level Curves }
+
+\textbf{Level curves} are simply cross sections of a three dimensional graph at
+certain heights. This can be written as $ f(x, y) = k $, where different height
+values are substituted for $k$.
+
+\subsubsection{ Example }
+
+We can use $ f(x, y) = x^{2} + y^{2} $ and plot the different level curves as
+follows:
+
+\begin{center}
+  \begin{tabular}{ c c }
+    $$ x^{2} + y^{2} = 0 $$ & $$ r = 0 $$ &
+    $$ x^{2} + y^{2} = 1 $$ & $$ r = 1 $$ &
+    $$ x^{2} + y^{2} = 2 $$ & $$ r = \sqrt{2} $$ &
+    $$ x^{2} + y^{2} = 3 $$ & $$ r = \sqrt{3} $$ &
+    $$ x^{2} + y^{2} = 4 $$ & $$ r = 2 $$ &
+    $$ x^{2} + y^{2} = 5 $$ & $$ r = \sqrt{5} $$ &
+  \end{tabular}
+\end{center}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.50]{"SphereLevelCurves"}
+  \caption{Sphere Level Curves}
+\end{figure}
+
+\subsubsection{ Example }
+
+If a hiker starts at (-1, 1) and moves in the positive $x$ direction, he will be
+going \textbf{downhill}. If a hiker starts at (-2, 0) and moves in the positive
+$x$ direction, he will still be going \textbf{downhill}. However, one hiker
+travels across a steeper decline, this is \textbf{hiker 2}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.50]{"Sphere"}
+  \caption{Sphere}
+\end{figure}
+
+\section{ 18.01 Derivatives }
+
+When thinking in only one variable, $ g(x) $ is a function while $ g'(x) $
+measures how $g$ changes if $x$ increases by a slight amount.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.50]{"Derivative"}
+  \caption{Derivative}
+\end{figure}
+
+We can then see a relationship between the derivative and the function as
+follows:
+$$ g(x + \Delta x) \approx g(x) + g'(x) \Delta x,\ \Delta x \approx 0 $$
+
+\section{ 18.02 Partial Derivatives }
+
+When thinking in two variables, $ f(x, y) $ is our function and $ f_{x}(x, y) $
+measures how $f$ changes if $x$ increases by a slight amount. Additionally, $
+f_{y}(x, y) $ measures how $f$ changes if $y$ increases by a slight amount. The
+relationship between the partial derivatives and the function is as follows:
+$$ f(x + \Delta x, y + \Delta y) \approx f(x, y) + f_{x}(x, y) \Delta x +
+f_{y}(x, y) \Delta y,\ \Delta x \approx 0,\ \Delta y \approx 0$$
+
+\subsection{ Computing Partial Derivatives }
+
+Think of one variable as being a constant and different the other the same way
+as before in 18.01.
+
+\subsubsection{ 18.01 Example }
+
+$$ g(x) = \cos(7x) $$
+$$ g'(x) = -7 \sin(7x) $$
+
+\subsubsection{ 18.02 Example }
+
+$$ h(x, y) = \cos(xy) $$
+$$ h_{x}(x, y) = -y \sin(xy) $$
+
+\subsubsection{ Previous Example }
+
+$$ f(x, y) = x^{2} + y^{2} $$
+$$ f_{x}(x, y) = 2x,\ f_{y}(x, y) = 2y $$
+
+Using the hiker analogy as before, we can calculate the slope that each one
+experiences using partial derivatives.
+$$ f_{x}(-1, 1) = -2,\ f_{x}(-2, 0) = -4 $$
+
+The negative values indicate that the slope is downward and the greater value in
+the second partial derivative indicates that the slope is greater.
+
+\end{document}
+
