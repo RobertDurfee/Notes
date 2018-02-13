@@ -1,0 +1,220 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 8.02 Problem Set 1 }
+\author{ Robert Durfee - Lecture 7 - Table 8 }
+\date{ February 12, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Electric Dipole Torque }
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{"ElectricDipoleTorque"}
+  \caption{Electric Dipole Torque}
+\end{figure}
+
+\subsection*{Part A}
+
+The magnitude of the dipole moment of this system of charges is defined as:
+$$ p = qd $$
+
+\subsection*{Part B}
+
+The force on a charge due to an electric field is defined as:
+$$ \vec{F} = q \vec{E} $$
+
+As a result, the force felt on the upper charge is:
+$$ \vec{F}_{1} = Eq \hat{i} $$
+
+And for the lower charge:
+$$ \vec{F}_{2} = -Eq \hat{i} $$
+
+The resulting net force is the sum of all the components:
+$$ \vec{F}_{net} = \vec{F}_{1} + \vec{F}_{2} = 0 $$
+
+\subsection*{Part C}
+
+Torque is defined as:
+$$ \vec{\tau} = \vec{F} \times \vec{r} $$
+
+As a result, the torque felt on the upper charge is:
+$$ \vec{\tau}_{1} = -\frac{ Eqd \sin(\theta) }{ 2 } \hat{k} $$
+
+And for the lower charge:
+$$ \vec{\tau}_{2} = -\frac{ Eqd \sin(\theta) }{ 2 } \hat{k} $$
+
+The resulting net torque is the sum of all the components:
+$$ \vec{\tau}_{net} = \vec{\tau}_{1} + \vec{\tau}_{2} = -Eqd \sin{\theta}
+\hat{k} $$
+
+Substituting the value for dipole moment, $p$:
+$$ \vec{\tau}_{net} = -Ep \sin(\theta) \hat{k} $$
+
+\subsection*{Part D}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.75]{"GrassSeedRepresentationB"}
+  \caption{Grass Seed Representation B}
+\end{figure}
+
+Representation B is the correct grass seed diagram because the external electric
+field lines must connect with the field lines on the negative charge but go
+around the positive charge. This is because field lines start at a positive and
+terminate at a negative, or infinity.
+
+\subsection*{Part E}
+
+Since there is only a net torque and no net force, there will be rotational
+motion only and no translational motion.
+
+\subsection*{Part F}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{"NonUniformElectricField"}
+  \caption{Non-Uniform Electric Field}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.74]{"GrassSeedRepresentationC"}
+  \caption{Grass Seed Representation C}
+\end{figure}
+
+Representation C is the correct grass seed diagram. Since $Q$ has a stronger
+charge, its field lines are more difficult to bend.  Additionally, since the
+positive charge $q$ is closest to $Q$, the field lines from $Q$ will not
+connect, rather, they will go around the dipole.
+
+\subsection*{Part G}
+
+Since $d \ll x$, we can calculate electric field at both charges in the dipole
+using linear approximation.
+$$ \vec{E}_{-}\left(x + \frac{ d }{ 2 } \right) = \vec{E}(x) + \frac{ d }{ 2 }
+\left( \frac{ d\vec{E} }{ dx } \right) $$
+$$ \vec{E}_{+}\left(x - \frac{ d }{ 2 } \right) = \vec{E}(x) - \frac{ d }{ 2 }
+\left( \frac{ d\vec{E} }{ dx } \right) $$
+
+Using the definition of force from electric field:
+$$ \vec{F} = q(\vec{E}_{+} - \vec{E}_{-}) = -qd \left( \frac{ dE }{ dx } \right)
+\hat{i} $$
+
+The electric field due to the large source charge $Q$ is:
+$$ \vec{E} = \frac{ k_{e} Q }{ x^{2} } \hat{r} $$
+
+The derivative of the electric field due to $Q$ is:
+$$ \frac{ dE }{ dx } = - \frac{ 2 k_{e} Q }{ x^{3} } $$
+
+Substituting the derivative into the force equation yields:
+$$ \vec{F} = \frac{ 2qdk_{e}Q }{ x^{3} } \hat{i} $$
+
+Substituting the value for dipole moment, $p$:
+$$ \vec{F} = \frac{ 2pk_{e}Q }{ x^{3} } \hat{i} $$
+
+\section{Field of Two Point Charges}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.50]{"FieldOfTwoPointCharges"}
+  \caption{Field of Two Point Charges}
+\end{figure}
+
+\subsection*{Part A}
+
+Representation 2 is the correct grass seed diagram because the stronger charge
+is on the left and its field lines are more difficult to bend. Also, the charges
+have opposite polarity so the field lines will connect between the charges.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.75]{"GrassSeedRepresentationTwo"}
+  \caption{Grass Seed Representation 2}
+\end{figure}
+
+\subsection*{Part B}
+
+The electric field at any point along the positive x-axis from the two different
+charges can be written as:
+$$ \vec{E}_{1} = -\frac{ 2k_{e}q }{ x^{2} } \hat{i} $$
+$$ \vec{E}_{2} = \frac{ k_{e}q }{ (x - 1)^{2} } \hat{i} $$
+
+The total electric field at any point becomes:
+$$ \vec{E}_{net} = \left[ \frac{ k_{e}q }{ (x - 1)^{2} } - \frac{ 2k_{e}q }{
+x^{2} } \right] \hat{i} = 0$$
+
+Setting this equal to zero yields one sensible root:
+$$ x = 2 + \sqrt{2} $$
+
+\section{Balancing Forces}
+
+\subsection*{Part A}
+
+Note: we can ignore the positive charge located at the axis because any forces
+acting upon it will produce no torque because $r = 0$ and any forces it supplies
+will produce no torque because it will be parallel to the radius vector.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.50]{"BalancingForces"}
+  \caption{Balancing Forces}
+\end{figure}
+
+The force acting on the negative charge from the positive charge below:
+$$ \vec{F}_{q} = \frac{ k_{e} q^{2} }{ d^{2} } \hat{r} $$
+
+$d$ is equal to the distance between the two charges:
+$$ d = \sqrt{l^{2} + h^{2}} $$
+
+The force then becomes:
+$$ \vec{F}_{q} = \frac{ k_{e} q^{2} }{ l^{2} + h^{2} } \hat{r} $$
+
+Using the definition for torque, the torque supplied on the negative charge
+from the positive charge below can be written:
+$$ \vec{\tau}_{q} = F_{q} l \sin(\theta) \hat{k} $$
+
+Substituting the value for $\sin(\theta)$:
+$$ \vec{\tau}_{q} = \frac{ k_{e}lhq^{2} }{ \left( l^{2} + h^{2} \right)^{3/2} }
+\hat{k}$$
+
+Calculating the torque due to the hanging mass:
+$$ \vec{\tau}_{m} = -mgx \hat{k} $$
+
+Net torque must be zero since the beam is not rotating:
+$$ \frac{ k_{e}lhq^{2} }{ \left( l^{2} + h^{2} \right)^{3/2} } = mgx $$
+
+Solving for $x$:
+$$ x = \frac{ k_{e}lhq^{2} }{ mg \left( l^{2} + h^{2} \right)^{3/2} } $$
+
+\subsection*{Part B}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.75]{"GrassSeedRepresentationD"}
+  \caption{Grass Seed Representation D}
+\end{figure}
+
+Representation D is the correct grass seed diagram because the two positive
+charges' field lines will not connect as they have the same polarity. However,
+the field lines from both positive charges will connect to the negative charge
+as they have opposite polarity.
+
+\end{document}
+
