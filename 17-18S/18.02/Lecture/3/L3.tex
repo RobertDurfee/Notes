@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 18.02 Lecture 3 }
+\author{ Robert Durfee }
+\date{ February 9, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Warm Up }
+
+Let's say that you have two equations:
+$$ y = x^{2}, \ 1 = (x - 1)^{2} + (y - 1)^{2}  $$
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.60]{"WarmUp"}
+  \caption{Warm Up}
+\end{figure}
+
+You need to figure out where these two graphs intersect. You could solve for
+this point algebraically, however, the math soon become too difficult to keep
+track of. As a result, it would be better to make a linear approximation of the
+function close to the point and use that to solve for the intersection.
+
+\bigbreak
+
+Find the linear approximation of $f(x, y) = y - x^{2}$ around the point $(1,
+2)$.
+$$ L(x, y) \approx f(x_{0}, y_{0}) + f_{x}(x_{0}, y_{0}) (x - x_{0}) +
+f_{y}(x_{0}, y_{0}) (y - y_{0})$$
+$$ L(x, y) \approx -2x + y + 1 $$
+
+Now we must decide which point to take our linear approximation around. In this
+case, $(1.5, 1.9)$ is the best as it is closest to the intersection.
+
+\section{18.01 Minima and Maxima}
+
+An extreme point of a function $g(x)$ within a certain interval takes two forms:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.60]{"Minimum"}
+  \caption{Minimum Within Interval}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.60]{"MinimumAtBoundary"}
+  \caption{Minimum At Boundary}
+\end{figure}
+
+\section{18.02 Minima and Maxima}
+
+Functions of two variables, like $f(x, y)$, are analogous to their one variable
+counterparts, however, the interval is a region in two dimensions. As a result,
+an extreme point can occur at the edge, a corner, or within the region.
+
+\bigbreak
+
+The minimum and maximum of a graph exist where $f_{x}(x, y)$ and $f_{y}(x, y)$
+are equal to zero. This is where the tangent plane is horizontal.
+
+\end{document}
+
