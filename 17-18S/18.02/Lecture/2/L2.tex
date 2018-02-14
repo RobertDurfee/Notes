@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 18.02 Lecture 2 }
+\author{ Robert Durfee }
+\date{ February 8, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Warm Up }
+
+Using the function $f(x, y) = x + 2y - 1$, sketch the level curves.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.60]{"LevelCurves"}
+  \caption{Level Curves}
+\end{figure}
+
+Is this surface planar or curved? Given the equal spacing between incremental
+level curves, this surface is planar.
+
+In general, $y = ax + b$ is a general formula for a line and $z = ax + by + c$
+is a general formula for a plane.
+
+\section{18.01 Linear Approximation}
+
+In general, the formula for a linear approximation of a one dimensional function
+is as follows:
+$$ g(x_{0} + \Delta x) \approx g(x_{0}) + g'(x_{0}) \Delta x $$
+
+\subsection{Example}
+
+Find the linear approximation of $g(x) = x^{2}$ around the point $x_{0} = 1$.
+$$ g(1 + \Delta x) \approx 1 + 2 \Delta x $$
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.60]{"LinearApproximation"}
+  \caption{Linear Approximation}
+\end{figure}
+
+It is important to notice that the linear approximation gives the line tangent
+to the graph. This gives a good approximation of $g$ for small values of $\Delta
+x$.
+
+\section{18.02 Linear Approximation}
+
+In general, the formula for a linear approximation of a two dimensional function
+is as follows:
+$$ f(x_{0} + \Delta x, y_{0} + \Delta y) \approx f(x_{0}, y_{0}) + f_{x}(x_{0},
+y_{0}) \Delta x + f_{y}(x_{0}, y_{0}) \Delta y $$
+
+\subsection{Example}
+
+Find the linear approximation of $f(x, y) = x^{2} + y^{2}$ around the point
+$(-1, 1)$.
+$$ f(-1 + \Delta x, 1 + \Delta y) \approx 2 - 2 \Delta x + 2 \Delta y $$
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.60]{"3DLinearApproximation"}
+  \caption{3D Linear Approximation}
+\end{figure}
+
+Another way to write the linear approximation formula is in terms of $x$ and $y$
+only. This makes the plane graphable.
+$$ L(x, y) = f(x_{0}, y_{0}) + f_{x}(x_{0}, y_{0})(x - x_{0}) + f_{y}(x_{0},
+y_{0})(y - y_{0}) $$
+
+\end{document}
+
