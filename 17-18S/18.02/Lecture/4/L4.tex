@@ -1,0 +1,108 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 18.02 Lecture 4 }
+\author{ Robert Durfee }
+\date{ February 13, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Warm Up }
+
+Find the minimum of $f(x, y) = x^{2} + x + y^{2}$ within the region $S$ defined
+between the intervals $-10 \leq x \leq 10$ and $-10 \leq y \leq 10$.
+
+\bigbreak
+
+Find all of the critical points of $f$.
+$$ f_{x}(x, y) = 2x + 1, \ f_{y}(x, y) = 2y $$
+
+Setting these partial derivatives equal to zero results in the critical point
+$(-1/2, 0)$. This critical point results in the value $-1/4$. This was an easy
+function, though, because the partial derivatives only depended on one variable.
+
+\section{More Complicated Warm Up}
+
+We can define a new function $g(x, y) = x^{2} + x + y^{2} + xy$. This function
+as the following partial derivatives:
+$$ g_{x}(x, y) = 2x + y + 1, \ g_{y}(x, y) = 2y + x $$
+
+These partial derivatives depend on both variables. As a result, they must be
+treated as a system of equations.
+
+\section{How to Handle Boundaries}
+
+\subsection{18.01 Methods}
+
+We can determine the minimum along a boundary by setting one variable as a
+constant and solving it the same way as a one dimensional extrema problem. This
+process must be repeated for each edge and quickly become tedious.
+
+\subsection{Number Sense}
+
+When thinking about $f$, $x^{2} + y^{2}$ will be very large along the
+boundaries. At the boundary, $x = \pm 10$ and $y = \pm 10$. As a result, $x^{2}
++ y^{2} \geq 100$. This is way larger than $-1/4$, so the minimum must not be on
+an edge.
+
+\bigbreak
+
+What about on the whole plane? The function $f$ is larger outside of the regions
+$S$, therefore the global minimum must occur within the region.
+
+\section{Function with No Minima}
+
+There are several examples of functions that do not have global minima. For
+example, $f(x) = x$ and $g(x) = e^{-x^{2}}$.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.60]{"NoMinima"}
+  \caption{No Minima}
+\end{figure}
+
+\section{Word Problems}
+
+Suppose you have a box that you need to build. It costs a different amount to
+build the front/back, top/bottom, and sides. The respective costs are \$1, \$2,
+and \$3 per square foot. It is also required that the volume of the box is 48
+cubic feet.
+
+\bigbreak
+
+This results in the creation of two equations:
+$$ xyz = 48, \ 2xz + 4xy + 6yz = C $$
+
+We can solve for $z$ and substitute into the other equation to create a function
+of only two variables:
+$$ C(x, y) = 96/y + 4xy + 288/x $$
+
+Then we can solve for the two partial derivatives:
+$$ C_{x}(x, y) = 4y + 288/x^{2}, \ C_{y}(x, y) = 96/y^{2} + 4x $$
+
+Solving the system of equations results in the solution $(6, 2, 4)$. This
+results in the cost of \$144.
+
+\bigbreak
+
+But is this point actually a minimum? We can test this by applying a boundary
+arbitrarily. Along the boundary, we can see that the cost is large no matter
+which edge we are using. As a result, the minimum must be within the region.
+
+\end{document}
+
