@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 18.02 Recitation 2 }
+\author{ Robert Durfee }
+\date{ February 12, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Linear Approximation }
+
+The level curves for the function $f(x, y) = 2(x - 1) + (y - 1)$:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.60]{"LevelCurves"}
+  \caption{Level Curve Warm Up}
+\end{figure}
+
+\begin{enumerate}[1.]
+  \item Using the function $f(x, y) = y^{2} - x^{3} + xy - x$, $f(1, 1) = 0$.
+
+  \item The partial derivatives for $f$:
+    $$ f_{x}(x, y) = -3x^{2} + y - 1, \ f_{y}(x, y) = 2y + x $$
+    $$ f_{x}(1, 1) = -3, \ f_{y}(1, 1) = 3 $$
+
+  \item The linear approximation of $f$:
+    $$ L(x, y) = -3x + 3y $$
+
+  \item The linear approximation level curves:
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.60]{"LinearApproximationLevelCurves"}
+      \caption{Linear Approximation Level Curves}
+    \end{figure}
+
+  \item The function $g(x, y) = x^{2} + 3y^{2}$ has partial derivatives:
+    $$ g_{x}(x, y) = 2x, \ g_{y}(x, y) = 6y $$
+
+    The plane $z = 2x + 6y - 6$ has partial derivatives:
+    $$ h_{x}(x, y) = 2, \ h_{y}(x, y) = 6 $$
+
+    The function $g$ has the same slope as the plane at the point $(1,1)$. This
+    point has a height of 4. The plane, on the other hand, is only at height 2.
+    As a result, we must add 2 to the plane to raise it to be tangential to the
+    curve $g$.
+
+    \bigbreak
+
+    The new equation for the plane is $z = 2x + 6y - 4$.
+
+  \item The function $f(x, y) = -(x^{2} - 1)^{2} - (x^{2}y - x - 1)^{2}$ has two
+    critical points: (-1, 0) and (1, 2).
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.60]{"NoMinima"}
+      \caption{No Minima}
+    \end{figure}
+\end{enumerate}
+
+\end{document}
+
