@@ -49,7 +49,27 @@ irrational.}
 
 \subsubsection*{Proof}
 
-The proof is by contradiction.
+The proof is by contradiction. Assume that $x$ is a rational root of the stated
+polynomial. Then $x$ can be written as a fraction $n/d$ in simplest terms. Then
+the polynomial can be written as:
+$$ a_{0} + a_{1} \left(\frac{ n }{ d }\right) + a_{2}\left(\frac{ n }{ d
+}\right)^{2} + \dots + a_{m-1}\left(\frac{ n }{ d }\right)^{m-1} +
+a_{m}\left(\frac{ n }{ d }\right)^{m} = 0 $$
+
+Multiplying both sides by $d^{m}$ and pulling out a $d$ results in:
+$$ d \left( a_{0}d^{m-1} + a_{1}nd^{m-2} + a_{2}n^{2}d^{m-3} + \ldots +
+a_{m-1}n^{m-1} \right) = -a_{m}n^{m}$$
+
+From this statement, if $d$ is 1, then the root will be integral, and this
+statement will hold, but if $d$ is not 1, then there is a contradiction. This
+contradiction arises because $d$ will be a factor of $n^{m}$, and thus a factor
+of $n$. As a result, $n/d$ will not be in simplest terms, which it must be as we
+defined it before.
+
+\bigbreak
+
+This shows that the roots of the defined polynomial must be integral or
+irrational.
 
 \section*{Problem 2}
 
@@ -123,12 +143,11 @@ The proof is by case analysis. There are two cases:
 
 \subsubsection*{Case 1: $R$ is True}
 
-If $R$ is true, then $w$, $x$, and $y$ must all be even. We know that an even
-number times another even number will also be even. As a result, $w^{2}$,
-$x^{2}$, and $y^{2}$ will all be even as well. From before, we also know that
-the sum of even numbers will be even. Therefore, $z^{2}$ must be even as well.
-Once again, we know that the square of a number can only be even if that number
-is even itself. Thus, $z$ is even.
+If $R$ is true, then all $w$, $x$, and $y$ are all even. We know that an even
+number takes the form $2m$ where $m$ is some integer. Then, the square takes the
+form $4m^{2}$. Summing these three together, for all even squares of $w$, $x$,
+and $y$, the result is all divisible by 4. As a result, $z$ can only be even if
+$z^{2}$ is divisible by four, and this is true.
 
 \subsubsection*{Case 2: $R$ is False}
 
