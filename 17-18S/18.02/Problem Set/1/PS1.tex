@@ -16,7 +16,7 @@
 
 \title{ 18.02 Problem Set 1 }
 \author{ Robert Durfee }
-\date{ February 7, 2018 }
+\date{ February 16, 2018 }
 
 \begin{document}
 
@@ -49,10 +49,14 @@
       \item $$ f_{x}(x, y) = y^{2} \cos(xy^{2}) $$
         $$ f_{y}(x, y) = 2xy \cos(xy^{2}) $$
     \end{enumerate}
-  \item \begin{enumerate}[a.]
-      \item
-      \item
-    \end{enumerate}
+  \item Level curves for $f(x,y) = y^{2} - x^{2}$:
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.60]{"LevelCurveSketch"}
+      \caption{Level Curve Sketch}
+    \end{figure}
+
   \item \begin{enumerate}[a.]
       \item $$ f_{x}(x, y) = -2x $$
         $$ f_{y}(x, y) = 2y $$
@@ -65,7 +69,9 @@
         the $y$ direction while keeping $x$ constant. When the more level curves
         crossed will indicate a larger difference in height and, therefore, the
         larger partial derivative.
-      \item
+      \item The points are shown in \textit{Figure 1}. These points are special
+        because they represent a change in direction in the level curve. A
+        minimum/maximum, essentially.
     \end{enumerate}
   \item \begin{enumerate}[a.]
     \item $$ f(x, y) = 10 - y^{2} + x $$
@@ -74,14 +80,212 @@
       $$ f_{x}(x, y) = -y,\ f_{y}(x, y) = -x + 1 $$
     \item $$ f(x, y) = 10 - x^{2} + xy $$
       $$ f_{x}(x, y) = -2x + y,\ f_{y}(x, y) = x $$
+
+      \bigbreak
+
+      Using the partial derivatives computed above, we are looking for a partial
+      derivative with respect to $y$ that is negative when $x$ is positive and
+      is positive when $x$ is negative. The only equation that has this property
+      is equation B.
   \end{enumerate}
 \end{enumerate}
 
 \section{Linear Approximation}
 
 \begin{enumerate}[1.]
-  \item
-  \item
+  \setcounter{enumi}{6}
+  \item Starting with $f(x, y) = \sin(xy) + 2e^{x}$, the partial derivatives can
+    be computed:
+    $$ f_{x}(x,y) = y \cos(xy) + 2e^{x}, \ f_{y}(x,y) = x \cos(xy) $$
+
+    These can then be substituted into the general linear approximation
+    equation:
+    $$ L(x,y) = \sin(x_{0}y_{0}) + 2e^{x_{0}} + (y_{0} \cos(x_{0}y_{0}) +
+    2e^{x_{0}})(x - x_{0}) + (x_{0} \cos(x_{0}y_{0}))(y - y_{0}) $$
+
+    Substituting $x_{0}=0$ and $y_{0}=0$:
+    $$ L(x,y) = 2 + 2x $$
+
+    Solving for the approximation at (0.1, 0.2):
+    $$ L(0.1, 0.2) = 2.2 $$
+
+  \item Starting with $P(W, M) = W \sqrt{M}$, the partial derivatives can be
+    computed:
+    $$ P_{W}(W, M) = \sqrt{M}, \ P_{M}(W, M) = \frac{ W }{ 2 \sqrt{M} } $$
+
+    These can then be substituted into the general linear approximation
+    equation:
+    $$ L(W_{0} + \Delta W, M_{0} + \Delta M) = W_{0} \sqrt{M_{0}} + \sqrt{M_{0}}
+    \Delta W + \frac{ W_{0} }{ 2 \sqrt{M_{0}}} \Delta M $$
+
+    Substituting $W_{0} = 3$ and $M_{0} = 4$:
+    $$ L(3 + \Delta W, 4 + \Delta M) = 6 + 2 \Delta W + 0.75 \Delta M $$
+
+    \bigbreak
+
+    \begin{enumerate}[a.]
+      \item Plugging in $\Delta W = 0.1$:
+        $$ L(3.1, 4) = 6.2 $$
+
+      \item Plugging in $\Delta M = 0.2$:
+        $$ L(3, 4.2) = 6.15 $$
+
+      \item Plugging in $\Delta W = -0.1$ and $\Delta M = 0.4$:
+        $$ L(2.9, 4.4) = 6.1 $$
+    \end{enumerate}
+
+    \bigbreak
+
+    From this information, we can determine that the best option for the company
+    is option A.
+  \item \begin{enumerate}[a.]
+    \item Starting with $f(x,y) = y^{2} - x^{2}$, the partial derivatives can be
+      computed:
+      $$ f_{x}(x, y) = -2x, \ f_{y}(x, y) = 2y $$
+
+      These can then be substituted into the general linear approximation
+      equation:
+      $$ L(x, y) = 4y - 4x $$
+    \item Linear approximation level curves for $L(x,y) = 4y - 4x$:
+
+      \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.60]{"LinearLevelCurveSketch"}
+        \caption{Linear Level Curve Sketch}
+      \end{figure}
+    \end{enumerate}
+
+  \item \begin{enumerate}[a.]
+      \item Starting with the basic linear approximation equation:
+        $$ f(x,y) \approx f(x_{0}, y_{0}) + f_{x}(x_{0},y_{0})(x - x_{0}) + f_{y}(x_{0},
+        y_{0})(y - y_{0})$$
+
+        Rearranging to get all the $x$, $y$, and $z$ terms together:
+        $$ f(x,y) - f(x_{0},y_{0}) \approx f_{x}(x_{0},y_{0})(x - x_{0}) + f_{y}(x_{0},
+        y_{0})(y - y_{0}) $$
+
+        We can redefine the differences between terms:
+        $$ \Delta z \approx f_{x}(x_{0},y_{0}) \Delta x + f_{y}(x_{0},y_{0}) \Delta
+        y $$
+
+        Using $f(x, y) = \frac{ x }{ x + y }$, the partial derivatives can be
+        calculated:
+        $$ f_{x}(x, y) = \frac{ y }{ (x + y)^{2} }, \ f_{y}(x, y) = -\frac{ x }{ (x
+        + y)^{2} } $$
+
+        Now all of the values can be substituted into the equation derived above:
+        $$ \Delta z \approx \frac{ 9 }{ 10^{2} }(0.01) - \frac{ 1 }{ 10^{2} }(0.01)
+        \approx 0.0008 $$
+
+        This can be rewritten into scientific notation:
+        $$ \Delta z = 8 \cdot 10^{-4} $$
+
+        As a result, the magnitude is on the order of $10^{-4}$.
+
+      \item Now, using $\Delta x = 0.01$ and $\Delta y = 0.03$:
+        $$ \Delta z \approx \frac{ 9 }{ 10^{2} }(0.01) - \frac{ 1 }{ 10^{2}
+        }(0.03) \approx 0.0006 $$
+
+        Using $\Delta x = 0.03$ and $\Delta y = 0.01$
+        $$ \Delta z \approx \frac{ 9 }{ 10^{2} }(0.03) - \frac{ 1 }{ 10^{2}
+        }(0.01) \approx 0.0026 $$
+
+        As a result, the plan where $\Delta x = 0.01$ and $\Delta y = 0.03$ is
+        better because the $\Delta z$ is the lowest.
+    \end{enumerate}
+
+  \item \begin{enumerate}[a.]
+      \item Sketch of $y = x^{2}$ and $(x-1)^{2} + (y-1)^{2} = 1$:
+
+        \begin{figure}[H]
+          \centering
+          \includegraphics[scale=0.60]{"PAndCSketch"}
+          \caption{Sketch of P and C}
+        \end{figure}
+
+      \item Using the sketch, a reasonable choice for the intersection is
+        (1.4, 1.9).
+
+      \item Using $f(x,y) = y - x^{2}$ and $g(x,y) = (x-1)^{2} + (y-1)^{2}$, two
+        sets of partial derivatives can be derived:
+        $$ f_{x}(x,y) = -2x, \ f_{y}(x,y) = 1 $$
+        $$ g_{x}(x,y) = 2(x - 1), \ g_{y}(x,y) = 2(y - 1) $$
+
+        These partial derivatives can be substituted into the linear approximation
+        equation:
+        $$ L_{f}(x,y) = y_{0} - x_{0}^{2} - 2x_{0}(x - x_{0}) + (y - y_{0}) $$
+        $$ L_{g}(x,y) = (x_{0} - 1)^{2} + (y_{0} - 1)^{2} + 2(x_{0} - 1)(x -
+        x_{0}) + 2(y_{0} - 1)(y - y_{0}) $$
+
+        Substituting the best guess for the intersection at (1.4, 1.9):
+        $$ L_{f}(x,y) = -2.8x + y + 1.96 $$
+        $$ L_{g}(x,y) = 0.8x + 1.8y - 3.57 $$
+
+      \item Setting these two equal to zero and one, respectively, and solving for
+        $x$ and $y$ yields:
+        $$ x = 1.39, \ y = 1.92 $$
+
+    \end{enumerate}
+
+\end{enumerate}
+
+\section{Maxima and Minima}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{11}
+  \item \begin{enumerate}[a.]
+      \item Starting with $f(x,y) = x(1-x^{2}-y^{2})$, the partial derivatives can
+        be calculated:
+        $$ f_{x}(x,y) = 1 - 3x^{2} -y^{2}, \ f_{y}(x,y) = -2yx $$
+
+        Setting these partial derivatives equal to zero will find the critical
+        points:
+        $$ (0, -1),\ (0, 1),\ (-1/\sqrt{3}, 0),\ (1/\sqrt{3}, 0) $$
+      \item These points evaluate to:
+        $$ 0,\ 0,\ -2/3\sqrt{3},\ 2/3\sqrt{3} $$
+
+        Next, the boundary must be checked for critical points. Solving $x^{2} +
+        y^{2} = 1$ for $y^{2}$ can easily be substituted into $f(x,y) = x(1-x^{2}
+        - y^{2})$:
+        $$ f(x) = 0 $$
+
+        As a result, all points are zero, so there are no critical points along
+        the boundary. Also, the value of zero is neither a minimum or a maximum
+        within this region so the minimum is $-0.38$ located at (-0.58, 0) and the
+        maximum is $0.38$ located at (0.58, 0).
+
+    \end{enumerate}
+
+  \item Starting with $f(x,y) = x -2y$, the partial derivatives can be computed:
+    $$ f_{x}(x,y) = 1, \ f_{y}(x,y) = -2 $$
+
+    This shows that there are no critical points along the plane. As a result,
+    all functions along the boundary will be linear as well, with no critical
+    points. The only point that need to be tested are the corners of the
+    triangle:
+    $$ f(1, 0) = 1, \ f(1,1) = -1, f(2,1) = 0 $$
+
+    As a result, the corner at (1, 0) is the maximum within the region
+    specified.
+
+  \item From the constraints given, two equations can be derived:
+    $$ 48 = xyz, \ C = 6xy + 8xz + 8yz $$
+
+    Solving for $z$ and substituting into the cost function results in a two
+    variable function which can be minimized:
+    $$ C(x, y) = 6xy + 384/y + 384/x $$
+
+    From this function, the partial derivatives follow:
+    $$ C_{x}(x,y) = 6(y - 64/x^{2}), \ C_{y}(x,y) = 6(x - 64/y^{2}) $$
+
+    Setting these partial derivatives equal to zero results in the following
+    dimensions:
+    $$ x = 4, \ y = 4, \ z = 3 $$
+
+  \item At a minimum or maximum within a region, there exists a point that is
+    completely flat. In order for a point on a surface to be completely flat,
+    that point must have partial derivatives equal to zero in all directions.
+
 \end{enumerate}
 
 \end{document}
