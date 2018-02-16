@@ -1,0 +1,166 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 6.042 Problem Set 1 }
+\author{ Robert Durfee }
+\date{ February 16, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1 }
+
+\subsection*{Part A}
+
+The polynomial $ x^{m} - k $ has the root $\sqrt[m]{k}$. It is also in the form
+of the polynomial provided in the lemma:
+$$ a_{0} + a_{1}x + a_{2}x^{2} + \ldots + a_{m-1}x^{m-1} + a_{m}x^{m} $$
+
+Where $a_{0}$ is $-1$, $a_{1}$ through $a_{m-1}$ are 0, and $a_{m}$ is 1. As a
+result, the root of this polynomial, as stated by the lemma, must me integral or
+irrational. $\sqrt[m]{k}$ will only be an integer if $k = n^{m}$, where $n$ is
+an integer. This is clear because an integer raised to any other power will not
+simplify completely, but will contain a root and, therefore will be irrational.
+And this is the second stipulation provided by the lemma.
+
+\subsection*{Part B}
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+\subsubsection*{Theorem}
+
+\textit{Suppose that $a + b + c = d$ where $a$, $b$, $c$, and $d$ are nonnegative
+integers. Let $P$ be the assertion that $d$ is even. Let $W$ be the assertion
+that exactly one among $a$, $b$, and $c$ are even, and let $T$ be the assertion
+that all three are even. Then, $ P \iff (W \lor T) $.}
+
+\subsubsection*{Proof}
+
+The proof is by case analysis. There are three cases:
+
+\begin{enumerate}[\hspace{1cm}1.]
+  \item $W$ is true and $T$ is false.
+  \item $W$ is false and $T$ is true.
+  \item $W$ is false and $T$ is false.
+\end{enumerate}
+
+There is no fourth case where both are true as the two assertions $W$ and
+$T$ are mutually exclusive.
+
+\subsubsection*{Case 1: $W$ is True and $T$ is False}
+
+Let's assume that $a$ and $b$ are odd and $b$ and $c$ is even. We know that
+the sum of two odd numbers is always even. As a result, the sum of $a$ and $b$
+is even. Now, the problem is reduced to the sum of two even numbers. We also
+know that the sum of two even numbers is also even. As a result, $d$ must be
+even.
+
+\subsubsection*{Case 2: $W$ is False and $T$ is True}
+
+Now, $a$, $b$, and $c$ are all even. Since the sum of two evens is even, the sum
+of $a$ and $b$ must be even. Now, the problem is reduced to the sum of two even
+numbers. As a result, $d$ must be even.
+
+\subsubsection*{Case 3: $W$ is False and $T$ is False}
+
+Now, $a$, $b$, and $c$ are all odd. We know that the sum of two odd numbers is
+even. Thus, the sum of $a$ and $b$ is even. Now, the problem is reduced to the
+sum of an even and an odd number. We also know that the sum of an even and an
+odd number is odd. As a result, $d$ must be odd.
+
+\bigbreak
+
+Given that $d$ is only even when $W \lor T$ evaluates to true, and $P$ is the
+assertion that $d$ is even, $ P \iff (W \lor T) $.
+
+\subsection*{Part B}
+
+\subsubsection*{Theorem}
+
+\textit{Suppose that $w^{2} + x^{2} + y^{2} = z^{2}$, where $w$, $x$, $y$, $z$
+are nonnegative integers. Let $P$ be the assertion that $z$ is even, and let $R$
+be the assertion that all three of $w$, $x$, and $y$ are even. Then, $P \iff R$.}
+
+\subsubsection*{Proof}
+
+The proof is by case analysis. There are two cases:
+
+\begin{enumerate}[\hspace{1cm}1.]
+  \item $R$ is true.
+  \item $R$ is false.
+\end{enumerate}
+
+\subsubsection*{Case 1: $R$ is True}
+
+If $R$ is true, then $w$, $x$, and $y$ must all be even. We know that an even
+number times another even number will also be even. As a result, $w^{2}$,
+$x^{2}$, and $y^{2}$ will all be even as well. From before, we also know that
+the sum of even numbers will be even. Therefore, $z^{2}$ must be even as well.
+Once again, we know that the square of a number can only be even if that number
+is even itself. Thus, $z$ is even.
+
+\subsubsection*{Case 2: $R$ is False}
+
+If $R$ is false, then at least one of $w$, $x$, and $y$ must be odd.
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+\begin{center}
+  \begin{tabular}{ c c c c c c c c }
+    $P$ & $Q$ & $R$ & $[(P \implies Q)$ & $\land$ & $(Q \implies R)]$ & $\land$ &
+    $(R \implies P)$ \\
+    T & T & T & T & T & T & \textbf{T} & T \\
+    T & T & F & T & F & F & \textbf{F} & T \\
+    T & F & T & F & F & T & \textbf{F} & T \\
+    T & F & F & F & F & T & \textbf{F} & T \\
+    F & T & T & T & T & T & \textbf{F} & F \\
+    F & T & F & T & F & F & \textbf{F} & T \\
+    F & F & T & T & T & T & \textbf{F} & F \\
+    F & F & F & T & T & T & \textbf{T} & T \\
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{ c c c c c c }
+    $P$ & $Q$ & $R$ & $[P \land Q]$ & $\land$ & $R$ \\
+    T & T & T & T & \textbf{T} &  \\
+    T & T & F & T & \textbf{F} &  \\
+    T & F & T & F & \textbf{F} &  \\
+    T & F & F & F & \textbf{F} &  \\
+    F & T & T & F & \textbf{F} &  \\
+    F & T & F & F & \textbf{F} &  \\
+    F & F & T & F & \textbf{F} &  \\
+    F & F & F & F & \textbf{F} &  \\
+  \end{tabular}
+\end{center}
+
+The truth assignment that makes the first proposition true and the second
+proposition false is $P = \rm{F}$, $Q = \rm{F}$, and $R = \rm{F}$.
+
+\subsection*{Part B}
+
+Sloppy Sam's mistake was in assuming that $Q$ must be true in the first place.
+He only proved that $P$, $Q$, and $R$ are all true if one of them is true.
+However, this doesn't prove that one has to be true in the first place. If all
+$P$, $Q$, and $R$ are false, then all the implications will be true.
+
+\end{document}
+
