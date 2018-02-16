@@ -30,17 +30,26 @@ Daniela Guillen and James Quigley.
 \subsection*{Part A}
 
 The polynomial $ x^{m} - k $ has the root $\sqrt[m]{k}$. It is also in the form
-of the polynomial provided in the lemma:
-$$ a_{0} + a_{1}x + a_{2}x^{2} + \ldots + a_{m-1}x^{m-1} + a_{m}x^{m} $$
-
-Where $a_{0}$ is $-1$, $a_{1}$ through $a_{m-1}$ are 0, and $a_{m}$ is 1. As a
-result, the root of this polynomial, as stated by the lemma, must me integral or
-irrational. $\sqrt[m]{k}$ will only be an integer if $k = n^{m}$, where $n$ is
-an integer. This is clear because an integer raised to any other power will not
-simplify completely, but will contain a root and, therefore will be irrational.
-And this is the second stipulation provided by the lemma.
+of the polynomial provided in the lemma.  Where $a_{0}$ is $-1$, $a_{1}$ through
+$a_{m-1}$ are 0, and $a_{m}$ is 1. As a result, the root of this polynomial, as
+stated by the lemma, must me integral or irrational. $\sqrt[m]{k}$ will only be
+an integer if $k = n^{m}$, where $n$ is an integer. This is clear because an
+integer raised to any other power will not simplify completely, but will contain
+an irreducible root and, therefore will be irrational.  And this is the second
+stipulation provided by the lemma.
 
 \subsection*{Part B}
+
+\subsubsection*{Lemma}
+
+\textit{Let the coefficients of the polynomial}
+$$ a_{0} + a_{1}x + a_{2}x^{2} + \ldots + a_{m-1}x^{m-1} + a_{m}x^{m} $$
+\textit{be integers. Then any real root of the polynomial is either integral or
+irrational.}
+
+\subsubsection*{Proof}
+
+The proof is by contradiction.
 
 \section*{Problem 2}
 
@@ -123,7 +132,18 @@ is even itself. Thus, $z$ is even.
 
 \subsubsection*{Case 2: $R$ is False}
 
-If $R$ is false, then at least one of $w$, $x$, and $y$ must be odd.
+If $R$ is false, then at least one of $w$, $x$, and $y$ must be odd. We know
+that a square of an odd number takes the form $4(m^{2} + m) + 1$, where $m$ is
+some integer. As a result, the sum of one odd and two evens will have a $1$
+term, a sum of two odds and one even will have a $2$ term, and a sum of three
+odds with have a $3$ term. But, in order for $z$ to be even, $z^{2}$ must be a
+multiple of $4$. As a result, none of the previously listed terms is a multiple
+of $4$, so $z$ cannot be even.
+
+\bigbreak
+
+Given that $z$ is only even when $R$ evaluates to true, and $P$ is the assertion
+that $z$ is even, $P \iff R$.
 
 \section*{Problem 3}
 
