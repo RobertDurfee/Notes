@@ -1,0 +1,306 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 18.02 Problem Set 2 }
+\author{ Robert Durfee }
+\date{ February 23, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Optimization Problems }
+
+\subsection{Is the maximum on the boundary or in the interior?}
+
+\begin{enumerate}[1.]
+  \item Starting with the function $f(x, y) = x + 2y$, the partial derivatives
+    can be computed:
+    $$ f_{x}(x, y) = 1,\ f_{y}(x, y) = 2 $$
+
+    Setting these equal to zero results in a contradiction. As a result, there
+    are no critical points for $f$. Since there are no critical points for the
+    whole function, the critical points can only exist along the boundary of
+    $D$.
+
+  \item Starting with the function $f(x, y) = xy - x^{4} - y^{4}$, the partial
+    derivatives can be computed:
+    $$ f_{x}(x, y) = y - 4x^{3},\ f_{y}(x, y) = x - 4y^{3} $$
+
+    Setting these equal to zero and solving for $x$ and $y$ results in two
+    critical points within $S$:
+    $$ (-0.5, -0.5),\ (0, 0) $$
+
+    The respective values for these critical points are $0.125$ and $0$. These
+    critical points are minima, therefore, the maximum has to lie along the
+    boundary of $S$ as when either $x$ or $y$ increase, the output increases
+    significantly.
+
+\end{enumerate}
+
+\subsection{Turning word problem into equations.}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{2}
+  \item \begin{enumerate}[a.]
+      \item From the word problem, we are given two equations:
+        $$ x + y + 2z = 12 $$
+        $$ xyz = f $$
+
+        These equations can be combined to create a maximization problem in
+        terms of two variables:
+        $$ f(x, y) = \frac{ x y (12 - x - y) }{ 2 } $$
+
+        The word problem also states that the values must be positive. Thus, the
+        region $R$ is confined to greater than or equal to zero. Additionally, a
+        little bit of number sense shows that if all numbers are positive, $x$
+        and $y$ summed has to be less than or equal to 12.
+
+        \begin{figure}[H]
+          \centering
+          \includegraphics[scale=0.60]{"RegionR"}
+          \caption{Region $R$}
+        \end{figure}
+
+      \item Using the function defined in the previous part, the partial
+        derivatives can be computed:
+        $$ f_{x}(x, y) = -\frac{ y (y + 2(x - 6) }{ 2 },\ f_{y}(x, y) = -\frac{
+        x (x + 2 (y - 6))}{ 2 } $$
+
+        Setting these equations equal to zero and solving for $x$ and $y$
+        results in:
+        $$ (0, 0),\ (0, 12),\ (12, 0),\ (4, 4)  $$
+
+        Using the first equation provided dictating the sum of the variables
+        must be $12$, $z$ can be computed for each pair:
+        $$ (0, 0, 6),\ (0, 12, 0),\ (12, 0, 0),\ (4, 4, 2) $$
+
+        The product of each respective set of variables becomes:
+        $$ 0,\ 0,\ 0, 32 $$
+
+        The set $(4, 4, 2)$ has the highest product and must be the maximum. It
+        is also clear that the maximum has to occur within $R$ since moving out
+        to the edges of the region lowers the product and along all edges, the
+        product is zero.
+    \end{enumerate}
+  \item This problem gives us two equations:
+    $$ y = x^{2},\ y = x - 10 $$
+
+    It also defines two points, each lay on their respective line:
+    $$ P_{1} = (x_{1}, y_{1}),\ P_{2} = (x_{2}, y_{2}) $$
+
+    Then, since it is asking for the distance between points, we can bring in
+    the distance equation as a constraint:
+    $$ D = \sqrt{(x_{2} - x_{1})^{2} + (y_{2} - y_{1})^{2}} $$
+
+    However, this equation has too many variables. However, we can substitute
+    for $y_{1}$ and $y_{2}$ as they are constrained by equations according to
+    the choices of $x_{1}$ and $x_{2}$. The distance equation then becomes:
+    $$ D(x_{1}, x_{2}) = \sqrt{(x_{2} - x_{1})^{2} + \left((x_{2} - 1) -
+    x_{1}^{2}\right)^{2}} $$
+
+    This equation can then be minimized using our conventional methods.
+\end{enumerate}
+
+\subsection{What if there is no minimum?}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{4}
+  \item \begin{enumerate}[a.]
+      \item From Larry's problem, two equations can be extracted:
+        $$ x y z = 12,\ 4 xz + 4 yz + xy = C $$
+
+        Using the first equation, the second equation can be reduced to a
+        function of two variables:
+        $$ C(x, y) = xy + \frac{ 48 }{ xy }(x + y) $$
+
+        Now the partial derivatives can be computed:
+        $$ C_{x}(x, y) = y - \frac{ 48 }{ x^{2} },\ C_{y}(x, y) = x - \frac{ 48
+        }{ y^{2} } $$
+
+        Setting each equation equal to zero and solving for $x$ and $y$ yields:
+        $$ \left(2 \sqrt[3]{6}, 2 \sqrt[3]{6}\right) $$
+
+        Substituting these values into the volume constraint formula:
+        $$ \left(2 \sqrt[3]{6}, 2 \sqrt[3]{6}, \sqrt[3]{\frac{ 3 }{ 4 }}\right) $$
+
+        The cost for these dimensions is \$39.62.
+
+      \item Now, Larry's cost function is a little simpler:
+        $$ C(x, y) = \frac{ 48 }{ xy }(x + y) $$
+
+        Computing the partial derivatives:
+        $$ C_{x}(x, y) = -\frac{ 48 }{ x^{2} },\ C_{x}(x, y) = -\frac{ 48 }{
+        y^{2} } $$
+
+        Setting each equation equal to zero is impossible, therefore, there are
+        no solutions.
+
+    \end{enumerate}
+\end{enumerate}
+
+\section{Level Curves and Partial Derivatives}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{5}
+  \item The first plot has all positive $x$ partial derivatives as level curves
+    are all always increasing from left to right. The second plot has level
+    curves on the left side which are decreasing from left to right. These $x$
+    partial derivatives must be negative.
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.60]{"LevelCurvesWithPositiveXPartial"}
+      \caption{Level Curves with Positive $x$ Partial Derivatives}
+    \end{figure}
+
+  \item The first plot has all $y$ partial derivatives equal to zero as
+    traversing in the $y$ direction never results in crossing a level curve,
+    only traveling along one.
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.60]{"LevelCurvesWithZeroYPartial"}
+      \caption{Level Curves with Zero $y$ Partial Derivatives}
+    \end{figure}
+
+  \item From the function $f(x, y) = x^{2} + 3y^{2}$, the partial derivatives
+    can be calculated:
+    $$ f_{x}(x, y) = 2x,\ f_{y}(x, y) = 6y $$
+
+    Using these partial derivatives and the linear approximation equation, the
+    equation for the tangent plane can be derived:
+    $$ L(x, y) = f(x_{0}, y_{0}) + f_{x}(x_{0}, y_{0})(x - x_{0}) + f_{y}(x_{0},
+    y_{0})(y - y_{0}) $$
+    $$ L(x, y) = 4 + 2(x - 1) + 6(y - 1) $$
+
+\end{enumerate}
+
+\section{Vectors and Dot Products}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{8}
+  \item Two vectors are perpendicular if there dot product is equal to zero.
+    $$ \langle 2, 2, 1 \rangle \cdot \vec{v} = 0 $$
+
+    Writing out the dot product explicitly:
+    $$ 2 v_{1} + 2 v_{2} + v_{3} = 0 $$
+
+    There are infinite solutions to this equation, so $z$ is chosen to be $0$
+    arbitrarily.
+    $$ 2 v_{1} + 2 v_{2} = 0 $$
+
+    Solving this equation for the ratio of $v_{1}$ to $v_{2}$:
+    $$ \frac{ v_{1} }{ v_{2} } = -1 $$
+
+    As a result, a possible solution for a perpendicular vector:
+    $$ \langle -1, 1, 0 \rangle $$
+
+  \item Using the initial vector $\langle 2, 2, 1 \rangle$, compute the length:
+    $$ \sqrt{2^{2} + 2^{2} + 1^{2}} = 3 $$
+
+    Dividing the original vector by its length will convert into a unit vector.
+    $$ \Big \langle \frac{ 2 }{ 3 }, \frac{ 2 }{ 3 }, \frac{ 1 }{ 3 } \Big \rangle $$
+
+  \item The dot product between two vectors computes the angle between through
+    the following formula:
+    $$ \vec{a} \cdot \vec{b} = \vert \vec{a} \vert \vert \vec{b} \vert
+    \cos \theta $$
+
+    Thus, we can define two vectors that originate at (0, 0):
+    $$ \vec{a} = \langle 2, 1 \rangle,\ \vec{b} = \langle 1, 2
+    \rangle $$
+
+    The length of each of these vectors are:
+    $$ \vert \vec{a} \vert = \sqrt{2^{2} + 1^{2}} = \sqrt{5} $$
+    $$ \vert \vec{b} \vert = \sqrt{1^{2} + 2^{2}} = \sqrt{5} $$
+
+    The dot product of these vectors can be computed:
+    $$ 2 \cdot 1 + 1 \cdot 2 = 4 $$
+
+    The equation for the angle between then becomes:
+    $$ \frac{ 4 }{ 5 } = \cos \theta $$
+
+  \item Planes can be described by a normal vector which is calculated using the
+    coefficients. If these normal vectors are parallel, then the planes must be
+    parallel as well. Vectors are parallel when they are multiples of each
+    other.
+
+    \bigbreak
+
+    The normal vectors for the planes are as follows:
+    $$ \langle 1, -1, 2 \rangle,\ \langle 2, -2, 2 \rangle,\ \langle 2, -2, 4
+    \rangle $$
+
+    It is easy to see that the third normal vector is twice the first normal
+    vectors. As a result, the first and third planes are parallel.
+
+  \item The equation for a plane is:
+    $$ A(x - x_{0}) + B(y - y_{0}) + C(z - z_{0}) = 0 $$
+
+    $A$, $B$, and $C$ are the normal vector components and $x_{0}$, $y_{0}$, and
+    $z_{0}$ represent a point on the plane.
+
+    \bigbreak
+
+    Substituting provided values:
+    $$ x + 2y + 3z = 5 $$
+
+  \item First, define a vector that runs parallel to the line $x + 2y = 2$. This
+    line has slope $-0.5$. Therefore, a parallel vector could take the form:
+    $$ \langle -2, 1 \rangle $$
+
+    Next, define a vector that runs from (1, 0) to a point along the line, which
+    will be called $Q$.
+    $$ \langle q_{1} - 1, q_{2} - 0 \rangle $$
+
+    Since $Q$ has to be along the line, $q_{2}$ can be written in terms of
+    $q_{1}$:
+    $$ \Big \langle q_{1} - 1, \frac{ 2 - q_{1} }{ 2 } \Big \rangle $$
+
+    Now we can use the dot product to solve for $q_{1}$:
+    $$ -2 (q_{1} - 1) + \frac{ 2 - q_{1} }{ 2 } = 0$$
+    $$ q_{1} = \frac{ 6 }{ 5 } $$
+
+    Substituting $q_{1}$ into the relation to $q_{2}$ yields $q_{2}$:
+    $$ q_{2} = \frac{ 2 - q_{1} }{ 2 } = \frac{ 2 }{ 5 } $$
+
+    As a result, the point along the line that is closest to the point (1, 0)
+    is:
+    $$ \left( \frac{ 6 }{ 5 }, \frac{ 2 }{ 5 } \right) $$
+
+  \item A plane is simply a set of all vectors that are perpendicular to a
+    single vector. As a result, we know that the dot product of any of these
+    vectors must be zero. Therefore, we can define two vectors, one normal to
+    our plane and one that lies on the plane. This vector can only lie on the
+    plane if it satisfies the dot product equally zero.
+
+  \item
+  \item
+\end{enumerate}
+
+\section{Linear Approximation}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{17}
+  \item \begin{enumerate}[a.]
+      \item
+      \item
+      \item
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
