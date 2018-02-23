@@ -147,7 +147,9 @@
         y^{2} } $$
 
         Setting each equation equal to zero is impossible, therefore, there are
-        no solutions.
+        no critical points. If Larry wants to minimize his cost, his fish tank
+        should have the smallest possible height and the longest possible length
+        and width. This way, his parents would bear the most of the cost.
 
     \end{enumerate}
 \end{enumerate}
@@ -288,8 +290,40 @@
     our plane and one that lies on the plane. This vector can only lie on the
     plane if it satisfies the dot product equally zero.
 
-  \item
-  \item
+  \item To find the amount of water flowing through a plane, the plane must
+    first have a normal vector. To get the normal vector, take the cross product
+    of two vectors along the plane.
+    $$ \langle 20, 0, 0 \rangle \times \langle 0, 0, -10 \rangle = \langle 0,
+    200, 0 \rangle$$
+
+    Now, using the plane's normal vector, take the dot product with the water's
+    flow rate.
+    $$ \langle 0, 200, 0 \rangle \cdot \langle 2, 2, 1 \rangle = 400$$
+
+    Note that the area of the plane is taken into account through the dot
+    product by definition.
+
+  \item We can compute the location of the tip of the finger by adding the two
+    vectors together. The first vector has a length of $2$ and is defined only
+    by $\theta_{1}$. This vector takes the form:
+    $$ \langle 2 \cos \theta_{1}, 2 \sin \theta_{1} \rangle $$
+
+    The second vector has a length of $1$ and is defined by the sum of both
+    $\theta_{1}$ and $\theta_{2}$. This vector take the form:
+    $$ \langle \cos(\theta_{1} + \theta_{2}), \sin(\theta_{1} + \theta_{2})
+    \rangle $$
+
+    This can be simplified to:
+    $$ \langle \cos \theta_{1} \cos \theta_{2} - \sin \theta_{1} \sin
+    \theta_{2}, \cos \theta_{1} \sin \theta_{2} + \sin \theta_{1} \cos
+    \theta_{2} \rangle $$
+
+    Now, summing these two vectors yields:
+    $$ \langle - \sin \theta_{1} \sin \theta_{2} + \cos \theta_{1} \cos \theta_{2} + 2
+    \cos \theta_{1}, \cos \theta_{1} \sin \theta_{2} + \sin \theta_{1} \cos
+    \theta_{2} + 2 \sin \theta_{1} \rangle $$
+
+    This vector defines the tip of the finger's location.
 \end{enumerate}
 
 \section{Linear Approximation}
@@ -297,10 +331,31 @@
 \begin{enumerate}[1.]
   \setcounter{enumi}{17}
   \item \begin{enumerate}[a.]
-      \item
-      \item
-      \item
-    \end{enumerate}
+    \item Starting with function $f(x, y) = \sin (x y) + x$, the partial
+      derivatives can be computed:
+      $$ f_{x}(x, y) = y \cos (x y) + 1,\ f_{y}(x, y) = x \cos (x y) $$
+
+      Using these partial derivatives, the linear approximation equation can be
+      determined:
+      $$ L(x, y) = (\sin (x_{0} y_{0}) + x_{0}) + (y_{0} \cos(x_{0} y_{0}) +
+      1)(x - x_{0}) + (x_{0} \cos(x_{0} y_{0}))(y - y_{0})$$
+
+      Substituting for point $(0, \pi / 2)$:
+      $$ L(x, y) = \frac{ \pi + 2 }{ 2 } x $$
+
+    \item The equation for the line $l$ can be written:
+      $$ 0.039 = x $$
+
+      Since this line is completely vertical, the point closest to $(0, \pi /
+      2)$ will take the $y$ coordinate from the point and the $x$ coordinate
+      from the line $l$:
+      $$ (0.039, 1.571) $$
+
+    \item Using the linear approximation around point (0, 0) instead would
+      provide a worse answer as the approximation of $f$ would be made further
+      away from the point we are looking for.
+
+  \end{enumerate}
 \end{enumerate}
 
 \end{document}
