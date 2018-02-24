@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 6.042 Session 1 }
+\author{ Robert Durfee }
+\date{ February 7, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{ Problem 1 }
+
+\begin{enumerate}[a.]
+  \item Arranging the right triangles into a $c \times c$ square:
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.80]{"CByCSquare"}
+      \caption{$c \times c$ Square}
+    \end{figure}
+
+    The smaller interior square is of dimensions $(b-a) \times (b-a)$.
+
+  \item Rearranging the right triangles to form two triangles of dimensions $a
+    \times a$ and $b \times b$.
+
+    \bigbreak
+
+    This shows that the area formed by the two
+    arrangements are equal. As a result, the following equation always holds.
+    $$ a^{2} + b^{2} = c^{2} $$
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.80]{"BByBAndAByASquare"}
+      \caption{$a \times a$ and $b \times b$ Squares}
+    \end{figure}
+
+  \item This realization holds for all arbitrary lengths of sides because the
+    relations were made using simple properties of triangles.
+
+  \item Some facts used to reach this conclusion include the sum of
+    complementary angles add up to be a right angle. Also, lining up two right
+    angles results in a straight line. Another is that lengths along a line add
+    up.
+
+\end{enumerate}
+
+\section*{Problem 2}
+
+\begin{enumerate}[a.]
+  \item $$ 1 = \sqrt{1} = \sqrt{(-1)(-1)} = \sqrt{-1} \sqrt{-1} = \left(
+    \sqrt{-1} \right)^{2} = -1 $$
+
+    This proof has an error in the third step. The rule that $ \sqrt{rt} =
+    \sqrt{r}\sqrt{t}$ only holds for positive numbers, not negative.
+
+  \item If $1 = -1$, then $2 = 1$ by dividing each side by $2$ and then adding
+    $3/2$ to each side.
+
+  \item
+    $$ \sqrt{r}\sqrt{s} = \sqrt{\left( \sqrt{r} \sqrt{s} \right)^{2}} =
+    \sqrt{\left( \sqrt{r} \right)^{2} \left( \sqrt{s} \right)^{2}} = \sqrt{rs}
+    $$
+
+\end{enumerate}
+
+\section*{Problem 3}
+
+\begin{enumerate}[a.]
+  \item In the following proof, the error occurs in step 2. The logarithm has a
+    negative value. As a result, the inequality sign should flip.
+
+    \begin{align}
+      3 &> 2 \\
+      3 \log_{10} (1/2) &> 2 \log_{10} (1/2) \\
+      \log_{10} (1/2)^{3} &> \log_{10} (1/2)^{2} \\
+      (1/2)^{3} &> (1/2)^{2} \\
+      1/8 &> 1/4
+    \end{align}
+
+  \item In the following proof, the error occurs in step 4. When squaring a
+    value with units, the units must also be squared.
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.60]{"CentsBogusProof"}
+    \end{figure}
+
+  \item In the following proof, the error occurs in step 5. Since $a = b$, the
+    difference between is $0$ and you cannot divide by $0$.
+
+    \begin{align}
+      \setcounter{equation}{0}
+      a &= b \\
+      a^{2} &= ab \\
+      a^{2} - b^{2} &= ab - b^{2} \\
+      (a - b)(a + b) &= (a - b)b \\
+      a + b &= b \\
+      a &= 0
+    \end{align}
+
+\end{enumerate}
+
+\end{document}
+
