@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 6.042 Session 2 }
+\author{ Robert Durfee }
+\date{ February 9, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1 }
+
+\subsection*{Proof}
+
+The proof is by contradiction. Assume that $a, b > \sqrt{n}$. Then, $a =
+\sqrt{n} + p$ and $b = \sqrt{n} + q$ for some $p, q > 0$. As a result,
+$$ ab = n + p \sqrt{n} + q \sqrt{n} + pq $$
+
+Since all the terms are positive, this shows that $ab > n$. This is a
+contradiction. Therefore, either $a$ or $b$ must be $ \leq \sqrt{n}$. \qed
+
+\section*{Problem 2}
+
+\subsection*{Proof}
+
+The proof is by contradiction. Assume that $\sqrt{3}$ is rational. As a result,
+it can be rewritten as a fraction in lowest terms:
+$$ \sqrt{3} = \frac{ n }{ d } $$
+
+By removing the square root:
+$$ 3 = \frac{ n^{2} }{ d^{2} } $$
+
+And multiplying each side by $d^{2}$:
+$$ 2 d^{2} = n^{2} $$
+
+Since $d$ is an integer, $d^{2}$ must also be an integer. Therefore, $n$ can be
+written:
+$$ n = 3k $$
+
+This shows that $n$ is a multiple of 3. Therefore, $d^{2}$ can be written as:
+$$ 3 d^{2} = \left( 3 k \right)^{2} $$
+
+And simplifying this to:
+$$ d^{2} = 3 k^{2} $$
+
+This shows that $d$ must also be divisible by 3. Since both $d$ and $n$ are
+multiples of three, the fraction $n/d$ is not written in lowest terms and
+therefore is a contradiction. As a result, $\sqrt{3}$ must be irrational.
+
+\bigbreak
+
+It is important to note that this holds for all numbers which aren't perfect
+squares which would have integer solutions instead of irrational. \qed
+
+\section*{Problem 3}
+
+\subsection*{Proof}
+
+The proof is by cases. In the following equation, there are three cases $r > s$,
+$r < s$, and $r = s$.
+$$ \max(r, s) + \min(r, s) = r + s $$
+
+\subsubsection*{Case 1: $r > s$}
+
+If $r > s$, then $\max(r, s) = r$ and $\min(r, s) = s$. Then the right side
+simplifies to $r + s$ which is equivalent to the left side.
+
+\subsubsection*{Case 2: $r < s$}
+
+If $r < s$, then $\max(r, s) = s$ and $\min(r, s) = r$. Then the right side
+simplifies to $s + r$ which, by commutativity, is equivalent to the left side.
+
+\subsubsection*{Case 3: $r = s$}
+
+If $r = s$, then the minimum and maximum functions will each return either $r$
+or $s$. The sum of any combination of $r$ and $s$ will be the same as $r = s$.
+
+\bigbreak
+
+All cases show that the left side of the equation simplifies to $r + s$. Since
+these are all the cases, the equation must be true. \qed
+
+\section*{Problem 4}
+
+\subsection*{Proof}
+
+The proof is by cases. There are two cases to consider: $\sqrt{2}^{\sqrt{2}}$ is
+rational or irrational.
+
+\subsubsection*{Case 1: $\sqrt{2}^{\sqrt{2}}$ is Irrational}
+
+If $\sqrt{2}^{\sqrt{2}}$ is irrational, then it can be raised to $\sqrt{2}$:
+$$ \left( \sqrt{2}^{\sqrt{2}} \right)^{\sqrt{2}} = \sqrt{2}^{\sqrt{2} \cdot
+\sqrt{2}} = \sqrt{2}^{(\sqrt{2})^{2}} =
+\sqrt{2}^{2} = 2 $$
+
+As a result, an irrational number raised to an irrational power could be
+rational since we know that $\sqrt{2}$ is irrational.
+
+\subsubsection*{Case 2: $\sqrt{2}^{\sqrt{2}}$ is Rational }
+
+If $\sqrt{2}^{\sqrt{2}}$ is rational, then we can already see that an irrational
+number raised to an irrational power is rational since we know $\sqrt{2}$ is
+irrational.
+
+\bigbreak
+
+Since both cases result in an irrational number raised to an irrational power
+resulting in a rational output, and the cases are exhaustive, it must be
+possible for an irrational number raised to an irrational power to be rational.
+\qed
+
+\end{document}
+
