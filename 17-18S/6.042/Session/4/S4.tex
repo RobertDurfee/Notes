@@ -1,0 +1,85 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 6.042 Session 4 }
+\author{ Robert Durfee }
+\date{ February 14, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+The full disjunctive normal form for the formula:
+\begin{align*}
+  (A \land B \land C \land D) &\lor
+  (A \land B \land \overline{C} \land D)\ \lor \\
+  (A \land \overline{B} \land C \land D) &\lor
+  (A \land \overline{B} \land C \land \overline{D})\ \lor \\
+  (A \land \overline{B} \land \overline{C} \land D) &\lor
+  (A \land \overline{B} \land \overline{C} \land \overline{D})\ \lor \\
+  (\overline{A} \land B \land C \land D) &\lor
+  (\overline{A} \land B \land \overline{C} \land D)\ \lor \\
+  (\overline{A} \land \overline{B} \land \overline{C} \land D) &\lor
+  (\overline{A} \land \overline{B} \land \overline{C} \land \overline{D})
+\end{align*}
+
+The full conjunctive normal form for the formula:
+\begin{align*}
+  (\overline{A} \lor \overline{B} \lor \overline{C} \lor D) &\land
+  (\overline{A} \lor \overline{B} \lor C \lor D)\ \land \\
+  (A \lor \overline{B} \lor \overline{C} \lor D) &\land
+  (A \lor \overline{B} \lor C \lor D)\ \land \\
+  (A \lor B \lor \overline{C} \lor \overline{D}) &\land
+  (A \lor B \lor \overline{C} \lor D)
+\end{align*}
+
+\section*{Problem 2}
+
+$$ A \oplus B \oplus C $$
+$$ (A \oplus B) \oplus C $$
+$$ ((A \land \overline{B}) \lor (\overline{A} \land B)) \oplus C $$
+$$ (((A \land \overline{B}) \lor (\overline{A} \land B)) \land \overline{C})
+\lor \overline{(((A \land \overline{B}) \lor (\overline{A} \land B))} \land C) $$
+$$ (((A \land \overline{B}) \lor (\overline{A} \land B)) \land \overline{C})
+\lor ((\overline{(A \land \overline{B})} \land \overline{(\overline{A} \land B)}) \land C)  $$
+$$ (((A \land \overline{B}) \lor (\overline{A} \land B)) \land \overline{C})
+\lor (((\overline{A} \lor B) \land (A \lor \overline{B})) \land C) $$
+$$ (A \land \overline{B} \land \overline{C}) \lor (\overline{A} \land B \land
+\overline{C}) \lor (((\overline{A} \lor B) \land (A \lor \overline{B})) \land C) $$
+$$ (A \land \overline{B} \land \overline{C}) \lor (\overline{A} \land B \land
+\overline{C}) \lor (((\overline{A} \land A) \lor (\overline{A} \land
+\overline{B}) \lor (B \land A) \lor (B \land \overline{B})) \land C) $$
+$$ (A \land \overline{B} \land \overline{C}) \lor (\overline{A} \land B \land
+\overline{C}) \lor ((F \lor (\overline{A} \land \overline{B}) \lor (B \land A)
+\lor F) \land C)$$
+$$ (A \land \overline{B} \land \overline{C}) \lor (\overline{A} \land B \land
+\overline{C}) \lor (((\overline{A} \land \overline{B}) \lor (B \land A)) \land C) $$
+$$ (A \land \overline{B} \land \overline{C}) \lor (\overline{A} \land B \land
+\overline{C}) \lor (\overline{A} \land \overline{B} \land C) \lor (A \land B
+\land C) $$
+
+\section*{Problem 3}
+
+\begin{enumerate}[a.]
+  \item In order for the statement to be satisfiable, the individual components
+    must be satisfiable. Therefore, a logical and of all the parts and the whole
+    statement will be satisfiable if and only if the whole is satisfiable.
+\end{enumerate}
+
+\end{document}
+
