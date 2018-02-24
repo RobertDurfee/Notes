@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 6.042 Session 5 }
+\author{ Robert Durfee }
+\date{ February 16, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1 }
+
+\begin{center}
+  \begin{tabular}{ c c c c c c }
+    Predicate & $\mathbb{N}$ & $\mathbb{Z}$ & $\mathbb{Q}$ & $\mathbb{R}$ & $\mathbb{C}$ \\
+    $\exists x . x^{2} = 2 $ & $x = \sqrt{2}$ & $x = \sqrt{2}$ & $x = \sqrt{2}$ & T & T \\
+    $\forall x . \exists y . x^{2} = y$ & T & T & T & T & T \\
+    $\forall y . \exists x . x^{2} = y$ & $y = 2$ & $y = 2$ & $y = 2$ & $y = -2$ & T \\
+    $\forall x \neq 0 . \exists y . xy = 1$ & $x = 2$ & $x = 2$ & T & T & T \\
+    $\exists x . \exists y . x + 2y = 2 \land 2x + 4y = 5$ & F & F & F & F & F
+  \end{tabular}
+\end{center}
+
+\section*{Problem 2}
+
+\begin{enumerate}[a.]
+  \item $\exists y . (x = yyy)$
+  \item $\exists y . (x = yy) \land (\mathrm{NoOnes}(x))$
+  \item $\mathrm{NoOnes}(x) \lor \overline{\mathrm{Substring}(0, x)}$
+  \item $(\exists y . ((x = 1y1) \land \mathrm{NoOnes}(y))) \lor (x = 10)$
+  \item If $x$ begins with $1$, prefix will fail because $0x$ doesn't begin with
+    $1$. If $x$ is $\lambda$, prefix will be true because nothing always comes
+    before a binary string. If $x$ begins with $0$, prefix will be true as long
+    as a zero follows which will continue recursively terminating only when $x$
+    is a string of $0$, evaluating true, or a $1$ is encountered, evaluating to
+    false.
+\end{enumerate}
+
+\section*{Problem 3}
+
+\begin{enumerate}[1.]
+  \item Not a counter model. All rationals have inverses except zero. However,
+    since the hypothesis is false, the implies is always true.
+  \item This is not a number smaller than every number in the set of reals. As a
+    result, this is a counter model.
+  \item This is not a number that, when multiplied to every number, makes it 2.
+    As a result, this is a counter model.
+  \item Both cases, if $y = \lambda$ will be true. As a result, this is not a
+    counter model.
+\end{enumerate}
+
+\section*{Problem 4}
+
+$$ \exists x . \exists y . \exists z . \forall s . (E(x, s) \implies (s = x \lor
+s = y \lor s = z)) $$
+
+\end{document}
+
