@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 6.042 Session 6 }
+\author{ Robert Durfee }
+\date{ February 20, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1 }
+
+\begin{enumerate}[a.]
+  \item $ \mathrm{Equal}(m, n) ::= \exists k . \mathrm{Zero}(k) \land
+    \mathrm{A}(m, n, k) $
+  \item $ \mathrm{One}(n) ::= \forall k . \mathrm{M}(k, k, n) $
+  \item $ \exists a , b , c . \mathrm{M}(a, m, j) \land
+    \mathrm{M}(b, k, k) \land \mathrm{A}(c, a, b) \land \mathrm{M}(n, i, c) $
+  \item $ \mathrm{Prime}(p) ::= \forall m , n . \mathrm{M}(p, m, n)
+    \implies (\mathrm{One}(m) \oplus \mathrm{One}(n)) $
+  \item $ \mathrm{Two}(n) ::= \exists m . \mathrm{A}(n, m, m) \land
+    \mathrm{One}(m) $
+  \item $ \mathrm{Even}(n) ::= \exists k, m . \mathrm{M}(n, k, m) \land
+    \mathrm{Two}(k) $
+  \item $ \forall n . \exists a (\mathrm{Even}(n) \land \mathrm{Greater}(n, a)
+    \land \mathrm{Three}(a)) \implies \exists p, q . \mathrm{Prime}(p) \land
+    \mathrm{Prime}(q) \land \mathrm{A}(n, p, q) $
+  \item $ \forall n . \exists p, q . \mathrm{Prime}(p) \land \mathrm{Prime}(q)
+    \land \mathrm{Greater}(p, n) \land \exists t . (\mathrm{Two}(t) \land
+    \mathrm{A}(q, p, t)) $
+\end{enumerate}
+
+\end{document}
+
