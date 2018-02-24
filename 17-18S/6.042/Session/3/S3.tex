@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 6.042 Session 3 }
+\author{ Robert Durfee }
+\date{ February 12, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{Proof}
+
+\begin{center}
+  \begin{tabular}{ c c c c c c }
+    $P$ & $Q$ & $R$ & $P$ & $\lor$ & $(Q\ \land\ R)$ \\
+    T & T & T & & T & T \\
+    T & T & F & & T & F \\
+    T & F & T & & T & F \\
+    T & F & F & & T & F \\
+    F & T & T & & T & T \\
+    F & T & F & & F & F \\
+    F & F & T & & F & F \\
+    F & F & F & & F & F \\
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{ c c c c c c }
+    $P$ & $Q$ & $R$ & $(P\ \lor\ Q)$ & $\land$ & $(P\ \lor\ R)$ \\
+    T & T & T & T & T & T\\
+    T & T & F & T & T & T\\
+    T & F & T & T & T & T\\
+    T & F & F & T & T & T\\
+    F & T & T & T & T & T\\
+    F & T & F & T & F & F\\
+    F & F & T & F & F & T\\
+    F & F & F & F & F & F\\
+  \end{tabular}
+\end{center}
+
+Since second to last column in each table (the final output) are equal for all
+truth values, the formulas are equivalent.\qed
+
+\section*{Problem 2}
+
+\begin{enumerate}[a.]
+  \item \begin{enumerate}[1.]
+      \item \begin{enumerate}[a.]
+        \item $\overline{L} \implies Q$
+        \item $\overline{L} \implies B$
+        \item $\overline{L} \iff N$
+        \end{enumerate}
+      \item $\overline{Q} \implies B$
+      \item $\overline{B}$
+    \end{enumerate}
+  \item The following formula is satisfiable.
+    $$ (\overline{L} \implies Q) \land (\overline{L} \implies B) \land
+    (\overline{L} \iff N) \land (\overline{Q} \implies B) \land \overline{B}$$
+
+    An environment that makes this satisfiable is $\langle L, Q, B, N \rangle =
+    \langle T, T, F, F \rangle$.
+
+  \item In order for the previous formula to be true, $B$ must be false. Working
+    backward from $B$, $Q$ and $L$ have to be true. Given that $L$ is true, $N$
+    has to be false.
+
+\end{enumerate}
+
+\section*{Problem 3}
+
+Proposition one and two are equivalent to formula one because a differentiable
+function must be continuous, but a continuous function does not need to be
+differentiable. For example, the function may have a corner.
+
+Propositions three and four are not reasonably converted to formula two because
+although watching TV implies homework is done, not watching TV doesn't imply
+that homework is not done. For example, there could be more chores to be done.
+
+\section*{Problem 4}
+
+\begin{enumerate}[a.]
+  \item Since the second to last column (final output) of the following truth
+    table is always true, the formula is valid.
+
+    \begin{center}
+      \begin{tabular}{ c c c c c }
+        $P$ & $Q$ & $(P \implies Q)$ & $\lor$ & $(Q \implies P)$ \\
+        T & T & T & T & T \\
+        T & F & F & T & T \\
+        F & T & T & T & F \\
+        F & F & T & T & T
+      \end{tabular}
+    \end{center}
+
+  \item $$ R ::= ((P \land Q) \lor (\overline{P} \land \overline{Q})) $$
+
+  \item If $P$ is always true (valid), then $\overline{P}$ is always false (not
+    satisfiable).
+
+    If $\overline{P}$ is always false (not satisfiable), then $P$ is always true
+    (valid).
+
+    \bigbreak
+
+    Since both implications are true, the iff must be true.  \qed
+
+  \item $$ S ::= \overline{P_{1} \land P_{2} \land \dots \land P_{k}} $$
+
+\end{enumerate}
+
+\end{document}
+
