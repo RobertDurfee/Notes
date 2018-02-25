@@ -3,6 +3,7 @@
 \usepackage{float}
 \usepackage{enumerate}
 \usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{bm}
 \usepackage{indentfirst}
 \usepackage{siunitx}
@@ -24,16 +25,46 @@
 
 \section*{Problem 1}
 
-$S$ is a set of non-makeable cents greater than or equal to 12 and multiples of
+Let $S$ be a set of non-makeable cents greater than or equal to 12 and multiples of
 3. Assume that the set is non empty. Let the smallest element in this set be
 $m$. We know that 12 and 15 are makeable ($6 + 6 = 12$ and $15 = 15$). As a
 result, $m$ must be greater than or equal to 18. Since $m$ is the smallest
 element in set $S$, $m - 6$ must be makeable. Adding $6$ keeps $m$ makeable so
 it can't be in the set. This is a contradiction, therefore the set is empty.
+\qed
 
 \section*{Problem 2}
 
+Let $S$ be a set of nonnegative integers such that the following equation
+doesn't hold:
+$$ \sum\limits_{k=1}^{n} k^{2} = \frac{ n (n + 1) (2n + 1) }{ 6 } $$
 
+Let the smallest integer in $S$ be $m$. Since $1^{2} = 1$, $m$ must be greater
+than 1. Since $m$ is the smallest, $m - 1$ must solve the above equation. This
+can be written:
+$$ 1^{2} + 2^{2} + \ldots + (m - 1)^{2} = \frac{ m (m - 1) (2m - 1) }{ 6 } $$
+
+If we add $m^{2}$ to both sides of the equation, it becomes:
+$$ 1^{2} + 2^{2} + \ldots + (m - 1)^{2} + m^{2} = \frac{ m (m + 1) (2m + 1) }{ 6 } $$
+
+This is equivalent to the first equation. As a result, this is a contradiction
+and $m$ is not in $S$ so $S$ must be empty. \qed
+
+\section*{Problem 3}
+
+I didn't write out the proof for this problem because it is quite long. However,
+the principle behind the proof is in the coefficients. Since $d$ is even, it can
+be written as $2 d'^{2}$. This, in turn, proves $c$ is even and so forth. As a
+result, a $2$ can be factored out infinitely. As a result, there can be no
+solution. \qed
+
+\section*{Problem 4}
+
+\begin{enumerate}[a.]
+  \item $n - 1$
+  \item For the serial AND circuit, the longest path has $n - 1$ gates. The
+    branched circuit only has a longest path of $\log_{2}(n)$ gates.
+\end{enumerate}
 
 \end{document}
 
