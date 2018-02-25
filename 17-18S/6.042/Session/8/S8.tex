@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 6.042 Session 8 }
+\author{ Robert Durfee }
+\date{ February 23, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{ Problem 1 }
+
+\begin{enumerate}[a.]
+
+  \item Proving through a series of if and only if statements:
+    $$ (P \land \overline{Q}) \lor (P \land Q) \iff P \land (\overline{Q}
+    \lor Q) \iff P \land T \iff P $$ \qed
+
+  \item Note that this problem is identical to problem 1.
+    \begin{align*}
+      &x \in (A - B) \cup (A \cap B) \\
+      &\iff (x \in A \land x \notin B) \lor (A \cap B) \\
+      &\iff (x \in A \land x \notin B) \lor (x \in A \land x \in B) \\
+      &\iff x \in A \land (x \notin B \lor x \in B) \\
+      &\iff x \in A \land T \\
+      &\iff x \in A
+    \end{align*} \qed
+
+\end{enumerate}
+
+\section*{Problem 2}
+
+The proof is by cases. Let $S$ be a four element set $\{a, b, c, d\}$. There are
+three cases in this game:
+
+\begin{enumerate}
+  \item P1 picks a one element subset.
+  \item P1 picks a two element subset.
+  \item P1 picks a three element subset.
+\end{enumerate}
+
+\subsection*{Case 1: P1 Picks a One Element Subset}
+
+If P1 picks one of the four elements, WLOG $\{a\}$, P2 picks $\{b, c, d\}$. The
+game then becomes a three element game of $\{b, c, d\}$ and P2 wins.
+
+\subsection*{Case 2: P1 Picks a Two Element Subset}
+
+If P1 picks a two element subset, WLOG $\{a, b\}$, P2 picks the complement
+subset, $\{c, d\}$. P2 continues in this way if P1 continues to pick two element
+subsets. Now, P1 must pick a one element subset, WLOG $\{a\}$. Then P2 picks
+$\{b\}$. Now the game is reduced to a two element game of $\{c, d\}$ and P2
+wins.
+
+\subsection*{Case 3: P1 Picks a Three Element Subset}
+
+If P1 picks a three element subset, WLOG $\{a, b, c\}$, P2 picks $\{d\}$. The
+game becomes a three element game of $\{a, b, c\}$ and P2 wins.
+
+\bigbreak
+
+This exhausts all cases and P2 wins in all cases. \qed
+
+\section*{Problem 3}
+
+\begin{enumerate}[a.]
+  \item $(a, b)$ has and order while $\{a, b\}$ does not.
+  \item If $a = \{1\}$ and $b = 2$, then $(a, b) = (\{1\}, 2)$, but
+    $\{a,{b}\} = \{\{a\},\{b\}\}$. This is ambiguous.
+  \item A solution to this problem would be $\{a,\{a, b\}\}$. This can be
+    extended to three dimensions, $\{a,\{a,b\},\{\{a,b\},c\}\}$.
+\end{enumerate}
+
+\end{document}
+
