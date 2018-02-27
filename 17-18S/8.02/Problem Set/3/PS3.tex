@@ -1,0 +1,248 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 8.02 Problem Set 3 }
+\author{ Robert Durfee - Lecture 7 - Table 8 }
+\date{ February 27, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{ Problem 1 }
+
+There are two regions to worry about: within the slab and outside the slab.
+
+\bigbreak
+
+First, define a Gaussian cylinder of radius $a$ and length $2x$ where $x < d$.
+This will determine the electric field within the slab.
+
+\bigbreak
+
+Calculating charge enclosed for region one:
+$$ Q_{enc,1} = 2 \rho \pi a^{2} x $$
+
+Define Gauss's law for region one:
+$$ \iint \vec{E}_{1} \cdot d\vec{A} = \frac{ 2 \rho \pi a^{2} x }{ \epsilon_{0} } $$
+
+Substituting for the surface area of the ends of the Gaussian cylinder:
+$$ 2 \pi a^{2} E_{1} = \frac{ 2 \rho \pi a^{2} x }{ \epsilon_{0} } $$
+
+Solving for $E_{1}$:
+$$ E_{1} = \frac{ \rho x }{ \epsilon_{0} }$$
+
+Second, define a Gaussian cylinder of radius $a$ and length $L$ where $L > 2d$.
+This will determine the electric field outside the slab.
+
+\bigbreak
+
+Calculating charge enclosed for region two:
+$$ Q_{enc,2} = 2 \rho \pi a^{2} d$$
+
+Define Gauss's Law for region two:
+$$ \iint \vec{E}_{2} \cdot d\vec{A} = \frac{ 2 \rho \pi a^{2} d }{ \epsilon_{0} } $$
+
+Substituting for the surface area of the ends of the Gaussian cylinder:
+$$ 2 \pi a^{2} E_{2} = \frac{ 2 \rho \pi a^{2} d }{ \epsilon_{0} } $$
+
+Solving for $E_{2}$:
+$$ E_{2} = \frac{ \rho d }{ \epsilon_{0} } $$
+
+For region one, calculate potential:
+$$ \Delta V_{1} = V(d) - V(0) = - \int\limits_{0}^{d} \frac{ \rho x }{
+\epsilon_{0} } dx = -\frac{ \rho d^{2} }{ 2 \epsilon_{0} } $$
+
+For region two, calculate potential:
+$$ \Delta V_{2} = V(x_{B}) - V(d) = - \int\limits_{d}^{x_{B}} \frac{ \rho d }{
+\epsilon_{0} } dx = -\frac{ \rho d }{ 2 \epsilon_{0} }\left( x_{B} - d \right)$$
+
+Summing these two electric potentials together:
+$$ V(x_{B}) - V(0) = -\frac{\rho d}{ \epsilon_{0} }\left( x_{B} - \frac{ d }{ 2 } \right) $$
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+Define a Gaussian cylinder of radius $r$, where $r > R$, and length $L$.
+
+\bigbreak
+
+Calculating charge enclosed in the cylinder:
+$$ Q_{enc} = L \lambda $$
+
+Define Gauss's Law for the cylinder:
+$$ \iint \vec{E} \cdot d\vec{A} = \frac{ L \lambda }{ \epsilon_{0} } $$
+
+Substituting for the surface area of the curved surface of the Gaussian
+cylinder:
+$$ 2 \pi L r E = \frac{ L \lambda }{ \epsilon_0 } $$
+
+Solving for $\vec{E}$:
+$$ \vec{E}(r) = \frac{ \lambda }{ 2 \pi \epsilon_{0} r } \hat{r} $$
+
+\subsection*{Part B}
+
+Calculating potential from electric field:
+$$ \Delta V = - \int\limits_{R_{0}}^{r} \frac{ \lambda }{ 2 \pi \epsilon_{0} r }
+dr = -\frac{ \lambda }{ 2 \pi \epsilon_{0} } \ln\left( \frac{ r }{ R_{0} } \right)$$
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+$$ V(x, y, z) = \frac{ kq }{ \sqrt{x^{2} + y^{2} + z^{2}} } $$
+
+\subsection*{Part B}
+
+$$ \left\langle \frac{ \partial V }{ \partial x }, \frac{ \partial V }{ \partial
+y}, \frac{ \partial V }{ \partial z } \right\rangle = \left\langle -\frac{ kqx
+}{ r^{3} }, -\frac{ kqy }{ r^{3} }, -\frac{ kqz }{ r^{3} } \right\rangle$$
+
+\subsection*{Part C}
+
+$$ \vec{\nabla} V = -\frac{ kq\vec{r} }{ r^{3} }$$
+
+\subsection*{Part D}
+
+The $\vec{\nabla} V$ points parallel to the electric field lines, but in the
+opposing direction. $\vec{E} = -\vec{\nabla} V$.
+
+\subsection*{Part E}
+
+\begin{enumerate}[i.]
+  \item The gradient operator points in the steepest ascent uphill. Therefore,
+    $\vec{\nabla} V$ points in the direction of greatest increase of $V$.
+
+  \item The sign of the charge will not impact this conclusion as positive
+    charges have positive values for $V$ and negative charges have negative
+    values for $V$. Although $\vec{\nabla}$ will point toward and negative
+    charge and away from a positive charge, since a positive charge has higher
+    $V$ and a negative charge has a lower $V$, then $\vec{\nabla} V$ is still
+    pointing in the greatest increasing direction, uphill.
+
+\end{enumerate}
+
+\subsection*{Part F}
+
+No, the choice of zero point for electric potential does not matter in the end
+because potential only has meaning based on the difference between points. This
+is the same for potential energy.
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+Region 1:
+$$ \vec{E} = 0 $$
+
+Region 2:
+$$ \vec{E} = \frac{ 2 V_{0} (d + x) }{ d^{2} } \hat{i} $$
+
+Region 3:
+$$ \vec{E} = \frac{ 2 V_{0} }{ d } \hat{i} $$
+
+Region 4:
+$$ \vec{E} = 0 $$
+
+\subsection*{Part B}
+
+The electric field function is plotted below, with $d = 2$ cm and $V_{0} = 2$ V,
+the $x$-axis in units of centimeters, and the $y$-axis in units of Volts per
+meter.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.40]{"EFieldPlot"}
+  \caption{Electric Field Plot}
+\end{figure}
+
+\section*{Problem 5}
+
+\subsection*{Part A}
+
+Once again there are two regions two worry about: within the sphere and outside
+the sphere.
+
+\bigbreak
+
+First, define a Gaussian sphere with radius $r$ where $r \leq R$. This will
+determine the electric field within the sphere.
+
+\bigbreak
+
+Calculating the charge enclosed by this sphere:
+$$ Q_{enc,1} = \frac{ 3 Q }{ 4 \pi R^{3} } \left( \frac{ 4 \pi r^{3} }{ 3 }
+\right) = \frac{ Q r^{3} }{ R^{3} } $$
+
+Defining Gauss's Law for the first region:
+$$ \iint \vec{E}_{1} \cdot d\vec{A} = \frac{ Q r^{3} }{ \epsilon_{0} R^{3} } $$
+
+Substituting the surface area of the Gaussian sphere:
+$$ 4 \pi r^{2} E_{1} = \frac{ Q r^{3} }{ \epsilon_{0} R^{3} } $$
+
+Solving for $E_{1}$:
+$$ E_{1} = \frac{ Q r }{ 4 \pi \epsilon_{0} R^{3} } $$
+
+Using this electric field to determine the electric potential within region one:
+$$ \Delta V = V_{1}(r) - V(0) = - \int\limits_{0}^{r} \frac{ Q r }{ 4 \pi \epsilon_0
+R^{3}} dr $$
+$$V_{1}(r) = -\frac{ Q r^{2} }{ 8 \pi \epsilon_{0} R^{3} } $$
+
+\bigbreak
+
+Second, define a Gaussian sphere with radius $r$ where $r > R$. This will
+determine the electric field outside the sphere.
+
+\bigbreak
+
+Charge is completely enclosed within this sphere:
+$$ Q_{enc,2} = Q $$
+
+Defining Gauss's Law for the second region:
+$$ \iint \vec{E}_{2} \cdot d\vec{A} = \frac{ Q }{ \epsilon_{0} } $$
+
+Substituting for the surface area of the Gaussian sphere:
+$$ 4 \pi r^{2} E_{2} = \frac{ Q }{ \epsilon_{0} } $$
+
+Solving for $E_{2}$:
+$$ E_{2} = \frac{ Q }{ 4 \pi \epsilon_{0} r^{2} } $$
+
+Using this electric field to determine the electric potential within region two:
+$$ \Delta V = V_{2}(r) - V(R) = - \int\limits_{R}^{r} \frac{ Q }{ 4 \pi
+\epsilon_{0} } dr$$
+$$ V_{2}(r) = \frac{ Q }{ 4 \pi \epsilon_0 } \left( \frac{ 1 }{ r } - \frac{ 1
+}{ R } \right) + V(R) $$
+
+Now, using the equation for region one to solve for $V(R)$
+$$ V(R) = -\frac{ Q }{ 8 \pi \epsilon_0 R } $$
+
+Substituting this value into the equation for potential in region two:
+$$ V_{2}(r) = \frac{ Q }{ 4 \pi \epsilon_0 } \left( \frac{ 1 }{ r } - \frac{ 1
+}{ R } \right) -\frac{ Q }{ 8 \pi \epsilon_0 R } $$
+
+\subsection*{Part B}
+
+Below is a plot of $V(r)$ vs $r$ where $Q$ was taken to be positive:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.40]{"ElectricPotentialPlot"}
+  \caption{Electric Potential Plot}
+\end{figure}
+
+\end{document}
+
