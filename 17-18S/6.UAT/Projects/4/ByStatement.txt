@@ -1,0 +1,11 @@
+Suppose we have a collection of objects with different characteristics (e.g.
+multicolored shapes). We can keep a list of the characteristics of all the
+objects in our collection. To know if a new object is not in our collection,
+there will be a characteristic of the new object not on our list. Then the new
+object must not be in our collection.
+
+We can determine if a new object is not in a collection of other objects by
+creating a list of all the characteristics of the collection, then comparing
+the characteristics of the new object with the list. If the new object has a
+characteristic not mentioned on our list, the object cannot be in the
+collection.
