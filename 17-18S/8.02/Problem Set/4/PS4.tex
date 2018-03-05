@@ -1,0 +1,237 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 8.02 Problem Set 4 }
+\author{ Robert Durfee }
+\date{ March 6, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Problem 1 }
+
+\subsection*{Part A}
+
+Using $r$ and $\theta$ to calculate $r_{-}$ and $r_{+}$:
+$$ r_{+} = \sqrt{(r \cos \theta - a)^{2} + (r \sin \theta)^{2}} $$
+$$ r_{-} = \sqrt{(r \cos \theta + a)^{2} + (r \sin \theta)^{2}} $$
+
+Using the radii to calculate potential from each charge:
+$$ V_{+} = \frac{ k Q }{ \sqrt{(r \cos \theta - a)^{2} + (r \sin \theta)^{2}} } $$
+$$ V_{-} = \frac{ -k Q }{ \sqrt{(r \cos \theta + a)^{2} + (r \sin \theta)^{2}} } $$
+
+Superposition principle can be used to find total potential:
+$$ V_{P} = \frac{ k Q }{ \sqrt{(r \cos \theta - a)^{2} + (r \sin \theta)^{2}} }
+- \frac{ k Q }{ \sqrt{(r \cos \theta + a)^{2} + (r \sin \theta)^{2}} }$$
+
+\subsection*{Part B}
+
+Incomplete.
+
+\subsection*{Part C}
+
+The supplied equation for electric potential:
+$$ V(r, \theta) = \frac{ k \vec{p} \cdot \vec{r} }{ r^{3} } $$
+
+And the supplied equation for electric field from electric potential:
+$$ E_{\theta}(r, \theta) = -\frac{ 1 }{ r } \frac{ \partial}{ \partial \theta }
+V(r, \theta) $$
+$$ E_{r}(r, \theta) = -\frac{ \partial }{ \partial r } V(r, \theta) $$
+
+Substituting values for $\vec{p}$ and $\vec{r}$:
+$$ E_{\theta}(r, \theta) = -\frac{ 1 }{ r } \frac{ \partial }{ \partial \theta }
+\left( \frac{ k \langle p, 0 \rangle \cdot \langle r \cos \theta, r \sin \theta
+\rangle }{ r^{3} } \right) = \frac{ kp \sin \theta }{ r^{3} }$$
+$$ E_{r}(r, \theta) = -\frac{ \partial }{ \partial r } \left( \frac{ k \langle p, 0
+\rangle \cdot \langle r \cos \theta, r \sin \theta \rangle}{ r^{3} } \right) =
+\frac{ 2 p k \cos \theta }{ r^{3} }$$
+
+\subsection*{Part D}
+
+Calculating initial electric potential:
+$$ V_{i} = kq \left( \frac{ 1 }{ d - a } - \frac{ 1 }{ d + a } \right) $$
+
+And final electric potential:
+$$ V_{f} = kq \left( \frac{ 1 }{ d + s - a } - \frac{ 1 }{ d + s + a } \right) $$
+
+Converting change to electric potential energy:
+$$ \Delta U = q \Delta V = k q^{2} \left( \left( \frac{ 1 }{ d + s - a } -
+\frac{ 1 }{ d + s + a } \right) - \left( \frac{ 1 }{ d - a } - \frac{ 1 }{ d + a
+} \right)\right) $$
+
+Given that only conservative forces are involved:
+$$ -\Delta U = \Delta KE $$
+
+Setting final kinetic energy equal to negative change in potential energy, given
+that the partial started from rest:
+$$ \frac{ 1 }{ 2 } m v^{2} = -k q^{2} \left( \left( \frac{ 1 }{ d + s - a } -
+\frac{ 1 }{ d + s + a } \right) - \left( \frac{ 1 }{ d - a } - \frac{ 1 }{ d + a
+} \right)\right) $$
+$$ v = \sqrt{\frac{ -2 k q^{2}}{m} \left( \frac{ 1 }{ d + s - a } -
+\frac{ 1 }{ d + s + a } - \frac{ 1 }{ d - a } + \frac{ 1 }{ d + a
+} \right)} $$
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+The $y$ components of the individual dipole moments will cancel due to symmetry.
+Since the dipole moments are the same in the $x$ direction, the formula can be
+simplified to:
+$$ 2 q d \cos \theta = p $$
+
+Solving for $q$:
+$$ q = \frac{ p }{ 2 d \cos \theta } $$
+
+Substituting values:
+$$ q = 5.16 \cdot 10^{-20}\ \si{C} $$
+
+\subsection*{Part B}
+
+Using the equation from problem 1:
+$$ V = \frac{ k \vec{p} \cdot \vec{r} }{ r^{3} } $$
+
+Substituting values:
+$$ V = \frac{ k \langle p, 0 \rangle \cdot \langle r \cos \theta, r \sin \theta
+\rangle }{ r^{3} } = \frac{ k p \cos \theta }{ r^{2} }$$
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+The positive charge on the insulator will attract the movable electrons within
+the conductor. As a result, the electrons from the left conductor will travel
+across the wire and to the insulator core of the right conductor.
+
+\subsection*{Part B}
+
+Since there is no electric field within a conductor in static equilibrium, the
+inside shell of the right conductor will have $-Q$ charge.
+
+\bigbreak
+
+The outside of each conductor must also have the same electric potential:
+$$ V = \frac{ k Q_{L} }{ 2a } = \frac{ k Q_{R} }{ 3a } $$
+$$ \frac{ Q_{L} }{ 2 } = \frac{ Q_{R} }{ 3 } $$
+
+\bigbreak
+
+Since the conductor was originally neutral, due to conservation of charge, the
+charge on the outside of the left conductor and the outside of the right
+conductor will sum to $Q$.
+$$ Q = Q_{L} + Q_{R} $$
+
+Solving for $Q_{L}$ and $Q_{R}$:
+$$ Q_{L} = \frac{ 2 Q }{ 5 },\ Q_{R} = \frac{ 3 Q }{ 5 } $$
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+$$ dU = \frac{ k q dq }{ R } $$
+
+\subsection*{Part B}
+
+Integrating over all $Q$:
+$$ U = \int\limits_{0}^{Q} \frac{ k q dq }{ R } = \frac{ k Q^{2} }{ 2R }$$
+
+\subsection*{Part C}
+
+\begin{enumerate}[i.]
+  \item Assuming a point charge:
+    $$ V = \frac{ k Q }{ R } $$
+
+    Solving for $Q$:
+    $$ Q = \frac{ V R }{ k } $$
+
+    Substituting values:
+    $$ Q = -5 \cdot 10^{-18}\ \si{C} $$
+
+    Dividing by the elementary charge:
+    $$ n_{e} = \frac{ Q }{ 1.602 \cdot 10^{-19} }\approx 31 $$
+  \item Once again, assuming point charge:
+    $$ E = \frac{ k Q }{ R^{2} } $$
+
+    Substituting values:
+    $$ E = 5 \cdot 10^{5}\ \si{N\ C^{-1}} $$
+\end{enumerate}
+
+\section*{Problem 5}
+
+\subsection*{Part A}
+
+Calculating the magnitude of a small area of charge:
+$$ dq = \sigma r dr d\theta $$
+
+Integrating the electric potential from this small unit of charge:
+$$ V = \int\limits_{0}^{2 \pi}\int\limits_{R_{1}}^{R_{2}} k \sigma dr
+d\theta = 2 \pi k \sigma (R_{2} - R_{1})$$
+
+Substituting values:
+$$ V = -113\ \si{V} $$
+
+\subsection*{Part B}
+
+Converting electric potential to potential energy:
+$$ \Delta U = q\Delta V  $$
+
+Since forces are conservative:
+$$ -\Delta U = \Delta KE $$
+
+Since the particle starts from rest, change in kinetic is just final:
+$$ \frac{ 1 }{ 2 } m v^{2} = -q \Delta V $$
+
+Solving for $v$:
+$$ v = \sqrt{\frac{ 2 q \Delta V }{ m }} $$
+
+Substituting values:
+$$ v = 6,306,860 \ \si{m\ s^{-1}} $$
+
+\subsection*{Part C}
+
+Using the same small area of charge:
+$$ dq = \sigma(r) r dr d\theta $$
+
+Integrating the electric potential from this small unit of charge:
+$$ V = \int\limits_{0}^{2 \pi}\int\limits_{0}^{R_{2}} \frac{ k \sigma_{0} R dr
+  d\theta}{\sqrt{r^{2} + z^{2}}} = 2 \pi k \sigma_{0} R \left(\ln(R + \sqrt{R^{2} +
+z^{2}}) - \ln(z)\right)$$
+
+\section*{Problem 6}
+
+\subsection*{Part A}
+
+The equation for capacitance between two parallel plates:
+$$ C = \frac{ \epsilon_{0} A }{ d } $$
+
+Substituting for distances:
+$$ C_{1} = \frac{ \epsilon_{0} A }{ z },\ C_{2} = \frac{ \epsilon_{0} A }{ d - z } $$
+
+The total capacitance is superposed:
+$$ C =  \frac{ \epsilon_{0} A }{ z } + \frac{ \epsilon_{0} A }{ d - z }$$
+
+\subsection*{Part B}
+
+Equation for stored energy in a capacitor:
+$$ E = \frac{ 1 }{ 2 } C \Delta V^{2} $$
+
+Substituting values:
+$$ E = \frac{ \epsilon_{0} A }{ 2 } \left( \frac{ 1 }{ z } + \frac{ 1 }{ d - z }
+\right) \Delta V^{2} $$
+
+\end{document}
+
