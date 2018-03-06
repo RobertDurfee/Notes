@@ -15,7 +15,7 @@
 \allowdisplaybreaks
 
 \title{ 8.02 Problem Set 4 }
-\author{ Robert Durfee }
+\author{ Robert Durfee - Lecture 7 - Table 8 }
 \date{ March 6, 2018 }
 
 \begin{document}
@@ -35,12 +35,37 @@ $$ V_{+} = \frac{ k Q }{ \sqrt{(r \cos \theta - a)^{2} + (r \sin \theta)^{2}} } 
 $$ V_{-} = \frac{ -k Q }{ \sqrt{(r \cos \theta + a)^{2} + (r \sin \theta)^{2}} } $$
 
 Superposition principle can be used to find total potential:
-$$ V_{P} = \frac{ k Q }{ \sqrt{(r \cos \theta - a)^{2} + (r \sin \theta)^{2}} }
-- \frac{ k Q }{ \sqrt{(r \cos \theta + a)^{2} + (r \sin \theta)^{2}} }$$
+$$ V_{P} = \frac{ k Q }{ \sqrt{r^{2} + a^{2} - 2ar\cos\theta} }
+- \frac{ k Q }{ \sqrt{r^{2} + a^{2} + 2ar\cos\theta} }$$
 
 \subsection*{Part B}
 
-Incomplete.
+The answer from part A can be written to make the Taylor expansion choice more
+obvious:
+$$ V = \frac{ kQ }{ r } \left( \left( 1 + \left( \frac{ a }{ r }
+\right)^{2} - 2 \left( \frac{ a }{ r } \right) \cos \theta \right)^{-1/2}
+- \left( 1 + \left( \frac{ a }{ r } \right)^{2} + 2 \left( \frac{ a }{ r
+} \right) \cos \theta  \right)^{-1/2}\right) $$
+
+In the above equation, the following Taylor expansion can be applied twice:
+$$ (1 + x)^{m} \approx 1 + mx + \ldots $$
+
+Substituting this into the previous equation (ellipsis omitted for simplicity):
+$$ V = \frac{ kQ }{ r } \left( \left( 1 - \frac{ 1 }{ 2 } \left( \left(
+\frac{ a }{ r } \right)^{2} - 2 \left( \frac{ a }{ r } \right) \cos \theta
+\right) \right) - \left( 1 - \frac{ 1 }{ 2 } \left( \left( \frac{ a }{ r}
+\right)^{2} + 2 \left( \frac{ a }{ r } \right) \cos \theta \right) \right)
+\right) $$
+
+Simplifying this equation:
+$$ V = \frac{ 2kQa \cos \theta }{ r^{2} } $$
+
+We also know the values for the following vectors:
+$$ \vec{p} = \langle 0, 2aQ \rangle,\ \hat{r} = \langle \sin \theta, \cos \theta
+\rangle $$
+
+Using a dot product, this equation can be simplified further:
+$$ V = \frac{ k \vec{p} \cdot \hat{r} }{ r^{2} } $$
 
 \subsection*{Part C}
 
