@@ -1,0 +1,277 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 18.02 Problem Set 3 }
+\author{ Robert Durfee }
+\date{ March 9, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Vectors }
+
+\begin{enumerate}[1.]
+  \item Equation for counterclockwise rotation:
+    $$ \vec{v}' = \langle v_{1} \cdot \cos \theta - v_{2} \cdot \sin \theta,
+    v_{1} \cdot \sin \theta + v_{2} \cdot \cos \theta \rangle $$
+    \begin{enumerate}[a.]
+      \item Substituting the value of $\vec{v} = \langle 2, 0 \rangle $ into the
+        above equation:
+        $$ \langle 2 \cdot \cos \theta, 2 \cdot \sin \theta \rangle = \langle
+        \sqrt{3}, 1 \rangle$$
+      \item Substituting the value of $\vec{v} = \langle 0, 1 \rangle $ into the
+        above equation:
+        $$ \langle -1 \cdot \sin \theta, 1 \cdot \cos \theta \rangle =
+        \left\langle -\frac{ 1 }{ 2 }, \frac{ \sqrt{3} }{ 2 } \right\rangle $$
+      \item Summing the two translated vectors together:
+        $$\langle \sqrt{3}, 1 \rangle + \left\langle -\frac{ 1 }{ 2 }, \frac{
+          \sqrt{3} }{ 2 } \right\rangle = \left\langle \sqrt{3} - \frac{ 1 }{ 2
+        }, 1 + \frac{ \sqrt{3} }{ 2 } \right\rangle $$
+    \end{enumerate}
+  \item The equations $2x + 3y = 2$ and $2x + 3y = 4$ can be rewritten as:
+    $$ \langle 2, 3 \rangle \cdot \langle x, y \rangle = 2 $$
+    $$ \langle 2, 3 \rangle \cdot \langle x, y \rangle = 4 $$
+
+    The vector $\langle 2, 3 \rangle$ represents a vector perpendicular to the
+    line. Let this vector be called $\vec{v}$. Let the perpendicular line
+    segment connecting the two lines be $d$.  This line segment is parallel to
+    $\vec{v}$ We also know that the two lines are vertically separated by a
+    distance of 2/3.  Let the vertical vector of length 2/3 connecting the two
+    lines be $\vec{w}$.
+
+    \bigbreak
+
+    From the dot product:
+    $$ \vec{v} \cdot \vec{w} = \vert \vec{v} \vert \vert \vec{w} \vert \cos
+    \theta $$
+
+    We want the length of the perpendicular line segment, $d$. From right
+    triangle trigonometry,
+    $$ d = \vert \vec{w} \vert \cos \theta $$
+
+    Solving the dot product for this quantity:
+    $$ \frac{ \vec{v} \cdot \vec{w} }{ \vert \vec{v} \vert } = \vert \vec{w}
+    \vert \cos \theta$$
+
+    Substituting provided values:
+    $$ \frac{ \langle 2, 3 \rangle \cdot \langle 0, 2/3 \rangle }{ \sqrt{2^{2} +
+    3^{2}} } = d = 0.5547$$
+
+  \item The normal vector for the plane $x + 2y + 3z = 5$ is $\langle 1, 2, 3
+    \rangle$. Let this be $\vec{n}$. We can project the vector for the point (1,
+    1, 0), let this vector be $\vec{u}$, onto the normal vector of the plane:
+    $$ \frac{ \vec{u} \cdot \vec{n} }{ \vert \vec{n} \vert^{2} }\vec{n} $$
+
+    Now we have one leg and the hypotenuse of the triangle, subtracting the
+    vector perpendicular to the plane from the vector $\vec{u}$ will give the
+    vector on the plane that represents the point closest to the point, $P$:
+    $$ \vec{u} - \frac{ \vec{u} \cdot \vec{n} }{ \vert \vec{n} \vert^{2} }\vec{n} $$
+
+    Substituting values:
+    $$ \langle 1, 1, 0 \rangle - \frac{ \langle 1, 1, 0 \rangle \cdot \langle 1,
+    2, 3 \rangle }{ \vert \langle 1, 2, 3 \rangle \vert^{2} } \langle 1, 2, 3
+    \rangle = \left\langle \frac{ 11 }{ 14 }, \frac{ 4 }{ 7 }, -\frac{ 9 }{ 14 }
+      \right\rangle $$
+\end{enumerate}
+
+\section{Linear Approximation}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{3}
+  \item For the $x$ component of the robot's finger:
+    $$ f(\theta_{1}, \theta_{2}) = 2 \cos \theta_{1} + \cos (\theta_{1} +
+    \theta_{2}) $$
+
+    Creating a linear approximation around the point $(\pi / 6, \pi / 3)$:
+    $$ L_{f}(\theta_{1}, \theta_{2}) = f(\theta_{1,0}, \theta_{2,0}) +
+    f_{\theta_{1}}(\theta_{1,0}, \theta_{2,0})(\theta_{1} - \theta_{1,0}) +
+    f_{\theta_{2}}(\theta_{1,0}, \theta_{2,0})(\theta_{2} - \theta_{2,0}) $$
+
+    Partial derivatives:
+    $$ f_{\theta_{1}}(\theta_{1}, \theta_{2}) = -2 \sin \theta_{1} - \sin
+    (\theta_{1} + \theta_{2}) $$
+    $$ f_{\theta_{2}}(\theta_{1}, \theta_{2}) = -\sin (\theta_{1} + \theta_{2}) $$
+
+    Substituting values:
+    $$ L_{f}(\theta_{1}, \theta_{2}) = \sqrt{3} - 2(\theta_{1} - \pi / 6) -
+    (\theta_{2} - \pi / 3) $$
+
+    For the $y$ component of the robot's finger:
+    $$ g(\theta_{1}, \theta_{2}) = 2 \sin \theta_{1} + \sin (\theta_{1} +
+    \theta_{2}) $$
+
+    Creating a linear approximation around the point $\left( \pi / 6, \pi / 3
+    \right)$:
+    $$ L_{g}(\theta_{1}, \theta_{2}) = g(\theta_{1,0}, \theta_{2,0}) +
+    g_{\theta_{1}}(\theta_{1,0}, \theta_{2,0})(\theta_{1} - \theta_{1,0}) +
+    g_{\theta_{2}}(\theta_{1,0}, \theta_{2,0})(\theta_{2} - \theta_{2,0}) $$
+
+    Partial derivatives:
+    $$ g_{\theta_{1}}(\theta_{1}, \theta_{2}) = 2 \cos \theta_{1} + \cos
+    (\theta_{1} + \theta_{2}) $$
+    $$ g_{\theta_{2}}(\theta_{1}, \theta_{2}) = \cos (\theta_{1} + \theta_{2}) $$
+
+    Substituting values:
+    $$ L_{g}(\theta_{1}, \theta_{2}) = 2 + \sqrt{3} (\theta_{1} - \pi / 6)$$
+
+    Solving this system of equations where $L_{f} = \sqrt{3}$ and $L_{f} = 2.01$:
+    $$ \theta_{1} = 0.529,\ \theta_{2} = 1.036 $$
+\end{enumerate}
+
+\section{Unbounded Minimization}
+\begin{enumerate}[1.]
+  \setcounter{enumi}{4}
+\item Starting with $f(x, y) = x + y + 1/xy$ and finding partial derivatives:
+  $$ f_{x}(x, y) = 1 - \frac{ 1 }{ x^{2} y },\ f_{y}(x, y) = 1 - \frac{ 1 }{ x
+  y^{2} } $$
+
+  Setting these equal to zero and solving for $x$ and $y$:
+  $$ x = 1,\ y = 1 $$
+
+  This is a minimum in the first quadrant as setting $x \geq 10$ will make
+  $f(x, y) \geq 10$. Setting $y \geq 10$ with make $f(x, y) \geq 10$. Lastly,
+  setting $1/xy \geq 10$ will result in $f(x,y) \geq 10$. These boundaries are
+  shown in the figure below. The point (1, 1) is contained within the boundary
+  and is less than 10 ($3 < 10$) so it must be a minimum.
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.70]{"Boundary"}
+    \caption{Boundary}
+  \end{figure}
+\end{enumerate}
+
+\section{Gradients, Directional Derivatives, Lagrange}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{5}
+  \item \begin{enumerate}[a.]
+      \item From the function $f(x, y) = xy$, the gradient is:
+        $$ \nabla f(x, y) = \langle y, x \rangle $$
+      \item Level curves are shown in \textit{Figure 2}.
+      \item Computed gradients:
+        $$ \nabla f(0,2) = \langle 2, 0 \rangle $$
+        $$ \nabla f(1/2, 2) = \langle 2, 1/2 \rangle $$
+        $$ \nabla f(1, 2) = \langle 2, 1 \rangle$$
+
+        All vectors are also shown in \textit{Figure 2}.
+      \item The vector perpendicular at this point was already computed:
+        $$ \nabla f(1, 2) = \langle 2, 1 \rangle $$
+
+        Using a dot product, the tangent vector can be computed:
+        $$ \langle 2, 1 \rangle \cdot \vec{v} = 0 $$
+        $$ \vec{v} = \langle -1, 2 \rangle $$
+      \item The normal vector at this point was already computed:
+        $$ \nabla f(1, 2) = \langle 2, 1 \rangle $$
+
+        Dividing by the length will result in the unit vector:
+        $$ \hat{v} = \left\langle \frac{ 2 }{ \sqrt{5} }, \frac{ 1 }{ \sqrt{5} }
+        \right\rangle $$
+    \end{enumerate}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.70]{"Gradient"}
+      \caption{Gradients}
+    \end{figure}
+  \item The gradient of $f(x,y) = x^{2} - y^{2}$ can be computed:
+    $$ \nabla f(x,y) = \langle 2x, -2y \rangle $$
+
+    To compute the first directional derivative, dot the gradient with $\vec{u}
+    = \langle 1/2, \sqrt{3}/2 \rangle$ at the point (2,3):
+    $$ D_{\vec{u}}(2,3) = \langle 2 \cdot 2, -2 \cdot 3 \rangle \cdot \langle
+    1/2, \sqrt{3}/2 \rangle = 2 - 3 \sqrt{3} $$
+
+    And for the second directional derivative, dot the gradient with $\vec{v} =
+    \langle -1/\sqrt{2}, 1/\sqrt{2} \rangle$ at the point (1,1):
+    $$ D_{\vec{v}}(1,1) = \langle 2 \cdot 1, -2 \cdot 1 \rangle \cdot \langle
+    -1/\sqrt{2}, 1/\sqrt{2} \rangle = -\frac{ 4 }{ \sqrt{2} }$$
+  \item The gradient of $h(x, y) = xy$ can be computed:
+    $$ \nabla h(x, y) = \langle y, x \rangle $$
+
+    Since Larry starts at (2, 1) and ends at (0, 3), his vector of travel can be
+    computed:
+    $$ \vec{v} = \langle 0 - 2, 3 - 1 \rangle = \langle -2, 2 \rangle $$
+
+    We can then take the directional derivative of $h(x, y)$ with respect to
+    $\vec{v}$:
+    $$ D_{\vec{v}}(2, 1) = \langle 1, 2 \rangle \cdot \langle -2, 2 \rangle = 2
+    $$
+
+    This is a positive value, therefore Larry must be going uphill.
+  \item \begin{enumerate}[a.]
+      \item Graph of $C$:
+
+        \begin{figure}[H]
+          \centering
+          \includegraphics[scale=0.70]{"Hyperbola"}
+          \caption{Hyperbola}
+        \end{figure}
+
+      \item The point where the normal direction where the gradient is parallel.
+        The gradient of $h(x,y) = y^{2} - x^{2}$ is:
+        $$ \nabla h(x, y) = \langle -2x, 2y \rangle $$
+
+        Setting the gradient equal to a multiple of the vector $\langle 1, 2 \rangle$:
+        $$ \langle 1, 2 \rangle = \lambda \langle -2x, 2y \rangle $$
+
+        Adding additional constraint that the point must be on the level curve
+        1:
+        $$ y^{2} - x^{2} = 1 $$
+
+        Solving this system of equations for $x$ and $y$:
+        $$ x = -\frac{ 1 }{ \sqrt{3} },\ y = \frac{ 2 }{ \sqrt{3} } $$
+
+        The other solution is eliminated because the solution must be within the
+        first or second quadrants.
+    \end{enumerate}
+  \item
+  \item
+  \item \begin{enumerate}[a.]
+      \item
+      \item
+    \end{enumerate}
+  \item
+\end{enumerate}
+
+\section{Integral Intuition}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{13}
+  \item \begin{enumerate}[a.]
+      \item
+      \item
+    \end{enumerate}
+  \item \begin{enumerate}[a.]
+      \item
+      \item
+      \item
+      \item
+    \end{enumerate}
+\end{enumerate}
+
+\section{Calculating Integrals}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{15}
+  \item
+  \item
+  \item
+\end{enumerate}
+
+\end{document}
+
