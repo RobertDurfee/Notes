@@ -1,0 +1,426 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 6.042 Problem Set 3 }
+\author{ Robert Durfee }
+\date{ March 9, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1 }
+
+I spent approximately 1 hour working on this problem in collaboration with
+Daniella Guillen and James Quigley.
+
+\subsection*{Part A}
+
+The state machine for the situation described is the following:
+\begin{equation*}
+  \begin{split}
+    \textrm{states} &::= \{ (c, h, t) \mid c, h, t \in \mathbb{N} \textrm{ and }
+    c = h + t \} \\
+    \textrm{start} &::= (102, 98, 4) \\
+    \textrm{transitions} &::= (c, h, t) \longrightarrow
+      \begin{cases}
+        \{ (c, 10 + h - 2a, -10 + t + 2a) \mid a \in \mathbb{N} \textrm{ and } a \leq 10\}& \\
+        (c + h + 1, h, t + h + 1)&
+      \end{cases}
+  \end{split}
+\end{equation*}
+
+Where $a$ represents the number of heads flipped to tails.
+
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+
+\subsection*{Part B}
+
+First, apply the second transition three times:
+\begin{equation*}
+  \begin{split}
+    (102, 98, 4) &\longrightarrow (201, 98, 103) \\
+                 &\longrightarrow (300, 98, 202) \\
+                 &\longrightarrow (399, 98, 301)
+  \end{split}
+\end{equation*}
+
+Then, apply the first transition 30 times, flipping tails only:
+\begin{equation*}
+  \begin{split}
+    (399, 98, 301) &\longrightarrow (399, 108, 291) \\
+                   &\longrightarrow (399, 118, 281) \\
+                   &\longrightarrow \ldots \\
+                   &\longrightarrow (399, 398, 1)
+  \end{split}
+\end{equation*}
+
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+
+\subsection*{Part C}
+
+The following are derived variables:
+
+\begin{center}
+  \begin{tabular}{ c c c }
+    $C ::= c$ & $H ::= h$ & $T ::= t$
+  \end{tabular}
+\end{center}
+\begin{center}
+  \begin{tabular}{ c c c }
+    $C_{2} ::= \begin{cases} 0 & c \textrm{ is even.} \\ 1 & c \textrm{ is odd.}
+      \end{cases}$ & $H_{2} ::= \begin{cases} 0 & h \textrm{ is even.} \\ 1 & h
+      \textrm{ is odd.} \end{cases}$ $T_{2} ::= \begin{cases} 0 & t \textrm{ is
+      even.} \\ 1 & t \textrm{ is odd.} \end{cases}$
+  \end{tabular}
+\end{center}
+
+Of these derived variables, $C$ is weakly increasing and $H_{2}$ is constant.
+
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+
+\subsection*{Part D}
+
+\begin{proof}
+  The proof is by induction on the number of transitions. The induction
+  hypothesis is
+  $$ P(n) ::= \textrm{if } (c, h, t) \textrm{ is a state reachable in } n
+  \textrm{ transitions, then } H_{2} = 0. $$
+
+  \noindent
+  \textbf{Base case}: P(0) is true since the only state reachable in 0
+  transitions is the start state (102, 98, 4) and 98 is even. Therefore, $H_{2}
+  = 0$.
+
+  \bigbreak
+
+  \noindent
+  \textbf{Inductive step}: Assume that P(n) is true, and let $(c',h',t')$ be any
+  state reachable in $n + 1$ transitions. There are two possible transitions to
+  worry about.
+
+  \bigbreak
+
+  \textbf{Transition 1}: For the first transition, as defined above, $h' = 10 +
+  h - 2a$. We assumed that $H_{2} = 0$ for the previous state, therefore $h$ is
+  even. For any value of $a$, $2a$ will be even. Therefore, the sum and
+  difference of all even integers will always be even, thus $h'$ is even and
+  $H_{2} = 0$. The induction hypothesis holds for transition 1.
+
+  \bigbreak
+
+  \textbf{Transition 2}: For the second transition, as defined above, $h' = h$.
+  We assumed that $H_{2} = 0$ for the previous state, therefore $h$ is even.
+  Since this is a simple equality statement, $h'$ must also be even, thus $H_{2}
+  = 0$, The induction hypothesis holds for transition 2.
+
+  \bigbreak
+
+  Since the induction hypothesis holds for the base case and the inductive step
+  for all transitions defined above, by induction, $P(n)$ holds for all states
+  and $H_{2} = 0$ is a preserved invariant.
+\end{proof}
+
+Since $H_{2} = 0$ is a preserved invariant for the state machine, and when one
+head is showing $H_{2} = 1$, it is impossible for one head to be showing as this
+contradicts the preserved invariant.
+
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+
+\section*{Problem 2}
+
+I spent approximately 20 minutes working on this problem in collaboration with
+Daniella Guillen and James Quigley.
+
+\bigbreak
+
+Let there be three boys--Alex, James, and Emile--and three girls--Sara, Hannah,
+and Betty.
+
+\bigbreak
+
+Let the boys' rankings of the girls be as follows:
+\begin{center}
+  \begin{tabular}{ c | c c c }
+    & \textbf{First} & \textbf{Second} & \textbf{Third} \\
+    Alex & Betty & Sara & Hannah \\
+    James & Sara & Hannah & Betty \\
+    Emile & Hannah & Betty & Sara
+  \end{tabular}
+\end{center}
+
+Let the girls' ranking of the boys be as follows:
+\begin{center}
+  \begin{tabular}{ c | c c c }
+    & \textbf{First} & \textbf{Second} & \textbf{Third} \\
+    Sara & Emile & Alex & James \\
+    Hannah & Alex & James & Emile \\
+    Betty & James & Emile & Alex
+  \end{tabular}
+\end{center}
+
+A matching of the boys and girls are as follows:
+\begin{center}
+  (Alex, Sara), (James, Hannah), (Emile, Betty)
+\end{center}
+
+Since everyone is paired with their second choice and everyone's first choice
+has them as their last choice, there cannot be any rogue couples. Therefore,
+these matchings are stable.
+
+\bigbreak
+
+These results are impossible to be met with by the Mating Ritual. For the mating
+ritual favoring the girls' choices, the outcome will be:
+\begin{center}
+  (Emile, Sara), (Alex, Hannah), (James, Betty)
+\end{center}
+
+For the mating ritual favoring the boys' choices, the outcome will be:
+\begin{center}
+  (Alex, Betty), (James, Sara), (Emile, Hannah)
+\end{center}
+
+Each ritual will end on the first day as either the girls will all get their
+first choices (and the boys their last) or the boys will all get their first
+choices (and the girls their last). Since no one gets their second choice, this
+matching in unattainable.
+
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+
+\section*{Problem 3}
+
+I spent approximately 1 hour working on this problem in collaboration with
+Daniella Guillen and James Quigley.
+
+\subsection*{Part A}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.70]{"KochSnowflake"}
+  \caption{Koch Snowflake}
+\end{figure}
+
+This Koch snowflake has 9 edges with three different edge lengths.
+
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+
+
+\subsection*{Part B}
+
+\begin{proof}
+  The proof is by structural induction on the edge lengths of a Koch snowflake.
+  The induction hypothesis will be
+  $$ P(n) ::= \textrm{the lengths of the edges of a Koch snowflake, } n
+  \textrm{, are rational.} $$
+
+  \noindent
+  \textbf{Base case}: The base case Koch snowflake is an equilateral triangle
+  with side length $l \in \mathbb{N}$. Since $\mathbb{N} \subseteq \mathbb{Q}$,
+  then $l \in \mathbb{Q}$. Thus the induction hypothesis holds for the base
+  case.
+
+  \bigbreak
+
+  \noindent
+  \textbf{Constructor case}: Let $n'$ be a Koch snowflake constructed from a
+  previous Koch snowflake $n$. Assume that the edge lengths of the Koch
+  snowflake $n$ are rational. WLOG, choose an edge, $m$, of Koch snowflake $n$
+  of length $l$. Then $l \in \mathbb{Q}$. To construct a new Koch snowflake,
+  remove the inner third of $m$ and replace it with two edges of length $l/3$.
+  By doing this action, an edge of length $l$ is removed from the Koch snowflake
+  $n$ and replaced with four edges of length $l/3$ to create $n'$.
+
+  Since $l \in \mathbb{Q}$ and $\mathbb{Q}$ is closed under division, $l/3 \in
+  \mathbb{Q}$. Since all the edges of $n$ are rational and $l/3$, the new edge,
+  is rational and no edges of other lengths are created through this action, the
+  edges of $n'$ must all be rational. Thus the induction hypothesis holds for
+  the constructor case.
+
+  \bigbreak
+
+  Since the induction hypothesis hold for the base case and the constructor
+  case, by structural induction, $P(n)$ hold for all $n$.
+\end{proof}
+
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+
+\begin{proof}
+  The proof is by structural induction on the area of a Koch snowflake. The
+  induction hypothesis will be
+  $$ P(n) ::= \textrm{the area of a Koch snowflake, } n \textrm{, is of the form
+  } q \sqrt{3} \textrm{ where } q \in \mathbb{Q}. $$
+
+  \noindent
+  \textbf{Base case}: The base case Koch snowflake is an equilateral triangle
+  with side length $l \in N$. The area of an equilateral triangle is given by
+  $$ \frac{ \sqrt{3} }{ 4 }l^{2} $$
+
+  Since the nonnegative integers are close under multiplication, $l^{2} \in
+  \mathbb{N}$. Since $\mathbb{N} \subseteq \mathbb{Q}$ and $\mathbb{Q}$ is
+  closed under division, $l^{2}/4 \in \mathbb{Q}$. Therefore, $l^{2}/4$ can be
+  written as $q$ where $q \in \mathbb{Q}$. And the total area would then be
+  $q\sqrt{3}$. Thus the inductive hypothesis is true for the base case.
+
+  \bigbreak
+
+  \noindent
+  \textbf{Constructor case}: Let $n'$ be a Koch snowflake constructed from a
+  previous Koch snowflake $n$. Assume that the area of the Koch snowflake $n$
+  can be written in the form $q\sqrt{3}$.
+
+  To construct $n'$, take an edge, $m$, of Koch snowflake $n$. Let the length of
+  this edge be $l$. Remove the inner third of $m$ and replace it with two edges
+  of length $l/3$. This adds an area of one equilateral triangle of side length
+  $l/3$ to the Koch snowflake $n$.
+
+  The area of $n'$ can then be expressed as
+  $$ q\sqrt{3} + \frac{ \sqrt{3} }{ 4 } \left(\frac{ l }{ 3 }\right)^{2} =
+  \sqrt{3} \left( q + \frac{ l^{2} }{ 36 } \right) $$
+
+  Since the edges of a Koch snowflake must be rational, as proved above, $l \in
+  \mathbb{Q}$. Since $\mathbb{Q}$ is closed under multiplication and division,
+  $l^{2}/36 \in \mathbb{Q}$. Therefore, $l^{2}/36$ can be written as $p \in
+  \mathbb{Q}$. The area of $n'$ is then expressed as:
+  $$ \sqrt{3} \left( q + p \right) $$
+
+  Since both $p,q \in \mathbb{Q}$, and $\mathbb{Q}$ is closed under addition,
+  their sum can be written as $q'$ where $q' \in \mathbb{Q}$. Therefore, the
+  area of $n'$ can be expressed in the form $q'\sqrt{3}$. Thus the inductive
+  hypothesis is true for the constructor case.
+
+  \bigbreak
+
+  Since the induction hypothesis holds for the base case and the constructor
+  case, by structural induction, $P(n)$ holds for all $n$.
+\end{proof}
+
+\end{document}
+
