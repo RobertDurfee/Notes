@@ -239,13 +239,72 @@
         The other solution is eliminated because the solution must be within the
         first or second quadrants.
     \end{enumerate}
-  \item
-  \item
+  \item Let $f(x, y) = x + 2y$, the function to minimize on the boundary where
+    $g(x, y) = y^{2} - x^{2}$ is equal to 1. Finding the gradients of $f(x,y)$
+    and $g(x, y)$:
+    $$ \nabla f(x, y) = \langle 1, 2 \rangle,\ \nabla g(x, y) = \langle -2x, 2y
+    \rangle $$
+
+    Setting these equal to each by a factor of $\lambda$:
+    $$ \langle 1, 2 \rangle = \lambda \langle -2x, 2y \rangle $$
+
+    And also applying the constraint condition:
+    $$ y^{2} - x^{2} = 1 $$
+
+    Solving this system of equations yields:
+    $$ x = -\frac{ 1 }{ \sqrt{3} },\ y = \frac{ 2 }{ \sqrt{3} } $$
+
+    The other solution was discard as it was not within quadrants one or two.
+  \item The extrema points occur on a boundary where the level curves of the
+    function are parallel to the boundary. This happens when the gradient
+    vectors are parallel (or they are multiples of each other).
   \item \begin{enumerate}[a.]
-      \item
-      \item
+      \item Let $P(W, M) = WM$ be the number of widgets produced per month and
+        $C(W, M) = 3W + 2M$ be the cost of running the factory each month.
+        Calculating the gradients for each function:
+        $$ \nabla P(W, M) = \langle M, W \rangle,\ \nabla C(W, M) = \langle 3, 2
+        \rangle $$
+
+        Setting these equal to each other by a factor of $\lambda$:
+        $$ \langle 3, 2 \rangle = \lambda \langle M, W \rangle $$
+
+        And applying the constraint function:
+        $$ 1000 = W M $$
+
+        Solving this system of equations yields:
+        $$ W = 25.82,\ M = 38.73 $$
+      \item Using the same gradients as before, but using a new constraint
+        function:
+        $$ 200 = 3W + 2M $$
+
+        Solving this new system of equations yields:
+        $$ W = 33.33,\ M = 50 $$
     \end{enumerate}
-  \item
+  \item There are two functions we wish to take the directional derivative of:
+    the $x$ and $y$ components of the robot's finger's position. Since
+    $\theta_{1}$ and $\theta_2$ will be increasing at the same time with the
+    same magnitude, we will take the directional derivative with respect to the
+    following unit vector:
+    $$ \hat{u} = \langle 1/\sqrt{2}, 1/\sqrt{2} \rangle $$
+
+    For the $x$ component:
+    $$ D_{\hat{u}}(2 \cos \theta_{1} + \cos (\theta_{1}+\theta_{2})) = \langle
+    -2 \sin \theta_1 - \sin (\theta_1 + \theta_2), -\sin (\theta_1 + \theta_2)
+    \rangle \cdot \langle 1/\sqrt{2}, 1/\sqrt{2} \rangle $$
+    $$ D_{\hat{u}}f(\theta_1, \theta_{2}) = -\sqrt{2} \left( \sin \theta_1 +
+    \sin (\theta_1 + \theta_{2}) \right) $$
+
+    For the $y$ component:
+    $$ D_{\hat{u}}(2 \sin \theta_{1} + \sin (\theta_1 + \theta_{2})) = \langle 2
+    \cos \theta_1 + \cos (\theta_1 + \theta_{2}), \cos (\theta_1 + \theta_2)
+    \rangle \cdot \langle 1/\sqrt{2}, 1/\sqrt{2} \rangle $$
+    $$ D_{\hat{u}}g(\theta_1, \theta_{2}) = \sqrt{2} ( \cos \theta_1 + \cos
+    (\theta_1 + \theta_{2}) ) $$
+
+    Substituting $\theta_1 = \pi/6$ and $\theta_2 = \pi/3$:
+    $$ \left\langle -\frac{ 3 }{ \sqrt{2} }, \sqrt{\frac{ 3 }{ 2 }}
+      \right\rangle $$
+
 \end{enumerate}
 
 \section{Integral Intuition}
@@ -253,22 +312,23 @@
 \begin{enumerate}[1.]
   \setcounter{enumi}{13}
   \item \begin{enumerate}[a.]
-      \item
-      \item
+      \item The best approximation would be 4. The function takes a value of 200
+        where $x = 10$ and $y = 10$ and the double integral calculates volume so
+        the dimensions are 200 by 0.1 by 0.2. Multiplying these together results
+        in 4.
+      \item The function integrating over increases as $x$ and $y$ increase so
+        the volume would be slightly larger as our approximation is based on the
+        value of the function in the lowest corner of the region.
     \end{enumerate}
-  \item \begin{enumerate}[a.]
-      \item
-      \item
-      \item
-      \item
-    \end{enumerate}
+  \item The closest approximation is C.
 \end{enumerate}
 
 \section{Calculating Integrals}
 
 \begin{enumerate}[1.]
   \setcounter{enumi}{15}
-  \item
+  \item Converting the integral to the following iterated integral:
+    $$ \int\limits_{0}^{\pi/2}\int\limits_{1}^{3} y \cos x dy dx = 6.282 $$
   \item
   \item
 \end{enumerate}
