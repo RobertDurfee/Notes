@@ -66,8 +66,64 @@
         $$ (-1, -1) \textrm{ and } (1, 1) $$
     \end{enumerate}
   \item \begin{enumerate}[a.]
-      \item
+      \item At the point where $y$ is as large and small as possible, the
+        gradient vector will be parallel to $\langle 0, 1 \rangle$.
+        $$ \langle 2x + y, 2y + x \rangle = \lambda \langle 0, 1 \rangle $$
+
+        Applying the constraint:
+        $$ x^{2} + xy + y^{2} = 3 $$
+
+        Solving this system of three equations yields:
+        $$ (-1, 2) \textrm{ and } (1, -2) $$
+
+        Therefore, $y$ is largest at $(-1, 2)$ and smallest at $(1, -2)$.
+
+      \item At the point where $C$ is closest to the origin, the gradient of a
+        circle centered at the origin will be parallel to the gradient of $f(x,
+        y)$ at that point.
+        $$ \langle 2x + y, 2y + x \rangle = \lambda \langle 2x, 2y \rangle$$
+
+        Applying the constraint:
+        $$ x^{2} + xy + y^{2} = 3 $$
+
+        Solving this system of three equations yields:
+        $$ (-1, -1), (1, 1), (-\sqrt{3}, \sqrt{3}), \textrm{ and } (\sqrt{3},
+        -\sqrt{3}) $$
+
+        Of these solutions, $(-1, -1)$ and $(1, 1)$ are closest to the origin and
+        $(-\sqrt{3}, \sqrt{3})$ and $(\sqrt{3},-\sqrt{3})$ are farthest from the
+        origin.
     \end{enumerate}
+  \item $A$ are the vectors from Problem 1. $B$ are the points from Problem 2.
+    $C_{1}$ are the points farthest from the origin from Problem 3 and $C_{2}$
+    are the points closest to the origin from Problem 3.
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.50]{"CurveC"}
+      \caption{Curve C}
+    \end{figure}
+
+  \item \begin{enumerate}[a.]
+      \item Using the gradient from previous problem. Dotting this gradient with
+        the vector in the derivative:
+        $$ \langle 2x + y, 2y + x \rangle \cdot \langle -3/5, 4/5 \rangle =
+        -\frac{ 3 }{ 5 }(2x + y) + \frac{ 4 }{ 5 }(x + 2y) $$
+
+        \item Solving this derivative at (1,1):
+          $$ -\frac{ 3 }{ 5 }(2 \cdot 1 + 1) + \frac{ 4 }{ 5 }(1 + 2 \cdot 1) =
+          -\frac{ 9 }{ 5 } + \frac{ 12 }{ 5 } = \frac{ 3 }{ 5 } $$
+
+          Since this value is positive, the function $f$ will increases as the
+          result of our path. Therefore, we will be outside circle $C$.
+    \end{enumerate}
+\end{enumerate}
+
+\section{Flux in Two Dimensions}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{5}
+  \item
 \end{enumerate}
 
 \end{document}
