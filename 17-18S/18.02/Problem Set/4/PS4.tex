@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 18.02 Problem Set 4 }
+\author{ Robert Durfee }
+\date{ March 16, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Gradients and Lagrange Multipliers }
+
+\begin{enumerate}[1.]
+  \item \begin{enumerate}[a.]
+    \item Let $f(x,y) = x^{2} + xy + y^{2}$. Computing the gradient for $f(x,
+      y)$:
+      $$ \nabla f(x, y) = \langle 2x + y, 2y + x \rangle $$
+
+      Since the gradient points normal to the level curves and $C$ is a level
+      curve of $f(x, y)$, the gradient at these points will be normal to the
+      curve $C$:
+      $$ \nabla f(0, \sqrt{3}) = \langle \sqrt{3}, 2 \sqrt{3} \rangle $$
+      $$ \nabla f(0, -\sqrt{3}) = \langle -\sqrt{3}, -2 \sqrt{3} \rangle $$
+
+    \item Tangent vectors can be found by finding vectors perpendicular to
+      gradient vectors. Perpendicular vectors result in a zero dot product:
+      $$ \langle -2\sqrt{3}, \sqrt{3} \rangle \perp \langle \sqrt{3}, 2\sqrt{3}
+      \rangle $$
+      $$ \langle 2 \sqrt{3}, -\sqrt{3} \rangle \perp \langle -\sqrt{3}, -2
+      \sqrt{3} \rangle $$
+    \end{enumerate}
+  \item \begin{enumerate}[a.]
+      \item When vectors are parallel, they are multiples of each other. Since
+        the normal vectors of $C$ are given by the gradient of $f(x, y)$,
+        setting the two equal to by a factor $\lambda$ can find the desired
+        point:
+        $$ \langle 2x + y, 2y + x \rangle = \lambda \langle 1, 0 \rangle $$
+
+        Applying the constraint:
+        $$ f(x, y) = 3 $$
+
+        Solving this system of three equations yields:
+        $$ (-2, 1) \textrm{ and } (2, -1) $$
+
+      \item Now with $\langle 1, 1 \rangle$:
+        $$ \langle 2x + y, 2y + x \rangle = \lambda \langle 1, 1 \rangle $$
+
+        Applying the constraint:
+        $$ f(x, y) = 3 $$
+
+        Solving this system of three equations yields:
+        $$ (-1, -1) \textrm{ and } (1, 1) $$
+    \end{enumerate}
+  \item \begin{enumerate}[a.]
+      \item
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
+
