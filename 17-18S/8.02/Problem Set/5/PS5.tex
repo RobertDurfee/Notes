@@ -50,7 +50,114 @@ $$ \Delta V = E d $$
 
 \subsection*{Part A}
 
+$0 < r < a$: For this radius range, there is no electric field. Due to the
+nature of conductors, the charge will try to get as far away from each other as
+possible. This will result in no net charge contained within the cable, all will
+be on the surface of the cable.
 
+\bigbreak
+
+$a < r < b$: Calculating charge enclosed in a Gaussian cylinder, length $L$:
+$$ Q_{enc} = \lambda L $$
+
+Setting up Gauss's Law:
+$$ \iint \vec{E} \cdot d\vec{A} = \frac{ Q_{enc} }{ \epsilon_{0} } $$
+
+Solving for electric field:
+$$ E = \frac{ \lambda }{ 2 \pi \epsilon_{0} r } $$
+
+\bigbreak
+
+$b < r < c$: The electric field will be reduced by a factor of $kappa$.
+Otherwise, the electric field in this region would be the same as the previous
+region.
+$$ E = \frac{ \lambda }{ 2 \pi \epsilon_{0} \kappa r } $$
+
+\bigbreak
+
+$c < r$: Since the outside shell of the cable has equal and opposite charge of
+the inner wire, there is no net charge within this region. Therefore, there is
+no electric field.
+
+\subsection*{Part B}
+
+$a \longrightarrow b$: Using the electric field calculated for this region from
+Part A:
+\begin{align*}
+  V(b) - V(a) &= -\int\limits_{a}^{b} \frac{ \lambda }{ 2 \pi \epsilon_{0} r }
+  dr \\
+              &= -\frac{ \lambda }{ 2 \pi \epsilon_{0} } \int\limits_{a}^{b}
+  \frac{ dr }{ r } \\
+              &= -\frac{ \lambda }{ 2 \pi \epsilon_{0} } \ln \left( \frac{
+              b }{ a } \right)
+\end{align*}
+
+\bigbreak
+
+$b \longrightarrow c$: Using the electric field calculated for this region from
+Part A:
+\begin{align*}
+  V(c) - V(b) &= -\int\limits_{b}^{c} \frac{ \lambda }{ 2 \pi \epsilon_{0}
+  \kappa r } dr \\
+              &= -\frac{ \lambda }{ 2 \pi \epsilon_{0} \kappa }
+  \int\limits_{b}^{c} \frac{ dr }{ r } \\
+              &= -\frac{ \lambda }{ 2 \pi \epsilon_{0} \kappa } \ln \left(
+  \frac{ c }{ b } \right)
+\end{align*}
+
+\bigbreak
+
+$a \longrightarrow c$: This change in potential can be written as:
+\begin{align*}
+  V(c) - V(a) &= \left[V(c) - V(b)\right] + \left[V(b) - V(a)\right] \\
+              &= -\frac{ \lambda }{ 2 \pi \epsilon_{0} \kappa } \ln \left(
+  \frac{ c }{ b } \right) -\frac{ \lambda }{ 2 \pi \epsilon_{0} } \ln \left( \frac{
+              b }{ a } \right)
+\end{align*}
+
+Since we only care about magnitude:
+$$ \vert V(c) - V(a) \vert = \frac{ \lambda }{ 2 \pi \epsilon_{0}} \ln \left(
+\left( \frac{ b }{ a } \right) \left( \frac{ c }{ b } \right)^{1/\kappa} \right)  $$
+
+\subsection*{Part C}
+
+The definition of capacitance:
+$$ C = \frac{ Q }{ \Delta V } $$
+
+Converting this to capacitance per unit length:
+$$ \frac{ C }{ L } = \frac{ \lambda }{ \Delta V } $$
+
+Substituting value for $\Delta V$ from Part B:
+$$ \frac{ C }{ L } = \frac{ 2 \pi \epsilon_{0} \kappa }{ \kappa \ln\left( \frac{
+b }{ a } \right) + \ln\left( \frac{ c }{ b } \right) } $$
+
+\section*{Problem 6}
+
+\subsection*{Part A}
+
+Capacitance between two parallel plates is defined as:
+$$ C = \frac{ \epsilon_{0} \kappa A }{ d } $$
+
+\subsection*{Part B}
+
+Capacitors in parallel are superposed:
+$$ C = C_{1} + C_{2} $$
+
+Capacitors in series are superposed:
+$$ \frac{ 1 }{ C } = \frac{ 1 }{ C_{1} } + \frac{ 1 }{ C_{2} } $$
+
+The capacitances for the three regions are as follows:
+$$ C_{1} = \frac{ \epsilon_{0} \kappa_{1} A }{ 2 d } $$
+$$ C_{2} = \frac{ \epsilon_{0} \kappa_{2} A }{ d } $$
+$$ C_{3} = \frac{ \epsilon_{0} \kappa_{3} A }{ d } $$
+
+$\kappa_{2}$ and $\kappa_{3}$ are combined in series and they together are in
+parallel with $\kappa _{1}$. Thus, the total capacitance follows the formula:
+$$ C = C_{1} + \left( \frac{ 1 }{ C_{2} } + \frac{ 1 }{ C_{3} } \right)^{-1} $$
+
+Substituting values calculated above:
+$$ C = \frac{ \epsilon_{0} A }{ d } \left( \frac{ \kappa_{1} }{ 2 } + \left(
+\frac{ 1 }{ \kappa_{2} } + \frac{ 1 }{ \kappa_{3} } \right)^{-1} \right) $$
 
 \end{document}
 
