@@ -252,10 +252,10 @@
     \end{align*}
   \item \begin{align*}
       \iint\limits_{D} \sqrt{x^{2} + y^{2}} dA &=
-      \int\limits_{0}^{2\pi}\int\limits_{0}^{10} r dr d\theta \\
-      &= \int\limits_{0}^{2\pi} 50 d\theta \\
-      &= 50 \theta \bigg\vert_{0}^{2\pi} \\
-      &= 100 \pi
+      \int\limits_{0}^{2\pi}\int\limits_{0}^{10} r^{2} dr d\theta \\
+      &= \int\limits_{0}^{2\pi} \frac{ 1000 }{ 3 } d\theta \\
+      &= \frac{ 1000 }{ 3 } \theta \bigg\vert_{0}^{2\pi} \\
+      &= \frac{ 2000 }{ 3 } \pi
     \end{align*}
   \item \begin{align*}
       \iint\limits_{S} 10 - (x + y) dA &= \int\limits_{0}^{1}\int\limits_{0}^{1}
@@ -266,8 +266,33 @@
     \end{align*}
   \item \begin{align*}
       \iint\limits_{R} 4 - x^{2}-y^{2}dA &=
-      \int\limits_{-2}^{2}\int\limits_{-\sqrt{4 - x^{2}}}^{\sqrt{4-x^{2}}}4 -
-      x^{2} - y^{2} dy dx
+      \int\limits_{0}^{2\pi}\int\limits_{0}^{2}(4 -
+      r^{2})r dr d\theta \\
+      &= \int\limits_{0}^{2\pi} 2r^{2} - \frac{ r^{4} }{ 4 }
+      \bigg\vert_{0}^{2}d\theta \\
+      &= \int\limits_{0}^{2\pi} 4 d\theta \\
+      &= 4\theta \bigg\vert_{0}^{2\pi} \\
+      &= 8 \pi
+    \end{align*}
+  \item \begin{align*}
+      \iint\limits_{R} 4 - x^{2}-y^{2}dA &=
+      \int\limits_{0}^{2\pi}\int\limits_{0}^{1}(4 -
+      r^{2})r dr d\theta \\
+      &= \int\limits_{0}^{2\pi} 2r^{2} - \frac{ r^{4} }{ 4 }
+      \bigg\vert_{0}^{1}d\theta \\
+      &= \int\limits_{0}^{2\pi} \frac{ 7 }{ 4 } d\theta \\
+      &= \frac{ 7 }{ 4 }\theta \bigg\vert_{0}^{2\pi} \\
+      &= \frac{ 7 }{ 2 } \pi
+    \end{align*}
+  \item \begin{align*}
+      \iint\limits_{R} (4 - x^{2}-y^{2}) - (x^{2} + y^{2}) dA &=
+      \int\limits_{0}^{2\pi}\int\limits_{0}^{\sqrt{2}}(4 -
+      2 r^{2})r dr d\theta \\
+      &= \int\limits_{0}^{2\pi} 2r^{2} - \frac{ r^{4} }{ 2 }
+      \bigg\vert_{0}^{\sqrt{2}}d\theta \\
+      &= \int\limits_{0}^{2\pi} 2 d\theta \\
+      &= 2 \theta \bigg\vert_{0}^{2\pi} \\
+      &= 4 \pi
     \end{align*}
 \end{enumerate}
 
