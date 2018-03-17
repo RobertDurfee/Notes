@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 18.02 Problem Set 5 }
+\author{ Robert Durfee }
+\date{ March 23, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section{ Parameterized Curves and Lengths }
+
+\begin{enumerate}[1.]
+  \item Let $c$ be defined be $(x(t),y(t)) = (\sin 2t, \sin t)$.
+    \begin{enumerate}[a.]
+      \item \begin{align*}
+          (x(0),y(0)) &= (0,0) \\
+          (x(\pi / 4), y(\pi / 4)) &= (1, 1/\sqrt{2}) \\
+          (x(\pi / 2), y(\pi / 2)) &= (0,1) \\
+          (x(3 \pi / 4), y(3 \pi / 4)) &= (-1, 1/\sqrt{2}) \\
+          (x(\pi), y(\pi)) &= (0, 0)
+        \end{align*}
+      \item The derivatives of the parameterized curve $c$ are $(x'(t), y'(x)) =
+        (2\cos2t, \cos t)$.
+        \begin{align*}
+          (x'(0),y'(0)) &= (2,1) \\
+          (x'(\pi / 4), y'(\pi / 4)) &= (0, 1/\sqrt{2}) \\
+          (x'(\pi / 2), y'(\pi / 2)) &= (-2,0) \\
+          (x'(3 \pi / 4), y'(3 \pi / 4)) &= (0, -1/\sqrt{2}) \\
+          (x'(\pi), y'(\pi)) &= (2, -1)
+        \end{align*}
+      \item Sketch of $c$:
+
+        \begin{figure}[H]
+          \centering
+          \includegraphics[scale=0.60]{"SketchOfC"}
+          \caption{Sketch of $c$}
+        \end{figure}
+    \end{enumerate}
+  \item
+\end{enumerate}
+
+\end{document}
+
