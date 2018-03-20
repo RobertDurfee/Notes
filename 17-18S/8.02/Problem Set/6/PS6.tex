@@ -1,0 +1,250 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 8.02 Problem Set 6 }
+\author{ Robert Durfee }
+\date{ March 20, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+The definition of resistance is
+$$ R = \frac{ \rho \ell }{ A } $$
+
+Using this definition, we can determine the resistance of our thick shell by
+assigning the surface area of a sphere to $A$ and the length $\ell$ to be the
+infinitesimal change in radius. Thus,
+$$ dR = \frac{ \rho dr }{ 4 \pi r^{2} } $$
+
+Integrating between the two radii,
+$$ R = \int\limits_{r_{a}}^{r_{b}} = \frac{ \rho }{ 4 \pi } \left( \frac{ 1 }{
+r_{a} } - \frac{ 1 }{ r_{b} } \right) $$
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+Given that electric fields are conservative forces and no other forces are
+acting on the particle when it is initially accelerated,
+$$ \Delta U = -\Delta K $$
+
+We also know, through the definition of electric potential,
+$$ \Delta U = - e \Delta V $$
+
+Combining these definition,
+$$ e \Delta V = \Delta K $$
+
+Since the particle starts from rest,
+$$ \Delta K = \frac{ 1 }{ 2 } m v^2 $$
+
+Solving for final velocity,
+$$ v = \sqrt{\frac{ 2 e \Delta V}{ m }} $$
+
+Now, since the particle travels through the magnetic and electric fields in a
+straight line,
+$$ \vec{F}_{E} + \vec{F}_{M} = 0 $$
+
+Electric force on a particle in a uniform field is
+$$ \vec{F}_{E} = q \vec{E} $$
+
+Magnetic force on a moving particle is
+$$ \vec{F}_{M} = q \vec{v} \times \vec{B} $$
+
+Combining these results,
+$$ q \vec{E} + q \vec{v} \times \vec{B_{1}} = 0 $$
+
+Solving for $B$,
+$$ B_{1} = \frac{ E }{ v } $$
+
+Substituting velocity from above,
+$$ B_{1} = E \sqrt{\frac{ m }{ 2 e \Delta V }} $$
+
+Using the right hand rule,
+$$ \vec{B_{1}} = E \sqrt{\frac{ m }{ 2 e \Delta V }} \hat{k} $$
+
+\subsection*{Part B}
+
+In the second portion of the mass spectrometer, the particle experiences
+acceleration only in the angular direction. Therefore,
+$$ \vec{F} = \frac{ m v^{2} }{ R } \hat{r} $$
+
+The only force in this portion is magnetic from the second magnetic field,
+$$ \vec{F}_{M} = q \vec{v} \times \vec{B_{2}} $$
+
+Setting these two equal,
+$$ \frac{ m v^{2} }{ R } = q v B_{2}$$
+
+Solving for velocity and substituting for $R$,
+$$ v = \frac{ e R B_{2} }{ m } = \frac{ e x B_{2} }{ 2 m } $$
+
+Using our result for velocity from the previous part,
+$$ \sqrt{\frac{ 2 e \Delta V}{ m }} = \frac{ e x B_{2} }{ 2 m } $$
+
+Solving for $m$,
+$$ m = \frac{ e x^{2} B_{2}^{2} }{ 8 \Delta V } $$
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+Starting with the Biot-Savart Law,
+$$ d\vec{B} = \frac{ \mu_{0} }{ 4 \pi } \frac{ I d\vec{s} \times \hat{r} }{ r^{2} } $$
+
+Noticing that $d\vec{s} \perp \hat{r}$ and that all $x$ and $y$ components of
+magnetic field cancel by symmetry,
+$$ d\vec{B} = \frac{ \mu_{0} }{ 4 \pi } \frac{ I ds }{ r^{2} } \sin \phi \hat{k} $$
+
+Since $ds$ is an arc on a circle,
+$$ ds = R d\theta$$
+
+Substituting for $r$, $ds$, and $\sin \phi$,
+$$ d\vec{B}_{top} = \frac{ \mu_{0} }{ 4 \pi } \frac{ I R d\theta }{ R^{2} + \left(
+\frac{ \ell }{ 2 } - z \right)^{2} } \frac{ R }{ \sqrt{R^{2} + \left( \frac{
+\ell }{ 2 } - z \right)^{2}} } \hat{k}$$
+
+Integrating over the entire ring,
+$$ \vec{B}_{top} = \int\limits_{0}^{2\pi} \frac{ \mu_{0} R^{2} I d\theta }{ 4 \pi
+\left( R^{2} + \left( \frac{ \ell }{ 2 } - z \right)^{2} \right)^{3/2} } \hat{k}
+= \frac{ \mu_{0} R^{2} I }{ 2 \left( R^{2} + \left( \frac{ \ell }{ 2
+} - z \right)^{2} \right)^{3/2} } \hat{k} $$
+
+For the bottom ring, the magnetic field will go in the reverse direction and
+instead of $\ell / 2 - z$, it will be $\ell / 2 + z$,
+$$ \vec{B}_{bottom} = - \frac{ \mu_{0} R^{2} I }{ 2 \left( R^{2} + \left( \frac{ \ell }{ 2
+} + z \right)^{2} \right)^{3/2} } \hat{k}$$
+
+Combining these two results,
+$$ \vec{B} = \frac{ \mu_{0} R^{2} I }{ 2 } \left( \left( R^{2} + \left( \frac{
+\ell }{ 2 } - z \right)^{2} \right)^{-3/2} - \left( R^{2} + \left( \frac{ \ell
+}{ 2 } + z \right)^{2} \right)^{-3/2} \right) \hat{k}$$
+
+\subsection*{Part B}
+
+The derivative of the magnetic field is,
+$$ \frac{ \partial \vec{B} }{ \partial z } = \frac{ 3 \mu_{0}R^{2} I }{ 4 } \left(
+-\frac{ -R + 2z }{ \left( \frac{ 5 R^{2} }{ 4 } - Rz + z^{2} \right)^{5/2}}
++ \frac{ R + 2z }{ \left( \frac{ 5R^{2} }{ 4 } + Rz + z^{2} \right)^{5/2}}\right) \hat{k}$$
+
+When $z = 0$, this simplifies to,
+$$ \frac{ \partial \vec{B} }{ \partial z }(z = 0) = \frac{ 48 \mu_{0} I }{ 25 \sqrt{5}
+R^{2} } \hat{k}$$
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+Suppose we have a curve, $\ell$, defined by the parameterization $(x(t), y(t))$
+where $t$ ranges from $a$ to $b$ and $(x(a), y(a))$ defines point $A$ and
+$(x(b), y(b))$ defines point $B$.
+
+Choose a small segment of curve $\ell$ and call it $d\vec{\ell}$. The tail of
+this vector is defined by $\langle x(t_{0}), y(t_{0}) \rangle$. The tip of the
+vector is defined by $\langle x(t_{0} + \Delta t), y(t_{0} + \Delta t)\rangle$.
+Using vector subtraction, $d\vec{\ell}$ can be expressed as
+$$ d\vec{\ell} = \langle x(t_{0} + \Delta t), y(t_{0} + \Delta t) \rangle - \langle x(t_{0}),
+y(t_{0}) \rangle $$
+
+Using the equation for magnetic force on a infinitesimal current-carrying wire,
+$$ d\vec{F} = I d\vec{\ell} \times \vec{B} $$
+
+Taking the cross product,
+$$ d\vec{F} = I B \left( \left( y(t_{0} + \Delta t) - y(t_{0}) \right) \hat{i} -
+\left( x(t_{0} + \Delta t) - x(t_{0})\right) \hat{j} \right)$$
+
+Using the linear approximation,
+$$ x(t_{0} + \Delta t) \approx x(t_{0}) + x'(t_{0}) \Delta t $$
+$$ y(t_{0} + \Delta t) \approx y(t_{0}) + y'(t_{0}) \Delta t $$
+
+The equation simplifies to
+$$ d\vec{F} = I B (y'(t) \hat{i} - x'(t) \hat{j}) dt $$
+
+Taking the integral from $A$ to $B$,
+$$ \vec{F} = \int\limits_{a}^{b} I B (y'(t) \hat{i} - x'(t) \hat{j}) dt = I B
+\big\langle y(b) - y(a), -(x(b) - x(a)) \big\rangle$$
+
+This result is independent of the path taken between $A$ and $B$.
+
+\subsection*{Part B}
+
+Given that the wire moves up $h$ and starts from rest,
+$$ \frac{ 1 }{ 2 } m v^{2} = mgh $$
+
+Solving for $v$,
+$$ v = \sqrt{2 g h} $$
+
+Using the definition for impulse,
+$$ F dt = m dv $$
+$$ F dt = m \sqrt{2 g h} $$
+
+From our answer in Part A, we know that we can treat the arc simply as a line
+segment of length $L$. Therefore, the magnetic force on the current-carrying wire is
+$$ F = I L B $$
+
+Substituting into the above equation,
+$$ I L B dt = m \sqrt{2 g h} $$
+
+From the question,
+$$ Q = \int I dt $$
+
+Therefore,
+$$ Q = \frac{ m \sqrt{2 g h} }{ L B } $$
+
+\section*{Problem 5}
+
+\subsection*{Part A}
+
+Using the Biot-Savart Law:
+$$ d\vec{B} = \frac{ \mu_{0} }{ 4 \pi } \frac{ I d\vec{\ell} \times \hat{r} }{
+r^{2} } $$
+
+For both sections of the ring, the magnetic field is perpendicular to the radius.
+Therefore,
+$$ d\vec{B} = -\frac{ \mu_{0} }{ 4 \pi } \frac{ I_{1} d\ell }{ r^{2} } \hat{k} $$
+
+Since $d\ell$ is an arc of a circle,
+$$ d\ell = r d\theta $$
+
+Substituting for the radius $R/2$,
+$$ d\vec{B} = -\frac{ \mu_{0} I_{1} d\theta }{ 2 \pi R } \hat{k} $$
+
+Integrating over 240 degrees,
+$$ \vec{B} = -\int\limits_{0}^{4\pi/3} \frac{ \mu_{0} I_{1} d\theta }{ 2 \pi R }
+\hat{k} = -\frac{ 2 \mu_{0} I_{1}  }{ 3 R } \hat{k} $$
+
+Substituting for the radius $R$,
+$$ d\vec{B} = -\frac{ \mu_{0} I_{1} d\theta }{ 4 \pi R } \hat{k}$$
+
+Integrating over 120 degrees,
+$$ \vec{B} = -\int\limits_{0}^{2\pi/3} \frac{ \mu_{0} I_{1} d\theta }{ 4 \pi R }
+\hat{k} = - \frac{ \mu_{0} I_{1} }{ 6 R } \hat{k} $$
+
+Combining these two magnetic fields,
+$$ \vec{B} = - \frac{ 5 \mu_{0} I_{1} }{ 6 R } \hat{k} $$
+
+\subsection*{Part B}
+
+The magnetic field at this point is the same as was calculated in Part B. Using
+the equation for magnetic force on a current-carrying wire,
+$$ \vec{F} = I \vec{\ell} \times \vec{B} $$
+
+Substituting for field found in Part A,
+$$ \vec{F} = - \frac{ 5 \mu_{0} s I_{1} I_{2} }{ 6 R } \hat{i} $$
+
+\end{document}
+
