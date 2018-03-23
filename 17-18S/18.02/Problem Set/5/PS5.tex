@@ -47,11 +47,285 @@
 
         \begin{figure}[H]
           \centering
-          \includegraphics[scale=0.60]{"SketchOfC"}
+          \includegraphics[scale=0.25]{"SketchOfC"}
           \caption{Sketch of $c$}
         \end{figure}
     \end{enumerate}
-  \item
+  \item Using the curve $c$ from the previous problem, the linear approximation
+    can be calculated,
+    $$ (\sin 2t_{0} + (2 \cos 2 t_{0}) \Delta t, \sin t_{0} + (\cos t_{0})
+    \Delta t) $$
+    \begin{enumerate}[a.]
+      \item When $t=0$,
+        $$ (0, 0) $$
+
+        When $t = 0.01$,
+        $$ (0.02, 0.01) $$
+
+        The distance between these two points,
+        $$ d \approx \sqrt{0.02^{2} + 0.01^{2}} \approx 0.0224 $$
+
+      \item When $t = \pi / 4$,
+        $$ (1, 1 / \sqrt{2}) $$
+
+        When $t = \pi / 4 + 0.02$,
+        $$ (1, 0.7212) $$
+
+        The distance between these two points,
+        $$ d \approx \sqrt{0^{2} + (0.7212 - 1 / \sqrt{2})^{2}} \approx 0.0141 $$
+    \end{enumerate}
+  \item The length of a small element of the curve,
+    $$ d\ell = \sqrt{(x'(t_{0}))^{2} + (y'(t_{0}))^{2}} dt $$
+
+    Integrating over the entire curve,
+    $$ L = \int\limits_{a}^{b} \sqrt{(x'(t))^{2} + (y'(t))^{2}} dt $$
+
+    Substituting values,
+    $$ L = \int\limits_{0}^{\pi}\sqrt{4 \cos^{2}(2t) + \cos^{2} (t)} dt$$
+  \item When $t = 0$,
+    $$ g(0) = 2.24 $$
+
+    This is equal to the answer in Problem 2 Part A multiplied by $\Delta t$.
+
+    \bigbreak
+
+    When $t = \pi / 4$,
+    $$ g(\pi / 4) = 7.07 $$
+
+    This is equal to the answer in Problem 2 Part B multiplied by $\Delta t$.
+
+  \item \begin{enumerate}[a.]
+      \item Setting $x(t) = 1$ and $y(t) = 1$,
+        $$ 3t^{2} - 2 = 1,\ t = 1 $$
+        $$ 2t^{3} - 1 = 1,\ t = 1 $$
+
+        Thus, (1,1) is on the curve when $t = 1$.
+
+        \bigbreak
+
+        The slope of this curve is
+        $$ (6t, 6t) $$
+
+        Therefore, a tangent vector when $t = 0$ is $\langle 1, 1 \rangle$.
+
+        \bigbreak
+
+        A normal vector is perpendicular to the tangent vector, therefore,
+        $\langle 1, -1 \rangle$ is a normal vector when $t = 1$.
+      \item Setting $x = 1$ and $y = 1$
+        $$ 1^{2} = -1^{3} + 1 + 1,\ 1 = 1 $$
+
+        This is a true statement, so (1,1) is on the curve.
+
+        \bigbreak
+
+        The gradient of this curve is
+        $$ \langle -3x^{2} + 1, -2y \rangle$$
+
+        Therefore, a normal vector at point (1,1) is $\langle -1, -1 \rangle$.
+
+        \bigbreak
+
+        A tangent vector is perpendicular to the normal vector, therefore,
+        $\langle -1, 1 \rangle$ is a tangent vector at (1, 1).
+
+      \item Taking the dot product between the tangent vectors,
+        $$ \cos^{-1}\left( \frac{ \langle 1, 1 \rangle \cdot \langle -1, 1
+        \rangle }{ 2 }\right) = \frac{ \pi }{ 2 } = 90^{\circ}$$
+    \end{enumerate}
+  \item \begin{enumerate}[a.]
+    \item $(t, \sqrt{4 - (t - 1)^{2}} + 1)$ for $1 \leq t \leq 3$.
+    \item $(\sqrt{4 - (2 - t)^{2}} + 1, 3 - t)$ for $0 \leq t \leq 2$.
+    \item $(1 + 2 \sin t, 1 + 2 \cos t)$ for $0 \leq t \leq \pi / 2$.
+  \end{enumerate}
+\end{enumerate}
+
+\section{Line Integrals with Respect To Arc Length}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{6}
+  \item A parameterization of $c$,
+    $$ (t, t^{2}) \textrm{ for } 0 \leq t \leq 2 $$
+
+    The slope of $c$,
+    $$ (1, 2t) $$
+
+    Computing the integral,
+    \begin{align*}
+      \int\limits_{c} \sqrt{1 + 4y} ds &= \int\limits_{0}^{2} \sqrt{1 + 4t^{2}}
+      \sqrt{1 + 4t^{2}} dt \\
+      &= \int\limits_{0}^{2} 1 + 4t^{2} dt \\
+      &= t + \frac{ 4 }{ 3 } t^{3} \bigg\vert_{0}^{2} \\
+      &= \frac{38}{3}
+    \end{align*}
+  \item Using parameterization $(1 - t, t)$,
+    \begin{align*}
+      \int\limits_{c} y ds &= \int\limits_{0}^{1} t \sqrt{2} dt \\
+                           &= \frac{ \sqrt{2} t^{2} }{ 2 } \bigg\vert_{0}^{1} \\
+                           &= \frac{ \sqrt{2} }{ 2 }
+    \end{align*}
+
+    Using parameterization $(1 - 4t^{2}, 4t^{2})$,
+    \begin{align*}
+      \int\limits_{c} y ds &= \int\limits_{0}^{1/2} 4t^{2} \sqrt{(-8t)^{2} +
+      (8t)^{2}} dt \\
+      &= \int\limits_{0}^{1/2} 32 \sqrt{2} t^{3} dt \\
+      &= 8 \sqrt{2} t^{4} \bigg\vert_{0}^{1/2} \\
+      &= \frac{ \sqrt{2} }{ 2 }
+    \end{align*}
+  \item The rod is most likely to break near the middle. From the function
+    provided, the distance between the original rod and the sagging rod is
+    largest when $x = 0$. This is the middle of the rod.
+\end{enumerate}
+
+\section{Line Integrals with Respect to $dx$ and $dy$}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{9}
+  \item \begin{enumerate}[a.]
+    \item Positive. $dy$ is positive throughout the interval and so is $x$.
+    \item Zero. $dx$ is zero throughout the interval.
+    \item Negative. $dx$ is negative and $y^{2}$ is positive throughout the
+      interval.
+    \item Positive. $dy$ is positive and $x + y$ is positive throughout the
+      interval.
+    \item Positive. Although $dx$ is initially positive and becomes negative,
+      $e^{y}$ is always positive and decreases in magnitude. Therefore, there
+      will be more positives than negatives.
+  \end{enumerate}
+\item Using the parameterization for $c$, $(t^{2}, t)$ for $1 \geq t \geq -1$,
+  \begin{align*}
+    \int\limits_{c} y^{2} dx &= \int\limits_{1}^{-1} 2 t^{3} dt \\
+                             &= \frac{ t^{4} }{ 2 } \bigg\vert_{1}^{-1} \\
+                             &= 0
+  \end{align*}
+\item Using the parameterization $(-\sqrt{1 - t^{2}}, t)$ for $0 \leq t \leq 1$,
+  \begin{align*}
+    \int\limits_{c} x^{2} dy &= \int\limits_{0}^{1} (-\sqrt{1 - t^{2}})^{2} dt
+    \\
+    &= \int\limits_{0}^{1} (1 - t^{2}) dt \\
+    &= t - \frac{ t^{3} }{ 3 } \bigg\vert_{0}^{1} \\
+    &= \frac{ 2 }{ 3 }
+  \end{align*}
+\item Parameterizing the curve into four segments,
+  $$ c_{1}: (t, b_{1}) \textrm{ for } a_{1} \leq t \leq a_{2} $$
+  $$ c_{2}: (a_{2},t) \textrm{ for } b_{1} \leq t \leq b_{2} $$
+  $$ c_{3}: (t, b_{2}) \textrm{ for } a_{2} \geq t \geq a_{1} $$
+  $$ c_{4}: (a_{1}, t) \textrm{ for } b_{2} \geq t \geq b_{1} $$
+
+  \begin{enumerate}[a.]
+    \item Since this integral is with respect to $dx$, $c_{2}$ and $c_{4}$ can
+      be ignored as they are vertical lines with no change in $x$. This leaves,
+      \begin{align*}
+        \int\limits_{c} x dx &= \int\limits_{a_{1}}^{a_{2}} t dt +
+        \int\limits_{a_{2}}^{a_{1}} t dt \\
+        &= 0
+      \end{align*}
+    \item Since this integral is with respect to $dy$, $c_{1}$ and $c_{3}$ can
+      be ignored as they are horizontal lines with no change in $y$. This
+      leaves,
+      \begin{align*}
+        \int\limits_{c} x dy &= \int\limits_{b_{1}}^{b_{2}} a_{2} dt +
+        \int\limits_{b_{2}}^{b_{1}} a_{1} dt \\
+        &= a_{1}(b_{1} - b_{2}) + a_{2}(b_{2} - b_{1})
+      \end{align*}
+  \end{enumerate}
+
+\end{enumerate}
+
+\section{Vector Fields}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{13}
+  \item For $\vec{V} = \langle y, -x \rangle$,
+    \begin{center}
+      \begin{tabular}{ c c c }
+        $\vec{V}(1,0) = \langle 0, -1 \rangle$ & $\vec{V}(0,1) = \langle 1, 0
+        \rangle$ & $\vec{V}(0,0) = \langle 0, 0 \rangle$ \\
+        $\vec{V}(-1,0) = \langle 0, 1 \rangle$ & $\vec{V}(0,-1) = \langle -1, 0
+        \rangle$ & $\vec{V}(1/2,0) = \langle 0, -1/2 \rangle$ \\
+        $\vec{V}(1/2,1/2) = \langle 1/2, -1/2 \rangle$ & $\vec{V}(-1/2,1/2) =
+        \langle 1/2, 1/2 \rangle$ & $\vec{V}(0,-1/2) = \langle -1/2, 0 \rangle$
+      \end{tabular}
+    \end{center}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.45]{"VectorFieldSketch1"}
+      \caption{Vector Field Sketch}
+    \end{figure}
+  \item For $\vec{V} = \langle 0, x \rangle$,
+    \begin{center}
+      \begin{tabular}{ c c c }
+        $\vec{V}(1,0) = \langle 0, 1 \rangle$ & $\vec{V}(0,1) = \langle 0, 0
+        \rangle$ & $\vec{V}(-1,0) = \langle 0, -1 \rangle$ \\
+        $\vec{V}(0,-1) = \langle 0, 0 \rangle$ & $\vec{V}(1/2,1/2) = \langle 0,
+        1/2 \rangle$ & $\vec{V}(-1/2,-1/2) = \langle 0, -1/2 \rangle$ \\
+        $\vec{V}(-1/2,1/2) = \langle 0, -1/2 \rangle$ & $\vec{V}(1/2,-1/2) =
+        \langle 0, 1/2 \rangle$ & $\vec{V}(0,0) = \langle 0, 0 \rangle$
+      \end{tabular}
+    \end{center}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.45]{"VectorFieldSketch2"}
+      \caption{Vector Field Sketch}
+    \end{figure}
+
+\end{enumerate}
+
+\section{Flux Through a Curve}
+
+\begin{enumerate}[1.]
+  \setcounter{enumi}{15}
+  \item Using the equations determined in problem 17.
+    \begin{enumerate}[a.]
+      \item For the length of the small segment,
+        $$ \ell = \Delta t \sqrt{1 + 4t^{2}} = 0.01 \sqrt{1 +
+        4(0.5)^{2}} = 0.01\sqrt{2}$$
+      \item For the unit normal vector,
+        $$ \hat{n} = \frac{ \langle 2t, -1 \rangle \Delta t}{ \ell } = \frac{
+        \langle 2 (0.5), -1 \rangle 0.01 }{ 0.01 \sqrt{2} } = \left\langle
+        \frac{ 1 }{ \sqrt{2} }, -\frac{ 1 }{ \sqrt{2} } \right\rangle$$
+      \item For flux,
+        $$ \Phi = (2 t^{3} + t) \Delta t = (2(0.5)^{3} + 0.5) 0.01 = 0.0075 $$
+    \end{enumerate}
+  \item \begin{enumerate}[a.]
+    \item The curve $c$ can be parameterized $(t, t^{2})$ for $t$ from $0$ to
+      $1$. We can take the linear approximation,
+      $$ L_{c} = (t + \Delta t, t^{2} + 2t \Delta t) $$
+
+      The distance between two points on this line are
+      $$ \sqrt{((t + \Delta t) - t)^{2} + ((t^{2} + 2t\Delta t) - t^{2})^{2}} $$
+
+      Which simplifies to,
+      $$ \Delta t \sqrt{1 + 4t^{2}} $$
+    \item The tangential vector to the curve is defined through linear
+      approximation,
+      $$ \langle \Delta t, 2t \Delta t \rangle = \langle 1, 2t \rangle \Delta t $$
+
+      A normal vector is defined perpendicular to the tangent vector. This
+      occurs when the dot product is zero,
+      $$ \langle 1, 2t \rangle \Delta t \perp \langle 2t, -1 \rangle \Delta t $$
+
+      Converting this vector into a unit vector by dividing by length,
+      $$ \hat{n} = \frac{ \langle 2t, -1 \rangle }{ \sqrt{1 + 4t^{2}} } $$
+
+    \item Parameterizing the vector field $\vec{V}(x, y) = \langle y, -x
+      \rangle$ as,
+      $$ \vec{V}(x(t), y(t)) = \langle t^{2}, -t \rangle = \vec{v}$$
+
+      This will represent the flow at a particular $t$. Now we can calculate
+      flux,
+      $$ d\Phi = \vec{v} \cdot \hat{n} \vert \ell \vert = \langle t^{2}, t
+      \rangle \cdot \langle 2t, -1 \rangle \Delta t = (2t^{3} + t) \Delta t$$
+  \end{enumerate}
+
+\item The equation determined in Problem 17 will result in the small amount of
+  flux through a small line segment. To calculate the entire flux, integrate
+  this over the entire curve,
+$$ \int\limits_0^{1} \langle t^{2}, -t \rangle \cdot \langle 2t, -1 \rangle dt =
+\int\limits_{0}^{1} (2t^{3} + t)dt = 1$$
 \end{enumerate}
 
 \end{document}
