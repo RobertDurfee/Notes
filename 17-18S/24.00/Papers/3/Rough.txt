@@ -1,0 +1,17 @@
+================================================================================
+
+Thesis: Paul's Theory-Theory results in a circular method for ascribing mental
+states to oneself where ones interpretation of evidence is filtered through ones
+current mental state.
+
+P1: [Theory-Theory] "All knowledge of our own attitudes and emotions is the 
+  product of theorizing about ourselves, usually on the basis of evidence."
+
+P2: Theories are developed through interpretation of evidence.
+
+P3: Our attitudes and emotions affect our interpretation of evidence.
+--------------------------------------------------------------------------------
+C1: All knowledge of our attitudes and emotions is dependent upon evidence 
+subject to our attitudes and emotions. 
+
+================================================================================
