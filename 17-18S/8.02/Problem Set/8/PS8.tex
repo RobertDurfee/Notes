@@ -1,0 +1,309 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 8.02 Problem Set 8 }
+\author{ Robert Durfee }
+\date{ April 10, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section{Rotating Coil }
+
+Flux through a rotating coil in a uniform field:
+$$ \Phi = N \pi R^2 B \cos \phi $$
+
+Taking the derivative of the flux:
+$$ \frac{d\Phi}{dt} = - N \pi R^2 B \sin \phi \frac{d\phi}{dt} $$
+
+Electromotive force generated from a magnetic field:
+$$ \varepsilon = - \frac{d\Phi}{dt} $$
+
+Substituting for derivative of flux:
+$$ \varepsilon = N \pi R^2 B \sin \phi \frac{d\phi}{dt} $$
+
+Substituting $\omega$ for $d\phi/dt$:
+$$ \varepsilon = N \pi R^2 B \omega \sin (\omega t) $$
+
+The maximum electromotive force occurs when $\sin (\omega t) = 1$:
+$$ \varepsilon_{max} = N \pi R^2 B \omega $$
+
+Substituting provided values (and converting to radians per second):
+$$ \varepsilon_{max} = 1.705\ \si{V} $$
+
+\section{Self Inductance, Energy, Induced Electric Fields, Faraday's Law}
+
+\subsection*{Part A}
+
+Ampere's Law:
+$$ \oint \vec{B} \cdot d\vec{s} = \mu_0 \iint \vec{J} \cdot d\vec{A} $$
+
+Choosing a square Amperian loop of length $w$ with one edge inside the solenoid,
+one outside, and two between loops, both magnetic field and current are
+constant:
+$$ B w = \frac{\mu_0 w I(t) N}{\ell} $$
+
+Current after $t = 2$ is $I(2) = 2b$:
+$$ B = \frac{2 \mu_0 b N}{\ell} $$
+
+Substituting values:
+$$ B = 2.01 \cdot 10^{-4}\ \si{T} $$
+
+\subsection*{Part B}
+
+\subsection*{Part C}
+
+Magnetic field in solenoid:
+$$ B = \frac{ \mu_0 I N}{\ell} $$
+
+Flux through solenoid:
+$$ \Phi = N B A $$
+
+Substituting for $B$ and $A$:
+$$ \Phi = \frac{ \pi \mu_0 I N^2 a^2}{\ell} $$
+
+Self-inductance is given by:
+$$ L = \frac{\Phi}{I} $$
+
+Substituting into inductance equation:
+$$ L = \frac{ \pi \mu_0 N^2 a^2}{\ell} $$
+
+Substituting values:
+$$ L = 1.42 \cdot 10^{-4}\ \si{H} $$
+
+\subsection*{Part D}
+
+Rate of doing work against the back electromotive force:
+$$ \frac{dW}{dt} = - \varepsilon I $$
+
+Electromotive force:
+$$ \varepsilon = -L \frac{dI}{dt} $$
+
+Combining equations:
+$$ \frac{dW}{dt} = -L I \frac{dI}{dt} $$
+
+Canceling the $dt$ term:
+$$ dW = -L I dI $$
+
+Integrating both sides:
+$$ \int\limits_0^W dW = L \int\limits_0^I I dI $$
+$$ W = \frac{L I^2}{2} $$
+
+\subsection*{Part E}
+
+Stored energy in a magnetic field:
+$$ U = \frac{1}{2 \mu_0} \int B^2 dV $$
+
+Since $B$ is constant within the solenoid,
+$$ U = \frac{B^2 V}{2 \mu_0} $$
+
+Substituting magentic field and volume of cylinder:
+$$ U = \frac{\pi \mu_0 N^2 a^2 I^2}{2 \ell} $$
+
+Separating parts:
+$$ U = \frac{LI^2}{2} $$
+
+This result is consistent with Part D as the work required to reach the steady
+current should be equal to the energy stored in the magnetic field. This comes
+from the conservation of energy (change in potential energy is equal to the work
+done for conservative forces).
+
+\subsection*{Part F}
+
+Faraday's Law:
+$$ \oint \vec{E} \cdot d\vec{s} = -\frac{d}{dt}\iint \vec{B} \cdot d\vec{A} $$
+
+Electric field is constant along a ring within the solenoid whose face is normal
+to the axis. Within this ring, magnetic field is also constant.
+$$ 2 \pi r E = -\frac{\pi \mu_0 r^2 N}{\ell} \frac{dI}{dt} $$
+
+Solving for $E$:
+$$ \vert E \vert = \frac{\mu_0 N r b}{2 \ell} $$
+
+\section{Mutual Inductance}
+
+\subsection*{Part A}
+
+Magnetic field from outer solenoid:
+$$ B = \frac{\mu_0 N_2 I_2}{b_2} $$
+
+Flux from outer solenoid through inner solenoid:
+$$ \Phi_{12} = B_2 N_1 A_1 $$
+
+Substituting magnetic field and area:
+$$ \Phi_{12} = \frac{\pi \mu_0 N_1 N_2 I_2 a_1^2}{b_2} $$
+
+Mutual inductance:
+$$ M_{12} = \frac{\Phi_{12}}{I_2} $$
+
+Substituting flux:
+$$ M_{12} = \frac{\pi \mu_0 N_1 N_2 a_1^2}{b_2} $$
+
+\subsection*{Part B}
+
+Multiply mutual inductance by current to get flux:
+$$ \Phi_{21} = \frac{\pi \mu_0 N_1 N_2 a_1^2 I_1}{b_2} $$
+
+\section{Self-Inductance of Two Wires}
+
+Magnetic field from current carrying wire:
+$$ B = \frac{\mu_0 I}{2 \pi r} $$
+
+Integrate over distance between wires for flux (both wires add fields together):
+$$ \Phi = 2 \ell \int_a^{d-a} \frac{\mu_0 I}{2 \pi r} dr = \frac{\mu_0 I
+\ell}{\pi} \ln\left(\frac{d - a}{a}\right) $$
+
+Inductance is defined:
+$$ L = \frac{\Phi}{I} $$
+
+Substituting for flux:
+$$ L = \frac{\mu_0 \ell}{\pi} \ln\left(\frac{d - a}{a}\right) $$
+
+\section{Solenoid}
+
+\subsection*{Part A}
+
+Magnetic field in a solenoid:
+$$ B = \mu_0 n I $$
+
+Flux through solenoid:
+$$ \Phi = \pi \mu_0 n a^2 I $$
+
+Taking the derivative of flux:
+$$ \frac{d\Phi}{dt} = \pi \mu_0 n a^2 \frac{dI}{dt} $$
+
+Electromotive force:
+$$ \varepsilon = -\frac{d\Phi}{dt} $$
+
+Substituting derivative of flux:
+$$ \varepsilon = -\pi \mu_0 n a^2 \frac{dI}{dt} $$
+
+Ohm's Law:
+$$ \varepsilon = IR $$
+
+Substituting for electromotive force and solving for current:
+$$ I = -\frac{\pi \mu_0 n h a^2}{R} $$
+
+The current is generated counterclockwise when looking from the right.
+
+\subsection*{Part B}
+
+Faraday's Law:
+$$ \oint \vec{E} \cdot d\vec{s} = -\frac{d}{dt}\iint \vec{B} \cdot d\vec{A} $$
+
+Electric field is constant along a ring within the solenoid whose face is normal
+to the axis. Within this ring, magnetic field is also constant.
+$$ 2 \pi r E = - \pi \mu_0 n r^2 \frac{dI}{dt} $$
+
+Solving for $E$:
+$$ E = -\frac{\mu_0 n r h}{2} $$
+
+The electric field is counterclockwise when looking from the right.
+
+\subsection*{Part C}
+
+Change in flux will be equal to twice the constant flux:
+$$ \Delta \Phi = 2 \Phi $$
+
+Substituting flux:
+$$ \Delta \Phi = 2 \pi \mu_0 n I a^2 $$
+
+Electromotive force:
+$$ \varepsilon = -\frac{\Delta \Phi}{\Delta t} $$
+
+Ohm's Law:
+$$ \varepsilon = I R $$
+
+Solving for current:
+$$ I = \frac{\Delta \Phi}{R \Delta t} $$
+
+Converting to charge:
+$$ \frac{\Delta Q}{\Delta t} = I $$
+
+Combining together:
+$$ \Delta Q = \frac{2 \pi \mu_0 n I a^2}{R} $$
+
+\section{Rail Gun}
+
+\subsection*{Part A}
+
+Flux through circuit:
+$$ \Phi = x(t) w B $$
+
+Induced electromotive force:
+$$ \varepsilon_{ind} = - v(t) w B $$
+
+Induced current:
+$$ \vert I_{ind} \vert = \frac{v(t) w B}{R} $$
+
+The current flows clockwise.
+
+\subsection*{Part B}
+
+Total current is equal to current from generator minus induced current:
+$$ I_{T} = \frac{\varepsilon - v(t) w B}{R} $$
+
+\subsection*{Part C}
+
+Magnetic force acting on a current carrying wire:
+$$ F_m = \vec{I} w \times \vec{B} $$
+
+Substituting for current and magnetic field:
+$$ F_m = \frac{\varepsilon w B - v(t) w^2 B^2}{R} $$
+
+\subsection*{Part D}
+
+Newton's Second Law differential equation:
+$$ \varepsilon w B - v(t) w^2 B^2 = m R \frac{d v(t)}{dt} $$
+
+Solution to differential equation:
+$$ v(t) = \frac{\varepsilon}{w B} - \frac{\varepsilon}{w B} e^{-\frac{w^2 B^2}{m
+R} t} $$
+
+Terminal velocity ($t \rightarrow \infty$):
+$$ v_{term} = \frac{\varepsilon}{w B} $$
+
+\subsection*{Part E}
+
+Substituting values for terminal velocity:
+$$ v_{term} = 20\ \si{km\ s^{-1}} $$
+
+\subsection*{Part F}
+
+Power from generator:
+$$ P = I \varepsilon $$
+
+Substituting equations from above:
+$$ P = \frac{\varepsilon - v w B}{R} \varepsilon $$
+
+Substituting values:
+$$ P = 0 $$
+
+Power lost to heat:
+$$ P = F v $$
+
+Substituting equations from above:
+$$ P = \frac{\varepsilon w B - v w^2 B^2}{R} v $$
+
+Substituting values:
+$$ P = 0 $$
+
+This is consistent because the car is no longer accelerating. Therefore no
+power is generated. Since no power is generated, none can be lost from heat.
+
+\end{document}
+
