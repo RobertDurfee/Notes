@@ -4,14 +4,40 @@ Thesis: Paul's Theory-Theory results in a circular method for ascribing mental
 states to oneself where ones interpretation of evidence is filtered through ones
 current mental state.
 
-P1: [Theory-Theory] "All knowledge of our own attitudes and emotions is the 
+P1: [Theory-Theory] "All knowledge of our own attitudes and emotions is the
   product of theorizing about ourselves, usually on the basis of evidence."
 
 P2: Theories are developed through interpretation of evidence.
 
 P3: Our attitudes and emotions affect our interpretation of evidence.
 --------------------------------------------------------------------------------
-C1: All knowledge of our attitudes and emotions is dependent upon evidence 
-subject to our attitudes and emotions. 
+C1: All knowledge of our attitudes and emotions is dependent upon evidence
+subject to our attitudes and emotions.
+
+================================================================================
+
+P1 Show the claims from the Cartesian theory for self-knowledge
+
+P2 Then explain why this theory results in a crazy conclusion
+
+P3 Show why to reject premise 2
+
+P3 Show how to amend premise 2
+
+P3 Show why to reject amended premise 2. [inner-sense]
+
+P4 Show why to reject premise 1
+
+P5 Show why to reject premise 3
+
+P6 Show the alternative [theory-theory]
+
+P7 Outline my argument's premises.
+
+P8 Show premise 2 to be true
+
+P9 Show premise 3 to be true
+
+P10 Conclude
 
 ================================================================================
