@@ -142,6 +142,82 @@ and positive for the bottom edge. Since the top edge has a higher $y$ value
 
 \subsection*{Part B}
 
+The line integral for the top edge:
+$$ \int\limits_{a_2}^{a_1} b_2 dx = -b_2(a_2 - a_1) $$
+
+The line integral for the bottom edge:
+$$ \int\limits_{a_1}^{a_2} b_1 dx = b_1(a_2 - a_1) $$
+
+\section*{Problem 7}
+
+The linear approximation for $P(x, y)$:
+$$ P(x, y) \approx e(x + y - 1) $$
+
+The linear approximation for $Q(x, y)$:
+$$ Q(x, y) \approx 2x - 2 + y $$
+
+As a result, the integral now becomes:
+$$ e \left[ \int_c x dx + \int_c y dx - \int_c dx \left] + \int_c 2x dy - 2
+\int_c dy + \int_c y dy $$
+
+Which simplifies (using the provided table) to:
+$$ (2 - e)(\Delta x \Delta y) \approx \int_c x e^{xy} dx + x^2 y dy $$
+
+\section*{Problem 8}
+
+\subsection*{Part A}
+
+Parameterization of $s$ with $t$ going from 0 to 1:
+$$ \langle t, 0 \rangle $$
+
+Parameterixation of $w$ with $t$ going from 0 to 1:
+$$ \langle t, 1/10 \sin \left( 100 t \right) \rangle $$
+
+The straight integral becomes:
+$$ \int\limits_0^1 dt = 1 $$
+
+The wiggly integral becomes:
+$$ \int\limits_0^1 (1 + 1/10 \sin \left( 100 t \right) ) dt \approx 1.00012 $$
+
+Note that these two results are very similar.
+
+\subsection*{Part B}
+
+The length of the straight segment is (clearly) 1.
+
+\bigbreak
+
+The length of the wiggly segment is computed using the integral:
+$$ \int\limits_0^1 \sqrt{1 + \left( 10 \cos \left( 100 t \right) \right)^2 } dt
+\approx 6 $$
+
+Note that these two results are very different!
+
+\section*{Problem 9}
+
+The correct integral for scoring hikers is:
+$$ \int_c s dy $$
+
+This is correct because as the hiker moves up ($dy$), the score will increase.
+Additionally, as the hiker moves right ($x$, into the smoother cliff side), the
+score will also increase.
+
+\section*{Problem 10}
+
+\section*{Problem 11}
+
+Computing the vector between $\langle 2, 3, 4 \rangle$ and $\langle 1, 2, 3
+\rangle$:
+$$ \langle 2, 3, 4 \rangle - \langle 1, 2, 3 \rangle = \langle 1, 1, 1 \rangle$$
+
+Adding this vector to the vector for the other provided point will determine the
+unknown point as the sides must be parallel:
+$$ \langle 1, 4, 5 \rangle + \langle 1, 1, 1 \rangle = \langle 2, 5, 6 \rangle
+$$
+
+\section*{Problem 12}
+
+\subsection*{Part A}
 
 \end{document}
 
