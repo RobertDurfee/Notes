@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 18.02 Problem Set 6 }
+\author{ Robert Durfee }
+\date{ April 12, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{Part A}
+
+%Figure
+
+This integral will be negative.
+
+\subsection*{Part B}
+
+$$\vec{r} = \langle t^2 + 1, t \rangle $$
+$$\vec{F}(x, y) = \langle -y, 0 \rangle $$
+
+Using these equations, the constructed integral follows:
+$$\int\limits_1^2 \langle -t, 0 \rangle \cdot \langle 2t, 1 \rangle dt =
+\frac{-14}{3} $$
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+Parameterization of curve $c$ with $t$ going from 0 to 1:
+$$ \langle t, -t \rangle $$
+
+From the Fundamental Theorem of Calculus:
+$$ f(0, 0) - f(1, -1) = \int\limits_0^1 (-2t^2 + t^2) dt + \int\limits_0^1 (2t^2
+- t^2) dt $$
+$$ 1 - f(1, -1) = 0 $$
+$$ 1 = f(1, -1) $$
+
+\subsection*{Part B}
+
+Parameterization of $c_1$ with $t$ going from 0 to 1:
+$$ \langle t, 0 \rangle $$
+
+From the Fundamental Theorem of Calculus:
+$$ f(0, 0) - f(1, 0) = \int\limits_0^1 0 dt + \int\limits_0^1 0 dt $$
+$$ 1 - f(1, 0) = 0 $$
+$$ f(1, 0) = 1 $$
+
+Parameterization of $c_2$ with $t$ going from 0 to 1:
+$$ \langle 1, -t \rangle $$
+
+From the Fundamental Theorem of Calculus:
+$$ f(1, 0) - f(1,-1) = \int\limit_0^1 0 dt + \int\limits_0^1 (2t + 1) dt $$
+$$ 1 - f(1, -1) = 0 $$
+$$ f(1, -1) = 1 $$ 
+
+\subsection*{Part C}
+
+Parameterization of $c$ with $t$ going from 0 to 1:
+$$ \langle x_1 t, y_1 t \rangle $$
+
+From the Fundamental Theorem of Calculus:
+$$ f(0, 0) - f(x_1, y_1) = \int\limits_0^1 ( 2 y_1 x_1^2 t^2 + x_1 y_1^2 t^2 )
+dt + \int\limits_0^1 (2 x_1 y_1^2 t^2 + y_1 x_1^2 t^2) dt $$
+$$ 1 - f(x_1, y_1) = x_1 y_1 (x_1 + y_1) $$
+$$ f(x_1, y_1) = 1 - x_1 y_1 (x_1 + y_1) $$
+
+\subsection*{Part D}
+
+Parameterization of $c_1$ with $t$ going from 0 to $x_1$:
+$$ \langle t, 0 \rangle $$
+
+From the Fundamental Theorem of Calculus:
+$$ f(0, 0) - f(x_1, 0) = \int\limits_0^{x_1} 0 dt + \int\limits_0^{x_1} 0 dt $$
+$$ 1 - f(x_1,0) = 0 $$
+$$ f(x_1, 0) = 1 $$
+
+Parameterization of $c_2$ with $t$ going from 0 to $y_1$:
+$$ \langle x_1, t \rangle $$
+
+From the Fundamental Theorem of Calculus:
+$$ f(x_1, 0) - f(x_1, y_1) = \int\limits_0^{y_1} 0 dt + \int\limits_0^{y_1}
+(2 x_1 t + x_1^2 ) dt $$
+$$ 1 - f(x_1, y_1) = x_1 y_1 (y_1 + x_1) $$
+$$ f(x_1, y_1) = 1 - x_1 y_1 (y_1 + x_1) $$
+
+\subsection*{Part E}
+
+Given that $f(0, 0) = 0$, the function $f$ is:
+$$ f(x, y) = x y (x + y)$$
+
+The gradient of this function:
+$$ \nabla f(x, y) = \langle 2xy + y^2, 2xy + x^2 \rangle $$
+
+\section*{Problem 3}
+
+A function with gradient $\nabla f(x, y) = \langle 0, y \rangle$:
+$$ f(x, y) = \frac{y^2}{2} $$
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+$$ f(0, 0.5) > f(0,0) $$
+
+\subsection*{Part B} 
+
+The approximate location of the minimum of $f$ is $(-0.5, -0.5)$.
+
+\subsection*{Part C}
+
+The approximate location of the maximum of $f$ is $(0.5, 0.5)$.
+
+\section*{Problem 5}
+
+Picture 2 is not a function because there exists a closed curve such that
+$\int_c \nabla f \cdot d\vec{r} \neq 0$. (Namely, an oval centered at (0,0).)
+
+\section*{Problem 6}
+
+\subsection*{Part A}
+
+Curve $c$ is oriented counter clockwise. Thus, $dx$ is negative for the top edge
+and positive for the bottom edge. Since the top edge has a higher $y$ value
+(which has a negative $dx$), the result is net negative.
+
+\subsection*{Part B}
+
+
+\end{document}
+
