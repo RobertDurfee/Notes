@@ -16,7 +16,7 @@
 
 \title{ 18.02 Problem Set 6 }
 \author{ Robert Durfee }
-\date{ April 12, 2018 }
+\date{ April 13, 2018 }
 
 \begin{document}
 
@@ -66,7 +66,7 @@ Parameterization of $c_2$ with $t$ going from 0 to 1:
 $$ \langle 1, -t \rangle $$
 
 From the Fundamental Theorem of Calculus:
-$$ f(1, 0) - f(1,-1) = \int\limit_0^1 0 dt + \int\limits_0^1 (2t + 1) dt $$
+$$ f(1, 0) - f(1,-1) = \int\limits_0^1 0 dt + \int\limits_0^1 (2t + 1) dt $$
 $$ 1 - f(1, -1) = 0 $$
 $$ f(1, -1) = 1 $$ 
 
@@ -157,7 +157,7 @@ The linear approximation for $Q(x, y)$:
 $$ Q(x, y) \approx 2x - 2 + y $$
 
 As a result, the integral now becomes:
-$$ e \left[ \int_c x dx + \int_c y dx - \int_c dx \left] + \int_c 2x dy - 2
+$$ e \left[ \int_c x dx + \int_c y dx - \int_c dx \right] + \int_c 2x dy - 2
 \int_c dy + \int_c y dy $$
 
 Which simplifies (using the provided table) to:
@@ -196,13 +196,34 @@ Note that these two results are very different!
 \section*{Problem 9}
 
 The correct integral for scoring hikers is:
-$$ \int_c s dy $$
+$$ \int_c x dy $$
 
 This is correct because as the hiker moves up ($dy$), the score will increase.
 Additionally, as the hiker moves right ($x$, into the smoother cliff side), the
 score will also increase.
 
 \section*{Problem 10}
+
+The work for stretching evenly:
+$$ W = \frac{L_{new}^2}{L_{old}} - L_{old} $$
+
+The original small section of the rubber band is defined from $t$ to $t + \Delta
+t$. The corresponding small section of the stretched rubber band is defined from
+$(x(t), y(t))$ to $(x(t + \Delta t), y(t + \Delta t))$. 
+
+The length of the original small section is (clearly) $\Delta t$. The length of
+the corresponding small section in the stretched rubber band, through linear
+approximation is:
+$$ L_{new} = \sqrt{ x'(t)^2 + y'(t)^2 } \Delta t $$
+
+Substituting these values into the work equation:
+$$ W = (x'(t)^2 + y'(t)^2 - 1) \Delta t $$
+
+Substituting values of derivatives:
+$$ W = ((1 + 2t)^2 + (1 - 2t)^2 - 1) \Delta t $$
+
+Integrating over $t$ (from $0$ to $1$):
+$$ W = \int\limits_0^1 ((1 + 2t)^2 + (1 - 2t)^2 - 1) dt = \frac{11}{3} $$
 
 \section*{Problem 11}
 
@@ -218,6 +239,193 @@ $$
 \section*{Problem 12}
 
 \subsection*{Part A}
+
+First, calculate the resulting points after applying parameterization using
+linear approximation:
+$$ \vec{r}(1, 1) = \langle 1, 1, -1 \rangle $$
+$$ \vec{r}(1.01, 1) = \vec{r}(1,1) + \frac{\partial \vec{r}}{\partial
+u}(1,1)(0.01) = \langle 1.01, 1, -0.98 \rangle $$
+$$ \vec{r}(1, 1.01) = \vec{r}(1, 1) + \frac{\partial \vec{r}}{\partial v}(1, 1)
+(0.01) = \langle 1, 1.01, -1.04 \rangle $$
+$$ \vec{r}(1.01, 1.01) = \vec{r}(1,1) + \frac{\partial \vec{r}}{\partial
+u}(1,1)(0.01) + \frac{\partial \vec{r}}{\partial v}(1,1)(0.01) = \langle 1.01,
+1.01, -1.02 \rangle $$
+
+Next, finding the difference between vectors that describe adjacent points:
+$$ \vec{r}(1.01, 1) - \vec{r}(1,1) = \langle 0.01, 0, 0.02 \rangle $$
+$$ \vec{r}(1.01, 1.01) - \vec{r}(1.01, 1) = \langle 0, 0.01, -0.04 \rangle $$
+$$ \vec{r}(1, 1.01) - \vec{r}(1.01, 1.01) = \langle -0.01, 0, -0.02 \rangle $$
+$$ \vec{r}(1, 1) - \vec{r}(1, 1.01) = \langle 0, -0.01, 0.04 \rangle $$
+
+Last, calculate the normal of each of these computed vectors:
+$$ \vert \langle 0.01, 0, 0.02 \rangle \vert = 0.0224 $$
+$$ \vert \langle 0, 0.01, -0.04 \rangle \vert = 0.0412 $$
+$$ \vert \langle -0.01, 0, -0.02 \rangle \vert = 0.0224 $$
+$$ \vert \langle 0, -0.01, 0.04 \rangle \vert = 0.0412 $$
+
+\subsection*{Part B}
+
+Finding the difference between vectors that describe non-adjacent points:
+$$ \vec{r}(1.01, 1) - \vec{r}(1, 1.01) = \langle 0.01, -0.01, 0.06 \rangle $$
+$$ \vec{r}(1.01, 1.01) - \vec{r}(1, 1) = \langle 0.01, 0.01, -0.02 \rangle $$
+
+Calculating the normal of each of these computed vectors:
+$$ \vert \langle 0.01, -0.01, 0.06 \rangle \vert = 0.0616 $$
+$$ \vert \langle 0.01, 0.01, -0.02 \rangle \vert = 0.0245 $$
+
+\subsection*{Part C}
+
+Computing the dot product of the vectors corresponding to the sides adjacent to
+point $\vec{r}(1,1)$:
+$$ \langle 0.01, 0, 0.02 \rangle \cdot \langle 0, 0.01, -0.04 \rangle = -0.0008
+$$
+
+Computing the product of the normals of each vector:
+$$ \vert \langle 0.01, 0, 0.02 \rangle \vert \vert \langle 0, 0.01, -0.04
+\rangle \vert = 0.000922 $$
+
+Setting the quotient equal to $\cos \theta$ (through dot product):
+$$ \cos \theta = \frac{ -0.0008 }{ 0.000922 } $$
+
+Solving for $\theta$:
+$$ \theta \approx 150^\circ $$
+
+\subsection*{Part D}
+
+Taking the vector that describes one side:
+$$ \vec{r}(1, 1.01) - \vec{r}(1,1) = \langle 0, 0.01, -0.04 \rangle $$
+
+Adding it to the point across from the side to see if resulting point is
+approximately equal to the known point:
+$$ \langle 0, 0.01, -0.04 \rangle + \vec{r}(1.01, 1) = \langle 1.01, 1.01, -1.02
+\rangle $$
+
+This is equal to the point $\vec{r}(1.01, 1.01)$. Therefore, the shape is
+approximately a parallelogram. 
+
+\section*{Problem 13}
+
+\subsection*{Part A}
+
+The partial derivatives of the parameterization:
+$$ \frac{\partial \vec{r}}{\partial u} = \langle \cos v, \sin v, 0 \rangle $$
+$$ \frac{\partial \vec{r}}{\partial v} = \langle - u \sin v, u \cos v, 1 \rangle
+$$
+
+Substituting for $u = 3$ and $v = 4$,
+$$ \frac{\partial \vec{r}}{\partial u} = \langle -0.654, -0.757, 0 \rangle $$
+$$ \frac{\partial \vec{r}}{\partial v} = \langle 2.270, -1.961, 1 \rangle $$
+
+Using linear approximation, the adjacent sides can be calculated:
+$$ \vec{r}(3 + \Delta u, 4) - \vec{r}(3, 4) =\langle -0.654, -0.757, 0
+\rangle\Delta u $$
+$$ \vec{r}(3, 4 + \Delta v) - \vec{r}(3, 4) =  \langle 2.270, -1.961, 1 \rangle
+\Delta v $$
+
+Computing the cosine of the angle between using the dot product formula:
+$$ \frac{\langle -0.654, -0.757, 0 \rangle \cdot \langle 2.270, -1.961, 1 \rangle}{\vert \langle -0.654, -0.757, 0
+\rangle\vert \vert\langle 2.270, -1.961, 1 \rangle \vert} = -0.0000325 $$
+
+This is approximately zero, therefore these sides roughly form a right angle.
+
+\subsection*{Part B}
+
+Taking the normal of the computed sides in Part A:
+$$ \vert \langle -0.654, -0.757, 0 \rangle \vert \Delta u = 1.00038 \Delta u $$
+$$ \vert \langle 2.270, -1.961, 1 \rangle \vert \Delta v = 3.16203 \Delta v $$
+
+\subsection*{Part C}
+
+Multiplying length of each side:
+$$ 1.00038 \Delta u \cdot 3.16203 \Delta v = 3.163 \Delta u \Delta v $$
+
+\subsection*{Part A'}
+
+Taking the dot product of the two partial derivatives (given that they represent
+two adjacent sides through linear approximation):
+$$ \langle \cos v_0, \sin v_0, 0 \rangle \cdot \langle -u_0 \sin v_0, u_0 \cos
+v_0, 1 \rangle = 0 $$
+
+Therefore, these sides roughly form a right angle.
+
+\subsection*{Part B'}
+
+Computing the normal of each of the side vectors:
+$$  \langle \cos v_0, \sin v_0, 0 \rangle = \sqrt{ \sin^2 v_0 + \cos^2 v_0 }
+\Delta u $$
+$$ \langle -u_0 \sin v_0, u_0 \cos v_0, 1 \rangle = \sqrt{ u_0^2 \sin^2 v_0 +
+u_0^2 \cos^2 + 1} \Delta v $$
+
+\subsection*{Part C'}
+
+Multiplying these two lengths to find area:
+$$ \sqrt{ \sin^2 v_0 + \cos^2 v_0 } \Delta u \cdot \sqrt{ u_0^2 \sin^2 v_0 +
+u_0^2 \cos^2 + 1} \Delta v = \sqrt{u_0^2 + 1} \Delta u \Delta v $$
+
+\subsection*{Part D}
+
+Using the result from Part C' to construct the integral for total surface area:
+$$ \int\limits_0^{10} \int\limits_{-10}^{10} \sqrt{u^2 + 1} du dv $$
+
+\subsection*{Part E}
+
+The result of this integral is approximately $10^3$.
+
+\section*{Problem 14}
+
+\subsection*{Part A}
+
+The partial derivatives of the parameterization:
+$$ \frac{\partial \vec{r}}{\partial \theta} = \langle - \sin \theta (3 + 2 \cos
+\phi), \cos \theta (3 + 2 \cos \phi), 0 \rangle $$
+$$ \frac{\partial \vec{r}}{\partial \phi} = \langle -2 \cos \theta \sin \phi, -2
+\sin \theta \sin \phi, 2 \sin \phi \rangle $$
+
+Computing the dot product of these vectors to confirm the small section is
+approximately a rectangle:
+$$ \langle - \sin \theta (3 + 2 \cos \phi), \cos \theta (3 + 2 \cos \phi), 0
+\rangle \cdot  \langle -2 \cos \theta \sin \phi, -2 \sin \theta \sin \phi, 2 \sin
+\phi \rangle = 0 $$
+
+Computing side lengths:
+$$  \vert \langle - \sin \theta (3 + 2 \cos \phi), \cos \theta (3 + 2 \cos \phi), 0
+\rangle \vert \Delta \theta $$
+$$ \vert \langle -2 \cos \theta \sin \phi, -2 \sin \theta \sin \phi, 2 \sin \phi
+\rangle \vert \Delta \phi $$
+
+Multiplying to determine area:
+\begin{equation*}
+  \begin{split}
+    \vert \langle - \sin \theta (3 + &2 \cos \phi), \cos \theta (3 + 2 \cos
+    \phi), 0 \rangle \vert \Delta \theta \\ \cdot & \vert \langle -2 \cos \theta \sin
+    \phi, -2 \sin \theta \sin \phi, 2 \sin \phi \rangle \vert \Delta \phi \\ = & (6 +
+    4 \cos \phi) \Delta \theta \Delta phi
+  \end{split}
+\end{equation*}
+
+Summing this small area over the entire surface:
+$$\int\limits_0^{2 \pi} \int\limits_0^{2 \pi} (6 + 4 \cos \phi) d\theta d\phi =
+236.871 $$
+
+\subsection*{Part B}
+
+The new curve $C$ is defined with $\phi$ going from $\pi/2$ to $3\pi/2$. It is
+then rotated completely around, so $\theta$ remains from $0$ to $2 \pi$. The
+integral becomes:
+$$ \int\limits_{\pi/2}^{3 \pi/ 2} \int\limits_0^{2 \pi} (6 + 4 \cos \phi)
+d\theta d\phi = 68.170 $$
+
+\subsection*{Part C}
+
+Solving for $\phi$ when $z = 1$:
+$$ 2 \sin \phi = 1 $$
+$$ \phi = \pi/6, 5\pi/6 $$
+
+The new curve $C$ is defined with $\phi$ going from $\pi/6$ to $5\pi/6$. It is
+also rotated completely around, so $\theta$ remains from $0$ to $2 \pi$. The
+integral becomes:
+$$ \int\limits_{\pi/6}^{5\pi/6} \int\limits_0^{2 \pi} (6 + 4 \cos \phi) d\theta
+d\phi = 78.957 $$
 
 \end{document}
 
