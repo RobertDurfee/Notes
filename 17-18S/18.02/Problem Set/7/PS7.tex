@@ -246,6 +246,32 @@ $\theta = 0$ at the positive $x$-axis.
 
 \section*{Problem 9}
 
+The parameterization of the top hemisphere of the unit circle is:
+$$ \vec{r}(\theta, \phi) = \langle \cos \theta \sin \phi, \sin \theta \sin \phi,
+\cos \phi \rangle $$
 
+The partial derivatives of this parameterization are:
+$$ \frac{\partial \vec{r}}{\partial \theta} = \langle -\sin \theta \sin \phi,
+\cos \theta \sin \phi, 0 \rangle $$
+$$ \frac{\partial \vec{r}}{\partial \phi} = \langle \cos \theta \cos \phi, \sin
+\theta \cos \phi, -\sin \phi \rangle $$
+
+The cross product of these two vectors:
+$$ \frac{\partial \vec{r}}{\partial \theta} \times \frac{\partial
+\vec{r}}{\partial \phi} =
+\begin{vmatrix}
+  -\sin \theta \sin \phi & \cos \theta \sin \phi & 0 \\
+  \cos \theta \cos \phi & \sin \theta \cos \phi & - \sin \phi \\
+\end{vmatrix} $$
+
+Expanding this determinant:
+$$ \frac{\partial \vec{r}}{\partial \theta} \times \frac{\partial
+\vec{r}}{\partial \phi} = \langle -\cos \theta \sin^2 \phi, -\sin \theta \sin^2
+\phi, -\cos \phi \sin \phi \rangle $$
+
+The normal of this vector is:
+$$ \sin \phi $$
+
+Computing the integral:
 
 \end{document}
