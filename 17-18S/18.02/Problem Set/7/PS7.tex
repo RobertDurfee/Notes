@@ -219,5 +219,33 @@ $$ 0 \leq \phi \leq \pi / 3 $$
 
 \section*{Problem 8}
 
-\end{document}
+The general equation for a sphere in Cartesian coordinates is $x^2 + y^2 + z^2 =
+r^2$. This equation can be solved for $z$:
+$$ z = \pm \sqrt{r^2 - x^2 - y^2} $$
 
+Since our surface only appears in the region where $z > 0$, this simplifies to 
+$$ z = \sqrt{r^2 - x^2 - y^2} $$
+
+Given our radius is 1, the parameterization follows:
+$$ \vec{r}(u, v) = \langle u, v, \sqrt{1 - u^2 - v^2} \rangle $$
+
+Since $z \geq 1/2$, 
+$$ 1 / 2 \leq \sqrt{1 - u^2 - v^2} $$
+
+Solving for a standard circle:
+$$u^2 + v^2 = 1 - \left(1/2)\right)^2 $$
+
+The radius is then $\sqrt{3} / 2$. So the Region $R$ must be part of a circle
+centered at (0, 0) with a radius $\sqrt{3} / 2$.
+
+\bigbreak
+
+We also know from the Problem 7 that $\pi / 4 \leq \theta \leq  5 \pi / 4$. This
+further defines $R$ as the half-circle between $\pi / 4$ and $5 \pi / 4$ where
+$\theta = 0$ at the positive $x$-axis.
+
+\section*{Problem 9}
+
+
+
+\end{document}
