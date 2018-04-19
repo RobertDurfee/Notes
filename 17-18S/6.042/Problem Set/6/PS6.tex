@@ -1,0 +1,200 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 6.042 Problem Set 6 }
+\author{ Robert Durfee }
+\date{ April 20, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+I spent approximately 1 hours working on this problem in collaboration with
+Daniella Guillen.
+
+\subsection*{Part A}
+
+\begin{proof}
+  The proof is by induction on the number of plays in the game.
+  \begin{center}
+    $P(n) ::=$ The number $x$ created during the $n$th play of the game is a
+    linear combination of the starting numbers $a$ and $b$.
+  \end{center}
+
+  \noindent\textbf{Base case}: In the first play of the game, the only two numbers on the
+  board are $a$ and $b$. WLOG, $a > b$, the only play is $x = a - b$.
+  $x$ is a linear combination of $a$ and $b$ with the coefficients $1$ and $-1$
+  respectively. Thus, $P(1)$ is true.
+
+  \bigbreak
+
+  \noindent\textbf{Inductive step}: Assume all the previous plays in the game 1 through
+  $n$ resulted in numbers on the board which can be represented as linear
+  combinations of $a$ and $b$. Then we can choose two numbers $x_1$ and $x_2$ on
+  the board. These two numbers can be written as linear combinations of $a$ and
+  $b$ such as:
+  $$ x_1 = s_1 a + t_1 b $$
+  $$ x_2 = s_2 a + t_2 b $$
+  WLOG, $x_1 > x_2$, the next play can be written $x' = x_1 - x_2$. From the
+  assumption about $x_1$ and $x_2$, 
+  $$ x' = \left(s_1 a + t_1 b\right) - \left(s_2 a + t_2 b\right) $$
+  Which, by combining like terms, can be written as a linear combination of $a$
+  and $b$ as follows:
+  $$ x' = \left(s_1 - s_2\right)a + \left(t_1 - t_2\right)b $$
+  Thus, $P(n + 1)$ is true.
+
+  \bigbreak
+
+  Given the induction hypothesis holds for the base case and the inductive step,
+  it holds for all plays during the game. Since all numbers on the board can be
+  written as a linear combination of $a$ and $b$, it follows from Corollary
+  9.2.3 that every number on the board is a multiple of $\gcd(a, b)$.
+ 
+\end{proof}
+
+\break
+
+\subsection*{Part B}
+
+\break
+
+\subsection*{Part C}
+
+Given that every number on the board is a multiple of the $\gcd(a, b)$ and that
+every multiple of the $\gcd(a,b)$ is on the board is in $[\gcd(a,b) ..
+\max(a,b)]$, it is possible to count the number of numbers that will be on the
+board at the end of the game. If that number is odd, Player 1 will always win.
+If that number is even, Player 2 will always win.
+
+\break
+
+\section*{Problem 2}
+
+I spent approximately 20 minutes working on this problem in collaboration with
+Daniella Guillen.
+
+\bigbreak
+
+We are given:
+$$ y \equiv m_1 x + b_1 \pmod{p} $$
+$$ y \equiv m_2 x + b_2 \pmod{p} $$
+
+Using the rule of transitivity, we can combine these two congruences:
+$$ m_1 x + b_1 \equiv m_2 x + b_2 \pmod{p} $$
+
+Since there is always an additive inverse in any modulo, we can add the additive
+inverse of $b_1$ (which I will denote using the notation $a^{-1(a)}$) to both
+sides:
+$$ m_1 x + b_1 + b_1^{-1(a)} \equiv m_2 x + b_2 + b_1^{-1(a)} \pmod{p} $$
+
+Then the $b_1$'s will cancel. Now we can take the additive inverse of $m_2$
+multiplied by $x$ and add that to both sides:
+$$ m_1 x + m_2^{-1(a)} \equiv m_2 x + m_2^{-1(a)} x + b_2 + b_1^{-1(a)} \pmod{p}
+$$
+
+Grouping similar $x$ terms on both sides using the rule of distributivity:
+$$ \left(m_1 + m_2^{-1(a)}\right) x \equiv \left(m_2 + m_2^{-1(a)}\right) x +
+b_2 + b_1^{-1(a)} \pmod{p} $$
+
+Then the $m_2$'s will cancel. Now, provided that $m_1 \neq m_2$ and $p$ is
+prime, we can multiply the multiplicative inverse of $m_1 + m_2^{-1(a)}$ (which
+I will denote using the notation $a^{-1(m)}$) to both sides:
+$$ \left(m_1 + m_2^{-1(a)}\right)^{-1(m)} \left(m_1 + m_2^{-1(a)}\right) x
+\equiv \left(m_1 + m_2^{-1(a)}\right) \left(b_2 + b_1^{-1(a)}\right) \pmod{p} $$
+
+Then the $m_1 + m_2^{-1(a)}$ term will cancel leaving:
+$$ x \equiv \left(m_1 + m_2^{-1(a)}\right) \left(b_2 + b_1^{-1(a)}\right)
+\pmod{p} $$
+
+Substituting $x$ into either equation above yields $y$:
+$$ y \equiv m_1 \left(m_1 + m_2^{-1(a)}\right) \left(b_2 + b_1^{-1(a)}\right) +
+b_1 \pmod{p} $$
+
+\break
+
+\section*{Problem 3}
+
+I spent approximately 2 hours working on this problem in collaboration with
+Daniella Guillen.
+
+\subsection*{Part A}
+
+We are given that $p_i$ does not divide $a$ and the expression:
+$$ a^{\phi(m)} \pmod{p_i^{k_i}} $$
+
+Since $m = p_1^{k_1} \ldots p_n^{k_n}$ where each $p_i$ is prime, then each
+$p_i^{k_i}$ must be relatively prime. Thus, using Theorem 9.10.10.2,
+$$ \phi(m) = \phi\left(p_1^{k_1}\right) \ldots \phi\left(p_i^{k_i}\right)
+\ldots \phi\left(p_n^{k_n}\right) $$
+
+So the expression is congruent to:
+$$ a^{\phi\left(p_1^{k_1}\right) \ldots \phi\left(p_i^{k_i}\right) \ldots
+\phi\left(p_n^{k_n}\right)} \pmod{p_i^{k_i}} $$
+
+Pulling the $\phi\left(p_i^{k_i}\right)$ term to the front of the exponent:
+$$ \left(a^{\phi\left(p_i^{k_i}\right)}
+\right)^{\phi\left(p_1^{k_1}\right) \ldots \phi\left(p_{i-1}^{k_{i-1}}\right)
+\phi\left(p_{i+1}^{k_{i+1}}\right)\ldots \phi\left(p_n^{k_n}\right)}
+\pmod{p_i^{k_i}} $$
+
+From Euler's Theorem,
+$$ a^{\phi\left(p_i^{k_i}\right)} \equiv 1 \pmod{p_i^{k_i}} $$
+
+So the expression is congruent to:
+$$ 1^{\phi\left(p_1^{k_1}\right) \ldots \phi\left(p_{i-1}^{k_{i-1}}\right)
+\phi\left(p_{i+1}^{k_{i+1}}\right)\ldots \phi\left(p_n^{k_n}\right)} \equiv 1
+\pmod{p_i^{k_i}} $$
+
+\break
+
+\subsection*{Part B}
+
+Since $p_i \vert a$, then $p_i^{k_i} \vert a^{m - \phi(m)}$ when $k_i \leq m -
+\phi(m)$.
+
+\bigbreak
+
+The meaning of $\phi(m)$ is the number of numbers in $[0..m)$ that are
+relatively prime to $m$. Since $m$ includes all numbers in that range, $m -
+\phi(m)$ is the number of numbers \textit{not} relatively prime to $m$. So we
+have to show that the number of numbers not relatively prime to $m$ is at least
+as large as $k_i$.
+
+\bigbreak
+
+All the $p$'s together are the unique prime factors of $m$. With their $k$
+exponents, the multiplication of all the terms is the prime factorization of
+$m$. As such, for $k_i$, we can know at least $k_i$ numbers that are not
+relatively prime to $m$. Namely, $p_i^{1}, p_i^{2}, \ldots, p_i^{k_i}$.
+Thus, $k_i \leq m - \phi(m)$.
+
+\bigbreak
+
+From this we can conclude $p_i^{k_i} \vert a^{m - \phi(m)}$ which, in turn,
+shows:
+$$ a^{m - \phi(m)} \equiv 0 \pmod{p_i^{k_i}} $$
+
+\break
+
+\subsection*{Part C}
+
+
+
+\end{document}
+
