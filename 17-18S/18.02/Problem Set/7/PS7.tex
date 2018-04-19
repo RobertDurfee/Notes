@@ -1,0 +1,223 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{ 18.02 Problem Set 7 }
+\author{ Robert Durfee }
+\date{ April 20, 2018 }
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+Let $\vec{v} = \langle v_1, v_2, v_3 \rangle$ and $\vec{w} = \lambda \vec{v} =
+\langle \lambda v_1, \lambda v_2, \lambda v_3 \rangle$.
+
+\bigbreak
+
+Computing the cross product of $\vec{v}$ and $\vec{w}$:
+$$ \vec{v} \times \vec{w} = 
+\begin{vmatrix}
+  \hat{i} & \hat{j} & \hat{k} \\
+  v_1 & v_2 & v_3 \\
+  \lambda v_1 & \lambda v_2 & \lambda v_3 \\
+\end{vmatrix} $$
+
+Expanding the determinant:
+$$\langle v_2 \lambda v_3 - v_3 \lambda v_2, v_1 \lambda v_3 - v_3 \lambda v_1,
+v_1 \lambda v_2 - v_2 \lambda v_1 \rangle = 0 $$
+
+Now let $\vec{v} = \langle v_1, v_2, v_3 \rangle$ and $\vec{w} = \langle w_1,
+w_2, w_3 \rangle$. 
+
+\bigbreak
+
+Computing both cross products:
+$$ \vec{v} \times \vec{w} = 
+\begin{vmatrix}
+   \hat{i} & \hat{j} & \hat{k} \\
+   v_1 & v_2 & v_3 \\
+   w_1 & w_2 & w_3 \\
+\end{vmatrix} $$
+$$ -\vec{w} \times \vec{v} =
+\begin{vmatrix}
+   \hat{i} & \hat{j} & \hat{k} \\
+   -w_1 & -w_2 & -w_3 \\
+   v_1 & v_2 & v_3 \\
+\end{vmatrix}$$ 
+
+Expanding both determinants:
+$$ \langle v_2 w_3 - v_3 w_2, v_1 w_3 - v_3 w_1, v_1 w_2 - v_2 w_1 \rangle$$
+$$ \langle -w_2 v_3 + w_3 v_2, -w_1 v_3 + w_3 v_1, -w_1 v_2 + w_2 v_1 \rangle $$
+
+These two expressions have equal components, therefore
+$$ \vec{v} \times \vec{w} = -\vec{w} \times \vec{v} $$
+
+\section*{Problem 2}
+
+Let $\vec{v} = \langle 1, 1, 0 \rangle$ and $\vec{w} = \langle 4, 2, 0 \rangle$. 
+
+\bigbreak
+
+The cross product of these two vectors will yield the area of the parallelogram
+defined by those three points. 
+$$ \vec{v} \times \vec{w} = 
+\begin{vmatrix}
+  \hat{i} & \hat{j} & \hat{k} \\
+  1 & 1 & 0 \\
+  4 & 2 & 0 \\
+\end{vmatrix} $$
+
+Expanding the determinant:
+$$ \vec{v} \times \vec{w} = \langle 0, 0, -2 \rangle $$
+
+Taking the norm will yield the area:
+$$ \vert \langle 0, 0, -2 \rangle \vert = 2 $$
+
+Dividing by $2$ to get the area of one triangle in the parallelogram:
+$$ A = 1 $$
+
+\section*{Problem 3}
+
+Let $\vec{v} = \langle -1, 2, 0 \rangle$ and $\vec{w} = \langle -1, 0, 6
+\rangle$.
+
+\bigbreak
+
+The cross product of these vectors will yield the area of the parallelogram
+defined by those three points:
+$$ \vec{v} \times \vec{w} = 
+\begin{vmatrix}
+  \hat{i} & \hat{j} & \hat{k} \\
+  -1 & 2 & 0 \\
+  -1 & 0 & 6 \\
+\end{vmatrix} $$
+
+Expanding the determinant:
+$$ \vec{v} \times \vec{w} = \langle 12, 6, 2 \rangle $$
+
+Taking the norm will yield the area:
+$$ \vert \langle 12, 6, 2 \rangle \vert = 2 \sqrt{46} $$
+
+Dividing by $2$ to get the area of one triangle in the parallelogram:
+$$ A = \sqrt{46} $$
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+Let $\vec{v} = \langle 1, -1, 1 \rangle$ and $\vec{w} = \langle 2, -1, 6
+\rangle$.
+
+\bigbreak
+
+The cross product will result in a vector that is perpendicular to both these
+vectors and, thus, a normal vector to the plane defined by these points:
+$$ \vec{v} \times \vec{w} = 
+\begin{vmatrix}
+  \hat{i} & \hat{j} & \hat{k} \\
+  1 & -1 & 1 \\
+  2 & -1 & 6 \\
+\end{vmatrix} $$
+
+Expanding the determinant:
+$$ \vec{v} \times \vec{w} = \langle -5, -4, 1 \rangle $$
+
+\subsection*{Part B}
+
+The components of the normal vector represent the coefficients of the equation
+of the plane $a$, $b$, and $c$;
+$$ -5 x -4 y + z = d $$
+
+Substituting for the point (1, 1, 0) to solve for $d$:
+$$ d = -9$$
+
+The final equation for the plane is:
+$$ -5 x -4 y + z = -9 $$
+
+\subsection*{Part C} 
+
+Testing another point in this equation (2, 0, 1):
+$$ -5 \cdot 2 - 4 \cdot 0 + 1 = -9$$
+
+This point also lies on the plane, as expected.
+
+\section*{Problem 5}
+
+Let $\vec{v} = \langle -1, 2, 0 \rangle$ and $\vec{w} = \langle -1, 0, 6
+\rangle$.
+
+\bigbreak
+
+From Problem 3, we know the normal vector to the plane is:
+$$ \vec{n} = \langle 12, 6, 2 \rangle $$
+
+The components of this vector determine the coefficients of the plane equation:
+$$ 12 x + 6 y + 2 z = d $$
+
+Substituting for the point (1, 0, 0) to solve for $d$:
+$$ d = 12 $$
+
+The final equation for the plane is:
+$$ 12 x + 6 y + 2z = 12 $$
+
+Solving for $z$:
+$$ z = 6 - 6 x - 3 y $$
+
+The parameterization of this surface can be:
+$$ \vec{r}(u, v) = \langle u, v, 6 - 6u - 3v \rangle $$
+
+Over the region $R$, where $R$ is the triangle on the $u$-$v$ plane with
+vertices (0, 0), (1, 0), and (0, 2).
+
+\section*{Problem 6}
+
+The parameterization of the curve $x = 1 + y^2 + z^2$ can be
+$$ \vec{r}(u, v) = \langle 1 + u^2 + v^2, u, v \rangle $$
+
+Over the region $R$, where $R$ is the circle on the $u$-$v$ plane centered at
+(0, 0) with radius 2. 
+
+\section*{Problem 7}
+
+The parameterization of the entire sphere with $0 \leq \theta \leq 2 \pi$ and $0
+\leq \phi \leq \pi$:
+$$ \vec{r}(u, v) = \langle \cos \theta \sin \phi, \sin \theta \sin \phi, \cos
+\phi \rangle $$
+
+Since $z \geq 1/2$, from the parameterization,
+$$ \cos \phi \geq 1/2 $$
+
+This inequality is true over the range $ 0 \leq \phi \leq \pi/3$.
+
+\bigbreak
+
+Since $y \geq x$, from the parameterization,
+$$ \sin \theta \sin \phi \geq \cos \theta \sin \phi $$
+
+This inequality is true over the range $ \pi / 4 \leq \theta \leq 5 \pi / 4 $.
+
+\bigbreak
+
+So the new range for the parameterization is
+$$ \pi / 4 \leq \theta \leq 5 \pi / 4 $$
+$$ 0 \leq \phi \leq \pi / 3 $$
+
+\section*{Problem 8}
+
+\end{document}
+
