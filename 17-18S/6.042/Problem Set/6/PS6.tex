@@ -72,6 +72,47 @@ Daniella Guillen.
 
 \subsection*{Part B}
 
+\begin{proof}
+
+Let the smallest positive number on the board after the game finished be $c$.
+This number can be written $a = qc + r$ where $q$ is the quotient and $r$ is the
+remainder. 
+
+\bigbreak
+
+Given that $c$ and $a$ are on the board, $r$ could also be computed
+and placed on board through repeated subtraction of $c$ from $a$, $q$ times (as
+per the definition of division):
+$$ a - c - c - \ldots - c = r $$
+
+But $r$ is restricted to the range $[0..c)$. And since we chose $c$ to be the
+smallest positive number on the board, $r$ cannot be on the board as it would be
+less than $c$. Thus, $r$ must be zero as non-positive numbers are not allowed in
+the game.
+
+\bigbreak
+
+Since $r$ is zero, $a = qc$. This shows that $c \vert a$. Repeating this
+argument by replacing $a$ with $b$ will lead to the conclusion that $c \vert b$.
+From the properties of the greatest common divisor:
+$$ (c \vert a \land c \vert b) \iff c \vert \gcd(a, b) $$
+
+It was also shown in Part A that every number on the board (including $c$) must
+be a multiple of $\gcd(a, b)$. The only way that $c$ can both be a multiple of
+$\gcd(a,b)$ and divide $\gcd(a,b)$ is if it equals $\gcd(a,b)$.
+
+\bigbreak
+
+Since the smallest element on the board must be $\gcd(a, b)$, every other
+multiple of $\gcd(a,b)$ up to $\max(a,b)$ can be computed during the game
+through repeated subtraction. Since $\max(a,b)$ is a multiple of $\gcd(a,b)$,
+every subtraction of $\gcd(a,b)$ from it will incrementally reduce the multiple
+of $\gcd(a,b)$ until the smallest number is reached, which is $\gcd(a,b)$. And
+since this game only deals with subtraction, no number can be larger than
+$\max(a,b)$.
+
+\end{proof}
+
 \break
 
 \subsection*{Part C}
@@ -135,6 +176,7 @@ Daniella Guillen.
 
 \subsection*{Part A}
 
+\begin{proof}
 We are given that $p_i$ does not divide $a$ and the expression:
 $$ a^{\phi(m)} \pmod{p_i^{k_i}} $$
 
@@ -160,11 +202,13 @@ So the expression is congruent to:
 $$ 1^{\phi\left(p_1^{k_1}\right) \ldots \phi\left(p_{i-1}^{k_{i-1}}\right)
 \phi\left(p_{i+1}^{k_{i+1}}\right)\ldots \phi\left(p_n^{k_n}\right)} \equiv 1
 \pmod{p_i^{k_i}} $$
+\end{proof}
 
 \break
 
 \subsection*{Part B}
 
+\begin{proof}
 Since $p_i \vert a$, then $p_i^{k_i} \vert a^{m - \phi(m)}$ when $k_i \leq m -
 \phi(m)$.
 
@@ -189,6 +233,7 @@ Thus, $k_i \leq m - \phi(m)$.
 From this we can conclude $p_i^{k_i} \vert a^{m - \phi(m)}$ which, in turn,
 shows:
 $$ a^{m - \phi(m)} \equiv 0 \pmod{p_i^{k_i}} $$
+\end{proof}
 
 \break
 
