@@ -37,26 +37,29 @@ Daniella Guillen.
     linear combination of the starting numbers $a$ and $b$.
   \end{center}
 
-  \noindent\textbf{Base case}: In the first play of the game, the only two numbers on the
-  board are $a$ and $b$. WLOG, $a > b$, the only play is $x = a - b$.
-  $x$ is a linear combination of $a$ and $b$ with the coefficients $1$ and $-1$
-  respectively. Thus, $P(1)$ is true.
+  \noindent\textbf{Base case}: In the first play of the game, the only two
+  numbers on the board are $a$ and $b$. WLOG, $a > b$, the only play is $x = a -
+  b$.  $x$ is a linear combination of $a$ and $b$ with the coefficients $1$ and
+  $-1$ respectively. Thus, $P(1)$ is true.
 
   \bigbreak
 
-  \noindent\textbf{Inductive step}: Assume all the previous plays in the game 1 through
-  $n$ resulted in numbers on the board which can be represented as linear
-  combinations of $a$ and $b$. Then we can choose two numbers $x_1$ and $x_2$ on
-  the board. These two numbers can be written as linear combinations of $a$ and
-  $b$ such as:
+  \noindent\textbf{Inductive step}: Assume all the previous plays in the game 1
+  through $n$ resulted in numbers on the board which can be represented as
+  linear combinations of $a$ and $b$. Then we can choose two numbers $x_1$ and
+  $x_2$ on the board. These two numbers can be written as linear combinations of
+  $a$ and $b$ such as:
   $$ x_1 = s_1 a + t_1 b $$
   $$ x_2 = s_2 a + t_2 b $$
-  WLOG, $x_1 > x_2$, the next play can be written $x' = x_1 - x_2$. From the
-  assumption about $x_1$ and $x_2$, 
+  
+  WLOG $x_1 > x_2$, the next play can be written $x' = x_1 - x_2$. From the
+  assumption about $x_1$ and $x_2$,
   $$ x' = \left(s_1 a + t_1 b\right) - \left(s_2 a + t_2 b\right) $$
+
   Which, by combining like terms, can be written as a linear combination of $a$
   and $b$ as follows:
   $$ x' = \left(s_1 - s_2\right)a + \left(t_1 - t_2\right)b $$
+
   Thus, $P(n + 1)$ is true.
 
   \bigbreak
@@ -65,7 +68,7 @@ Daniella Guillen.
   it holds for all plays during the game. Since all numbers on the board can be
   written as a linear combination of $a$ and $b$, it follows from Corollary
   9.2.3 that every number on the board is a multiple of $\gcd(a, b)$.
- 
+
 \end{proof}
 
 \break
@@ -74,42 +77,42 @@ Daniella Guillen.
 
 \begin{proof}
 
-Let the smallest positive number on the board after the game finished be $c$.
-This number can be written $a = qc + r$ where $q$ is the quotient and $r$ is the
-remainder. 
+  Let the smallest positive number on the board after the game finished be $c$.
+  This number can be written $a = qc + r$ where $q$ is the quotient and $r$ is
+  the remainder.
 
-\bigbreak
+  \bigbreak
 
-Given that $c$ and $a$ are on the board, $r$ could also be computed
-and placed on board through repeated subtraction of $c$ from $a$, $q$ times (as
-per the definition of division):
-$$ a - c - c - \ldots - c = r $$
+  Given that $c$ and $a$ are on the board, $r$ could also be computed and placed
+  on board through repeated subtraction of $c$ from $a$, $q$ times (as per the
+  definition of division): 
+  $$ a - c - c - \ldots - c = r $$
 
-But $r$ is restricted to the range $[0..c)$. And since we chose $c$ to be the
-smallest positive number on the board, $r$ cannot be on the board as it would be
-less than $c$. Thus, $r$ must be zero as non-positive numbers are not allowed in
-the game.
+  But $r$ is restricted to the range $[0..c)$. And since we chose $c$ to be the
+  smallest positive number on the board, $r$ cannot be on the board as it would
+  be less than $c$. Thus, $r$ must be zero as non-positive numbers are not
+  allowed in the game.
 
-\bigbreak
+  \bigbreak
 
-Since $r$ is zero, $a = qc$. This shows that $c \vert a$. Repeating this
-argument by replacing $a$ with $b$ will lead to the conclusion that $c \vert b$.
-From the properties of the greatest common divisor:
-$$ (c \vert a \land c \vert b) \iff c \vert \gcd(a, b) $$
+  Since $r$ is zero, $a = qc$. This shows that $c \vert a$. Repeating this
+  argument by replacing $a$ with $b$ will lead to the conclusion that $c \vert
+  b$.  From the properties of the greatest common divisor: 
+  $$ (c \vert a \land c \vert b) \iff c \vert \gcd(a, b) $$
 
-It was also shown in Part A that every number on the board (including $c$) must
-be a multiple of $\gcd(a, b)$. The only way that $c$ can both be a multiple of
-$\gcd(a,b)$ and divide $\gcd(a,b)$ is if it equals $\gcd(a,b)$.
+  It was also shown in Part A that every number on the board (including $c$)
+  must be a multiple of $\gcd(a, b)$. The only way that $c$ can both be a
+  multiple of $\gcd(a,b)$ and divide $\gcd(a,b)$ is if it equals $\gcd(a,b)$.
 
-\bigbreak
+  \bigbreak
 
-Since the smallest element on the board must be $\gcd(a, b)$, every other
-multiple of $\gcd(a,b)$ up to $\max(a,b)$ can be computed during the game
-through repeated subtraction. Since $\max(a,b)$ is a multiple of $\gcd(a,b)$,
-every subtraction of $\gcd(a,b)$ from it will incrementally reduce the multiple
-of $\gcd(a,b)$ until the smallest number is reached, which is $\gcd(a,b)$. And
-since this game only deals with subtraction, no number can be larger than
-$\max(a,b)$.
+  Since the smallest element on the board must be $\gcd(a, b)$, every other
+  multiple of $\gcd(a,b)$ up to $\max(a,b)$ can be computed during the game
+  through repeated subtraction. Since $\max(a,b)$ is a multiple of $\gcd(a,b)$,
+  every repeated subtraction (or division) of $\gcd(a,b)$ from it will
+  incrementally reduce the multiple of $\gcd(a,b)$ until the smallest number is
+  reached, which is $\gcd(a,b)$. And since this game only deals with
+  subtraction, no number can be larger than $\max(a,b)$.
 
 \end{proof}
 
@@ -132,40 +135,40 @@ Daniella Guillen.
 
 \bigbreak
 
-We are given:
-$$ y \equiv m_1 x + b_1 \pmod{p} $$
-$$ y \equiv m_2 x + b_2 \pmod{p} $$
+We are given: 
+$$ y \equiv m_1 x + b_1 \pmod{p} $$ $$ y \equiv m_2 x + b_2 \pmod{p} $$
 
-Using the rule of transitivity, we can combine these two congruences:
+Using the rule of transitivity, we can combine these two congruences: 
 $$ m_1 x + b_1 \equiv m_2 x + b_2 \pmod{p} $$
 
 Since there is always an additive inverse in any modulo, we can add the additive
-inverse of $b_1$ (which I will denote using the notation $a^{-1(a)}$) to both
-sides:
+inverse of $b_1$ (which I will denote using $a^{-1(a)}$) to both
+sides: 
 $$ m_1 x + b_1 + b_1^{-1(a)} \equiv m_2 x + b_2 + b_1^{-1(a)} \pmod{p} $$
 
 Then the $b_1$'s will cancel. Now we can take the additive inverse of $m_2$
-multiplied by $x$ and add that to both sides:
+multiplied by $x$ and add that to both sides: 
 $$ m_1 x + m_2^{-1(a)} \equiv m_2 x + m_2^{-1(a)} x + b_2 + b_1^{-1(a)} \pmod{p}
 $$
 
-Grouping similar $x$ terms on both sides using the rule of distributivity:
+Grouping similar $x$ terms on both sides using the rule of distributivity: 
 $$ \left(m_1 + m_2^{-1(a)}\right) x \equiv \left(m_2 + m_2^{-1(a)}\right) x +
 b_2 + b_1^{-1(a)} \pmod{p} $$
 
 Then the $m_2$'s will cancel. Now, provided that $m_1 \neq m_2$ and $p$ is
 prime, we can multiply the multiplicative inverse of $m_1 + m_2^{-1(a)}$ (which
-I will denote using the notation $a^{-1(m)}$) to both sides:
+I will denote using $a^{-1(m)}$) to both sides: 
 $$ \left(m_1 + m_2^{-1(a)}\right)^{-1(m)} \left(m_1 + m_2^{-1(a)}\right) x
-\equiv \left(m_1 + m_2^{-1(a)}\right) \left(b_2 + b_1^{-1(a)}\right) \pmod{p} $$
-
-Then the $m_1 + m_2^{-1(a)}$ term will cancel leaving:
-$$ x \equiv \left(m_1 + m_2^{-1(a)}\right) \left(b_2 + b_1^{-1(a)}\right)
+\equiv \left(m_1 + m_2^{-1(a)}\right)^{-1(m)} \left(b_2 + b_1^{-1(a)}\right)
 \pmod{p} $$
 
-Substituting $x$ into either equation above yields $y$:
-$$ y \equiv m_1 \left(m_1 + m_2^{-1(a)}\right) \left(b_2 + b_1^{-1(a)}\right) +
-b_1 \pmod{p} $$
+Then the $m_1 + m_2^{-1(a)}$ term will cancel leaving: 
+$$ x \equiv \left(m_1 + m_2^{-1(a)}\right)^{-1(m)} \left(b_2 +
+b_1^{-1(a)}\right) \pmod{p} $$
+
+Substituting $x$ into either equation above yields $y$: 
+$$ y \equiv m_1 \left(m_1 + m_2^{-1(a)}\right)^{-1(m)} \left(b_2 +
+b_1^{-1(a)}\right) + b_1 \pmod{p} $$
 
 \break
 
@@ -177,31 +180,38 @@ Daniella Guillen.
 \subsection*{Part A}
 
 \begin{proof}
-We are given that $p_i$ does not divide $a$ and the expression:
-$$ a^{\phi(m)} \pmod{p_i^{k_i}} $$
+  We are given that $p_i$ does not divide $a$ and the expression: 
+  $$ a^{\phi(m)} \pmod{p_i^{k_i}} $$
 
-Since $m = p_1^{k_1} \ldots p_n^{k_n}$ where each $p_i$ is prime, then each
-$p_i^{k_i}$ must be relatively prime. Thus, using Theorem 9.10.10.2,
-$$ \phi(m) = \phi\left(p_1^{k_1}\right) \ldots \phi\left(p_i^{k_i}\right)
-\ldots \phi\left(p_n^{k_n}\right) $$
+  Since $m = p_1^{k_1} \ldots p_n^{k_n}$ where each $p_i$ is prime, then each
+  $p_i^{k_i}$ must be relatively prime. Thus, using Theorem 9.10.10.2, 
+  $$ \phi(m) = \phi\left(p_1^{k_1}\right) \ldots \phi\left(p_i^{k_i}\right)
+  \ldots \phi\left(p_n^{k_n}\right) $$
 
-So the expression is congruent to:
-$$ a^{\phi\left(p_1^{k_1}\right) \ldots \phi\left(p_i^{k_i}\right) \ldots
-\phi\left(p_n^{k_n}\right)} \pmod{p_i^{k_i}} $$
+  So the expression is congruent to: 
+  $$ a^{\phi\left(p_1^{k_1}\right) \ldots \phi\left(p_i^{k_i}\right) \ldots
+  \phi\left(p_n^{k_n}\right)} \pmod{p_i^{k_i}} $$
 
-Pulling the $\phi\left(p_i^{k_i}\right)$ term to the front of the exponent:
-$$ \left(a^{\phi\left(p_i^{k_i}\right)}
-\right)^{\phi\left(p_1^{k_1}\right) \ldots \phi\left(p_{i-1}^{k_{i-1}}\right)
-\phi\left(p_{i+1}^{k_{i+1}}\right)\ldots \phi\left(p_n^{k_n}\right)}
-\pmod{p_i^{k_i}} $$
+  Pulling the $\phi\left(p_i^{k_i}\right)$ term to the front of the exponent: 
+  $$ \left(a^{\phi\left(p_i^{k_i}\right)} \right)^{\phi\left(p_1^{k_1}\right)
+  \ldots \phi\left(p_{i-1}^{k_{i-1}}\right)
+  \phi\left(p_{i+1}^{k_{i+1}}\right)\ldots \phi\left(p_n^{k_n}\right)}
+  \pmod{p_i^{k_i}} $$
 
-From Euler's Theorem,
-$$ a^{\phi\left(p_i^{k_i}\right)} \equiv 1 \pmod{p_i^{k_i}} $$
+  From Euler's Theorem, 
+  $$ a^{\phi\left(p_i^{k_i}\right)} \equiv 1 \pmod{p_i^{k_i}} $$
 
-So the expression is congruent to:
-$$ 1^{\phi\left(p_1^{k_1}\right) \ldots \phi\left(p_{i-1}^{k_{i-1}}\right)
-\phi\left(p_{i+1}^{k_{i+1}}\right)\ldots \phi\left(p_n^{k_n}\right)} \equiv 1
-\pmod{p_i^{k_i}} $$
+  So the expression is congruent to: 
+  $$ 1^{\phi\left(p_1^{k_1}\right) \ldots \phi\left(p_{i-1}^{k_{i-1}}\right)
+  \phi\left(p_{i+1}^{k_{i+1}}\right)\ldots \phi\left(p_n^{k_n}\right)}
+  \pmod{p_i^{k_i}}$$
+    
+  Which is, simply congruent to 
+  $$1 \pmod{p_i^{k_i}} $$
+
+  Thus, if $p_i$ does not divide $a$, 
+  $$ a^{\phi(m)} \equiv 1 \pmod{p_i^{k_i}} $$
+
 \end{proof}
 
 \break
@@ -209,37 +219,71 @@ $$ 1^{\phi\left(p_1^{k_1}\right) \ldots \phi\left(p_{i-1}^{k_{i-1}}\right)
 \subsection*{Part B}
 
 \begin{proof}
-Since $p_i \vert a$, then $p_i^{k_i} \vert a^{m - \phi(m)}$ when $k_i \leq m -
-\phi(m)$.
+  Since $p_i \vert a$, then $p_i^{k_i} \vert a^{m - \phi(m)}$ when $k_i \leq m -
+  \phi(m)$.
 
-\bigbreak
+  \bigbreak
 
-The meaning of $\phi(m)$ is the number of numbers in $[0..m)$ that are
-relatively prime to $m$. Since $m$ includes all numbers in that range, $m -
-\phi(m)$ is the number of numbers \textit{not} relatively prime to $m$. So we
-have to show that the number of numbers not relatively prime to $m$ is at least
-as large as $k_i$.
+  The meaning of $\phi(m)$ is the number of numbers in $[0..m)$ that are
+  relatively prime to $m$. Since $m$ includes all numbers in that range, $m -
+  \phi(m)$ is the number of numbers \textit{not} relatively prime to $m$. So we
+  have to show that the number of numbers not relatively prime to $m$ is at
+  least as large as $k_i$.
 
-\bigbreak
+  \bigbreak
 
-All the $p$'s together are the unique prime factors of $m$. With their $k$
-exponents, the multiplication of all the terms is the prime factorization of
-$m$. As such, for $k_i$, we can know at least $k_i$ numbers that are not
-relatively prime to $m$. Namely, $p_i^{1}, p_i^{2}, \ldots, p_i^{k_i}$.
-Thus, $k_i \leq m - \phi(m)$.
+  All the $p$'s together are the unique prime factors of $m$. With their $k$
+  exponents, the multiplication of all the terms is the prime factorization of
+  $m$. As such, for $k_i$, we can know at least $k_i$ numbers that are not
+  relatively prime to $m$. Namely, $p_i^{1}, p_i^{2}, \ldots, p_i^{k_i}$.  Thus,
+  $k_i \leq m - \phi(m)$.
 
-\bigbreak
+  \bigbreak
 
-From this we can conclude $p_i^{k_i} \vert a^{m - \phi(m)}$ which, in turn,
-shows:
-$$ a^{m - \phi(m)} \equiv 0 \pmod{p_i^{k_i}} $$
+  From this we can conclude $p_i^{k_i} \vert a^{m - \phi(m)}$ which, in turn,
+  shows: 
+  $$ a^{m - \phi(m)} \equiv 0 \pmod{p_i^{k_i}} $$
 \end{proof}
 
 \break
 
 \subsection*{Part C}
 
+\begin{proof}
+  From Parts A and B, it was shown that 
+  $$ p_i^{k_i} \vert a^{\phi(m)} - 1 $$ 
+  $$ p_i^{k_i} \vert a^{m - \phi(m)} $$
 
+  These two facts hold independent on what $i$ is chosen, therefore it applies
+  to all $i \in [1..n]$. From the properties of the divides relation, 
+  $$ c \vert a \implies c \vert ab $$
+
+  So the two facts can be represented in one statement: 
+  $$ p_i^{k_i} \vert a^{m - \phi(m)} \left(a^{\phi(m)} - 1\right) $$
+
+  Which is equivalent to: 
+  $$ p_i^{k_i} \vert a^m - a^{m - \phi(m)} $$
+
+  From Theorem 9.4.1 (The Fundamental Theorem of Arithmetic), the right term is
+  the product of a unique, weakly decreasing sequence of primes: 
+  $$ a^m - a^{m - \phi(m)} = q_1^{\ell_1} \ldots q_r^{\ell_r} $$
+
+  Given that each $p_i^{k_i}$ divides $q_1^{\ell_1} \ldots q_r^{\ell_r}$ and
+  that each $p_i^{k_i}$ and $q_j^{\ell_j}$ are relatively prime to all other
+  $p_i^{k_i}$'s and $q_j^{\ell_j}$'s respectively, each $p_i^{k_i}$ corresponds
+  to only one $q_j^{\ell_j}$.
+
+  \bigbreak
+
+  Since $m$ is just the product of all the relatively prime numbers $p_i^{k_i}$
+  and each $p_i^{k_i}$ corresponds to a single, unique $q_j^{\ell_j}$, the
+  product of all $p_i^{k_i}$'s must also divide $q_1^{\ell_1} \ldots
+  q_r^{\ell_r}$. Thus, 
+  $$ m \vert  a^m - a^{m - \phi(m)} $$
+
+  Which is equivalent to: 
+  $$ a^{m} \equiv a^{m - \phi(m)} \pmod{m} $$
+\end{proof}
 
 \end{document}
 
