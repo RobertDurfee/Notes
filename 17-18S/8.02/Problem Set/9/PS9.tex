@@ -1,0 +1,228 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{8.02 Problem Set 9}
+\author{Robert Durfee}
+\date{April 24, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 1}
+
+\subsection*{Part A}
+
+The power (and energy) produced by the battery, due to conservation of energy,
+must be consumed by the battery and the capacitor. Therefore,
+$$ P_{bat} = P_{res} + P_{cap} $$
+
+The energy stored in a capacitor is given by,
+$$ U_{cap} = \frac{1}{2} \frac{Q(t)^2}{C} $$
+So the power can be represented as the derivative of this with respect to time,
+$$ P_{cap}(t) = \frac{\partial}{\partial t} \left( \frac{1}{2} \frac{Q(t)^2}{C}
+\right) $$
+where the charge at any given time (since the capacitor is charging) is given
+by,
+$$ Q(t) = C \varepsilon \left(1 - e^{-t/RC} \right) $$
+Therefore, the power absorbed by a capacitor at a certain time $t$ is given by,
+$$ P_{cap}(t) = \frac{\varepsilon^2}{R} \left( -e^{-2t/RC} + e^{t/RC} \right) $$
+
+Now, we can solve the conservation of power equation for the power dissipated by
+the resistor given that the battery supplies $P_{bat}(t) = I(t) \varepsilon$,
+$$ P_{res}(t) = I(t) \varepsilon - \frac{\varepsilon^2}{R} \left( -e^{-2t/RC} +
+e^{t/RC} \right) $$
+But since current supplied by the battery depends on time as well, it is given,
+$$ I(t) = I_0 e^{-t/RC} $$
+where the initial current is given as $\varepsilon/R$ as it is like the
+capacitor is just a regular wire. So this can be substituted to get the entire
+equation for power through resistor:
+$$ P_{res}(t) = \frac{\varepsilon^2}{R} \left( e^{-t/RC} + e^{-2t/RC} - e^{t/RC}
+\right) $$
+
+Since power is equivalent to the time derivative of energy, 
+$$ P_{res}(t) = \frac{\partial E(t)}{\partial t} = \frac{\varepsilon^2}{R} \left(
+e^{-t/RC} + e^{-2t/RC} - e^{t/RC} \right) $$
+By separating variable, the total energy can be found as $t$ reaches infinity,
+$$ U_{res} = \int\limits_0^{\infty} \frac{\varepsilon^2}{R} \left( e^{-t/RC} +
+e^{-2t/RC} - e^{t/RC} \right) dt = \frac{C \varepsilon^2}{2} $$ 
+
+\subsection*{Part B}
+
+The energy stored in a capacitor is,
+$$ U_{cap} = \frac{1}{2} \frac{Q^2}{C} $$
+So at a time $t = T$, the capacitor is fully charged so
+$$ Q = C \varepsilon $$
+Thus, the total energy stored in the capacitor is,
+$$ U_{cap} = \frac{C \varepsilon^2}{2} $$
+
+This value is the same which was calculated in the previous part. Therefore, the
+total energy dissipated through the resistor is the same as the stored energy in
+the capacitor.
+
+\subsection*{Part C}
+
+In this case, it is simpler as there is no battery, only the capacitor and the
+resistor. As a result, all the energy in the capacitor will be dissipated
+through the only element, the resistor. From the previous part, the total
+energy in the capacitor is,
+$$ U_{cap} = \frac{C \varepsilon^2}{2} $$
+So the total energy dissipated through the resistor will the be same,
+$$ U_{res} = \frac{C \varepsilon^2}{2} $$
+
+\subsection*{Part D}
+
+To calculate the average power dissipated, take the energy in the discharging
+cycle and add it to the charging cycle and divide by two times the time span,
+$$ P_{avg} = \frac{1}{T} \left( \frac{C \varepsilon^2}{2} \right) $$
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+The currents, by Kirchoff's Junction Rule are related by:
+$$ I_2 = I_1 + I_3 $$
+
+\subsection*{Part B}
+
+By traversing the left loop counterclockwise, Kirchoff's Loop Rule gives:
+$$ 0 = I_3 R - I_1 R + \varepsilon - \frac{Q}{C} $$
+
+\subsection*{Part C}
+
+By traversing the right loop counterclockwise, Kirchoff's Loop Rule gives:
+$$ 0 = -I_3 R - I_2 R + \varepsilon $$
+
+\subsection*{Part D}
+
+A capacitor acts like a break in a circuit after a long time, therefore not
+current can flow through this part of the circuit,
+$$ I_1 = 0 $$
+
+\subsection*{Part E}
+
+Ohm's law gives,
+$$ \varepsilon = I R $$
+Since the total resistance is $2R$, as the left loop contributes nothing to the
+circuit, rearranging this will give us the current for both $I_2$ and $I_3$,
+$$ I_2 = I_3 = \frac{\varepsilon}{2R} $$
+
+\subsection*{Part F}
+
+Remembering the loop rule from the previous Part B,
+$$ 0 = I_3 R - I_1 R + \varepsilon - \frac{Q}{C} $$
+This can be rearranged to solve for voltage across the capacitor,
+$$ V_{cap} = I_3 R - I_1 R + \varepsilon $$
+And since $I_3$ and $I_1$ were solved for above, this equation becomes,
+$$ V_{cap} = \frac{3 \varepsilon}{2} $$
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+When the capacitor is fully charged, it acts like a break in the circuit.
+Therefore, the top arm of the circuit can be ignored. Ohm's law gives,
+$$ I = \frac{V}{R_1 + R_2} $$
+Substituting values provided,
+$$ I = \frac{5}{3 + 10} = \frac{5}{13} $$
+
+\subsection*{Part B}
+
+When the capacitor is fully charged, there is no current moving though that
+entire part of the circuit. Therefore, the potential is constant all along that
+arm of the circuit. So the voltage across the capacitor is the same as the
+voltage across $R_3$, which is given by,
+$$ V_{R2} = \left( \frac{V}{R_1 + R_2} \right) R_2 $$
+Substituting values provided,
+$$ V_{C} = \left ( \frac{5}{3 + 10} \right) \cdot 10 = \frac{50}{13} $$
+
+\subsection*{Part C}
+
+Since the voltage across the capacitor and its capacitance is known, the
+following equation is helpful for energy stored in a capacitor,
+$$ U_C = \frac{1}{2} C V^2 $$
+Substituting valeus,
+$$ U_C = \frac{1}{2} (3 \cdot 10^{-3}) \left(\frac{50}{13}\right)^2 =
+\frac{15}{676} $$
+
+\section*{Problem 4}
+
+First, define the current going through $R_1$ as $I_1$ to the left, the
+current through $R_2$ as $I_2$ upwards, and the current through $R_3$ as
+$I_3$ to the left. Then, using Kirchoff's Junction Rule,
+$$ I_3 = I_1 + I_2 $$
+As defined in the top, middle junction.
+
+Now, traversing counterclockwise around the left half of the circuit, Kirchoff's
+Loop Rule gives,
+$$ 0 = \varepsilon_2 - I_2 R_2 + I_1 R_1 - \varepsilon_1 $$
+And traversing counterclockwise around the right half of the circuit gives,
+$$ 0 = -\varepsilon_3 + I_3 R_3 + I_2 R_2 - \varepsilon_2 $$
+
+Solving this system of three equations yields the current through each battery:
+$$ I_1 = 2\ \si{A},\ I_2 = 2\ \si{A},\ I_3 = 4\ \si{A} $$
+Where each is flowing from the negative to the positive terminals through the
+battery, therefore all batteries are discharging.
+
+Using the values for each batteries voltage respectively,
+$$ P_1 = 4\ \si{W},\ P_2 = 8\ \si{W},\ P_3 = 16\ \si{W} $$
+
+\section*{Problem 5}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{"Ohmmeter"}
+  \caption{Ohmmeter}
+\end{figure}
+
+Using the displayed design for an ohmmeter, if the two leads are connected,
+there is very little resistance in the upper arm of the circuit. Therefore,
+nearly all the current will flow through this arm. So the circuit is essentially
+two resistors in series, ignoring $R_2$. Since the circuit should display $50\
+\si{\mu A}$, the total current in the series circuit must be $50\ \si{\mu A}$.
+The total voltage is given as $1.5\ \si{V}$. The total resistance is given,
+$$ R_T = R_1 + 20\ \si{\Omega} $$
+Using Ohm's Law, $R_1$ can be determined,
+$$ R_1 = \frac{V}{I} - 20\ \si{\Omega} = 29980\ \si{\Omega} $$
+
+Now, let the two leads connect to a resistor of $15\ \si{\Omega}$. The total
+resistance in the circuit is nearly unchanged. As a result, it can be assumed
+that the total current is still $50\ \si{\mu A}$. We want the $15\ \si{\Omega}$
+resistor to cause the ammeter to show $25\ \si{\mu A}$. This is half the total
+current in the circuit. Therefore, the other half must go through the middle
+arm. So the current through the middle arm is roughly $25\ \si{\mu A}$. Using
+Ohm's Law, $R_2$ can now be determined,
+$$ R_2 = \frac{V - I_T R_1}{I_2} = 40\ \si{\Omega} $$
+
+Let the two leads connect to a resistor of $5\ \si{\Omega}$. The current in the
+top arm of the circuit is given by,
+$$ I_{5 \si{\Omega}} = \frac{V R_2}{25 R_2 + R_1 (25 + R_2) } = 30.7\ \si{\mu
+A} $$
+
+Let the two leads connect to a resistor of $50\ \si{\Omega}$. The current in the
+top arm of the circuit is given by,
+$$ I_{50 \si{\Omega}} = \frac{V R_2}{70 R_2 + R_1 (70 + R_2) } = 18.2\ \si{\mu
+A} $$
+
+This design is pretty feasible as $30\ \si{k\Omega}$ and $40\ \si{\Omega}$
+resistors are pretty standard. However, my approximations result in the $15\
+\si{\Omega}$ and $0\ \si{\Omega}$ resistors not lining up exactly at $25\
+\si{\mu A}$ and $50\ \si{\mu A}$. Rather, they show $26.7\ \si{\mu A}$ and
+$33.3\ \si{\mu A}$ respectively. As a result, the scale is a little different
+than what was asked for, but should still provide a functional ohmmeter.
+
+\end{document}
