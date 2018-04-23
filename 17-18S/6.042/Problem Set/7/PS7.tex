@@ -1,0 +1,160 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\title{6.042 Problem Set 7}
+\author{Robert Durfee}
+\date{April 27, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{Part A}
+
+\begin{lemma}
+  If $f$ is a continuous function on the interval $[a, b]$, differentiable on
+  the interval $(a, b)$, and $f'(c) > 0\ \forall c \in (a, b)$, then $\forall
+  x_1 < x_2 \in (a, b)$, $f(x_1) < f(x_2)$.
+\end{lemma}
+
+\begin{proof}
+  Let $f$ be a continuous, differentiable function with $f'(x) > 0$ on the
+  interval $[x_1, x_2]$ where $x_1 < x_2$. According to the Mean-Value Theorem,
+  there exists some $x_1 < c < x_2$ such that,
+  $$ f(x_2) - f(x_1) = f'(c)(x_2 - x_1) $$
+  Since $f'(x) > 0\ \forall x \in [x_1, x_2]$, $f'(c) > 0$. Also, since $x_2 >
+  x_1$, $x_2 - x_1 > 0$. Therefore, the right term is positive. Since the right
+  term is positive, the left term must be as well. Therefore, $f(x_2) - f(x_1) >
+  0$.  Shifting terms provides,
+  $$ f(x_1) < f(x_2) $$
+\end{proof}
+
+Lemma 1 can be used to show that $\log_2 x < x$. Rearrange terms to find,
+$$ 0 < x - \log_2 x $$
+Now set $f(x) = x - \log_2 x$ and differentiate $f$ to get,
+$$ f'(x) = 1 - \frac{1}{x \ln 2} $$
+$f'(x) > 0$ when $x > 1 / \ln 2$. Thus, by Lemma 1, 
+
+\break
+
+\subsection*{Part B}
+
+\break
+
+\subsection*{Part C}
+
+\break
+
+\section*{Problem 2}
+
+I spent approximately 20 minutes working on this problem alone using only course
+materials from this term.
+
+\bigbreak
+
+From Theorem 14.3.2, if $f: \mathbb{R}^+ \rightarrow \mathbb{R}^+$ is a weakly
+decreasing function, then
+$$ \int\limits_0^n f(x) dx + f(n) \leq \sum\limits_{i=1}^{n} f(i) \leq
+\int\limits_0^n f(x) dx + f(1) $$
+
+For this particular problem,
+$$ f(i) = \frac{1}{(2i + 1)^2} $$
+Which is clearly a decreasing function because as $i$ increases, $f(i)$ will get
+smaller. Thus, Theorem 14.3.2 can be used.
+
+Substituting $f(i)$ and $n = \infty$ into the equation from Theorem 14.3.2,
+$$ \int\limits_1^\infty \frac{dx}{(2x + 1)^2} + \lim_{x \to \infty} \frac{1}{(2x
++ 1)^2} \leq \sum\limits_{i=1}^{\infty} \frac{1}{(2i + 1)^2} \leq
+\int\limits_1^\infty \frac{dx}{(2x + 1)^2} + \frac{1}{(2 \cdot 1 + 1)^2} $$
+Solving the integrals and limits yields,
+$$ \frac{1}{6} + 0 \leq \sum\limits_{i=1}^{\infty} \frac{1}{(2i + 1)^2} \leq
+\frac{1}{6} + \frac{1}{9} $$
+However, this lower and upper bound only restricts the result to a range of
+$0.\overline{11}$. Therefore, a tighter bound is required.
+
+Repeating this process but instead starting when $i = 2$,
+$$ \int\limits_2^\infty \frac{dx}{(2x + 1)^2} + \lim_{x \to \infty} \frac{1}{(2x
++ 1)^2} \leq \sum\limits_{i=2}^{\infty} \frac{1}{(2i + 1)^2} \leq
+\int\limits_2^\infty \frac{dx}{(2x + 1)^2} + \frac{1}{(2 \cdot 2 + 1)^2} $$
+Solving the integrals and limits yields,
+$$ \frac{1}{10} + 0 \leq \sum\limits_{i=2}^{\infty} \frac{1}{(2i + 1)^2} \leq
+\frac{1}{10} + \frac{1}{25} $$
+And this lower and upper bound restricts the new result to a range of $0.04$.
+Therefore, this bound can be used.
+
+Now, this bound must be converted to support the previous sum which starts at $i
+= 1$. This can be done by adding $f(1) = 1/9$ to each of the three terms,
+$$ \frac{1}{10} + \frac{1}{9} \leq \sum\limits_{i=2}^{\infty} \frac{1}{(2i +
+1)^2} + \frac{1}{9} \leq \frac{1}{10} + \frac{1}{25} + \frac{1}{9} $$
+So the center term now becomes the original sum,
+$$ \frac{1}{10} + \frac{1}{9} \leq \sum\limits_{i=1}^{\infty} \frac{1}{(2i +
+1)^2} \leq \frac{1}{10} + \frac{1}{25} + \frac{1}{9} $$
+Evaluating the fractions,
+$$ 0.2\overline{11} \leq \sum\limits_{i=1}^{\infty} \frac{1}{(2i + 1)^2} \leq
+0.25\overline{1} $$
+
+\break
+
+\section*{Problem 3}
+
+I spent approximately 10 minutes working on this problem alone using only course
+materials from this term.
+
+\subsection*{Part A}
+
+The total, nominal wealth accumulated by a Harvard graduate after $n$ years
+including a $\$20,000$ raise each year can be represented as,
+$$ W_N = \sum\limits_{i = 0}^n \$40,000 + \$20,000 i $$
+Adjusting for inflation will determine the total, real wealth accumulated by a
+Harvard graduate after $n$ years in terms of today's dollars with a fixed $8\%$
+inflation rate,
+$$ W_R = \sum\limits_{i = 0}^n \frac{\$40,000 + \$20,000 i}{1.08^i} $$
+
+\break
+
+\subsection*{Part B}
+
+The total, nominal wealth accumulated by an MIT graduate after $n$ years
+including a $20\%$ raise each year can be represented as,
+$$ W_N = \sum\limits_{i = 0}^n \$30,000 \cdot 1.20^i $$
+Adjusting for inflation will determine the total, real wealth accumulated by an
+MIT graduate after $n$ years in terms of today's dollars with a fixed $8\%$
+inflation rate,
+$$ W_R = \sum\limits_{i = 0}^n \frac{\$30,000 \cdot 1.20^i}{1.08^i} $$
+
+\break
+
+\subsection*{Part C}
+
+Substituting $n = 20$ into the sum for a Harvard graduate's real, total wealth,
+$$ W_R = \sum\limits_{i = 0}^{20} \frac{\$40,000 + \$20,000 i}{1.08^i} =
+\$2,010,884.66 $$
+And substituting $n = 20$ into the sum for an MIT graduate's real total wealth,
+$$ W_R = \sum\limits_{i = 0}^{20} \frac{\$30,000 \cdot 1.20^i}{1.08^i} =
+\$2,198,579.00 $$
+
+Since the present value of an MIT graduate's total future earnings after 20
+years is larger than a Harvard graduate's, the MIT degree is worth more if you
+plan to retire in 20 years.
+
+\end{document}
+
