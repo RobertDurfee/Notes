@@ -15,8 +15,6 @@
 \usepackage{mhchem}
 \usepackage{chemfig}
 \allowdisplaybreaks
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
 
 \title{6.042 Problem Set 7}
 \author{Robert Durfee}
@@ -30,37 +28,103 @@
 
 \subsection*{Part A}
 
-\begin{lemma}
-  If $f$ is a continuous function on the interval $[a, b]$, differentiable on
-  the interval $(a, b)$, and $f'(c) > 0\ \forall c \in (a, b)$, then $\forall
-  x_1 < x_2 \in (a, b)$, $f(x_1) < f(x_2)$.
-\end{lemma}
-
 \begin{proof}
-  Let $f$ be a continuous, differentiable function with $f'(x) > 0$ on the
-  interval $[x_1, x_2]$ where $x_1 < x_2$. According to the Mean-Value Theorem,
-  there exists some $x_1 < c < x_2$ such that,
-  $$ f(x_2) - f(x_1) = f'(c)(x_2 - x_1) $$
-  Since $f'(x) > 0\ \forall x \in [x_1, x_2]$, $f'(c) > 0$. Also, since $x_2 >
-  x_1$, $x_2 - x_1 > 0$. Therefore, the right term is positive. Since the right
-  term is positive, the left term must be as well. Therefore, $f(x_2) - f(x_1) >
-  0$.  Shifting terms provides,
-  $$ f(x_1) < f(x_2) $$
+  Rearranging the inequality $\log_2 x < x$ to,
+  $$ x - \log_2 x > 0 $$
+  Letting $f(x) = x - \log_2 x$, take the derivative,
+  $$ f'(x) = 1 - \frac{1}{x \ln 2} $$
+  This is equal to zero when
+  $$ x = \frac{1}{\ln 2} = 1.4427 $$
+  Which corresponds to the value
+  $$ f(1.4427) = 0.91329 $$
+  Since this is the minimum value of $f(x)$, all other values must be greater
+  and since $0.91329 > 0$, then $x - \log_2 x > 0$ for all $x > 0$ which in turn
+  shows, $$ \log_2 x < x\ \forall x > 1 $$
 \end{proof}
-
-Lemma 1 can be used to show that $\log_2 x < x$. Rearrange terms to find,
-$$ 0 < x - \log_2 x $$
-Now set $f(x) = x - \log_2 x$ and differentiate $f$ to get,
-$$ f'(x) = 1 - \frac{1}{x \ln 2} $$
-$f'(x) > 0$ when $x > 1 / \ln 2$. Thus, by Lemma 1, 
 
 \break
 
 \subsection*{Part B}
 
+\begin{proof}
+  To prove a strict partial order, one must prove both irreflexivity and
+  transitivity. 
+
+  \bigbreak
+
+  \textbf{Irreflexivity}: To show irreflexivity, there cannot be a relation
+  $f(x)\ R\ f(x)$. Since the relation $f(x)\ R\ g(x)$ is equivalent to $g(x) =
+  o(f(x))$, we can use limits to describe the relation as,
+  $$ \lim_{x \to \infty} \frac{f(x)}{g(x)} = 0$$
+  But in the case of $f(x)\ R\ f(x)$, the limit takes the form,
+  $$ \lim_{x \to \infty} \frac{f(x)}{f(x)} = 1$$
+  Since $1 \neq 0$, the relation is not reflexive, therefore it is irreflexive.
+
+  \bigbreak
+
+  \textbf{Transitivity}: To show transitivity, the relation must satisfy,
+  $$ f(x)\ R\ g(x) \land g(x)\ R\ h(x) \implies f(x)\ R\ h(x) $$
+  Since the relation $f(x)\ R\ g(x)$ is equivalent to $g(x) = o(f(x))$, limits
+  can be used once again,
+  $$ \lim_{x \to \infty} \frac{g(x)}{f(x)} = 0 $$
+  $$ \lim_{x \to \infty} \frac{h(x)}{g(x)} = 0 $$
+  We can use these limits to construct $f(x)\ R\ h(x)$,
+  $$ \lim_{x \to \infty} \frac{g(x)}{f(x)} \cdot \lim_{x \to \infty}
+  \frac{h(x)}{g(x)} = \lim_{x \to \infty} \frac{f(x)}{h(x)} $$
+  And we can substitute zero for the limits on the left side to show,
+  $$ \lim_{x \to \infty} \frac{f(x)}{h(x)} = 0 $$
+  Therefore, $h(x) = o(f(x))$ which further means $f(x)\ R\ h(x)$. So the
+  relation is transitive.
+
+  \bigbreak
+
+  Since both irreflexivity and transitivity are satisfied, $R$ is a strict
+  partial order.
+\end{proof}
+
 \break
 
 \subsection*{Part C}
+
+\begin{proof}
+  To prove $f \sim g \iff f = g + h$ for some $h = o(g)$, I will prove the
+  implication $ f = g + h \implies f \sim g $ and the contrapositive $ f \neq g
+  + h \implies f \not\sim g $.
+
+  \bigbreak
+
+  \textbf{Implication}: From $f(x) = g(x) + h(x)$, it must be,
+  $$ \lim_{x \to \infty} \frac{f(x)}{g(x)} = \lim_{x \to \infty} \frac{g(x) +
+  h(x)}{g(x)} $$
+  Then, the right side can be expanded using the rules of addition of limits,
+  $$ \lim_{x \to \infty} \frac{f(x)}{g(x)} = \lim_{x \to \infty}
+  \frac{g(x)}{g(x)} + \lim_{x \to \infty} \frac{h(x)}{g(x)} $$
+  It is clear that the first term on the left equals $1$ and the second term
+  must equal zero because $h(x) = o(g(x))$. Therefore,
+  $$ \lim_{x \to \infty} \frac{f(x)}{g(x)} = 1 $$
+  This is the definition of asymptotic equivalence, therefore,
+  $$ f(x) \sim g(x) $$
+
+  \bigbreak
+
+  \textbf{Contrapositive}: Essentially repeating the proof above, from $f(x)
+  \neq g(x) + h(x)$, it must be,
+  $$ \lim_{x \to \infty} \frac{f(x)}{g(x)} \neq \lim_{x \to \infty} \frac{g(x) +
+  h(x)}{g(x)} $$
+  But we just showed that the right side can be written,
+  $$ \lim_{x \to \infty} \frac{g(x) + h(x)}{g(x)} = \lim_{x \to \infty}
+  \frac{g(x)}{g(x)} + \lim_{x \to \infty} \frac{h(x)}{g(x)} = 1 $$
+  Therefore,
+  $$ \lim_{x \to \infty} \frac{f(x)}{g(x)} \neq 1 $$
+  But this is the requirement for asymptotic equivalence, therefore,
+  $$ f(x) \not\sim g(x) $$
+
+  \bigbreak
+
+  Since the implication and the contrapositive hold, both direction of the iff
+  hold. Therefore, $f \sim g \iff f = g + h$.
+
+\end{proof}
 
 \break
 
@@ -121,36 +185,36 @@ materials from this term.
 
 \subsection*{Part A}
 
-The total, nominal wealth accumulated by a Harvard graduate after $n$ years
-including a $\$20,000$ raise each year can be represented as,
-$$ W_N = \sum\limits_{i = 0}^n \$40,000 + \$20,000 i $$
+The total, nominal wealth accumulated by a Harvard graduate at the end of $n$
+years including a $\$20,000$ raise each year can be represented as,
+$$ W_N = \sum\limits_{i = 0}^{n - 1} \$40,000 + \$20,000 i $$
 Adjusting for inflation will determine the total, real wealth accumulated by a
-Harvard graduate after $n$ years in terms of today's dollars with a fixed $8\%$
-inflation rate,
-$$ W_R = \sum\limits_{i = 0}^n \frac{\$40,000 + \$20,000 i}{1.08^i} $$
+Harvard graduate at the end of $n$ years in terms of today's dollars with a
+fixed $8\%$ inflation rate,
+$$ W_R = \sum\limits_{i = 0}^{n - 1} \frac{\$40,000 + \$20,000 i}{1.08^i} $$
 
 \break
 
 \subsection*{Part B}
 
-The total, nominal wealth accumulated by an MIT graduate after $n$ years
-including a $20\%$ raise each year can be represented as,
-$$ W_N = \sum\limits_{i = 0}^n \$30,000 \cdot 1.20^i $$
+The total, nominal wealth accumulated by an MIT graduate at the end of  $n$
+years including a $20\%$ raise each year can be represented as,
+$$ W_N = \sum\limits_{i = 0}^{n - 1} \$30,000 \cdot 1.20^i $$
 Adjusting for inflation will determine the total, real wealth accumulated by an
-MIT graduate after $n$ years in terms of today's dollars with a fixed $8\%$
-inflation rate,
-$$ W_R = \sum\limits_{i = 0}^n \frac{\$30,000 \cdot 1.20^i}{1.08^i} $$
+MIT graduate at the end of $n$ years in terms of today's dollars with a fixed
+$8\%$ inflation rate,
+$$ W_R = \sum\limits_{i = 0}^{n - 1} \frac{\$30,000 \cdot 1.20^i}{1.08^i} $$
 
 \break
 
 \subsection*{Part C}
 
 Substituting $n = 20$ into the sum for a Harvard graduate's real, total wealth,
-$$ W_R = \sum\limits_{i = 0}^{20} \frac{\$40,000 + \$20,000 i}{1.08^i} =
-\$2,010,884.66 $$
+$$ W_R = \sum\limits_{i = 0}^{19} \frac{\$40,000 + \$20,000 i}{1.08^i} =
+\$1,916,483.45 $$
 And substituting $n = 20$ into the sum for an MIT graduate's real total wealth,
-$$ W_R = \sum\limits_{i = 0}^{20} \frac{\$30,000 \cdot 1.20^i}{1.08^i} =
-\$2,198,579.00 $$
+$$ W_R = \sum\limits_{i = 0}^{19} \frac{\$30,000 \cdot 1.20^i}{1.08^i} =
+\$1,950,821.10 $$
 
 Since the present value of an MIT graduate's total future earnings after 20
 years is larger than a Harvard graduate's, the MIT degree is worth more if you
