@@ -1,0 +1,38 @@
+Argument:
+================================================================================
+P1:It can be such that every individual has more in an unequal distribution than
+they would in an equal distribution.
+
+P2: An unequal distribution of wealth can meet the fundamental necessities for
+living of every individual.
+
+P3: Fair transactions can cause unequal distributions
+--------------------------------------------------------------------------------
+C1: An equal distribution of wealth is not necessary for a just society.
+
+Philosophers:
+================================================================================
+Rawls: High inequality is okay so long as it benefits the worst off.
+
+Frankfurt: High inequality is okay so long as the worst off are better than the
+threshold of necessity.
+
+Nozick: High inequality is okay so long as the transactions which led to it were
+just and fair.
+
+Definitions:
+================================================================================
+Just: Acting or being in conformity with what is morally upright or good.
+
+Paper Structure:
+================================================================================
+P01: Introduction.
+P02: Argument premises.
+P03: Rawls.
+P04: Premise 1.
+P05: Frankfurt.
+P06: Premise 2.
+P07: Nozick.
+P08: Premise 3.
+P09: Conclusion.
+P10: Objections.
