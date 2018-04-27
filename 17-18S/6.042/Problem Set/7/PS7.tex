@@ -183,8 +183,8 @@ $$ 0.2\overline{11} \leq \sum\limits_{i=1}^{\infty} \frac{1}{(2i + 1)^2} \leq
 
 \section*{Problem 3}
 
-I spent approximately 10 minutes working on this problem in collaboration with
-Daniela Guillen.
+I spent approximately 45 minutes working on this problem in collaboration with
+Daniela Guillen and Richard Wang.
 
 \subsection*{Part A}
 
@@ -195,6 +195,50 @@ Adjusting for inflation will determine the total, real wealth accumulated by a
 Harvard graduate at the end of $n$ years in terms of today's dollars with a
 fixed $8\%$ inflation rate,
 $$ W_R = \sum\limits_{i = 0}^{n - 1} \frac{\$40,000 + \$20,000 i}{1.08^i} $$
+
+To find the closed form, rewrite as,
+$$ \$40,000 \cdot \sum\limits_{i = 0}^{n - 1} \left( \frac{1}{1.08} \right)^i +
+\$20,000 \cdot \sum\limits_{i = 0}^{n - 1} i \left(\frac{1}{1.08}\right)^i $$
+Now there are two sums that can be calculated independently.
+
+Looking at the closed form of a geometric sum,
+$$ \sum\limits_{i = 0}^n x^i = \frac{1 - x^{n + 1}}{1 - x} $$
+Now this can be used in the first sum where $n = n - 1$ and $x = 1/1.08$,
+$$ \$40,000 \cdot \frac{1 - (1/1.08)^n}{1 - 1/1.08} $$
+This is the closed form of the first sum.
+
+Looking at a simpler, general form of the second sum,
+$$ \sum\limits_{i = 0}^n i x^i $$
+Using perturbation, we can determine a closed form of this sum. First, write out
+a few terms in the sum,
+$$ S = 1x + 2x^2 + 3x^3 + \ldots + (n - 1)x^{n-1} + nx^n $$
+Now, multiply the sum by $x$,
+$$ xS = 1x^2 + 2x^3 + \ldots + (n - 1)x^n + nx^{n + 1} $$
+Subtract this sum from the one previous,
+$$ S - xS = \left( x + x^2 + x^3 + \ldots + x^{n - 1} + x^n \right) - nx^{n+1} $$
+Looking at the closed form of a geometric sum,
+$$ \sum\limits_{i = 0}^n x^i = \frac{1 - x^{n + 1}}{1 - x} $$
+The $S - xS$ sum can be altered to use this closed form,
+$$ S - xS = \left( 1 + x + x^2 + x^3 + \ldots + x^{n - 1} + x^n \right) -
+\left(1 + nx^{n+1} \right) $$
+Now substituting the closed form of the geometric sum into the parentheses,
+$$ S - xS = \frac{1 - x^{n + 1}}{1 - x} - \left( 1 + nx^{n + 1} \right) $$
+The left side of the equation can be rewritten,
+$$ (1 - x) S = \frac{1 - x^{n + 1}}{1 - x} - \left( 1 + nx^{n + 1} \right) $$
+Now it is easy to recover $S$ by dividing $1 - x$,
+$$ S = \frac{1 - x^{n + 1}}{(1 - x)^2} - \frac{1 + nx^{n + 1}}{1 - x} $$
+Therefore, the closed form of our simpler sum is,
+$$ \sum\limits_{i = 0}^n i x^i = \frac{1 - x^{n + 1}}{(1 - x)^2} - \frac{1 +
+nx^{n + 1}}{1 - x} $$
+Now this can be used in the second sum where $n = n - 1$ and $x = 1/1.08$,
+$$ \$20,000 \cdot \sum\limits_{i = 0}^{n - 1} \frac{i}{1.08^i} = \$20,000 \left( 
+\frac{1 - (1/1.08)^n}{(1 - 1/1.08)^2} - \frac{1 + (n - 1) (1/1.08)^n}{1 -
+1/1.08}\right) $$
+
+Combining the closed form of each individual sum, the final sum is,
+$$ \$40,000 \cdot \frac{1 - (1/1.08)^n}{1 - 1/1.08} + \$20,000 \left(
+\frac{1 - (1/1.08)^n}{(1 - 1/1.08)^2} - \frac{1 + (n - 1) (1/1.08)^n}{1 -
+1/1.08}\right) $$
 
 \break
 
@@ -207,6 +251,13 @@ Adjusting for inflation will determine the total, real wealth accumulated by an
 MIT graduate at the end of $n$ years in terms of today's dollars with a fixed
 $8\%$ inflation rate,
 $$ W_R = \sum\limits_{i = 0}^{n - 1} \frac{\$30,000 \cdot 1.20^i}{1.08^i} $$
+
+To find this equation's closed form, rewrite as,
+$$ \$30,000 \sum\limits_{i = 0}^{n - 1} \left(\frac{10}{9}\right)^i $$
+Looking at the closed form of a geometric sum,
+$$ \sum\limits_{i = 0}^n x^i = \frac{1 - x^{n + 1}}{1 - x} $$
+Now this can be used in our formula where $n = n - 1$ and $x = 10/9$,
+$$ \$30,000 \cdot \frac{1 - (10/9)^n}{1 - 10/9} $$
 
 \break
 
