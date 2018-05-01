@@ -1,0 +1,246 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{8.02 Problem Set 10}
+\author{Robert Durfee}
+\date{May 1, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{Part A}
+
+Construct a Gaussian cylinder of radius $r$ which intersects the left disc. The
+disc has a area charge density of $Q/A$. Therefore, Gauss's Law can be written,
+$$ \iint \vec{E} \cdot d\vec{A} = \frac{Q_{enc}}{\varepsilon_0} $$
+Simplifying, this becomes,
+$$ 2 E \cdot \pi r^2 = \frac{Q \pi r^2}{\varepsilon_0 A} $$
+Solving for $E$,
+$$ E = \frac{Q}{2 \varepsilon_0 A} $$
+Since there is another disc on the right, the total electric field is,
+$$ E = \frac{Q}{\varepsilon_0 A} $$
+
+\subsection*{Part B}
+
+The change in potential between plates is given,
+$$ \Delta V = \int\limits_0^d \frac{Q}{\varepsilon_0 A} ds $$
+Computing this integral,
+$$ \Delta V = \frac{Q d}{\varepsilon_0 A} $$
+
+\subsection*{Part C}
+
+Capacitance is given,
+$$ C = \frac{Q}{\Delta V} $$
+Substituting computed value for $\Delta V$,
+$$ C = \frac{\varepsilon_0 A}{d} $$
+
+\subsection*{Part D}
+
+Construct an Amperian square of side length $\ell$ containing a few of the wires
+of the solenoid on one side. The number of turns per unit length is given by
+$N/h$. Therefore, Ampere's Law can be written,
+$$ \int \vec{B} \cdot d\vec{s} = \mu_0 I_{enc} $$
+Substituting for $I_{enc}$,
+$$ B \ell = \mu_0 \frac{N}{h} \ell I $$
+Solving for $B$,
+$$ B = \mu_0 \frac{N}{h}I $$
+
+\subsection*{Part E}
+
+Inductance is given,
+$$ L = \frac{\Phi}{I} $$
+Substituting for computed $B$,
+$$ L = \mu_0 \pi \frac{N^2}{h} a^2 $$
+
+\subsection*{Part F}
+
+The natural angular frequency for oscillation is given,
+$$ \omega = \frac{1}{\sqrt{LC}} $$
+Converting to period,
+$$ T = 2 \pi \sqrt{LC} $$
+Substituting values computed above,
+$$ T = 2 \pi \sqrt{\left( \mu_0 \pi \frac{N^2}{h} a^2 \right) \left(
+\frac{\varepsilon_0 A}{d} \right)} $$
+
+\subsection*{Part G}
+
+Energy stored in a capacitor is given,
+$$ U = \frac{1}{2} \frac{Q^2}{C} $$
+Substituting for capacitance from above,
+$$ U = \frac{d}{2 \varepsilon_0 A} Q^2 $$
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+From the differential equation given from Kirchoff's Loop Rule,
+$$ I_0 = \frac{V_0}{\sqrt{R^2 + (\omega L - 1/\omega C)^2}} $$
+
+\subsection*{Part B}
+
+The minimum occurs when,
+$$ \omega L = \frac{1}{\omega C} $$
+Solving for $\omega$,
+$$ \omega = \frac{1}{\sqrt{LC}} $$
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+After the switch is closed for a long time, the inductor acts as a wire.
+Thus,
+$$ I_0 = \frac{\varepsilon_0}{R} $$
+
+\subsection*{Part B}
+
+Taking Kirchoff's Loop Rule clockwise,
+$$ 0 = \varepsilon - IR_2 - IR_1 - L\frac{dI}{dt} $$
+Solving for the time derivative of current,
+$$ \frac{dI}{dt} = \frac{\varepsilon - I(R_1 + R_2)}{L} $$
+
+\subsection*{Part C}
+
+Integrating with respect to current and time results,
+$$ \frac{L}{R_1 + R_2} \ln\left(\frac{\varepsilon - I_0 (R_1 + R_2)}{\varepsilon
+- I (R_1 + R_2)}\right) = t $$
+Solving for $I$,
+$$ I(t) = \frac{\varepsilon - (\varepsilon - I_0 (R_1 + R_2)) e^{-t(R_1 +
+R_2)/L}}{R_1 + R_2} $$
+However, since we are assuming $\varepsilon \approx 0$,
+$$ I(t) = I_0 e^{-t (R_1 + R_2) / L} $$
+
+\subsection*{Part D}
+
+Faraday's Law gives,
+$$ \varepsilon = -L \frac{dI}{dt} $$
+Taking the derivative of current,
+$$ \varepsilon(t) = I_0 (R_1 + R_2) e^{-t (R_1 + R_2)/L} $$
+Since this is right after the switch is opened, $t = 0$,
+$$ \varepsilon = I_0 (R_1 + R_2) $$
+
+\subsection*{Part E}
+
+This assumption was reasonable considering the EMF from the inductor will be
+much larger than the battery's at this moment.
+
+\subsection*{Part F}
+
+The change in voltage is given,
+$$ \Delta V = I_0 R_2 $$
+Substituting for $I_0$,
+$$ \Delta V = \frac{\varepsilon_0 R_2}{R_1} $$
+
+\subsection*{Part G}
+
+Substituting the given value of the resistor,
+$$ \Delta V = 80 \varepsilon $$
+
+\subsection*{Part H}
+
+This is significantly higher than the voltage supplied by the battery. As a
+result, there might be a large arc formed when flipping the switch.
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+Inductance is given,
+$$ L = \frac{\Phi}{I} $$
+Decomposing flux,
+$$ L = \frac{B A N}{I} $$
+Solving for magnetic field per current,
+$$ \frac{B}{I} = \frac{L}{AN} $$
+Substituting values,
+$$ \frac{78 \cdot 10^{-3}}{\pi (1.7/2 \cdot 10^{-1})^2 \cdot 235} = 1.462\
+\si{T\ A^{-1}} $$
+
+\subsection*{Part B}
+
+Mutual inductance is given,
+$$ M_{12} = \frac{N_1 \Phi_{12}}{I_2} $$
+Decomposing flux,
+$$ M_{12} = \frac{B_2}{I_2} N_1 A_2 $$
+Substituting values,
+$$ \pi 1.462 \cdot 2920 \cdot (1.7/2 \cdot 10^{-2})^2 = 0.969\ \si{H} $$
+
+\subsection*{Part C}
+
+The inductance for both solenoids, assuming equal cross-sectional area,
+$$ L_1 = \frac{B_1 N_1 A}{I_1},\ L_2 = \frac{B_2 N_2 A}{I_2} $$
+The mutual inductance, computed both ways,
+$$ M_{12} = \frac{B_2 N_1 A}{I_2},\ M_{21} = \frac{B_1 N_2 A}{I_1} $$
+Multiplying the self inductances together,
+$$ L_1 L_2 = \frac{B_1 B_2 N_1 N_2 A}{I_1 I_2} $$
+Which is the same as the mutual inductance squared, computed each way.
+
+\subsection*{Part D}
+
+For an ideal transformer,
+$$ \frac{N_p}{N_s} = \frac{V_p}{V_s} $$
+Therefore, the voltage is given,
+$$ \frac{3}{235} \cdot 2920 = 37.28\ \si{V} $$
+
+\section*{Problem 5}
+
+\subsection*{Part A}
+
+Since the current leads and lags the voltage, there must be both an inductor and
+a capacitor.
+
+\subsection*{Part B}
+
+From the information provided, two equations are known,
+$$ \tan^{-1}(-\pi/6) = \frac{2L - 1/2C}{\sqrt{3}},\ \tan^{-1}(\pi/6) = \frac{6L -
+1/6C}{\sqrt{3}} $$
+Solving this system of equations yields,
+$$ L = 1/4,\ C = 1/3 $$
+
+\subsection*{Part C}
+
+The natural resonant frequency is given,
+$$ \omega = \frac{1}{\sqrt{LC}} $$
+Substituting values,
+$$ \omega = 2 \sqrt{3} $$
+
+\section*{Problem 6}
+
+\subsection*{Part A}
+
+The amplitude of the current through this circuit is given,
+$$ I_0 = \frac{V_0}{\sqrt{R^2 + (\omega L)^2}} $$
+The time-averaged power through the light bulb is,
+$$ P = \frac{1}{2} I_0^2 R $$
+Since the power without an inductor is $100\ \si{W}$, the resistance can be
+determined,
+$$ \frac{(120 \sqrt{2})^2}{2 \cdot 100} = 144\ \si{\Omega} $$
+Now, using this resistance and the goal of reducing the power dissipated by the
+light bulb by 5 times, the inductance can be determined using the equation,
+$$ P = \frac{R V^2}{(R^2 + (\omega L)^2)} $$
+Substituting values and solving for $L$,
+$$ L = 0.764\ \si{H} $$
+
+\subsection*{Part B}
+
+You can use a resistor instead of an inductor in this circuit. However, a
+resistor will consume energy and release it in the form of heat. An inductor,
+on the other hand, will only temporarily store energy within its magnetic field.
+
+\end{document}
+
