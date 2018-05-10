@@ -1,0 +1,240 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{6.042 Problem Set 8}
+\author{Robert Durfee}
+\date{May 11, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{Part A}
+
+\begin{proof}
+
+  Given that the integer $x$ is in the range $10^9 < x < 2 \cdot 10^9$, the most
+  significant digit must be $1$. Additionally, because $x$ must be odd, the
+  least significant digit must be odd. Since $1$ has already been used,
+  the possible values for the least significant digit are $3$, $5$, $7$, and
+  $9$. Once the least and most significant digits are assigned, there are 8
+  digits that are unassigned. These digits include $3$ odd and $5$ even. As a
+  result, at least two even digits must be placed next to each other.
+
+\end{proof}
+
+\break
+
+\subsection*{Part B}
+
+\begin{proof}
+
+  In a graph with $n$ vertices, the degree of each vertex is limited to the
+  range $[0..n)$. It is important to observe that if there exists a node of
+  degree $n-1$ in a graph of $n$ vertices, it must be connected to every other
+  node in the graph. So there cannot be a vertex with a $0$ degree in the
+  same graph. Thus, no graph with $n$ vertices can contain both a vertex
+  with degree $0$ and a vertex with degree $n-1$.
+
+  Thus, whether there exists a node with a degree of $0$ or if there isn't,
+  there are at most $n - 1$ possible degrees for each vertex. Therefore, since
+  there are $n$ vertices and only at most $n - 1$ degree possibilities, at least
+  $2$ nodes must have the same degree.
+
+\end{proof}
+
+\break
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+\begin{proof}
+
+  The set of finite sequences of the form $\{1, 2, 3, 4\}^n$ is constructed
+  using the Cartesian product $n$ times,
+  $$ \{1, 2, 3, 4\}^n = \{1, 2, 3, 4\} \times \{1, 2, 3, 4\} \times \ldots $$
+  Thus, using the product rule (15.2.1) $n$ times,
+  $$ \vert \{1, 2, 3, 4\}^n \vert = \vert \{1, 2, 3, 4\} \vert \cdot \vert \{1,
+  2, 3, 4\} \vert \cdot \ldots $$
+  Since the size of $\{1, 2, 3, 4\} = 4$, the expression becomes,
+  $$ \vert \{1, 2, 3, 4\}^n \vert = 4^n $$
+
+\end{proof}
+
+\break
+
+\subsection*{Part B}
+
+\begin{proof}
+
+  Let $S_i$ be the set of sequences which do not contain the number $i$. Then
+  the union of these sets, $ S_1 \cup S_2 \cup S_3 \cup S_4 $, is the set of
+  sequences that do not contain at least one instance of 1, 2, 3, and 4.
+
+  Using inclusion-exclusion principle for $4$ sets, the size of this union can
+  be written,
+  \begin{align*}
+    \vert S_1 \cup S_2 \cup S_3 \cup S_4 \vert = &\vert S_1 \vert + \vert S_2
+    \vert + \vert S_3 \vert + \vert S_4 \vert - \vert S_1 \cap S_2 \vert - \vert
+    S_1 \cap S_3 \vert - \vert S_1 \cap S_4 \vert \\
+    & - \vert S_2 \cap S_3 \vert - \vert S_2 \cap S_4 \vert - \vert S_3 \cap S_4
+    \vert + \vert S_1 \cap S_2 \cap S_3 \vert \\
+    & + \vert S_1 \cap S_2 \cap S_4 \vert + \vert S_1 \cap S_3 \cap S_4 \vert +
+    \vert S_2 \cap S_3 \cap S_4 \vert \\
+    & - \vert S_1 \cap S_2 \cap S_3 \cap S_4 \vert
+  \end{align*}
+
+  Since $S_1$ is constructed using the Cartesian product of $\{2, 3, 4\}$, using
+  the product rule, the size of $S_1$ can be determined,
+  $$ \vert S_1 \vert = \vert \{ 2, 3, 4 \} \vert \cdot \vert \{2, 3, 4\} \vert
+  \cdot \ldots = 3^n $$
+  The sizes of all $S_i$ can be computed similarly to show they are all $3^n$.
+
+  Since $S_1 \cap S_2$ is constructed using the Cartesian product of $\{3, 4\}$,
+  using the product rule, the size of $S_1 \cap S_2$ can be determined,
+  $$ \vert S_1 \cap S_2 \vert = \vert \{3, 4\} \vert \cdot \vert \{3, 4\} \vert
+  \cdot \ldots = 2^n $$
+  The sizes of all $S_i \cap S_j$ (where $i \neq j$) can be computed similarly
+  to show they are all $2^n$.
+
+  Since $S_1 \cap S_2 \cap S_3$ is constructed using the Cartesian product of
+  $\{4\}$, using the product rule, the size of $S_1 \cap S_2 \cap S_3$ can be
+  determined,
+  $$ \vert S_1 \cap S_2 \cap S_3 \vert = \vert \{4\} \vert \cdot \vert \{4\}
+  \vert \cdot \ldots = 1^n $$
+  The sizes of all $S_i \cap S_j \cap S_k$ (where $i \neq j \neq k$) can be
+  computed similarly to show they are all $1^n$.
+
+  Lastly, $S_1 \cap S_2 \cap S_3 \cap S_4$ is empty as there cannot be a
+  sequence without 1's, 2's, 3's, or 4's if the only numbers to choose from are
+  1, 2, 3, and 4. Thus,
+  $$ \vert S_1 \cap S_2 \cap S_3 \cap S_4 \vert = 0 $$
+
+  Since a lot of the sizes are the same, the equation from inclusion-exclusion
+  can be simplified to,
+  $$ \vert S_1 \cup S_2 \cup S_3 \cup S_4 \vert = \binom{4}{1} 3^n -
+  \binom{4}{2} 2^n + \binom{4}{3} 1^n - \binom{4}{4} 0^n $$
+  Simplifying,
+  $$ \vert S_1 \cup S_2 \cup S_3 \cup S_4 \vert = 4 \cdot 3^n - 6 \cdot 2^n + 4
+  $$
+
+  However, this is not the requested size. This size is the number of sequences
+  that do \textit{not} contain each of 1, 2, 3, and 4 at least once. Therefore,
+  the number of sequences that \textit{do} contain each of 1, 2, 3, and 4 at
+  least once is,
+  $$ \vert \{1, 2, 3, 4\}^n \vert - \vert  S_1 \cup S_2 \cup S_3 \cup S_4 \vert
+  = 4^n - 4 \cdot 3^n + 6 \cdot 2^n - 4 $$
+
+\end{proof}
+
+\break
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+\begin{proof}
+
+  Let $S$ be the subset of 10 players in the tournament including $n$ total
+  players. The probability of a single player beating every player in $S$ is
+  determined by the product of the probability of beating each individual
+  player in $S$. Since winning and losing are equally likely, this probability
+  is $1/2$. Thus, the probability of beating every player in $S$ is given by,
+  $$ \left( \frac{1}{2} \right)^{10} $$
+  However, we want to know the probability that this player does \textit{not}
+  beat every player in $S$. This is given by,
+  $$ 1 - \left( \frac{1}{2} \right)^{10} $$
+  But this is still only the probability that that \textit{one} player in the
+  $n$-person tournament doesn't beat every player in $S$. However, there are $n
+  - 11$ other players in the tournament who could beat every player in $S$.
+  Therefore, the total probability that not a single player in the tournament
+  beats every player in $S$ is,
+  $$ \mathrm{Pr}[B_S] = \left(1 - \left( \frac{1}{2} \right)^{10} \right)^{n -
+  10} $$
+  Note that we can only multiply the probability of each player together to get
+  the intersection because the problem states that each win/loss is independent
+  from all the others.
+
+\end{proof}
+
+\break
+
+\subsection*{Part B}
+
+\begin{proof}
+
+  Let $S$ range over the size-10 subsets of players. Thus,
+  $$ Q = \bigcup_{S} B_S $$
+  From Boole's inequality,
+  $$ \mathrm{Pr}\left[ \bigcup_{S} B_S \right] \leq \sum_{S}
+  \mathrm{Pr}\left[B_S\right] $$
+  Combining these two equations,
+  $$ \mathrm{Pr}[Q] \leq \sum_S \left(1 - \left( \frac{1}{2} \right)^{10}
+  \right)^{n - 10} $$
+  Since $S$ ranges over the size-10 subsets of players, the number of ways to
+  construct size-10 subsets is given by the binomial coefficient,
+  $$ \binom{n}{10} $$
+  Therefore, $\mathrm{Pr}[B_S]$ is summed to itself $n$ choose $10$ times. This
+  can be written,
+  $$ \mathrm{Pr}[Q] \leq \binom{n}{10} \left(1 - \left( \frac{1}{2} \right)^{10}
+  \right)^{n - 10} $$
+
+\end{proof}
+
+\break
+
+\subsection*{Part C}
+
+\begin{proof}
+
+  To show that when $n$ is large enough, $\mathrm{Pr}[Q] < 1$, we take the
+  limit,
+  $$ \lim_{n \to \infty} \binom{n}{10} \alpha^{n - 10} $$
+  This limit can be rewritten by expanding the binomial coefficient,
+  $$ \lim_{n \to \infty} \frac{n!}{10! (n - 10)!} \alpha^{n - 10} $$
+  The majority of the products in the numerator are canceled. Thus, the limit
+  can be written to show this,
+  $$ \lim_{n \to \infty} \frac{1}{10!} \prod_{i = 0}^9 (n - i) \alpha^{n - 10}
+  $$
+  Now, a constant term can be pulled out of $\alpha^{n-10}$ to simplify further,
+  $$ \lim_{n \to \infty} \frac{1}{10! \alpha^{10}} \prod_{i = 0}^9 (n - i)
+  \alpha^{n} $$
+  Since the leading term is constant, it can be ignored. Thus the limit becomes,
+  $$ \lim_{n \to \infty} \prod_{i = 0}^9 (n - i) \alpha^{n} $$
+  The product only has 10 terms. Each of which is less than or equal to $n$
+  given that $i$ is positive. Therefore, the limit is not asymptotically greater
+  than,
+  $$  \lim_{n \to \infty} n^{10} \alpha^{n} $$
+  To utilize Corollary 14.7.4, this limit can be written,
+  $$ \lim_{n \to \infty} \frac{n^{10}}{\left(1/\alpha\right)^n} $$
+  Given that $\alpha = 1 - 1/2^{10}$, $\alpha < 1$ and thus $1 / \alpha > 1$.
+  Therefore, by Corollary 14.7.4, which states,
+  $$ x^b = o(a^x)\ \forall a > 1, b \in \mathbb{R} $$
+  The limit, by the definition of little oh, must be,
+  $$ \lim_{n \to \infty} \frac{n^{10}}{\left(1/\alpha\right)^n} = 0 $$
+  By extension, the original limit must also be,
+  $$  \lim_{n \to \infty} \binom{n}{10} \alpha^{n - 10} = 0 $$
+
+
+\end{proof}
+
+\end{document}
+
