@@ -1,0 +1,289 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{8.02 Problem Set 11}
+\author{Robert Durfee}
+\date{May 11, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{Part A}
+
+Construct a Gaussian cylinder of radius $r$ which intersects the bottom plate of
+the capacitor. The charge enclosed in this region, assuming uniform
+distribution, is
+$$ Q_{enc} = \frac{Q r^2}{a^2} $$
+Using this value, Gauss's law can be simplified,
+$$ 2 E \pi r^2 = \frac{Q r^2}{\varepsilon_0 a^2} $$
+Solving for $E$,
+$$ E = \frac{Q}{2 \varepsilon_0 \pi a^2} $$
+However, this only accounts for half of the field between the plates. Since the
+top plate is symmetric, this value can be doubled to find total field between
+plates,
+$$ E_{T} = \frac{Q}{\varepsilon_0 \pi a^2} $$
+And since field points from positive to negative charge, this field points up.
+
+\subsection*{Part B}
+
+Assuming the current through the resistor is uniform, enclosed current is,
+$$ I_{enc} = \frac{I}{\pi a^2} \pi r^2 = \frac{r^2}{a^2} \frac{\partial
+Q}{\partial t} $$
+This current is flowing downward, thus
+$$ \frac{I_{enc}}{\partial Q / \partial t} = - \frac{r^2}{a^2} $$
+
+\subsection*{Part C}
+
+Since the electric field is (nearly) constant between the plates, the flux
+through the defined region can be written,
+$$ \Phi_E = \left( \frac{Q}{\varepsilon_0 \pi a^2} \right) \left( \pi r^2
+\right) = \frac{Q r^2}{\varepsilon_0 a^2} $$
+The time derivative of flux,
+$$ \frac{\partial \Phi_E}{\partial t} = \frac{r^2}{\varepsilon_0 a^2}
+\frac{\partial Q}{\partial t} $$
+Dividing by the time derivative of charge,
+$$ \frac{\partial \Phi_E / \partial t}{\partial Q / \partial t} =
+\frac{r^2}{\varepsilon_0 a^2} $$
+
+\subsection*{Part D}
+
+Using Ampere-Maxwell equation,
+$$ \oint \vec{B} \cdot d\vec{s} = \mu_0 \left( I_{enc} + I_{dis} \right) = \mu_0
+\left( -\frac{r^2}{a^2} + \frac{r^2}{a^2} \right) = 0 $$
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+Using the equation for magnetic field,
+$$ \vec{B} = B_0 f(ax + bt) \hat{j} $$
+Taking the second derivative with respect to displacement,
+$$ \frac{\partial^2 \vec{B}}{\partial x^2} = B_0 a^2 f(ax + bt) \hat{j} $$
+And with respect to time,
+$$ \frac{\partial^2 \vec{B}}{\partial t^2} = B_0 b^2 f(ax + bt) \hat{j} $$
+Setting them equal using the requirement for satisfying Maxwell's equations,
+$$ \frac{\partial^2 \vec{B}}{\partial x^2} = \frac{1}{c^2} \frac{\partial^2
+\vec{B}}{\partial t^2} $$
+Simplifying,
+$$ a = \frac{b}{c} $$
+
+\subsection*{Part B}
+
+Given the relation between electric field and magnetic field magnitude,
+$$ E_0 = c B_0 $$
+Using the cross product for determining direction,
+$$ \hat{E} \times \hat{j} = -\hat{i} $$
+Thus, the direction of the electric field must be $\hat{k}$.
+
+\subsection*{Part C}
+
+The solution of the Poynting vector only in terms of $B_0$ is,
+$$ \vec{S} = -\frac{c B_0^2}{2 \mu_0} \hat{i} $$
+
+\subsection*{Part D}
+
+Pressure on a perfectly reflecting medium is,
+$$ P_{ref} = \frac{2}{c} S $$
+Substituting for $S$,
+$$ P_{ref} = \frac{2 B_0^2}{\mu_0} $$
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+The pressure on a perfectly reflecting medium can be written,
+$$ P_{ref} = \frac{2}{c} \frac{P}{4 \pi r_{es}^2} $$
+Substituting values,
+$$ P_{ref} = 9.44 \cdot 10^{-6}\ \si{Pa} $$
+
+\subsection*{Part B}
+
+Determining force from pressure,
+$$ F_{rad} = \frac{P}{A} $$
+Substituting values,
+$$ F_{rad} = 1.89 \cdot 10^{-5}\ \si{N} $$
+
+\subsection*{Part C}
+
+The equation for gravitational force,
+$$ F_{grav} = G \frac{m_1 m_2}{r_{es}^2} $$
+Substituting values,
+$$ F_{grav} = 0.59\ \si{N} $$
+Dividing the radiation force by the gravitational force,
+$$ \frac{F_{rad}}{F_{grav}} = 3.20 \cdot 10^{-5} $$
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+The equation for the electric field,
+$$ \vec{E}(y, t) = E_0 \sin\left( \frac{2 \pi}{\lambda} \left(y - ct
+\right)\right) \hat{k} $$
+
+\subsection*{Part B}
+
+The corresponding equation for the magnetic field,
+$$ \vec{B}(y, t) = \frac{E_0}{c} \sin \left( \frac{2 \pi}{\lambda} \left(y -
+ct\right)\right) \hat{i} $$
+
+\subsection*{Part C}
+
+The Poynting vector is defined,
+$$ \vec{S} = \frac{\vec{E} \times \vec{B}}{\mu_0} $$
+Substituting equations from previous parts,
+$$ \vec{S}(y, t) = \frac{E_0^2}{\mu_0 c} \sin^2 \left(\frac{2 \pi}{\lambda}
+\left(y - ct \right) \right) \hat{j} $$
+
+\subsection*{Part D}
+
+The force on a perfectly absorbing medium is,
+$$ \langle \vert \vec{F}_{abs} \vert \rangle = \frac{A}{c} \langle \vert \vec{S}
+\vert \rangle $$
+Substituting our equation for $\vec{S}$,
+$$ \langle \vert \vec{F}_{abs} \vert \rangle = \frac{E_0^2 b^2}{2 \mu_0 c^2} $$
+
+The force on a perfectly reflecting medium is simply twice that of the absorbing
+medium,
+$$ \langle \vert \vec{F}_{ref} \vert \rangle = \frac{E_0^2 b^2}{\mu_0 c^2} $$
+
+\section*{Problem 5}
+
+\subsection*{Part A}
+
+The Poynting vector is defined,
+$$ \vec{S} = \frac{\vec{E} \times \vec{B}}{\mu_0} $$
+Substituting equations provided,
+$$ \vec{S} = \frac{E_0^2}{\mu_0 c} \sin^2 \left(kx - \omega t \right) \hat{i} $$
+
+\subsection*{Part B}
+
+Given the time average of a sine function,
+$$ \langle \vec{S} \rangle = \frac{E_0^2}{2 \mu_0 c} \hat{i} $$
+
+\subsection*{Part C}
+
+The time average of the energy density in electric and magnetic fields,
+$$ \langle u_E \rangle = \frac{\varepsilon_0}{2} \langle E^2 \rangle,\ \langle
+u_M \rangle = \frac{1}{2 \mu_0} \langle B^2 \rangle $$
+The time average of the electric and magnetic fields are,
+$$ \langle E^2 \rangle = \frac{E_0^2}{2},\ \langle B^2 \rangle =
+\frac{E_0^2}{2c^2} $$
+Substituting,
+$$ \langle u_E \rangle = \frac{\varepsilon_0 E_0^2}{4},\ \langle u_M \rangle =
+\frac{E_0^2}{4 \mu_0 c^2} $$
+Using the relation of $\varepsilon_0 \mu_0 = 1/c^2$,
+$$ \langle u_E \rangle = \frac{\varepsilon_0 E_0^2}{4},\ \langle u_M \rangle =
+\frac{\varepsilon_0 E_0^2}{4} $$
+
+\subsection*{Part D}
+
+The total energy from energy density is,
+$$ \langle U \rangle = \iiint \langle u_E \rangle + \langle u_M \rangle dA $$
+Assuming uniformity,
+$$ \langle U \rangle = \frac{\varepsilon_0 E_0^2 A c \Delta t}{2} $$
+
+\subsection*{Part E}
+
+The time derivative of the total energy just cancels the $\Delta t$,
+$$ \frac{\partial\langle U \rangle}{\partial t} = \frac{\varepsilon_0 E_0^2 A c
+}{2} $$
+
+\subsection*{Part F}
+
+The definition of power is the time derivative of energy, thus,
+$$ \langle P \rangle = \frac{\varepsilon_0 E_0^2 A c }{2} $$
+
+\section*{Problem 6}
+
+\subsection*{Part A}
+
+From the definition of Poynting vector,
+$$ S_{sun}(r) = \frac{P_{sun}}{4 \pi r^2} $$
+
+\subsection*{Part B}
+
+From the definition of pressure on a perfectly reflecting medium,
+$$ P_{ref} = \frac{P_{sun}}{2 \pi c r^2} $$
+
+\subsection*{Part C}
+
+From the definition of pressure,
+$$ F = \frac{P_{sun} A}{2 \pi c r^2} $$
+
+Equating gravitational force and force from radiation,
+$$ G \frac{m_1 m_2}{r^2} = \frac{P_{sun} A}{2 \pi c r^2} $$
+Since the sail is circular,
+$$ A = \pi \left(\frac{d}{2}\right)^2 $$
+Simplifying the expression and solving for $d$,
+$$ d = \sqrt{\frac{8 G m_1 m_2 c}{P}} $$
+Substituting values for masses,
+$$ d \approx 892\ \si{m} $$
+
+\section*{Problem 7}
+
+\subsection*{Part A}
+
+For radii smaller than $a$, there is no field because the charge in a conductor
+is located on the surface. Also, for radii larger than $b$, there is in field
+because the total enclosed charge is $0$.
+
+For $a < r < b$, construct a Gaussian cylinder of radius $a < r < b$ and length
+$\ell$. Gauss's law becomes,
+$$ E 2 \pi r \ell = \frac{-Q}{\varepsilon_0} $$
+Solving for $E$,
+$$ E = \frac{-Q}{2 \pi \varepsilon_0 r \ell} \hat{r} $$
+
+\subsection*{Part B}
+
+For radii smaller than $a$ and larger than $b$, there is no changing field or
+current. As a result, there is no magnetic field in these regions.
+
+For $a < r < b$, construct an Amperian loop of radius $a < r < b$. There is no
+enclosed current, only displacement current. Therefore, since the electric field
+is constant at a certain radius in this region, Ampere-Maxwell equation becomes,
+$$ B 2 \pi r = \mu_0 \varepsilon_0 \frac{\partial}{\partial t} \left( \left(
+\frac{-Q}{2 \pi \varepsilon_0 r \ell} \right) \left(2 \pi 2 \ell \right) \right)
+$$
+Simplifying,
+$$ B 2 \pi r = - \mu_0 I $$
+Solving for $B$,
+$$ \vec{B} = \frac{- \mu_0 I}{2 \pi r} \hat{\phi} $$
+
+\subsection*{Part C}
+
+Taking the cross product of electric field and magnetic field give the Poynting
+vector,
+$$ \vec{S} = \frac{I Q}{4 \varepsilon_0 \pi^2 \ell r^2} \hat{k} $$
+
+\subsection*{Part D}
+
+The surface of integration is the "washer" region between radii $a$ and $b$.
+$$ P = \int\limits_0^{2 \pi} \int\limits_a^b \frac{I Q}{4 \varepsilon_0 \pi^2
+\ell r^2} r dr d\phi = \frac{I Q}{2 \varepsilon_0 \pi \ell} \int\limits_a^b
+\frac{dr}{r} = \frac{I Q}{2 \varepsilon_0 \pi \ell} \ln\left(\frac{b}{a}\right) $$
+
+\subsection*{Part E}
+
+Some of the power that flows through the coaxial will be stored within the
+electric and magnetic fields of the cable. Thus, the power dissipated by the
+resistor should be less than the power that flows into the cable from the
+battery.
+
+\end{document}
