@@ -1,0 +1,255 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{6.041 Problem Set 1}
+\author{Robert Durfee}
+\date{September 11, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\textit{Let $ A $, $ B $, and $ C $ be some events. For each one of the events
+below, give a set-theoretic expression and also show the event pictorially on a
+Venn diagram.}
+
+\subsection*{Part A}
+
+\textit{At least two of the events $ A $, $ B $, $ C $ occur.}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{"P1A"}
+    \caption{ $ (A \cap B) \cup (B \cap C) \cup (C \cap A) $ }
+\end{figure}
+
+\subsection*{Part B}
+
+\textit{At most two of the events $ A $, $ B $, $ C $ occur.}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{"P1B"}
+    \caption{ $ \overline{(A \cap B \cap C)} $ }
+\end{figure}
+
+\subsection*{Part C}
+
+\textit{None of the events $ A $, $ B $, $ C $ occurs.}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{"P1C"}
+    \caption{ $ \overline{(A \cup B \cup C)} $ }
+\end{figure}
+
+\subsection*{Part D}
+
+\textit{Either event $ B $ occurs or, if not, then $ C $ also does not occur.}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{"P1D"}
+    \caption{ $ \overline{B} \implies \overline{C} $ }
+\end{figure}
+
+\section*{Problem 2}
+
+\textit{Find the value of $ P \left( A \cup \overline{ \left( \overline{B} \cup
+\overline{C} \right) } \right) $ for each of the following cases.}
+
+\subsection*{Part A}
+
+\textit{The events $ A $, $ B $, $ C $ are disjoint events and $ P(A) = 2/5 $.}
+
+\bigbreak
+
+Since both $ B $ and $ C $ are disjoint, the union of their complements span the
+entire sample space $ \Omega $. The complement of the entire sample space $
+\Omega $ is the empty set $ \emptyset $. Lastly, any set's union with the empty
+set is that same set. Therefore, using $ P(A) = 2/5 $,
+\begin{align*}
+    P \left( A \cup \overline{ \left( \overline{B} \cup \overline{C} \right) }
+    \right) &= P \left( A \cup \overline{ \Omega } \right) \\
+    &= P \left( A \cup \emptyset \right) \\
+    &= P(A) \\
+    &= 2/5
+\end{align*}
+
+\subsection*{Part B}
+
+\textit{The events $ A $ and $ C $ are disjoint, and $ P(A) = 1/2 $, and $ P(B
+\cap C) = 1/4 $.}
+
+\bigbreak
+
+From DeMorgan's Law, $ \overline{ \overline{B} \cup \overline{C} } = B \cap C $.
+Additionally, given that $ A $ and $ C $ are disjoint, and that the intersect of
+$ B $ and $ C $ must be a subset of $ C $, then $ A $ and $ B \cap C $ must also
+be disjoint. Thus, the additional rule can be used. Therefore, using $ P(A) =
+1/2 $ and $ P(B \cap C) = 1/4 $,
+\begin{align*}
+    P \left( A \cup \overline{ \left( \overline{B} \cup \overline{C} \right) }
+    \right) &= P \left( A \cup \left( B \cap C \right) \right) \\
+    &= P(A) + P(B \cap C) \\
+    &= 1/2 + 1/4 \\
+    &= 3/4
+\end{align*}
+
+\subsection*{Part C}
+
+\textit{$ P \left( \overline{A} \cap \left( \overline{B} \cup \overline{C}
+\right) \right) = 0.7 $}
+
+\bigbreak
+
+Using DeMorgan's Law, $ \overline{\overline{A} \cap \left( \overline{B} \cup
+\overline{C} \right)} = A \cup \overline{\left( \overline{B}
+\cup \overline{C} \right)} $. Therefore, given $ P \left( \overline{A} \cap
+\left( \overline{B} \cup \overline{C} \right) \right) = 0.7 $,
+\begin{align*}
+    P \left( A \cup \overline{\left( \overline{B} \cup \overline{C} \right) }
+    \right) &= 1 - P \left( \overline{A \cup \overline{\left( \overline{B} \cup
+    \overline{C} \right)} } \right) \\
+    &= 1 - P \left( \overline{A} \cap \left( \overline{B} \cup \overline{C}
+    \right) \right) \\
+    &= 1 - 0.7 \\
+    &= 0.3
+\end{align*}
+
+\section*{Problem 3}
+
+\textit{Mary and Tom park their cars in an empty parking lot with $ n \geq 2 $
+consecutive parking spaces (i.e, n spaces in a row, where only one car fits in
+each space). Mary and Tom pick parking spaces at random. (All pairs of distinct
+parking spaces are equally likely.) What is the probability that there is
+exactly one empty parking space between them?}
+
+\bigbreak
+
+With $ n $ parking spaces all in a row, there are $ n - 2 $ distinct ways such
+that there is exactly one parking space between the two cars. Furthermore, the
+number of distinct ways two cars can be placed in $ n $ parking spaces all in a
+row is $ \binom{n}{2} $. Therefore, the probability of the event $ E $ that two
+cars have exactly one empty space between them, given every outcome is uniform,
+follows,
+$$ P(E) = (n - 2) / \binom{n}{2} $$
+
+\section*{Problem 4}
+
+\textit{Alice and Bob each choose at random a real number between zero and one.
+We assume that the pair of numbers is chosen according to the uniform
+probability law on the unit square, so that the probability of an event is equal
+to its area.}
+
+\textit{We define the following events:}
+
+\begin{itemize}
+    \item[] $ A $ = \{ \textit{The magnitude of the difference of the two
+        numbers is $ > $ 1/3} \}
+    \item[] $ B $ = \{ \textit{At least one of the numbers is $ > $ 1/4} \}
+    \item[] $ C $ = \{ \textit{The sum of the two numbers is 1} \}
+    \item[] $ D $ = \{ \textit{Alice’s number is $ > $ 1/4} \}
+\end{itemize}
+
+\textit{Find the following probabilities:}
+
+\subsection*{Part A}
+
+\textit{$ P(A) $}
+
+\bigbreak
+
+The set notation for event $ A $ is,
+$$ A = \{ (x, y) \mid \vert x - y \vert > 1/3 \} $$
+This can be broken down into
+$$ A = \{ (x, y) \mid x - y > 1/3 \lor x - y < -1/3 \} $$
+Over the unit square, this creates two equal triangles whose areas are given by
+$$ A_T = (1/2) (1 - 1/3)^2 $$
+Therefore, the total probability, given by the total area is
+$$ P(A) = (1 - 1/3)^2 = 4/9 $$
+
+\subsection*{Part B}
+
+\textit{$ P(B) $}
+
+\bigbreak
+
+The set notation for event $ B $ is,
+$$ B = \{ (x, y) \mid \max{(x, y)} > 1/4 \} $$
+The area of this region over the unit square is given by
+$$ A_R = 1 - (1/4)^2 $$
+Therefore, the total probability, given by the area is
+$$ P(B) = 1 - (1/4)^2 = 15/16 $$
+
+\subsection*{Part C}
+
+\textit{$ P(A \cap B) $}
+
+\bigbreak
+
+The set notation for event $ A \cap B $ is,
+$$ A \cap B = \{ (x, y) \mid \vert x - y \vert > 1/3 \land \max{(x, y)} > 1/4 \}
+$$
+These two different regions over the unit square overlap exactly where region $
+A $ did as calculated above. Therefore, the event $ A \cap B  = A $. So the
+total probability, given by the area of region $ A $,
+$$ P(A \cap B) = P(A) = 4/9 $$
+
+\subsection*{Part D}
+
+\textit{$ P(C) $}
+
+\bigbreak
+
+The set notation for event $ C $ is,
+$$ C = \{ (x, y) \mid x + y = 1 \} $$
+Since this is only a line with no area, and the probability is defined by area,
+$$ P(C) = 0 $$
+
+\subsection*{Part E}
+
+\textit{$ P(D) $}
+
+\bigbreak
+
+The set notation for event $ D $, taking $ x $ as Alice's number, is,
+$$ D = \{ (x, y) \mid x > 1/4 \} $$
+This region over the unit square takes up $ 3/4 $ of its area. Therefore, the
+total probability is,
+$$ P(D) = 3/4 $$
+
+\subsection*{Part F}
+
+\textit{$ P(A \cap D) $}
+
+\bigbreak
+
+The set notation for event $ A \cap D $, taking $ x $ as Alice's number, is,
+$$ A \cap D = \{ (x, y) \mid \vert x - y \vert > 1/3 \land x > 1/4 \} $$
+These two regions intersect making one triangle of area equal to half of $ P(A)
+A $,
+$$ A_{T1} = P(A) / 2 $$
+And the other given by,
+$$ A_{T2} = (1/2)(2/3 - 1/4)^2 $$
+Therefore, the total probability, given by area,
+$$ P(A \cap D) = (1/2)(4/9) + (1/2)(2/3 - 1/4)^2 \approx 0.309 $$
+
+\end{document}
+
