@@ -1,0 +1,186 @@
+%
+% 6.006 problem set 1 solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros-fa18}
+\newcommand{\theproblemsetnum}{1}
+\newcommand{\releasedate}{Thursday, September 6}
+\newcommand{\partaduedate}{Thursday, September 13}
+
+\title{6.006 Problem Set 1}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 11PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} Sushrutha Reddy
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+\problempart $ (f_4, \{ f_1, f_2 \}, f_5, f_3) $
+\problempart $ (f_5, f_4, f_1, f_3, f_2) $
+\problempart $ (f_3, f_1, f_2, f_5, f_4) $
+\problempart $ (f_2, f_3, f_4, f_1, f_5) $
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+
+\begin{problemparts}
+\problempart % Problem 2a
+\begin{enumerate}[i.]
+  \item $ T(n) = 2 T(2n / 3) + O(n) $
+  \item For the Master Theorem, $ a = 2 $ and $ b = 3/2 $. Checking the
+      condition for Case I.  In order for Case I to apply, $ n \in
+        O(n^{\log_{3/2} 2 - \varepsilon}) $ for some $ \varepsilon > 0 $.  Since
+        $ \log_{3/2} 2 > 1 $, it is clear that if $ \varepsilon = \log_{3/2} 2 -
+        1 $, the condition of Case I forms a bound on $ n $, $ n \in
+        O(n^{\log_{3/2} 2 - (\log_{3/2} 2 - 1)}) = O(n) $.  Therefore, the first
+        case of the Master Theorem applies. So the resulting amount of work of
+        the recurrence is $ T(n) \in O(n^{\log_{3/2} 2}) $ which is \textit{not}
+        $ O(n \log n) $.
+\end{enumerate}
+
+\problempart % Problem 2b
+\begin{enumerate}[i.]
+  \item $ T(n) = 2 T(n/4) + O(\log n) $
+    \begin{center}
+        \includegraphics[scale=0.4]{Images/i.PNG}
+    \end{center}
+    From the recursion tree, $ T(n) = \log(n) + 2 \log (n/4) + 2^2 \log (n/4^2)
+        + \ldots + n^{\log_4 2}$.  Looking at this sum shows the tree is
+        leaf-heavy, that is, the leaves contribute more to the work. As a
+        result, $ T(n) \in O(n^{\log_4 2}) $.
+    \smallbreak
+    Using the Master Theorem, $ a = 2 $, and $ b = 4 $. Checking the condition
+        for Case I. In order for Case I to apply, $ \log n \in O(n^{\log_4 2 -
+        \varepsilon} $ for some $ \varepsilon > 0 $. It is known from proof via
+        textbook/recitation that $ (\log n)^a \in O(n^b) \forall a,b > 0 $.
+        Therefore, if $ \varepsilon < 0.5 $ then $ \log n \in O(n^{\log_4 2 -
+        \varepsilon}) $ and thus Case I applies. From this, $ T(n) \in
+        \Theta(n^{\log_4 2}) $.
+  \item $ T(n) = 17 T(n/3) + \Theta(n!) $
+    \begin{center}
+        \includegraphics[scale=0.4]{Images/ii.PNG}
+    \end{center}
+    From the recursion tree, $ T(n) = n! + 17 (n/3)! + 17^2 (n/3^2)! + \ldots +
+        n^{\log_3 17} $. Looking at this sum shows the tree is root-heavy, that
+        is, the root contributes most to the work. As a result,
+    $ T(n) \in O(n!) $.
+    \smallbreak
+    Using the Master Theorem, $ a = 17 $ and $ b = 3 $. Checking the condition
+        for Case III. In order for Case III to apply, $ n! \in \Omega(n^{\log_3
+        17 + \varepsilon} $ for some $ \varepsilon > 0 $. It is clear that a
+        factorial is asymptotically greater than a polynomial. Therefore, $ n!
+        \in \Omega(n^{\log_3 17 + \varepsilon} $ when $ \varepsilon = 1 $, for
+        example. Furthermore, Case III requires $ 17 (n/3)! < c n! $ for some $
+        0 < c < 1 $. Taking the limit of the ratio gives:
+    $$ \lim_{n \to \infty} \frac{17(n/3)!}{c n!} $$
+    The constants can be ignored
+    $$ \lim_{n \to \infty} \frac{(n/3)!}{n!} $$
+    Cancelling like terms
+    $$ \lim_{n \to \infty} \frac{1}{n (n-1) \ldots (n/3 + 1)} = 0 $$
+    Therefore, for any nonzero $ c $, $ 17 (n/3)! < c n! $ and Case III applies.
+        From this, $ T(n) \in
+    \Theta(n!) $
+  \item $ T(n) = 25 T(n/5) + n^2 + 2n + \log n $
+    \begin{center}
+        \includegraphics[scale=0.36]{Images/iii.PNG}
+    \end{center}
+    From the recursion tree, $ T(n) = O(n^2) + O(n^2) + \ldots + O(n^2) $.
+        Looking at this sum shows the tree is even per level. Therefore, the
+        total work is the work per level times the number of levels.  Since
+        there are $ \log_5 n $ levels, $ T(n) \in O(n^2 \log n) $.
+    \smallbreak
+    Using the Master Theorem, $ a = 25 $ and $ b = 5 $. Checking the condition
+        for Case II. In order for Case II to apply, $ n^2 \in \Theta(n^{\log_5
+        25} \log^k n $ for some $ k \geq 0 $. It is easy to see that $ n^2 \in
+        \Theta(n^2) $ therefore, $ n^2 \in \Theta(n^{\log_5 25} \log^k n $ for $
+        k = 0 $. Thus Case II applies. From this, $ T(n) \in \Theta(n^2 \log n)
+        $
+  \item $ T(n) = T(\sqrt{n}) + O(1) $
+      \begin{center}
+          \includegraphics[scale=0.4]{Images/iv.PNG}
+      \end{center}
+      From the recursion tree, $ T(n) = 1 + 1 + \ldots + 1 $. Therefore the work
+        is constant per level and only depends on the length of the chain. Given
+        that at each level $ k $, $ n = n^{1/2^k} $, setting this equal to a
+        termination point will allow solving for $ k $. Setting termination at $
+        2 $, since $ 1 $ is never reached, yields $ n^{1/2^k} = 2 $. Solving for
+        $ k $ results in $ k = \log \log n $.  Therefore, $T(n) \in O(\log \log
+        n)$.
+\end{enumerate}
+\end{problemparts}
+
+\newpage
+\problem  % Problem 3
+
+\begin{problemparts}
+\problempart \textbf{Description} Iterate over each row and apply binary search.
+    If the element is found within the row, terminate and return the index. If
+    the element is not found, move to the next row until the are no remaining
+    rows. If there are no more remaining rows, the element is not in the 2D
+    array, return None.
+    \smallbreak
+    \textbf{Correctness} If the element is in the 2D array, it must be within at
+    least one row. If it is in a row, the iteration will encounter that row and
+    binary search will return its index. If the element is not in the 2D array,
+    it will not be in a row and thus when the iteration completes through all
+    rows without breaking early, it is certain the element is not in the array
+    and will return None.
+    \smallbreak
+    \textbf{Running Time} Since each row has $ m $ elements, binary search on
+    any of them will execute in $ O(\log m) $ time. Since there are $ n $ rows,
+    the total complexity is $ O(n \log m) $.
+\problempart If $ v > s $, then we can eliminate the first column of the 2D
+    array. If $ v < s $, then we can eliminate the last row of the 2D array. If
+    $ v \neq s $, then either a column or row will be eliminated. This means
+    that either $ n $ or $ m $ elements will be removed. Therefore, at least $
+    \min (n, m) $ elements are removed.
+\problempart \textbf{Description} Initialize $ (x, y) $ to $ (0, n) $. Let $ s $
+    be the element located at $ (x, y) $. If $ v > s $ (and $ x < m - 1 $),
+    recurse after incrementing $ x $, thereby removing the first column of the
+    array. Else if $ v < s $ (and $ y > 0 $), recurse after decrementing $ y $,
+    thereby removing the last row of the array. Else if $ v = s $, the element
+    has been found, return $ (x, y) $.  Else, return None as the bounds of the
+    array have been met.
+    \smallbreak
+    \textbf{Correctness} Since each column and row are sorted increasing down
+    and to the right, if the lowest, leftmost cell, $ s $, of a 2D-subarray is
+    less than $ v $, and since all the elements above $ s $ are less than $ s $,
+    then these elements can be removed as they are less than $ v $. Furthermore,
+    if the $ s $ is greater than $ v $, and since all the elements to the right
+    of $ s $ are greater than $ s $, then these elements can be removed as they
+    are greater than $ v $. Given that $ v $ cannot be removed from the array by
+    mistake, it must appear in the lower, leftmost cell of a 2D-subarray at some
+    point if it is present in the array. Otherwise, the bounds of the array are
+    met and None is returned.
+    \smallbreak
+    \textbf{Running Time} A recurrence can be constructed for this algorithm as
+    follows $ T(m + n) = T(m + n - 1) + O(1) $ where $ n $ and $ m $ represent
+    the number of rows and columns respectively. Each recurrence removes either
+    one row or one column. At each step, the only operations are done in
+    constant time. This recurrence is simply a chain of length $ m + n $ with
+    each node of constant time. Therefore, $ T(n) \in O(n + m) $.
+\problempart Submit your implementation to {\small\url{alg.mit.edu}}.
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
+
