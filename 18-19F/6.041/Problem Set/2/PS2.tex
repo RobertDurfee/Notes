@@ -34,11 +34,35 @@ events have positive probability.)}
 \textit{$ P \left( A \cap B \cap \overline{C} \right) = P \left( A \cap B
 \right) P \left( \overline{C} \mid A \cap B \right) $}
 
+\bigbreak
+
+From the definition of conditional probability
+$$ P ( \overline{C} \mid A \cap B ) = \frac{ P ( A \cap B \cap \overline{C} ) }{
+    P ( A \cap B ) } $$
+Substituting into the provided expression
+$$ P ( A \cap B \cap \overline{C} ) = P ( A \cap B ) \frac{ P ( A \cap B \cap
+\overline{C} ) }{ P ( A \cap B ) } $$
+Canceling terms
+$$ P ( A \cap B \cap \overline{C} ) =  P ( A \cap B \cap \overline{C} ) $$
+
 \subsection*{Part B}
 
 \textit{$ P \left( A \cap B \cap \overline{C} \right) = P \left( A \right) P
 \left( \overline{C} \mid A \right) P \left( B \mid A \cap \overline{C} \right)
 $}
+
+\bigbreak
+
+From the definition of conditional probability
+$$ P ( \overline{C} \mid A ) = \frac{ P ( \overline{C} \cap A ) }{ P ( A ) },\ P
+( B \mid A \cap \overline{C} ) = \frac{ P ( A \cap B \cap \overline{C} ) }{ P (
+A \cap \overline{C} ) } $$
+Substituting into the provided expression
+$$ P ( A \cap B \cap \overline{C} ) = P ( A ) \frac{ P ( \overline{C} \cap A )
+}{ P ( A ) } \frac{ P ( A \cap B \cap \overline{C} ) }{ P ( A \cap \overline{C}
+) } $$
+Canceling terms
+$$ P ( A \cap B \cap \overline{C} ) =  P ( A \cap B \cap \overline{C} ) $$
 
 \subsection*{Part C}
 
@@ -46,10 +70,35 @@ $}
 \left( \overline{C} \cap A \mid A \right) P \left( B \mid A \cap \overline{C}
 \right) $}
 
+\bigbreak
+
+From the definition of conditional probability
+$$ P ( \overline{C} \cap A \mid A ) = \frac{ P ( \overline{C} \cap A \cap A ) }{
+    P ( A ) },\ P ( B \mid A \cap \overline{C} ) = \frac{ P ( B \cap A \cap
+\overline{C} ) }{ P ( A \cap \overline{C} ) } $$
+Substituting into the provided expression
+$$ P ( A \cap B \cap \overline{C} ) = P ( A ) \frac{ P ( \overline{C} \cap A )
+}{ P ( A ) } \frac{ P ( B \cap A \cap \overline{C} ) }{ P ( A \cap \overline{C}
+) } $$
+Canceling terms
+$$ P ( A \cap B \cap \overline{C} ) =  P ( A \cap B \cap \overline{C} ) $$
+
 \subsection*{Part D}
 
 \textit{$ P \left( A \cap B \mid C \right) = P \left( A \mid C \right) P \left(
 B \mid A \cap C \right) $}
+
+\bigbreak
+
+From the definition of conditional probability
+$$ P ( A \cap B \mid C ) = \frac{ P ( A \cap B \cap C ) }{ P ( C ) },\ P ( A
+\mid C ) = \frac{ P ( A \cap C ) }{ P ( C ) } $$
+$$ P ( B \mid A \cap C ) = \frac{ P ( A \cap B \cap C ) }{ P ( A \cap C ) } $$
+Substituting into provided expression
+$$ \frac{ P ( A \cap B \cap C ) }{ P ( C ) } = \frac{ P ( A \cap C ) }{ P ( C )
+} \frac{ P ( A \cap B \cap C ) }{ P ( A \cap C ) } $$
+Canceling terms
+$$ P ( A \cap B \cap C ) =  P ( A \cap B \cap C ) $$
 
 \section*{Problem 2}
 
@@ -62,10 +111,28 @@ event $ C $. Suppose that $ P \left( C \right) > 0 $ and $ P \left( \overline{C}
 \textit{Are $ A $ and $ \overline{B} $ guaranteed to be conditionally
 independent given $ C $? Justify your answer.}
 
+\bigbreak
+
+If $ P ( B \cap C ) > 0 $, then $ P (A \cap B \mid C) = P (A \mid C) P(B \mid C)
+$ is the same as $ P(A \mid B \cap C) = P(A \mid C) $. Furthermore, since
+conditioning on $ B $ has no effect, the conditioning on $ \overline{B} $ must
+also have no effect. Therefore, $ P(A \mid \overline{B} \cap C) = P(A \mid C) $
+which is the same as $ P(\overline{B} \mid A \cap C) = P(\overline{B} \mid C) $.
+Therefore $ A $ and $ \overline{B} $ are conditionally independent given $ C $.
+
 \subsection*{Part B}
 
 \textit{Are $ A $ and $ B $ guaranteed to be conditionally independent given $
 \overline{C} $? Justify your answer.}
+
+\bigbreak
+
+A counterexample exists when $ A $ and $ B $ only intersect within $ C $.
+Therefore, $ P(A \cap B \mid \overline{C}) = 0 $. However, if $ A $ and $ B $
+still exist in $ \overline{C} $, $ P(A \mid \overline{C}) $ and $ P(B \mid
+\overline{C}) $ are both positive. Thus, $ P(A \cap B \mid \overline{C}) \neq
+P(A \mid \overline{C}) P(B \mid \overline{C}) $ and thus are not conditionally
+independent given $ \overline{C} $.
 
 \section*{Problem 3}
 
@@ -83,10 +150,28 @@ the two die rolls is $ 10 $).}
 \textit{Is event $ A $ independent of the event “at least one of the die rolls
 resulted in a $ 5 $”?}
 
+\bigbreak
+
+Let $ I $ be the event "at least one of the die rolls resulted in a $ 5 $."
+Given probabilities
+$$ P(A \cap I) = 1/25,\ P(A) = 1/25,\ P(I) = 9/25 $$
+Checking independence
+$$ P(A \cap I) \neq P(A) P(I) $$
+Therefore they are not independent.
+
 \subsubsection*{Part II}
 
 \textit{Is event $ A $ independent of the event “at least one of the die rolls
 resulted in a $ 1 $”?}
+
+\bigbreak
+
+Let $ II $ be the event “at least one of the die rolls resulted in a $ 1 $”.
+Given probabilities
+$$ P(A \cap II) = 0,\ P(A) = 1/25,\ P(II) = 9/25 $$
+Checking independence
+$$ P(A \cap II) \neq P(A) P(II) $$
+Therefore they are not independent.
 
 \subsection*{Part B}
 
@@ -97,10 +182,26 @@ resulted in a $ 1 $”?}
 \textit{Is event $ B $ independent of getting "doubles" (i.e., both dice
 resulting in the same number)?}
 
+\bigbreak
+
+Let $ I $ be the event of getting doubles. Given probabilities
+$$ P(B \cap I) = 1/25,\ P(B) = 3/25,\ P(I) = 5/25 $$
+Checking independence
+$$ P(B \cap I) \neq P(B) P(I) $$
+Therefore they are not independent.
+
 \subsubsection*{Part II}
 
 \textit{Given that the total is $ 8 $, what is the probability that at least one
 of the die rolls resulted in a $ 3 $?}
+
+\bigbreak
+
+Let $ II $ be the event that at least one of the die rolls resulted in a $ 3 $.
+Given probabilities
+$$ P(II \cap B) = 2/25,\ P(B) = 3/25 $$
+Using the definition of conditional probability
+$$ P(II \mid B) = \frac{P(II \cap B)}{P(B)} = 2/3 $$
 
 \section*{Problem 4}
 
@@ -119,11 +220,47 @@ different links are independent.}
 \textit{Assume that $ p = 1/3 $. Find the probability that there exists a path
 from $ A $ to $ B $ along which no link has failed.}
 
+\bigbreak
+
+Let $ 1 $, $ 2 $, ... be the events that Link 1, Link 2, ... fail respectively.
+A path exists from $ A $ to $ B $ if $ (\overline{1} \cap \overline{2} \cap
+\overline{5}) \cup (\overline{3} \cap \overline{4} \cap \overline{5}) $. Using
+the inclusion-exclusion principle, the probability of this event is
+$$ P((\overline{1} \cap \overline{2} \cap \overline{5}) \cup (\overline{3} \cap
+\overline{4} \cap \overline{5})) = P(\overline{1} \cap \overline{2} \cap
+\overline{5}) + P(\overline{3} \cap \overline{4} \cap \overline{5}) -
+P(\overline{1} \cap \overline{2} \cap \overline{3} \cap \overline{4} \cap
+\overline{5}) $$
+Since each link failing is independent of all the others, this equivalent
+$$ P(\overline{1})P(\overline{2})P(\overline{5}) +
+P(\overline{3})P(\overline{4})P(\overline{5}) -
+P(\overline{1})P(\overline{2})P(\overline{3})P(\overline{4})P(\overline{5}) $$
+Therefore
+$$ P((\overline{1} \cap \overline{2} \cap \overline{5}) \cup (\overline{3} \cap
+\overline{4} \cap \overline{5})) = 2(1 - p)^3 - (1 - p)^5 \approx 0.46 $$
+
 \subsection*{Part B}
 
 \textit{Given that exactly one link in the network has failed, find the
 probability that there exists a path from $ A $ to $ B $ along which no link has
 failed.}
+
+\bigbreak
+
+The event that exactly one link fails is given by
+$$ (1 \cap \overline{2} \cap \overline{3} \cap \overline{4} \cap \overline{5})
+\cup (\overline{1} \cap 2 \cap \overline{3} \cap \overline{4} \cap \overline{5})
+\cup \ldots $$
+Given that the link failures are independent and the outcomes of the event are
+mutually exclusive, the probability becomes
+$$ P(1)P(\overline{2})P(\overline{3})P(\overline{4})P(\overline{5}) +
+P(\overline{1})P(2)P(\overline{3})P(\overline{4})P(\overline{5}) + \ldots = 5
+p(1 - p)^4 $$
+The only outcome in this event that would be leave no path from $ A $ to $ B $
+is the failure of Link 5, which has a probability of $ p(1 - p)^4 $. Therefore,
+the probability that there is a path from $ A $ to $ B $ given that exactly one
+link failed is
+$$ \frac{ 4 p (1 - p)^4 }{ 5 p (1 - p)^4 } = 4/5 $$
 
 \section*{Problem 5}
 
@@ -143,15 +280,73 @@ for $ n \leq 1 $, if the dog is alive during day $ n - 1 $, then the probability
 it is alive during day $ n $ is $ 2/(n + 1) $. The dog can only die overnight.
 Oscar stops searching as soon as he finds his dog, either alive or dead.}
 
+\bigbreak
+
+Let $ L $ be the random variable representing the location of the dog. Let $ F_i
+$ be the event that the dog is found on the $ i $th day. Let $ S_i $ be the
+random variable representing the forest Oscar searches on the $ i $th day. Let $
+H_i $ be the event that the dog is healthy on the $ i $th day. Then the given
+probabilities are
+$$ P(L = A) = 0.4, P(L = B) = 0.6 $$
+$$ P(F_i \mid L = A \cap S_i = A) = 0.25,\ P(F_i \mid L = B \cap S_i = B) = 0.15 $$
+$$ P(F_i \mid L = A \cap S_i = B) = 0,\ P(F_i \mid L = B \cap S_i = A) = 0 $$
+$$ P(H_i \mid H_{i - 1} \cap H_{i - 2} \cap \ldots \cap H_{0}) = 2 / (i + 1) $$
+
 \subsection*{Part A}
 
 \textit{ In which forest should Oscar look on the first day of the search to
 maximize the probability he finds his dog that day?}
 
+\bigbreak
+
+To figure out the best strategy, compare the following
+$$ P(F_1 \mid S_1 = A),\ P(F_1 \mid S_1 = B) $$
+
+First for $ P(F_1 \mid S_1 = A) $. Using the law of total probability, this is
+equivalent
+$$ P(L = A) P(F_1 \mid S_1 = A \cap L = A) + P(L = B) P(F_1 \mid S_1 = A \cap L
+= B) $$
+Using the probabilities described above,
+$$ P(F_1 \mid S_1 = A) = (0.4)(0.25) + (0.6)(0.0) = 0.10 $$
+
+Now for $ P(F_1 \mid S_1 = B) $. Using the law of total probability, this is
+equivalent
+$$ P(L = A) P(F_1 \mid S_1 = B \cap L = A) + P(L = B) P(F_1 \mid S_1 = B \cap L
+= B) $$
+Using the probabilities described above,
+$$ P(F_1 \mid S_1 = A) = (0.4)(0.0) + (0.6)(0.15) = 0.09 $$
+Therefore Oscar should search forest $ A $.
+
 \subsection*{Part B}
 
 \textit{Oscar looked in forest $ A $ on the first day but didn’t find his dog.
 What is the probability that the dog is in forest $ A $?}
+
+\bigbreak
+
+The probability asked for is $ P(L = A \mid S_1 = A \cap \overline{F_1}) $.
+Using Bayes' Rule, this can be written as
+$$ \frac{ P(\overline{F_1} \mid L = A \cap S_1 = A) P(L = A \cap S_1 = A) }{
+    P(S_1 = A \cap \overline{F_1}) } $$
+Since it is reasonable to assume that the forest Oscar searches is independent
+of where the dog is (otherwise he would know where the dog was to begin with),
+This can be simplified
+$$ \frac{ (1 - P(F_1 \mid L = A \cap S_1 = A)) P(L = A) }{ 1 - P(F_1 \mid S_1 =
+A) } $$
+Everything is know except $ P(\overline{F_1} \mid S_1 = A) $. Using the law of
+total probability, this is the same as
+$$ P(L = A) (1 - P(F_1 \mid S_1 = A \cap L = A)) + P(L = B) (1 - P(F_1 \mid S_1
+= A \cap L = B)) $$
+Using the probabilities defined above leads to the simplification
+$$ P(\overline{F_1} \mid S_1 = A) = P(L = A) (1 - P(F_1 \mid S_1 = A \cap L =
+A)) + P(L = B) $$
+Substituting back into the equation determined above
+$$ P(L = A \mid S_1 = A \cap \overline{F_1}) = \frac{ (1 - P(F_1 \mid L =
+A \cap S_1 = A)) P(L = A) }{ P(L = A) (1 - P(F_1 \mid S_1 = A \cap L = A)) + P(L
+= B) } $$
+Using the probabilities above,
+$$ P(L = A \mid S_1 = A \cap \overline{F_1}) = \frac{ (1 - 0.25) (0.40) }{
+    (0.40) (1 - 0.25) + 0.60 } = 1/3 $$
 
 \subsection*{Part C}
 
@@ -159,11 +354,60 @@ What is the probability that the dog is in forest $ A $?}
 finds the dog on the first day. What is the probability that he looked in forest
 $ A $?}
 
+\bigbreak
+
+The probability being asked for is $ P(S_1 = A \mid F_1) $. Using Bayes' Rule,
+this can be rewritten as
+$$ \frac{ P(F_1 \mid S_1 = A) P(S_1 = A) }{ P(F_1) } $$
+The probability $ P(F_1 \mid S_1 = A) $ can be determined using the law of total
+probability as follows
+$$ P(F_1 \mid S_1 = A) = P(L = A) P(F_1 \mid S_1 = A \cap L = A) + P(L = B)
+P(F_1 \mid S_1 = A \cap L = B) $$
+Using the probabilities above, this simplifies
+$$ P(F_1 \mid S_1 = A) = P(L = A) P(F_1 \mid S_1 = A \cap L = A) $$
+Furthermore, the probability $ P(F_1) $ can be found also using the law of total
+probability,
+$$ P(F_1) = P(S_1 = A) P(F_1 \mid S_1 = A) + P(S_1 = B) P(F_1 | S_1 = B) $$
+Using the above derived expression reduces this to known probabilities
+\begin{align*}
+    P(F_1) = &P(S_1 = A) P(L = A) P(F_1 \mid S_1 = A \cap L = A) \\
+    &+ P(S_1 = B) P(L = B) P(F_1 \mid S_1 = B \cap L = B)
+\end{align*}
+Substituting this back into the desired expression and using probabilities above
+$$ P(S_1 = A \mid F_1) = \frac{ (0.4) (0.25) (0.5) }{ (0.5)(0.4)(0.25) +
+(0.5)(0.6)(0.15) } \approx 0.53 $$
+
 \subsection*{Part D}
 
 \textit{Oscar decides to look in forest $ A $ for the first two days. What is
 the probability that he finds his dog alive for the first time on the second
 day?}
+
+\bigbreak
+
+The probability being asked for is $ P ( \overline{F_1} \cap F_2 \cap H_2 \mid
+S_1 = S_2 = A) $. If knowing $ S_1 = S_2 = A $ occurs, also knowing $ F_1 $ will
+have no impact on $ F_2 $ and vice versa. The same can be said for the health of
+the dog on each day and relative to $ F_i $. Therefore, there is conditional
+independence and the probability can be rewritten as
+\begin{align*}
+    P(\overline{F_1} \mid S_1 = S_2 = A) P(F_2 \mid S_1 = S_2 = A) P(H_1 \mid
+    S_1 = S_2 = A) \\
+    P(H_2 \mid S_1 = S_2 = A)
+\end{align*}
+It is also reasonable to assume that the dog's health is independent of where
+Oscars is looking. Thus
+$$ P(\overline{F_1} \mid S_1 = S_2 = A) P(F_2 \mid S_1 = S_2 = A) P(H_1) P(H_2)
+$$
+Furthermore, where Oscar looks on day 1 will not impact whether he will find the
+dog on day 2 and vice versa. Therefore
+$$ P(\overline{F_1} \mid S_1 = A) P(F_2 \mid S_2 = A) P(H_1) P(H_2) $$
+Using the expression for $ P(F_1 \mid S_1 = A) $ from above yields
+$$ (1 - P(L = A)P(F_1 \mid S_1 = A \cap L = A)) P(L = A) P(F_2 \mid S_2 = A \cap
+L = A) P(H_1) P(H_2) $$
+Substituting the probabilities given above
+$$ P ( \overline{F_1} \cap F_2 \cap H_2 \mid S_1 = S_2 = A) = (1 -
+(0.4)(0.25))(0.4)(0.25)(1)(0.66) = 0.06 $$
 
 \subsection*{Part E}
 
@@ -186,10 +430,27 @@ forecast is “rain”, the probability of actually having rain on that day is 0
 On the other hand, if the forecast is “no rain”, the probability of actually
 raining is 0.1.}
 
+\bigbreak
+
+Let $ F $ be the event that the forecast predicts rain. Let $ R $ be the event
+that it actually rains. Let $ U $ be the event that Victor is carrying an
+umbrella. The given probabilities are
+$$ P(F) = 0.2,\ P(\overline{F}) = 0.8 $$
+$$ P(R \mid F) = 0.8,\ P(R \mid \overline{F}) = 0.1 $$
+
 \subsection*{Part A}
 
 \textit{One day, Victor missed the forecast and it rained. What is the
 probability that the forecast was “rain”?}
+
+\bigbreak
+
+The probability being asked for is $ P(F \mid R) $. Using Bayes' Rule, this is
+the same as
+$$ \frac{P(R \mid F) P(F)}{P(F) P(R \mid F) + P(\overline{F}) P(R \mid
+\overline{F}) } $$
+Using the given probabilities above
+$$ P(F \mid R) = \frac{(0.8) (0.2)}{ (0.2) (0.8) + (0.8) (0.1) } = 2/3 $$
 
 \subsection*{Part B}
 
@@ -201,6 +462,46 @@ if it says “rain” he will always carry an umbrella, and if it says “no rai
 will not carry an umbrella. Let $ U $ be the event that “Victor is carrying an
 umbrella”, and let $ N $ be the event that the forecast is “no rain”. Are events
 $ U $ and $ N $ independent?}
+
+\bigbreak
+
+Let $ S $ be the event that Victor sees the forecast. The given probabilities
+$$ P(S) = 0.8,\ P(\overline{S}) = 0.2 $$
+$$ P(U \mid \overline{S}) = 0.5 $$
+$$ P(U \mid S \cap F) = 1,\ P(U \mid S \cap \overline{F}) = 0 $$
+
+To assess whether $ \overline{F} $ and $ U $ are independent, the following must
+be shown
+$$ P(\overline{F} \cap U) = P(\overline{F}) P(U) $$
+
+Starting with $ P(U) $. Using the total law of probability, this is the same as
+$$ P(U) = P(S) P(U \mid S) + P(\overline{S}) P(U \mid \overline{S}) $$
+Everything is known except $ P(U \mid S) $. This can be rewritten using the law
+of total probability
+$$ P(U \mid S) = P(F) P(U \mid S \cap F) + P(\overline{F}) P(U \mid S \cap
+\overline{F}) $$
+Using the probabilities given, this can be simplified
+$$ P(U \mid S) = P(F) $$
+Therefore, putting it all together,
+$$ P(U) = P(S) P(F) + P(\overline{S}) P(U \mid \overline{S}) $$
+Using the probabilities above,
+$$ P(U) = (0.8) (0.2) + (0.2) (0.5) = 0.26 $$
+
+Next for $ P(\overline{F}) $. This is given as $ P(\overline{F}) = 0.8 $.
+
+Lastly, solving for $ P(\overline{F} \cap U) $. Using the multiplication rule
+$$ P(\overline{F} \cap U) = P(\overline{F}) P(U \mid \overline{F}) $$
+The only unknown is $ P(U \mid \overline{F}) $. Using the law of total
+probability,
+$$ P(U \mid \overline{F}) = P(S) P(U \mid \overline{F} \cap S) + P(\overline{S})
+P(U \mid \overline{F} \cap \overline{S}) $$
+Substituting into the above desired expression,
+$$ P(\overline{F} \cap U) = P(\overline{F}) (P(S) P(U \mid \overline{F} \cap S)
++ P(\overline{S}) P(U \mid \overline{F} \cap \overline{S})) $$
+Using the probabilities above,
+$$ P(\overline{F} \cap U) = (0.8) ( (0.8) (0.0) + (0.2) (0.5) ) = 0.08 $$
+
+Since $ (0.8) (0.26) \neq 0.08 $, $ U $ and $ N $ are not independent.
 
 \subsection*{Part D}
 
