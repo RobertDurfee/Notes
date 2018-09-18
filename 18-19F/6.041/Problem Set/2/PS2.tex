@@ -1,0 +1,211 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{6.041 Problem Set 2}
+\author{Robert Durfee}
+\date{September 18, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\textit{Consider the events $ A $, $ B $, and $ C $. Are the following
+statements always true? Justify your answer. (Assume that all conditioning
+events have positive probability.)}
+
+\subsection*{Part A}
+
+\textit{$ P \left( A \cap B \cap \overline{C} \right) = P \left( A \cap B
+\right) P \left( \overline{C} \mid A \cap B \right) $}
+
+\subsection*{Part B}
+
+\textit{$ P \left( A \cap B \cap \overline{C} \right) = P \left( A \right) P
+\left( \overline{C} \mid A \right) P \left( B \mid A \cap \overline{C} \right)
+$}
+
+\subsection*{Part C}
+
+\textit{$ P \left( A \cap B \cap \overline{C} \right) = P \left( A \right) P
+\left( \overline{C} \cap A \mid A \right) P \left( B \mid A \cap \overline{C}
+\right) $}
+
+\subsection*{Part D}
+
+\textit{$ P \left( A \cap B \mid C \right) = P \left( A \mid C \right) P \left(
+B \mid A \cap C \right) $}
+
+\section*{Problem 2}
+
+\textit{Suppose that events $ A $ and $ B $ are conditionally independent given
+event $ C $. Suppose that $ P \left( C \right) > 0 $ and $ P \left( \overline{C}
+\right) > 0 $.}
+
+\subsection*{Part A}
+
+\textit{Are $ A $ and $ \overline{B} $ guaranteed to be conditionally
+independent given $ C $? Justify your answer.}
+
+\subsection*{Part B}
+
+\textit{Are $ A $ and $ B $ guaranteed to be conditionally independent given $
+\overline{C} $? Justify your answer.}
+
+\section*{Problem 3}
+
+\textit{You roll two five-sided dice. The sides of each die are numbered from $
+1 $ to $ 5 $. The dice are “fair” (all sides are equally likely), and the two
+die rolls are independent.}
+
+\subsection*{Part A}
+
+\textit{Event $ A $ is “the total is $ 10 $” (i.e., the sum of the results of
+the two die rolls is $ 10 $).}
+
+\subsubsection*{Part I}
+
+\textit{Is event $ A $ independent of the event “at least one of the die rolls
+resulted in a $ 5 $”?}
+
+\subsubsection*{Part II}
+
+\textit{Is event $ A $ independent of the event “at least one of the die rolls
+resulted in a $ 1 $”?}
+
+\subsection*{Part B}
+
+\textit{Event $ B $ is “the total is $ 8 $.”}
+
+\subsubsection*{Part I}
+
+\textit{Is event $ B $ independent of getting "doubles" (i.e., both dice
+resulting in the same number)?}
+
+\subsubsection*{Part II}
+
+\textit{Given that the total is $ 8 $, what is the probability that at least one
+of the die rolls resulted in a $ 3 $?}
+
+\section*{Problem 4}
+
+\textit{Consider the communication network shown in the figure below and suppose
+that each link can fail with probability $ p $. Assume that failures of
+different links are independent.}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{"P4"}
+    \caption{ Communication Network }
+\end{figure}
+
+\subsection*{Part A}
+
+\textit{Assume that $ p = 1/3 $. Find the probability that there exists a path
+from $ A $ to $ B $ along which no link has failed.}
+
+\subsection*{Part B}
+
+\textit{Given that exactly one link in the network has failed, find the
+probability that there exists a path from $ A $ to $ B $ along which no link has
+failed.}
+
+\section*{Problem 5}
+
+\textit{Oscar has lost his dog in either forest $ A $ (with probability 0.4) or
+in forest $ B $ (with probability 0.6).}
+
+\textit{If the dog is in forest $ A $ and Oscar spends a day searching for it in
+forest $ A $, the conditional probability that he will find the dog that day is
+0.25.  Similarly, if the dog is in forest $ B $ and Oscar spends a day looking
+for it there, he will find the dog that day with probability 0.15.}
+
+\textit{The dog cannot go from one forest to the other. Oscar can search only in
+the daytime, and he can travel from one forest to the other only overnight. The
+dog is alive during day 0, when Oscar loses it, and during day 1, when Oscar
+starts searching. It is alive during day 2 with probability $ 2/3 $. In general,
+for $ n \leq 1 $, if the dog is alive during day $ n - 1 $, then the probability
+it is alive during day $ n $ is $ 2/(n + 1) $. The dog can only die overnight.
+Oscar stops searching as soon as he finds his dog, either alive or dead.}
+
+\subsection*{Part A}
+
+\textit{ In which forest should Oscar look on the first day of the search to
+maximize the probability he finds his dog that day?}
+
+\subsection*{Part B}
+
+\textit{Oscar looked in forest $ A $ on the first day but didn’t find his dog.
+What is the probability that the dog is in forest $ A $?}
+
+\subsection*{Part C}
+
+\textit{Oscar flips a fair coin to determine where to look on the first day and
+finds the dog on the first day. What is the probability that he looked in forest
+$ A $?}
+
+\subsection*{Part D}
+
+\textit{Oscar decides to look in forest $ A $ for the first two days. What is
+the probability that he finds his dog alive for the first time on the second
+day?}
+
+\subsection*{Part E}
+
+\textit{Oscar decides to look in forest $ A $ for the first two days. Given that
+he did not find his dog on the first day, find the probability that he does not
+find his dog dead on the second day.}
+
+\subsection*{Part F}
+
+\textit{Oscar finally finds his dog on the fourth day of the search. He looked
+in forest $ A $ for the first 3 days and in forest $ B $ on the fourth day.
+Given this information, what is the probability that he found his dog alive?}
+
+\section*{Problem 6}
+
+\textit{Before leaving for work, Victor checks the weather report in order to
+decide whether to carry an umbrella. On any given day, with probability 0.2 the
+forecast is “rain” and with probability 0.8 the forecast is “no rain”. If the
+forecast is “rain”, the probability of actually having rain on that day is 0.8.
+On the other hand, if the forecast is “no rain”, the probability of actually
+raining is 0.1.}
+
+\subsection*{Part A}
+
+\textit{One day, Victor missed the forecast and it rained. What is the
+probability that the forecast was “rain”?}
+
+\subsection*{Part B}
+
+\textit{Victor misses the morning forecast with probability 0.2 on any day in
+the year. If he misses the forecast, Victor will flip a fair coin to decide
+whether to carry an umbrella. (We assume that the result of the coin flip is
+independent from the forecast and the weather.) On any day he sees the forecast,
+if it says “rain” he will always carry an umbrella, and if it says “no rain” he
+will not carry an umbrella. Let $ U $ be the event that “Victor is carrying an
+umbrella”, and let $ N $ be the event that the forecast is “no rain”. Are events
+$ U $ and $ N $ independent?}
+
+\subsection*{Part D}
+
+\textit{Victor is carrying an umbrella and it is not raining. What is the
+probability that he saw the forecast?}
+
+\end{document}
+
