@@ -16,7 +16,7 @@
 \allowdisplaybreaks
 
 \title{6.041 Problem Set 2}
-\author{Robert Durfee}
+\author{Robert Durfee - R02}
 \date{September 18, 2018}
 
 \begin{document}
@@ -44,6 +44,8 @@ $$ P ( A \cap B \cap \overline{C} ) = P ( A \cap B ) \frac{ P ( A \cap B \cap
 \overline{C} ) }{ P ( A \cap B ) } $$
 Canceling terms
 $$ P ( A \cap B \cap \overline{C} ) =  P ( A \cap B \cap \overline{C} ) $$
+Therefore they are equal so long as $ A \cap B \neq \emptyset $ otherwise $
+P(\overline{C} \mid A \cap B) $ is undefined.
 
 \subsection*{Part B}
 
@@ -63,6 +65,8 @@ $$ P ( A \cap B \cap \overline{C} ) = P ( A ) \frac{ P ( \overline{C} \cap A )
 ) } $$
 Canceling terms
 $$ P ( A \cap B \cap \overline{C} ) =  P ( A \cap B \cap \overline{C} ) $$
+Therefore they are equal so long as $ A \cap \overline{C} \neq \emptyset $
+otherwise $ P(B \mid A \cap \overline{C} ) $ is undefined.
 
 \subsection*{Part C}
 
@@ -82,6 +86,8 @@ $$ P ( A \cap B \cap \overline{C} ) = P ( A ) \frac{ P ( \overline{C} \cap A )
 ) } $$
 Canceling terms
 $$ P ( A \cap B \cap \overline{C} ) =  P ( A \cap B \cap \overline{C} ) $$
+Therefore they are equal so long as $ A \cap \overline{C} \neq \emptyset $
+otherwise $ P(B \mid A \cap \overline{C}) $ is undefined.
 
 \subsection*{Part D}
 
@@ -99,6 +105,8 @@ $$ \frac{ P ( A \cap B \cap C ) }{ P ( C ) } = \frac{ P ( A \cap C ) }{ P ( C )
 } \frac{ P ( A \cap B \cap C ) }{ P ( A \cap C ) } $$
 Canceling terms
 $$ P ( A \cap B \cap C ) =  P ( A \cap B \cap C ) $$
+Therefore they are equal so long as $ A \cap C \neq \emptyset $ otherwise $ P(B
+\mid A \cap C) $ is undefined.
 
 \section*{Problem 2}
 
@@ -361,7 +369,7 @@ this can be rewritten as
 $$ \frac{ P(F_1 \mid S_1 = A) P(S_1 = A) }{ P(F_1) } $$
 The probability $ P(F_1 \mid S_1 = A) $ can be determined using the law of total
 probability as follows
-$$ P(F_1 \mid S_1 = A) = P(L = A) P(F_1 \mid S_1 = A \cap L = A) + P(L = B)
+$$ P(L = A) P(F_1 \mid S_1 = A \cap L = A) + P(L = B)
 P(F_1 \mid S_1 = A \cap L = B) $$
 Using the probabilities above, this simplifies
 $$ P(F_1 \mid S_1 = A) = P(L = A) P(F_1 \mid S_1 = A \cap L = A) $$
@@ -404,7 +412,7 @@ dog on day 2 and vice versa. Therefore
 $$ P(\overline{F_1} \mid S_1 = A) P(F_2 \mid S_2 = A) P(H_1) P(H_2) $$
 Using the expression for $ P(F_1 \mid S_1 = A) $ from above yields
 $$ (1 - P(L = A)P(F_1 \mid S_1 = A \cap L = A)) P(L = A) P(F_2 \mid S_2 = A \cap
-L = A) P(H_1) P(H_2) $$
+L = A) P(H_2) $$
 Substituting the probabilities given above
 $$ P ( \overline{F_1} \cap F_2 \cap H_2 \mid S_1 = S_2 = A) = (1 -
 (0.4)(0.25))(0.4)(0.25)(1)(0.66) = 0.06 $$
@@ -415,11 +423,52 @@ $$ P ( \overline{F_1} \cap F_2 \cap H_2 \mid S_1 = S_2 = A) = (1 -
 he did not find his dog on the first day, find the probability that he does not
 find his dog dead on the second day.}
 
+\bigbreak
+
+The probability being asked for is $ P( \overline{F_2 \cap \overline{H_2}} \mid
+S_1 = S_2 = A \cap \overline{F_1} ) $. Using the axiom of unitarity, this can be
+written as
+$$ 1 - P( F_2 \cap \overline{H_2} \mid S_1 = S_2 = A \cap \overline{F_1} ) $$
+It is reasonable to assume that, given that Oscar is searching in forest $ A $
+and that he didn't find his dog on the first day, that whether he finds his dog
+the next day and whether it is healthy are conditionally independent. As such,
+the probability can be written as
+$$ 1 - P(F_2 \mid S_1 = S_2 = A \cap \overline{F_1}) P(\overline{H_2} \mid S_1 =
+S_2 = A \cap \overline{F_1}) $$
+It is further reasonable to assume that where Oscar looks and whether he found
+the dog the first day are independent from the health of the dog on the second
+day. Also, where Oscar searches the first day and whether he finds the dog that
+day are independent of whether he finds the dog the next day (ignoring the fact
+that he would stop looking if he found it). Hence, the probability is
+$$ 1 - P(F_2 \mid S_2 = A) P(\overline{H_2}) $$
+Using the probability expression for $ P(F_2 \mid S_2 = A) $ from before and
+substituting
+$$ 1 - P(L = A) P(F_2 \mid S_2 = A \cap L = A) P(\overline{H_2}) $$
+Substituting given probability values
+$$ 1 - (0.4) (0.25) (0.33) = 0.97 $$
+
 \subsection*{Part F}
 
 \textit{Oscar finally finds his dog on the fourth day of the search. He looked
 in forest $ A $ for the first 3 days and in forest $ B $ on the fourth day.
 Given this information, what is the probability that he found his dog alive?}
+
+\bigbreak
+
+The probability being asked for is $ P(H_4 \cap H_3 \cap H_2 \cap H_1 \cap H_0
+\mid S_1 = S_2 = S_3 = A \cap S_4 = B \cap \overline{F_1} \cap \overline{F_2}
+\cap \overline{F_3} \cap F_4 \cap L = B) $. It is reasonable to remove all the
+conditions as where Oscar looks, whether he finds his dog or not (assuming it is
+lost the whole time), and where the dog is has no impact on the dogs health.
+Therefore, the probability becomes
+$$ P(H_4 \cap H_3 \cap H_2 \cap H_1 \cap H_0) $$
+Furthermore, it is known that the dog is always healthy on the zeroth and first
+days. Therefore,
+$$ P(H_4 \cap H_3 \cap H_2) $$
+Using the multiplication rule
+$$ P(H_4 \cap H_3 \cap H_2) = P(H_2) P(H_3 \mid H_2) P(H_4 \mid H_2 \cap H_3) $$
+Substituting given probabilities from above,
+$$ P(H_4 \cap H_3 \cap H_2) = (0.66) (0.5) (0.40) = 0.13 $$
 
 \section*{Problem 6}
 
@@ -503,10 +552,34 @@ $$ P(\overline{F} \cap U) = (0.8) ( (0.8) (0.0) + (0.2) (0.5) ) = 0.08 $$
 
 Since $ (0.8) (0.26) \neq 0.08 $, $ U $ and $ N $ are not independent.
 
-\subsection*{Part D}
+\subsection*{Part C}
 
 \textit{Victor is carrying an umbrella and it is not raining. What is the
 probability that he saw the forecast?}
+
+\bigbreak
+
+The probability that is being asked for is $ P(S \mid U \cap \overline{R}) $.
+Using the definition of conditional probability, this can be rewritten
+$$ P(S \mid U \cap \overline{R}) = \frac{ P(S \cap U \cap \overline{R}) }{ P(U
+\cap \overline{R}) } $$
+Using the multiplication rule along the tree pictured below, this probability
+becomes
+$$ \frac{ P(F) P(S) P(\overline{R} \mid F) }{ P(F) \left(
+P(S) P(\overline{R} \mid F) + P(\overline{S}) P(U \mid
+\overline{S}) P(\overline{R} \mid F) \right) + P(\overline{F}) P(\overline{S})
+P(U \mid \overline{S}) P(\overline{R} \mid \overline{F}) } $$
+Substituting given probabilities
+$$ \frac{ (0.20) (0.80) (0.20) }{ (0.20) (0.80) (0.2) + (0.20) (0.20) (0.50)
+(0.20) + (0.80) (0.20) (0.50) (0.90) } $$
+Therefore, the answer is
+$$ P(S \mid U \cap \overline{R}) \approx 0.30 $$
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{"P6C"}
+    \caption{ Raining Tree Diagram }
+\end{figure}
 
 \end{document}
 
