@@ -25,101 +25,44 @@
 
 \section*{Problem 1}
 
+\textit{For the matrix $ A $ and vector $ b $,}
+\[
+    A = \begin{pmatrix}
+        1 & 2 & 1 & -1 & 1 \\
+        1 & 0 & 1 & -1 & 0 \\
+        1 & 2 & 1 & 0 & 0 \\
+        1 & 1 & 0 & 0 & 0 \\
+        -1 & 0 & 0 & 0 & 0
+    \end{pmatrix},
+    \ b = \begin{pmatrix}
+        0 \\
+        0 \\
+        0 \\
+        0 \\
+        1
+    \end{pmatrix}
+\]
+
 \subsection*{Part A}
 
-Starting with the augmented matrix
-\[
-    \begin{pmatrix}
-        1 & 2 & 1 & -1 & 1 & 0 \\
-        1 & 0 & 1 & -1 & 0 & 0 \\
-        1 & 2 & 1 & 0 & 0 & 0 \\
-        1 & 1 & 0 & 0 & 0 & 0 \\
-        -1 & 0 & 0 & 0 & 0 & 1
-    \end{pmatrix}
-\]
-Applying the first elimination matrix
-\[
-    \begin{pmatrix}
-        1 & 0 & 0 & 0 & 0 \\
-        -1 & 1 & 0 & 0 & 0 \\
-        -1 & 0 & 1 & 0 & 0 \\
-        -1 & 0 & 0 & 1 & 0 \\
-        1 & 0 & 0 & 0 & 1
-    \end{pmatrix}
-    \begin{pmatrix}
-        1 & 2 & 1 & -1 & 1 & 0 \\
-        1 & 0 & 1 & -1 & 0 & 0 \\
-        1 & 2 & 1 & 0 & 0 & 0 \\
-        1 & 1 & 0 & 0 & 0 & 0 \\
-        -1 & 0 & 0 & 0 & 0 & 1
-    \end{pmatrix}
-    =
-    \begin{pmatrix}
-        1 & 2 & 1 & -1 & 1 & 0 \\
-        0 & -2 & 0 & 0 & -1 & 0 \\
-        0 & 0 & 0 & 1 & -1 & 0 \\
-        0 & -1 & -1 & 1 & -1 & 0 \\
-        0 & 2 & 1 & -1 & 1 & 1
-    \end{pmatrix}
-\]
-Applying the second elimination matrix
-\[
-    \begin{pmatrix}
-        1 & 0 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 & 0 \\
-        0 & 0 & 1 & 0 & 0 \\
-        0 & -1/2 & 0 & 1 & 0 \\
-        0 & 1 & 0 & 0 & 1
-    \end{pmatrix}
-    \begin{pmatrix}
-        1 & 2 & 1 & -1 & 1 & 0 \\
-        0 & -2 & 0 & 0 & -1 & 0 \\
-        0 & 0 & 0 & 1 & -1 & 0 \\
-        0 & -1 & -1 & 1 & -1 & 0 \\
-        0 & 2 & 1 & -1 & 1 & 1
-    \end{pmatrix}
-    =
-    \begin{pmatrix}
-        1 & 2 & 1 & -1 & 1 & 0 \\
-        0 & -2 & 0 & 1 & -1 & 0 \\
-        0 & 0 & 0 & 1 & -1 & 0 \\
-        0 & 0 & -1 & 1 & -1/2 & 0 \\
-        0 & 0 & 1 & -1 & 0 & 1
-    \end{pmatrix}
-\]
-Swapping rows 3 and 4 and applying third elimination matrix
-\[
-    \begin{pmatrix}
-        1 & 0 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 & 0 \\
-        0 & 0 & 1 & 0 & 0 \\
-        0 & 0 & 0 & 1 & 0 \\
-        0 & 0 & 1 & 0 & 1
-    \end{pmatrix}
-    \begin{pmatrix}
-        1 & 2 & 1 & -1 & 1 & 0 \\
-        0 & -2 & 0 & 1 & -1 & 0 \\
-        0 & 0 & -1 & 1 & -1/2 & 0 \\
-        0 & 0 & 0 & 1 & -1 & 0 \\
-        0 & 0 & 1 & -1 & 0 & 1
-    \end{pmatrix}
-    =
-    \begin{pmatrix}
-        1 & 2 & 1 & -1 & 1 & 0 \\
-        0 & -2 & 0 & 0 & -1 & 0 \\
-        0 & 0 & -1 & 1 & -1/2 & 0 \\
-        0 & 0 & 0 & 1 & -1 & 0 \\
-        0 & 0 & 0 & 0 & -1/2 & 1
-    \end{pmatrix}
-\]
-Applying backsubstitution
-$$ -1/2 x_5 = 1 \implies x_5 = -2 $$
-$$ x_4 - x_5 = 0 \implies x_4 = -2 $$
-$$ -x_3 + x_4 - 1/2 x_5 = 0 \implies x_3 = -1 $$
-$$ -2 x_2 - x_5 = 0 \implies x_2 = 1 $$
-$$ x_1 + 2 x_2 + x_3 - x_4 + x_5 = 0 \implies x_1 = -1 $$
+\textit{Show hand calculations to compute $ x = A^{-1} b $}
+
+\bigbreak
+
+Applying forward substitution
+\begin{align*}
+    -1 x_1 = 1 \implies x_1 &= -1 \\
+     x_1 + x_2 = 0 \implies x_2 &= 1 \\
+     x_1 + 2 x_2 + x_3 = 0 \implies x_3 &= -1 \\
+     x_1 + x_3 - x_4 = 0 \implies x_4 &= -2 \\
+     x_1 + 2 x_2 + x_3 - x_4 + x_5 = 0 \implies x_5 &= -2
+\end{align*}
 
 \subsection*{Part B}
+
+\textit{Explain why your $ x $ appears in $ A^{-1} $.}
+
+\bigbreak
 
 The vector $ \vec{b} $ simply selects the last column of any matrix multiplied
 to it on the left. Therefore, since $ x = A^{-1} b $, the vector $ \vec{x} $
@@ -127,7 +70,27 @@ must be the last column of $ A^{-1} $.
 
 \section*{Problem 2}
 
+\textit{Consider the matrix}
+\[
+    A = \begin{pmatrix}
+        1 & 4 & 1 \\
+        1 & 2 & -1 \\
+        3 & 14 & 6
+    \end{pmatrix}
+\]
+\textit{In this problem, we will consider transforming this matrix by a sequence
+of invertible linear column operations - multiplying columns by scalars and
+adding/subtracting them.}
+
 \subsection*{Part A}
+
+\textit{Come up with column operations that change the first row from
+$\begin{pmatrix} 1 & 4 & 1\end{pmatrix}$ to $\begin{pmatrix} 1 & 0 &
+0\end{pmatrix}$, i.e. that put zeros to the *right* of the first pivot. Express
+these operations in terms of multipling $A$ on the left or right by some matrix
+$E$. Give $E$ and $E^{-1}$.}
+
+\bigbreak
 
 \[
     \begin{pmatrix}
@@ -153,8 +116,8 @@ Therefore
         1 & -4 & -1 \\
         0 & 1 & 0 \\
         0 & 0 & 1
-    \end{pmatrix},\ 
-    E^{-1} = \begin{pmatrix}
+    \end{pmatrix},
+    \ E^{-1} = \begin{pmatrix}
         1 & 4 & 1 \\
         0 & 1 & 0 \\
         0 & 0 & 1
@@ -163,9 +126,21 @@ Therefore
 
 \subsection*{Part B}
 
+\textit{If we do a sequence of column operations that transform $A$ into $I$,
+and then do the same column operations to the $3\times 3$ identity matrix $I$,
+what is the resulting matrix?}
+
+\bigbreak
+
 The resulting matrix should be the inverse of matrix $ A $.
 
 \subsection*{Part C}
+
+\textit{Carry out the process from (b): perform column operations on $A$ that
+transform it into $I$, and perform the *same* column operations on $I$. Do them
+both at once by "augmenting" $A$ in a certain way (maybe not the usual way).}
+
+\bigbreak
 
 Picking up from previous step in Part A
 \[
@@ -317,15 +292,22 @@ Now applying in reverse
 
 \section*{Problem 3}
 
-Starting with the given matrix
+\textit{Compute $L$ and $U$ for the following symmetric matrix $A$:}
+
 \[
-    \begin{pmatrix}
+    A = \begin{pmatrix}
         a & a & a & a \\
         a & b & b & b \\
         a & b & c & c \\
         a & b & c & d
     \end{pmatrix}
 \]
+
+\textit{and find four conditions on the numbers $a$,$b$,$c$, and $d$ to get
+$A=LU$ with four pivots.}
+
+\bigbreak
+
 Applying $ R2 - R1 $, $R3 - R1 $, $ R4 - R1 $.
 \[
     \begin{pmatrix}
@@ -358,16 +340,23 @@ $$ a \neq 0,\ b - a \neq 0,\ c - b \neq 0,\ d - c \neq 0 $$
 
 \section*{Problem 4}
 
-\subsection*{Part A}
+\textit{Consider the following matrix for some numbers $a$, $b$, and $c$:}
 
-Starting with the given matrix
 \[
-    \begin{pmatrix}
+    L = \begin{pmatrix}
         1 & 0 & 0 \\
         a & 1 & 0 \\
         b & c & 1
     \end{pmatrix}
 \]
+
+\subsection*{Part A}
+
+\textit{When you perform the usual Gaussian elimination steps to $L$, what
+matrix will you obtain?}
+
+\bigbreak
+
 Applying $ R2 - a R1 $ and $ R3 - b R1 $.
 \[
     \begin{pmatrix}
@@ -386,6 +375,10 @@ Applying $ R3 - c R2 $.
 \]
 
 \subsection*{Part B}
+
+\textit{If you apply the same row operations to $I$, what matrix will you get?}
+
+\bigbreak
 
 Starting with the identity matrix
 \[
@@ -414,9 +407,51 @@ Applying $ R3 - c R2 $.
 
 \subsection*{Part C}
 
+\textit{If you apply the same row operations to $LB$ for some $3\times n$
+matrix $B$, what will you get?}
+
+\bigbreak
+
+Multiplying the given matrix by a unknown $ 3 \times 4 $ matrix
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        a & 1 & 0 \\
+        b & c & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        u_{11} & u_{12} & u_{13} & u_{14} \\
+        u_{21} & u_{22} & u_{23} & u_{24} \\
+        u_{31} & u_{32} & u_{33} & u_{34} \\
+    \end{pmatrix}
+\]
+Which results in
+\[
+    \begin{pmatrix}
+        u_{11} & u_{12} & u_{13} & u_{14} \\
+        a u_{11} + u_{21} & a u_{12} + u_{22} & a u_{13} + u_{23} & a u_{14} + u_{24} \\
+        b u_{11} + c u_{21} + u_{31} & b u_{12} + c u_{22} + u_{32} & b u_{13} + c u_{23} + u_{33} & b u_{14} + c u_{24} + u_{34}
+    \end{pmatrix}
+\]
+Performing row operations $ R2 - a R1 $, $ R3 - b R1 $, and $ R3 - c R2 $ will
+reduce this back to the original unknown matrix $ B $.
+
 \section*{Problem 5}
 
+\textit{Consider the following matrices:}
+$$
+U = \begin{pmatrix} 1 & 1 & -1 \\ 0 & 1 & 2 \\ 0 & 0 & 1 \end{pmatrix}, \;
+L = \begin{pmatrix} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -2 & 1 & 1 \end{pmatrix}, \;
+B = \begin{pmatrix} 1 & 2 & 3 \\ 3 & 2 & 1 \\ 1 & 0 & 1 \end{pmatrix}
+$$
+
+\textit{Let $A = U B^{-1} L$.}
+
 \subsection*{Part A}
+
+\textit{Compute the second column of $A^{-1}$.}
+
+\bigbreak
 
 The given expression $ A = U B^{-1} L $ can be rewritten using the inverse
 product rule
@@ -462,7 +497,24 @@ Substituting back to solve for second column of $ A^{1} $
 
 \section*{Problem 6}
 
+\textit{Suppose you have a $5 \times 5$ matrix of the form}
+$$A = \begin{pmatrix}
+    \star & \star & 0 & 0 & 0 \\
+    \star & \star & \star & 0 & 0 \\
+    0 & \star & \star & \star & 0 \\
+    0 & 0 & \star & \star & \star \\
+    0 & 0 & 0 & \star & \star
+\end{pmatrix}
+$$
+\textit{where "$\star$" denotes nonzero entries.}
+
 \subsection*{Part A}
+
+\textit{Assuming no row swaps are required and the matrix is nonsingular, what
+pattern of nonzero entries do you generically expect to see in the $L$ and
+$U$ factors of a matrix $A$ of this form, and why?}
+
+\bigbreak
 
 Each column in a tridiagonal matrix only needs to complete one row operation to
 eliminate the element directly below the pivot point. Therefore, the $ L $
@@ -489,6 +541,14 @@ steps. Therefore, the $ U $ pattern should be
 \]
 
 \subsection*{Part B}
+
+\textit{If $A$ is an $m \times m$ tridiagonal matrix (i.e. same pattern of
+zeros, but extended to an arbitrary size), how does the count of scalar
+arithmetic operations to compute the $ L $, $U$ factors (i.e. to perform
+elimination) scale with $m$?  You need not give an exact count, just say whether
+it is roughly proportional to $m$, $m^2$, $m^3$, etcetera for large $m$.)}
+
+\bigbreak
 
 Since each column only has one nonzero element below the pivot, it only takes
 one row operation to make zero below each pivot. In this row operation, only
