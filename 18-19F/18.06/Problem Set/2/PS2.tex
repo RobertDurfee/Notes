@@ -1,0 +1,501 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{18.06 Problem Set 2}
+\author{Robert Durfee}
+\date{September 19, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{Part A}
+
+Starting with the augmented matrix
+\[
+    \begin{pmatrix}
+        1 & 2 & 1 & -1 & 1 & 0 \\
+        1 & 0 & 1 & -1 & 0 & 0 \\
+        1 & 2 & 1 & 0 & 0 & 0 \\
+        1 & 1 & 0 & 0 & 0 & 0 \\
+        -1 & 0 & 0 & 0 & 0 & 1
+    \end{pmatrix}
+\]
+Applying the first elimination matrix
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 & 0 & 0 \\
+        -1 & 1 & 0 & 0 & 0 \\
+        -1 & 0 & 1 & 0 & 0 \\
+        -1 & 0 & 0 & 1 & 0 \\
+        1 & 0 & 0 & 0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 2 & 1 & -1 & 1 & 0 \\
+        1 & 0 & 1 & -1 & 0 & 0 \\
+        1 & 2 & 1 & 0 & 0 & 0 \\
+        1 & 1 & 0 & 0 & 0 & 0 \\
+        -1 & 0 & 0 & 0 & 0 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & 2 & 1 & -1 & 1 & 0 \\
+        0 & -2 & 0 & 0 & -1 & 0 \\
+        0 & 0 & 0 & 1 & -1 & 0 \\
+        0 & -1 & -1 & 1 & -1 & 0 \\
+        0 & 2 & 1 & -1 & 1 & 1
+    \end{pmatrix}
+\]
+Applying the second elimination matrix
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 & 0 \\
+        0 & 0 & 1 & 0 & 0 \\
+        0 & -1/2 & 0 & 1 & 0 \\
+        0 & 1 & 0 & 0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 2 & 1 & -1 & 1 & 0 \\
+        0 & -2 & 0 & 0 & -1 & 0 \\
+        0 & 0 & 0 & 1 & -1 & 0 \\
+        0 & -1 & -1 & 1 & -1 & 0 \\
+        0 & 2 & 1 & -1 & 1 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & 2 & 1 & -1 & 1 & 0 \\
+        0 & -2 & 0 & 1 & -1 & 0 \\
+        0 & 0 & 0 & 1 & -1 & 0 \\
+        0 & 0 & -1 & 1 & -1/2 & 0 \\
+        0 & 0 & 1 & -1 & 0 & 1
+    \end{pmatrix}
+\]
+Swapping rows 3 and 4 and applying third elimination matrix
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 & 0 \\
+        0 & 0 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 1 & 0 \\
+        0 & 0 & 1 & 0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 2 & 1 & -1 & 1 & 0 \\
+        0 & -2 & 0 & 1 & -1 & 0 \\
+        0 & 0 & -1 & 1 & -1/2 & 0 \\
+        0 & 0 & 0 & 1 & -1 & 0 \\
+        0 & 0 & 1 & -1 & 0 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & 2 & 1 & -1 & 1 & 0 \\
+        0 & -2 & 0 & 0 & -1 & 0 \\
+        0 & 0 & -1 & 1 & -1/2 & 0 \\
+        0 & 0 & 0 & 1 & -1 & 0 \\
+        0 & 0 & 0 & 0 & -1/2 & 1
+    \end{pmatrix}
+\]
+Applying backsubstitution
+$$ -1/2 x_5 = 1 \implies x_5 = -2 $$
+$$ x_4 - x_5 = 0 \implies x_4 = -2 $$
+$$ -x_3 + x_4 - 1/2 x_5 = 0 \implies x_3 = -1 $$
+$$ -2 x_2 - x_5 = 0 \implies x_2 = 1 $$
+$$ x_1 + 2 x_2 + x_3 - x_4 + x_5 = 0 \implies x_1 = -1 $$
+
+\subsection*{Part B}
+
+The vector $ \vec{b} $ simply selects the last column of any matrix multiplied
+to it on the left. Therefore, since $ x = A^{-1} b $, the vector $ \vec{x} $
+must be the last column of $ A^{-1} $.
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+\[
+    \begin{pmatrix}
+        1 & 4 & 1 \\
+        1 & 2 & -1 \\
+        3 & 14 & 6
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & -4 & -1 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        1 & -2 & -2 \\
+        3 & 2 & 3
+    \end{pmatrix}
+\]
+Therefore
+\[
+    E = \begin{pmatrix}
+        1 & -4 & -1 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix},\ 
+    E^{-1} = \begin{pmatrix}
+        1 & 4 & 1 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+\]
+
+\subsection*{Part B}
+
+The resulting matrix should be the inverse of matrix $ A $.
+
+\subsection*{Part C}
+
+Picking up from previous step in Part A
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        1 & -2 & -2 \\
+        3 & 2 & 3
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        1/2 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & -2 & 0 \\
+        4 & 2 & 1
+    \end{pmatrix}
+\]
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & -2 & 0 \\
+        4 & 2 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & -2 & 0 \\
+        -4 & -2 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & -2 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+\]
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & -2 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & -1/2 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+\]
+
+Now applying in reverse
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & -4 & 1 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & -4 & -1 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+\]
+\[
+    \begin{pmatrix}
+        1 & -4 & -1 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & -1 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & -4 & 3 \\
+        0 & 1 & -1 \\
+        0 & 0 & 1
+    \end{pmatrix}
+\]
+\[
+    \begin{pmatrix}
+        1 & -4 & 3 \\
+        0 & 1 & -1 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        1/2 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        -1 & -4 & 3 \\
+        1/2 & 1 & -1 \\
+        0 & 0 & 1
+    \end{pmatrix}
+\]
+\[
+    \begin{pmatrix}
+        -1 & -4 & 3 \\
+        1/2 & 1 & -1 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        -4 & -2 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        -13 & -10 & 3 \\
+        9/2 & 3 & -1 \\
+        -4 & -2 & 1
+    \end{pmatrix}
+\]
+\[
+    \begin{pmatrix}
+        -13 & -10 & 3 \\
+        9/2 & 3 & -1 \\
+        -4 & -2 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & -1/2 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        -13 & 5 & 3 \\
+        9/2 & -3/2 & -1 \\
+        -4 & 1 & 1
+    \end{pmatrix}
+\]
+
+\section*{Problem 3}
+
+Starting with the given matrix
+\[
+    \begin{pmatrix}
+        a & a & a & a \\
+        a & b & b & b \\
+        a & b & c & c \\
+        a & b & c & d
+    \end{pmatrix}
+\]
+Applying $ R2 - R1 $, $R3 - R1 $, $ R4 - R1 $.
+\[
+    \begin{pmatrix}
+        a & a & a & a \\
+        0 & b - a & b - a & b - a \\
+        0 & b - a & c - a & c - a \\
+        0 & b - a & c - a & d - a
+    \end{pmatrix}
+\]
+Applying $ R3 - R2 $ and $ R4 - R2 $.
+\[
+    \begin{pmatrix}
+        a & a & a & a \\
+        0 & b - a & b - a & b - a \\
+        0 & 0 & c - b & c - b \\
+        0 & 0 & c - b & d - b
+    \end{pmatrix}
+\]
+Applying $ R4 - R3 $.
+\[
+    \begin{pmatrix}
+        a & a & a & a \\
+        0 & b - a & b - a & b - a \\
+        0 & 0 & c - b & c - b \\
+        0 & 0 & 0 & d - c
+    \end{pmatrix}
+\]
+Therefore, in order for there to be four pivots,
+$$ a \neq 0,\ b - a \neq 0,\ c - b \neq 0,\ d - c \neq 0 $$
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+Starting with the given matrix
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        a & 1 & 0 \\
+        b & c & 1
+    \end{pmatrix}
+\]
+Applying $ R2 - a R1 $ and $ R3 - b R1 $.
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & c & 1
+    \end{pmatrix}
+\]
+Applying $ R3 - c R2 $.
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+\]
+
+\subsection*{Part B}
+
+Starting with the identity matrix
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+\]
+Applying $ R2 - a R1 $ and $ R3 - b R1 $.
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        -a & 1 & 0 \\
+        -b & 0 & 1
+    \end{pmatrix}
+\]
+Applying $ R3 - c R2 $.
+\[
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        -a & 1 & 0 \\
+        ca - b & -c & 1
+    \end{pmatrix}
+\]
+
+\subsection*{Part C}
+
+\section*{Problem 5}
+
+\subsection*{Part A}
+
+The given expression $ A = U B^{-1} L $ can be rewritten using the inverse
+product rule
+$$ A^{-1} = L^{-1} B U^{-1} $$
+Let $ C = L^{-1} B $. Using row reduction, $ C $ is determined
+\[
+    C = \begin{pmatrix}
+        1 & 2 & 3 \\
+        4 & 4 & 4 \\
+        -1 & 0 & 3
+    \end{pmatrix}
+\]
+Using the column wise definition of matrix multiplication,
+$$ a_2^{-1} = C u_2^{-1} $$
+The definition of identities gives
+$$ U u_2^{-1} = e_2 $$
+Using row reduction, $ u_2^{-1} $ can be determined.
+\[
+    u_2^{-1} = \begin{pmatrix}
+        -1 \\
+        1 \\
+        0
+    \end{pmatrix}
+\]
+Substituting back to solve for second column of $ A^{1} $
+\[
+    a_2^{-1} = \begin{pmatrix}
+        1 & 2 & 3 \\
+        4 & 4 & 4 \\
+        -1 & 0 & 3
+    \end{pmatrix}
+    \begin{pmatrix}
+        -1 \\
+        1 \\
+        0
+    \end{pmatrix}
+    = \begin{pmatrix}
+        1 \\
+        0 \\
+        1
+    \end{pmatrix}
+\]
+
+\section*{Problem 6}
+
+\subsection*{Part A}
+
+Each column in a tridiagonal matrix only needs to complete one row operation to
+eliminate the element directly below the pivot point. Therefore, the $ L $
+pattern should be
+\[
+    L = \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        \star & 1 & 0 & 0 \\
+        0 & \star & 1 & 0 \\
+        0 & 0 & \star & 1
+    \end{pmatrix}
+\]
+
+Furthermore, since each column only has one element directly above the pivot,
+and all the above elements are zeros, they will be unaffected by row elimination
+steps. Therefore, the $ U $ pattern should be
+\[
+    U \begin{pmatrix}
+        \star & \star & 0 & 0 \\
+        0 & \star & \star & 0 \\
+        0 & 0 & \star & \star \\
+        0 & 0 & 0 & \star
+    \end{pmatrix}
+\]
+
+\subsection*{Part B}
+
+Since each column only has one nonzero element below the pivot, it only takes
+one row operation to make zero below each pivot. In this row operation, only
+four elements are involved. Therefore, there are 2 scalar multiplications and
+additions. Thus, each column requires constant time to perform row reduction.
+Since there are $ m $ columns, the number of scalar operations is roughly
+proportional to $ m $.
+
+\end{document}
+
