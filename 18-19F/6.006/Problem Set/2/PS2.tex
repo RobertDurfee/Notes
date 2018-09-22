@@ -1,0 +1,335 @@
+\documentclass[12pt,twoside]{article}
+
+\input{macros-fa18}
+\newcommand{\theproblemsetnum}{2}
+\newcommand{\releasedate}{Thursday, September 13}
+\newcommand{\partaduedate}{Thursday, September 20}
+
+\title{6.006 Problem Set 2}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 11PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem 
+
+\begin{problemparts}
+
+    \problempart From the fact that there is a zipline path between $ e_0 $
+        and $ e_1 $, it is known that all elements between are less than both $
+        e_0 $ and $ e_1 $. Therefore, in the left half (with $ e_0 $), all the
+        elements to the right are less than $ e_0 $. Similarly, for the right
+        half (with $ e_1 $), all the elements to the left are less than $ e_1 $.
+
+        Furthermore, from the fact that $ e_0 $ to $ e_1 $ is the longest
+        zipline path, if there was an element to the left of $ e_0 $,
+        assuming WLOG that $ e_0 < e_1 $, there would exist an longer zipline
+        path from this new element to $ e_1 $. Therefore, since there is not,
+        $ e_0 $ must be the maximum in the left half as it must be greater
+        than all elements to the left and right.
+
+    \problempart {\bf Description} First, split the array into two equal
+        sized halves, $ A_L $ and $ A_R $. Now, the longest zipline path is
+        either fully contained in $ A_L $ or $ A_R $, or it has one endpoint in $
+        A_L $ one endpoint in $ A_R$.
+
+        To handle the first two cases, recurse over the individual halves $
+        A_L $ and $ A_R $ until the length of each half is $ 2 $, then return
+        the elements as a tuple representing a zipline path of length $ 2 $
+        as there is no smaller division to be made.
+        
+        For the second case, compute the maxima $ e_L $ and $ e_R $ from each
+        half $ A_L $ and $ A_R $, respectively. Select the lesser of the two
+        maxima. If the lesser maxima is $ e_L $, then the longest zipline
+        path between the halves $ A_L $ and $ A_R $ must start at $ e_L $.
+        Scan to the right until the first element greater than $ e_L $ is
+        found within $ A_R $. If the lesser maxima is $ e_R $, the the
+        longest zipline path between halves $ A_L $ and $ A_R $ must end at $
+        e_R $. Scan to the left until the first element greater than $ e_R $
+        is found within $ A_L$.
+
+        \smallbreak
+
+        {\bf Correctness} For an array $ A $, let $P(A)$ be the statement
+        that my algorithm correctly returns the longest zipline path (as
+        defined in the problem) in an array $A$. I will prove $ P(A) $ is
+        true for any array $ A $ by strong induction on $|A|$.
+
+        {\it Base Case}: Consider when $|A| = 2$. My algorithm returns the
+        two elements in $ A $ and states it is the longest zipline path. This
+        is trivially true and is explicitly stated in the problem.
+
+        {\it Inductive Case}: For the induction hypothesis, suppose that
+        $P(A)$ is true for all arrays of length $< n$; that is, suppose that
+        for any array $ A $ of length $< n$ my algorithm correctly returns
+        the longest zipline path.
+
+        Now consider an array $ A $ of length $n$. My algorithm divides $ A $
+        into two halves $ A_0 $ and $A_1$ of size $ < n $; therefore, the
+        returned longest zipline paths $ p_0 $ and $ p_1 $ are correct by the
+        induction hypothesis.
+
+        Now, the maximum within each $A_0$ and $ A_1 $ is determined. Given
+        the work in Part A, the lesser of the two maxima, $ e_i $ must be an
+        endpoint of any path that straddles $ A_0 $ and $ A_1 $. Therefore,
+        to find the other endpoint, scan towards the opposite section until
+        the first element greater than $ e_i $ is located. Since by
+        definition, every element between the endpoints has to be less than
+        both the endpoints, this must be the other endpoint.
+
+        The length of all three prospective zipline paths is now known and
+        the largest is then returned. Therefore I have shown by induction
+        that my algorithm correctly returns the largest zipline path in any
+        array $ A $ with distinct elements.
+
+        \smallbreak
+
+        {\bf Running Time} To find the two maxima in each half requires a
+        total of $ O(n) $ work. To find he the matching endpoint of the
+        lesser maxima also requires, at worst, $ O(n) $ work. Therefore, the
+        combining step of the divide and conquer algorithm described is $
+        O(n) $. Each division reduces the amount of work by $ 2 $ and splits
+        into $ 2 $ recursions. The recurrence that matches this description is
+        $$ T(n) = 2 T(n/2) + O(n) $$
+        Therefore, by the Master Theorem Case II, the running time is $ O(n
+        \log n ) $.
+
+\end{problemparts}
+
+\newpage
+\problem {\bf Description} (This is a little much to explain in words...
+    Python "pseudo" code provided on next page.)
+    
+    First, separate the panel lower and upper heights into two arrays. Sort
+    them in increasing order. Then, iterate across the lower and upper height
+    arrays concurrently. If the next lower height is less than the next upper
+    height, an interval has been found. After the interval is output,
+    increase the count for number of overlapping panels. If the next lower
+    height is greater than the next upper height, an interval has been found
+    as well. After the interval is output, decrease the count for number of
+    overlapping panels. If the next lower and upper heights are the same, an
+    interval has not been found, just increase both indexes and output
+    nothing. Continue similarly through whichever array has remaining
+    elements after the concurrent loop terminates.
+
+    \smallbreak
+
+    {\bf Correctness} The intervals must appear between consectutive
+    lower/lower, upper/upper, lower/upper, or upper/lower height. By sorting
+    the arrays of upper and lower heights individually, and iterating over
+    each, each interval will be encountered. Additionally, any time an upper
+    edge is encountered, the number of panels must decrease and any time a
+    lower edge is encountered, the number of panels must increase, unless
+    their interval is zero. Therefore, since my algorithm will cover every
+    interval and correctly increment or decrement the number of panels
+    overlapping, the output must be correct.
+
+    \smallbreak
+
+    {\bf Running Time} The sorting of the arrays each takes $ O(n \log n ) $,
+    assuming merge/heap sort. Then, the concurrent loop will require $ O(2n)
+    $ work to iterate over completely. Therefore, total work is $ O(2 n \log
+    n + 2n) \in O(n \log n) $.
+
+\newpage
+
+{\tt
+def shadow\_art\_divide(A):
+
+\quad l = sorted(map(lambda p: p[0], A))
+
+\quad     u = sorted(map(lambda p: p[1], A))
+
+\quad     n = 1, li = 1, ui = 0, v = l[0], o = []
+
+\quad     while li < len(l) and ui < len(l):
+
+\quad \quad         if l[li] < u[ui]:
+
+\quad \quad \quad             if v != l[li]: o.append(((v, l[li]), n))
+
+\quad \quad \quad             n += 1, v = l[li], li += 1
+
+\quad \quad         elif l[li] > u[ui]:
+
+\quad \quad \quad             if v != u[ui]: o.append(((v, u[ui]), n))
+
+\quad \quad \quad             n -= 1, v = u[ui], ui += 1
+
+\quad \quad         else: ui += 1, li += 1
+
+\quad     while li < len(l):
+
+\quad \quad         if v != l[li]: o.append(((v, l[li]), n))
+
+\quad \quad         n += 1, v = l[li], li += 1
+
+\quad     while ui < len(u):
+
+\quad \quad         if v != u[ui]: o.append(((v, u[ui]), n))
+
+\quad \quad         n -= 1, v = u[ui], ui += 1
+
+\quad     return o
+}
+
+\newpage
+
+\problem {\bf Description} The double sided dynamic array has five properties:
+
+    \begin{itemize}
+        \item \ {\tt next\_left}: An index pointing to slot for {\tt
+            insert\_left()}. Initialized to $ -1 $.
+        \item \ {\tt next\_right}: An index pointing to slot for {\tt
+            insert\_right()}. Initialized to $ 0 $.
+        \item \ {\tt size}: Total number of slots in {\tt array}. Initialized
+            to $ 0 $
+        \item \ {\tt array}: Data contained in the dynamic array. Initialized
+            to {\tt []}.
+        \item \ {\tt len}: A computed property representing {\tt next\_right -
+            next\_left + 1}, which is the number of nonempty elements in the
+            array.
+    \end{itemize}
+
+    The double sided dynamic array has seven methods:
+
+    \begin{itemize}
+        \item \ {\tt at(i)}: Returns the element located at the $ i $th index
+            offset base $ 0 $ from the first nonempty element in the dynamic
+            array. This is calculated by {\tt array[next\_left + i + 1]}.
+        \item \ {\tt resize\_left(new\_size)}: Sets the {\tt size} of the
+            dynamic array to {\tt new\_size} and places all newly allocated
+            empty slots to the left of the data contained in the array.
+            Resets the {\tt next\_left} and {\tt next\_right} values
+            accordingly.
+        \item \ {\tt resize\_right(new\_size)}: Sets the {\tt size} of the
+            dynamic array to {\tt new\_size} and places all newly allocated
+            empty slots to the right of the data contained in the array. {\tt
+            next\_left} and {\tt next\_right} values should remain the same.
+        \item \ {\tt insert\_left(x)}: Inserts the element {\tt x} at {\tt
+            next\_left}, which is the next open slot in the array, and
+            decrements {\tt next\_left}. If {\tt next\_left == -1}, then {\tt
+            resize\_left()} is called with the {\tt new\_size = size + len}
+            which doubles the number of empty elements to the left of the
+            data in the array.
+        \item \ {\tt insert\_right(x)}: Inserts the element {\tt x} at {\tt
+            next\_right}, which is the next open slot in the array, and
+            increments {\tt next\_right}. If {\tt next\_right == size}, then
+            {\tt resize\_right()} is called with the {\tt new\_size = size +
+            len} which doubles the number of empty elements to the right of
+            the data in the array.
+        \item \ {\tt delete\_left()}: Reduces the index {\tt next\_left}. If
+            the number of empty elements to the left has become {\tt 3 *
+            len}, then {\tt resize\_left()} is called with {\tt new\_size =
+            size - 2 * len} which ensures that {\tt len} empty elements still
+            exist to the left to prevent immediate resizing.
+        \item \ {\tt delete\_right()}: Reduces the index {\tt next\_right}. If
+            the number of empty elements to the right has become {\tt 3 *
+            len}, then {\tt resize\_right()} is called with {\tt new\_size =
+            size - 2 * len} which ensures that {\tt len} empty elements still
+            exist to the right to prevent immediate resizing.
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Correctness}: 
+
+    \begin{itemize}
+        \item \ {\tt at(i)}: Since {\tt next\_left} holds the location of the
+            first empty element to the left of all the data in the array,
+            {\tt next\_left + 1} must be the first nonempty element in the
+            array. Any base index $ i $ plus that will correspond the $i$th
+            nonempty element in the array.
+        \item \ {\tt insert\_left(new\_size)}: Since {\tt next\_left} is
+            initialized to one less than the current element and is always
+            decremented after insert, it will always point to the next empty
+            slot to the left. Also, if {\tt next\_left} is outside the bounds
+            of the array, it is resized with additional elements to the left,
+            thus there will always be space for the new element.
+        \item \ {\tt insert\_right(x)}: Since {\tt next\_right} is
+            initialized to one more than the current element and is always
+            incremented after insert, it will always point to the next empty
+            slot to the right. Also, if {\tt next\_right} is outside the bounds
+            of the array, it is resized with additional elements to the
+            right, thus there will always be space for the new element.
+        \item \ {\tt delete\_left()}: Since {\tt next\_left} represents the
+            information regarding the left bound of the data contained in the
+            array, if it is incremented, the data recognized by the data
+            structure will shrink by one element on the left, there by
+            removing the leftmost element. Furthermore, shrinking will only
+            reduce the number of elements in such a way that prevents
+            accidental removal of data contained in the array.
+        \item \ {\tt delete\_right()}: Since {\tt next\_right} represents the
+            information regarding the right bound of the data contained in the
+            array, if it is decremented, the data recognized by the data
+            structure will shrink by one element on the right, there by
+            removing the rightmost element. Furthermore, shrinking will only
+            reduce the number of elements in such a way that prevents
+            accidental removal of data contained in the array.
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Running Time}: 
+
+    \begin{itemize}
+        \item \ {\tt at(i)}: The calculation performed is constant therefore
+            running time is $ O(1) $.
+        \item \ {\tt insert\_left(new\_size)}: On a typical insert, only one
+            element is set which happens in $ O(1) $ work. However, every $ 2^k
+            $ inserts will result in a resize. Therefore, $ n $ inserts will
+            will cost $ \Theta(1 + 2 + 4 + \ldots + n) = \Theta(n) $ work.
+            Thus, insert is amortized $ O(1) $.
+        \item \ {\tt insert\_right(x)}: Same as above.
+        \item \ {\tt delete\_left()}: On a typical delete, only the index
+            {\tt next\_left} is altered which happens in $ O(1) $ work.
+            However, every $ 4^k $ deletes, a resize occurs to reduce storage
+            which takes $ \Theta(1 + 4 + 16 + \ldots + n) = \Theta(n) $ work.
+            Thus, delete is amortized $ O(1) $.
+        \item \ {\tt delete\_right()}: Same as above.
+    \end{itemize}
+
+\newpage
+\problem
+
+\begin{problemparts}
+\problempart Given that $ \delta = \min(\delta_L, \delta_R) $, then every
+    point in the left and right half (individually) must be at least $ \delta
+    $ away from each other. It is clear the see that for each point $ q_i $
+    in $ V $, we only need to look at all point $ q_j $ such that $ | y_i -
+    y_j | < \delta $. Given that all points are at least $ \delta $ apart,
+    the worst case situation is there are 8 points together forming a
+    rectangle $ 2 \delta \times \delta $, one in each corner and two sets of
+    two coindicental points along the edge of the rectangle and along the
+    median. Since one of these points must be the point $ q_i $, there are
+    only at most 7 other points that must be checked.
+\problempart If we sort the points by $ x $- and then $ y $- components ahead
+    of time, and assure that our algorithm is stable, then each division
+    reduces the amount of work by $ 2 $ and splits into $ 2 $ recursions and
+    each step requires $ O(n) $ work (given that we will never have to make
+    the full $n ^ 2$ comparisons within $ V $ as proven above). Thus, the
+    recurrence that matches this algorithm is
+    $$ T(n) = 2 T(n/2) + O(n) $$
+    Therefore, by the Master Theorem Case II, the running time is $ O(n \log
+    n) $.
+\problempart Submit your implementation to {\small\url{alg.mit.edu/PS2}}
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
