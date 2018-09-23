@@ -1,0 +1,184 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{6.041 Problem Set 3}
+\author{Robert Durfee - R02}
+\date{September 25, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\textit{You are given the set of letters $ \{ A, B, C, D, E \} $. What is the
+probability that in a random five-letter string (in which each letter appears
+exactly once, and with all such strings equally likely) the letters $ A $, $
+B $ and $ D $ are next to each other (in no particular order)?}
+
+\bigbreak
+
+Since, $ A $, $ B $, and $ D $ must stay together, when assembling a sequence,
+you have to choose from $ \{ A, B, D \}^* $, $ C $, or $ E $. Let's first
+fix the the first element to be $ \{ A, B, D \}^* $:
+$$ ( \{ A, B, D \}^*, \star, \star ) $$
+The size of sequences of this form is given by
+$$ | \{ A, B, D \}^* | \cdot 2 \cdot 1 = (3 \cdot 2 \cdot 1) \cdot 2 \cdot 1
+= 12 $$
+Now, since we fixed the location of $ \{ A, B, D \}^* $, we must look at how
+many other ways there are to position $ \{ A, B, C \}^* $. There are $
+\binom{3}{1} = 3 $ different ways to do this. Therefore, the total number of
+sequences of this form must be
+$$ ((3 \cdot 2 \cdot 1) \cdot 2 \cdot 1) \cdot 3 = 36 $$
+
+Now the total number of sequences $ \{ A, B, C, D, E \}^* $ is given by
+$$ 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = 5! = 120 $$
+Therefore, the probability of getting this sequence, given all are equally
+likely, must be
+$$ \frac{36}{120} = \frac{3}{10} $$
+
+\section*{Problem 2}
+
+\textit{Alice plays the following game with Bob. First, Alice randomly
+chooses a set of 5 cards out of a 52-card deck, memorizes them, and places
+them back into the deck. (Any set of 5 cards is equally likely.) Then, Bob
+randomly chooses 9 cards out of the same deck. (Any set of 9 cards is equally
+likely.) Assume that the choice of 5 cards by Alice and the choice of 9 cards
+by Bob are independent.}
+
+\textit{What is the probability that all 5 cards Alice chose were also among
+the 9 cards chosen by Bob?}
+
+\bigbreak
+
+The five cards that Alice draws does nothing other than restrict the cards that
+Bob can draw. The values of Alice's cards is not important.
+
+First, let's fix the locations of Alice's cards to be the first cards in the
+sequence of cards drawn by Bob:
+$$ ( \{ A_0, A_1, A_2, A_3, A_4 \}^*, \star, \star, \star, \star ) $$
+The number of sequences in this form must then be:
+$$ | \{ A_0, A_1, A_2, A_3, A_4 \}^* | \cdot \frac{(52 - 5)!}{(52 - 9)!} = 5!
+\cdot \frac{47!}{43!} $$
+However, since we fixed the location of $ \{ A_0, A_1, A_2, A_3, A_4 \}^* $,
+we must look at how many other ways there are to fix $ \{ A_0, A_1, A_2, A_3,
+A_4 \}^* $. There are $ \binom{9}{5} $ ways to do this. Therefore, the total
+number of sequences of this form (where Alice's cards were drawn by Bob),
+must be
+$$ 5! \cdot \frac{47!}{43!} \cdot \binom{9}{5} = 5! \cdot \frac{47!}{43!}
+\cdot \frac{9!}{4! \cdot 5!} = \frac{47!}{43!} \cdot \frac{9!}{4!} $$
+
+Now, the total number of sequences of cards Bob could have drawn is given
+$$ \frac{52!}{43!} $$
+Therefore, the probability of getting all of Alices cards, given card sequences
+are equally likely and Alice's draw is independent of Bob's, must be
+$$ \frac{(47! \cdot 9!) / (43! \cdot 4!)}{52! / 43!} = \frac{ 47! \cdot 9! /
+4! }{ 52! } = \frac{3}{61880} \approx 4.8 \cdot 10^{-5} $$
+
+\section*{Problem 3}
+
+\textit{Each one of $ n $ persons, indexed by $ 1, 2, \ldots, n $, has a
+clean hat and throws it into a box. The persons then pick hats from the box,
+at random. Every assignment of the hats to the persons is equally likely. In
+an equivalent model, each person picks a hat, one at a time, in the order of
+their index, with each one of the remaining hats being equally likely to be
+picked. Find the probability of the following events.}
+
+\subsection*{Part A}
+
+\textit{Every person gets his or her own hat back.}
+
+\subsection*{Part B}
+
+\textit{Each one of persons $ 1, \ldots, m $ gets his or her own hat back,
+where $ 1 \leq m \leq n $.}
+
+\subsection*{Part C}
+
+\textit{Each one of persons $ 1, \ldots, m $ gets back a hat belonging to one
+of the last $ m $ persons (persons $ n - m + 1, \ldots, n $), where $ 1 \leq 
+m \leq n $.}
+
+\textit{Now assume, in addition, that every hat thrown into the box has
+probability $ p $ of getting dirty (independently of what happens to the
+other hats or who has dropped or picked it up). Find the probability that:}
+
+\subsection*{Part D}
+
+\textit{Persons $ 1, \ldots, m $ will pick up clean hats.}
+
+\subsection*{Part E}
+
+\textit{Exactly $ m $ persons will pick up clean hats.}
+
+\section*{Problem 4}
+
+\textit{A player is randomly dealt a sequence of 13 cards from a standard
+52-card deck. All sequences of 13 cards are equally likely. In an equivalent
+model, the cards are chosen and dealt one at a time. When choosing a card,
+the dealer is equally likely to pick any of the cards that remain in the
+deck.}
+
+\subsection*{Part A}
+
+\textit{What is the probability the 13th card dealt is a King?}
+
+\subsection*{Part B}
+
+\textit{Find the probability of the event that the 13th card dealt is the
+first King dealt.}
+
+\section*{Problem 5}
+
+\textit{The newest invention of the 6.041A staff is a three-sided die. On any
+roll of this die, the result is 1 with probability 1/2, 2 with probability
+1/4, and 3 with probability 1/4. Consider a sequence of six independent rolls
+of this die.}
+
+\subsection*{Part A}
+
+\textit{Find the probability that exactly two of the rolls result in a 3.}
+
+\subsection*{Part B}
+
+\textit{Given that exactly two of the six rolls resulted in a 1, find the
+probability that the first roll resulted in a 1.}
+
+\subsection*{Part C}
+
+\textit{We are told that exactly three of the rolls resulted in a 1 and
+exactly three rolls resulted in a 2. Given this information, find the
+probability that the six rolls resulted in the sequence $ (1, 2, 1, 2, 1, 2)
+$.}
+
+\subsection*{Part D}
+
+\textit{Find the conditional probability that exactly $ k $ rolls resulted in
+a 3, given that at least one roll resulted in a 3.}
+
+\section*{Problem 6}
+
+\textit{We saw in Recitation 5 that the expected value of a random variable $
+X $ that takes nonnegative integer values only, can be expressed by the
+following formula:}
+$$ E [X] = \sum\limits_{k=1}^{\infty} P(X \geq k) $$
+\textit{Use this result to find the expectation of a random variable $ Y $
+that takes positive integer values and whose $ PMF $ is:}
+$$ p_Y(y) = (1 - \alpha) \alpha^{y - 1},\, y = 1, 2, \ldots $$
+\textit{where $ 0 < \alpha < 1 $.}
+
+\end{document}
