@@ -1,0 +1,316 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{18.06 Problem Set 3}
+\author{Robert Durfee}
+\date{September 26, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\textit{Which of the following sets are vectors spaces (with the usual
+definition of $\pm$ and multiplication by real scalars), and why? }
+
+\begin{enumerate}
+    \item \textit{The set of all functions $f(x)$ whose integral
+    $\int_{-\infty}^\infty f(x) dx$ is zero.}
+
+    \bigbreak
+    
+    {\bf Zero}: The function $ f(x) = 0 $ is in the set of all functions
+    whose integral is $ \int_{-\infty}^{\infty} f(x) dx = 0 $ as $
+    \int_{-\infty}^{\infty} 0 dx = 0 $.
+    
+    \bigbreak
+    
+    {\bf Addition}: Let $ f(x) $ and $ g(x) $ be in the set described above.
+    Then, the following must be true
+    $$ \int\limits_{-\infty}^{\infty} f(x) dx = 0,\,
+    \int\limits_{-\infty}^{\infty} g(x) dx = 0 $$
+    Using this information, checking if $ f(x) + g(x) $ is also in the set
+    described above:
+    $$ \int\limits_{-\infty}^{\infty} f(x) + g(x) dx =
+    \int\limits_{-\infty}^{\infty} f(x) dx + \int\limits_{-\infty}^{\infty}
+    g(x) dx = 0 + 0 = 0 $$
+    Therefore, this set is closed under addition.
+
+    \bigbreak
+
+    {\bf Scalar Multiplication}: Let $ f(x) $ be in the set described above
+    and $ k $ be some real-valued constant. The following must be true
+    $$ \int\limits_{-\infty}^{\infty} f(x) dx = 0 $$
+    Using this information, checking if $ k f(x) $ is also in the set
+    described above:
+    $$ \int\limits_{-\infty}^{\infty} k f(x) dx = k
+    \int\limits_{-\infty}^{\infty} f(x) dx = k \cdot 0 = 0 $$
+    Therefore, this set is closed under scalar multiplication.
+
+    \bigbreak
+
+    Since all the conditions for vector spaces are satisfied, this must be a
+    vector space.
+
+    \item \textit{Given a subspace $V$ of $ \mathbb{R}^n$ and an $m\times n$
+    matrix $A$, the set of all vectors $Ax$ for all $x \in V$.}
+    
+    \bigbreak
+
+    {\bf Zero}: The zero vector can be represented by the following, for example:
+    $$ A = I_n,\, x = \vec{0}_n $$
+    As the vector subspace $ V $ must contain the zero vector $ \vec{0}_n $.
+    
+    \bigbreak
+
+    {\bf Addition}: Let $ A $, and $ B $ be two $ m \times n $ dimensional
+    matrices and $ x $ and $ y $ be two $ n \times 1 $ dimensional vectors in
+    $ V $. Then, both $ Ax $ and $ By $ are in the set defined above. Using
+    this information, checking if $ Ax + By $ is also in the set defined
+    above. That is, checking if
+    $$ Ax + By = Cz $$
+    for some $ m \times n $ matrix $ C $ and some $ n \times 1 $ vector $ z $.
+    Expanding these matrices and vectors element-wise yields
+    $$ \begin{pmatrix}
+        a_{11} & a_{12} & \ldots & a_{1n} \\
+        a_{21} & a_{22} & \ldots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{m1} & a_{m2} & \ldots & a_{mn}
+    \end{pmatrix}
+    \begin{pmatrix}
+        x_1 \\
+        x_2 \\
+        \vdots \\
+        x_n 
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+        b_{11} & b_{12} & \ldots & b_{1n} \\
+        b_{21} & b_{22} & \ldots & b_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        b_{m1} & b_{m2} & \ldots & b_{mn}
+    \end{pmatrix}
+    \begin{pmatrix}
+        y_1 \\
+        y_2 \\
+        \vdots \\
+        y_n 
+    \end{pmatrix} $$
+    Applying multiplication yields
+    $$ \begin{pmatrix}
+        a_{11} x_1 + a_{12} x_2 + \ldots + a_{1n} x_n \\
+        a_{21} x_1 + a_{22} x_2 + \ldots + a_{2n} x_n \\
+        \vdots \\
+        a_{m1} x_1 + a_{m2} x_2 + \ldots + a_{mn} x_n
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+        b_{11} y_1 + b_{12} y_2 + \ldots + b_{1n} y_n \\
+        b_{21} y_1 + b_{22} y_2 + \ldots + b_{2n} y_n \\
+        \vdots \\
+        b_{m1} y_1 + b_{m2} y_2 + \ldots + b_{mn} y_n
+    \end{pmatrix} $$
+    Applying addition yields
+    $$ \begin{pmatrix}
+        a_{11} x_1 + b_{11} y_1 + a_{12} x_2 + b_{12} y_2 + \ldots + a_{1n} x_n + b_{1n} y_n \\
+        a_{21} x_1 + b_{21} y_1 + a_{22} x_2 + b_{22} y_2 + \ldots + a_{2n} x_n + b_{2n} y_n \\
+        \vdots \\
+        a_{m1} x_1 + b_{m1} y_1 + a_{m2} x_2 + b_{m2} y_2 + \ldots + a_{mn} x_n + b_{mn} y_n
+    \end{pmatrix} $$
+    Now, this \textit{can} be separated into a matrix-vector product
+    $$ \begin{pmatrix}
+        a_{11} & b_{11} & a_{12} & b_{12} & \ldots & a_{1n} & b_{1n} \\
+        a_{21} & b_{21} & a_{22} & b_{22} & \ldots & a_{2n} & b_{2n} \\
+        \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+        a_{m1} & b_{m1} & a_{m2} & b_{m2} & \ldots & a_{mn} & b_{mn}
+    \end{pmatrix}
+    \begin{pmatrix}
+        x_1 \\
+        y_1 \\
+        x_2 \\
+        y_2 \\
+        \vdots \\
+        x_n \\
+        y_n
+    \end{pmatrix} $$
+    However, the dimenions are \textit{not} $ m \times n $ and $ n \times 1
+    $. Therefore, this set is not closed under addition.
+
+    \bigbreak
+
+    Since the set in not closed under addition, it cannot be a vector space.
+
+    \item \textit{The set of 3-component vectors whose components sum to 1.}
+
+    \bigbreak
+
+    {\bf Zero}: Let $ v $ be a vector contained in the set described above.
+    $ v $ can be written element-wise
+    $$ v = \begin{pmatrix}
+        v_1 \\
+        v_2 \\
+        v_3
+    \end{pmatrix} $$
+    Where $ v_1 + v_2 + v_3 = 1 $ There is no for the zero vector to be
+    present in this set as $ 0 + 0 + 0 \neq 1 $.
+
+    \bigbreak
+
+    Since the zero vector is not present in the set, it cannot be a vector
+    space.
+
+    \item \textit{The set of 2-component vectors whose components have product 0.}
+
+    \bigbreak
+
+    {\bf Zero}: Let $ v $ be a vector contained in the set described above. $
+    v $ can be written element-wise
+    $$ v = \begin{pmatrix}
+        v_1 \\
+        v_2
+    \end{pmatrix} $$
+    Where $ v_1 \cdot v_2 = 0 $. The zero vector is clearly in this set as $
+    0 \cdot 0 = 0 $.
+
+    \bigbreak
+
+    {\bf Addition}: Let $ v $ and $ w $ be in the set described above. Then,
+    the following must be true
+    $$ v_1 \cdot v_2 = 0,\, w_1 \cdot w_2 = 0 $$
+    Using this information, checking if $ v + w $ is also in the set
+    described above
+    $$ v + w = \begin{pmatrix}
+        v_1 + w_1 \\
+        v_2 + w_2
+    \end{pmatrix} $$ 
+    Checking component conditions
+    $$ (v_1 + w_1) \cdot (v_2 + w_2) = v_1 v_2 + v_1 w_2 + w_1 v_2 + w_1 w_2
+    = v_1 w_2 + w_1 v_2 $$
+    This is \textit{not} guaranteed to be zero as $ v_1 v_2 = 0 $ if only $
+    v_1 = 0 $ and $ w_1 w_2 = 0 $ if only $ w_2 = 0 $. Therefore, the above
+    expression would reduce further to $ w_1 v_2 $ which wouldn't necessarily
+    be zero. Therefore, this set is not closed under addition.
+    
+    \bigbreak
+
+    Since this set is not closed under addition, this is not a vector space.
+
+    \item \textit{The union of two subspaces $S$ and $T$: all vectors that
+    are in *either* $S$ or $T$.}
+
+    \bigbreak
+
+    {\bf Zero}: Since both $S$ and $T$ are vector subspaces, then the zero vector
+    must be in each of them and therefore in there union.
+
+    \bigbreak
+
+    {\bf Addition}: Since $ S $ is not fully contained in $ T $, there is
+    some $ s \in S $ yet $ s \notin T $. Similarly for $ t \in T $ yet $ t
+    \notin S $.
+    
+    Proof by contradiction. Assume that $ S \cup T $ is a subspace. Then,
+    there must exist two vectors $ s, t \in S \cup T $ such that $ s + t \in
+    S \cup T $. Thus, there is some vector $ s + t = s' $ that lies in either
+    $ S $ or $ T $.
+    
+    If $ s' \in S $, then $ s + t = s' \in S $ and since $ s, s' \in S $,
+    then, because $ S $ is a subspace and closed under addition, the difference
+    $ s' - s = t \in S $. But this contradicts the choice for $ t \in T $ but
+    $ t \notin S $.
+
+    From this, $ s + t \in T $. Then $ s + t = t' \in T $ and since $ t, t'
+    \in T $, then, because $ T $ is also a subspace and closed under
+    addition, the difference $ t' - t = s \in T $. But this also contradicts
+    the choice for $ s \in S $ but $ s \notin T $.
+
+    Therefore, the union is not closed under addition.
+
+    \bigbreak
+
+    Since the union is not closed under addition, it cannot be a vector space.
+
+    \item \textit{The intersection of two subspaces $S$ and $T$: all vectors
+    that are in *both* $S$ and $T$.}
+
+    \bigbreak
+
+    {\bf Zero}: Since both $ S $ and $ T $ are vector subspaces, they must
+    both contain the zero vector. Thus, that zero vector must be in the
+    intersection.
+
+    \bigbreak
+
+    {\bf Addition}: Let $ s,t \in S \cap T $. This also means that $ s \in S,
+    T $ and $ t \in S, T $. Because $ S $ is a subspace and $ s $ and $ t $
+    are both within it, then $ s + t \in S $. Furthermore, because $ T $ is a
+    subspace and $ s $ and $ t $ are both within it, then $ s + t \in T $.
+    Therefore the sum is in both $ S $ and $ T $ and therefore must be in $ S
+    \cap T $.
+
+    \bigbreak
+
+    {\bf Scalar Multiplication}: Let $ k $ be a scalar constant. Let $ v \in
+    S \cap T $. This also means that $ v \in S, T $. Because $ S $ is a
+    subspace and $ v \in S $, then it is closed under scalar multiplication
+    and therefore $ kv \in S $. The same goes for $ T $. Since $ kv \in S, T
+    $, then it must also be in $ S \cap T $.
+
+    \bigbreak
+
+    Since all the conditions for vector spaces are satisfied, the intersection
+    of two subspaces must also be a subspace.
+
+\end{enumerate}
+
+\section*{Problem 2}
+
+\textit{If $C(B)$ is a subspace of $N(A)$ for $3\times 3$ matrices $A$ and
+$B$, then $AB$ must be what?}
+
+\bigbreak
+
+The matrix product $ AB $ can be written in the column method of matrix
+multiplication
+$$ AB = A \begin{pmatrix}
+    b_1 & b_2 & b_3
+\end{pmatrix} 
+= \begin{pmatrix}
+    A b_1 & A b_2 & A b_3
+\end{pmatrix} $$
+Knowing that the column space of $ B $ is within the null space of $ A $, this
+further reduces to
+$$ \begin{pmatrix}
+    A b_1 = 0 & A b_2 = 0 & A b_3 = 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+    \vec{0} & \vec{0} & \vec{0}
+\end{pmatrix} $$
+Therefore, $ AB $ must be the $ 3 \times 3 $ zero matrix.
+
+\section*{Problem 4}
+
+\section*{Problem 5}
+
+\section*{Problem 6}
+
+\section*{Problem 7}
+
+\end{document}
