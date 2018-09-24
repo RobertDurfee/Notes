@@ -138,7 +138,13 @@ m \leq n $.}
 
 \bigbreak
 
-I don't understand this question...
+For the first person, there are $ m $ different hats to choose from, each
+equally likely. For the second person, there are $ m - 1 $ hats left to
+choose from and so on until all $ m $ people picked up hats. Therefore, since
+all hats are equally likely to be picked up, the probability of the first $ m
+$ people picking up hats belonging to the last $ m $ people is given by
+$$ \frac{1}{m} \cdot \frac{1}{m - 1} \cdot \ldots \cdot \frac{1}{m - m + 2}
+\cdot 1 = \frac{1}{m!} $$
 
 \bigbreak
 
@@ -352,5 +358,19 @@ $$ E [X] = \sum\limits_{k=1}^{\infty} P(X \geq k) $$
 that takes positive integer values and whose $ PMF $ is:}
 $$ p_Y(y) = (1 - \alpha) \alpha^{y - 1},\, y = 1, 2, \ldots $$
 \textit{where $ 0 < \alpha < 1 $.}
+
+\bigbreak
+
+The definition of expected value is 
+$$ E[Y] = \sum\limits_{y = 0}^{\infty} y p_Y(y) $$
+Given the probability mass function for $ Y $, this becomes
+$$ E[Y] = \sum\limits_{y = 0}^{\infty} y (1 - \alpha) \alpha^{y - 1} = (1 -
+\alpha) \sum\limits_{y = 0}^{\infty} y \alpha^{y - 1} $$
+Using the infinte geometric sum definition,
+$$ \sum\limits_{y = 0}^{\infty} \alpha^y = \frac{\alpha}{1 - \alpha} $$
+Taking the derivative of both sides with respect to $ \alpha $ yields
+$$ \sum\limits_{y = 0}^{\infty} y \alpha^{y - 1} = \frac{1}{(1 - \alpha)^2} $$
+Therefore, the expected value for $ Y $ is
+$$ E[Y] = (1 - \alpha) \cdot \frac{1}{(1 - \alpha)^2} = \frac{1}{1 - \alpha} $$
 
 \end{document}
