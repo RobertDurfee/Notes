@@ -102,16 +102,45 @@ picked. Find the probability of the following events.}
 
 \textit{Every person gets his or her own hat back.}
 
+\bigbreak
+
+There are $ n! $ different ways to distribute the hats back to everyone. Only
+one of these ways will result in everyone getting their hat back. As a result,
+the probability of this event occurring must be
+$$ \frac{1}{n!} $$
+
 \subsection*{Part B}
 
 \textit{Each one of persons $ 1, \ldots, m $ gets his or her own hat back,
 where $ 1 \leq m \leq n $.}
+
+\bigbreak
+
+The first person picks up his/her hat with a probability of $ 1 / n $. The
+next person picks up his/her hat with probability of $ 1 / (n - 1) $. This
+continues for all $ m $ persons. Therefore, the total probability of $ m $
+persons getting their hats back is given by
+$$ \frac{1}{n} \cdot \frac{1}{n - 1} \cdot \ldots \cdot \frac{1}{n - m + 1} =
+\frac{(n - m)!}{n!} $$
+
+Or, thinking in terms of sequences, there is only one way to assign the first
+$ m $ hats to the first $ m $ people such that they get their hats back, so
+we only need to consider how to arrange the remaining $ n - m $ hats. This is
+given by $ (n - m)! $. There are a total of $ n! $ ways to arrange the hats,
+therefore, the probability is also shown to be
+$$ \frac{(n - m)!}{n!} $$
 
 \subsection*{Part C}
 
 \textit{Each one of persons $ 1, \ldots, m $ gets back a hat belonging to one
 of the last $ m $ persons (persons $ n - m + 1, \ldots, n $), where $ 1 \leq 
 m \leq n $.}
+
+\bigbreak
+
+I don't understand this question...
+
+\bigbreak
 
 \textit{Now assume, in addition, that every hat thrown into the box has
 probability $ p $ of getting dirty (independently of what happens to the
@@ -121,9 +150,30 @@ other hats or who has dropped or picked it up). Find the probability that:}
 
 \textit{Persons $ 1, \ldots, m $ will pick up clean hats.}
 
+\bigbreak
+
+The first person picks up a clean hat with probability $ (1 - p) $. The same
+goes for the second person, and so on. Therefore, the probability of the
+first $ m $ persons picking up clean hats is given by
+$$ (1 - p) \cdot (1 - p) \cdot \ldots \cdot (1 - p) = (1 - p)^m $$
+
 \subsection*{Part E}
 
 \textit{Exactly $ m $ persons will pick up clean hats.}
+
+\bigbreak
+
+Now, we also have to ensure that the last $ n - m + 1 $ people pick up dirty
+hats. Therefore, the probability that the first $ m $ people pick up clean
+hats and the last $ n - m + 1 $ people pick up dirty hats is given by
+$$ (1 - p) \cdot (1 - p) \cdot \ldots \cdot (1 - p) \cdot p \cdot p \cdot
+\ldots \cdot p = (1 - p)^m \cdot p^{n - m} $$
+But this fixed the order in which the hats were picked up (all clean first,
+then all dirty). Therefore, we must also consider how many different ways
+in which the order could change. This is $ \binom{n}{m} $. Therefore, the
+overall probability of exactly $ m $ clean hats being picked is given by
+the binomial distribution
+$$ \binom{n}{m} (1 - p)^m p^{n - m} $$
 
 \section*{Problem 4}
 
@@ -137,10 +187,47 @@ deck.}
 
 \textit{What is the probability the 13th card dealt is a King?}
 
+\bigbreak
+
+Let's first consider the case when the last card drawn is the king of spades.
+Then the sequence of drawn cards looks like
+$$ ( \star, \star, \ldots, \star, K_S ) $$
+The number of choices for the first card is $ 52 - 1 $, and the second $ 52 -
+2 $, and so on. The last card is fixed, therefore its probability is $ 1 $.
+Therefore, the number of sequences like this is
+$$ (52 - 1)(52 - 2) \ldots (52 - 12) = \frac{(52 - 1)!}{(52 - 13)!} =
+\frac{51!}{39!} $$
+But, since we chose the king to be of spades, there are 3 other ways to make
+a satisfying sequence. Therefore, the number of sequences with the last card
+a king is
+$$ 4 \cdot \frac{51!}{39!} $$
+The total number of ways to draw $ 13 $ cards is given by
+$$ \frac{52!}{39!} $$
+Therefore, the total probability of having the last card be a king is given by
+$$ \frac{4 \cdot 51! / 39!}{52! / 39!} = \frac{1}{13} $$
+This is the same probability of just drawing a king from the deck.
+
 \subsection*{Part B}
 
 \textit{Find the probability of the event that the 13th card dealt is the
 first King dealt.}
+
+\bigbreak
+
+Once again, fixing the last card to be a king, the sequence of drawn cards
+looks like
+$$ ( \star, \star, \ldots, \star, K) $$
+The number of choices for the first card are $ 52 - 4 $ (as no kings are
+possible), and the second is $ 52 - 5 $, and so on. However, the choices for
+the last card are $ 4 $ as there are four different kings to choose from.
+Therefore, the number of sequences like this is
+$$ (52 - 4) (52 - 5) \ldots (52 - 15) \cdot 4 = \frac{4 \cdot (52 - 4)!}{(52
+- 16)!} = 4 \cdot \frac{48!}{36!} $$
+The total number of ways to draw $ 13 $ cards is the same as before,
+$$ \frac{52!}{39!} $$
+Therefore, the total probability of having the last card be the first king is
+given by
+$$ \frac{ 4 \cdot 48! / 36!}{52! / 39!} = \frac{703}{20825} $$
 
 \section*{Problem 5}
 
@@ -153,10 +240,37 @@ of this die.}
 
 \textit{Find the probability that exactly two of the rolls result in a 3.}
 
+\bigbreak
+
+The probability that two of six rolls of this die result in a 3 is given by
+the binomial distribution where probability of success $ p = 1/4 $. Therefore,
+the probability is
+$$ \binom{6}{2} (1/4)^2 (1 - 1/4)^{6 - 2} = \frac{1215}{4096} $$
+
 \subsection*{Part B}
 
 \textit{Given that exactly two of the six rolls resulted in a 1, find the
 probability that the first roll resulted in a 1.}
+
+\bigbreak
+
+Let $ A $ be the event that the first roll is a $ 1 $. Let $ B $ be the event
+that exactly two of the six rolls resulted in a $ 1 $. Then
+$$ P(A \mid B) = \frac{P(A \cap B)}{P(B)} $$
+The probability of $ B $ is given by the binomial distribution with
+probability of success $ p = 1/2 $. Thus,
+$$ P(B) = \binom{6}{2} (1/2)^2 (1-1/2)^{6 - 2} $$
+The probability of $ A \cap B $ is the same as the probability of first
+rolling a $ 1 $ and then exactly one of the next five rolls is a $ 1 $.
+The probability of the former is just $ 1/2 $ and the probability of the
+latter is given by the binomial distribution with probability of success $ p
+= 1/2 $. Since the rolls are independent, these probabilities can be
+multiplied. Thus,
+$$ P(A \cap B) = (1/2) \binom{5}{1} (1/2)^1 (1 - 1/2)^{5 - 1} $$
+Therefore, the overall probability of the first roll being a $ 1 $ given that
+exactly two $ 1 $'s were rolled is given by
+$$ P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{(1/2) \binom{5}{1} (1/2)^1
+(1 - 1/2)^{5 - 1}}{\binom{6}{2} (1/2)^2 (1-1/2)^{6 - 2}} = \frac{1}{3} $$
 
 \subsection*{Part C}
 
@@ -165,10 +279,68 @@ exactly three rolls resulted in a 2. Given this information, find the
 probability that the six rolls resulted in the sequence $ (1, 2, 1, 2, 1, 2)
 $.}
 
+\bigbreak
+
+Let $ A $ be the event that the sequence $ (1, 2, 1, 2, 1, 2) $ was rolled.
+Let $ B $ be the event that exactly three 1's and three 2's were rolled. Then,
+the probability $ P(A \mid B) $ is given by
+$$ P(A \mid B) = \frac{P(A \cap B)}{P(B)} $$
+
+First, determining the probability of $ B $. Let's first consider the case
+where the first three rolls were 1's and the last three rolls were 2's. That
+is, the sequence looks like
+$$ (1, 1, 1, 2, 2, 2) $$
+Since the rolls are independent, the probabilty of this sequence is
+$$ (1/2)(1/2)(1/2)(1/4)(1/4)(1/4) = (1/2)^3 (1/4)^3 $$
+But, there are $ \binom{6}{2} $ different ways that this sequence can be
+arranged, all with equal probability. Therefore, the probability of exactly
+three 1's and three 2's is given by
+$$ P(B) = \binom{6}{2} (1/2)^3 (1/4)^3 $$
+
+Now, determing the probability of $ A \cap B $. There is only one sequence
+that satisfies this condition. The probability is given by
+$$ (1/2)^3 (1/4)^3 $$
+
+Therefore, the probability of rolling $ (1, 2, 1, 2, 1, 2) $ given rolling
+exactly three 1's and three 2's is
+$$ \frac{ (1/2)^3 (1/4)^3 }{\binom{6}{3} (1/2)^3 (1/4)^3} = \frac{1}{20} $$
+
 \subsection*{Part D}
 
 \textit{Find the conditional probability that exactly $ k $ rolls resulted in
 a 3, given that at least one roll resulted in a 3.}
+
+\bigbreak
+
+Let $ A $ be the event that exactly $ k $ 3's are rolled and $ B $ be the
+event that at least one 3 was rolled. Then, the probability $ P(A \mid B) $
+is given by
+$$ P(A \mid B) = \frac{P(A \cap B)}{P(B)} $$
+
+First, determining the probability of $ B $. The probability of at least one
+3 is equal to 1 minus the probability of rolling no 3's. The probability of
+rolling no 3's is simply the probability of rolling a 1, event $C$, or a 2,
+event $D$ six times. And, since each roll is independent,
+$$ P(B) = 1 - P(\overline{B}) = 1 - P(C \cup D)^6 $$
+Also, since $ C $ and $ D $ are mutually exclusive,
+$$ P(B) = 1 - (P(C) + P(D))^6 = 1 - (1/2 + 1/4)^6 $$
+
+Next, determining the probability of $ A \cap B $. This is the statement
+``exactly $k$ 3's were rolled and at least one 3 was rolled." This is the same
+as saying ``exactly $k$ 3's were rolled for $ k > 0 $." Therefore, the probability
+is given by the binomial distribution with probability of success $ p = 1/4 $
+for $ k > 0 $, otherwise the probability is zero as you cannot roll exactly
+zero 3's and at least one 3 at the same time.
+$$ P(A \cap B) = \begin{cases}
+    \binom{6}{k} (1/4)^k (1 - 1/4)^{6 - k} & k > 0 \\
+    0 & k = 0
+\end{cases} $$
+
+Therefore, the probability of $ A \mid B $ is
+$$ P(A \mid B) = \begin{cases}
+    \frac{\binom{6}{k} (1/4)^k (1 - 1/4)^{6 - k}}{1 - (1/2 + 1/4)^6} & k > 0 \\
+    0 & k = 0
+\end{cases} $$
 
 \section*{Problem 6}
 
