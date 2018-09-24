@@ -79,82 +79,24 @@ definition of $\pm$ and multiplication by real scalars), and why? }
     
     \bigbreak
 
-    {\bf Addition}: Let $ A $, and $ B $ be two $ m \times n $ dimensional
-    matrices and $ x $ and $ y $ be two $ n \times 1 $ dimensional vectors in
-    $ V $. Then, both $ Ax $ and $ By $ are in the set defined above. Using
-    this information, checking if $ Ax + By $ is also in the set defined
-    above. That is, checking if
-    $$ Ax + By = Cz $$
-    for some $ m \times n $ matrix $ C $ and some $ n \times 1 $ vector $ z $.
-    Expanding these matrices and vectors element-wise yields
-    $$ \begin{pmatrix}
-        a_{11} & a_{12} & \ldots & a_{1n} \\
-        a_{21} & a_{22} & \ldots & a_{2n} \\
-        \vdots & \vdots & \ddots & \vdots \\
-        a_{m1} & a_{m2} & \ldots & a_{mn}
-    \end{pmatrix}
-    \begin{pmatrix}
-        x_1 \\
-        x_2 \\
-        \vdots \\
-        x_n 
-    \end{pmatrix}
-    +
-    \begin{pmatrix}
-        b_{11} & b_{12} & \ldots & b_{1n} \\
-        b_{21} & b_{22} & \ldots & b_{2n} \\
-        \vdots & \vdots & \ddots & \vdots \\
-        b_{m1} & b_{m2} & \ldots & b_{mn}
-    \end{pmatrix}
-    \begin{pmatrix}
-        y_1 \\
-        y_2 \\
-        \vdots \\
-        y_n 
-    \end{pmatrix} $$
-    Applying multiplication yields
-    $$ \begin{pmatrix}
-        a_{11} x_1 + a_{12} x_2 + \ldots + a_{1n} x_n \\
-        a_{21} x_1 + a_{22} x_2 + \ldots + a_{2n} x_n \\
-        \vdots \\
-        a_{m1} x_1 + a_{m2} x_2 + \ldots + a_{mn} x_n
-    \end{pmatrix}
-    +
-    \begin{pmatrix}
-        b_{11} y_1 + b_{12} y_2 + \ldots + b_{1n} y_n \\
-        b_{21} y_1 + b_{22} y_2 + \ldots + b_{2n} y_n \\
-        \vdots \\
-        b_{m1} y_1 + b_{m2} y_2 + \ldots + b_{mn} y_n
-    \end{pmatrix} $$
-    Applying addition yields
-    $$ \begin{pmatrix}
-        a_{11} x_1 + b_{11} y_1 + a_{12} x_2 + b_{12} y_2 + \ldots + a_{1n} x_n + b_{1n} y_n \\
-        a_{21} x_1 + b_{21} y_1 + a_{22} x_2 + b_{22} y_2 + \ldots + a_{2n} x_n + b_{2n} y_n \\
-        \vdots \\
-        a_{m1} x_1 + b_{m1} y_1 + a_{m2} x_2 + b_{m2} y_2 + \ldots + a_{mn} x_n + b_{mn} y_n
-    \end{pmatrix} $$
-    Now, this \textit{can} be separated into a matrix-vector product
-    $$ \begin{pmatrix}
-        a_{11} & b_{11} & a_{12} & b_{12} & \ldots & a_{1n} & b_{1n} \\
-        a_{21} & b_{21} & a_{22} & b_{22} & \ldots & a_{2n} & b_{2n} \\
-        \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
-        a_{m1} & b_{m1} & a_{m2} & b_{m2} & \ldots & a_{mn} & b_{mn}
-    \end{pmatrix}
-    \begin{pmatrix}
-        x_1 \\
-        y_1 \\
-        x_2 \\
-        y_2 \\
-        \vdots \\
-        x_n \\
-        y_n
-    \end{pmatrix} $$
-    However, the dimenions are \textit{not} $ m \times n $ and $ n \times 1
-    $. Therefore, this set is not closed under addition.
+    {\bf Addition}: Let $ x, y \in V $. Checking if $ Ax + Ay $ is also in
+    the set defined above
+    $$ Ax + Ay = A (x + y) $$
+    Given the fact that $ x, y \in V $ and $ V $ is a vector subspace, then $
+    x + y \in V $ also. As a result, the set is closed under addition.
 
     \bigbreak
 
-    Since the set in not closed under addition, it cannot be a vector space.
+    {\bf Scalar Multiplication}: Let $ x \in V $ and $ k \in \mathbb{R} $.
+    Checking if $ k (Ax) $ is also in the set defined above
+    $$ k (Ax) = A (kx) $$
+    Given the fact that $ x \in V $ and $ V $ is a vector subspace, then $ kx
+    \in V $ as well. Therefore, the set is closed under multiplication.
+
+    \bigbreak
+
+    Since all the conditions for vector spaces are satisfied, this must be a
+    vector space.
 
     \item \textit{The set of 3-component vectors whose components sum to 1.}
 
@@ -307,10 +249,183 @@ Therefore, $ AB $ must be the $ 3 \times 3 $ zero matrix.
 
 \section*{Problem 4}
 
+\textit{Consider the vector space $V$ of infinitely differentiable
+real-valued functions $f(x)$ on the real line $x\in \mathbb{R}$ (this vector
+space is commonly called "$C^\infty$"). The analogue of a "matrix" acting on
+such a space is a *linear operator* $\hat{A}$, which satisfies
+$\hat{A}(\alpha f + \beta g) = \alpha \hat{A} f + \beta \hat{A} g$ for any
+functions $f$ and $g$ in $V$ and any scalars $\alpha$ and $\beta$.}
+
+\subsection*{Part A}
+
+\textit{What is the null space $N(\hat{A})$ for $\hat{A} = \frac{d^2}{dx^2}$,
+defined the same way as we did for matrices?}
+
+\bigbreak
+
+The matrix definition for the nullspace of the linear operation of second
+derivative is defined as
+$$ N(\hat{A}) = \{ x \in \mathbb{R} \mid \hat{A}x = 0 \} $$
+Converting this into terms using derivatives
+$$ N\left(\frac{d^2}{dx^2}\right) = \left\{ x \in \mathbb{R} \mid \frac{d^2
+x}{dx^2} = 0 \right\} $$
+Which means all functions whose second derivative is $ 0 $. For example, any
+polynomial of degree less than or equal to $ 1 $.
+
+\subsection*{Part B}
+
+\textit{If the differential equation $\hat{A} u = \frac{d^2 u}{dx^2} = b$ has
+a particular solution $u(x)$ for a right-hand-side $b(x)$, what does your
+answer from (a) tell you about the uniqueness (or lack thereof) of this
+solution? What are the other solutions, if any?}
+
+\bigbreak
+
+Given the columns of the linear operation $ \hat{A} $ are linearly
+independent, then the existence of nontrivial solutions in the nullspace
+would conclude that the solutions to $ \hat{A} u = b $ is not unqiue.
+
+Let $ v \in N(A) $. Then
+$$ \hat{A}(u + v) = \hat{A} u + \hat{A} v = b + \hat{A} v = b + 0 = b $$
+The solution $ u $ plus a scalar multiple of any element in the nullspace
+will also be a solution.
+
 \section*{Problem 5}
+
+$$ A = \begin{pmatrix}
+    0 & 1 & 2 & 3 & 4 \\
+    0 & 1 & 2 & 4 & 6 \\
+    0 & 0 & 0 & 1 & 2
+\end{pmatrix} $$
+
+\subsection*{Part A}
+
+\textit{Find the rref form of A.}
+
+\bigbreak
+
+$$ \mathrm{rref} (A) = \begin{pmatrix}
+    0 & 1 & 2 & 0 & -2 \\
+    0 & 0 & 0 & 1 & 2 \\
+    0 & 0 & 0 & 0 & 0
+\end{pmatrix} $$
+
+\subsection*{Part B}
+
+\textit{Find the special solutions (a basis) for $N(A)$.}
+
+\bigbreak
+
+Solutions to the $ \mathrm{rref} (A) $ can be written in equations
+\begin{align*}
+    x_1 &= x_1 \\
+    x_2 &= -2 x_3 + x_5 \\
+    x_3 &= x_3 \\
+    x_4 &= -2 x_5 \\
+    x_5 &= x_5
+\end{align*}
+Which is the same as
+$$ c_1 \begin{pmatrix}
+    1 \\
+    0 \\
+    0 \\
+    0 \\
+    0
+\end{pmatrix}
++ c_2 \begin{pmatrix}
+    0 \\
+    -2 \\
+    1 \\
+    0 \\
+    0
+\end{pmatrix}
++ c_3 \begin{pmatrix}
+    0 \\
+    2 \\
+    0 \\
+    -2 \\
+    1
+\end{pmatrix}
+,\quad
+\left\{
+    \begin{pmatrix}
+        1 \\
+        0 \\
+        0 \\
+        0 \\
+        0
+    \end{pmatrix},
+    \begin{pmatrix}
+        0 \\
+        -2 \\
+        1 \\
+        0 \\
+        0
+    \end{pmatrix},
+    \begin{pmatrix}
+        0 \\
+        2 \\
+        0 \\
+        -2 \\
+        1
+    \end{pmatrix}
+\right\} $$
 
 \section*{Problem 6}
 
+\textit{How is the nullspace $N(C)$ related to $N(A)$ and $N(B)$ if $C =
+\begin{pmatrix} A \\ B \end{pmatrix}$? ($A$ is $m \times n$ and $B$ is $p
+\times n$.)}
+
+\bigbreak
+
+The nullspace of $ C $ is defined as
+$$ N(C) = N(A) \cap N(B) $$
+That is, the nullspace of $ C $ contains all the basis vectors that are
+present in both $ A $ and $ B $.
+
 \section*{Problem 7}
+
+\subsection*{Part A}
+
+\textit{Explain why $N(B)$ must be a subspace of $N(AB)$ for any $m \times n$
+matrix $A$ and any $n \times p$ matrix $B$.}
+
+\bigbreak
+
+The nullspace of $ AB $ is defined as
+$$ N(AB) = \{ x \in \mathbb{R}^p \mid (AB)x = 0 \} $$
+The nullspace of $ B $ is defined as
+$$ N(B) = \{ x \in \mathbb{R}^p \mid Bx = 0 \} $$
+Therefore, any $ x $ that satisfies the condition for the nullspace of $ B $
+must also satisfy the condition for the nullspace of $ A $ because
+$$ (AB) x = A (B x) = A \cdot \vec{0} = \vec{0} $$
+From this, it is clear that all vectors in the nullspace of $ B $ are in the
+nullspace of $ AB $. There is no need to prove the properties of a subspace
+hold as, by definition, a nullspace contains the zero vector and is closed
+under addition and scalar multiplication.
+
+\subsection*{Part B}
+
+\textit{What must be true of $A$ to have $N(AB) = N(B)$?}
+
+\bigbreak
+
+$ A $ must not create any additional vectors in the nullspace basis after
+multiplying with $ B $. This will certainly not occur if $ A $ has all of
+its pivots. That is, the rank of $ A $ is equal to the number of columns.
+
+\subsection*{Part C}
+
+\textit{We know from class that the dimension of the nullspace (the number of
+special solutions) = \#columns - rank. What does your answer from (a) tell you
+about the relationship between the rank of $AB$ and the rank of $B$? (For
+example, is one bigger than the other?)}
+
+\bigbreak
+
+From Part A, the nullspace of $ B $ is at least as large as the nullspace of
+$ AB $. Also, both $ AB $ and $ B $ must have the same number of columns.
+Therefore, the rank of $ AB $ is less than or equal to the rank of $ B $.
 
 \end{document}
