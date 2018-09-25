@@ -134,21 +134,324 @@ values of $ k \in K $,
 \end{problemparts}
 
 \newpage
-\problem  % Problem 2
+\problem
 
 \begin{problemparts}
-\problempart % Problem 2a
-\problempart % Problem 2b
-\problempart % Problem 2c
-\problempart % Problem 2d
+\problempart {\bf Description} This data structure will have three
+    properties:
+    \begin{itemize}
+        \item {\tt heaviest\_species}: This will contain the species of the
+        heaviest fish that has been caught so far.
+        \item {\tt max\_weight}: This will contain the heaviest recorded
+        weight of all the fish caught so far.
+        \item {\tt weight\_species\_tuples}: This will be a linked list of
+        tuples that represent the weight and species of every fish caught.
+    \end{itemize}
+    This data structure will have two methods:
+    \begin{itemize}
+        \item {\tt get\_heaviest\_species()}: This will return the value
+        stored in \\
+        {\tt heaviest\_species}.
+        \item {\tt record\_fish(weight, species)}: This will add a new
+        linked list node to the front of {\tt weight\_species\_tuples} and
+        check if the newly added weight is larger than {\tt max\_weight}. If
+        so, {\tt max\_weight} and {\tt heaviest\_species} will be updated
+        accordingly.
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Correctness} 
+    \begin{itemize}
+        \item {\tt record\_fish()}: Given the recording of fish is simply a
+        call to a linked list insert-left, the correctness of this operation
+        rests on the correctness of linked list insert-right, which is
+        assumed to be correct.
+        \item {\tt get\_heaviest\_species()}: Since the weight of a new fish
+        is always compared to the old maximum weight, which is then updated
+        accordingly, it is impossible to add a fish with a weight greater
+        than max weight. Additionally, since the heaviest species is updated
+        alongside the maximum weight, it will always maintain the species of
+        the heaviest fish. Thus, the heaviest species can be returned
+        correctly.
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Running Time} 
+    \begin{itemize}
+        \item {\tt record\_fish()}: To record the new fish, a call to a
+        linked list insert-left, which is $ O(1) $, and only a few other
+        constant-time updates are made. Therefore, this is a total of $ O(1) $.
+        \item {\tt get\_heaviest\_species()}: To return the heaviest species,
+        only a stored value is returned requring $ O(1) $ work.
+    \end{itemize}
+
+\problempart {\bf Description} This data structure should have one property:
+    \begin{itemize}
+        \item {\tt fish\_heap}: This is a binary max-heap that stores tuples
+        of weights and species of every fish recorded. The key is given by
+        the weights of the fish.
+    \end{itemize}
+    This data structure should have three methods:
+    \begin{itemize}
+        \item {\tt get\_heaviest\_species()}: This returns the species of the
+        maximum element (given by weight) in the binary max-heap {\tt
+        fish\_heap}.
+        \item {\tt record\_fish(weight, species)}: This inserts an element into
+        the binary max-heap {\tt fish\_heap}.
+        \item {\tt pop\_heaviest\_fish()}: This finds the max fish (given by
+        weight) in {\tt fish\_heap}, returns it, and then removes it.
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Correctness}
+    \begin{itemize}
+        \item {\tt get\_heaviest\_species()}: This relies on the operation
+        find-max in a binary max-heap, which is assumed correct, and
+        returning the species property of the returned element which must've
+        been set during the record process.
+        \item {\tt record\_fish(weight, species)}: This relies on the
+        operation insert of a weight-species tuple in a binary max-heap,
+        which is assumed correct, sorted based on the weight.
+        \item {\tt pop\_heaviest\_fish()}: This relies on the find-max and
+        delete-max operations in a binary max-heap, which are assumed
+        correct.
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Running Time}
+    \begin{itemize}
+        \item {\tt get\_heaviest\_species()}: Find-max in a binary max-heap
+        is done in $ O(1) $ work.
+        \item {\tt record\_fish(weight, species)}: Insert into a binary max
+        heap is done in $ O(\log n) $ work.
+        \item {\tt pop\_heaviest\_fish()}: Find-max and delete-max in a
+        binary max-heap are each $ O(1) $ and $ O(\log n) $, respectively.
+    \end{itemize}
+
+\problempart {\bf Description} This data structure should have two properties:
+    \begin{itemize}
+        \item {\tt lighter\_fish}: This is a max-heap that holds tuples
+        containing the weight and species of the lighter half of fish caught.
+        \item {\tt heavier\_fish}: This is a min-heap that holds tuples
+        containing the weight and species of the heavier half of fish caught.
+    \end{itemize}
+    This data structure should have five methods:
+    \begin{itemize}
+        \item {\tt get\_median\_species()}: This calls {\tt find\_median()}
+        and returns the species of the median.
+        \item {\tt record\_fish(weight, species)}: This calls {\tt
+        find\_median()} and if the weight of the new fish is greater, the
+        fish is inserted into the min-heap {\tt heavier\_fish}. If the weight
+        of the new fish is less, the fish is inserted into the max-heap {\tt
+        lighter\_fish}. {\tt rebalance()} is then called to maintain the
+        relative sizes of the min and max heaps.
+        \item {\tt pop\_median\_fish()}: This calls {\tt find\_median()} and
+        returns the value and calls the delete method on the appropriate heap
+        given the result of {\tt find\_median()}. To maintain the equal
+        halves, {\tt rebalance()} is then called.
+        \item {\tt rebalance()}: This method checks if the min- and max-heaps
+        are equal in size (give or take 1). If they are not, the min or max
+        of the larger is popped and inserted into the other heap.
+        \item {\tt find\_median()}: This method returns $ 0 $ if the median
+        is minimum of the min-heap and $ 1 $ if the median is the maximum of
+        the max-heap. This is determined by the relative sizes of the heaps.
+        If one is larger, that one contains the median at the root. If they
+        are equal in size, I choose to return the lesser value (or the one
+        contained in the max-heap).
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Correctness}
+    \begin{itemize}
+        \item {\tt get\_median\_species()}: Given the median is kept in the
+        min or max of the respective heap, assured by the rebalance method
+        argued below, and the find median correctly returns the location, as
+        argued below, the median is guaranteed to be found correctly. The
+        find-min/max operation on the heap is assumed correct.
+        \item {\tt record\_fish(weight, species)}: Since the median is
+        correctly located by find-median (argued below) and the value is
+        correctly returned by find-min/max in a heap (assumed) then lesser
+        and greater halves of the data are maintained if the value greater is
+        inserted into the greater half or the value lesser is inserted into
+        the lesser half. Rebalancing correctly maintains that the median is
+        the min/max of the appropriate heap.
+        \item {\tt pop\_median\_fish()}: Given the median is kept in the min
+        or max of the respective heap, assured by the rebalance method argued
+        below, and the find median correctly returns the location, as argued
+        below, the median is guaranteed to be found correctly. The
+        find-min/max and delete-min/max operations on a heap are assumed
+        correct.
+        \item {\tt rebalance()}: If the sizes become unequal, the max of the
+        lesser or the min of the greater no longer represents the median. To
+        fix this, the data split needs to be shifted towards the greater half
+        to restore balance. If the lesser half is larger, the maximum element
+        should really be the minimum of the greater half. Therefore a delete
+        from the lesser and insert into the greater will do this. And vice
+        versa for if the greater halve is larger. Therefore, this maintains
+        the median in the min/max of the heap.
+        \item {\tt find\_median()}: Since the median is middle value of
+        sorted data, it must either be the maximum of the lesser half or the
+        minimum of the upper half. If the halves are unequal, the greater one
+        must contain the median. Therefore, this will return the location of
+        the median correctly. If the halves are equal, my choice is just to
+        return the lesser of the two.
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Running Time}
+    \begin{itemize}
+        \item {\tt get\_median\_species()}: This finds the median ($O(1)$ as
+        argued below) and then calls a find-min/max on a heap which is also $
+        O(1) $. Therefore, the overall work is $ O(1) $.
+        \item {\tt record\_fish(weight, species)}: This finds the location of
+        median, which is $ O(1) $ as argued below, and then calls a
+        find-min/max on a heap, which is $ O(\log n) $. No matter the result
+        of the comparison, an insert to a heap is called which is $ O(\log n) $.
+        Then, rebalancing is needed, taking $ O(\log n) $ as argued below.
+        Therefore, the total work is $ O(\log n ) $.
+        \item {\tt pop\_median\_fish()}: This finds the location of median,
+        which is $ O(1) $ as argued below, and then calls a find-max/min on a
+        heap, which is also $ O(1) $. Then, the element is deleted from the
+        heap which takes $ O(\log n) $. Lastly, rebalancing takes place which
+        is $ O(\log n) $ as argued below. Therefore, overall work is $ O(\log
+        n) $.
+        \item {\tt rebalance()}: The size comparison takes $ O(1) $
+        (assuming, once again, that this is a property of the heap). If the
+        sizes differ by more than one, a delete max/min is called on a heap
+        (requiring $ O(\log n) $) and a subsequent insert on a heap
+        (requiring $ O(\log n) $). Therefore, the total work is $ O(\log n) $.
+        \item {\tt find\_median()}: This only compares the relative sizes of
+        (which I will assume is stored in the heap, if not, it is easy to
+        implement), which takes $ O(1) $.
+    \end{itemize}
+
+\problempart {\bf Description} This data structure should have one property:
+    \begin{itemize}
+        \item {\tt fish}: This is a min-heap that contains the fish that are
+        caught during the trip.
+    \end{itemize}
+    This data structure should have two methods:
+    \begin{itemize}
+        \item {\tt add\_fish(weight, species)}: This method will insert the
+        newest caught fish into the {\tt fish} heap. This assumes that
+        Frankie is responsible for calling {\tt identify\_discard()} to
+        determine both if a fish should be discarded and which fish to remove
+        after catching the last fish.
+        \item {\tt identify\_discard()}: If the size of the heap is less than
+        or equal to $ k $, this method will return {\tt None} as no fish
+        needs to be removed. If the heap is greater than $ k $, this method
+        will find the minimum fish within the {\tt fish} heap and return it.
+        This assumes that frankie has some other means of removing the fish as
+        this method will not remove the fish, just identify it.
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Correctness} For each operation
+    \begin{itemize}
+        \item {\tt add\_fish(weight, species)}: This is a simple call to an
+        insert operation on a min-heap. This is assumed correct.
+        \item {\tt identify\_discard()}: If the number of fish caught is less
+        than or equal to the capacity, this is certainly correct as no fish
+        will be identified to be removed. If the number of fish is greater
+        than the size of the capacity, then the lightest fish will be
+        identified. This is done through a find-min operation on a min-heap
+        which is assumed correct.
+    \end{itemize}
+    This also guarantees that Frankie will end up with the largest fish he
+    caught during the entire trip as there was no way for Frankie to have
+    thrown out a fish larger than the $ k $ he had at the end of his trip.
+
+    \smallbreak
+
+    {\bf Running Time}
+    \begin{itemize}
+        \item {\tt add\_fish(weight, species)}: This is a simple call to an
+        insert operation on a min-heap known to be $ O(\log n) $.
+        \item {\tt identify\_discard()}: Involves constant-time size
+        comparison (assuming the size of the heap is a property, easy to
+        implement) and a find-min on a heap which is known to be $ O(1) $.
+        Assuming no remove is performed, this operation has a total of $ O(1)
+        $ work. If the remove is performed also, a call to delete-min on a
+        min-heap will be called which is $ O(\log n ) $ and then the total
+        work would be $ O(\log n)$.
+    \end{itemize}
+
 \end{problemparts}
 
 \newpage
-\problem  % Problem 3
+\problem
 
 \begin{problemparts}
-\problempart % Problem 3a
-\problempart % Problem 3b
+\problempart Consider the bottom-up/iterative implementation of insertion
+    sort. Let $ A $ be an unsorted, $ k $-proximate array. Insertion sort
+    slowly expands a sorted subsection of the array $ A $ located at the
+    beginning of $ A $. Let this sorted subsection be from $ a_0 $ to $ a_j
+    $. Then, $ a_{j + 1} $ is compared with $ a_j $ and swapped if out of
+    order. Then, $ a_j $ is compared with $ a_{j - 1} $ and swapped if out of
+    order, and so on until $ a_1 $ is compared with $ a_0 $. This approaches
+    $ O(n) $ swaps. However, given that $ a_{j} $ can only be at most $ k $
+    slots away from its final sorted position $ a_i $, swaps do not need to
+    occur beyond $ a_i $ as $ a_j $ must be located there or somewhere
+    earlier. Therefore, at maximum, only $ k $ swaps are needed. Since the
+    number of iterations is $ n $ and each iteration will perform at most $ k
+    $ swaps, this must be $ O(kn) $.
+\problempart {\bf Description} I will use a modified definition of a min-heap
+    to aid in the implementation of {\tt proximate\_sort()}. This heap will
+    have two properties:
+    \begin{itemize}
+        \item {\tt k}: This is the size of the heap.
+        \item {\tt arr}: This is the fixed (non-dynamic) array containing the
+        elements of the heap.
+    \end{itemize}
+    And also three methods:
+    \begin{itemize}
+        \item {\tt init(A, k)}: This will set {\tt k } and allocate {\tt
+        arr}. Then it will call {\tt min\_heapify\_up()} after inserting each
+        of the $ k $ members of $ A $. (There is a faster way, but since the
+        input was given as a tuple, I can't perform an in-place heapify.)
+        \item {\tt swap\_top(x)}: This will set the root value as $ x $ and
+        call {\tt min\_heapify\_down()} on the new element. Then it will
+        return the old root value.
+        \item {\tt pop()}: This will return the root value and remove it,
+        calling {\tt min\_heapify\_down()} afterwards.
+    \end{itemize}
+    Now, the actual algorithm {\tt proximate\_sort()} will initialize the heap
+    with the first $ k + 1 $ elements of $ A $. Then, for each element after
+    the first $ k + 1 $, it will call {\tt swap\_top()} and push the returned
+    element to the sorted output. Once this loop completes, the remaining
+    elements in the heap are {\tt pop()}'ed off and pushed into the sorted
+    output. The sorted output is then returned.
+
+    \smallbreak
+
+    {\bf Correctness}
+
+    \smallbreak
+
+    {\bf Running Time} For the methods in the data structure
+    \begin{itemize}
+        \item {\tt init(A, k)}: Allocation requires $ O(k) $, and for each of
+        the $ k $ elements, min-heapify requires $ O(\log k) $ work.
+        Therefore, total work is $ O(k + k \log k) \in O( k \log k) $. (Once
+        again, this could be simplied if an in-place sort were possible, i.e.
+        not supplying tuples.)
+        \item {\tt swap\_top(x)}: A single call to min-heapify is used which
+        is $ O(\log k) $.
+        \item {\tt pop()}: A single call to min-heapify is used which is $
+        O(\log k) $.
+    \end{itemize}
+    Then, the proximate-sort algorithm will make one call to the
+    initialization method which is $ O(k \log k) $, $ n - k $ calls to the
+    swap method which is $ O(\log k) $, and $ k $ calls to the pop method
+    which is $ O(\log k) $. Therefore, total work is $ O(n \log k) $.
+
 \problempart Submit your implementation to {\small\url{alg.mit.edu/PS3}}
 \end{problemparts}
 
