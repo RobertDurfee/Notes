@@ -1,0 +1,158 @@
+%
+% 6.006 problem set 3 solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros-fa18}
+\newcommand{\theproblemsetnum}{3}
+\newcommand{\releasedate}{Thursday, September 20}
+\newcommand{\partaduedate}{Thursday, September 27}
+
+\title{6.006 Problem Set 3}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 11PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem
+
+\begin{problemparts}
+\problempart {\tt [0, 12, 4, 23, 13, 6, 24]} is a min-heap.
+    \begin{center}
+        \includegraphics[scale=0.4]{Images/P1A1.PNG}
+    \end{center}
+    {\tt [8, 11, 8, 12, 14, 9, 10]} is a min-heap.
+    \begin{center}
+        \includegraphics[scale=0.4]{Images/P1A2.PNG}
+    \end{center}
+    {\tt [23, 7, 16, 4, 7, 12, 1]} is a max-heap.
+    \begin{center}
+        \includegraphics[scale=0.4]{Images/P1A3.PNG}
+    \end{center}
+    {\tt [9, 6, 10, 2, 7, 4, 11]} is neither a min- nor max-heap.
+    \begin{center}
+        \includegraphics[scale=0.4]{Images/P1A4i.PNG}
+        \includegraphics[scale=0.4]{Images/P1A4ii.PNG}
+    \end{center}
+    \begin{center}
+        \includegraphics[scale=0.4]{Images/P1A4iii.PNG}
+        \includegraphics[scale=0.4]{Images/P1A4vi.PNG}
+    \end{center}
+    \begin{center}
+        \includegraphics[scale=0.4]{Images/P1A4v.PNG}
+    \end{center}
+    {\tt [10, 2, 9, 0, 1, 8, 7]} is a max-heap.
+    \begin{center}
+        \includegraphics[scale=0.4]{Images/P1A5.PNG}
+    \end{center}
+\problempart The following lists the possible nodes that can contain the
+values of $ k \in K $,
+    \begin{enumerate}
+        \item $ A $
+        \item $ B, C $
+        \item $ B, C, D, E, F, G $
+        \item $ B, C, D, E, F, G $
+        \item $ B, C, D, E, F, G $
+        \item $ D, E, F, G $
+        \item $ D, E, F, G $
+    \end{enumerate}
+\problempart {\bf Description} First, the second largest element in the
+    max-heap needs to be located. Since the root of the tree representing the
+    heap must be the maximum element, then second largest value must be one
+    of the children of the root, which ever is larger. If the new value of
+    the second largest is greater than the old value, set the second largest
+    and call {\tt max\_heapify\_up()} on the element. If the new value of the
+    second largest is less than the old value, set the second largest and
+    call {\tt max\_heapify\_down()} on the element.
+
+    \smallbreak
+
+    {\bf Correctness} The second largest (non-unique) element has to be one
+    of the descendants of the root given that $ A $ is a max-heap. Therefore,
+    all the descendants are less than or equal to the root. Furthermore, the
+    second largest (non-unique) element must be in the top two levels of the
+    heap because it must be greater than or equal to every element except the
+    root. Therefore, the (non-unique) second largest must be one of the two
+    children of the root, whichever is larger.
+
+    Once the element is set, there are three cases to consider
+    \begin{enumerate}
+        \item The new value is equal to the old.
+        \item The new value is larger than the old.
+        \item The new value is less than the old.
+    \end{enumerate}
+
+    In the first case, there is no further action to be taken given that the
+    max-heap hasn't changed.
+
+    In the second case, let the left and right children of the root be $ c_L
+    $ and $ c_R $, respectively. WLOG, assume that $ c_L $ was the second
+    largest and has been changed to a new value $ v $ such that $ v > c_L $.
+    Since $ c_R $ is unchanged, it must still maintain the max-heap property
+    with all of its descendants. Also, since $ v > c_L $, the new tree formed
+    under $ v $ must also maintain the max-heap property as $ c_L $ was
+    greater than all of its descendants and $ v > c_L $. Thus, the only
+    element that could violate the max-heap property is the root. Thus, {\tt
+    max\_heapify\_up()} can be called to fix the heap.
+    
+    In the second case, let the left and right children of the root be $ c_L
+    $ and $ c_R $, respectively. WLOG, assume that $ c_L $ was the second
+    largest and has been changed to a new value $ v $ such that $ v < c_L $.
+    Since $ c_R $ is unchanged, it must still maintain the max-heap property
+    with all of its descendants. Also, since $ v < c_L $ and $ c_L $ must be
+    less that the root, given it was a max-heap, the root and its children
+    (not descendants) must also still satisfy the max-heap property. The only
+    elements out of place are $ v $ and possibly all its descendants.
+    Therefore, calling {\tt max\_heapify\_down()} will fix the heap.
+
+    \smallbreak
+
+    {\bf Running Time} To find the second largest element only involves
+    arithmetic and can be done in $ O(1) $ work. Setting the new value
+    involves constant index-lookup, therefore $ O(1) $ work. If the new and
+    old values are equal, there is no necessary further work. If the new
+    value is greater than the old value, only at worst one swap in {\tt
+    max\_heapify\_up()} is required as the height of the tree is $ 1 $. If
+    the new value is less than the old value, then {\tt max\_heapify\_down()}
+    will require at worst $ O(\log n) $ work. (Slightly less because there is
+    one fewer level.) Therefore, the overall running time is $ O(\log n) $.
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+
+\begin{problemparts}
+\problempart % Problem 2a
+\problempart % Problem 2b
+\problempart % Problem 2c
+\problempart % Problem 2d
+\end{problemparts}
+
+\newpage
+\problem  % Problem 3
+
+\begin{problemparts}
+\problempart % Problem 3a
+\problempart % Problem 3b
+\problempart Submit your implementation to {\small\url{alg.mit.edu/PS3}}
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
