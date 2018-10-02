@@ -364,9 +364,40 @@ values of $ k \in K $,
         identified. This is done through a find-min operation on a min-heap
         which is assumed correct.
     \end{itemize}
-    This also guarantees that Frankie will end up with the largest fish he
-    caught during the entire trip as there was no way for Frankie to have
-    thrown out a fish larger than the $ k $ he had at the end of his trip.
+
+    This also guarantees that Frankie ends the trip with the heaviest fish
+    he caught in the entire trip. Consider the induction hypothesis $ P(n) $
+    that after catching $ n $ fish, and Frankie ends his trip, he will have
+    the $ \min(n, k) $ largest fish in his inventory given that he throws out
+    the lightest fish every time his inventory reaches $ k + 1 $ capacity.
+
+    {\bf Base Case}: Consider the base case where $ n = 1 $. That is, after
+    catching $ 1 $ fish, Frankie ends his trip and looks at his inventory. If
+    $ k < n $, then Frankie must have zero fish in his inventory. Then, he
+    must have zero of the heaviest fish by definition. This is $ \min(n, k)
+    $. If $ k \geq n $, then Frankie will have exactly $ 1 $ fish. One out
+    one fish is, by definition the maximum. This is also $ \min(n, k) $.
+    Therefore, $ P(n) $ is true for the base case.
+
+    {\bf Inductive Step} Assume from induction that after catching $ n $
+    fish, Frankie must have the $ \min(n, k) $ largest fish he caught during
+    the trip. Then, Frankie catches one more fish, $ f $. Now, $ n' = n + 1
+    $. If $ k \geq n' $, then Frankie will not throw out any fish and since his
+    inventory has all the fish he ever caught, he must have the $ \min(n, k)
+    $ heaviest fish by definition. If $ k < n' $ and the weight of $ f $ is
+    greater than the minimum weight currently in inventory, the minimum fish
+    $ m $ will be thrown out. From the inductive assumption, $ m $ must be
+    larger than all other fish previously caught. Therefore, the $ \min(n, k)
+    $ fish left in inventory must be the largest caught. If $ k < n' $ and $
+    f $ is not heavier than the minimum in inventory, then it must be the
+    minimum and will be thrown. Since $ f $ is lighter than all in the
+    inventory and the inventory is unchanged and, from the inductive step,
+    already had the largest $ \min(n, k) $ fish, this will remain true.
+    Therefore, $ P(n) $ is true for the inductive step.
+
+    Since $ P(n) $ is true for the base case and the inductive step, it has
+    been shown that Frankie must have the $ \min(n, k) $ heaviest fish in his
+    inventory after $ n $ catches.
 
     \smallbreak
 
@@ -402,6 +433,7 @@ values of $ k \in K $,
     earlier. Therefore, at maximum, only $ k $ swaps are needed. Since the
     number of iterations is $ n $ and each iteration will perform at most $ k
     $ swaps, this must be $ O(kn) $.
+
 \problempart {\bf Description} I will use a modified definition of a min-heap
     to aid in the implementation of {\tt proximate\_sort()}. This heap will
     have two properties:
@@ -412,7 +444,7 @@ values of $ k \in K $,
     \end{itemize}
     And also three methods:
     \begin{itemize}
-        \item {\tt init(A, k)}: This will set {\tt k } and allocate {\tt
+        \item {\tt init(A, k)}: This will set {\tt k} and allocate {\tt
         arr}. Then it will call {\tt min\_heapify\_up()} after inserting each
         of the $ k $ members of $ A $. (There is a faster way, but since the
         input was given as a tuple, I can't perform an in-place heapify.)
@@ -431,7 +463,31 @@ values of $ k \in K $,
 
     \smallbreak
 
-    {\bf Correctness}
+    {\bf Correctness} For the methods in the data structure
+    \begin{itemize}
+        \item {\tt init(A, k)}: This is essentially a build-heap function.
+        The allocation will ensure space for the fixed heap and min-heapify
+        will ensure the min-heap property is retained after every insertion.
+        \item {\tt swap\_top(x)}: This is essentially an extract-min
+        operation except instead of taking the last leaf, a new value is
+        inserted at the root. For the same reason as extract-min is correct,
+        this is as well: the only possible incorrect value in the heap is the
+        root and therefore will be correctly placed by min-heapify-down.
+        \item {\tt pop()}: This is exactly a extract-min an is correct for
+        the same reasons stated in swap-top.
+    \end{itemize}
+
+    For the actual algorithm, initializing a $ k + 1 $-sized heap will ensure
+    the top element is always the minimum within those $ k + 1 $ elements.
+    Therefore, every time we call swap-top, the minimum element in the heap
+    must be returned and the size $ k + 1 $ is maintained. Even though the
+    heap does not contain the whole array, it contains the least $ k + 1 $
+    elements. Therefore, given the the proximate property, the minimum of the
+    $ k + 1 $ must be the next element in the sorted sequence as it cannot be
+    further than $ k $ locations away and can be safely popped. If there are
+    no more elements to add, then the heap contains the last $ k + 1 $
+    elements and can be popped in sorted order. Therefore, the array must be
+    sorted correctly.
 
     \smallbreak
 
