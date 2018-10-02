@@ -1,0 +1,279 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{6.041 Problem Set 4}
+\author{Robert Durfee - R02}
+\date{October 2, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\textit{Let X, Y and Z be discrete random variables. For each of the
+statements that follow, determine whether it is true (meaning, always true)
+or false (meaning, not always true), and provide a very brief explanation
+(not a complete proof). Assume that all conditioning events have non-zero
+probability.}
+
+\subsection*{Part A}
+
+\textit{$ p_{X,Y,Z}(x, y, z) = p_Y(y) p_{Z|Y}(z \mid y) p_{X|Y,Z}(x \mid y, z) $}
+
+\bigbreak
+
+This is simply the multiplication rule written in different notation. For
+example,
+$$ P(A \cap B \cap C) = P(B) P(C \mid B) P(A \mid B \cap C) $$
+Therefore, this is always true.
+
+\subsection*{Part B}
+
+\textit{$ p_{X,Y|Z}(x, y \mid z) = p_X(x) p_{Y|Z} (y \mid z) $}
+
+\bigbreak
+
+Using probability of events notation and the definition of conditional
+probability, the left side can be rewritten
+$$ P(A \cap B \mid C) = \frac{P(A \cap B \cap C)}{P(C)} $$
+And the right hand side
+$$ P(A) P(B \mid C) = P(A) \frac{P(B \cap C)}{P(C)} $$
+Equating both sides yields
+$$ P(A \cap B \cap C) = P(A) P(B \cap C) $$
+As a result, this is not necessarily always true.
+
+\subsection*{Part C}
+
+\textit{$ p_{X,Y|Z}(x, y \mid z) = p_{X|Z} (x \mid z) p_{Y|X,Z}(y \mid x, z) $}
+
+\bigbreak
+
+Using the probability of events notation and the definition of conditional
+probability, the left side can be rewritten
+$$ P(A \cap B \mid C) = \frac{P(A \cap B \cap C)}{P(C)} $$
+And the right side
+$$ P(A \mid C) P(B \mid A \cap C) = \frac{P(A \cap C)}{P(C)} \frac{P(B \cap A
+\cap C)}{P(A \cap C)} $$
+Equating both sides
+$$ P(A \cap B \cap C) = P(B \cap A \cap C) $$
+Therefore, this is always true.
+
+\subsection*{Part D}
+
+\textit{$ \sum\limits_x p_{X,Y|Z}(x, y \mid z) = 1 $}
+
+\bigbreak
+
+This is not always true summing over a single $ y $ may not represent the
+entire universe $ z $. Take, for example, if $ y $ never occurred, then
+the probability would be $ 0 $.
+
+\subsection*{Part E}
+
+\textit{$ \sum\limits_x\sum\limits_y p_{X,Y|Z}(x, y \mid z) = 1 $}
+
+\bigbreak
+
+Yes, assuming that all $ x $ and $ y $ are disjoint, as is the definition
+of a meaningful random variable, and all $ x $ and $ y $ are summed over,
+this will cover the entire universe $ z $ and therefore must equal 1.
+
+\subsection*{Part F}
+
+\textit{$ p_{X,Y|Z}(x, y \mid z) = \frac{p_{X,Y,Z}(x, y, z)}{p_Z(z)} $}
+
+\bigbreak
+
+Using the probability of events notation and the definition of conditional
+probability, the left side can be rewritten
+$$ P(A \cap B \mid C) = \frac{P(A \cap B \cap C)}{P(C)} $$
+Therefore this is always true, it is simply different notation.
+
+\subsection*{Part G}
+
+\textit{$ p_{X|Y,Z}(x \mid y, z) = \frac{p_{X,Y,Z}(x, y, z)}{p_{Y,Z}(y, z)} $}
+
+\bigbreak
+
+Using the probability of events notation and the definition of conditional
+probability, the left side can be rewritten
+$$ P(A \mid B \cap C) = \frac{P(A \cap B \cap C)}{P(B \cap C)} $$
+Therefore this is always true, it is simply different notation.
+
+\section*{Problem 2}
+
+\textit{The random variables X and Y have the joint PMF}
+$$ p_{X,Y}(x, y) = \begin{cases}
+    c \cdot (x + y)^2 & \mathrm{if}\, x \in \{ 1, 2, 4 \}\, \mathrm{and}\, y
+    \in \{ 1, 3 \} \\
+    0 & \mathrm{otherwise}
+\end{cases} $$
+
+\subsection*{Part A}
+
+\textit{Find the value of the constant c.}
+
+\bigbreak
+
+The following sum spans the entire possible values for $ X $ and $ Y $
+$$ \sum\limits_{x \in \{ 1, 2, 4 \}} \sum\limits_{y \in \{ 1, 3 \}} c \cdot
+(x + y)^2 = c \cdot \sum\limits_{x \in \{ 1, 2, 4 \}} \sum\limits_{y \in \{
+1, 3 \}} (x + y)^2  = c \cdot 125 = 1$$
+Therefore, $ c = 1/125 $.
+
+\subsection*{Part B}
+
+\textit{Find $ P(Y < X) $.}
+
+\bigbreak
+
+This is true for $ (x, y) = (2, 1),\, (4, 1),\, (4, 3) $. Summing over the
+PMF for these values yields
+$$ P(Y < X) = 83/125 \approx 0.664 $$
+
+\subsection*{Part C}
+
+\textit{Find $ P(Y = X) $.}
+
+\bigbreak
+
+This is true for $ (x, y) = (1, 1) $. Summing over the PMF for this value yields
+$$ P(Y = X) = 1/125 \approx 0.008 $$
+
+\subsection*{Part D}
+
+\textit{Find the PMF of X.}
+
+$$ p_X(x) = \begin{cases}
+    17/125 & x = 1 \\
+    34/125 & x = 2 \\
+    74/125 & x = 3
+\end{cases} $$
+
+\subsection*{Part E}
+
+\textit{Find the expectations $ E[X] $ and $ E[XY] $.}
+
+$$ E[X] = 17/125 \cdot 1 + 34/125 \cdot 2 + 74/125 \cdot 4 = 381/125 \approx
+3.048 $$
+\begin{align*}
+    E[XY] &= 1/125 \cdot 1 + 9/125 \cdot 2 + 25/125 \cdot 4 + 16/125 \cdot 3
+    + 25/125 \cdot 6 + 49/125 \cdot 12 \\
+    &= 181/25 \approx 7.240
+\end{align*}
+
+\subsection*{Part F}
+
+\textit{Find the variance of X.}
+
+\bigbreak
+
+Using the definition of variance
+$$ \sigma_X^2 = E[X^2] - E[X]^2 = E[X^2] - (381/125)^2 $$
+Calculating $ E[X^2] $
+$$ E[X^2] = 17/125 \cdot 1^2 + 34/125 \cdot 2^2 + 74/125 \cdot 4^2 = 1337/125 $$
+Plugging into variance
+$$ \sigma_X^2 = 1337/125 - (381/125)^2 = 21964/15625 \approx 1.406 $$
+
+\section*{Problem 3}
+
+\textit{Consider a sequence of independent tosses of a biased coin at times $
+k = 0, 1, 2, \ldots , n $. On each toss, the probability of Heads is p, and
+the probability of Tails is $ 1 - p $.}
+
+\textit{A reward of one unit is given at time k, for $ k \in \{ 1, 2, \ldots
+, n \} $, if the toss at time k resulted in Tails and the toss at time $ k -
+1 $ resulted in Heads. Otherwise, no reward is given at time k.}
+
+\textit{Let R be the sum of the rewards collected at times $ 1, 2, \ldots, n
+$.}
+
+\subsection*{Part A}
+
+\textit{Find E[R]. Express your answer in terms of p and/or n.}
+
+\bigbreak
+
+Let $ R_i $ be the reward at time $ i $ for $ i \in \{ 1, 2, \ldots, n \} $.
+Then,
+$$ p_{R_i}(r_i) = \begin{cases}
+    p(1 - p) & r_i = 1 \\
+    1 - p(1 - p) & r_i = 0
+\end{cases} $$
+Which, trivially, has an expected value of $ E[R_i] = p(1 - p) $.
+
+The expected value of $ R $ is given by
+$$ E[R] = E[R_1 + R_2 + \ldots + R_n] $$
+By the linearity of expectation
+$$ E[R] = E[R_1] + E[R_2] + \ldots + E[R_n] $$
+Since each $ R_i $ are equal,
+$$ E[R] = (n - 1) E[R_i] = (n - 1) p (1 - p) $$
+
+\subsection*{Part B}
+
+\textit{Find Var(R). Express your answer in terms of p and/or n.}
+
+\bigbreak
+
+From the definition of variance,
+$$ \sigma_R^2 = E[R^2] - E[R]^2 $$
+From above, this becomes
+$$ \sigma_R^2 = E[R^2] - (n - 1) p (1 - p) $$
+Let $ R_i $ be the reward at time $ i $ for $ i \in \{ 1, 2, \ldots, n \} $.
+The term $ E[R^2] $ is given by
+$$ E[R^2] = n E[R_i^2] + 2(n - 1) E[R_i R_{i + 1}] + (n^2 - 3n + 2) E[R_i
+R_{i + \ell}] $$
+Since the only values of $ R_i $ are either $ 1 $ or $ 0 $, $ E[R_i^2] =
+p^2(1 - p)^2 $. For $ R_i R_{i + 1} $, the value must be $ 0 $ as there can
+never be two consecutive rewards. Therefore $ E[R_i R_{i + 1}] = 0 $. Lastly,
+flips separated by more than one are once again independent. Therefore, $
+E[R_i R_{i + \ell}] = p^2(1 - p)^2 $. Variance must be
+$$ \sigma_R^2 = n p^2 (1 - p)^2 + (n^2 - 3n + 2) p^2 (1 - p)^2 = (n^2 - 2n +
+2) p^2 (1 - p)^2 $$
+
+\section*{Problem 4}
+
+\textit{ For each of the statements that follow, determine whether it is true
+(meaning, always true) or false (meaning, not always true), and provide a
+very brief explanation (not a complete proof). Here, we assume all random
+variables are discrete, and that all expectations are well-defined and
+finite. }
+
+\subsection*{Part A}
+
+\textit{Let X and Y be two binomial random variables.}
+
+\begin{enumerate}[i.]
+    \item \textit{If X and Y are independent, then $ X + Y $ is also a
+    binomial random variable.}
+    \item \textit{If X and Y have the same parameters, n and p, then $ X + Y
+    $ is a binomial random variable.}
+    \item \textit{If X and Y have the same parameter p, and are independent,
+    then $ X + Y $ is a binomial random variable.}
+\end{enumerate}
+
+\subsection*{Part B}
+
+\textit{Suppose that $ E[X] = 0 $. Then, $ X = 0 $ (i.e. $ X(\omega) = 0 $,
+for all $ \omega \in \Omega $).}
+
+\subsection*{Part C}
+
+\textit{Suppose that $ E[X^2] = 0 $. Then, $ P(X = 0) = 1 $.}
+
+\end{document}
