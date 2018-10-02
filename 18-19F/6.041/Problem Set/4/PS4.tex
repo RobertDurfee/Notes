@@ -243,8 +243,7 @@ p^2(1 - p)^2 $. For $ R_i R_{i + 1} $, the value must be $ 0 $ as there can
 never be two consecutive rewards. Therefore $ E[R_i R_{i + 1}] = 0 $. Lastly,
 flips separated by more than one are once again independent. Therefore, $
 E[R_i R_{i + \ell}] = p^2(1 - p)^2 $. Variance must be
-$$ \sigma_R^2 = n p^2 (1 - p)^2 + (n^2 - 3n + 2) p^2 (1 - p)^2 = (n^2 - 2n +
-2) p^2 (1 - p)^2 $$
+$$ \sigma_R^2 = (n^2 - 3n + 3) p^2 (1 - p)^2 $$
 
 \section*{Problem 4}
 
@@ -267,13 +266,49 @@ finite. }
     then $ X + Y $ is a binomial random variable.}
 \end{enumerate}
 
+\bigbreak
+
+Let $ p_X(x) $ and $ p_Y(y) $ be the PMFs of $ X $ and $ Y $ respectively. If
+no assumptions are made about the two, they must be
+$$ p_X(k) = \binom{n}{k} p^k (1 - p)^{n - k} $$
+$$ p_Y(k) = \binom{m}{k} q^k (1 - q)^{m - k} $$
+Then, their sum becomes
+$$ p_{X+Y}(k) = \sum\limits_{i = 0}^k p_{X,Y}(i, k - i) $$
+If no assumptions are made, this is as far as the expression can reasonably
+be simplified. However, if $ X $ and $ Y $ are independent,
+$$ p_{X+Y}(k) = \sum\limits_{i = 0}^k p_X(i) p_Y(k - i) $$
+Rearranging the terms yields
+$$ p_{X+Y}(k) = \binom{m + n}{k} p^i q^{k - i} (1 - p)^{n - i} (1 - q)^{m - k
++ i} $$
+Once again, if no more assumptions are made, then this is it and $ X + Y $ is
+not binomial. However, if $ p = q $,
+$$ p_{X+Y}(k) = \binom{m + n}{k} p^k (1 - p)^{n + m - k} $$
+Which is a binomial random variable. These assumptions correspond to the
+third statement only.
+
 \subsection*{Part B}
 
 \textit{Suppose that $ E[X] = 0 $. Then, $ X = 0 $ (i.e. $ X(\omega) = 0 $,
 for all $ \omega \in \Omega $).}
 
+\bigbreak
+
+This is not always true. Since negative values are perfectly valid for a
+random variable $ X $, consider the PMF
+$$ p_X(x) = \begin{cases}
+    1/2 & x = -1 \\
+    1/2 & x = 1
+\end{cases} $$
+The expected value of this PMF is $ 0 $, yet $ X $ never equals $ 0 $.
+
 \subsection*{Part C}
 
 \textit{Suppose that $ E[X^2] = 0 $. Then, $ P(X = 0) = 1 $.}
+
+\bigbreak
+
+Contrary to the previous part, $ X^2 $ is never negative. Therefore, in order
+for the expected value to be exactly zero, the possible values for $ X $ are
+limited to only $ 0 $. Thus this is always true.
 
 \end{document}
