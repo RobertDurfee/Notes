@@ -1,0 +1,264 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{18.06 Problem Set 4}
+\author{Robert Durfee}
+\date{October 3, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\textit{Can a set of linearly independent vectors contain the $\vec{0}$
+vector? Under what circumstances, if any?}
+
+\bigbreak
+
+No, from the definition of linear independence, $ \{ \vec{v}_1, \vec{v}_2,
+\ldots, \vec{v}_n \} $ are independent if $ c_1 \vec{v}_1 + c_2 \vec{v}_2 +
+\ldots + c_n \vec{v}_n = 0 $ only if $ c_1 = c_2 = \ldots = c_n = 0 $ But, if
+the zero vector is the $ i $th vector in the set, then $c_i$ can equal any
+real value while setting the all other $c$'s equal to zero. Therefore, any
+set containing the zero vector must be linearly dependent.
+
+\section*{Problem 2}
+
+\textit{Give a basis and state the dimensionality for the following vector
+spaces and subspaces (for multiplication by real scalars and the ordinary
+addition/subtraction operations):}
+
+\subsection*{Part A}
+
+\textit{Functions $p(x)$ that are polynomials of degree $ \leq 3 $ (cubic or
+less).}
+
+\bigbreak
+
+All cubic (or less) polynomials can be represented by form $ p(x) = ax^3 +
+bx^2 + cx + d $ for all real values $ a, b, c, d $. A single cubic polynomial
+can thus be expressed as the vector
+$$ p(x) = \begin{pmatrix}
+    a \\
+    b \\
+    c \\
+    d
+\end{pmatrix} $$
+This can be written as a sum of vectors
+$$ p(x) = a \begin{pmatrix}
+    1 \\
+    0 \\
+    0 \\
+    0
+\end{pmatrix} + b \begin{pmatrix}
+    0 \\
+    1 \\
+    0 \\
+    0
+\end{pmatrix} + c \begin{pmatrix}
+    0 \\
+    0 \\
+    1 \\
+    0
+\end{pmatrix} + d \begin{pmatrix}
+    0 \\
+    0 \\
+    0 \\
+    1
+\end{pmatrix} $$
+Therefore, a basis takes the form
+$$ \left\{\begin{pmatrix}
+    1 \\
+    0 \\
+    0 \\
+    0
+\end{pmatrix},\, \begin{pmatrix}
+    0 \\
+    1 \\
+    0 \\
+    0
+\end{pmatrix},\, \begin{pmatrix}
+    0 \\
+    0 \\
+    1 \\
+    0
+\end{pmatrix},\, \begin{pmatrix}
+    0 \\
+    0 \\
+    0 \\
+    1
+\end{pmatrix} \right\} $$
+The vectors that make up this basis live in $ \mathbb{R}^4 $ and the
+dimension of the space is also $ 4 $.
+
+\subsection*{Part B}
+
+\textit{3-component vectors $x \in \mathbb{R}^3$ whose components average to
+zero.}
+
+\subsection*{Part C}
+
+\textit{$3\times 3$ matrices $A$ that are anti-symmetric: $A = -A^T$.}
+
+\section*{Problem 3}
+
+\textit{Come up with a matrix $A$ and a vector $b \ne 0$ such that the
+solutions of $Ax=b$ form a line in $\mathbb{R}^3$, and all of the entries of
+$A$ are nonzero. Find the complete solution (i.e., all solutions) $x$.}
+
+\bigbreak
+
+Let $ A $ be the $ 3 \times 3 $ matrix and $ b $ be the $3 \times 1$ vector
+$$ A = \begin{pmatrix}
+    1 & 1 & 2 \\
+    1 & 2 & 4 \\
+    1 & 3 & 6
+\end{pmatrix},\, b = \begin{pmatrix}
+    2 \\
+    2 \\
+    2
+\end{pmatrix} $$
+Then the nullspace of this matrix is given by the basis
+$$ N(A) = \left\{ \begin{pmatrix}
+    0 \\
+    -2 \\
+    1
+\end{pmatrix} \right\} $$
+This is a 1-dimensional nullspace in $ \mathbb{R}^3 $. Therefore, any
+solution to $ Ax = b $ is given by
+$$ x = x_s + c_1 \cdot \begin{pmatrix}
+    0 \\
+    -2 \\
+    1
+\end{pmatrix} $$
+Which forms a line in $ \mathbb{R}^3 $. A possible special solution could be
+$$ x_s = \begin{pmatrix}
+    2 \\
+    0 \\
+    0
+\end{pmatrix} $$
+Thus, all solutions to $ Ax = b $ is explicitly
+$$ x = \begin{pmatrix}
+    2 \\
+    0 \\
+    0
+\end{pmatrix} + c_1 \begin{pmatrix}
+    0 \\
+    -2 \\
+    1
+\end{pmatrix} $$
+
+\section*{Problem 4}
+
+\textit{The following matrix is from problem 5 of pset 3:}
+$$ A = \begin{pmatrix}
+    0 & 1 & 2 & 3 & 4 \\
+    0 & 1 & 2 & 4 & 6 \\
+    0 & 0 & 0 & 1 & 2
+\end{pmatrix} $$
+
+\subsection*{Part A}
+
+\textit{Give a basis for $C(A)$ and the dimension of this subspace.}
+
+\bigbreak
+
+The column space of this matrix is given by the basis
+$$ C(A) = \left\{ \begin{pmatrix}
+    1 \\
+    1 \\
+    0
+\end{pmatrix},\, \begin{pmatrix}
+    3 \\
+    4 \\
+    1
+\end{pmatrix} \right\} $$
+This is a 2-dimensional column space whose components live in $ \mathbb{R}^3 $
+
+\subsection*{Part B}
+
+\textit{If $b = \begin{pmatrix} 3 \\ 6 \\ \beta \end{pmatrix}$, for what
+values of the scalar $\beta$ will $Ax=b$ have a solution?}
+
+\bigbreak
+
+In order for $ Ax = b $ to have a solution, $ \beta = 3 $.
+
+\subsection*{Part C}
+
+\textit{For the $\beta$ from (b), find the complete solution to $Ax=b$.}
+
+\bigbreak
+
+The nullspace of $ A $ is given by the basis
+$$ N(A) = \left\{ \begin{pmatrix}
+    1 \\
+    0 \\
+    0 \\
+    0 \\
+    0
+\end{pmatrix},\, \begin{pmatrix}
+    0 \\
+    -2 \\
+    1 \\
+    0 \\
+    0
+\end{pmatrix},\, \begin{pmatrix}
+    0 \\
+    2 \\
+    0 \\
+    -2 \\
+    1
+\end{pmatrix} \right\} $$
+A special solution to $ Ax = b $ is
+$$ x_s = \begin{pmatrix}
+    0 \\
+    -6 \\
+    0 \\
+    3 \\
+    0
+\end{pmatrix} $$
+Therefore, the complete solution to $ Ax = b $ is
+$$ x = \begin{pmatrix}
+    0 \\
+    -6 \\
+    0 \\
+    3 \\
+    0
+\end{pmatrix} + c_1 \begin{pmatrix}
+    1 \\
+    0 \\
+    0 \\
+    0 \\
+    0
+\end{pmatrix} + c_2 \begin{pmatrix}
+    0 \\
+    -2 \\
+    1 \\
+    0 \\
+    0
+\end{pmatrix} + c_3 \begin{pmatrix}
+    0 \\
+    2 \\
+    0 \\
+    -2 \\
+    1
+\end{pmatrix} $$
+
+\end{document}
