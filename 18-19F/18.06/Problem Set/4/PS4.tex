@@ -112,9 +112,115 @@ dimension of the space is also $ 4 $.
 \textit{3-component vectors $x \in \mathbb{R}^3$ whose components average to
 zero.}
 
+\bigbreak
+
+These vectors can be represented as the set
+$$ \left\{ \begin{pmatrix}
+    x_1 \\
+    x_2 \\
+    x_3
+\end{pmatrix} \mid (x_1 + x_2 + x_3) / 3 = 0 \right\} $$
+Solving for $ x_1 $ allows this to be written solely as a vector
+$$ \begin{pmatrix}
+    -x_2 - x_3 \\
+    x_2 \\
+    x_3
+\end{pmatrix} = x_2 \begin{pmatrix}
+    -1 \\
+    1 \\
+    0
+\end{pmatrix} + x_3 \begin{pmatrix}
+    -1 \\
+    0 \\
+    1
+\end{pmatrix} $$
+Since these are linearly independent, they form a two-dimensional basis in $
+\mathbb{R}^3 $
+$$ \left\{ \begin{pmatrix}
+    -1 \\
+    1 \\
+    0
+\end{pmatrix},\, \begin{pmatrix}
+    -1 \\
+    0 \\
+    1
+\end{pmatrix} \right\} $$
+
 \subsection*{Part C}
 
 \textit{$3\times 3$ matrices $A$ that are anti-symmetric: $A = -A^T$.}
+
+\bigbreak
+
+This equation can be expanded into component form
+$$ \begin{pmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33}
+\end{pmatrix} = - \begin{pmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33}
+\end{pmatrix}^T $$
+After applying the negation and transpose
+$$ \begin{pmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33}
+\end{pmatrix} = \begin{pmatrix}
+    -a_{11} & -a_{21} & -a_{31} \\
+    -a_{12} & -a_{22} & -a_{32} \\
+    -a_{13} & -a_{23} & -a_{33}
+\end{pmatrix} $$
+Along the diagonal, it is clear to see that $ a_{11}, a_{22}, a_{33} $ will
+only be equal to $ -a_{11}, -a_{22}, -a_{33} $, respectively, if they are
+zero. Therefore, this can be simplified
+$$ \begin{pmatrix}
+    0 & a_{12} & a_{13} \\
+    a_{21} & 0 & a_{23} \\
+    a_{31} & a_{32} & 0
+\end{pmatrix} = \begin{pmatrix}
+    0 & -a_{21} & -a_{31} \\
+    -a_{12} & 0 & -a_{32} \\
+    -a_{13} & -a_{23} & 0
+\end{pmatrix} $$
+This system now has three constraints
+$$ a_{12} = -a_{21} $$
+$$ a_{13} = -a_{31} $$
+$$ a_{23} = -a_{32} $$
+Written in matrix form
+$$ \begin{pmatrix}
+    0 & -a_{21} & -a_{31} \\
+    a_{21} & 0 & -a_{32} \\
+    a_{31} & a_{32} & 0
+\end{pmatrix} = a_{21} \begin{pmatrix}
+    0 & -1 & 0 \\
+    1 & 0 & 0 \\
+    0 & 0 & 0
+\end{pmatrix} + a_{31} \begin{pmatrix}
+    0 & 0 & -1 \\
+    0 & 0 & 0 \\
+    1 & 0 & 0
+\end{pmatrix} + a_{32} \begin{pmatrix}
+    0 & 0 & 0 \\
+    0 & 0 & -1 \\
+    0 & 1 & 0
+\end{pmatrix} $$
+Since these matrices are linearly independent, they form a three-dimensional
+basis in $ \mathbb{R}^3 \times \mathbb{R}^3 $
+$$ \left\{ \begin{pmatrix}
+    0 & -1 & 0 \\
+    1 & 0 & 0 \\
+    0 & 0 & 0
+\end{pmatrix},\, \begin{pmatrix}
+    0 & 0 & -1 \\
+    0 & 0 & 0 \\
+    1 & 0 & 0
+\end{pmatrix},\, \begin{pmatrix}
+    0 & 0 & 0 \\
+    0 & 0 & -1 \\
+    0 & 1 & 0
+\end{pmatrix} \right\} $$
 
 \section*{Problem 3}
 
@@ -153,7 +259,8 @@ $$ x_s = \begin{pmatrix}
     0 \\
     0
 \end{pmatrix} $$
-Thus, all solutions to $ Ax = b $ is explicitly
+Thus, all solutions to $ Ax = b $, $ \forall c_1 \in \mathbb{R} $, is
+explicitly
 $$ x = \begin{pmatrix}
     2 \\
     0 \\
@@ -234,7 +341,8 @@ $$ x_s = \begin{pmatrix}
     3 \\
     0
 \end{pmatrix} $$
-Therefore, the complete solution to $ Ax = b $ is
+Therefore, the complete solution to $ Ax = b $, $ \forall c_1, c_2, c_3 \in
+\mathbb{R} $, is
 $$ x = \begin{pmatrix}
     0 \\
     -6 \\
