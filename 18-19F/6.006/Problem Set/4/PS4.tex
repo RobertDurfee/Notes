@@ -1,0 +1,411 @@
+%
+% 6.006 problem set 4 solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros-fa18}
+\newcommand{\theproblemsetnum}{4}
+\newcommand{\releasedate}{Thursday, September 27}
+\newcommand{\partaduedate}{Thursday, October 4}
+
+\title{6.006 Problem Set 4}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 11PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem
+
+\begin{problemparts}
+\problempart Original Tree $ T $, {\tt insert(18)}:
+
+    \begin{center}
+        \includegraphics[scale=0.25]{Images/P1A1.PNG}
+        \includegraphics[scale=0.25]{Images/P1A2.PNG}
+    \end{center}
+
+    {\tt delete(5)}, {\tt insert(26)}:
+
+    \begin{center}
+        \includegraphics[scale=0.25]{Images/P1A3.PNG}
+        \includegraphics[scale=0.25]{Images/P1A4.PNG}
+    \end{center}
+
+    {\tt delete(32)}, {\tt delete(15)}:
+
+    \begin{center}
+        \includegraphics[scale=0.25]{Images/P1A5.PNG}
+        \includegraphics[scale=0.25]{Images/P1A6.PNG}
+    \end{center}
+
+\problempart In the original tree $ T $, the nodes with keys $ 4 $, $ 27 $,
+    and $ 32 $ each have a skew equal to $ 2 \not\in \{-1, 0, 1 \} $ and
+    therefore violates the AVL property.
+
+\problempart Original tree $ T $ with root of rotation to be performed:
+
+    \begin{center}
+        \includegraphics[scale=0.4]{Images/P1C1.PNG}
+    \end{center}
+
+    {\tt rotate\_left(32)}:
+
+    \begin{center}
+        \includegraphics[scale=0.4]{Images/P1C2.PNG}
+    \end{center}
+
+    {\tt rotate\_left(4)}:
+
+    \begin{center}
+        \includegraphics[scale=0.4]{Images/P1C3.PNG}
+    \end{center}
+
+\end{problemparts}
+
+\newpage
+\problem
+
+\begin{problemparts}
+
+\problempart {\bf Description}: This data structure/base has a single property
+    \begin{itemize}
+        \item {\tt fleeces}: An AVL tree that maintains a sorted set of
+        fleeces based on the ascribed price (the key).
+    \end{itemize}
+    This data structure/base supports three methods
+    \begin{itemize}
+        \item {\tt add\_fleece(fleece)}: Perfoms an insert into the AVL tree
+        {\tt fleeces} where {\tt fleece.price} is the key.
+        \item {\tt modified\_find(price)}: This returns the fleece
+        corresponding to the price key, it is exists, like a typical AVL
+        find. If the key does not exist, the last visited fleece is returned
+        instead.
+        \item {\tt remove\_ten\_below(price)}: Performs a modified search
+        (see below) in the AVL tree {\tt fleeces} for {\tt price}. Three
+        cases are possible:
+        \begin{itemize}
+            \item Price is found: Return the fleece whose key is price and
+            then call an AVL find-previous nine times, returning each located
+            fleece. Then, for each returned fleece, call an AVL delete.
+            \item Price is not found and the last visited fleece had a lower
+            price: Return the fleece corresponding to the last visited node and
+            then call an AVL find-previous nine times, returning each located
+            fleece. Then, for each returned fleece, call an AVL delete.
+            \item Price is not found and the last visited fleece has a higher
+            price: Call an AVL find-previous ten times, returning each located
+            fleece. Then, for each returned fleece, call an AVL delete.
+        \end{itemize}
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Correctness}: \begin{itemize}
+        \item {\tt add\_fleece(fleece)}: This only involves calling an AVL
+        add method which is assumed to correctly place the fleece within the
+        AVL tree based on the key, which is the price. Thus, the fleece will
+        be added correctly.
+        \item {\tt modified\_find(price)}: This is exactly like an AVL find
+        which is assumed to return the node associated with the key. However,
+        instead of returning {\tt None} if the key is not found, it simply
+        returns the last visited node which may be less than or greater than
+        the price being searched for. However, given the BST property is in
+        place in {\tt fleeces}, the last visited node can {\it only} be
+        directly adjacent to the desired node if it were to exist.
+        \item {\tt remove\_ten\_below(price)}: Given the modified find is
+        guaranteed to return the fleece associated with the key or a fleece
+        directly adjacent to a fleece with that key, there are only three cases
+        \begin{itemize}
+            \item Price is found: This fleece and the nine previous must be
+            less than or equal to the specified price. An AVL find-previous
+            is assumed to return the previous so if each returned fleece is
+            fed into the find-previous nine times, the ten fleeces less than
+            or equal to the specified price must be returned. 
+            \item Price is not found and the last visited fleece had a lower
+            price: Given the correctness of the modified find, this fleece
+            must be the greatest fleece less than the specified price.
+            Therefore, it and nine previous are the ten priciest fleeces less
+            than the specified price. Proceed as in the last case.
+            \item Price is not found and the last visited fleece had a higher
+            price: Given the correctness of the modified find, this fleece
+            must be the least fleece greater than the specified price.
+            Therefore, its ten previous must be the ten priciest fleeces less
+            than the specified price. Proceed as in the last case.
+        \end{itemize}
+        Then, an AVL delete will remove all the returned fleeces in all
+        cases, which is assumed correct. Thus, the ten fleeces will be
+        returned correctly.
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Running Time}: \begin{itemize}
+        \item {\tt add\_fleece(fleece)}: Simply an AVL add: $ O(\log n) $.
+        \item {\tt modified\_find(price)}: Simply an AVL find, but keeping
+        track of the last visited node (no extra work): $ O(\log n) $.
+        \item {\tt remove\_ten\_below(price)}: In all cases, a single
+        modified find takes place with $ O(\log n) $. Then, for the first two
+        cases, nine subsequent AVL find-previous are called, each $ O(\log n
+        ) $. In the third cases, ten instead of nine are called. Lastly, ten
+        AVL deletes are performed, each $ O(\log n) $. This running time is
+        worst case $ O(21 \log n) \in O(\log n) $.
+    \end{itemize}
+
+\problempart {\bf Description}: This data structure/base has a single
+    property:
+    \begin{itemize}
+        \item {\tt clusters}: An AVL tree sorted by the location of the
+        cluster. Each node in {\tt clusters} is also an AVL tree sorted by
+        the print quality of the printer.
+    \end{itemize}
+    This data structure/base supports four methods:
+    \begin{itemize}
+        \item {\tt put\_online(printer)}: Performs an AVL find to determine
+        if there are other printers located at the specified location. Two
+        cases:
+        \begin{itemize}
+            \item Other printers exist at same location: Perform an AVL
+            insert into the tree at this node, based on the quality key.
+            \item No other printers exist at same location: Perform an AVL
+            insert into the {\tt clusters} AVL tree based on location key.
+            The node to insert is an AVL tree containing the single new
+            printer.
+        \end{itemize}
+        \item {\tt take\_offline(printer)}: Performs an AVL find to locate
+        the AVL tree in {\tt clusters} with the printer's location. Then,
+        within the located AVL tree, an AVL delete is performed based on the
+        printer's quality. If the AVL tree in {\tt clusters} is now empty,
+        perform an AVL delete on {\tt clusters} based on the printers
+        location.
+        \item {\tt modified\_find(location)}: Performs an AVL find, but, if
+        the specified location is not found, return the last visited node.
+        This node will be directly adjacent to the desired node, but could be
+        greater or less than. The returned node {\it may or may not} be the
+        closest location to the desired location.
+        \item {\tt best\_closest(location)}: Performs a modified AVL find to
+        locate the location or a directly adjacent location. Three cases
+        \begin{itemize}
+            \item Location is found: Return the maximum quality printer
+            within the AVL tree at that location.
+            \item Location is not found and the returned location is greater:
+            Call an AVL find-previous to get the directly adjacent location
+            less than the location specified. Compare the relative distances.
+            Take the closer and perform an AVL find-maximum on the AVL tree
+            at that location.
+            \item Location is not found and the returned location is less:
+            Call an AVL find-next to the the directly adjacent location
+            greater than the location specified. Compare the relative
+            distances. Take the closer and perform an AVL find-maximum on the
+            AVL tree at that location.
+        \end{itemize}
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Correctness}: \begin{itemize}
+        \item {\tt put\_online(printer)}: AVL find will determine if the
+        location-constant node exists (assumed correct).
+        \begin{itemize}
+            \item If node doesn't exist: AVL insert is performed to add a new
+            node with an AVL tree with one node (assumed correct).
+            \item If node exists: AVL insert is performed within that
+            location-constant AVL tree (assumed correct).
+        \end{itemize}
+        Thus the printer will be added correctly.
+        \item {\tt take\_offline(printe)}: AVL find (assumed correct) will
+        determine the location-constant node to perform an AVL delete
+        (assumed correct). An additional AVL delete (assumed correct) will be
+        performed if the size of the AVL tree at the location becomes zero.
+        Thus the printer will be removed correctly
+        \item {\tt modified\_find(location)}: Same as argued in Part A. Note
+        this also realizes that the returned node may not have the closest
+        location if it is not the exact location searched for.
+        \item {\tt best\_closest(location)}: \begin{itemize}
+            \item If location found: Because of the correctness of the
+            modified find, it must be the closest location since it is that
+            location. The maximum quality printer within the cluster is
+            returned using an AVL find-maximum (assumed correct). Note that
+            this AVL tree is guaranteed to be non-empty from the
+            specification of the {\tt take\_offline()}.
+            \item If location not found: Returned location must be greater
+            than or less than the desired location. The respective previous
+            or next is found using the appropriate AVL find method (assumed
+            correct). Since the returned location from the modified find is
+            guaranteed to be directly adjacent, but may or may not be the
+            closest. Compare the two locations and select the closest. These
+            two must be closest given from the BST property. Therefore,
+            perform in the same way as the last case with the selected node.
+        \end{itemize}
+        Thus the closest, highest quality printer is returned.
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Running Time}: \begin{itemize}
+        \item {\tt put\_online(printer)}: AVL find: $ O(\log n) $. And then
+        an AVL insert to add to the found cluster (or create the cluster): $
+        O(\log n) $. Total: $ O(2 \log n) \in O(\log n) $.
+        \item {\tt take\_offline(printer)}: AVL find to find cluster: $
+        O(\log n) $. Then AVL delete within cluster to find printer: $ O(\log
+        n) $. Then, another possible AVL delete to remove empty cluster: $
+        O(\log n) $. Note that the deletes will never both be $ O(\log n) $.
+        Therefore, total running time: $ O(2 \log n) \in O(\log n) $.
+        \item {\tt modified\_find(location)}: Same as in Part A: $ O(\log n) $.
+        \item {\tt best\_closest(location)}: An AVL find to get cluster: $
+        O(\log n) $. Then, at worst, an AVL find-previous/-next to get other
+        adjacent location: $ O(\log n) $. Lastly, an AVL find-maximum within
+        the cluster: $ O(\log n) $. Total: $ O(3 \log n) \in O(\log n) $.
+    \end{itemize}
+
+    Note: An AVL tree of heaps will be slightly more performant ($ O(1) $
+    find-maximum instead of $ O(\log n) $) and support the same operations. I
+    didn't realize this immediately, but the AVL tree of AVL trees still
+    satisfies the question requirements.
+
+\problempart {\bf Description}: This data structure/base will have one property
+    \begin{itemize}
+        \item {\tt letters}: An AVL tree whose key is the postmark date/time.
+        Also contains information about the letter (like the sender).
+    \end{itemize}
+    This data structure/base will support two methods
+    \begin{itemize}
+        \item {\tt add(letter)}: This will perform an AVL insert into the
+        letters AVL tree based on the postmark date/time. Will also add the
+        sender information.
+        \item {\tt at(k)}: This will perform an AVL find-minimum. Then, $k -
+        1$ AVL find-next's. The last returned sender from the string of
+        find-next's is then returned.
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Correctness}: \begin{itemize}
+        \item {\tt add(letter)}: Just an AVL insert assumed correct.
+        \item {\tt at(k)}: AVL find-minimum (assumed correct) will give
+        starting point for the $ k $ letters in postmark order. $ k - 1 $
+        find-nexts will return the next $ k - 1 $ letters in postmark order.
+        The last of the returned letters must be the $ k $th letter.
+    \end{itemize}
+
+    \smallbreak
+
+    {\bf Running Time}: \begin{itemize}
+        \item {\tt add(letter)}: Just an AVL insert: $ O(\log n) $.
+        \item {\tt at(k)}: AVL find-minimum: $ O(\log n) $. Then, $ k - 1 $
+        find-nexts each individually worst case $ O(\log n) $. The naive
+        worst case is thus $ O(k \log n) $. This is fine for small $ k $.
+        However, this is not the tightest bound. The $k - 1$ find next can be
+        shown to actually be $ O(k) $ in aggregate. This is because a string
+        of find-nexts is simply an in-order traversal of the AVL tree. As a
+        result, at worst, if $ k = n $, then this traversal would be $ O(n) $
+        not $ O(n \log n) $ as each node is hit exactly once. Therefore, on
+        average, $ k $ find-nexts will be $ O(k) $. Therefore, the total
+        running time is actually $ O(\log n + k) $ which is better than the
+        naive bound.
+    \end{itemize}
+
+\end{problemparts}
+
+\newpage
+\problem
+
+\begin{problemparts}
+
+\problempart Since Python uses dynamic arrays, the {\tt add\_transaction}
+    operation is amortized $ O(1) $, but could be worst-case $ O(n) $. The
+    {\tt interval\_revenue} operation has to visit every transaction so it
+    must be $ O(n) $.
+
+\problempart Let $ m_i $ be an augmentation stored in the $i$th node within a
+    given AVL tree. $ m_i $ represents the sum of all transactions included
+    in the right and left subtrees of node $ i $ as well as the transaction
+    within $ i $ itself. Let $ P(n) $ be the hypothesis that $ m_n $ stored
+    in a node at height $n$ in a given AVL tree can be computed in $ O(1) $
+    time.
+
+    {\bf Base Case}: Let $ n = 0 $. That is, the node in which $ m_n $ is
+    contained is a leaf. This means that the sum of the left and right
+    subtrees is zero. Thus, $ m_n = t $, that is, the sum of all transactions
+    is simply the value of the transaction at that node. Only one operation
+    is required, therefore $ O(1) $ and the hypothesis $ P(n) $ is satisfied.
+
+    {\bf Inductive Step}: Assume by induction that the inductive hypothesis
+    is true for all nodes at height $ n $. More concretely, this means that
+    the sums $m_n$ hold the sum of all transactions in their left and right
+    subtrees (plus their own transaction) and that they were computed in
+    constant time. Now, the sum $ m_{n + 1} $ is calculated by adding two
+    sums from nodes at height $n$ and then adding their own transaction.
+    Since both $m_n$ were computed in $ O(1) $ time and two additions is also
+    $ O(1) $, this whole process takes $ O(1) $. Thus, the hypothesis is true
+    for $ P(n + 1) $.
+
+    Since the hypothesis holds for the base case and the inductive step, by
+    induction, $m_n$ represents the sum of all transactions contained in any
+    node's subtree and it is computed in $ O(1) $ time from bottom up.
+
+    \smallbreak
+
+    Since it was shown that the augmentation is computed in constant time
+    from the bottom up for any node, and any {\tt insert} or {\tt delete}
+    operations incur updates from the bottom up, this augmentation can be
+    maintained in constant time for the AVL tree.
+
+\problempart Let $ t_{1,i} $ and $ t_{2,i} $ be augmentations stored in the
+    $i$th node within a given AVL tree. $ t_{1,i} $ represents the minimum
+    transaction contained in the subtree rooted at node $i$ and $ t_{2,i} $
+    is the maximum. Let $ P(n) $ be the hypothesis that $ t_{1,i} $ (or $
+    t_{2,i} $, which is identical) stored in a node at height $ n $ in a
+    given AVL tree can be computed in $ O(1) $ time.
+
+    {\bf Base Case}: Let $ n = 0 $. That is, the node in which $ t_{1, n} $
+    is contained is a leaf. Thus, $ t_{1, n} = t $, that is, the minimum of
+    all transactions contained at this subtree is simply the value of the
+    transaction at this node. Only one operation is required, therefore $
+    O(1) $ and the hypothesis $ P(n) $ is satisfied.
+
+    {\bf Inductive Step}: Assume by induction that the inductive hypothesis
+    is true for all nodes at height $ n $. More concretely, this means that
+    the minimums $ t_{1, n} $ hold the minimum of all transactions in their
+    left and right subtrees (including their own transaction) and that they
+    were computed in constant time. Now, the minimum $ t_{1,n+1} $ must
+    either be the minimum of the left subtree, if it exists, or the
+    transaction contained within the node at height $n + 1$, if the left
+    subtree doesn't exist. Since the minimum of the left subtree was computed
+    in $ O(1) $ time by the inductive assumption, this can be determined in $
+    O(1) $ time and thus the inductive hypothesis $ P(n + 1) $ is true.
+
+    Since the hypothesis holds for the base case and the inductive step, by
+    induction, $ t_{1, n} $ (and $ t_{2,n} $, by symmetrical proof)
+    represents the minimum (and maximum) of all transactions contained in any
+    node's subtree and it is computed in $ O(1) $ time from the bottom up.
+
+    \smallbreak
+    
+    Since it was shown that the augmentation is computed in constant time
+    from the bottom up for any node, and any {\tt insert} or {\tt delete}
+    operations incur updates from the bottom up, this augmentation can be
+    maintained in constant time for the AVL tree.
+
+\problempart 
+\problempart
+\problempart
+\problempart Submit your implementation to {\small\url{alg.mit.edu/PS4}}
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
