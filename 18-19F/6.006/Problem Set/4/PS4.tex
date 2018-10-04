@@ -399,9 +399,62 @@
     operations incur updates from the bottom up, this augmentation can be
     maintained in constant time for the AVL tree.
 
-\problempart 
-\problempart
-\problempart
+\problempart {\bf Description}: If $ t_2 $ is less than the lower bound ($
+    t_{1,i} $) stored on the given node or if $ t_1 $ is greater than the
+    upper bound ($ t_{2,i} $) stored on the given node, the node and all
+    of its descendants are outside of the desired range. Return 0.
+
+    If $ t_1 $ is less than or equal to the lower bound ($t_{1,i}$) stored on
+    the given node and $ t_2 $ is greater than or equal the upper bound
+    ($t_{2,i}$) stored on the given node, the node and all its descendants
+    are included in the desired range. Return the sum stored at that node.
+
+    Recursive step: If the current element is within the desired range, add
+    its value to a temporary sum. If the left node exists, recurse and add it
+    to the temporary sum. If the right node exists, recurse and add it to the
+    temporary sum.
+
+    \smallbreak
+
+    {\bf Correctness}: The first case is trivial as the two intervals do not
+    overlap and therefore the sum in their intersection must be zero.
+
+    The second case is equally trivial as the desired interval fully overlaps
+    the current nodes interval. Given from Part C, the sum contained in that
+    node must equal the sum of all of its descendants.
+
+    The third case confirms the current node is within the desired range, then
+    adds it ensuring no incorrect additions. Then the left and right trees are
+    recursed if they exist.
+
+\problempart If the desired range's lower bound is between a given node's
+    minimum and its value and the desired range's upper bound is between a
+    given node's value and maximum, then two recursions (one on the left 
+    subtree and one on the right) are required. However, after this case,
+    there are only two possibilities for each individual recursion. WLOG,
+    take the left subtree recursion:
+    \begin{itemize}
+        \item The desired range's lower bound is between the node's minimum
+        and its value: A recursion to the left is required. However, given
+        the established previous recursion above, the upper bound of the
+        desired range must be greater than the maximum of the current node.
+        Therefore, no right recursion is necessary, just return the sum of
+        that right subtree.
+        \item The desired range's lower bound is between the node's value and
+        its maximum: Only a recursion to the right is required.
+    \end{itemize}
+    Any subsequent recursion will follow this pattern as well since one bound
+    is guaranteed to be beyond either the maximum or minimum. Therefore, if
+    this particular case is hit, it will only occur once.
+
+\problempart Given the answer from Part E, although it appears that there is
+    a branching factor of two, in reality, that will only occur once and thus
+    the real branching factor is one. Furthermore, each branching roughly
+    halves the problem size given the BST-AVL property. Lastly, each
+    iteration only does constant comparisions. The recurrence is given
+    $$ T(n) = T(n/2) + 1 $$
+    By the second case of the Master Theorem, this is $ O(\log n) $.
+
 \problempart Submit your implementation to {\small\url{alg.mit.edu/PS4}}
 \end{problemparts}
 
