@@ -1,0 +1,42 @@
+Structure
+================================================================================
+Introduction
+Preparing for idealism
+Vasubandu's Argument for Idealism
+My argument against his
+Conclusion: must be mind-independent objects
+
+
+Thesis
+================================================================================
+In this essay, I will affirm this naive viewpoint. I will argue that the table
+not only exists in reality, but can be immediately known.
+
+Argument
+================================================================================
+  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    --------------------------------------------------------------------------------
+      P1: The table is mind-independent.
+      P2: If something is mind-independent, it persists when not perceived.
+    --------------------------------------------------------------------------------
+    C1: The table exists independent from perception.
+
+    --------------------------------------------------------------------------------
+      P3: The table is known through context-specific sense-data.
+      P4: All possible context-specific sense-data is limited independent from context.
+    --------------------------------------------------------------------------------
+    C2: The table is qualified independent from context.
+
+    P5: For an object to be "real," it must exist independent from perception
+      and be qualified independent from context.
+  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  C3: The table is "real."
+
+  --------------------------------------------------------------------------------
+    P6: All possible sense-data associated with the table in every context can
+      be described.
+    P7: An object is "known" if all it's properties can be described.
+  --------------------------------------------------------------------------------
+  C4: The table can be "known."
+================================================================================
+C5: The table is "real" and can be "known."
