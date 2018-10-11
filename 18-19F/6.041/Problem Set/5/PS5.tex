@@ -161,7 +161,7 @@ axiom
 \end{align*}
 From this, $ c = 1/800 $.
 Therefore, the PDF for $X$ is 
-$$ f_X{x} = \begin{cases}
+$$ f_X(x) = \begin{cases}
     x / 800 & 0 \leq x \leq 40 \\
     0 & \mathrm{otherwise}
 \end{cases} $$
@@ -208,9 +208,40 @@ Therefore, the probability of a positive profit is $ P(Z > 0) = 1/2 $.
 
 \textit{Find the PDF of Z. Express your answers in terms of z.}
 
+\bigbreak
+
+If $X$ is given, then the profit $Z$ ranges directly with the range of $Y$.
+Therefore, maximum profit given $X$ is $2X - X$ and minimum profit given $X$
+is $0 - X$. Since each value of $Y$ is of uniform probability given $X$, the
+PDF of $Z$ is also uniform given $X$
+$$ f_{Z|X}(z \mid x) = \begin{cases}
+    1 / 2x & -x \leq z \leq x \\
+    0 & \mathrm{otherwise}
+\end{cases} $$
+From the relationship to marginal PDF
+$$ f_Z(z) = \int\limits_{-\infty}^\infty f_X(x) f_{Z|X}(z \mid x) dx $$
+The marginal PDF of $Z$ becomes
+\begin{align*} f_Z(z) &= \int\limits_0^{40} \frac{x}{1600} \cdot \frac{1}{2x} dx \\
+    &= \frac{1}{3200} \int\limits_0^{40} dx \\
+    &= \frac{1}{3200} \left(x \right)_0^40 \\
+    &= \frac{1}{3200} \left(40 - 0 \right) \\
+    &= \frac{1}{80}
+\end{align*}
+Therefore, the marginal PDF of $Z$ is
+$$ f_Z(z) = \begin{cases}
+    1/80 & -40 \leq z \leq 40 \\
+    0 & \mathrm{otherwise}
+\end{cases} $$
+
 \subsection*{Part D}
 
 \textit{Calculate the expected value of Z.}
+
+\bigbreak
+
+Since $Z$ is uniformly distributed over the range $ -40 \leq z \leq 40 $, the
+expected value is simply the center of the region which is zero. Therefore,
+Paul's expected profit is zero.
 
 \section*{Problem 4}
 
@@ -369,6 +400,47 @@ $$ f_{X|Y}(x \mid 0.5) = \begin{cases}
 \textit{Let $ R = XY $ and let $A$ be the event $ \{ X < 0.5 \} $. Evaluate $
 E[R \mid A] $.}
 
+\bigbreak
+
+From the expected value rule,
+$$ E[g(X,Y) \mid A] = \int\limits_{-\infty}^{\infty} g(x, y) f_{X,Y|A}(x, y)
+dx $$
+The joint PDF from above
+$$ f_{X,Y}(x,y) = \begin{cases}
+    1/2 & y \leq x \leq 1,\, 0 \leq y \leq 1 \\
+    3/2 & 1 < x \leq (2 - y),\, 0 \leq y \leq 1 \\
+    0 & \mathrm{otherwise}
+\end{cases} $$
+From the definition of a conditional PDF given an event
+$$ f_{X,Y|A}(x) = \frac{f_{X,Y}(x,y)}{P(A)} $$
+The probability of event $A$, $ X < 0.5 $ is given by the joint PDF
+\begin{align*}
+    \int\limits_0^{0.5}\int\limits_y^{0.5} f_{X,Y}(x,y) dx dy &= \int\limits_0^{0.5}\int\limits_y^{0.5} \frac{1}{2} dx dy \\
+    &= \frac{1}{2} \int\limits_0^{0.5} \int\limits_y^{0.5} dx dy \\
+    &= \frac{1}{2} \int\limits_0^{0.5} \left(x \right)_y^{0.5} dy \\
+    &= \frac{1}{2} \int\limits_0^{0.5} \left(0.5 - y \right) dy \\
+    &= \frac{1}{2} \left(0.5 - \frac{y^2}{2} \right)_0^{0.5} \\
+    &= \frac{1}{2} \left(\left(0.5 - \frac{0.5^2}{2}\right) - \left(0.5 - \frac{0^2}{2}\right) \right) \\
+    &= \frac{1}{16}
+\end{align*}
+Therefore, the conditional joint PDF is 
+$$ f_{X,Y|A}(x) = \begin{cases}
+    8 & y \leq x \leq 0.5,\, 0 \leq y \leq 0.5 \\
+    0 & \mathrm{otherwise}
+\end{cases} $$
+Substituting back into the expected value rule
+\begin{align*}
+    E[X \cdot Y \mid A] &= \int\limits_{0}^{0.5}\int\limits_y^{0.5} 8 x y dx dy \\
+    &= 8 \int\limits_0^{0.5} y \int\limits_y^{0.5} x dx dy \\
+    &= 8 \int\limits_0^{0.5} y \left(\frac{x^2}{2} \right)_y^{0.5} dy \\
+    &= 8 \int\limits_0^{0.5} y \left(\frac{0.5^2}{2} - \frac{y^2}{2} \right) dy \\
+    &= 8 \int\limits_0^{0.5} \frac{0.25 y}{2} - \frac{y^3}{2} dy \\
+    &= 8 \left(\frac{0.25 y^2}{4} - \frac{y^4}{8} \right)_0^{0.5} \\
+    &= 8 \left(\frac{0.25 \cdot 0.5^2}{4} - \frac{0.5^4}{8} \right) \\
+    &= \frac{1}{16}
+\end{align*}
+Therefore, $ E[X\cdot Y \mid X < 0.5] = 1 / 16 $.
+
 \section*{Problem 5}
 
 \subsection*{Part A}
@@ -377,10 +449,49 @@ E[R \mid A] $.}
 some $ c > 0 $, so that $P(0 \leq X \leq c) = 1$. Prove that $\mathrm{var}(X)
 \leq c^2/4$.}
 
+\bigbreak
+
+From the properties of variance, the following are equivalent
+$$ \mathrm{var}(X) = \mathrm{var}(X - c / 2) $$
+Since $ 0 \leq X \leq c $, then
+$$ -\frac{c}{2} \leq X - \frac{c}{2} \leq \frac{c}{2} $$
+Therefore it is easy to see that
+$$ E[(X - c/2)^2] \leq \frac{c^2}{4} $$
+From the definition of variance
+$$ \mathrm{var}(X - c / 2) = E[(X - c/2)^2] - (E[X - c / 2])^2 $$
+The first term has to be less than or equal to $ c^2 / 4 $ and the second
+term is always non-negative. Therefore
+$$ \mathrm{var}(X - c / 2) \leq \frac{c^2}{4} $$
+Using, again, the properties of variance, this is equivalent to
+$$ \mathrm{var}(X) \leq \frac{c^2}{4} $$
+
 \subsection*{Part B}
 
 \textit{Let X be a non-negative continuous random variable. Using the
 definition $E[X] = \int_0^{\infty} x f_X(x) dx $, show that $ E[X] =
 \int_0^{\infty} P(X > t) dt $.}
+
+\bigbreak
+
+From the definition of expected value of positive continuous random variables
+$$ E[X] = \int\limits_0^\infty x f_X(x) dx $$
+However, the relationship between PDF and CDF is as follows
+$$ \frac{dF_X(x)}{dx} = f_X(x) $$
+Therefore, this definition can be written also as
+$$ E[X] = \int\limits_0^\infty x dF_X(x) $$
+Thinking in terms of Riemann integrals, this is the same as taking the sum of
+horizontal rectangles of height $ dF_X(x) $ and length $x$. But, since the
+range of integration is positive and $F_X(x)$ approaches $1$ as $x$ approaches
+infinity, this integral can be written as
+$$ E[X] = \int\limits_0^\infty 1 - F_X(x) dx $$
+Which simply takes vertical rectangles from $F_X(x)$ to $1$ with width $dx$.
+This is the same area of integration as above.
+
+Now, from the definition of CDF
+$$ F_X(x) = P(X \leq x) $$
+For positive random variables, the following must also be true
+$$ F_X(x) = 1 - P(X > x) $$
+Therefore, the integral can be written
+$$ E[X] = \int\limits_0^\infty P(X > x) dx $$
 
 \end{document}
