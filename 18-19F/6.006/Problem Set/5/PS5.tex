@@ -1,0 +1,333 @@
+%
+% 6.006 problem set 5 solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros-fa18}
+\newcommand{\theproblemsetnum}{5}
+\newcommand{\releasedate}{Thursday, October 4}
+\newcommand{\partaduedate}{Thursday, October 11}
+
+\title{6.006 Problem Set 5}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 11PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+\problempart {\bf Description} Put all items into a hashtable. Loop through
+    the items and check if the difference between that item's price and $g$
+    is in the hashtable. If it is, then there exist two items whose prices
+    sum to exactly $g$.
+    
+    {\bf Correctness} If two items' prices sum to $g$, then looking for the
+    additive complement of each element with $g$ will determine if another
+    item exists so the sum of them equals $g$.
+
+    {\bf Running Time} To add the elements to a hashtable is assumed $O(1)$
+    for each and therefore $O(n)$ overall. It is expected that each hashtable
+    lookup will complete in $O(1)$. Therefore, overall running time is $O(n)$
+    expected.
+\problempart {\bf Description} Start with the first price, $p$, in the list.
+    Assume this is the least element and the list is sorted in increasing order.
+    Compute $ g - p = p' $. Search the portion of the list with elements
+    greater than $p$ using binary search. If $p'$ is found, return true. If
+    $p'$ is not found, continue with the next price and repeat.
+
+    {\bf Correctness} Given the list of prices is sorted, binary search is
+    possible. Therefore, for each element, we can compute it's additive
+    complement with $g$. If that complement exists in the array, binary
+    search will find it. Note: We only have to search the upper portion of
+    the list because, by symmetry, if the complement exists in the lower
+    portion, it would've already been found.
+
+    {\bf Running Time} Each element requires $O(\log n)$ work. There are, at
+    most $n$ elements to iterate over. Therefore, total running time is $O(n
+    \log n)$ worst case.
+\problempart {\bf Description} Sort the elements using radix sort. Then
+    perform the algorithm described in Part B.
+
+    {\bf Correctness} Radix sort is assumed to sort the elements in the
+    correct order.
+
+    {\bf Running Time} Radix sort takes $O(c n)$ time for $n$ elements taking
+    value at most $ n^c $. Since $ \log_n g \in O(1) $, $c$ is constant. From
+    this, radix sort will take $O(n)$. Then, the algorithm above will take
+    $O(n \log n)$ Therefore, the total running time is $O(n + n \log n) \in
+    O(n)$ worst case.
+\end{problemparts}
+
+\newpage
+
+\problem {\bf Description} The data structure will have two properties
+    \begin{itemize}
+        \item {\tt key\_AVL}: An AVL tree sorted on item keys. With
+        augmentation to keep track of the minimum item in node subtree (as
+        proven in last problem set).
+        \item {\tt id\_hash}: A chained hashtable of items hashed on unique
+        identifiers.
+    \end{itemize}
+
+    The data structure will have five methods
+    \begin{itemize}
+        \item {\tt insert(x)}: Hash the item's ID and insert into {\tt
+        id\_hash}. Perform an AVL-insert into {\tt key\_AVL} and maintain
+        minimum-item augmentation.
+        \item {\tt find\_min()}: Return minimum-item from {\tt key\_AVL}
+        using the maintained augmentation.
+        \item {\tt delete\_min()}: Get minimum item by calling {\tt
+        find\_min()}. Hash the item's ID and delete it from {\tt id\_hash}.
+        Perform an AVL-delete on the minimum key in {\tt key\_AVL}.
+        \item {\tt find\_id(id)}: Hash the item ID to find location in {\tt
+        id\_hash}. If more than one at location, compare IDs to select
+        correct item and return.
+        \item {\tt change\_key(id, k)}: Hash item ID and save key of item
+        stored at hashed location in {\tt id\_hash}. Replace the old key with
+        the new. Perform AVL-delete of old-keyed item. Perform AVL-insert of
+        new-keyed item in {\tt key\_AVL}.
+    \end{itemize}
+
+    {\bf Correctness}
+    \begin{itemize}
+        \item {\tt insert(x)}: Hash-insert on item ID is assumed to correctly
+        place the item at the hashed location in {\tt id\_hash}. AVL-insert
+        is assumed to place the item in the correct location based on key in
+        {\tt key\_AVL}. As shown in previous problem set, the minimum-item
+        augmentation is easily maintained.
+        \item {\tt find\_min()}: AVL-find-min on {\tt key\_AVL} using the
+        augmentation is expected correct as shown in previous problem set.
+        \item {\tt delete\_min()}: After getting the minimum key, an
+        AVL-delete is performed on {\tt key\_AVL} which is assumed correct.
+        \item {\tt find\_id(id)}: Hashing is assumed to give correct location
+        of item with ID in {\tt id\_hash}. To ensure correctness with
+        collisions, the IDs of all items at that location are compared and
+        the correct one is returned (if it exists).
+        \item {\tt change\_key(id, k)}: Hashing is assumed to give correct
+        location of item with ID in {\tt id\_hash}. With that location, the
+        contents are updated with new key. This has no effect on the item's
+        hashed location and therefore no rehashing is required. With the old
+        key, the AVL-delete on {\tt key\_AVL} is assumed correct as is the
+        AVL-insert to add the updated key.
+    \end{itemize}
+
+    {\bf Running Time}
+    \begin{itemize}
+        \item {\tt insert(x)}: Hashing is assumed constant. AVL-insert is
+        assumed to be $O(\log n)$ even with the minimum-augmentation as shown
+        in previous problem set. Therefore, overall $O(\log n)$.
+        \item {\tt find\_min()}: AVL-find-min with the augmentation allows
+        for constant-time find as the minimum item is stored in the root
+        node. (Shown in previous problem set.) Therefore overall $O(1)$
+        \item {\tt delete\_min()}: Find-min is proven $O(1)$ above.
+        AVL-delete is assumed to be $O(\log n)$. Therefore overall $O(\log n)$.
+        \item {\tt find\_id(id)}: Hashing is assumed constant, but if there
+        is a collision, the worst-case is not constant. Therefore, expected
+        lookup in hashtable is $O(1)$. Therefore the overall time-complexity
+        is {\it expected} $O(1)$.
+        \item {\tt change\_key(id, k)}: Hashed lookup will perform expected
+        $O(1)$. Updating value at hashed location is constant time.
+        AVL-delete and AVL-insert are both assumed $O(\log n)$. Overall is
+        {\it expected} $O(\log n)$.
+    \end{itemize}
+
+\newpage
+\problem  % Problem 3
+
+\begin{problemparts}
+\problempart Since the length of the weets are limited to 60 characters,
+    counting sort is a good option to sort by length. The range of inputs
+    will be $0 - 60$ and the number of weets is $n$. Therefore, complexity of
+    this first operation is $O(n + 60)$. Now, radix sort is a great option
+    for sorting lexicographically. However, typically the least significant
+    sorting order would be performed first, but the radix sort option only
+    works for constant length expressions. Therefore, a separate radix sort
+    should be performed in each constant-length partition. Therefore, the
+    $k$-lenth partitions will be sorted in $ O(kn_k) $ by radix sort (where
+    $n_k$ is now the number of weets in the $k$-length partition). Therefore,
+    the overall running time will be $ O(60 + n + 60n_{60} + 59 n_{59} +
+    \ldots + 2 n_2 + n_1) $ Since each $n_k$ is less than $n$, this is
+    asymptotically equal to $O(n)$.
+\problempart Since the number of likes per weet is significantly larger than
+    the number of weets, any counting/tuple/radix sort would be a bad idea as
+    the value range would dominate the run-time complexity rather than the
+    number of weets. Therefore, I would argue for a comparison sort. The best
+    of which in time-complexity are either merge or heap sort. (Given that
+    the number of weets is assumed to be large, I will ignore the initial
+    relative inefficiency compared to insertion sort.) Since these are tied for
+    running time, looking at other factors: Heap sort can be done in-place,
+    however, heap sort is not stable. Since no secondary sorting is
+    necessary, I will place more weight on in-place sorting. Therefore, I
+    would suggest heap sort with time complexity $O(n \log n)$ and
+    space-complexity $O(1)$.
+\problempart Because the most liked weets of a given day will be changing
+    constantly, it would make most sense to have this information stored for
+    easy lookup rather than sort this information every time. Thus, I would
+    argue for a data structure. In this case, the maximum value and the
+    subsequence $m$ values are of interest. Although a max-heap will make
+    finding the most-liked weet fast and the subsequent remove-max will
+    return the next $m$ most-liked, this will mutate the data stored in the
+    data structure. This will make it difficult to maintain throughout the
+    day as new weets are added. On an AVL tree, the find-max can also be
+    constant time using an augmentation. Subsequent find-nexts are just as
+    fast as a heap ($O(\log n)$), yet the tree is not mutated. Therefore, I
+    would argue that the weets should be stored in a max-augmented AVL tree.
+    This will allow constant mutation and lookup complexity of $O(m \log n)$.
+    (Note: that as $m$ approaches $n$ in an AVL tree, the complexity of a
+    find-next approaches $O(m)$. Thus lookup reaches linear time $O(m)$.) To
+    maintain the data structure, each new weet per day will require $O(\log
+    n)$ work. In comparision a sort every time will require $O(m + n \log n)$
+    as a comparison sort is most optimal (as noted in Part B) and then the
+    top $m$ have to be iterated over.
+\problempart As each friend has their weets already sorted in chronological
+    order and the end goal is to {\it merge} all the results together, this
+    problem really lends itself to a type of merge sort. In this merge
+    sort-esque algorithm, partition the group of friends into groups of two
+    and have them combine their weets. Then continue to form groups of two
+    until all weets are combined. To analyze time-complexity, consider a
+    standard merge-sort recurrence tree. However, instead of $n$ leaves,
+    there are only $k$ as they have been sorted before. Therefore, the height
+    of the recurrence tree is $\log k$, not $\log n$. The amount of work per
+    level is the same as at each level, all $n$ weets are being compared.
+    Therefore, $\log k$ levels each with $c \cdot n$ work yields $O(n \log
+    k)$ complexity.
+\end{problemparts}
+
+\newpage
+\problem  % Problem 4
+
+\begin{problemparts}
+\problempart \begin{enumerate}
+    \item Group the list of words based on length:
+        \begin{itemize}
+            \item {\tt \{'of', 'on'\} },
+            \item {\tt \{'the', 'the'\} },
+            \item {\tt \{'stop', 'spot', 'tops', 'spot', 'pots'\} },
+            \item {\tt \{'those'\} },
+            \item {\tt \{'altering', 'integral', 'triangle'\} }.
+        \end{itemize}
+    \item Remove duplicates:
+        \begin{itemize}
+            \item {\tt \{'of', 'on'\} },
+            \item {\tt \{'the'\} },
+            \item {\tt \{'stop', 'spot', 'tops', 'pots'\} },
+            \item {\tt \{'those'\} },
+            \item {\tt \{'altering', 'integral', 'triangle'\} }.
+        \end{itemize}
+    \item Remove partitions with only single elements: 
+        \begin{itemize}
+            \item {\tt \{'of', 'on'\} },
+            \item {\tt \{'stop', 'spot', 'tops', 'pots'\} },
+            \item {\tt \{'altering', 'integral', 'triangle'\} }.
+        \end{itemize}
+    \item Sort each word lexicographically:
+        \begin{itemize}
+            \item {\tt \{'fo', 'no'\} },
+            \item {\tt \{'opst', 'opst', 'opst', 'opst'\} },
+            \item {\tt \{'aegilnrt', 'aegilnrt', 'aegilnrt'\} }.
+        \end{itemize}
+    \item Partition again based on equal strings:
+        \begin{itemize}
+            \item {\tt \{'fo'\} }
+            \item {\tt \{'no'\} },
+            \item {\tt \{'opst', 'opst', 'opst', 'opst'\} },
+            \item {\tt \{'aegilnrt', 'aegilnrt', 'aegilnrt'\} }.
+        \end{itemize}
+    \item Remove partitions with only single elements:
+        \begin{itemize}
+            \item {\tt \{'opst', 'opst', 'opst', 'opst'\} },
+            \item {\tt \{'aegilnrt', 'aegilnrt', 'aegilnrt'\} }.
+        \end{itemize}
+    \item The number of anagram pairs is equal to the sum of the sizes of the
+    groupings choose 2:
+    $$ \binom{4}{2} + \binom{3}{2} = 9 $$
+\end{enumerate}
+\problempart {\bf Description} First, check the size of both $s_1$ and $s_2$.
+    If not equal, return {\tt False}. Initialize an array of size 26 (the
+    number of possible letters assumed in the string) with all elements zero.
+    Iterate over the characters in $s_1$ and increase the value stored in
+    element corresponding to the character in $s_1$ (e.g. {\tt 'a'} is {\tt
+    0}, {\tt 'b'} is {\tt 1}, etc.). Now, iterate over the characters in
+    $s_2$. For each character, decrement the value stored in the
+    corresponding element. If the value becomes $-1$, return {\tt False}. If
+    the end of $s_2$ is reached and an encountered value is never $-1$, then
+    the two strings are anagrams and return {\tt True}.
+
+    {\bf Correctness} If the two strings are unequal in length, it is
+    impossible for them to be anagrams. If the two strings have equal length,
+    they may or may not be anagrams. If the strings are of equal length,
+    there are two possible cases:
+    \begin{itemize}
+        \item $s_1$ has the same characters as $s_2$ and if there are
+        repeats, they are repeated the same number of times. In this case,
+        the two strings are anagrams. In the algorithm provided, the
+        difference between the character frequency arrays for each $s_1$ and
+        $s_2$ will equal zero. Therefore, the algorithm will never enounter a
+        $-1$ and will complete the entire iteration of $s_2$ and return {\tt
+        True}.
+        \item $s_1$ has a character that $s_2$ does not have (or vice versa).
+        Then these two strings are not anagrams. In the algorithm provided,
+        the difference between the character frequency arrays for each $s_1$
+        and $s_2$ is non zero. However, since the arrays have an equal number
+        of characters, for every extra character in $s_1$ there is a
+        corresponding missing character. Therefore, a $-1$ must be
+        encountered and the algorithm will return a {\tt False}.
+    \end{itemize}
+
+    {\bf Running Time} To iterate over the first string of at-most
+    $k$-characters requires $O(k)$ work. The same goes for the iteration over
+    the second string. Therefore, the algorithm is at worst $O(k)$.
+\problempart {\bf Description} Take the list of strings and pass them into a
+    hashtable. This will remove all the duplicate words. Now, iterate over
+    the hashtable and for each key (the string in the list), sort the letters
+    using a simple counting sort over the possible letters ({\tt 'a'} to {\tt
+    'z'}). Then, hash this sorted string and append the original string to a
+    list of strings located at the key of the sorted string. Lastly, iterate
+    over the hashtable and count the number of items at each. The number of
+    anagram pairs is that length choose 2. Add to the total number of
+    anagrams an continue iteration. Return the total anagram pairs.
+
+    {\bf Correctness} Adding elements into a hashtable will remove duplicates
+    through collisions. We just look at the keys, not the values stored at
+    the keys. Therefore the first step will eliminate duplicates. Sorting by
+    counting sort will ensure the letters are in lexicographical order. This
+    will force collisions between anagrams as they must have the same
+    lexicographical order. The original strings are stored as a chain at that
+    key (the typical way of handling collisions). Now the anagrams are all
+    grouped together. The number of pairs within a group of anagrams is
+    simply $n$ choose $2$ where $n$ is the number of anagrams. Summing over
+    anagram pairs within each group will yield the total number of anagram
+    pairs.
+
+    {\bf Running Time} To remove duplicates via a hashtable will take $O(n)$,
+    where $n$ is the number of strings, as hashing is assumed to take $O(1)$.
+    Iterating over the new 'list' of strings without duplicates is at worst
+    $O(n)$ if there are no duplicates. Within this loop, each string must be
+    sorted by letter. Using counting sort, this will take $O(k + 26)$, where
+    $k$ is the length of the longest string in the list. Lastly, to iterate
+    over all keys in the hashtable is at worst $O(n)$ if every string is
+    unique and not an anagram of another. Therefore, the running time is $
+    O(n + n(k + 26) + n) \in O(kn) $ in worst case as hash collisions are
+    used as a feature, not a bug.
+\problempart Submit your implementation to {\small\url{alg.mit.edu/PS5}}
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
