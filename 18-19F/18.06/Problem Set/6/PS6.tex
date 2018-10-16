@@ -1,0 +1,508 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{18.06 Problem Set 6}
+\author{Robert Durfee}
+\date{October 17, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\textit{Recall that, if $x \in \mathbb{R}^n$, then $\nabla_x f(x)$ (for a
+scalar-valued function $f$) is a column vector}
+$$ \nabla_x f = \begin{pmatrix}
+    \frac{\partial f}{\partial x_1} \\
+    \frac{\partial f}{\partial x_2} \\
+    \vdots \\
+    \frac{\partial f}{\partial x_n}
+\end{pmatrix} $$
+
+\subsection*{Part A}
+
+\textit{If $f(x) = \frac{x^T A x}{x^T x}$ for some $n \times n$ matrix $A$
+and $x \neq 0$, write $\nabla_x f$ as a matrix expression involving $A$ and
+$x$.}
+
+\bigbreak
+
+The quotient rule applies, therefore
+$$ \nabla_x \frac{g(x)}{h(x)} = \frac{(\nabla_x g) h(x) - g(x) (\nabla_x
+h)}{(h(x))^2} $$
+Where, in this case,
+$$ g(x) = x^T A x,\, h(x) = x^T x $$
+The product rule also applies, therefore
+$$ \nabla_x g'(x) h'(x) = (\nabla_x g') h'(x) + g'(x) (\nabla_x h') $$
+Where, in this case,
+$$ g'(x) = x^T,\, h'(x) = Ax $$
+Therefore,
+$$ \nabla_x g = Ax + A^T x,\, \nabla_x h = 2x $$
+Putting this all together,
+$$ \nabla_x f = \frac{(Ax + A^T x) (x^T x) - (x^T A x)(2x)}{(x^T x)^2} $$
+
+\subsection*{Part B}
+
+\textit{For the $f(x)$ from Part A, $f(\alpha x)$ has what relationship to
+$f(x)$ for any real $\alpha \neq 0$? It follows that $\nabla_x f$ must be}
+orthogonal \textit{to what vector? Check that this is true of your answer
+from Part A.}
+
+\bigbreak
+
+Evaluating $f(\alpha x)$:
+$$ f(\alpha x) = \frac{(\alpha x)^T A (\alpha x)}{(\alpha x)^T (\alpha x)} $$
+Since $\alpha$ is a constant,
+\begin{align*}
+    f(\alpha x) &= \frac{\alpha^2 x^T A x}{\alpha^2 x^T x}
+    &= \frac{x^T A x}{x^T x}
+\end{align*}
+Therefore $f(\alpha x) = f(x)$. From this, $f(x)$ along $x$, is unchanging
+and therefore is represents a level curve. Thus, $\nabla_x f$ is orthogonal
+to $x$.
+
+Checking the dot product of $x$ and the answer to Part A
+\begin{align*}
+    \frac{(Ax + A^T x) (x^T x) - (x^T A x)(2x)}{(x^T x)^2} \cdot x &=
+    \frac{(Ax \cdot x + A^T x \cdot x)(x^T x) - (x^T A x)(2x \cdot x)}{(x^T x)^2} \\
+    &= \frac{(x^T A^T x + x^T A x)(x^T x)}{(x^T x)^2} - \frac{(x^T A x)(2x^T x)}{(x^T x)^2} \\
+    &= \frac{x^T A^T x + x^T A x - 2(x^T A x)}{x^T x} \\
+    &= \frac{x^T A x + x^T A x - 2 (x^T A x)}{x^T x} \\
+    &= 0
+\end{align*}
+Therefore, the answer from Part A is orthogonal to $x$.
+
+\section*{Problem 2}
+
+\textit{If $f(A)$ is a scalar function of an $m \times n$ matrix $A$, then it
+is useful to define the gradient with respect to the} matrix \textit{as
+another $m \times n$ matrix:}
+$$ \nabla_A f = \begin{pmatrix}
+    \frac{\partial f}{\partial a_{11}} & \frac{\partial f}{\partial a_{12}} & \cdots \\
+    \frac{\partial f}{\partial a_{21}} & \frac{\partial f}{\partial a_{22}} & \cdots \\
+    \vdots & \vdots & \ddots
+\end{pmatrix} $$
+\textit{Given this definition, give a matrix expression for $\nabla_A f$ with
+$f(A) = x^T A y$ where $x \in \mathbb{R}^m$ and $y \in \mathbb{R}^n$ are
+constant vectors.}
+
+\bigbreak
+
+The partial derivative with respect to a single component $a_{ij}$ is given by
+$$ \frac{\partial f}{\partial a_{ij}} = x_i y_j $$
+Therefore, the entire gradient $\nabla_A f$ is given by the outer product
+$$ \nabla_A f = x y^T $$
+
+\section*{Problem 3}
+
+\textit{Suppose that we minimize the length of a vector along a line:}
+$$ \min_{a \in \mathbb{R}} || u + \alpha v || $$
+\textit{for some nonzero vectors $u, v \in \mathbb{R}^n$, finding the
+minimizer $\hat{\alpha}$.}
+
+\subsection*{Part A}
+
+\textit{If we write this in the form of a standard least-square problem $
+\min_x || b - Ax ||$, what are $A$, $b$, and $x$ in terms of the above?}
+
+\bigbreak
+
+$$ b = u,\, A = -v,\, x = \alpha $$
+
+\subsection*{Part B}
+
+\textit{Solve the normal equations to find an explicit solution
+$\hat{\alpha}$.}
+
+\bigbreak
+
+The normal equation is given by
+$$ A^T A \hat{x} = A^T b $$
+Substituting the values from above,
+$$ (-v)^T (-v) \hat{\alpha} = (-v)^T u $$
+Since these are just vectors,
+$$ \hat{\alpha} = -\frac{v^T u}{v^T v} $$
+
+\subsection*{Part C}
+
+\textit{At this minimum, $u + \hat{\alpha} v$ is orthogonal to what vector?}
+
+\bigbreak
+
+Substituting the value found for $\hat{\alpha}$
+$$ u - \frac{v^T u}{v^T v} v $$
+This is simply the difference between $u$ and its projection onto $v$.
+Therefore, it is clear that it must be orthogonal to $v$.
+
+\section*{Problem 4}
+
+\textit{Support that we have $m$ data points $\{(a_1, b_1), (a_2, b_2),
+\ldots, (a_m, b_m)\}$ that we want to perform a least-square fit to a
+function of the following form:}
+$$ f(a) = x_1 + x_2 a + x_3 a^2 + x_4 (a - 1)^2 $$
+\textit{That is, we want to minimize $\sum_{i = 1}^m [b_i - f(a_i)]^2$ over
+all possible $x \in \mathbb{R}^4$.}
+
+\subsection*{Part A}
+
+\textit{Formulate this in matrix form as in class: we are minimizing $|| b -
+Ax ||$ for what matrix $A$ and vector $b$?}
+
+\bigbreak
+
+$$ A = \begin{pmatrix}
+    1 & a_1 & a_1^2 & (a_1 - 1)^2 \\
+    1 & a_2 & a_2^2 & (a_2 - 1)^2 \\
+    \vdots & \vdots & \vdots & \vdots \\
+    1 & a_m & a_m^2 & (a_m - 1)^2
+\end{pmatrix} $$
+
+\subsection*{Part B}
+
+\textit{Give the rank of $A$ and $A^T A$ and a basis for $N(A) = N(A^T A)$.
+What does this tell you about the solutions to the normal equations $A^T A
+\hat{x} = A^T b$ for the fit coefficients $\hat{x}$?}
+
+\bigbreak
+
+It is clear to see that the 4th column of $A$ is a combination of the other
+columns (represented here using the variables $c$) taking the form
+$$ c_4 = c_3 - 2 c_2 + c_1 $$
+Therefore, the rank of $A$ (and therefore $A^T A$) is 3 and thus the null
+space must have dimension 1. To find the basis, consider
+$$ A = \begin{pmatrix}
+    1 & a_1 & a_1^2 & (a_1 - 1)^2 \\
+    1 & a_2 & a_2^2 & (a_2 - 1)^2 \\
+    \vdots & \vdots & \vdots & \vdots \\
+    1 & a_m & a_m^2 & (a_m - 1)^2
+\end{pmatrix} \begin{pmatrix}
+    x_1 \\
+    x_2 \\
+    x_3 \\
+    x_4
+\end{pmatrix} = \begin{pmatrix}
+    0 \\
+    0 \\
+    \vdots \\
+    0
+\end{pmatrix} $$
+Given the relationship between the columns,
+$$ x = \begin{pmatrix}
+    -1 \\
+    2 \\
+    -1 \\
+    1
+\end{pmatrix} $$
+Therefore, the null space is given by the basis
+$$ N(A) = N(A^T A) = \left\{ \begin{pmatrix}
+    -1 \\
+    2 \\
+    -1 \\
+    1
+\end{pmatrix} \right\} $$
+This tells us that the solutions to the normal equations is not unique.
+
+\subsection*{Part D}
+
+\textit{If the least-square solution is not unique, Julia find the $\hat{x}$
+with minimum length. In this problem, that means that Julia's $\hat{x}$ must
+be orthogonal to what vectors?}
+
+\bigbreak
+
+The solution must be orthogonal to all the vectors in the null space.
+
+\section*{Problem 5}
+
+\textit{Project $a_1 = \begin{pmatrix} 1 0 \end{pmatrix}^T$ onto the line
+spanned by $a_2 = \begin{pmatrix} 1 2 \end{pmatrix}^T$. Then project the
+result back onto the line spanned by $a_1$. Multiply these projection
+matrices $P_1P_2$: is this a projection?}
+
+\bigbreak
+
+The projection matrix for $a_2$ is
+\begin{align*}
+    P_1 &= \frac{a_2 a_2^T}{a_2^T a_2} \\
+    &= \frac{\begin{pmatrix} 1 \\ 2 \end{pmatrix} \begin{pmatrix} 1 & 2 \end{pmatrix}}{\begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 1 \\ 2 \end{pmatrix}} \\
+    &= \begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix} / 5 \\
+    &= \begin{pmatrix}
+        1/5 & 2/5 \\
+        2/5 & 4/5
+    \end{pmatrix}
+\end{align*}
+Applying this to $a_1$
+$$ \begin{pmatrix}
+    1/5 & 2/5 \\
+    2/5 & 4/5
+\end{pmatrix} \begin{pmatrix}
+    1 \\
+    0
+\end{pmatrix} = \begin{pmatrix}
+    1/5 \\
+    2/5
+\end{pmatrix} $$
+
+The projection matrix for $a_1$ is 
+\begin{align*}
+    P_2 &= \frac{a_1 a_1^T}{a_1^T a_1} \\
+    &= \frac{\begin{pmatrix} 1 \\ 0 \end{pmatrix} \begin{pmatrix} 1 & 0 \end{pmatrix}}{\begin{pmatrix} 1 & 0 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix}} \\
+    &= \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} \\
+    &= \begin{pmatrix}
+        1 & 0 \\
+        0 & 0
+    \end{pmatrix}
+\end{align*}
+Applying this to the result from the previous projection
+$$ \begin{pmatrix}
+    1 & 0 \\
+    0 & 0
+\end{pmatrix} \begin{pmatrix}
+    1/5 \\
+    2/5
+\end{pmatrix} = \begin{pmatrix}
+    1/5 \\
+    0
+\end{pmatrix} $$
+
+Multiplying $P_1 P_2$
+$$ \begin{pmatrix}
+    1/5 & 2/5 \\
+    2/5 & 4/5
+\end{pmatrix} \begin{pmatrix}
+    1 & 0 \\
+    0 & 0
+\end{pmatrix} = \begin{pmatrix}
+    1/5 & 0 \\
+    2/5 & 0
+\end{pmatrix} $$
+Testing if this satisfies the property of a projection $P^2 = P$,
+$$ \begin{pmatrix}
+    1/5 & 0 \\
+    2/5 & 0
+\end{pmatrix}^2 = \begin{pmatrix}
+    1/25 & 0 \\
+    2/25 & 0
+\end{pmatrix} \neq \begin{pmatrix}
+    1/5 & 0 \\
+    2/5 & 0
+\end{pmatrix} $$
+Therefore, this cannot be a projection.
+
+\section*{Problem 6}
+
+\textit{To find the projection matrix onto the plane $x - y - 2z = 0$, choose
+two vectors in that plane (the null space of what matrix?) and make them
+columns of $A$ so that the plane is $C(A)$. Then compute the projection of
+the point $\begin{pmatrix} 0 & 6 & 12 \end{pmatrix}^T$ onto this plane, and
+check your result in Julia.}
+
+\bigbreak
+
+The two following vectors lie in the plane $x - y - 2z = 0$ and form a matrix
+$A$ whose column space spans the plane
+$$ A = \begin{pmatrix}
+    3 & 1 \\
+    1 & 1 \\
+    1 & 0
+\end{pmatrix} $$
+The normal equations allow a solution for $\hat{x}$
+$$ A^T A \hat{x} = A^T b $$
+Substituting $A$
+$$ \begin{pmatrix}
+    3 & 1 & 1 \\
+    1 & 1 & 0
+\end{pmatrix} \begin{pmatrix}
+    3 & 1 \\
+    1 & 1 \\
+    1 & 0
+\end{pmatrix} \hat{x} = \begin{pmatrix}
+    3 & 1 & 1 \\
+    1 & 1 & 0
+\end{pmatrix} \begin{pmatrix}
+    0 \\
+    6 \\
+    12
+\end{pmatrix} $$
+$$ \begin{pmatrix}
+    11 & 4 \\
+    4 & 2
+\end{pmatrix} \hat{x} = \begin{pmatrix}
+    18 \\
+    6
+\end{pmatrix} $$
+Solving for $\hat{x}$
+$$ \hat{x} = \begin{pmatrix}
+    2 \\
+    -1
+\end{pmatrix} $$
+Mutliplying by $A$ to get the projection
+$$ A\hat{x} = \begin{pmatrix}
+    3 & 1 \\
+    1 & 1 \\
+    1 & 0
+\end{pmatrix} \begin{pmatrix}
+    2 \\
+    -1
+\end{pmatrix} = \begin{pmatrix}
+    5 \\
+    1 \\
+    2
+\end{pmatrix} $$ 
+
+\section*{Problem 7}
+
+\subsection*{Part A}
+
+\textit{Find the projection matrix $P_C$ onto the column space $C(A)$ for}
+$$ A = \begin{pmatrix}
+    3 & 6 & 6 \\
+    4 & 8 & 8
+\end{pmatrix} $$
+
+\bigbreak
+
+The column space is given by the basis
+$$ C(A) = \left\{ \begin{pmatrix}
+    3 \\
+    4
+\end{pmatrix} \right\} $$
+Therefore, the projection can be defined only by the vector described in the
+basis. Thus, the projection matrix is
+$$ P_C = \frac{\begin{pmatrix} 3 \\ 4 \end{pmatrix} \begin{pmatrix} 3 & 4
+\end{pmatrix}}{\begin{pmatrix} 3 & 4 \end{pmatrix} \begin{pmatrix} 3 \\ 4
+\end{pmatrix}} = \begin{pmatrix}
+    9 & 12 \\
+    12 & 16
+\end{pmatrix} / 25 = \begin{pmatrix}
+    9/25 & 12/25 \\
+    12/25 & 16/25
+\end{pmatrix} $$
+
+\subsection*{Part B}
+
+\textit{Find the projection matrix $P_R$ onto the row space $A$. Multiply $B
+= P_C A P_R$. Your answer $B$ may be a little surprising at first -- can you
+explain it?}
+
+\bigbreak
+
+The row space is given by the basis
+$$ R(A) = \left\{ \begin{pmatrix}
+    3 \\
+    6 \\
+    6
+\end{pmatrix} \right\} $$
+Therefore, the projection can be defined only by the vector described in the
+basis. Thus the projection matrix is
+$$ P_C = \frac{\begin{pmatrix} 3 \\ 6 \\ 6 \end{pmatrix} \begin{pmatrix} 3 &
+6 & 6 \end{pmatrix}}{\begin{pmatrix} 3 & 6 & 6 \end{pmatrix} \begin{pmatrix} 3 \\
+6 \\ 6 \end{pmatrix}} = \begin{pmatrix}
+    9 & 18 & 18 \\
+    18 & 36 & 36 \\
+    18 & 36 & 36
+\end{pmatrix} / 81 = \begin{pmatrix}
+    1/9 & 2/9 & 2/9 \\
+    2/9 & 4/9 & 4/9 \\
+    2/9 & 4/9 & 4/9
+\end{pmatrix} $$
+
+Multiplying these together,
+$$ \begin{pmatrix}
+    9/25 & 12/25 \\
+    12/25 & 16/25
+\end{pmatrix} \begin{pmatrix}
+    3 & 6 & 6 \\
+    4 & 8 & 8
+\end{pmatrix} \begin{pmatrix}
+    1/9 & 2/9 & 2/9 \\
+    2/9 & 4/9 & 4/9 \\
+    2/9 & 4/9 & 4/9
+\end{pmatrix} = \begin{pmatrix}
+    3 & 6 & 6 \\
+    4 & 8 & 8
+\end{pmatrix} $$
+This result makes sense as the first product projects $A$ onto the column
+space of $A$ which will leave $A$ unchanged. And the second product projects
+anything on the right onto the row space, which, evidently, projects anything
+on the right onto the column space, leaving $A$ unchanged as well.
+
+\section*{Problem 8}
+
+\textit{Given two $m \times n$ matrices $A$ and $B$ and two right-hand sides
+$b, c \in \mathbb{R}^m$, suppose that we want to minimize:}
+$$ f(x) = || b - Ax ||^2 + || c - Bx ||^2 $$
+\textit{over $x \in \mathbb{R}^n$. That is, we are minimizing the} sum
+\textit{of two least-square fitting problems.}
+
+\subsection*{Part A}
+
+\textit{$|| b ||^2 + || c ||^2 = || w ||^2$ for a vector $ w \in
+\mathbb{R}^{2m}$. Give such a $w$.}
+
+\bigbreak
+
+Expanding the expression
+$$ b_1^2 + b_2^2 + \ldots + b_m^2 + c_1^2 + c_2^2 + \ldots + c_m^2 $$
+This is the same as
+$$ || w ||^2 $$
+For a $w$ made from $b$ and $c$ stacked
+$$ w = \begin{pmatrix}
+    b \\
+    c
+\end{pmatrix} $$
+
+\subsection*{Part B}
+
+\textit{Write down a matrix equation $C\hat{x} = d$ whose solution $\hat{x}$
+gives the minimum of $f(x)$. Give explicit formulas for $C$ and $d$ in terms
+of $A$, $B$, $b$, and $c$.}
+
+\bigbreak
+
+Using the result from Part A
+$$ f(x) = \left|\left| \begin{pmatrix}
+    b - Ax \\
+    c - Bx
+\end{pmatrix} \right| \right|^2 $$
+Separating this to mirror the standard least-squares
+$$ f(x) = \left|\left| \begin{pmatrix}
+    b \\
+    c
+\end{pmatrix} - \begin{pmatrix}
+    A \\
+    B
+\end{pmatrix} x \right|\right|^2 $$
+Since minimizing the length squared is the smae as minimizing the length, the
+normal equations can be used.
+$$ \begin{pmatrix}
+    A^T & B^T
+\end{pmatrix} \begin{pmatrix}
+    A \\
+    B
+\end{pmatrix} \hat{x} = \begin{pmatrix}
+    A^T & B^T
+\end{pmatrix} \begin{pmatrix}
+    b \\
+    c
+\end{pmatrix} $$
+Therefore, the expressions for $C$ and $d$ are
+$$ C = A^T A + B^T B,\, d = A^T b + B^T c $$
+
+\end{document}
