@@ -1,0 +1,220 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{18.06 Problem Set 7}
+\author{Robert Durfee}
+\date{October 24, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+Finding the null space for $A$. Since the matrix $A$ is already in
+row-echelon form, the null space can be directly read from the matrix.
+$$ N(A) = \left\{ \begin{pmatrix}
+    -1 \\
+    1 \\
+    0 \\
+    0
+\end{pmatrix},\, \begin{pmatrix}
+    1 \\
+    0 \\
+    1 \\
+    0
+\end{pmatrix},\, \begin{pmatrix}
+    -1 \\
+    0 \\
+    0 \\
+    1
+\end{pmatrix} \right\} $$
+
+The first vector of the orthogonal basis $V$ is given by
+$$ v_1 = a_1 = \begin{pmatrix}
+    -1 \\
+    1 \\
+    0 \\
+    0
+\end{pmatrix} $$
+The second vector is given by the Gram-Schmidt algorithm
+\begin{align*}
+    v_2 &= a_2 - \frac{v_1 v_1^T}{v_1^T v_1} a_2 \\
+    &= \begin{pmatrix} 1 \\ 0 \\ 1 \\ 0 \end{pmatrix} - \frac{\begin{pmatrix}
+    -1 \\ 1 \\ 0 \\ 0 \end{pmatrix} \begin{pmatrix} -1 & 1 & 0 & 0
+    \end{pmatrix}}{\begin{pmatrix} -1 & 1 & 0 & 0 \end{pmatrix}
+    \begin{pmatrix} -1 \\ 1 \\ 0 \\ 0 \end{pmatrix}} \begin{pmatrix} 1 \\ 0
+    \\ 1 \\ 0 \end{pmatrix} \\
+    &= \begin{pmatrix} 1/2 \\ 1/2 \\ 1 \\ 0 \end{pmatrix}
+\end{align*}
+The final vector is given by the Gram-Schmidt algorithm
+\begin{align*}
+    v_3 &= a_3 - \frac{v_1 v_1^T}{v_1^T v_1} a_3 - \frac{v_2 v_2^T}{v_2^T v_2} a_3 \\
+    &= \begin{pmatrix} -1 \\ 0 \\ 0 \\ 1 \end{pmatrix} -
+    \frac{\begin{pmatrix} -1 \\ 1 \\ 0 \\ 0 \end{pmatrix} \begin{pmatrix} -1
+    & 1 & 0 & 0 \end{pmatrix}}{\begin{pmatrix} -1 & 1 & 0 & 0 \end{pmatrix}
+    \begin{pmatrix} -1 \\ 1 \\ 0 \\ 0 \end{pmatrix}} \begin{pmatrix} -1 \\ 0
+    \\ 0 \\ 1 \end{pmatrix} - \frac{\begin{pmatrix} 1/2 \\ 1/2 \\ 1 \\ 0
+    \end{pmatrix} \begin{pmatrix} 1/2 & 1/2 & 1 & 0
+    \end{pmatrix}}{\begin{pmatrix} 1/2 & 1/2 & 1 & 0 \end{pmatrix}
+    \begin{pmatrix} 1/2 \\ 1/2 \\ 1 \\ 0 \end{pmatrix}} \begin{pmatrix} -1 \\ 0
+    \\ 0 \\ 1 \end{pmatrix}\\
+    &= \begin{pmatrix} -1/3 \\ -1/3 \\ 1/3 \\ 1 \end{pmatrix}
+\end{align*}
+Thus, the orthogonal basis is
+$$ \left\{ \begin{pmatrix}
+    -1 \\
+    1 \\
+    0 \\
+    0
+\end{pmatrix},\, \begin{pmatrix}
+    1/2 \\
+    1/2 \\
+    1 \\
+    0
+\end{pmatrix},\, \begin{pmatrix}
+    -1/3 \\
+    -1/3 \\
+    1/3 \\
+    1
+\end{pmatrix} \right\} $$
+The length of each vector is given as
+$$ || v_1 || = \sqrt{2},\, || v_2 || = \sqrt{\frac{3}{2}},\, || v_3 || =
+\sqrt{\frac{4}{3}} $$
+Therefore, the orthonormal basis is
+$$ \left\{ \begin{pmatrix}
+    -\sqrt{1/2} \\
+    \sqrt{1/2} \\
+    0 \\
+    0
+\end{pmatrix},\, \begin{pmatrix}
+    \sqrt{1/6} \\
+    \sqrt{1/6} \\
+    \sqrt{2/3} \\
+    0
+\end{pmatrix},\, \begin{pmatrix}
+    -\sqrt{1/12} \\
+    -\sqrt{1/12} \\
+    \sqrt{1/12} \\
+    \sqrt{3/4}
+\end{pmatrix} \right\} $$
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+Take, for example, the following matrix $A$
+$$ A = \begin{pmatrix}
+    1 & 2 \\
+    1 & 2
+\end{pmatrix} $$
+These columns are not independent and therefore not full column rank. When
+trying to do Gram-Schmidt, the first orthogonal vector is
+$$ v_1 = a_1 = \begin{pmatrix} 1 \\ 2 \end{pmatrix} $$
+And the second orthogonal vector is
+\begin{align*}
+    v_2 &= a_2 - \frac{v_1 v_1^2}{v_1^2 v_1} a_2 \\
+    &= \begin{pmatrix} 2 \\ 2 \end{pmatrix} - \frac{\begin{pmatrix} 1 \\ 1
+    \end{pmatrix} \begin{pmatrix} 1 & 1 \end{pmatrix}}{\begin{pmatrix} 1 & 1
+    \end{pmatrix} \begin{pmatrix} 1 \\ 1 \end{pmatrix}} \begin{pmatrix} 2 \\
+    2 \end{pmatrix} \\
+    &= \begin{pmatrix} 2 \\ 2 \end{pmatrix} - \begin{pmatrix} 2 \\ 2 \end{pmatrix} \\
+    &= \begin{pmatrix} 0 \\ 0 \end{pmatrix}
+\end{align*}
+But the second vector has zero length, therefore a division by zero will
+occur when creating the orthonormal basis.
+
+\subsection*{Part B}
+
+This can be avoided if the pivot columns of $A$ are taken instead.
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+The $Q$ can be formed by concatenating the matrix $V$ which is the
+orthonormal basis for the left null space of $A$.
+
+\subsection*{Part B}
+
+Given this new $Q$, the matrix $R$ takes the following form
+$$ R = \begin{pmatrix}
+    \hat{R} \\
+    0
+\end{pmatrix} $$
+Where $0$ is a $(m - n) \times n $ zero matrix. Therefore, the dimensions of
+$R$ must be $m \times n$.
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+The matrix $M$ is an upper triangular matrix, however, it is "mirrored" from
+the traditional sense. For example,
+$$ M = \begin{pmatrix}
+    \star & \star & \star & \star \\
+    \star & \star & \star & 0 \\
+    \star & \star & 0 & 0 \\
+    \star & 0 & 0 & 0
+\end{pmatrix} $$
+
+\section*{Problem 5}
+
+\subsection*{Part A}
+
+The first orthogonal polynomial is given by
+$$ v_1(x) = a_1 = 1 $$
+The second orthogonal polynomial is given through the Gram-Schmidt algorithm
+\begin{align*}
+    v_2(x) &= a_2 - v_1 \frac{v_1 \cdot a_2}{v_1 \cdot v_1} \\
+    &= x - \frac{(1) [(1) \cdot (x)]}{(1) \cdot (1)} \\
+    &= x - \frac{\int_0^{\infty} x e^{-1} dx}{\int_0^{\infty} e^{-x} dx} \\
+    &= x - \frac{1!}{0!} \\
+    &= x - 1
+\end{align*}
+Lastly, the final orthogonal polynomial is given through the Gram-Schmidt
+algorithm
+\begin{align*}
+    v_3(x) &= a_3 - v_1 \frac{v_1 \cdot a_3}{v_1 \cdot v_1} - v_2 \frac{v_2 \cdot a_3}{v_2 \cdot v_2} \\
+    &= x^2 - \frac{(1) [(1) \cdot (x^2)]}{(1) \cdot (1)} - \frac{(x - 1) [(x - 1) \cdot (x^2)]}{(x - 1) \cdot (x - 1)} \\
+    &= x^2 - \frac{\int_0^\infty x^2 e^{-x} dx}{\int_0^\infty e^{-x} dx} - \frac{(x - 1) \int_0^\infty (x^3 - x^2) e^{-x} dx}{\int_0^\infty (x^2 -2x + 1) e^{-x} dx} \\
+    &= x^2 - \frac{2!}{0!} - \frac{(x - 1) (3! - 2!)}{2! - 2 \cdot 1! + 0!} \\
+    &= x^2 - 4x + 2
+\end{align*}
+The length of each of these polynomials is 
+$$ || v_1(x) || = 1,\, || v_2(x) || = 1,\, || v_3(x) || = 2 $$
+Therefore, the orthonormal basis for degree three polynomials (using this
+definition of the dot product) is given by
+$$ q_1(x) = 1,\, q_2(x) = x - 1,\, q_3(x) = \frac{1}{2} x^2 - 2x + 1 $$
+
+\subsection*{Part B}
+
+This is equivalent to projecting the function $f(x)$ onto the span of $x$.
+Therefore, the coefficient $\alpha$ is given by
+$$ \alpha = \frac{x \cdot f(x)}{x \cdot x} $$
+Using the dot product definition provided,
+$$ \alpha = \frac{\int_0^\infty x f(x) e^{-x} dx}{\int_0^\infty x^2 e^{-x}
+dx} $$
+Evaluating the integral piecewise
+\begin{align*}
+    \alpha &= \frac{\int_0^1 x^2 e^{-x} dx + \int_1^\infty x \cdot 0 \cdot
+    e^{-x} dx}{\int_0^\infty x^2 e^{-x} dx} \\
+    &= 1 - \frac{5}{2 e}
+\end{align*}
+
+\end{document}
