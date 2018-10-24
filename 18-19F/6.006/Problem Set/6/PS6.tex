@@ -1,0 +1,211 @@
+%
+% 6.006 problem set 6 solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros-fa18}
+\newcommand{\theproblemsetnum}{6}
+\newcommand{\releasedate}{Thursday, October 18}
+\newcommand{\partaduedate}{Thursday, October 25}
+
+\title{6.006 Problem Set 6}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 11PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:}
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem 
+\begin{problemparts}
+\problempart Graph 1
+    \begin{center}
+        \includegraphics[scale=0.35]{Images/P1Ai.PNG}
+    \end{center}
+
+    Graph 2
+    \begin{center}
+        \includegraphics[scale=0.35]{Images/P1Aii.PNG}
+    \end{center}
+
+\problempart Order-8 Division Graph
+    \begin{center}
+        \includegraphics[scale=0.35]{Images/P1B.PNG}
+    \end{center}
+
+\problempart Order-8 division graph BFS from 4. Order visited given as
+superscript.
+    \begin{center}
+        \includegraphics[scale=0.35]{Images/P1Ci.PNG}
+    \end{center}
+
+    Order-8 division graph DFS from 4. Order visited given as superscript.
+    \begin{center}
+        \includegraphics[scale=0.35]{Images/P1Cii.PNG}
+    \end{center}
+
+\end{problemparts}
+
+\newpage
+\problem {\bf Description} For each vertex, run BFS. The number of levels
+    returned after BFS has finished running for each vertex will give the
+    radius of each vertex. Take the minimum of these and return.
+
+    {\bf Correctness} The radius of a vertex is defined to be the shortest
+    path to the farthest vertex. BFS will return the shortest path to every
+    vertex from a source vertex. Therefore, the longest path returned from
+    BFS for the source vertex will be that vertex's radius. The radius of a
+    graph is given by the smallest radius. This is simply the minimum radius
+    as found previously.
+
+    {\bf Running Time} A naive approach to the run time will suggest that the
+    running time is $ O(|V| \cdot (|V| + |E|)) = O(|V|^2 + |V||E|)$. However,
+    given that the graph is connected, there are at least as many edges as
+    vertices and therefore, this becomes $O(|V||E| + |V||E|)$ which is simply
+    $O(|V| |E|)$.
+
+\problem {\bf Description} Apply DFS to each vertex (starting with the
+    Capitol vertex) keeping track of those previously visited (full DFS).
+    Starting with a counter initialized to zero, every time a new iteration
+    of DFS is needed (a vertex is encountered not previously hit by a DFS),
+    increase the counter by 1. Return the counter at the end of the full DFS.
+
+    {\bf Correctness} Each DFS will discover every vertex reachable from that
+    source vertex. If a new iteration is needed, then that vertex was not
+    originally reachable by any previous DFS. In this case, that means it is
+    not reachable from the Capitol given that this was the first vertex DFS
+    was run on. By connecting this vertex to the Capitol, all the vertices
+    encountered during that DFS are now reachable. This must be the minimum
+    number as it results in adding the least number of vertices to make a
+    connected graph.
+
+    {\bf Running Time} Assuming full DFS requires worst-case $O(|V| + |E|)$.
+    Since this algorithm only makes a constant-time modification to full DFS,
+    this will also be worst-case $O(|V| + |E|)$.
+
+\newpage
+\problem  % Problem 4
+
+\begin{problemparts}
+\problempart {\bf Description} For every $k$-weighted edge, divide the edge
+    into $k$ sections by inserting $k - 1$ vertices along that edge separated
+    by a weight-1 edge. Then perform BFS on this graph.
+
+    {\bf Correctness} Each edge is clearly now represented by a path of
+    length $k$. Therefore, it has the effect of an edge of weight $k$.
+
+    {\bf Running Time} The number of vertices is now, worst-case, $|V| = n +
+    kf$. The number of edges is now, worst-case, $|E| = kf$. Therefore, since
+    BFS runs in, worst-case $O(|V| + |E|)$ the new running time is $O(n +
+    2kf) \in O(n + kf)$.
+
+\problempart {\bf Description} For every vertex, replace it with $k$ vertices
+    connected linearly with weight-1 edges. Then, for an edge of weight $ 1
+    \leq i \leq k$ from $u$ to $v$, connect the edge to the last vertex in
+    the chain of $k$ vertices representing $u$ and the $k - i + 1$th vertex
+    in the chain of $k$ vertices representing $v$ (one-indexed).
+
+    {\bf Correctness} Each edge is clearly now represented by a path of
+    length $k$. Therefore, it has the effect of an edge of weight $k$.
+
+    {\bf Running Time} The number of vertices is now $|V| = kn$. The number
+    of edges is now $|E| = f + nk - 1$. Therefore, since BFS runs in,
+    worst-case, $O(|V| + |E|)$, the new running time is $O(2kn + f - 1) \in
+    O(kn + f)$.
+\end{problemparts}
+
+\problem {\bf Description} Perform a modified BFS on the source pf Zink's
+    location. Instead of constructing a list of levels of vertices reachable
+    by a specific distance, construct a list of levels representing the cost
+    of traversing to that vertex. To choose the order of vertices to traverse
+    at each step, prepend any zero-weight edges to the beginning of queue and
+    append any one-weight edges to the end of a queue. Then visit in the
+    order of the queue from zeros to ones.
+
+    {\bf Correctness} This is the same as BFS except the order of traversal
+    is not ``random'' or predetermined, rather, it is based on the weight of
+    the edge. Therefore, BFS will still return the shortest path, but now the
+    shortest weighted path as lower weights are given preference.
+
+    {\bf Running Time} Same as BFS, $O(|V| + |E|)$, as no changes were made
+    beyond constant adjustment operations (enqueue/dequeue).
+
+\newpage
+\problem  % Problem 6
+
+\begin{problemparts}
+\problempart {\bf Description} Iterate over all $x$ and $y$ in the range $[1,
+    k]$. Check to see if the following condition is true
+
+    {\tt A[y][x] == x + ky + 1}
+
+    Where {\tt A} is the tuple of tuples where first index gives row and the
+    second gives column. If it is true for all $x$ and $y$, then the Rubik's
+    $k$-square is solved.
+
+    {\bf Correctness} Taken directly from the definition in the problem
+    question, every $i$th cubie is solved if $x = i - ky - 1$. Solving for
+    $i$ gives the above expression.
+
+    {\bf Running Time} There are a total of $k^2$ elements to check, each
+    check is constant, therefore the running time is $O(k^2)$.
+
+\problempart {\bf Descption} Provided a configuration, apply all $2k$
+    possible moves as defined in the problem question iterating over columns
+    and then rows.
+
+    {\bf Correctness} From the problem question, the number of possible moves
+    is $2k$ therefore this will hit all possible reachable configurations.
+
+    {\bf Running Time} To construct the new tuple of tuples requires $k^2$
+    work. $2k$ different tuples of tuples are created. Therefore, the total
+    work is $O(k^3)$.
+
+\problempart Looking at a single element of a Rubik's $k$-square, $a_{ij}$,
+    there are only four positions this element can be moved to using the game
+    definitions. Take, WLOG, $i = j = 0$. Then, $a_{ij}$ can take the
+    positions $a_{00}$, $-a_{k0}$, $a_{kk}$, or $-a_{0k}$. No other position
+    is possible. Using symmetry, this can be applied to all $k^2$ elements in
+    the Rubik's $k$-square. Therefore, the total number of configurations
+    must be $4^{k^2}$.
+
+\problempart {\bf Description} Start with the provided configuration. Add the
+    configuration to a hashtable of all encountered configurations. Determine
+    all possible configurations reachable from the current configuration.
+    Apply BFS on this configuration where the adjacent vertices are given by
+    all the possible configurations calculated. Ignore those already present
+    in the hastable. If the configuration is solved, break out and return the 
+    sequence leading up to the solved state. Repeat.
+
+    {\bf Correctness} The vertices of this graph are all possible
+    configurations reachable. BFS will determine the shortest path from a
+    single source configuration to all other configurations, including the
+    solved state. Since this algorithm breaks exactly when the solved
+    configuration is reached, a traversal up the levels will result in the
+    shortest path from the source configuration to the solved configuration.
+
+    {\bf Running Time} At each vertex, you are doing $O(k^3)$ work to compute
+    the adjacent vertices. Then, you also check if the configurations have
+    already been visited which is $O(1)$ expected for each configuration
+    which there are $2k$ of. Since we showed that there are at most $4^{k^2}$
+    vertices, the total work must be $O(4^{k^2} k^3)$ expected.
+
+\problempart Submit your implementation to {\small\url{alg.mit.edu/PS6}}
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
