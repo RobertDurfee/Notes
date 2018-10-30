@@ -1,0 +1,170 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{18.06 Problem Set 8}
+\author{Robert Durfee}
+\date{October 31, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\textit{In class, we showed that the pseudoinverse $A^+ = V \Sigma^{-1} U^T$
+gives the minimum-norm least-squares solution $\hat{x} = A^+ b$.}
+
+\textit{Suppose that $A$ is an $m\times n$ matrix with full column rank. In
+this case, $V$ is a ... matrix. By plugging in the SVD $A = U \Sigma V^T$
+(and keeping in mind the shapes of the matrices), show explicitly in this
+case that}
+$$ A^+ = (A^T A)^{-1} A^T $$
+
+\bigbreak
+
+In this case, $V$ is a square matrix such that $V V^T = I$ and $V^T V = I$.
+Substituting the SVD for $A$ into the provided expression:
+\begin{align*}
+  A^{+} &= (A^T A)^{-1} A^T \\
+  &= ((U \Sigma V^T)^T(U \Sigma V^T))^{-1} (U \Sigma V^T)^T \\
+  &= ((V \Sigma^T U^T)(U \Sigma V^T))^{-1} (V \Sigma^T U^T)
+\end{align*}
+However, from the SVD, $U^T U = I$, therefore
+\begin{align*}
+  A^{+} &= (V \Sigma^T \Sigma V^T)^{-1} (V \Sigma^T U^T)
+\end{align*}
+Furthermore, $\Sigma$ is diagonal therefore $\Sigma^T = \Sigma$
+\begin{align*}
+  A^{+} &= (V \Sigma^2 V^T)^{-1} (V \Sigma U^T) \\
+  &= V (\Sigma^2)^{-1} V^{-1} V \Sigma U^T \\
+  &= V (\Sigma^2)^{-1} \Sigma U^T \\
+  &= V \Sigma^{-1} U^T
+\end{align*}
+
+\section*{Problem 2}
+
+\textit{Recall the polynomial fitting exercise from the least-square fitting
+notebook in lecture 12. We saw that one of the things that can go terribly
+wrong is overfitting. Here, we will use the SVD to help us understand this
+phenomenon.}
+
+\textit{In class, we fitted a polynomial of degree $n$ to 50 data points
+generated from a degree-3 polynomial $1 + 2a + 3a^2 + 4a^3$ plus noise, using
+the $m \times n$ Vandermonde matrix}
+$$ A = \begin{pmatrix}
+  1 & a_1 & a_1^2 & \cdots & a_1^{n-1} \\
+  1 & a_2 & a_2^2 & \cdots & a_2^{n-1} \\
+  1 & a_3 & a_3^2 & \cdots & a_3^{n-1} \\
+  \vdots & \vdots & \vdots & \ddots & \vdots \\
+  1 & a_m & a_m^2 & \cdots & a_m^{n-1} \\
+\end{pmatrix} $$
+\textit{and we found that the fit "went crazy" for $n=40$.}
+
+\subsection*{Part A}
+
+\textit{Look at the singular values $\sigma_k$ of $A$. What is the condition
+number of the matrix? The matrix $A$ is very ill-conditioned, which means
+that the columns are nearly linearly dependent. As you add more and more
+columns to $A$ (that is, as you increase $n$), why are they becoming nearly
+linearly dependent? What vector are the rightmost columns becoming nearly
+parallel to?}
+
+\bigbreak
+
+The condition number of the matrix is $2.778 \cdot 10^{21}$. The columns are
+becoming nearly dependent because the rightmost columns are becoming nearly
+parallel to the previous columns.
+
+\subsection*{Part B}
+
+\textit{Another symptom of the fact that the matrix $A$ is ill-conditioned is
+that our solution $\hat{x}$ from above had huge components (because $\hat{x}
+= A^+ b$ divides by $\sigma$ values that are nearly zero). In consequence, a
+common technique to cope with overfitting is ridge regression, also called a
+Tikhonov regularization and many other names. Instead of minimizing
+$\Vert b - Ax \Vert$, we minimize:}
+$$ \Vert b - Ay \Vert^2 + \lambda \Vert y \Vert^2 $$
+\textit{where $\lambda > 0$ is some constant parameter (whose magnitude
+depends on the amount of noise etcetera), corresponding to a penalty term
+$\lambda \Vert y \Vert^2$ that tries to make $\Vert y \Vert$ small. Using the
+solution to problem 8 of problem set 6, give an equation for the minimum
+$\hat{y}$ of the ridge-regularized fitting problem. It should look very
+similar to the $A^T A \hat{x} = A^T b$ "normal equations" for ordinary
+fitting, and should be identical for $\lambda = 0$.}
+
+\bigbreak
+
+Starting with the provided expression for ridge-regression
+$$ \lVert b - Ay \rVert^2 + \lambda \lVert y \rVert^2 $$
+This expression can be written as the following to closely match that in
+problem set 6.
+$$ \lVert b - Ay \rVert^2 + \lVert 0 - \sqrt{\lambda} I y \rVert^2 $$
+Using the equation derived from problem set 6, the normal equations are given
+by
+$$ \begin{pmatrix}
+  A^T & -\sqrt{\lambda} I
+\end{pmatrix} \begin{pmatrix}
+  A \\
+  -\sqrt{\lambda} I
+\end{pmatrix} \hat{y} = \begin{pmatrix}
+  A^T & -\sqrt{\lambda} I
+\end{pmatrix} \begin{pmatrix}
+  b \\
+  \vec{0}
+\end{pmatrix} $$
+Thus, the solution of $\hat{y}$ is
+$$ \hat{y} = (A^T A + \lambda I)^{-1} A^T b $$
+
+\subsection*{Part D}
+
+\textit{For a full column-rank $m\times n$ matrix with SVD $A = U \Sigma
+V^T$, write the ridge-regularized solution in a form resembling the
+pseudoinverse:}
+$$ \hat{y} = V \, (???) \, U^T b $$
+\textit{where $(???)$ is some $n\times n$ matrix in terms of the singular
+values $\sigma_k$ and the regularization parameter $\lambda$. Your result
+should be equivalent to the pseudoinverse $A^+$ but with each singular
+value $\sigma_k$ replaced by ..., which effectively makes the
+singular values ... and the condition number ... ?}
+
+\bigbreak
+
+Substituting the SVD into the derived equation above,
+\begin{align*}
+  \hat{y} &= (A^T A + \lambda I)^{-1} A^T b \\
+  &= ((U \Sigma V^T)^T(U \Sigma V^T) + \lambda I)^{-1} (U \Sigma V^T)^T b \\
+  &= (V \Sigma^T U^T U \Sigma V^T) + \lambda I)^{-1} (V \Sigma^T U^T) b
+\end{align*}
+Once again, $U^T U = I$ and $\Sigma^T = \Sigma$, thus
+\begin{align*}
+  \hat{y} = (V \Sigma^2 V^T + \lambda I)^{-1} (V \Sigma U^T) b
+\end{align*}
+Given that $\Sigma$ is diagonal,
+\begin{align*}
+  \hat{y} &= (V (\Sigma^2 + \lambda I) V^T)^{-1} (V \Sigma U^T) b \\
+  &= V (\Sigma^2 + \lambda I) V^{-1} V \Sigma U^T b \\
+  &= V (\Sigma^2 + \lambda I) \Sigma U^T b
+\end{align*}
+Therefore $(???) = (\Sigma^2 + \lambda I) \Sigma$. Which, I think, is in
+simplest terms.
+
+From this, every $\sigma_k$ is replace with
+$$ \sigma_k = \frac{\sigma_k}{\sigma_k^2 + \lambda} $$
+Which makes the singular values smaller and the condition number smaller.
+
+\end{document}
