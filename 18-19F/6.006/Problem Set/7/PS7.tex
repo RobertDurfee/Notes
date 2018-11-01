@@ -65,7 +65,7 @@ $O(|V|)$. Then for $k$ times (instead of $|V| - 1$ times), relax $|E|$ edges.
 Therefore, the running time is $O(|V| + k|E|)$.
 
 \problem {\bf Description} Create a graph where the different states of
-tranfiguration are vertices and the altered mass ratios $w = -r + 1$ as the
+tranfiguration are vertices and the altered mass ratios $w = -\log(r)$ as the
 edges. Run Bellman-Ford on this graph with source salt where the shortest
 path is the one that provides the most of any material starting with salt. If
 there is a negative-weight cycle along the path from salt to a material, then
@@ -73,35 +73,58 @@ an infinite amount of that material can be produced.
 
 To determine the maximum gold, assuming the path from salt to gold does not
 contain a negative-weight cycle for now, follow parent pointers from gold to
-salt multiplying the original amount of $s$ by the ratio $r = -(w - 1)$
+salt multiplying the original amount of $s$ by the ratio $r = e^{-w}$
 (where $w$ is the weight of the edge in the constructed graph).
 
 If there is a negative-weight cycle detected along this path, then infinite
 gold can be produced.
 
 {\bf Correctness} Bellman-Ford will give the shortest path as shown in
-lecture. The shortest path between states with weights $w = -r + 1$ must
-yield the maximum gold because maximum paths now become minimum paths as all
-$r$ were originally greater than $0$. Furthermore, negative-weight cycles
-will exist only for cycles of weight $w < 0$ or, equivalently, $r > 1$, which
-yields infinite material reachable by that cycle.
+lecture. The shortest path between states with weights $w = -\log(r)$ must
+yield the maximum gold because maximum multiplicative paths now become
+minimum additive paths given the monotonically increasing nature of
+logarithms and ability to convert products into sums. Furthermore,
+negative-weight cycles will exist only for cycles of weight $w < 0$ or,
+equivalently, $r > 1$, which yields infinite material reachable by that
+cycle.
 
 {\bf Running Time} Analogous to Bellman-Ford runtime analysis with graph
 construction done linearly. Therefore, $O(|V||E|)$.
 
 \newpage
 
-\problem
+\problem {\bf Description} Construct a graph where each of the edges are
+weighted according to the health lost at the destination cave if and only if
+the destination cave is of strictly higher elevation. If the cave is of equal
+height, delete the edge. Run topological sort and DAG SSSP which will return
+the shortest weighted path from their current location to all destinations.
+If a destination is an exit to the tunnel system and has weight less thant
+$k$, it is possible for them to escape without seriously harming Zink's
+sword.
 
-\problem {\bf Description} Construct a graph with vertices as road
-intersections and roads are represented by two directed, weighted edges. One
-edge has weight $a - h_R$ and the other $a - h_L$ to represent traveling
-along the road one direction or the other. Run Bellman-Ford to find the SSSP
-from Lee's location. If the shortest path from Lee to Whike is negative (in
-terms of the weights constructed), assuming no negative-weight cycles for
-now, then Lee can travel to Whike with strictly more candy. If Bellman-Ford
-detects a cycle reachable to both Whike and Lee, then an infinite amount of
-candy can be accumulated.
+{\bf Correctness} By construction, edges are directed in the direction of
+strictly increasing height. This creates a DAG as once you go up a level, you
+must continue to go up, you cannot go down or stay on the same level. From
+this, a topological sort must exist and DAG SSSP will return all shortest
+paths. If the shortest path to a system exit is less than $k$, then that path
+provides the way for Zink and Lelda to leave the system.
+
+{\bf Running Time} The traversal to correct the edges is linear $O(|V| +
+|E|)$. Then, DAG SSSP will take $O(|V| + |E|)$. Therefore, overall runtime is
+$O(|V| + |E|)$.
+
+\problem {\bf Description} Note: This assumes that the source and destination
+houses are located at intersections. If they are not, Lee should start/stop
+at the closest intersection and proceed as follows. 
+
+Construct a graph with vertices as road intersections and roads are
+represented by two directed, weighted edges. One edge has weight $a - h_R$
+and the other $a - h_L$ to represent traveling along the road one direction
+or the other. Run Bellman-Ford to find the SSSP from Lee's location. If the
+shortest path from Lee to Whike is negative (in terms of the weights
+constructed), assuming no negative-weight cycles for now, then Lee can travel
+to Whike with strictly more candy. If Bellman-Ford detects a cycle reachable
+to both Whike and Lee, then an infinite amount of candy can be accumulated.
 
 {\bf Correctness} Bellman-Ford will give the shortest path as shown in
 lecture. The shortest path between Whike and Lee using the weights $a - h_R$
@@ -119,21 +142,42 @@ construction done linearly. Therefore $O(|V||E|)$.
 
 \begin{problemparts}
 
-\problempart {\bf Description} Run topological sort on the graph. Visit each
-vertex in topological sort order. For each vertex, {\it contract} each
-adjacent edge. Contract is the opposite of relax in that a distance
-estimation is increased if {\tt d[v] < d[u] + w(u, v)} and the parent is
-updated. The distances stored will be the maximum weighted paths.
+\problempart {\bf Description} Run topological sort on the graph. Negate all
+edge weights. Visit each vertex in topological sort order performing DAG SSSP
+described in lecture. The shortest paths returned are actually the longest.
 
-{\bf Correctness} Since this is a DAG, a topological sort exists.
+{\bf Correctness} Since this is a DAG, a topological sort exists. It was
+shown in lecture that topological order is the optimal way to perform
+relaxation. The shortest negative path is, intuitively, the longest positive
+path. Note that it was also shown that DAG SSSP works for negative weights.
 
-{\bf Running Time} 
+{\bf Running Time} This is essentially the same algorithm as the DAG SSSP
+presented in lecture. Therefore, it has the same running time $O(|V| + |E|)$
+as each vertice is hit once as well as each edge.
 
-\problempart {\bf Description} 
+\problempart {\bf Description} Take the transformations and construct a
+reversed directed graph where edges point from the target of each
+transformation to one of the sources for each source. The weights of each
+edge is the time it takes to construct the transformation. Run the algorithm
+described above on the target which will give the maximum path to each
+possible source. For each source, follow the parent pointers back to the
+target and record the length along the way. Return the greatest length.
 
-{\bf Correctness}
+{\bf Correctness} It wouldn't make sense for the file conversions to result
+in a cycle, therefore I will assume that there are no cycles. The reverse of a
+directed graph will turn SSSP into single-target shortest-path, as discussed
+in lecture. As a result, since the algorithm described above performs
+efficient single-source longest path on the reverse DAG, this will convert to
+the single-target longest path for each possible source. The longest of each
+of the provided sources is the limiting factor on the overall speed of the
+parallelization of the DAG. Therefore, the maximum longest path with respect
+to the given sources returns the minimum build time.
 
-{\bf Running Time}
+{\bf Running Time} To construct the graph takes linear time $O(|V| + |E|)$.
+The algorithm described above also takes linear time $O(|V| + |E|)$. Then,
+each iteration over sources $|S|$ could, at worst, hit all edges, thus
+$O(|E|)$. Therefore, the overall runtime is $O(|V| + |S||E|)$. If $|S|
+\longrightarrow |V|$, this approaches $O(|V||E|)$.
 
 \problempart Submit your implementation to {\small\url{alg.mit.edu/PS7}}
 
@@ -142,4 +186,3 @@ updated. The distances stored will be the maximum weighted paths.
 \end{problems}
 
 \end{document}
-

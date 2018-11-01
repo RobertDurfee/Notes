@@ -58,7 +58,7 @@ def ss_maximum_path(wadj, s):
     def get_d(u):
         return d_backing[u] if u in d_backing else -math.inf
 
-    def set_d(u, v):
+    def set_d(u, v)
         d_backing[u] = v
 
     set_d(s, 0)
