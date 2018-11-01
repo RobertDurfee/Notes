@@ -1,0 +1,145 @@
+\documentclass[12pt,twoside]{article}
+
+\input{macros-fa18}
+\newcommand{\theproblemsetnum}{7}
+\newcommand{\releasedate}{Thursday, October 25}
+\newcommand{\partaduedate}{Thursday, November 1}
+
+\title{6.006 Problem Set 7}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 11PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} Joanna Cohen 
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem
+
+\begin{problemparts}
+
+\problempart There are cycles in the graph between vertices $(4-7)$ and $(7-9)$.
+
+\problempart After running DFS visiting each node in order 0-12, here is the
+parent forest (shown in red)
+
+\begin{center}
+    \includegraphics[scale=0.55]{Images/P1B.PNG}
+\end{center}
+
+The {\it reversed} finishing time order is
+
+{\tt 12, 11, 8, 3, 4, 7, 9, 6, 10, 5, 2, 1, 0}
+
+\problempart The reversed order would be a topological sort if the edges $(7
+\rightarrow 4)$ and $(9 \rightarrow 7)$ were removed.
+
+\end{problemparts}
+
+\newpage
+
+\problem {\bf Description} Run Bellman-Ford on the unmodified graph. However,
+only run the outer loop (which typically runs $|V| - 1$ times) $k$ times.
+
+{\bf Correctness} When running Bellman-Ford, we typically run the relaxation
+process $|V| - 1$ times. This is to ensure that if there is a path connecting all
+vertices, all its edges have been relaxed to the shortest possible distance.
+But, in this case, there is a guarantee that the longest path only involves
+$k$ edges. Therefore, we can safely terminate Bellman-Ford after $k$
+iterations of the outer loop. The rest of the proof is analogous to the
+standard Bellman-Ford given in lecture.
+
+{\bf Running Time} As in the standard Bellman-Ford, initialization takes
+$O(|V|)$. Then for $k$ times (instead of $|V| - 1$ times), relax $|E|$ edges.
+Therefore, the running time is $O(|V| + k|E|)$.
+
+\problem {\bf Description} Create a graph where the different states of
+tranfiguration are vertices and the altered mass ratios $w = -r + 1$ as the
+edges. Run Bellman-Ford on this graph with source salt where the shortest
+path is the one that provides the most of any material starting with salt. If
+there is a negative-weight cycle along the path from salt to a material, then
+an infinite amount of that material can be produced.
+
+To determine the maximum gold, assuming the path from salt to gold does not
+contain a negative-weight cycle for now, follow parent pointers from gold to
+salt multiplying the original amount of $s$ by the ratio $r = -(w - 1)$
+(where $w$ is the weight of the edge in the constructed graph).
+
+If there is a negative-weight cycle detected along this path, then infinite
+gold can be produced.
+
+{\bf Correctness} Bellman-Ford will give the shortest path as shown in
+lecture. The shortest path between states with weights $w = -r + 1$ must
+yield the maximum gold because maximum paths now become minimum paths as all
+$r$ were originally greater than $0$. Furthermore, negative-weight cycles
+will exist only for cycles of weight $w < 0$ or, equivalently, $r > 1$, which
+yields infinite material reachable by that cycle.
+
+{\bf Running Time} Analogous to Bellman-Ford runtime analysis with graph
+construction done linearly. Therefore, $O(|V||E|)$.
+
+\newpage
+
+\problem
+
+\problem {\bf Description} Construct a graph with vertices as road
+intersections and roads are represented by two directed, weighted edges. One
+edge has weight $a - h_R$ and the other $a - h_L$ to represent traveling
+along the road one direction or the other. Run Bellman-Ford to find the SSSP
+from Lee's location. If the shortest path from Lee to Whike is negative (in
+terms of the weights constructed), assuming no negative-weight cycles for
+now, then Lee can travel to Whike with strictly more candy. If Bellman-Ford
+detects a cycle reachable to both Whike and Lee, then an infinite amount of
+candy can be accumulated.
+
+{\bf Correctness} Bellman-Ford will give the shortest path as shown in
+lecture. The shortest path between Whike and Lee using the weights $a - h_R$
+and $a - h_L$ must be the one that maximizes candy accumulation as maximum
+paths become minimum paths when weights are negated. If a negative-weight
+cycle is reached, then there must exist a cycle where more candy is gained
+than lost, thus infinite candy can be gained.
+
+{\bf Running Time} Analogous to Bellman-Ford runtime analysis with graph
+construction done linearly. Therefore $O(|V||E|)$.
+
+\newpage
+
+\problem
+
+\begin{problemparts}
+
+\problempart {\bf Description} Run topological sort on the graph. Visit each
+vertex in topological sort order. For each vertex, {\it contract} each
+adjacent edge. Contract is the opposite of relax in that a distance
+estimation is increased if {\tt d[v] < d[u] + w(u, v)} and the parent is
+updated. The distances stored will be the maximum weighted paths.
+
+{\bf Correctness} Since this is a DAG, a topological sort exists.
+
+{\bf Running Time} 
+
+\problempart {\bf Description} 
+
+{\bf Correctness}
+
+{\bf Running Time}
+
+\problempart Submit your implementation to {\small\url{alg.mit.edu/PS7}}
+
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
