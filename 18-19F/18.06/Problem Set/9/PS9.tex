@@ -1,0 +1,237 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{18.06 Problem Set 9}
+\author{Robert Durfee}
+\date{November 7, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{Part A}
+
+Given that $Q^T = Q^{-1}$, the following must be true
+$$ Q^{T} Q = I $$
+From this, the determinant of the right must be equal to the determinant of
+the left as follows
+$$ \mathrm{det}(Q^T Q) = \mathrm{det}(I) $$
+The determinant of the identity matrix is $1$, thus
+$$ \mathrm{det}(Q^T Q) = 1 $$
+The left side can be broken apart
+$$ \mathrm{det}(Q^T) \mathrm{det}(Q) = 1 $$
+From the properties of determinants
+$$ \mathrm{det}(Q)^2 = 1 $$
+Therefore the determinant must be $+1$ or $-1$.
+
+\subsection*{Part B}
+
+This matrix must be rank deficient. Therefore, the determinant is $0$.
+
+\subsection*{Part C}
+
+Using the following properties,
+$$ \mathrm{det}(A) = \mathrm{det}(A^T) $$
+$$ \mathrm{det}(c A) = c^n \mathrm{det}(A) $$
+THe following is true for a skew-symmetric matrix,
+$$ \mathrm{det}(A) = -\mathrm{det}(A) $$
+As long as $n$ is odd (which it is in this case). Therefore the determinant
+is $0$.
+
+\section*{Problem 2}
+
+Multiplying $B$ by $x_1$
+$$ (2A + 3I) x_1 = 2 \lambda_1 x_1 + 3 x_1 = 13 x_1 $$
+Therefore $\lambda_1' = 13$ and $x_1' = \begin{pmatrix} 1 & 1 \end{pmatrix}^T$
+
+Multiplying $B$ by $x_2$
+$$ (2A + 3I) x_2 = 2 \lambda_2 x_2 + 3 x_2 = x_2 $$
+Therefore $\lambda_2' = 1$ and $x_2' = \begin{pmatrix} -2 & 1 \end{pmatrix}^T$
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+For a simple $3 \times 3$ matrix, this can be written as
+$$ A \begin{pmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & 0 & 1
+\end{pmatrix} = \begin{pmatrix}
+  \lambda_1 & 0 & 0 \\ 
+  0 & \lambda_2 & 0 \\
+  0 & 0 & \lambda_3
+\end{pmatrix} \begin{pmatrix}
+  1 & 0 & 0 \\ 
+  0 & 1 & 0 \\
+  0 & 0 & 1
+\end{pmatrix} $$
+From this, it is clear to see that $A$ must be diagonal.
+
+\subsection*{Part B}
+
+For a simple $3 \times 3$ matrix, this can be written as
+$$ A \begin{pmatrix}
+  \star & \star & \star \\
+  0 & \star & \star \\
+  0 & 0 & \star
+\end{pmatrix} = \begin{pmatrix}
+  \lambda_1 & 0 & 0 \\ 
+  0 & \lambda_2 & 0 \\
+  0 & 0 & \lambda_3
+\end{pmatrix} \begin{pmatrix}
+  \star & \star & \star \\
+  0 & \star & \star \\
+  0 & 0 & \star
+\end{pmatrix} $$
+Since an upper triangular matrix's inverse is also upper triangular and the
+product of two upper triangular matrices is upper triangular,
+$$ A = \begin{pmatrix}
+  \lambda_1 & 0 & 0 \\ 
+  0 & \lambda_2 & 0 \\
+  0 & 0 & \lambda_3
+\end{pmatrix} \begin{pmatrix}
+  \star & \star & \star \\
+  0 & \star & \star \\
+  0 & 0 & \star
+\end{pmatrix} $$
+Thus, it is clear to see that $A$ is also upper triangular.
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+Expanding out the product $A^T A$, the trace is simply
+$$ \mathrm{trace}(A^T A) = \sum_{i, j} a_{ij}^2 $$
+Thus, the Frobenius norm must be
+$$ \lVert A \rVert = \sqrt{\sum_{i, j} a_{ij}^2} $$
+
+\subsection*{Part B}
+
+Using the SVD to write $A$,
+\begin{align*}
+  \mathrm{trace}(A^T A) &= \mathrm{trace}(V \Sigma^T U^T U \Sigma V^T) \\
+  &= \mathrm{trace}(V \Sigma^T \Sigma V^T)
+\end{align*}
+Using properties of the trace,
+\begin{align*}
+  \mathrm{trace}(A^T A) &= \mathrm{trace}(V^T V \Sigma^T \Sigma) \\
+  &= \mathrm{trace}(\Sigma^T \Sigma)
+\end{align*}
+From Part A, we know that the trace of $\Sigma^T \Sigma$ is just
+$$ \sum_{i} \sigma_i^2 $$
+Therefore, the relation to the Frobenius norm is
+$$ \rVert A \lVert = \sqrt{\sum_i \sigma_t^2} $$
+
+\section*{Problem 5}
+
+\subsection*{Part A}
+
+From the definition provided,
+$$ \begin{pmatrix}
+  g_{k+2} \\
+  g_{k+1}
+\end{pmatrix} = \begin{pmatrix}
+  1 - w & w \\
+  1 & 0
+\end{pmatrix} \begin{pmatrix}
+  g_{k+1} \\
+  g_k
+\end{pmatrix} $$
+Therefore,
+$$ A =  \begin{pmatrix}
+  1 - w & w \\
+  1 & 0
+\end{pmatrix} $$
+
+\subsection*{Part B}
+
+Using the equation for $2 \times 2$ characteristic polynomial,
+$$ \lambda^2 - \mathrm{trace}(A) \lambda + \mathrm{det}(A) $$
+The eigenvalues are given by
+$$ \lambda^2 - (1 - w) \lambda - w $$
+The roots are $1$ and $-w$, thus
+$$ \lambda_1 = 1,\, \lambda_2 = -w $$
+From this, the eigenvectors are given by
+$$ (A - \lambda I) = 0 $$
+Yielding
+$$ x_1 = \begin{pmatrix}
+  1 \\
+  1
+\end{pmatrix},\, x_2 = \begin{pmatrix}
+  1 \\
+  -1/w
+\end{pmatrix} $$
+
+\subsection*{Part C}
+
+As $w$ approaches $-1$, the eigenvalues become $ \lambda_1 = \lambda_2 = 1 $.
+And the eigenvectors become $ x_1 = x_2 = \begin{pmatrix} 1 & 1
+\end{pmatrix}^T $. Therefore, this will no longer be diagonalizable.
+
+\subsection*{Part D}
+
+As $n$ approaches $\infty$, the sequence converges to a non-zero constant
+which does depend on the initial $x$.
+
+\subsection*{Part E}
+
+From the eigenvalues and eigenvectors from before,
+$$ A^n = \begin{pmatrix}
+  1 & 1 \\
+  1 & -1/w
+\end{pmatrix} \begin{pmatrix}
+  1^n & 0 \\
+  0 & (-w)^n
+\end{pmatrix} \begin{pmatrix}
+  1/(w + 1) & w / (w + 1) \\
+  1/(w + 1) & -w / (w + 1)
+\end{pmatrix} $$
+As $n$ approaches $\infty$, with $0 < w < 1$ this becomes
+$$ A^n = \begin{pmatrix}
+  1 & 1 \\
+  1 & -1/w
+\end{pmatrix} \begin{pmatrix}
+  1 & 0 \\
+  0 & 0
+\end{pmatrix} \begin{pmatrix}
+  1/(w + 1) & w / (w + 1) \\
+  1/(w + 1) & -w / (w + 1)
+\end{pmatrix} $$
+As a result, 
+$$ A^\infty = \begin{pmatrix}
+  1/(w + 1) & w / (w + 1) \\
+  1/(w + 1) & w / (w + 1)
+\end{pmatrix} $$
+
+\subsection*{Part F}
+
+Substituting $w = 0.5$ and multiplying by $\begin{pmatrix} 1 & 0 \end{pmatrix}^T$ yields
+$$ A^\infty \begin{pmatrix}
+  1 \\
+  0
+\end{pmatrix} = \begin{pmatrix}
+  2/3 \\
+  2/3
+\end{pmatrix} $$
+
+\subsection*{Part G}
+
+\end{document}
