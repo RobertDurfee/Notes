@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{6.041 Problem Set 9}
+\author{Robert Durfee - R02}
+\date{November 7, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+From the Bernoulli distribution with $k$ trials,
+$$ E[X \mid P = p] = k p $$
+Treating $p$ as a random variable,
+$$ E[X \mid P] = k P $$
+Using the law of iterated expectations,
+$$ E[X] = E[E[X \mid P]] = k E[P] $$
+From the uniform distribution in the range $[0, 1]$,
+$$ E[X] = k / 2 $$
+
+From the Bernoulli distribution with $k$ trials,
+$$ \mathrm{var}(X \mid P = p) = k p (1 - p) $$
+Treating $p$ as a random variable,
+$$ \mathrm{var}(X \mid P) = k P (1 - P) $$
+Using the law of total variance
+\begin{align*}
+  \mathrm{var}(X) &= E[\mathrm{var}(X \mid P)] + \mathrm{var}(E[X \mid P]) \\
+  &= E[k P(1 - P)] + \mathrm{var}(k P) \\
+  &= k(E[P] - E[P^2]) + k^2 \mathrm{var}(P)
+\end{align*}
+Using the definition of variance,
+\begin{align*}
+  \mathrm{var}(X) &= k (E[P] - \mathrm{var}(P) - (E[P])^2) + k^2 \mathrm{var}(P) \\
+  &= k / 6 - k^2 / 12
+\end{align*}
+
+\section*{Problem 2}
+
+Let $X = X_1 + X_2 + \ldots + X_k$ where $k$ is given by the random variable
+$K$ with a geometric distribution as defined by the probability of success $p
+= 1/2$. Then, the mean and variance are given by
+$$ E[K] = (1 - p) / p = 1 $$
+$$ \mathrm{var}(K) = (1 - p) / p^2 = 2 $$
+Each individual $X_i$ is given by a uniform distribution on the interval $[0,
+3]$. Therefore, the mean and variance are given by
+$$ E[X_i] = 3 / 2 $$
+$$ \mathrm{var}(X_i) = 3 / 4 $$
+
+Using the law of iterated expectation,
+\begin{align*}
+  E[X] &= E[E[X \mid K]] \\
+  &= E[K E[X_i]] \\
+  &= (3 / 2) E[K] \\
+  &= 3 / 2
+\end{align*}
+
+Using the law of total variance,
+\begin{align*}
+  \mathrm{var}(X) &= E[\mathrm{var}(X \mid K)] + \mathrm{var}(E[X \mid K]) \\
+  &= E[K \mathrm{var}(X_i)] + \mathrm{var}(K E[X_i]) \\
+  &= (3 / 4) E[K] + (3 / 2)^2 \mathrm{var}(K) \\
+  &= (3 / 4) + (9 / 4)(2) \\
+  &= 21 / 4
+\end{align*}
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+\subsection*{Part B}
+
+\subsection*{Part C}
+
+\subsection*{Part D}
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+\subsection*{Part B}
+
+\subsection*{Part C}
+
+\subsection*{Part D}
+
+\section*{Problem 6}
+
+\end{document}
