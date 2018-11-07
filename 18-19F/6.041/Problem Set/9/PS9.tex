@@ -83,22 +83,188 @@ Using the law of total variance,
 
 \subsection*{Part A}
 
+Let $C = 1$ correspond to choosing coin 1 and $C = 2$ to choosing coin 2. Let
+$K$ be the random variable corresponding to the number of heads flipped in
+$3$ trials. Using Bayes' rule,
+$$ P(C = 1 \mid K = k) = \frac{P(C = 1) P(K = k \mid C = 1)}{P(K = k)} $$
+The probability of coin 1 being selected is $p$, therefore,
+$$ P(C = 1) = p $$
+$K$ for coin 1 is governed by a Bernoulli distribution with trials $3$ and
+probability of success $1/3$, therefore
+$$ P(K = k \mid C = 1) = \binom{3}{k} \left(\frac{1}{3}\right)^k
+\left(\frac{2}{3}\right)^{3 - k} $$
+Using the law of total probability,
+$$ P(K = k) = P(C = 1) P(K = k \mid C = 1) + P(C = 2) P(K = k \mid C = 2) $$
+$K$ for coin 2 is also governed by a Bernoulli distribution with trials $3$
+and probability of success $2/3$, therefore
+$$ P(K = k) = p \binom{3}{k} \left(\frac{1}{3}\right)^k
+\left(\frac{2}{3}\right)^{3 - k} + (1 - p) \binom{3}{k}
+\left(\frac{2}{3}\right)^k \left(\frac{1}{3}\right)^{3 - k} $$
+Putting this all together,
+\begin{align*}
+  P(C = 1 \mid K = k) &= \frac{p \binom{3}{k} \left(\frac{1}{3}\right)^k
+  \left(\frac{2}{3}\right)^{3 - k}}{p \binom{3}{k} \left(\frac{1}{3}\right)^k
+  \left(\frac{2}{3}\right)^{3 - k} + (1 - p) \binom{3}{k}
+  \left(\frac{2}{3}\right)^k \left(\frac{1}{3}\right)^{3 - k}} \\
+  &= \frac{2^{3 - k} p }{2^{3 - k} p + 2^k(1 - p)}
+\end{align*}
+
 \subsection*{Part B}
+
+Using the MAP rule, Bob should use the following,
+$$ P(C = 1 \mid K = k) \geq P(C = 2 | K = k) $$
+Using the Bayes' rule,
+\begin{align*}
+  P(K = k \mid C = 1) &\geq P(K = k \mid C = 2) \\
+  \frac{2^{3 - k} p }{2^{3 - k} p + 2^k(1 - p)} &\geq \frac{2^{k} (1 - p)
+  }{2^{3 - k} p + 2^k(1 - p)} \\
+  2^{3 - k} p &\geq 2^{k} (1 - p) \\
+  \frac{1}{2} \log_2\left(\frac{p}{1 - p}\right) + \frac{3}{2} &\geq k
+\end{align*}
 
 \subsection*{Part C}
 
+\subsubsection*{Part I}
+
+The probability that Bob guesses correctly is given by the law of total
+probability,
+$$ P(\mathrm{Correct}) = P(C = 1) P(\mathrm{Correct} \mid C = 1) + P(C = 2)
+P(\mathrm{Correct} \mid C = 2) $$
+Using the decision rule from above with $p = 2/3$, Bob guesses coin 1 for $k
+\leq 2$ and coin 2 for $k = 3$. Therefore,
+\begin{align*}
+  P(\mathrm{Correct}) &= p \cdot P(K \leq 2 \mid C = 1) + (1 - p) \cdot P(K =
+  3 \mid C = 2) \\
+  &= (2/3) (1 - (1/3)^3) + (1/3) (2/3)^3 \\
+  &= 20 / 27
+\end{align*}
+
+\subsubsection*{Part II}
+
+If Bob does not gain any additional evidence, aside from the fact that $p =
+2/3$, he will minimize the error by always choosing coin 1 as it is more
+likely to be picked than coin 2. Calculating correctness as before,
+\begin{align*}
+  P(\mathrm{Correct}) &= P(C = 1) P(\mathrm{Correct} \mid C = 1) + P(C = 2)
+  P(\mathrm{Correct} \mid C = 2) \\
+  &= 1 \cdot (2/3) + 0 \cdot (1/3) \\
+  &= 2/3
+\end{align*}
+
 \subsection*{Part D}
+
+If the value from Part B is less than zero, Bob will never choose the first
+coin. Therefore, this is true for $p$ given by
+\begin{align*}
+  \frac{1}{2} \log_2\left(\frac{p}{1 - p}\right) + \frac{3}{2} &< 0 \\
+  \log_2\left(\frac{p}{1 - p}\right) &< -3 \\
+  \frac{p}{1 - p} &< \frac{1}{8} \\
+  p &< \frac{1}{9}
+\end{align*}
 
 \section*{Problem 4}
 
 \subsection*{Part A}
 
+Under the MAP rule, hypothesis $\Theta = 1$ will be chosen if
+$$ P(\Theta = 1 \mid X = x) \geq P(\Theta = 0 \mid X = x) $$
+Using Bayes' Rule,
+\begin{align*}
+  P(\Theta = 1 \mid X = x) &\geq P(\Theta = 0 \mid X = x) \\
+  \frac{P(\Theta = 1) P(X = x \mid \Theta = 1)}{P(X = x)} &\geq
+  \frac{P(\Theta = 0) P(X = x \mid \Theta = 0)}{P(X = x)} \\
+  P(\Theta = 1) P(X = x \mid \Theta = 1) &\geq P(\Theta = 0) P(X = x \mid
+  \Theta = 0)
+\end{align*}
+The hypotheses $\Theta = 0$ and $\Theta = 1$ have probabilities $1 - p$ and
+$p$, respectively. The following distributions determine the conditional PDFs
+for $X$,
+$$ f_{X|\Theta}(x \mid 0) = \begin{cases}
+  1 & x \in [0, 1] \\
+  0 & \mathrm{otherwise}
+\end{cases},\, f_{X|\Theta}(x \mid 1) = \begin{cases}
+  2x & x \in [0, 1] \\
+  0 & \mathrm{otherwise}
+\end{cases} $$
+From this, the MAP rule becomes,
+\begin{align*}
+  p (2x) &\geq (1 - p) (1) \\
+  x &\geq \frac{1 - p}{2p}
+\end{align*}
+If $p = 3/5$, then this becomes $1/3$.
+
 \subsection*{Part B}
+
+If $x = 1$, then the MAP rule always chooses hypothesis $\Theta = 0$. When $x
+= 1$, $p < 1/3$
 
 \subsection*{Part C}
 
+The probability of error given the hypothesis is $\Theta = 0$ is given by 
+$$ P(\mathrm{Wrong} \mid \Theta = 0) $$
+Using the decision rule from above, the wrong answer is given when
+$$ P(\mathrm{Wrong} \mid \Theta = 0) = P\left(x > \frac{1 - p}{p} \mid \Theta
+= 0\right) $$
+This is the same as
+$$ P(\mathrm{Wrong} \mid \Theta = 0) = 1 - P\left(x \leq \frac{1 - p}{p} \mid
+\Theta = 0\right) $$
+By using the conditional CDF for $X$,
+\begin{align*}
+  P(\mathrm{Wrong} \mid \Theta = 0) &= 1 - F_{X|\Theta}\left(\frac{1 - p}{p}
+  \mid 0 \right) \\
+  &= 1 - \frac{1 - p}{p}
+\end{align*}
+Substituting $p = 3/5$, the probability of error is $2/3$
+
 \subsection*{Part D}
 
+The overall error is given by the law of total probability,
+$$ P(\mathrm{Wrong}) = P(\mathrm{Wrong} \mid \Theta = 0) P(\Theta = 0) +
+P(\mathrm{Wrong} \mid \Theta = 1) P(\Theta = 1) $$
+Using the decision rule from above, the wrong guess is given when,
+$$ P(\mathrm{Wrong}) = P\left(x > \frac{1 - p}{2p} \mid \Theta = 0\right)(1 -
+p) + P\left(x \leq \frac{1 - p}{2p} \mid \Theta = 1\right) p $$
+Using conditional CDFs for $X$,
+\begin{align*}
+  P(\mathrm{Wrong}) &= (1 - p) \cdot \left(1 - F_{X|\Theta}\left(\frac{1 -
+  p}{2p} \mid 0\right)\right) + p \cdot F_{X|\Theta}\left(\frac{1 - p}{2p}
+  \mid 1\right) \\
+  &= (1 - p) \cdot \left(1 - \frac{1 - p}{2p}\right) + p \cdot \left(\frac{1
+  - p}{2p}\right)^2
+\end{align*}
+
 \section*{Problem 6}
+
+Let $\Sigma = 1$ correspond to $\sigma = 1$ and $\Sigma = 4$ correspond to
+$\sigma = 4$. Using the MAP rule, hypothesis $\Sigma = 1$ is chosen if,
+$$ P(\Sigma = 1 \mid t_1, t_2, \ldots, t_n) \geq P(\Sigma = 4 \mid t_1, t_2,
+\ldots, t_n) $$
+Using Bayes' Rule,
+\begin{align*}
+  \frac{P(\Sigma = 1) P(t_1, t_2, \ldots, t_n \mid \Sigma = 1)}{P(t_1, t_2,
+  \ldots, t_n)} &\geq \frac{P(\Sigma = 4) P(t_1, t_2, \ldots, t_n \mid \Sigma
+  = 4)}{P(t_1, t_2, \ldots, t_n)} \\
+  P(\Sigma = 1) P(t_1, t_2, \ldots, t_n \mid \Sigma = 1) &\geq P(\Sigma = 4)
+  P(t_1, t_2, \ldots, t_n \mid \Sigma = 4)
+\end{align*}
+Given that each hypothesis is initially equally likely, this reduces to
+$$ P(t_1, t_2, \ldots, t_n \mid \Sigma = 1) \geq P(t_1, t_2, \ldots, t_n \mid
+\Sigma = 4) $$
+Since each observation is independent and normally distributed, this becomes,
+\begin{align*}
+  \prod_{i=1}^n \frac{1}{\sqrt{2 \pi}} \exp\left(-\frac{t_i^2}{2}\right)
+  &\geq \prod_{i=1}^n \frac{1}{2 \sqrt{2 \pi}}
+  \exp\left(-\frac{t_i^2}{8}\right) \\
+  \sum_{i=1}^n \left(\ln\left(\frac{1}{\sqrt{2 \pi}}\right) -
+  \frac{t_i^2}{2}\right) &\geq \sum_{i=1}^n \left(\ln\left(\frac{1}{2 \sqrt{2
+  \pi}}\right) - \frac{t_i^2}{8}\right) \\
+  n \ln \left(\frac{1}{\sqrt{2 \pi}}\right) - \frac{1}{2}\sum_{i=1}^n t_i^2
+  &\geq n \ln \left(\frac{1}{2\sqrt{2\pi}}\right) - \frac{1}{8}\sum_{i=1}^n t_i^2 \\
+  n \ln 2 &\geq \frac{3}{8} \sum_{i=1}^n t_i^2 \\
+  1 &\geq \frac{3}{8 n \ln 2} \sum_{i=1}^n t_i^2
+\end{align*}
+Therefore, the coefficients are
+$$ c_1 = \frac{3}{8 n \ln 2},\, c_2 = 0 $$
+
 
 \end{document}
