@@ -1,0 +1,243 @@
+%
+% 6.006 problem set 8 solutions template
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{amsmath}
+
+\input{macros-fa18}
+\newcommand{\theproblemsetnum}{8}
+\newcommand{\releasedate}{Thursday, November 1}
+\newcommand{\partaduedate}{Sunday, November 11}
+
+\title{6.006 Problem Set 8}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 11PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} Johanna Cohen
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem
+
+\begin{problemparts}
+\problempart Visited order:
+{\tt (s, b, a, d, e, f, c)}
+
+Shortest paths:
+{\tt (0, 6, 7, 10, 10, 10, 15)}
+
+\problempart {\bf Description} Run graph exploration from $s$ to identity all
+the negative edges. For each adjacent vertice to a negative edge, run graph
+exploration again to determine all reachable vertices from the negative
+edges. These vertices all have negative infinite shortest path lengths. Now,
+remove the negative edges. Convert the undirected graph into an directed
+graph by creating parallel edges in opposing directions with the same weights
+as the undirected edges. Run Dijkstra on the new graph.
+
+{\bf Correctness} Graph traversal will reveal all reachable negative weight
+edges. All vertices reachable from these edges must have negative infinity
+shortest paths as the negative undirected edges form negative weight cycles
+in an analogous directed graph. Graph traversal will find all these reachable
+nodes. Once these edges are removed, the remaining graph must have either
+positive infinite paths (unreachable) or positive. Dijkstra can handle both
+cases.
+
+{\bf Running Time} Graph traversal is $O(|V| + |E|)$. Dijkstra is $O(|E| +
+|V| \log |V|)$. Total must be $O(|E| + |V| \log |V|)$.
+
+\problempart {\bf Description} Run Bellman-Ford, from $s$, $|V|$ times. On
+the last iteration, keep track of adjacent vertices of relaxed edges. For
+each, traverse the parent pointers until a vertice is hit twice. These will
+represent the negative-weight cycles. For each cycle, run graph traversal to
+see if both $t$ and $s$ are reachable from the same cycle. Return the path
+from $s$ to a vertice on the cycle, the path describing the cycle, and the
+path from a vertice on the cycle to $t$.
+
+{\bf Correctness} Bellman-Ford will identify the edges that are part of a
+negative weight cycle. The parent pointer traversal will yield the cycles.
+Graph traversal will find the cycle reachable from both $s$ and $t$ (which
+there must be one given that $\delta(s, t) = - \infty$).
+
+{\bf Running Time} Bellman-Ford is $O(|V||E|)$. Graph traversal is $O(|V| +
+|E|)$. Therefore, overall run time is $O(|V||E|)$.
+
+\end{problemparts}
+
+\newpage
+\problem Let $G$ be defined by a set of $n$ vertices $V$ representing the
+spaceports and a set of $f$ edges $E$ representing the flights between each
+spaceport. These edges have weights given by the flying time.
+
+\begin{problemparts}
+\problempart {\bf Description} Let $s$ be the vertice representing Nighton,
+Ohio. Let $t$ be the vertice representing Moon Base Beta. Run Dijkstra on $G$
+starting at $s$. Return $\delta(s, t)$ as determined by Dijkstra.
+
+{\bf Correctness} Dijkstra will return the shortest path from $s$ to all $v
+\in V$ including $t$.
+
+{\bf Running Time} Dijkstra runs in $O(|E| + |V| \log |V|)$.
+
+\problempart {\bf Description} Let $s$ be the vertice representing Moon Base
+Beta. Let $t$ be the vertice representing Deep Space Ten. Run Bellman-Ford on
+$G$ starting at $s$. Return $\delta(s, t)$ as determined by Bellman-Ford.
+
+{\bf Correctness} Given the Consistent Timeline Hypothesis, there cannot be
+any negative weight cycles. Therefore, Bellman-ford will return the shortest
+path from $s$ to any $v \in V$, including $t$.
+
+{\bf Running Time} Bellman-Ford runs in $O(|V||E|)$.
+
+\problempart {\bf Description} Add a new vertice to $G$ that is connected to
+all vertices with weight $0$. Run Bellman-Ford from this vertice and augment
+the graph as described in the Johnson algorithm in lecture. For each
+potential new base, run Dijkstra. Iterate over all computed distances and sum
+them together. Return the potential new base with the smallest distance sum.
+
+{\bf Correctness} This is just the Johnson algorithm which computes the all
+sources shortest paths problem. Thus the sums of the distances will be the
+sums of the minimum flying times from that source to all spaceports.
+
+{\bf Running Time} Johnson's algorithm runs in $O(|V||E| + |V|^2 \log |V|)$.
+The graph traversal to sum all the weights is $O(|V||E| + |V|^2)$. Therefore,
+the overall runtime is $O(|V||E| + |V|^2 \log |V|)$.
+
+\end{problemparts}
+
+\newpage
+\problem {\bf Description} 
+  \begin{enumerate}
+    \item {\bf Subproblems} Let the subproblem $x(i, j)$ be the maximum score
+    along the contiguous subsequence from $i$ to $j$ in range $[0, n - 1]$.
+
+    \item {\bf Relate Subproblems} Let the subproblem be determined by the
+    rule
+    $$ x(i, j) = \max\left\{x(i, k - 1), x(k, j)\right\}\quad \forall k \in
+    [i + 1, j] $$
+    These cases are each dependent upon strictly smaller subsequences and
+    therefore form a directed acyclic graph where smallest subsequences
+    should be computed prior to larger ones.
+
+    \item {\bf Base Cases} The base cases are subsequences of length $1$:
+    $$ x(i, i) = 0\quad \forall i \in [0, n - 1] $$
+    And subsequences of length $2$ (let $a$ be the given sequence):
+    $$ x(i, i + 1) = a_i \cdot a_{i + 1} \quad \forall i \in [0, n - 2] $$
+
+    \item {\bf Solution from Subproblems} The solution to the problem is
+    given by $x(0, n - 1)$.
+
+  \end{enumerate}
+
+{\bf Correctness} By induction, it is clear to see that if the base cases are
+solved, the inductive cases follow.
+
+{\bf Running Time} There are $n (n + 1) / 2$ subproblems each require $O(1)$
+work. Therefore, the overall runtime is $O(n)$.
+
+\newpage
+
+\problem {\bf Description}
+  \begin{enumerate}
+    \item {\bf Subproblems} Let the subproblem $x(i, v)$ be the maximum score
+    along the contiguous subsequence of ramps from $i$ to $n - 1$ with
+    starting velocity $v$.
+
+    \item {\bf Relate Subproblems} Let the subproblem be determined by the rule
+    $$ x(i, v) = \max\left\{ -1 + x(i + 1, v - 1), -1 + x(i + 1, v +
+    1), f(i, v) \right\}\quad \forall i \in [0, n - 1] $$
+    Where $f$ is defined as follows,
+    $$ f(i, v) = \begin{cases}
+      0 & i + v > n - 1 \\
+      3v + x(i + v, v), & \mathrm{black} \\
+      v + x(i + v, v), & \mathrm{white}
+    \end{cases} $$
+    These all depend upon strictly smaller subsequences. Also, the $v$ is
+    constrained between $1$ and $i$ for the subproblem defined by starting
+    point $i$, therefore there is a constant number of subsequences to be
+    computed. Therefore, this is a directed acyclic graph where smaller
+    subsequences should be computed before larger ones.
+
+    {\bf Note}: $v$ is constrained between $1$ and $40$ so there should be a
+    $\min$ and a $\max$ around the $v + 1$ and $v - 1$, respectively, to
+    confirm that. For cleanliness, I have removed this from the notation.
+
+    \item {\bf Base Cases}: The base case is the empty subsequence from $n -
+    1$ to $n - 1$ defined as
+    $$ x(n - 1, v) = 0 \quad \forall v \in [1, n] $$
+
+    \item {\bf Solution from Subproblems} The solution to the problem is
+    given by $x(0, 1)$.
+
+  \end{enumerate}
+
+{\bf Correctness} By induction, it is clear to see that if the base cases
+are solved, the inductive cases follow.
+
+{\bf Running Time} There are $n$ different contiguous subsequences ending
+with $n$ and each $i$th subproblem has a possible starting velocity between
+$1$ and $i$. Therefore, there are $n (n + 1) / 2$ total subproblems each
+requiring $O(1)$ work so the overall runtime is $O(n)$.
+
+\newpage
+\problem 
+
+\begin{problemparts}
+\problempart The length $D$ corresponds to a path $p$ from $s$ to $t$ through
+some vertice $v$. $\delta(s, t)$ corresponds to the shortest path from $s$ to
+$t$. Given by the safety lemma, our algorithm cannot yield a path length that
+is less than the shortest path.
+
+\problempart Given the stopping condition defined, $v_s$ will be reached by
+the Dijkstra starting from $s$ and $v_t$ will be reached by the Dijkstra
+starting from $t$. Dijkstra is guaranteed to return the shortest distance to
+all vertices. Therefore, $d(s, v_s) = \delta(s, v_s)$ and $d(t, v_t) =
+\delta(t, v_t)$.
+
+\problempart There are two cases to consider: an path with an odd number of
+edges and a path with an even number of edges.
+
+If the path $p$ has an odd number of edges, the $v_s$ and $v_t$ are two
+distinct vertices separated by a single weight $w(v_s, v_t)$. From this,
+$d(s, v_t) = d(s, v_s) + w(v_s, v_t)$. Given from Part B, this must be
+$\delta(s, v_t) = \delta(s, v_s) + w(v_s, v_t)$. Furthermore, $\delta(s, t) =
+\delta(s, v_t) + \delta(t, v_t)$.
+
+If the path $p$ has an even number of edges, the $v_s$ and $v_t$ are the same
+vertice. Therefore, $\delta(s, v_s) = \delta(s, v_t)$. Therefore, $\delta(s,
+t) = \delta(s, v_t) + \delta(t, v_t)$.
+
+\problempart Given the stopping condition, $D$ is the minimum $d(s, v) + d(s,
+t)$. From Part C, any $v$ along the path $p$ will yield a $D$ equal to the
+shortest path. If the $v$ is not on the path, it may be lower, becuase of the
+minimum, but not greater. Therefore $D \leq \delta(s, t)$.
+
+\problempart Given that each vertice has a degree of at most $k$, then $E \in
+O(kV)$. The runtime for Dijkstra becomes $O(kV + V \log V)$. Now, given that
+the number of vertices is $\Theta(r^k)$, the runtime for Dijkstra becomes
+$O(k r^k + r^k \log r^k)$. Therefore, each individual Dijkstra will only have
+to cover $r / 2$. Therefore the bidirectional Dijkstra runtime is
+$$ O\left(2\left(k \left(\frac{r}{2}\right)^k + \left(\frac{r}{2}\right)^k
+\log \left(\frac{r}{2}\right)^k \right)\right) $$
+Therefore, pulling the $2^k$ to the front,
+$$ O\left(\frac{1}{2^{(k - 1)}} \left(k r^k + r^k \log
+\left(\frac{r}{2}\right)^k \right)\right) $$
+This shows the bidirectional Dijkstra is faster by a factor of $\Theta(2^k)$.
+\problempart Submit your implementation to {\small\url{alg.mit.edu/PS8}}
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
