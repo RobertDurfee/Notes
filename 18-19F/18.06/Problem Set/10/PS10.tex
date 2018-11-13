@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{18.06 Problem Set 9}
+\author{Robert Durfee}
+\date{November 7, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{Part A}
+
+From the $QR$ factorization,
+$$ A = QR $$
+Multiplying each side by $Q^T$,
+$$ Q^T A = Q^T Q R $$
+But it is known that $Q^T Q = I$, therefore
+$$ Q^T A = R $$
+Substituting into the expression for $B$,
+$$ B = Q^T A Q $$
+Once again, $Q^T = Q^{-1} $, therefore
+$$ B = Q^{-1} A Q $$
+Therefore, matrices $A$ and $B$ are similar to each other and have the same
+eigenvalues.
+
+\subsection*{Part B}
+
+The result is converging to a diagonal matrix with the components
+corresponding to the eigenvalues of $A$.
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+\subsection*{Part B}
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+The provided solution to the second-order differential equations
+$$ x(t) = c e^{\kappa t} + d e^{-\kappa t} $$
+Rearranging,
+\begin{align*}
+  x(t) &= \frac{1}{2} \left(c e^{\kappa t} + c e^{- \kappa t} + d e^{\kappa
+  t} + d e^{-\kappa t} \right) + \frac{1}{2} \left(c e^{\kappa t} - c e^{-
+  \kappa t} - d e^{\kappa t} + d e^{-\kappa t} \right) \\
+  &= (c + d) \frac{e^{\kappa t} + e^{-\kappa t}}{2} + (c - d) \frac{e^{\kappa
+  t} - e^{-\kappa t}}{2} \\
+  &= (c + d) \cosh(\kappa t) + (c - d) \sinh(\kappa t) \\
+  &= \alpha \cosh(\kappa t) + \beta \sinh(\kappa t)
+\end{align*}
+Where $\alpha$ and $\beta$ are given by $x(0)$ and $\dot{x}(0)$.
+
+\subsection*{Part B}
+
+Substituting $\kappa = i \omega$,
+\begin{align*}
+  x(t) &= x(0) \cosh(\kappa t) + \dot{x}(0) \sinh(\kappa t) \\
+  &= x(0) \cosh(i \omega t) + \dot{x}(0) \sinh(i \omega t) \\
+  &= x(0) \cos(\omega t) + \dot{x}(0) i \sin(\omega t)
+\end{align*}
+
+\subsection*{Part C}
+
+\subsection*{Part D}
+
+\subsection*{Part E}
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+\subsection*{Part B}
+
+\end{document}
