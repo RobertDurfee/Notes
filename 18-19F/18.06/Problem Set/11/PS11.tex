@@ -84,6 +84,22 @@ $$ \frac{d^2}{dt^2} \sin(At) = -A^2 \sin(At) $$
 
 \subsection*{Part C}
 
+Expanding $w$ in terms of eigenvectors,
+$$ w = c_1 x_1 + c_2 x_2 + \cdots + c_n x_n $$
+Mutliplying by $\sin(At)$,
+$$ u(t) = \sin(At) w = c_1 \sin(\lambda_1 t) x_1 + c_2 \sin(\lambda_2 t) x_2
++ \cdots + c_n \sin(\lambda_n t) x_n $$
+Evaluating initial conditions,
+$$ u(0) = 0 = c_1 \sin(0) x_1 + c_2 \sin(0) x_2 + \cdots + c_n \sin(0) x_n =
+0 + 0 + \cdots + 0 $$
+\begin{align*}
+  u'(0) = v_0 &= c_1 \cos(0) x_1 + c_2 \cos(0) x_2 + \cdots + c_n \cos(0) x_n \\
+  &= c_1 x_1 + c_2 x_2 + \cdots + c_n x_n \\
+  &= w
+\end{align*}
+Therefore, the solution takes the form,
+$$ u(t) = \sin(At) v_0 $$
+
 \subsection*{Part D}
 
 Computing the first eigenvalue $\lambda_1$,
@@ -141,6 +157,12 @@ All terms cancel except $I$. Therefore, $U$ is orthogonal.
 
 \subsection*{Part B}
 
+Taking the dot product of $x(t)$ with itself,
+$$ x(t)^T x(t) = \left(e^{At} x(0)\right)^T \left(e^{At} x(0)\right) = x(0)^T
+\left(e^{At}\right)^T e^{At} x(0) $$
+However, from Part A, $ \left(e^{At}\right)^T x^{At} = I $. Therefore,
+$$ x(t)^T x(t) = x(0)^T x(0) $$
+
 \subsection*{Part C}
 
 The matrix $iA$ is a symmetric matrix with eigenvalues that are purely real,
@@ -179,8 +201,103 @@ These vectors must be orthogonal to each because $A$ is symmetric.
 
 \subsection*{Part C}
 
+Expanding the solution $x(t)$ in terms of the eigenvectors,
+$$ x(t) = c_1 e^{(\lambda_1 - 12) t} x_1 + c_2 e^{(\lambda_2 - 12) t} x_2 +
+c_3 e^{(\lambda_3 - 12) t} x_3 $$
+From the eigenvalues computed above, the first two terms will decay as time
+increases. The last term, however, will reach a steady-state. Therefore, the
+solution is parallel to the third eigenvector $x_3 = \begin{pmatrix} 1 & 0 &
+-1 \end{pmatrix}^T$
+
 \subsection*{Part D}
 
+Evaluating the initial condition,
+$$ x(0) = \begin{pmatrix}
+  1 \\
+  0 \\
+  0
+\end{pmatrix} = c_1 \begin{pmatrix}
+  1 \\
+  1 \\
+  1
+\end{pmatrix} + c_2 \begin{pmatrix}
+  1 \\
+  -2 \\
+  1
+\end{pmatrix} + c_3 \begin{pmatrix}
+  1 \\
+  0 \\
+  -1
+\end{pmatrix} $$
+This is the same as evaluating,
+$$ \begin{pmatrix}
+  1 & 1 & 1 \\
+  1 & -2 & 0 \\
+  1 & 1 & -1
+\end{pmatrix} \begin{pmatrix}
+  c_1 \\
+  c_2 \\
+  c_3
+\end{pmatrix} = \begin{pmatrix}
+  1 \\
+  0 \\
+  0
+\end{pmatrix} $$
+Because the eigenvectors are orthogonal, solving this only requires dot
+products, yielding,
+$$ c_1 = \frac{1}{3},\quad c_2 = \frac{1}{6},\quad c_3 = \frac{1}{2} $$
+Therefore, the complete expression for $x(t)$ is
+$$ x(t) = \frac{1}{3} e^{-6t} \begin{pmatrix}
+  1 \\
+  1 \\
+  1
+\end{pmatrix} + \frac{1}{6} e^{-18t} \begin{pmatrix}
+  1 \\
+  -2 \\
+  1
+\end{pmatrix} + \frac{1}{2} \begin{pmatrix}
+  1 \\
+  0 \\
+  -1
+\end{pmatrix} $$
+
 \subsection*{Part E}
+
+Writing the matrix exponential in terms of eigenvalues and eigenvectors,
+$$ e^{(A - 12I) t} = X e^{(\Lambda - 12 I) t} X^{-1} $$
+Expanding out the matrices (since $X$ is orthogonal, the inverse is just
+$X^T$ over normalization factors).
+$$ e^{(A - 12I) t} = \begin{pmatrix}
+  1 & 1 & 1 \\
+  1 & -2 & 0 \\
+  1 & 1 & -1
+\end{pmatrix} \begin{pmatrix}
+  e^{-6t} &  &  \\
+   & e^{-18t} & \\
+   & & e^{0t}
+\end{pmatrix} \begin{pmatrix}
+  1/3 & 1/3 & 1/3 \\
+  1/6 & -1/3 & 1/6 \\
+  1/2 & 0 & -1/2
+\end{pmatrix} $$
+As $t \longrightarrow \infty$, the inner matrix simplifies,
+$$ \begin{pmatrix}
+  1 & 1 & 1 \\
+  1 & -2 & 0 \\
+  1 & 1 & -1
+\end{pmatrix} \begin{pmatrix}
+  0 & 0 & 0 \\
+  0 & 0 & 0 \\
+  0 & 0 & 1
+\end{pmatrix} \begin{pmatrix}
+  1/3 & 1/3 & 1/3 \\
+  1/6 & -1/3 & 1/6 \\
+  1/2 & 0 & -1/2
+\end{pmatrix} = \begin{pmatrix}
+  1/2 & 0 & -1/2 \\
+  0 & 0 & 0 \\
+  -1/2 & 0 & 1/2
+\end{pmatrix} $$
+This is a projection matrix as $P^2 = P$.
 
 \end{document}
