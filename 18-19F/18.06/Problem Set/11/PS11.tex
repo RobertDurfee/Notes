@@ -1,0 +1,186 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{18.06 Problem Set 11}
+\author{Robert Durfee}
+\date{November 21, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{Part A}
+
+\begin{itemize}
+  \item The solution approaches a constant because the real component of the
+  eigenvalues is negative and therefore the solution decays.
+  \item The angular frequency of oscillation is given by the imaginary
+  component of the eigenvalues. In this case, the imaginary component is
+  $\sqrt{227} / 2$. Converting to period,
+  $$ T = \frac{2 \pi}{\omega} = \frac{4 \pi}{\sqrt{227}} $$
+\end{itemize}
+
+\subsection*{Part B}
+
+Given that $v^T x(t)$ is constant, then its time-derivative is $0$. Therefore,
+$$ \frac{d v^T x(t)}{dt} = v^T \frac{dx(t)}{dt} = 0 $$
+Given the differential equation,
+$$ v^T A x = 0 $$
+However, this must be true for all $x$, thus
+$$ v^T A = A^T v = 0 $$
+Therefore, $v$ is in the left nullspace of $A$. The left nullspace in this
+case is $1$-dimensional. $v$ is also an eigenvector of $A^T$.
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+The Taylor series is given by
+$$ \sin(A) = A - \frac{A^3}{3!} + \frac{A^5}{5!} - \frac{A^7}{7!} + \cdots $$
+Multiplying by $x$,
+$$ \sin(A) x = Ax - \frac{A^3 x}{3!} + \frac{A^5 x}{5!} - \frac{A^7 x}{7!} +
+\cdots $$
+Given that $x$ is an eigenvector,
+$$ \sin(A) x = \lambda x - \frac{\lambda^3 x}{3!} + \frac{\lambda^5 x}{5!} -
+\frac{\lambda^7 x}{7!} + \cdots $$
+Taking out the $x$ yields,
+$$ \sin(A) x = \sin(\lambda) x $$
+Therefore, if $\lambda$ is an eigenvalue of $A$ and $x$ an eigenvector, then
+$\sin(\lambda)$ is an eigenvalue of $\sin(A)$ and $x$ and eigenvector.
+
+\subsection*{Part B}
+
+Taking the first derivative of $\sin(At)$ with respect to time,
+$$ \frac{d}{dt} \sin(At) = A - \frac{A^3 t^2}{2!} + \frac{A^5 t^4}{4!} -
+\frac{A^7 t^6}{6!} + \cdots $$
+Pulling an $A$ to the front,
+$$ \frac{d}{dt} \sin(At) = A \left(I - \frac{(At)^2}{2!} + \frac{(At)^4}{4!}
+- \frac{(At)^6}{6!} + \cdots\right) $$
+Taking the second derivative,
+$$ \frac{d^2}{dt^2} \sin(At) = A \left(-A^2 t + \frac{A^4 t^3}{3!} -
+\frac{A^6 t^5}{5!} + \cdots\right) $$
+Pulling a $-A$ to the front,
+$$ \frac{d^2}{dt^2} \sin(At) = -A^2 \left(At + \frac{(At)^3}{3!} -
+\frac{(At)^5}{5!} + \cdots \right) $$
+Replacing the Taylor Series for $\sin(At)$,
+$$ \frac{d^2}{dt^2} \sin(At) = -A^2 \sin(At) $$
+
+\subsection*{Part C}
+
+\subsection*{Part D}
+
+Computing the first eigenvalue $\lambda_1$,
+$$ \frac{\pi}{2} \begin{pmatrix}
+  1 & 1 \\
+  1 & 1 
+\end{pmatrix} \begin{pmatrix}
+  1 \\
+  1
+\end{pmatrix} = \pi \begin{pmatrix}
+  1 \\
+  1
+\end{pmatrix} $$
+Thus, the first eigenvalue is $\lambda_1 = \pi$.
+
+Computing the second eigenvalue $\lambda_2$,
+$$ \frac{\pi}{2} \begin{pmatrix}
+  1 & 1 \\
+  1 & 1 
+\end{pmatrix} \begin{pmatrix}
+  1 \\
+  -1
+\end{pmatrix} = \begin{pmatrix}
+  0 \\
+  0
+\end{pmatrix} $$
+Thus, the second eigenvalue is $\lambda_2 = 0$
+
+Using these eigenvalues and the rule computed in Part A, the corresponding
+eigenvalues for $\sin A$ are,
+$$ \lambda_1' = \sin \lambda_1 = \sin \pi = 0 $$
+$$ \lambda_2' = \sin \lambda_2 = \sin 0 = 0 $$
+Since both eigenvalues are zero and $\sin A$ is diagonalizable, then $\sin A$
+must be the zero matrix.
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+To show that $U$ is orthogonal, we show that,
+$$ \left(e^{A}\right)^T \left(e^A\right) = I $$
+However, through the Taylor Series for the exponential,
+$$ \left(e^A\right)^T = \left(e^{A^T}\right) $$
+Furthermore, since $A$ is skew-symmetric, $A^T = -A$. Therefore, we just need
+to show that
+$$ \left(e^{-A}\right) \left(e^{A}\right) = I $$
+Using the Taylor Series for exponential,
+$$ \left(I - A + \frac{A^2}{2!} - \frac{A^3}{3!} + \cdots\right) \left(I + A
++ \frac{A^2}{2!} + \frac{A^3}{3!} + \cdots\right) $$
+Writing out the first few terms,
+$$ I + A + \frac{A^2}{2!} + \frac{A^3}{3!} - A - A^2 - \frac{A^3}{2!} +
+\frac{A^2}{2!} + \frac{A^3}{2!} + \frac{A^5}{2!3!} - \frac{A^3}{3!} -
+\frac{A^5}{2!3!} + \cdots $$
+All terms cancel except $I$. Therefore, $U$ is orthogonal.
+
+\subsection*{Part B}
+
+\subsection*{Part C}
+
+The matrix $iA$ is a symmetric matrix with eigenvalues that are purely real,
+so $A$ must have eigenvalues that are purely imaginary and eigenvectors that
+are orthogonal and imaginary.
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+Since we know two of the three eigenvalues, the third can be found using the
+trace of $A$.
+$$ \mathrm{trace}(A) = 7 - 2 + 7 = 12 $$
+Since $\lambda_1 = -6$ and $\lambda_2 = 6$, $\lambda_3 = 12$. All eigenvalues
+must be real because $A$ is symmetric.
+
+\subsection*{Part B}
+
+Using the definition of eigenvectors $(A - \lambda I) x = 0$,
+$$ \left(\begin{pmatrix}
+  7 & 4 & -5 \\
+  4 & -2 & 4 \\
+  -5 & 4 & 7
+\end{pmatrix} - 12 I\right) x = \begin{pmatrix}
+  -5 & 4 & -5 \\
+  4 & -14 & 4 \\
+  -5 & 4 & 5
+\end{pmatrix} x = 0 $$
+By looking at the matrix, $x$ must be
+$$ x = \begin{pmatrix}
+  1 \\
+  0 \\
+  -1
+\end{pmatrix} $$
+These vectors must be orthogonal to each because $A$ is symmetric.
+
+\subsection*{Part C}
+
+\subsection*{Part D}
+
+\subsection*{Part E}
+
+\end{document}
