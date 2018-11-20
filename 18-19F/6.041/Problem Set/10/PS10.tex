@@ -1,0 +1,234 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{6.041 Problem Set 10}
+\author{Robert Durfee - R02}
+\date{November 14, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+Computing the posterior distribution,
+\begin{align*}
+  f_{\Theta|X_1X_2}(\theta \mid x_1, x_2) &= \frac{f_\Theta(\theta)
+  f_{X_1X_2|\Theta}(x_1, x_2 \mid \theta)}{f_{X_1X_2}(x_1 x_2)} \\
+  &= \frac{f_\Theta(\theta) f_{W_1}(x_1 - \theta) f_{W_2}(x_2 -
+  2\theta)}{f_{X_1X_2}(x_1 x_2)}
+\end{align*}
+This is proportional to
+\begin{align*}
+  f_{\Theta|X_1X_2}(\theta \mid x_1, x_2) &\propto
+  \exp\left(-\frac{1}{2}\left(\theta^2 + (x_1 - \theta)^2 + (x_2 - 2\theta)^2
+  \right)\right)
+\end{align*}
+Therefore, to maximize the posterior, we can minimize the exponent. The
+derivative of the posterior with respect to $\theta$ is
+$$ \frac{\partial}{\partial \theta} f_{\Theta|X_1X_2}(\theta \mid x_1, x_2) =
+12 \theta - 2 $$
+Setting this to zero and solving for $\theta$ yields $ 1/2 $. Therefore, this
+is the least means squares estimate as the variables are normal and therefore
+the maximum corresponds to the mean.
+$$ \hat{\theta}_{LMS} = 1 / 2 $$
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+The PMF for the hypothesis $\Theta$ where $\Theta = 0$ and $\Theta = 1$
+corresponds to type-A and type-B light bulbs, respectively, is
+$$ p_{\Theta}(\theta) = \begin{cases}
+  2/3 & \theta = 0 \\
+  1/3 & \theta = 1
+\end{cases} $$
+The conditional PDFs for each type of light bulb are given,
+$$ f_{T_i|\Theta}(t_i \mid \theta = 0) = \begin{cases}
+  \lambda e^{-\lambda t_i} & t_i > 0 \\
+  0 & \mathrm{otherwise}
+\end{cases} $$
+$$ f_{T_i|\Theta}(t_i \mid \theta = 1) = \begin{cases}
+  \mu e^{-\mu t_i} & t_i > 0 \\
+  0 & \mathrm{otherwise}
+\end{cases} $$
+The MAP rule for choosing type-A light bulbs is given by
+\begin{align*}
+  P(\Theta = 0 \mid T_1 = t_1) &\geq P(\Theta = 1 \mid T_1 = t_1) \\
+  p_\Theta(0) f_{T_1|\Theta}(t_1 \mid 0) &\geq p_\Theta(1) f_{T_1|\Theta}(t_1 \mid 1) \\
+  \frac{2}{3} \lambda e^{-\lambda t_1} &\geq \frac{1}{3} \mu e^{-\mu t_1} \\
+  \ln(2\lambda) - \lambda t_1 &\geq \ln(\mu) - \mu t_1 \\
+  \frac{1}{\lambda - \mu} \ln\left(\frac{2\lambda}{\mu}\right) &\leq t_1
+\end{align*}
+Therefore, $\alpha$ is given by
+$$ \alpha = \frac{1}{\lambda - \mu} \ln\left(\frac{2\lambda}{\mu}\right) $$
+
+\subsection*{Part B}
+
+The probability of error is given by
+\begin{align*}
+  P(\mathrm{Error}) &= P(\Theta = 0)(1 - P(\alpha \leq t_1 \mid \Theta = 0))
+  + P(\Theta = 1) P(\alpha \leq t_1 \mid \Theta = 1) \\
+  &= P(\Theta = 0)(1 - F_{T_1|\Theta}(\alpha \mid 0))
+  + P(\Theta = 1) F_{T_1|\Theta}(\alpha \mid 1) \\
+  &= \left(\frac{2}{3}\right) \left(e^{-\lambda \alpha}\right) +
+  \left(\frac{1}{3}\right)\left(1 - e^{-\mu \alpha}\right)
+\end{align*}
+
+\subsection*{Part C}
+
+First, the conditional probabilities for each hypothesis are given by
+$$ P(\Theta = 0 \mid T_1 = 2) = \frac{4 e^2}{3 + 4e^2} $$
+$$ P(\Theta = 1 \mid T_1 = 2) = \frac{3}{3 + 4e^2} $$
+From these, the LMS estimate for the second light bulb is given by
+$$ E[T_2 \mid T_1 = 2] = P(\Theta = 0 \mid T_1 = 2) E[T_2 \mid \Theta = 0] +
+P(\Theta = 1 \mid T_1 = 2) E[T_2 \mid \Theta = 1] $$
+Since $T_2$ conditioned on $\Theta$ is governed by an exponential
+distribution, its mean is given by $1/\lambda$ and $1/\mu$. Therefore, the
+LMS estimator is given by
+\begin{align*}
+  E[T_2 \mid T_1 = 2] &= \frac{1}{2} \frac{4 e^2}{3 + 4e^2} + \frac{1}{3}
+  \frac{3}{3 + 4e^2} \\
+  &= \frac{2 e^2 + 1}{3 + 4e^2} \\
+  &\approx 0.485
+\end{align*}
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+The conditional PMF for each of the coins is given by a geometric
+distribution,
+$$ p_{T_i|Q}(t_i \mid q) = (1 - q)^{t_i - 1} q $$
+Integrating over the range of $Q$,
+\begin{align*}
+  p_{T_i}(t_i) &= \int\limits_0^1 (1 - q)^{t_i - 1} q dq \\
+  &= \frac{1}{t_i^2 + t_i}
+\end{align*}
+This applies for $t_i \in \{1, 2, \ldots, k\}$.
+
+\subsection*{Part B}
+
+The posterior is given by Bayes Rule
+\begin{align*}
+  f_{Q|T_1}(q \mid t_1) &= \frac{f_Q(q) f_{T_1|Q}(t \mid q)}{p_{T_1}(t_1)} \\
+  &= (t_1^2 + t_1)(1 - q)^{t_1 - 1} q 
+\end{align*}
+To find the LMS estimator, find the conditional expectation,
+\begin{align*}
+  E[Q \mid T_1] &= \int\limits_0^1 q f_{Q|T_1}(q \mid t_1) dq \\
+  &= (t_1^2 + t_1) \int\limits_0^1 q^2 (1 - q)^{t_1 - 1} dq \\
+  &= (t_1^2 + t_1) \frac{2! (t_1 - 1)!}{(2 + t_1)!} \\
+  &= \frac{2}{2 + t}
+\end{align*}
+
+\subsection*{Part C}
+
+The posterior distribution is given by Bayes Rule,
+$$ f_{Q|T_1^k} (q \mid t_1^k) = \frac{f_Q(q) p_{T_1^k|Q}(t_1^k \mid
+q)}{p_{T_1^k}(t_1^k)} $$
+This is proportional to
+$$ f_{Q|T_1^k} (q \mid t_1^k) \propto \prod\limits_{i = 1}^k (1 - q)^{t_i -
+1} q $$
+Therefore, the MAP estimator can be found by taking the derivative with
+respect to $q$,
+$$ \frac{\partial}{\partial q} f_{Q|T_1^k} (q \mid t_1^k) = \sum\limits_{i =
+1}^k \left(\frac{t_i - 1}{q - 1} + \frac{1}{q}\right) $$
+Setting this equal to zero and solving for $q$ yields,
+$$ q = \frac{k}{\sum_{i = 1}^k t_i} $$
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+To find the MAP estimator, it is sufficient to minimize the exponent,
+$$ \theta_1^2 + \frac{1}{\sigma^2}\sum\limits_{i = 1}^{n}\left(y_i - \theta_0
+- \theta_1 t_i - \theta_2 t_i^2\right)^2 $$
+The derivative with respect to $\theta_1$ is
+$$ \frac{\partial}{\partial \theta_1} = 2 \theta_1 + \frac{2}{\sigma^2}
+\sum\limits_{i = 1}^{n} t_i \left(\theta_0 + \theta_1 t_i + \theta_2 t_i^2 -
+y_i \right) $$
+Setting this equal to $0$ and solving for $\theta_1$ yields,
+$$ \hat{\theta}_1 = \frac{\sum_{i = 1}^n t_i \left(y_i - \theta_0 - \theta_2
+t_i^2\right)}{\sigma^2 + \sum_{i = 1}^n t_i^2} $$
+
+\subsection*{Part B}
+
+$Y_i$ is only a linear combination of normal variables and therefore it must
+be normal. Furthermore, the MAP estimator is a linear combination of $Y_i$,
+therefore it also must be a normal random variable.
+
+\subsection*{Part C}
+
+Using the equation for the MAP estimator from the previous part, the MSE can
+be written as
+$$ MSE = E\left[\left(\frac{t_1 (\Theta_1 t_1 + W_1) + t_2 (\Theta_1 t_2 +
+W_2)}{1 + t_1^2 + t_2^2} - \Theta_1\right)^2\right] $$
+Simplifying and substituting means and variances for $\Theta_1, W_1,$ and
+$W_2$ yields the mean squared error,
+$$ MSE = \frac{1}{t_1^2 + t_2^2 + 1} $$
+
+\subsection*{Part D}
+
+From the MSE from above, we want to minimize over the range $0 \leq t_1, t_2
+\leq 10$. The maximum of this function occurs when $t_1 = t_2 = 0$. This
+function does not have a global minimum, therefore the minimum occurs on the
+bound. Thus, the minimum occurs when $ t_1 = t_2 = 10$.
+
+\section*{Problem 5}
+
+\subsection*{Part A}
+
+The hypothesis prior distribution is given by
+$$ f_\Theta(\theta) = \begin{cases}
+  1 & 0 \leq \theta \leq 1 \\
+  0 & \mathrm{otherwise}
+\end{cases} $$
+The conditional distribution of $X$ is given by
+$$ f_{X|\Theta}(x \mid \theta) = \begin{cases}
+  1 / \theta & \theta \leq x \leq 2 \theta \\
+  0 & \mathrm{otherwise}
+\end{cases} $$
+From this, the posterior distribution is given by Bayes Rule,
+\begin{align*}
+  f_{\Theta|X}(x \mid \theta) &= \frac{f_\Theta(\theta) f_{X|\Theta}(x \mid
+  \theta)}{f_X(x)} \\
+  &= \frac{1 / \theta}{\int_0^1 f_\Theta(\theta) f_{X|\Theta}(x \mid \theta)
+  d\theta} \\
+  &= \frac{1 / \theta}{\int_{x/2}^{x} 1 / \theta d\theta} \\
+  &= \frac{1}{\theta \ln 2}
+\end{align*}
+Over the range $x/2 \leq \theta \leq x$ and $0 \leq x \leq 1$.
+
+\subsection*{Part B}
+
+The derivative of the answer to Part A with respect to $\theta$ is given by
+$$ \frac{\partial}{\partial \theta} = \frac{-1}{\theta^2 \ln 2} $$
+Over the range $x/2 \leq \theta \leq x$ and $0 \leq x \leq 1$. Therefore, to
+maximize this over the given range, we can minimize the denominator. This
+happens when $\theta$ is smallest at $\hat{\theta} = x/2$.
+
+\subsection*{Part C}
+
+Finding the LMS estimator is just the conditional expectation,
+\begin{align*}
+  \hat{\theta}_{LMS} &= E[\Theta \mid X] \\
+  &= \int\limits_{x/2}^{x} \theta \frac{1}{\theta \ln 2} d\theta \\
+  &= \frac{x}{2 \ln 2}
+\end{align*}
+
+\end{document}
