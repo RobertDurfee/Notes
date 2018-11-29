@@ -1,0 +1,219 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{6.041 Problem Set 12}
+\author{Robert Durfee - R02}
+\date{November 29, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{Part A}
+
+Consider two disjoint intervals $(0, t]$ and $(t, t + s]$. Let $N$ be the
+number of arrivals in the time interval $(0, t]$ and $L$ be the number
+of arrivals in the interval $(t, t + s]$. Thus, the number of arrivals in $(0,
+t + s]$ is $M = N + L$. The PMF of $L$ is given by the Poisson,
+$$ p_L(\ell) = P(k = \ell, \tau = s; \lambda) = \frac{(\lambda
+s)^\ell}{\ell!} e^{-\lambda s},\quad \ell \in \{0, 1, \ldots\}$$
+Now, the conditional PMF of $M$ given $N$ is just the PMF of $L$ offset by
+the amount $N$ as $M = N + L$. Thefore, $\ell = m - n$ and the conditional
+PMF is,
+$$ p_{M|N}(m \mid n) = \frac{(\lambda s)^{m - n}}{(m - n)!} e^{-\lambda
+s},\quad n \leq m \in \{0, 1, \ldots\} $$
+
+\subsection*{Part B}
+
+Using the multiplication rule,
+$$ P_{MN}(m, n) = p_N(n) p_{M|N}(m \mid n) $$
+The PMF for $N$ is determined from the Poisson,
+$$ p_N(n) = P(k = n, \tau = t; \lambda) = \frac{(\lambda t)^n}{n!}
+e^{-\lambda t},\quad n \in \{0, 1, \ldots\} $$
+The PMF for $M$ given $N$ was computed in Part A.
+$$ p_{M|N}(m \mid n) = \frac{(\lambda s)^{m - n}}{(m - n)!} e^{-\lambda
+s},\quad n \leq m \in \{0, 1, \ldots\} $$
+Multiplying these two together yields the joint PMF,
+$$ p_{MN}(m, n) = \left(\frac{(\lambda t)^n}{n!} e^{-\lambda t}\right)
+\left(\frac{(\lambda s)^{m - n}}{(m - n)!} e^{-\lambda s}\right),\quad n \leq
+m \in \{0, 1, \ldots\} $$
+Simplified,
+$$ p_{MN}(m, n) = \frac{\lambda^m t^n s^{m - n}}{n!(m - n)!} e^{-\lambda(t +
+s)},\quad n \leq m \in \{0, 1, \ldots\} $$
+
+\subsection*{Part C}
+
+Using the definition of conditional probability,
+$$ p_{N|M}(n \mid m) = \frac{p_{MN}(m, n)}{p_M(m)} $$
+The joint PMF was calculated in Part B,
+$$ p_{MN}(m, n) = \frac{\lambda^m t^n s^{m - n}}{n!(m - n)!} e^{-\lambda(t +
+s)},\quad n \leq m \in \{0, 1, \ldots\} $$
+The PMF for $M$ is given by the Poisson,
+$$ p_M(m) = P(k = m, \tau = t + s; \lambda) = \frac{\left(\lambda (s +
+t)\right)^m}{m!} e^{-\lambda (t + s)},\quad m \in \{0, 1, \ldots\} $$
+Putting these two together using the definition above,
+$$ p_{N|M}(n \mid m) = \left(\frac{\lambda^m t^n s^{m - n}}{n!(m - n)!}
+e^{-\lambda(t + s)}\right) / \left(\frac{\left(\lambda (t + s)\right)^m}{m!}
+e^{-\lambda (s + t)}\right) $$
+Simplified,
+$$ p_{N|M}(n \mid m) = \frac{m!}{n! (m - n)!} \frac{t^m s^{m - n}}{(t +
+s)^m},\quad n \leq m \in \{0, 1, \ldots\} $$
+
+\subsection*{Part D}
+
+Consider again the random variable $L = M - N$ from Part A. Therefore, the
+expectation can be rewritten as,
+$$ E[MN] = E[N (N + L)] $$
+Since $L$ and $N$ are independent, this can be split apart.
+\begin{align*}
+  E[MN] &= E[N (N + L)] \\
+  &= E[N^2 + NL] \\
+  &= E[N^2] + E[N]E[L] \\
+  &= \mathrm{var}(N) + E[N]^2 + E[N]E[L] \\
+  &= (\lambda t) + (\lambda t)^2 + (\lambda t)(\lambda s) \\
+  &= \lambda t + \lambda^2 t^2 + \lambda^2 s t
+\end{align*}
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+A bus arrives deterministically every hour. Therefore, the time interval of
+interest in the passenger arrival process is one hour. The expected number of
+passengers arriving in one hour is given by the Poisson,
+$$ E[N_\tau] = \lambda \tau $$
+$$ E[N_1] = \lambda $$
+
+\subsection*{Part B}
+
+Yes, the buses depart according to a Poisson process. Interdeparture times
+are exponentially distributed by a common parameter $\mu$ and each departure
+is independent from the others.
+
+\subsection*{Part C}
+
+An event defined by either a passenger or a bus arriving is given by the
+merged passenger-bus Poisson process. The parameter for this process is the
+sum of the individual processes' $\lambda' = \lambda + \mu$. The expected
+number of event in a single hour is given by this Poisson,
+$$ E[N_1] = \lambda' = \lambda + \mu $$
+
+\subsection*{Part D}
+
+Due to the memorylessness property of the Poisson process, the arrivals prior
+do not affect the arrivals after. Therefore, the expected time until the next
+bus remains the same and this is given by the expected value of an
+exponential distribution.
+$$ E[T] = \frac{1}{\mu} $$
+
+\subsection*{Part E}
+
+Considering the merged passenger-bus process. An event is caused by a
+passenger with probability,
+$$ P(\mathrm{Passenger}) = \frac{\lambda}{\mu + \lambda} $$
+An event is caused by a bus with probability,
+$$ P(\mathrm{Bus}) = \frac{\mu}{\mu + \lambda} $$
+Thus, we can consider every passenger arrival as a failure and the bus
+arrival as a success. To find the PMT of $N$, the number of people on a bus,
+there must be $n$ failures and $1$ success. This is given by,
+$$ p_N(n) = \left(\frac{\lambda}{\mu + \lambda}\right)^n \left(\frac{\mu}{\mu
++ \lambda}\right),\quad n \in \{0, 1, \ldots\} $$
+Substituting $\lambda = 20$ and $\mu = 2$,
+$$ p_N(n) = \frac{2 \cdot 20^n}{22^{n+1}},\quad n \in \{0, 1, \ldots\} $$
+
+\section*{Problem 3}
+
+\subsection*{Part A}
+
+Consider the merged Poisson process of eastbound and westbound ships with
+parameter $\lambda_E + \lambda_W$. The past is independent from the future
+and therefore the probability that the next ship will be westbound is given
+by,
+$$ P(\mathrm{Westbound}) = \frac{\lambda_W}{\lambda_E + \lambda_W} $$
+
+\subsection*{Part B}
+
+The change in direction occurs when the next eastbound ship arrives. This is
+given by the exponential distribution.
+$$ f_X(x) = \lambda_E e^{-\lambda_E x},\quad x \geq 0 $$
+
+\subsection*{Part C}
+
+In order for an eastbound ship not to pass a westbound ship, no westbound
+ship can enter $t$ before the eastbound or $t$ after the eastbound, as it
+takes $t$ time to cross the canal. As a result, the probability is given by
+the Poisson,
+$$ P(\mathrm{No\ Westbound}) = P(k = 0, \tau = 2t; \lambda = \lambda_W) =
+e^{-2 \lambda_W t} $$
+
+\subsection*{Part D}
+
+The distribution of $V$ is given by the $k$th arrival time of the eastbound
+process where $k = 7$,
+$$ f_{Y_7}(v) = f_V(v) = \frac{\lambda_E^7 v^6 e^{-\lambda_E v}}{6!},\quad v
+\geq 0 $$
+
+\subsection*{Part E}
+
+The change in direction of the pointer occurs in two cases
+\begin{itemize}
+  \item The previous ship was eastbound and the next ship is westbound.
+  \item The previous ship was westbound and the next ship is eastbound.
+\end{itemize}
+Using the Law of Total Probability,
+$$ P(\mathrm{Change}) = P(\mathrm{East})P(\mathrm{West} \mid \mathrm{East}) +
+P(\mathrm{West})P(\mathrm{East} \mid \mathrm{West}) $$
+However, since this is a Poisson process, the next arrival is independent of
+the previous. Therefore this becomes,
+$$ P(\mathrm{Change}) = 2 P(\mathrm{East})P(\mathrm{West}) $$
+Substituting the respective probabilities from the merged Poisson,
+$$ P(\mathrm{Change}) = \frac{2 \lambda_E \lambda_W}{(\lambda_E +
+\lambda_W)^2} $$
+
+\subsection*{Part F}
+
+The number of ships seen up until the seventh eastbound is given by the
+binomial distribution where eastbounds are successes and westbounds are
+failures. We want $7$ successes and $k - 7$ failures. However, the last
+ship's arrival time is fixed. So, we want the number of ways to choose
+size-$6$ subgroups of a total of $k - 1$ ships. From this, the PMF is
+$$ p_K(k) = \binom{k - 1}{6} \left(\frac{\lambda_E}{\lambda_E +
+\lambda_W}\right)^7 \left(\frac{\lambda_W}{\lambda_E + \lambda_W}\right)^{k -
+7},\quad k \in \{7, 8, \ldots\} $$
+
+\section*{Problem 4}
+
+\subsection*{Part A}
+
+The length $R$ is given by the sum of two exponentials. This is equivalent to
+the Erlang distribution of order-$2$. The expectation of an order-$k$ Erlang is
+$$ E[Y_k] = \frac{k}{\lambda} $$
+Substituting for order-$2$,
+$$ E[R] = \frac{2}{\lambda} $$
+
+\subsection*{Part B}
+
+The length $R$ is now given by the sum of three exponentials as $f_X(x)$ is
+an order-$3$ Erlang. The middle segment's expected length is given by the
+solution to Part A, $2 / \lambda$. Then, add two more exponentials on either
+side, each with expected length $1 / \lambda$ as determined from order-$1$
+Erlangs. Therefore, the total expected length is,
+$$ E[R] = \frac{4}{\lambda} $$
+
+\end{document}
