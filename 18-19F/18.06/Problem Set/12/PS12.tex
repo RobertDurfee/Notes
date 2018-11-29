@@ -1,0 +1,354 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{18.06 Problem Set 12}
+\author{Robert Durfee}
+\date{November 28, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+For the following parts, let $B = -A^T A$. As a result, $B$ is real-symmetric
+and negative semi-definite. Therefore, the possible eigenvalues of $B$ are
+$\lambda \leq 0$.
+
+\subsection*{Part A}
+
+\begin{itemize}
+
+  \item {\bf $x(t)$ is a nonzero constant vector} is possible. Let the
+  eigenvalues of $B$ be all zero and the initial condition $x(0)$ be nonzero.
+  Given $B$ is negative semi-definite, negative eigenvalues are possible.
+
+  \item {\bf $x(t)$ monotonically approaches nonzero constant vector} is
+  possible. Let there exist a negative eigenvalue for $B$. Let the other
+  eigenvalue be zero. This is possible because $B$ is negative semi-definite.
+  
+  \item {\bf $x(t)$ monotonically approaches zero vector} is possible. Let
+  eigenvalues for $B$ be negative. This is possible because $B$ is negative
+  semi-definite.
+
+  \item {\bf $\lVert x(t) \rVert$ diverges} is not possible. Given that all
+  eigenvalues of $B$ are less than or equal to zero, the solutions must
+  decay.
+
+  \item {\bf $x(t)$ oscillates} is not possible. Given that $A$ is real, then
+  $B$ is real-symmetric and must have real eigenvalues. Thus there cannot be
+  oscillating solutions.
+
+  \item {\bf $x(t)$ has decaying oscillations} is not possible. Given that
+  $A$ is real, then $B$ is real-symmetric and must have real eigenvalues.
+  Thus there cannot be oscillating solutions.
+
+  \item {\bf $x(t)$ jumps around discontinuously} is not possible. This
+  behavior is undefined and not possible for a real-symmetric, negative
+  semi-definite matrix $B$.
+
+\end{itemize}
+
+\subsection*{Part B}
+
+\begin{itemize}
+
+  \item {\bf $x(t)$ is a nonzero constant vector}. According to Part A, all
+  the eigenvalues must be zero for $B$. An easy way to ensure this is to set
+  $A$ to be the $3 \times 2$ zero matrix. 
+  $$ A = \begin{pmatrix}
+    0 & 0 \\
+    0 & 0 \\
+    0 & 0
+  \end{pmatrix} $$
+  Then $B = -A^T A$ must equal,
+  $$ B = \begin{pmatrix}
+    0 & 0 \\
+    0 & 0
+  \end{pmatrix} $$
+  With eigenvalues and eigenvectors,
+  $$ \lambda_1 = 0,\quad \lambda_2 = 0 $$
+  $$ x_1 = \begin{pmatrix}
+    1 \\
+    0
+  \end{pmatrix},\quad x_2 = \begin{pmatrix}
+    0 \\
+    1
+  \end{pmatrix} $$
+  Solving for coefficients using the initial condition $x(0) =
+  \begin{pmatrix} 1 & 2 \end{pmatrix}^T$ yields
+  $$ x(t) = \begin{pmatrix}
+    1 \\
+    0
+  \end{pmatrix} + 2 \begin{pmatrix}
+    0 \\
+    1
+  \end{pmatrix} = \begin{pmatrix}
+    1 \\
+    2
+  \end{pmatrix} $$
+  Clearly, the solution $x(t)$ is a nonzero constant for all $t$.
+
+  \item {\bf $x(t)$ monotonically approaches nonzero constant vector}.
+  According to Part A, there must be one negative eigenvalue and one zero
+  eigenvalue. If $A$ equals the following,
+  $$ A = \begin{pmatrix}
+    1 & 2 \\
+    1 & 2 \\
+    1 & 2
+  \end{pmatrix} $$
+  Then $B = -A^T A$ must equal,
+  $$ B = \begin{pmatrix}
+    -3 & -6 \\
+    -6 & -12
+  \end{pmatrix} $$
+  With eigenvalues and eigenvectors
+  $$ \lambda_1 = -15,\quad \lambda_2 = 0 $$
+  $$ x_1 = \begin{pmatrix}
+    1 \\
+    2
+  \end{pmatrix},\quad x_2 = \begin{pmatrix}
+    -2 \\
+    1
+  \end{pmatrix} $$
+  Solving for coefficients using the initial condition $x(0) =
+  \begin{pmatrix} 3 & 1 \end{pmatrix}^T$ yields
+  $$ x(t) = e^{-15 t} \begin{pmatrix}
+    1 \\
+    2
+  \end{pmatrix} - \begin{pmatrix}
+    -2 \\
+    1
+  \end{pmatrix} $$
+  Clearly, as $t \longrightarrow \infty$, the solution approaches
+  $\begin{pmatrix} 2 & -1 \end{pmatrix}^T $
+
+  \item {\bf $x(t)$ monotonically approaches zero vector}. According to Part
+  A, there must be two negative eigenvalues. If $A$ equals the following,
+  $$ A = \begin{pmatrix}
+    1 & 1 \\
+    1 & 1 \\
+    1 & -1
+  \end{pmatrix} $$
+  Then $B = -A^T A$ must equal,
+  $$ B = \begin{pmatrix}
+    -3 & -1 \\
+    -1 & -3
+  \end{pmatrix} $$
+  With eigenvalues and eigenvectors,
+  $$ \lambda_1 = -4,\quad \lambda_2 = -2 $$
+  $$ x_1 = \begin{pmatrix}
+    1 \\
+    1
+  \end{pmatrix},\quad x_2 = \begin{pmatrix}
+    -1 \\
+    1
+  \end{pmatrix} $$
+  Solving for coefficients using the initial condition $x(0) =
+  \begin{pmatrix} 1 & 1 \end{pmatrix}^T$ yields,
+  $$ x(t) = e^{-4 t} \begin{pmatrix}
+    1 \\
+    1
+  \end{pmatrix} $$
+  Clearly, as $t \longrightarrow \infty$, the solution approaches
+  $\begin{pmatrix} 0 & 0 \end{pmatrix}^T$ monotonically.
+
+\end{itemize}
+
+\subsection*{Part C}
+
+\begin{itemize}
+  
+  \item {\bf $x(t)$ is a nonzero constant vector}. The matrix $A A^T$ is
+  $$ A A^T = \begin{pmatrix}
+    0 & 0 & 0 \\
+    0 & 0 & 0 \\
+    0 & 0 & 0
+  \end{pmatrix} $$
+  This matrix has eigenvectors and eigenvalues,
+  $$ \lambda_1 = 0,\quad \lambda_2 = 0,\quad \lambda_3 = 0 $$
+  $$ x_1 = \begin{pmatrix}
+    1 \\
+    0 \\
+    0
+  \end{pmatrix},\quad x_2 = \begin{pmatrix}
+    0 \\
+    1 \\
+    0
+  \end{pmatrix},\quad x_3 = \begin{pmatrix}
+    0 \\
+    0 \\
+    1
+  \end{pmatrix} $$
+  The eigenvectors give the left singular vectors and the eigenvalues give
+  the singular values. For the right singular vectors, the matrix $A^T A$ is
+  $$ A^T A = \begin{pmatrix}
+    0 & 0 \\
+    0 & 0
+  \end{pmatrix} $$
+  This matrix has eigenvectors,
+  $$ x_1 = \begin{pmatrix}
+    1 \\
+    0
+  \end{pmatrix},\quad x_2 = \begin{pmatrix}
+    0 \\
+    1
+  \end{pmatrix} $$
+  These give the right singular vectors.
+
+  \item {\bf $x(t)$ monotonically approaches nonzero constant vector}. The
+  matrix $A A^T$ is
+  $$ A A^T = \begin{pmatrix}
+    5 & 5 & 5 \\
+    5 & 5 & 5 \\
+    5 & 5 & 5
+  \end{pmatrix} $$
+  This matrix has eigenvectors,
+  $$ x_1 = \begin{pmatrix}
+    1 \\
+    -1 \\
+    0
+  \end{pmatrix},\quad x_2 = \begin{pmatrix}
+    -1 \\
+    -1 \\
+    2
+  \end{pmatrix},\quad x_3 = \begin{pmatrix}
+    1 \\
+    1 \\
+    1
+  \end{pmatrix} $$
+  Normalizing these eigenvectors give the left singular vectors. 
+  $$ u_1 = \frac{1}{\sqrt{2}}\begin{pmatrix}
+    1 \\
+    -1 \\
+    0
+  \end{pmatrix},\quad u_2 = \frac{1}{\sqrt{6}}\begin{pmatrix}
+    -1 \\
+    -1 \\
+    2
+  \end{pmatrix},\quad u_3 = \frac{1}{\sqrt{3}}\begin{pmatrix}
+    1 \\
+    1 \\
+    1
+  \end{pmatrix} $$
+  For the right singular vectors and singular values, the matrix $A^T A$ is
+  $$ A^T A = \begin{pmatrix}
+    3 & 6 \\
+    6 & 12
+  \end{pmatrix} $$
+  This matrix has eigenvectors and eigenvalues,
+  $$ \lambda_1 = 0,\quad \lambda_2 = 15 $$
+  $$ x_1 = \begin{pmatrix}
+    -2 \\
+    1
+  \end{pmatrix},\quad x_2 = \begin{pmatrix}
+    1 \\
+    2
+  \end{pmatrix} $$
+  Normalizing these eigenvectors and taking the square root of the
+  eigenvalues give the right singular vectors and singular values.
+  $$ \sigma_1 = 0,\quad \sigma_2 = \sqrt{15} $$
+  $$ v_1 = \frac{1}{\sqrt{5}}\begin{pmatrix}
+    -2 \\
+    1
+  \end{pmatrix},\quad v_2 = \frac{1}{\sqrt{5}}\begin{pmatrix}
+    1 \\
+    2
+  \end{pmatrix} $$
+
+  \item {\bf $x(t)$ monotonically approaches zero vector}. The matrix $A A^T$
+  is
+  $$ A A^T = \begin{pmatrix}
+    2 & 2 & 0 \\
+    2 & 2 & 0 \\
+    0 & 0 & 2
+  \end{pmatrix} $$
+  This matrix has eigenvectors,
+  $$ x_1 = \begin{pmatrix}
+    1 \\
+    -1 \\
+    0
+  \end{pmatrix},\quad x_2 = \begin{pmatrix}
+    0 \\
+    0 \\
+    1
+  \end{pmatrix},\quad x_3 = \begin{pmatrix}
+    1 \\
+    1 \\
+    0
+  \end{pmatrix} $$
+  Normalizing these eigenvectors give the left singular vectors. 
+  $$ u_1 = \frac{1}{\sqrt{2}}\begin{pmatrix}
+    1 \\
+    -1 \\
+    0
+  \end{pmatrix},\quad u_2 = \begin{pmatrix}
+    0 \\
+    0 \\
+    1
+  \end{pmatrix},\quad u_3 = \frac{1}{\sqrt{2}}\begin{pmatrix}
+    1 \\
+    1 \\
+    0
+  \end{pmatrix} $$
+  For the right singular vectors and singular values, the matrix $A^T A$ is
+  $$ A^T A = \begin{pmatrix}
+    3 & 1 \\
+    1 & 3
+  \end{pmatrix} $$
+  This matrix has eigenvectors and eigenvalues,
+  $$ \lambda_1 = 2,\quad \lambda_2 = 4 $$
+  $$ x_1 = \begin{pmatrix}
+    -1 \\
+    1
+  \end{pmatrix},\quad x_2 = \begin{pmatrix}
+    1 \\
+    1
+  \end{pmatrix} $$
+  Normalizing these eigenvectors and taking the square root of the
+  eigenvalues give the right singular vectors and singular values.
+  $$ \sigma_1 = \sqrt{2},\quad \sigma_2 = 2 $$
+  $$ v_1 = \frac{1}{\sqrt{2}}\begin{pmatrix}
+    -1 \\
+    1
+  \end{pmatrix},\quad v_2 = \frac{1}{\sqrt{2}}\begin{pmatrix}
+    1 \\
+    1
+  \end{pmatrix} $$
+
+\end{itemize}
+
+\section*{Problem 2}
+
+If $A + A^H$ is positive definite, then
+$$ x^H \left(A + A^H\right) x > 0\quad \forall x > 0 $$
+Using this fact, let $x$ be an eigenvector and $A$ and $\lambda$ be the
+corresponding eigenvalue. Simplifying,
+\begin{align*}
+  x^H \left(A + A^H\right) x &= x^H A x + x^H A^H x \\
+  &= x^H \left(A x\right) + \left(x^H A^H\right) x \\
+  &= x^H \left(\lambda x\right) + \left(A x\right)^H x \\
+  &= \lambda x^H x + \left(\lambda x\right)^H x \\
+  &= \lambda x^H x + \bar{\lambda} x^H x \\
+  &= \left(\lambda + \bar{\lambda}\right) \left(x^H x\right) > 0
+\end{align*}
+Since the sum of a complex number plus its conjugate maintain sign in the
+real part and the complex part cancels, the real part must be positive as the
+complex dot product $x^H x$ is also positive.
+
+\end{document}
