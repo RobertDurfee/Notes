@@ -1,0 +1,306 @@
+%
+% 6.006 problem set 9 solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros-fa18}
+\newcommand{\theproblemsetnum}{9}
+\newcommand{\releasedate}{Thursday, November 15}
+\newcommand{\partaduedate}{Thursday, November 29}
+
+\title{6.006 Problem Set 9}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 11PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} Joanna Cohen
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem % Problem 1
+
+\begin{problemparts}
+\problempart % Problem 1a
+{\bf Subproblems} Let $x(n)$ be the number of BSTs that can be formed from
+$n$ distinct nodes.
+
+{\bf Relation} Guess a root for the tree. Recurse on the right and left
+subtrees.
+$$ x(n) = \sum_{i = 0}^{n - 1} x(i) \cdot x\left(n - i - 1\right) $$
+
+The recurrence is acyclic because it depends only on strictly smaller $n$.
+
+{\bf Base Cases} Zero or one nodes form exactly one tree.
+$$ x(0) = x(1) = 1 $$
+
+{\bf Solution} Given $n$ distinct nodes, the solution is
+$$ x(n) $$
+
+Compute by memoized bottom up or iterative top down.
+
+{\bf Running Time} There are $O(n)$ total subproblems and each requires
+$O(n)$ arithmetic operations. Therefore, total work is $O(n^2)$ arithmetic
+operations.
+
+\problempart % Problem 1b
+{\bf Subproblems} Let $x(n, h)$ be the number of AVL trees that can be formed
+from $n$ distinct nodes and of height $h$.
+
+{\bf Relation} Guess a root for the tree. Recurse of the right and left
+subtrees. This time, however, the heights can only differ by one.
+\begin{align*}
+  x(n, h) = \sum_{i = 0}^{n - 1} &(x(i, h - 1) \cdot x(n - i - 1, h - 1) \\
+  &+ x(i, h - 1) \cdot x(n - i - 1, h - 2) \\
+  &+ x(i, h - 2) \cdot x(n - i - 1, h - 1))
+\end{align*}
+
+The recurrence is acyclic because it depends only on strictly smaller $n$ and
+$h$.
+
+{\bf Base Cases} If there are negative heights, no tree can be formed. Zero
+or one nodes form exactly one tree so long as their respective heights are
+also zero and one.
+$$ x(n, h) = 0\quad \forall h < 0 $$
+$$ x(0, 0) = x(1, 1) = 1 $$
+
+{\bf Solution} To choose the height for the AVL tree, consider that the
+maximum height is $1.44 \log_2(n)$ and the height only differs by plus or
+minus one. Therefore, the solution is given by,
+$$ \sum_{i \in S} x(n, i) $$
+Where $S$ is the set containing possible heights, $\{1.44 \log_2(n) \pm 1\}$.
+
+Compute each dynamic program iteration by memoized bottom up or iterative top
+down.
+
+{\bf Running Time} There are $O(n \log_2(n))$ subproblems because $h \in
+O(\log_2(n))$. Each subproblem requires $O(n)$ arithmetic operations.
+Therefore, the dynamic program is $O(n^2 \log_2(n))$ arithmetic operations.
+Since it is only run at most $O(1)$ times, the overall algorithm is also
+$O(n^2 \log_2(n))$ arithmetic operations.
+
+\problempart % Problem 1c
+{\bf Subproblems} Let $x(n)$ be the number of binary heaps that can be formed
+from $n$ distinct nodes.
+
+{\bf Relation} Given $n$ distinct nodes, the least must be the root. The left
+and right tree can be arbitrarily divided as they all must be less than the
+root. There are $n - 1$ choose $\ell$ ways to do this.
+$$ x(n) = \binom{n - 1}{\ell} x(\ell) \cdot x(r) $$
+Where $\ell$ and $r$ are determined by the shape of the tree. Since the tree
+must be complete, each subtree is also complete. The left subtree will either
+be full (if the number of nodes in the final level is greater than half the
+max possible) or just complete (if the number of nodes in the final level is
+less than half the max possible). The right is made up of whatever nodes are
+not in the left.
+$$ \ell = \begin{cases}
+  2^{\lfloor \log_2(n)\rfloor} - 1 & n - (2^{\lfloor \log_2(n)\rfloor} - 1)
+  \geq 2^{\lfloor \log_2(n)\rfloor - 1} \\
+  n - 2^{\lfloor \log_2(n)\rfloor - 1} & n - (2^{\lfloor \log_2(n)\rfloor} -
+  1) < 2^{\lfloor \log_2(n)\rfloor - 1}
+\end{cases} $$
+$$ r = n - \ell - 1 $$
+
+The recurrence is acyclic because it only depends on strictly smaller $n$.
+
+{\bf Base Cases} Zero or one nodes form exactly one heap.
+$$ x(0) = x(1) = 1 $$
+
+{\bf Solution} Given $n$ distince nodes, the solution is
+$$ x(n) $$
+
+Compute by memoized bottom up or iterative top down.
+
+{\bf Running Time} There are $O(n)$ subproblems. Each subproblem requires
+$O(1)$ arithmetic operations (aside from the choose operation). For the
+choose operation, compute all $n$ choose $n$ ahead of time using dynamic
+programming which takes $O(n)$ arithmetic operations. Therefore, the overall
+solution, when using precomputed choose, is $O(n)$ arithmetic operations.
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+{\bf Subproblems} Split the board into two arrays of length $n$. Call them
+$A$ and $B$. The two rows $A$ and $B$ vertically stacked represent the $2
+\times n$ board. Then, let $x(i, j)$ be the maximum placement of ships on a
+board consisting of the upper row from $i$ to the end and the lower row from
+$j$ to the end.
+
+{\bf Relation} If $i = j$, then the two sequence are even.
+\begin{align*}
+  x(i, j) = \max(&A[i] + A[i + 1] + x(i + 2, j + 1), \\
+    &B[j] + B[j + 1] + x(i + 1, j + 2), \\
+    &A[j] + B[j] + x(i + 1, j + 1), \\
+    &x(i + 1, j + 1))
+\end{align*}
+This corresponds to the following,
+\begin{itemize}
+  \item\ Place a ship horizontally on the top row.
+  \item\ Place a ship horizontally on the bottom row.
+  \item\ Place a ship vertically.
+  \item\ Ignore both leftmost spots.
+\end{itemize}
+
+If $i > j$, then the top sequence is ahead of the bottom.
+\begin{align*}
+  x(i, j) = \max(&B[j] + B[j + 1] + x(i, j + 2),\\
+    &x(i, j + 1))
+\end{align*}
+This corresponds to the following,
+\begin{itemize}
+  \item\ Place a ship horizontally on the bottom row.
+  \item\ Ignore the lower leftmost spot.
+\end{itemize}
+
+If $i < j$, then the bottom sequence is ahead of the top. This case is
+analogous to the previous by interchanging $i$ and $j$ and $A$ and $B$.
+
+The recurrence is acyclic as it only depends on strictly shorter subsequences
+of the top and bottom rows.
+
+{\bf Base Cases} If both $i$ and $j$ are at the end of the board, either
+takeboth or leave both.
+$$ x(n - 1, n - 1) = \max(0, A[n - 1] + B[n - 1]) $$
+
+If $i$ is beyond the edge of the board and $j$ is at the end of the board (or
+vice versa), only a single block remains and must be ignored.
+$$ x(n, n - 1) = x(n - 1, n) = 0 $$
+
+{\bf Solution} Initiate the dynamic program by calling
+$$ x(0, 0) $$
+
+Compute using memoized bottom up or iterative top down.
+
+When computing the individual subproblems, store the index of the ship move
+that led to the result in the form, for example, $(i, 0)$, $(i + 1, 0)$ if
+the placement was on the top row horizontally from $i$ to $i + 1$.
+Reconstruct the ship placements by looking at the parent pointers stored with
+the memo from the returned result.
+
+{\bf Running Time} There are only $O(n)$ subproblems. Throughout the
+recurrence, each sequence is either lined up or off by one. Therefore, there
+are {\bf not} $O(n^2)$ subproblems. Furthermore, only $O(1)$ work is done per
+subproblem, therefore the overall work is $O(n)$.
+
+\newpage
+\problem  % Problem 3
+{\bf Subproblems} Let $x(i, j, d)$ be the maximum number of districts won
+along the sequence from $i$ to $j$ using $d$ districts.
+
+{\bf Relation} Guess a possible district from the beginning of the sequence
+to $k$. The rest of the sequence can be divided into $d - 1$ districts now.
+$$ x(i, j, d) = \max(x(i, k, 1) + x(k + 1, j, d - 1)\quad k \in \{i, \ldots,
+j\}) $$
+
+This recurrence is acyclic becuase it only depends on strictly shorter
+subsequences.
+
+{\bf Base Cases} If $d = 1$ and the length of the sequence is odd,
+$$ x(i, j, 1) = v(i, j) $$
+Where $v(i, j)$ is $1$ if the sequence from $i$ to $j$ has more Maryonettes
+than Itnizks, $0$ otherwise.
+
+If $d = 1$ and the length of the sequence is even,
+$$ x(i, j, 1) = -\infty $$
+
+{\bf Solution} Duplicate Circleworld $n$ times. Cut each circle at a
+different index such that the $n$ created arrays represent $n$ different ways
+to guess the first division of the nation. Then, feed each array into the
+dynamic program as
+$$ x(0, n, d) $$
+
+Compute each dynamic program result using memoized bottom up or iterative top
+down. Then choose and return the maximum from each possible ``flattened''
+Circleworld.
+
+Within each subproblem evaluation, save the choice of district sequences
+along with the score. Reconstruct the result using the memo and parent
+pointers returned from the result.
+
+{\bf Note}: If it is not possible to divide Circleworld into $d$ groups such
+that each has an odd number of residents, then the result will be $-\infty$.
+
+{\bf Running Time} The dynamic program has $O(n^2d)$ subproblems. Each
+subproblem requires $O(n)$ work. Therefore, the dynamic program needs $O(n^3
+d)$ work to complete. Running this algorithm $n$ times leads to $O(n^4 d)$.
+
+\newpage
+\problem  % Problem 4
+{\bf Subproblems} Let $x(i, j)$ be the maximum score possible in the sequence
+from $i$ to $j$ of $A$.
+
+{\bf Relation} Either the bottles at the ends are to be broken, or they are
+not. If they are not, guess a place between them to recurse upon.
+$$ x(i, j) = \max\begin{cases}
+  x(i, k) + x(k + 1, j) & k \in \{i, \ldots, j\} \\
+  x(i + 1, j - 1) + A[i] * A[j] 
+\end{cases} $$
+
+The recurrence is acyclic because it only depends on strictly smaller
+subsequences.
+
+{\bf Base Cases} If the sequence includes one or fewer elements,
+$$ x(i, j) = 0 $$
+
+{\bf Solution} Given an array of lenght $n$, start recursion on the whole
+sequence,
+$$ x(0, n) $$
+
+Compute using memoized bottom up or iterative top down.
+
+{\bf Running Time} There are $O(n^2)$ subproblems. Each subproblem requires
+$O(n)$ work. Therefore, the overall runtime is $O(n^3)$.
+
+\newpage
+\problem  % Problem 5
+
+\begin{problemparts}
+\problempart % Problem 5a
+{\bf Subproblems} Let $x(i, j)$ be the length of the longest palindrome in
+the sequences from $i$ to $j$. {\bf Note}: This will be twice the length of
+the encoded message.
+
+{\bf Relation} If $A[i] \neq A[j]$ then the first and the last characters
+can't both be a part of the longest palindrome. Guess one to keep and
+recurse on the subsequence.
+$$ x(i, j) = \max(x(i + 1, j), x(i, j - 1)) $$
+If $A[i] = A[j]$, then the two characters will be a part of the longest
+palindrome. Take them and recurse on the inner sequence.
+$$ x(i, j) = 2 + x(i + 1, j - 1) $$
+
+This recurrences is acyclic because it only depends on strictly smaller
+subsequences.
+
+{\bf Base Cases} If the length of the sequence is $0$ characters,
+$$ x(i, j) = 0 $$
+If the length of the sequence is $1$ character, 
+$$ x(i, j) = 1 $$
+
+{\bf Solution} Initiate the dynamic program on an array of length $n$ by
+calling,
+$$ x(0, n) $$
+
+For each of the subproblems, store the character saved that led to the max
+score along with the memo. Reconstruct the message by following parent
+pointers and using the memo.
+
+{\bf Running Time} There are $O(n^2)$ subproblems. Each subproblem requires
+$O(1)$ work. Therefore, the total runtime is $O(n^2)$.
+
+\problempart Submit your implementation to {\small\url{alg.mit.edu/PS9}}
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
