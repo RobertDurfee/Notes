@@ -1,0 +1,217 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{indentfirst}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\allowdisplaybreaks
+
+\title{18.06 Problem Set 13}
+\author{Robert Durfee}
+\date{December 5, 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{Part A}
+
+Expanding the dot product,
+\begin{align*}
+  \vec{w_1}(x) \cdot \left(A \vec{w_2}(x)\right)&= \begin{pmatrix}
+  u_1(x) \\
+  v_1(x)
+\end{pmatrix} \cdot \left(\begin{pmatrix}
+  0 & \partial / \partial x \\
+  \partial / \partial x & 0
+\end{pmatrix} \begin{pmatrix}
+  u_2(x) \\
+  v_2(x)
+\end{pmatrix}\right) \\
+&= \begin{pmatrix}
+  u_1(x) \\
+  v_1(x)
+\end{pmatrix} \cdot \begin{pmatrix}
+  v_2'(x) \\
+  u_2'(x)
+\end{pmatrix}
+\end{align*}
+Using the given definition of a dot product,
+\begin{align*}
+  \begin{pmatrix}
+    u_1(x) \\
+    v_1(x)
+  \end{pmatrix} \cdot \begin{pmatrix}
+    v_2'(x) \\
+    u_2'(x)
+  \end{pmatrix} &= \int_0^L \begin{pmatrix}
+    u_1(x) \\
+    v_1(x)
+  \end{pmatrix}^H \begin{pmatrix}
+    v_2'(x) \\
+    u_2'(x)
+  \end{pmatrix} dx
+\end{align*}
+Applying integration by parts,
+\begin{align*}
+  \int_0^L \begin{pmatrix}
+    u_1(x) \\
+    v_1(x)
+  \end{pmatrix}^H \begin{pmatrix}
+    v_2'(x) \\
+    u_2'(x)
+  \end{pmatrix} dx &= \begin{pmatrix}
+    u_1(x) \\
+    v_1(x)
+  \end{pmatrix}^H \begin{pmatrix}
+    v_2(x) \\
+    u_2(x)
+  \end{pmatrix} \Bigg\vert_0^L - \int_0^L \begin{pmatrix}
+    u_1'(x) \\
+    v_1'(x)
+  \end{pmatrix}^H \begin{pmatrix}
+    v_2(x) \\
+    u_2(x)
+  \end{pmatrix} dx
+\end{align*}
+Assuming $u_k(0) = u_k(L) = 0$, the first term goes to zero,
+$$ \int_0^L \begin{pmatrix}
+    u_1(x) \\
+    v_1(x)
+  \end{pmatrix}^H \begin{pmatrix}
+    v_2'(x) \\
+    u_2'(x)
+  \end{pmatrix} dx = - \int_0^L \begin{pmatrix}
+    u_1'(x) \\
+    v_1'(x)
+  \end{pmatrix}^H \begin{pmatrix}
+    v_2(x) \\
+    u_2(x)
+  \end{pmatrix} dx $$
+Moving the negative sign into the integral,
+$$ \int_0^L \begin{pmatrix}
+    u_1(x) \\
+    v_1(x)
+  \end{pmatrix}^H \begin{pmatrix}
+    v_2'(x) \\
+    u_2'(x)
+  \end{pmatrix} dx = \int_0^L \begin{pmatrix}
+    - u_1'(x) \\
+    - v_1'(x)
+  \end{pmatrix}^H \begin{pmatrix}
+    v_2(x) \\
+    u_2(x)
+  \end{pmatrix} dx $$
+Therefore,
+$$ \vec{w_1}(x) \cdot \left(A \vec{w_2}(x)\right) = \int_0^L \begin{pmatrix}
+    - u_1'(x) \\
+    - v_1'(x)
+  \end{pmatrix}^H \begin{pmatrix}
+    v_2(x) \\
+    u_2(x)
+  \end{pmatrix} dx $$
+Expanding the integrand out yields,
+$$ \vec{w_1}(x) \cdot \left(A \vec{w_2}(x)\right) = \int_0^L -\overline{u_1'(x)}
+v_2(x) - \overline{v_1'(x)} u_2(x) dx $$
+Doing the same for the integrand of $\left(-A \vec{w_1}(x)\right) \cdot
+\vec{w_2}(x)$,
+$$ \left(-A \vec{w_1}(x)\right) \cdot \vec{w_2}(x) = \int_0^L -\overline{v_1'(x)}
+u_2(x) - \overline{u_1'(x)} v_2(x) dx $$
+These are the same and from this it is clear,
+$$ \vec{w_1}(x) \cdot \left(A \vec{w_2}(x)\right) = \left(-A
+\vec{w_1}(x)\right) \cdot \vec{w_2}(x) $$
+
+\subsection*{Part B}
+
+Continuing the algebra given,
+\begin{align*}
+  \frac{\partial}{\partial t} \lVert w \rVert^2 &= \frac{\partial w}{\partial
+  t} \cdot w + w \cdot \frac{\partial w}{\partial t} \\
+  &= \left(A w\right) \cdot w + w \cdot \left(A w\right) \\
+  &= (A w) \cdot w + (-A w) \cdot w \\
+  &= (A w) \cdot w - (A w) \cdot w \\
+  &= 0
+\end{align*}
+
+\subsection*{Part C}
+
+Given the following for $w \neq 0$,
+$$ A w = \lambda w $$
+Taking the complex dot product on the left by $w$,
+\begin{align*}
+  w^H (A w) &= w^H (\lambda w) \\
+  (-A w)^H w &= \lambda \lVert w \rVert^2 \\
+  (-\lambda w)^H w &= \lambda \Vert w \rVert^2 \\
+  -\overline{\lambda} \lVert w \rVert^2 &=  \lambda \lVert w \rVert^2 \\
+  -\overline{\lambda} &= \lambda
+\end{align*}
+This implies that $\lambda$ is purely imaginary.
+
+\section*{Problem 2}
+
+\subsection*{Part A}
+
+There are two ways to perform this operation,
+$$ \left(\frac{x_1 x_1^T}{x_1^T x_1}\right)x \quad \mathrm{or} \quad x_1
+\left(\frac{x_1^T x}{x_1^T x_1}\right) $$
+In the first case, there are $n^2$ proportional operations as matrix
+mutliplication is involved. In the second case, only dot products are
+involved and thus there are only $n$ proportional operations. The second
+choice is best.
+
+\subsection*{Part B}
+
+To compute $c_1$, dot products should be used. For example,
+$$ \left(\frac{x_1^T x}{x_1^T x_1}\right) = \frac{1}{x_1^T x_1} \left(x_1^T
+c_1 x_1 + x_1^T c_2 x_2 + \cdots + x_1^T c_n x_n\right)$$
+Knowing that $x_1, x_2, \ldots, x_n$ are orthogonal, this simplifies to,
+$$ \left(\frac{x_1^T x}{x_1^T x_1}\right) = c_1 $$
+
+\subsection*{Part C}
+
+From the definition of an inverse,
+$$ X^{-1} X = I $$
+This can be written as a column-wise operation,
+$$ \begin{pmatrix}
+  X^{-1} x_1 & X^{-1} x_2 & \cdots & X^{-1} x_n
+\end{pmatrix} = I $$
+We want each column to be $e_1, e_2, \ldots, e_n$. We know that $X$ is
+orthogonal. Therefore, $X^T x_1$, where $x_1$ is a column of $X$ will be all
+zeros except for the first entry.
+$$ \begin{pmatrix}
+  X^T x_1 & X^T x_2 & \cdots & X^T x_n
+\end{pmatrix} = \mathrm{diagonal} $$
+The entries are the dot products $x_1^T x_1, x_2^T x_2, \ldots, x_n^T x_n$.
+To make these entries equal to $1$, divide by the norm.
+$$ \begin{pmatrix}
+  \frac{X^T x_1}{x_1^T x_1} & \frac{X^T x_2}{x_2^T x_2} & \cdots & \frac{X^T
+  x_n}{x_n^T x_n}
+\end{pmatrix} = I $$
+Converting this to matrix operations,
+$$ \begin{pmatrix}
+ \frac{1}{x_1^T x_1} &   &   &   \\
+   & \frac{1}{x_2^T x_2} & & \\
+   & & \ddots & \\
+   & & & \frac{1}{x_n^T x_n}
+\end{pmatrix} X^T X = I $$
+Therefore,
+$$ X^{-1} = \begin{pmatrix}
+  \frac{1}{x_1^T x_1} &   &   &   \\
+   & \frac{1}{x_2^T x_2} & & \\
+   & & \ddots & \\
+   & & & \frac{1}{x_n^T x_n}
+\end{pmatrix} X^T $$
+
+\end{document}
