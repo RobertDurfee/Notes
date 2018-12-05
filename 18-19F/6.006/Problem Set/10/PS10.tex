@@ -1,0 +1,472 @@
+%
+% 6.006 problem set 10 solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros-fa18}
+\newcommand{\theproblemsetnum}{10}
+\newcommand{\releasedate}{Thursday, November 29}
+\newcommand{\partaduedate}{Thursday, December 6}
+
+\title{6.006 Problem Set 10}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 11PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} Johanna Cohen
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+\problempart % Problem 1a
+
+{\bf Description} First define a merge operation that performs similarly to
+that in traditional merge. Instead of taking two separate arrays, take one
+array $A$, a set of indicies for one subarray $(i, m)$, and set of indices
+for another subarray $(j, n)$, and an index for the beginning of a contiguous
+staging area $s$. The staging area must be at least as large as the sum of
+the lengths of the two subarrays. Then perform standard merge by swapping the
+values in the staging area with the values taken from either subarray.
+
+Then define a merge-sort operation that performs similarly to traditional
+merge sort. Like traditional merge sort, take one array $A$, a subarray to
+apply merge sort to $(i, j)$, but also provide a contiguous staging area $s$
+that is at least as large as the subarray to sort. If there is only a single
+element to sort, just return. If not, split the section in half, and merge
+sort on each half in order and applying the same staging area for both. Then
+call the merge defintion above. The result will be in the staging area $s$ so
+before returning, the result needs to be swapped back to the original
+location $(i, j)$.
+
+To make an array $A$ $(k, 0)$-sorted, call merge sort with parameters $(A,
+(0, k), k)$ so long as $k \leq n / 2$.
+
+{\bf Correctness} As long as there is enough space in the staging area, the
+length of the subarray to sort, no sorted elements will be swapped out of
+place. This applies in the case mentioned where $(i, j)$ represents $(0, k)$
+where $k \leq n/2$ and the staging area starts at $n/2$ at worst. This
+ensures enough space. The majority of the algorithm correctness follows from
+standard merge sort.
+
+{\bf Run Time} The merge step is $O(k)$ as there are $O(k)$ swaps taking
+place to merge. Each merge sort recursion calls this only once so the runtime
+recurrence is
+$$ T(k) = 2 T(k/2) + O(k) $$
+The solution to this recurrence is $O(k \log k)$ by Case II Master Theorem.
+
+\problempart % Problem 1b
+
+{\bf Description} First call the merge sort defined above as {\tt ms(A, n / 2,
+n, 0)}. Then call merge sort again as {\tt ms(A, 0, n / 4, n / 4)}.
+
+{\bf Correctness} This will work as expected because the first call has a
+staging area from $0$ to $n/2$ which can handle a sort from $(n/2, n)$. Next,
+the staging area is of size $n / 4$ which can handle the sorting of $(0, n /
+4)$. Thus no swaps will interfere with sorted subsections and the array will
+be $(n/4, n/2)$-sorted.
+
+{\bf Runtime} $O((n / 2) \log(n / 2) + (n / 4) \log (n / 4)) \in O(n \log n)$
+
+\problempart % Problem 1c
+
+{\bf Description} Create a new special definition for merge other than the
+one described in Part A. Take one array $A$ and one integer $a$. This integer
+must be $a \leq n / 4$. Using $a$, assign the variables $(i, m) = (0, a)$ to
+represent the first subarray to merge. Assign the variables $(j, n) = (2a,
+n)$ to represent the second subarray to merge. Lastly, set the staging area
+to start at $s = a$.
+
+Run the standard merge as augmented in Part A while both subarrays still have
+elements. That is, when $i < m$ and $j < n$. If the first subarray runs out
+of elements, the merge is complete. If the second subarray runs out of
+elements, continue swapping the elements left in the first subarray with the
+element at the staging area pointer.
+
+{\bf Correctness} Since the merge algorithm is proven correct above for a
+staging area large enough for both subarrays, the burden of proof now is to
+ensure that no sorted elements will be corrupted by swaps with the staging
+area now that it is smaller than the sum of the sizes of the two subarrays.
+
+Let $i$ be the pointer to the next to-be-processed element in the left
+subarray. Let $j$ be the pointer to the next to-be-processed element in the
+right subarray. Let $s$ be the pointer to the next empty slot in the staging
+area. By necessity, $i < s < j$. Thus, the space between $s$ and $j$ must be
+staging area. The only way to corrupt the sorted sections would be to swap
+something in $i$ with something in $j$. But, anything swapped into the
+staging area cannot overwrite anything already sorted because $s$ will always
+point to an unsorted element less than $j$ and greater than the end of the
+left subarray.
+
+{\bf Running Time} This is analogous to the merge provided in Part A as at
+most $O(3 n / 4)$ swaps are performed. Therefore, the algorithm is $O(n)$.
+
+\problempart % Problem 1d
+
+{\bf Description} First apply algorithm in Part B. Then apply the algorithm
+in Part C for $a = 1/4$. Then repeatedly alternate between apply the
+algorithm in Part A for $k = n / 8, n / 16, n / 32, \ldots$ and applying the
+algorithm in Part C for $a = 1 / 8, 1 / 16, 1 / 32, \ldots$. Once the staging
+area becomes size $1$, just perform a linear swap along all elements until
+its place is found.
+
+{\bf Correctness} Part B will reduce the problem to 
+\begin{center}
+{\tt [----1/4S-----|----1/4U----|--------1/2S--------]}
+\end{center}
+Then, Part C will reduce it to 
+\begin{center}
+{\tt [----1/4U-----|--------------3/4S---------------]}
+\end{center}
+Part A will reduce it to
+\begin{center}
+{\tt [-1/8S-|-1/8U-|--------------3/4S---------------]}
+\end{center}
+Part C will reduce it to
+\begin{center}
+{\tt [-1/8U-|----------------7/8S--------------------]}
+\end{center}
+The proofs for Parts A through C are given above. Continuing in this fashion
+will shrink the unsorted staging area as $1, 1/2, 1/4, 1/8,\ldots$ and the
+placement will allow for repeated calling until only one element remains.
+
+This algorithm is not stable as the swaps in the staging area will destroy
+any inherent order that was present to begin with.
+
+{\bf Running Time} At each step, the staging area reduces by one half. Thus
+each call to Part A will reduce as such. However, the work to apply Part C
+will remain $O(n)$ for the entire algorithm as $n$ doesn't decrease.
+Therefore the recurrence for the algorithm is
+$$ T(n) = T(n / 2) + O(n \log n + N) $$
+Where $n$ is given by the staging area but $N$ is the constant length of the
+overall array. By Case III of the Master Theorem, this is $O(n \log n + n)
+\in O(n \log n) $.
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+
+{\bf Description} Define three hashtables $E$, $C$, and $I$ hashed on email
+addresses, credit card numbers, and IP addresses respectively. The values
+contained in the hashtables are indexes of user records in list $U$. Each $u
+\in U$ contains a list of email addresses associated with that user.
+
+For each log entry $p \in P$, first check for a collision in $E$. If there is
+a collision, that email has been used before and is already associated with a
+user. Move to next $p$. If there is not a collision, check for a collision in
+$C$. If there is a collsion in $C$, go to the user record associated with
+that credit card number and add the new email address to that user's email
+addresses. If there is not a collision, to the same for $I$ as for $C$ if
+there is a collision. If there is no collision for $E$, $C$, or $I$, add a
+new user $u$ to $U$ with the given email address. Then add the $e$, $c$, and
+$i$ of that user to $E$, $C$, and $I$ with value as index of user record $u$.
+
+Return the list $U$ of user records.
+
+{\bf Correctness} If an email address, credit card, or IP address is seen
+more than once, the email address will be attributed to the user last seen
+with the given $e$, $c$, or $i$. Therefore each user record must contain all
+email addresses used by that user. These can be hashed given that they are
+storable in constant words.
+
+{\bf Running Time} Each collision detection is expected $O(1)$ for each $E$,
+$C$, and $I$. To add a user record can be chosen to be $O(1)$ if linked list.
+Same for adding an email to user record if using linked lists. This will not
+sacrifice speed anywhere else as only insert-at-end operations are needed. If
+user needs list in array form, $O(|U|)$ needed to convert which is related to
+$|P|$ so it can be $O(|P|)$. Overall this is repeated $|P|$ times so runtime
+is expected $O(|P|)$.
+
+\newpage
+\problem  % Problem 3
+
+{\bf Description} The data structure should have the following properties:
+\begin{itemize}
+  \item\ {\tt avl}: An AVL tree of player IDs sorted on winningness with
+  augmenation of minimum and maximum winningness within left and right
+  subtrees. Also augment with most recent player within all descendants.
+  \item\ {\tt ht}: A hashtable where keys are ID's of players and values are
+  pointers to the player in the AVL tree.
+\end{itemize}
+
+The data structure should have the following methods:
+\begin{itemize}
+  \item\ {\tt change\_wins(i,k,t)}: Lookup the player from the ID in the
+  hashtable. Use the pointer stored at the hashtable to get the node of the
+  player in the AVL tree. Remove this node from the AVL tree but keep the old
+  $k$. Insert a new node with the updated number of winningness (by adding
+  the new and old $k$ together) and time. Also update the index of the node
+  stored in the hashtable for the given user.
+  \item\ {\tt find\_partner(i)}: Use hashtable to find the user's node in the
+  AVL tree. Get that user's winningness. Search the AVL tree for the first
+  node with minimum and maximum winningness augmentation within $\pm 10$.
+  Then return the most recent player augmentation.
+\end{itemize}
+
+{\bf Correctness} For the AVL tree with agumentations:
+\begin{itemize}
+  \item\ {\tt avl}: The min/max augmentation was demonstrated correct in
+  Problem Set 4 Problem 3. The most recent player can be computed by
+  \begin{center}
+    {\tt node.recent = max(left.recent, right.recent, node.t)}
+  \end{center}
+  This only depends on children and self.
+\end{itemize}
+
+\begin{itemize}
+  \item\ {\tt change\_wins(i,k,t)}: Hashtable will give reference to node in
+  AVL tree assumed correct. Remove AVL assumed correct. Insert AVL assumed
+  correct. Augmentation can be updated as described above in terms solely of
+  children and self and therefore is maintainable.
+  \item\ {\tt find\_partner(i)}: Hashtable lookup and find in AVL assumed
+  correct. The strategy for finding the correct min/max range was
+  demonstrated in Problem Set 4 Problem 3. The augmentation for most recent
+  will hold the most recent player as described above.
+\end{itemize}
+
+{\bf Running Time}
+\begin{itemize}
+  \item\ {\tt change\_wins(i,k,t)}: Hashtable lookup is expected $O(1)$. AVL
+  remove is $O(\log n)$. AVL insert is also $O(\log n)$. The augmentation for
+  min/max can be upheld in $O(1)$ time as shown in Problem Set 4 Problem 3.
+  The augmentation for most recent can be determine in $O(1)$ because it only
+  depends on left, right, and self nodes. Therefore overall expected $O(\log
+  n)$.
+  \item\ {\tt find\_partner(i)}: Hashtable lookup is expected $O(1)$.
+  Searching AVL tree for a range based on augmentation is $O(\log n)$ as
+  shown in Problem Set 4 Problem 3. Therefore overall expected $O(\log n)$.
+\end{itemize}
+
+\newpage
+\problem  % Problem 4
+
+{\bf Description} Arrange the map of colonies into groups each having the
+same estimated time to the capital. For each group, in increasing order of
+estimate, run Dijkstra looking only at the colonies in the group of same
+estimates. When the last group (highest estimates) of colonies is reached and
+after Dijkstra has run, return.
+
+{\bf Correctness} Each subgroup of colonies with the same estimate will only
+depend on colonies with smaller estimates. Therefore, each group can be
+looked at individually in sequential order on estimates.
+
+{\bf Running Time} Each subgroup can only have at most $5$ vertices.
+Therefore, deleting the minimum will take $O(1)$ time. Furthermore, each
+vertice only has at most $8$ edges. Therefore the relaxation can be done in
+$O(1)$ time. Therefore, there is only an outer loop that goes through each
+group and each vertice in each group. The size of this set is $O(n)$.
+Therefore, the overall runtime is $O(n)$.
+
+\newpage
+\problem  % Problem 5
+
+\begin{problemparts}
+\problempart % Problem 5a
+
+{\bf Subproblem} Let $x(u, v, d)$ be the smallest weight of a path from
+vertex $u$ to vertex $v$ having at most $d$ edges.
+
+{\bf Relation} The path from $u$ to $v$ using at most $d$ edges must go
+through some $u$-adjacent vertice $w$ and then have a path from $w$ to $v$
+using $d - 1$ edges.
+$$ x(u, v, d) = \min(w(u, w) + x(w, v, d - 1),\quad \forall w \in V) $$
+
+This recurrence is acyclic because it depends on strictly smaller subproblems
+as $d$ strictly decreases.
+
+{\bf Base Case} If $u = v$ then the path is length $0$,
+$$ x(u, u, d) = 0 $$
+If the path length is zero and $u \neq v$, there is no path
+$$ x(u, v, 0) = \infty $$
+
+{\bf Solution} The all-pairs shortest path solution is computed by running
+the dynamic programming subproblem on two $u, v \in V$ and $k = |V|$ and
+recording the vertices visited. Repeat for non visited pairs with the same
+memo.
+
+Compute subproblems via top-down memoization or bottom-up. Store the parent
+pointers which will contain all pairs shortest paths.
+
+{\bf Running Time} There are $|V|$ $u$'s, $|V|$ $v$'s, and $|V|$ $k$'s.
+Therefore, the number of subproblems is $O(|V|^3)$. The amount of work per
+subproblem is $O(|V|)$ as there are $|V|$ $w$'s to choose from. Overall
+running time is $O(|V|^4)$.
+
+\problempart % Problem 5b
+
+{\bf Subproblem} Let $x(u, v, i)$ be the smallest weight of a path from
+vertex $u$ to $v$ having at most $2^i$ edges.
+
+{\bf Relation} The path from $u$ to $v$ using at most $2^i$ edges must go
+through some vertice $w$ halfway through the path from $u$ to $v$.
+$$ x(u, v, i) = \min(x(u, w, i - 1) + x(w, v, i - 1),\quad \forall w \in V) $$
+{\bf Note:} $i - 1$ is equivalent to $d / 2$ in the last problem.
+
+The recurrence is acylic because it depends on strictly smaller subproblems
+as $i$ strictly decreases.
+
+{\bf Base Case}: If $i = 0$, the path contains one edge so its lenght is just
+the weight.
+$$ x(u, v, 0) = w(u, v) $$
+
+{\bf Solution}: Same as in last problem except $i = \log |V|$ as we start
+with $d = |V|$ so $2^i = |V|$ for $i = \log |V|$.
+
+{\bf Running Time} Same as last problem except this time we are only
+considering $\log |V|$ different $i$ values. Therefore, number of subproblems
+is $O(|V|^2 \log |V|)$ with work per subproblem the same as before.
+Therefore, total runtime is $O(|V|^3 \log |V|)$.
+
+\problempart % Problem 5c
+
+{\bf Subproblem} Let $x(u, v, k)$ be the smallest weight of a path from
+vertex $u$ to $v$ using only vertices from $\{1, 2, \ldots, k\} \cup \{u,
+v\}$.
+
+{\bf Relation} The path from $u$ to $v$ using only $\{1, 2, \ldots, k\} \cup
+\{u, v\}$ must go through vertice $k$ and then only use $k-1$ vertices or not
+go through $k$ and use $k-1$ vertices (along with $u$ and $v$).
+$$ x(u, v, k) = \min\begin{cases}
+  x(u, k, k - 1) + x(k, v, k - 1) \\
+  x(u, v, k - 1)
+\end{cases}\Bigg\} $$
+
+The recurrence is acyclic because it depends on strictly smaller problems as
+$k$ strictly decreases.
+
+{\bf Base Case}: If $k = 0$, there are no other nodes to consider other than
+$u$ and $v$ so the path must be the weight of the edge.
+$$ x(u, v, 0) = w(u, v) $$
+
+{\bf Solution} Same as last problems except $k = |V|$ as we must first
+consider all vertices.
+
+{\bf Running Time} Same as last problems except $k = |V|$ so the number of
+subproblems is $O(|V|^3)$. Also, the work per subproblem is now constant as
+no guessing takes place. Overall runtime is thus $O(|V|^3)$.
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 6
+
+\begin{problemparts}
+\problempart % Problem 6a
+
+{\bf Subproblems} Let $x(i, s)$ be the length of the longest alternating
+subsequence on the array $A$ using the first $i + 1$ elements (includine
+$a_i$) and starting with the sign $s \in \{<, >\}$.
+
+{\bf Relation} Take the element $a_i$. Then, find the elements that are
+either less than or greater than (depending on the value of $s$) and try each
+one and recurse.
+$$ x(i, <) = \max(x(j, >) + 1 \mid \forall j \in [0, i)\ \mathrm{and}\ a_j <
+a_i) $$
+$$ x(i, >) = \max(x(j, <) + 1 \mid \forall j \in [0, i)\ \mathrm{and}\ a_j >
+a_i) $$
+
+The recurrence is acyclic because it depends on strictly smaller $i$ values
+and thus shorter subsequences.
+
+{\bf Base Case} If $s$ is $<$, then any $a_j$ before $a_i$ that is greater
+than or equal to $a_i$ cannot be taken,
+$$ x(i, <) = 1\ \mathrm{if}\ a_j \geq a_i\ \forall j \in [0, i) $$
+Reciprocal for $>$.
+$$ x(i, >) = 1\ \mathrm{if}\ a_j \leq a_i\ \forall j \in [0, i) $$
+
+{\bf Solution} Start with the whole array, but must choose maximum between
+either $<$ or $>$.
+$$ \max(x(n, >), x(n, <)) $$
+
+Compute subproblems via top-down memoization or iterative bottom up. Store
+parent pointers to reconstruct the longest sequence.
+
+{\bf Running Time} Number of subproblems is $O(n)$ as $i \in [0, n)$ and $s
+\in \{<, >\}$. Work per subproblem is $O(n)$ as $j \in [0, n)$. Total run
+time is $O(n^2)$.
+
+\problempart % Problem 6b
+
+{\bf Description} The data structure should maintain the following property:
+\begin{itemize}
+  \item {\tt avl}: An AVL tree sorted on keys {\tt k} with augmentation of the
+  max value, {\tt max}, of the left subtree (not including its own value).
+\end{itemize}
+
+The data structure should support three methods:
+\begin{itemize}
+  \item {\tt insert(x)}: Call a standard AVL insert on item {\tt x} based on its
+  key {\tt k}. Then, call the update method described below.
+  \item {\tt update(k)}: Standard AVL update for height and skew. Then
+  calculate augmentation {\tt max}. If {\tt left.k} is strictly
+  less than the current {\tt k}, take the maximum value from {\tt left.max}
+  and the current value. If {\tt left.k} is equal to the current {\tt k},
+  just take the {\tt left.max}.
+  \item {\tt get\_max\_value\_under(k)}: Call a standard AVL find for the key
+  {\tt k}. Return that keys {\tt max} augmentation.
+\end{itemize}
+
+{\bf Correctness}
+\begin{itemize}
+  \item {\tt insert(x)}: This is just a standard AVL insert so it is assumed
+  correct. The interesting stuff happens with update.
+  \item {\tt update(k)}: This performs standard AVL update which is assumed
+  correct. The augmentation is properly upheld by induction as the left must
+  have the proper augmentation. The two cases ensure that the max value goes
+  with the {\tt k} that is strictly smaller than the current {\tt k}. It can
+  be computed simply by looking at the left and the current nodes.
+  \item {\tt get\_max\_value\_under(k)}: This is just a standard AVL find and
+  returns the augmentaton. Given the definition of the augmentation, it is
+  the correct value.
+\end{itemize}
+
+{\bf Running Time}
+\begin{itemize}
+  \item {\tt insert(x)}: Standard AVL insert: $O(\log n)$
+  \item {\tt update(k)}: The augmentation only relies on left child and self.
+  Therefore it can be computed in $O(1)$ time.
+  \item {\tt get\_max\_value\_under(k)}: Standard AVL find: $O(\log n)$.
+\end{itemize}
+
+\problempart 
+
+{\bf Description} During memoization for items not in the memo, store the
+computed $x(i, s)$ values into one of two data structure (one for $s = <$ and
+one for $s = >$) using the insert method. The key will be $(a_i, i)$ or
+$(-a_i, i)$ for each respective data structure. When computing the max for
+values in the memo, just call the get method defined above for key $(a_i, i)$
+or $(-a_i, i)$ for the respective data structure for given $s$.
+
+{\bf Correctness} For $s = <$, the AVL tree will be sorted on keys $(a_i,
+i)$. Therefore, calling get max value under $(a_i, i)$ will, by definition,
+return the maximum value of keys $(<a_i, <i)$ as the left subtree will
+include keys $(\leq a_i, \leq i)$. 
+
+For $s = >$, the AVL tree will be sorted on keys $(-a_i, i)$. Therefore,
+calling get max value under $(-a_i, i)$ will, by definition, return the
+maximum value of keys $(<-a_i, <i)$ as the left subtree will include keys
+$(\leq -a_i, \leq i)$. This is equivalent to finding the max value for
+$(>a_i, <i)$ which is exactly what we are looking for.
+
+{\bf Running Time} There are still $n$ subproblems, but instead of each
+subproblem using $O(n)$ work, it only requires $O(\log n)$ to look up in the
+data structure.
+
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
