@@ -9,7 +9,7 @@ dimensions make sense?
 
 ### 2.3) Shapes
 
-**2.3f)** Maybe we could remind them about single value tuples again?
+6. Maybe we could remind them about single value tuples again?
 
 ### 2.8) Indexing
 
