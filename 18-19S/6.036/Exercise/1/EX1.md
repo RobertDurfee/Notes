@@ -11,6 +11,11 @@ dimensions make sense?
 
 6. Maybe we could remind them about single value tuples again?
 
+### 2.6) Length
+
+Should probably discuss the difference between a $1 \times 1$ NumPy array and
+a scalar.
+
 ### 2.8) Indexing
 
 Maybe we could teach them about `np.reshape`? It is really useful on more
