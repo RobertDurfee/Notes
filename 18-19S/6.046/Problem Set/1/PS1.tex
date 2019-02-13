@@ -34,19 +34,203 @@
 
 \problempart % Problem 1a
 
+We examine the recurrence,
+$$ T(n) = 5 T\left(\frac{n}{2}\right) + n^3 $$
+
+With the standard notation used in the Master Theorem,  $a = 5$, $b = 2$, and 
+$f(n) = n^3$. Using these values, we consider each case of the Master Theorem.
+
+\textbf{Case I}: Is $n^3 \in O\left(n^{\log_2 5 - \varepsilon}\right)$ for some 
+$\varepsilon > 0$? Since $\log_2 5 \approx 2.3$, there is no $\varepsilon$ that
+can satisfy this equality. As a result, Case I of the Master Theorem does not
+apply.
+
+\textbf{Case II}: Is $n^3 \in \Theta\left(n^{\log_2 5}\right)$? Since we already
+established that $\log_2 5 \approx 2.3 \neq 3$, this equality is not satisfied.
+
+\textbf{Case III}: Is $n^3 \in \Omega\left(n^{\log_2 5 + \varepsilon}\right)$
+for some $\varepsilon > 0$ and $5 f(n / 2) \leq c f(n)$ for some $c < 1$? Since
+$\log_2 5 \approx 2.3$, the first condition is satisfied with $\varepsilon <
+0.7$. Furthermore, evaluating the second condition yields $5 n^3 / 8 \leq c 
+n^3$ which is true for $5/8 \leq c < 1$. Therefore, Case III of the Master 
+Theorem applies.
+
+By Case III of the Master Theorem,
+$$ T(n) \in \Theta\left(n^3\right) $$
+ 
 \problempart % Problem 1b
+
+We examine the recurrence,
+$$ T(n) = 3 T\left(\frac{n}{3}\right) + n $$
+
+With the standard notation used in the Master Theorem, $a = b = 3$ and $f(n) 
+= n$. Using these values, we consider, each case of the Master Theorem.
+
+\textbf{Case I}: Is $n \in O\left(n^{\log_3 3 - \varepsilon}\right)$ for some
+$\varepsilon > 0$? Since $\log_3 3 = 1$, there is no $\varepsilon > 0$ that can
+satisfy this equation.
+
+\textbf{Case II}: Is $n \in \Theta\left(n^{\log_3 3}\right)$? Since $\log_3 3 =
+1$, this is true. As a result, Case II of the Master Theorem applies.
+
+By Case II of the Master Theorem,
+$$ T(n) \in \Theta\left(n \log n\right) $$
 
 \problempart % Problem 1c
 
+We examine the recurrence,
+$$ T(n) = T(n - 3) + 2n $$
+
+Since this does not follow the standard framework presented in the Master
+Theorem, we construct a tree to come up with a guess, which we verify using the
+substitution method.
+
+There is no branching factor in this recurrence. As a result, we only have to
+consider a chain of a certain length. Since the input decreases by $3$ after
+each recursive call, the total number of calls is $n / 3$ (assuming $n$ is a
+multiple of $3$ for simplicity). At the $k$th call, there is $2(n - 3k)$ work is
+required. As a result, the total work can be written as
+$$ T(n) = \sum_{k = 0}^{n / 3} 2(n - 3k) $$
+Breaking apart the sum,
+$$ T(n) = 2n \sum_{k = 0}^{n / 3} 1 - 6 \sum_{k = 0}^{n / 3} k $$
+Which further simplifies to,
+$$ T(n) = \frac{2n^2}{3} - n \left(\frac{n}{3} + 1\right) $$
+From this, we can conclude that $T(n) \in \Theta\left(n^2\right)$.
+
+Now we confirm using induction. The induction hypothesis to confirm the upper
+bound is $P(n)$: $T(n) \leq c n^2$ for some $c > 0$ and $\forall n \geq n_0$.
+
+\textbf{Base Case}: Consider when $n = 1$. From the problem definition, we assume
+$T(n) \in O(1)$ for any $n < 3$. Therefore, by definition, $T(1) \leq c$ for any
+constant $c$.
+
+\textbf{Inductive Step}: Assume via strong induction that $P(m)$ holds for all
+$m < n$. Now consider an arbitrary $n > n_0$. We can simplify the recurrence
+using this assumption as
+$$ T(n) = T(n - 3) + 2n \leq c (n - 3)^2 + 2n $$
+Expanding the power,
+$$ T(n) \leq c (n^2 - 6n + 9) + 2n $$
+Now we show this satisfies $P(n)$,
+\begin{align*}
+    c (n^2 - 6n + 9) + 2n &\leq c n^2 \\
+    c(-6n + 9) + 2n &\leq 0 \\
+    n(-6c + 2) + 9c &\leq 0
+\end{align*}
+Therefore, if we choose $c > 1/3$, this condition will hold for sufficiently
+large $n$.
+
+By induction, this shows that $T(n) \in O(n^2)$. 
+
 \problempart % Problem 1d
+
+We examine the recurrence,
+$$ T(n) = 5 T(\sqrt[2]{n}) + \log \log n $$
+
+First, we set $n = 2^m$. The recurrence becomes,
+$$ T(2^m) = 5 T(2^{m / 2}) + \log m $$
+We assume that $T(2^m) = S(m)$. This new recurrence is
+$$ S(m) = 5 S(m / 2) + \log m $$
+Now we can use the Master Theorem. 
+
+\textbf{Case 1}: Is $\log m \in O(n^{\log_2 5 - \varepsilon})$ for some 
+$\varepsilon > 0$? It is well known that logarithms grow slower than polynomials.
+That is,
+$$ \forall \alpha, k > 0,\quad \left(\log n\right)^k \in O\left(n^\alpha\right) $$
+Thus, for any $\varepsilon < \log_2 5$, this case will hold.  As a result, the
+solution to the recurrence $S(m)$ is
+$$ S(m) \in \Theta\left(m^{\log_2 5}\right) $$
+
+Now we substitute $n = 2^m$ to get the solution to recurrence $T(n)$,
+$$ T(n) \in \Theta\left((\log n)^{\log_2 5}\right) $$
 
 \problempart % Problem 1e
 
+We examine the recurrence,
+$$ T(n) = 3 T(n / 5) + 2 T(n/7) + \Theta(n) $$
+
+We construct a recurrence tree.
+\begin{itemize}
+    \item The work in the root node is
+        $$c n $$
+    \item The work in the first level is given by
+        $$c \left(\frac{3n}{5} + \frac{2n}{7}\right) = \frac{31c n}{35} $$
+    \item The work in the second level is given by
+        $$c \left(\frac{9n}{25} + \frac{12n}{35} + \frac{4}{49}\right) = 
+        \frac{961 c n}{1225} $$
+\end{itemize}
+
+Now it is easy to see that the work per level is given by
+$$ c n \left(\frac{31}{35}\right)^\ell $$
+Since the work per level is decreasing geometrically, the root node dictates
+the total work. Therefore,
+$$ T(n) \in \Theta(n) $$
+
 \problempart % Problem 1f
   \begin{enumerate}
-    \item
-    \item
-    \item
+    \item The ranking for the provided functions goes as follows:
+
+    $$ \log \log n^{10} \in o(\log n) \in \Theta(\log_7 n) \in \Theta(\log n^3) 
+    \in o(\log^3 n) \in o(n^{1/3}) $$
+    
+    This results from the following limits:
+    
+    $$\lim_{n \to \infty} \frac{\log \log n^{10}}{\log n} = \lim_{n \to \infty} 
+        \frac{10n}{n \log(n^{10})} = \lim_{n \to \infty} \frac{10}{\log (n^{10})} = 0 $$ 
+    $$\lim_{n \to \infty} \frac{\log n}{\log_7 n} = \lim_{n \to \infty} \frac{n 
+        \log 7}{n \log 2} = \log 7 $$
+    $$\lim_{n \to \infty} \frac{\log_7 n}{\log n^3} = \lim_{n \to \infty} 
+        \frac{n \log 2}{3 n \log 7} = \frac{1}{3} \log_7 2 $$
+    $$\lim_{n \to \infty} \frac{\log n^3}{\log^3 n} = \lim_{n \to \infty} 
+        \frac{3 n \log^3 2}{3 n \log 2 \log^2 n} = \lim_{n \to \infty} \frac{
+        \log^2 2}{\log^2 n}= 0 $$ 
+        
+    And from the well-known theorem that shows polynomials always grow faster
+    than logarithms,
+    $$ \log^3 n \in o(n^{1/3}) $$
+    
+    \item The ranking goes as follows:
+    
+    $$ n \log n^2 \in \Theta(\log(n!)) \in o(n^{5/3}) \in o(n^2 \log n) < 2^n $$
+    
+    This results from the following limits:
+    
+    \begin{align*}
+        \lim_{n \to \infty} \frac{n \log n^2}{\log(n!)} &\approx \lim_{n \to \infty}
+        \frac{n \log n^2}{\log \left(\sqrt{2 \pi n}
+        \left(\frac{n}{e}\right)^n\right)} = \lim_{n \to \infty} \frac{ 2n (\log
+        n^2 + 2)}{2n \log n + 1} \\
+        &= \lim_{n \to \infty} \frac{\log n^2 + 4}
+        {\log n + 1} = \lim_{n \to \infty} \frac{2n}{n} = 2
+    \end{align*}
+    \begin{align*}
+        \lim_{n \to \infty} \frac{\log(n!)}{n^{5/3}} &\approx \lim_{n \to \infty} 
+        \frac{\log \left(\sqrt{2 \pi n} \left(\frac{n}{e}\right)^n\right)}{n^{5/3}}
+        = \lim_{n \to \infty} \frac{3 (2n \log n + 1)}{10n^{5/3}} \\
+        &= \lim_{n \to \infty}
+        \frac{18(\log n + 1)}{50 n^{2/3}} = \lim_{n \to \infty} \frac{54 n^{1/3}}{100n}= 0 
+    \end{align*}
+    $$\lim_{n \to \infty} \frac{n^{5/3}}{n^2 \log n} = \lim_{n \to \infty} 
+        \frac{5 n^{2/3}}{3(n + 2n \log n)} = \lim_{n \to \infty} \frac{10}{3 n^{1/3} 
+        (6 \log n + 9)}= 0 $$
+        
+    Lastly, since the $2^n$ term will always exist in the denominator,
+    $$\lim_{n \to \infty} \frac{n^2 \log n}{2^n} = 0 $$
+    
+    \item The ranking goes as follows:
+    
+    $$ n^{10 \log n} \in o(e^n) \in o\left((\log n)^{n - 5}\right) \in 
+    o\left((\log n)^n\right) $$
+    
+    This results from the following limits:
+    
+    $$\lim_{n \to \infty} \frac{n^{10 \log n}}{e^n} = \lim_{n \to \infty} \frac{10 
+        \log^2 n}{n} = 0 $$
+    $$\lim_{n \to \infty} \frac{e^n}{\left(\log n\right)^{n}} = \lim_{n \to \infty}
+        \frac{n}{\log\log^n n} = \lim_{n \to \infty} \frac{1}{\log\log n + 1 / \log n} = 0 $$
+    
+    Since the both are growing logarithmically, but one is growing just a little slower,
+    $$\lim_{n \to \infty} \frac{\left(\log n\right)^{n - 5}}{\left(\log n \right)^n} = 0 $$
+    
   \end{enumerate}
 
 \end{problemparts}
@@ -58,9 +242,123 @@
 
 \problempart % Problem 2a
 
+\textbf{Description} First, guess that all $n$ board members will vote `yes'. 
+Record the number of incorrect guesses (the total number of `no' votes) as $v_1$.
+Next, only within the subset, $S$, you wish to determine the number of `no'
+votes, switch your guess to `no'. Record the number of incorrect guesses as 
+$v_2$. The number of `no' votes in the desired subset is given by
+$$ \frac{k - (v_2 - v_1)}{2} $$
+
+\textbf{Correctness} From the first query, where you guess all members will vote
+`yes', you will get a count of all the `no' voters on the board. In the second
+query, you only change your guesses for the partition of interest. Therefore,
+the difference in errors $\delta = v_2 - v_1$ tells you how many more `yes' 
+votes ($y$) than `no' votes ($n$) exist solely in the partition of interest. 
+Since we also know that the total number of votes is $k$, we have a system of 
+two equations:
+$$ y = \delta + n $$
+$$ k = y + n $$
+Solving for $n$ yields the following,
+$$ \frac{k - \delta}{2} = \frac{k - (v_2 - v_1)}{2} = n $$
+
+\textbf{Running Time} Only two queries are executed. Therefore, this satisfies
+the requirement for a constant number of queries.
+
 \problempart % Problem 2b
 
+\textbf{Description} This algorithm implements a modified binary search. Divide
+the board members into two equal groups. Query each group to get a count of the
+number of `no' votes using Part A. If neither group has any `no' votes, return 
+\texttt{None}. Otherwise, choose the group with the most incorrect guesses 
+(breaking ties arbitrarily) and recurse on this group discarding the other 
+group. Continue until there is only one voter in the partition. If this voter
+votes `yes', return \texttt{None}. If this voter votes `no', return the index
+of that member.
+
+\textbf{Correctness} By using the algorithm in Part A, you will get an accurate
+count of all the `no' voters in a particular partition. By choosing the
+partition with the greatest `no' votes (and ignoring partitions with zero `no'
+votes), we assure that the section we recurse on will always have a `no' voter
+to find. Once there is only one member in our partition, by induction, we know
+that, if there is `no' voter to discover, it must be at this index. If not,
+there are no `no' voters to discover and \texttt{None} can safely be returned.
+
+\textbf{Running Time} The following recurrence describes the algorithm
+$$ T(n) = T(n/2) + O(1) $$
+We know that the amount of work to divide/combine is $O(1)$ from Part A. Each
+time we recurse, we discard one half of the board members. Thus the problem
+size decreases by a factor of $2$ with a branching factor of $1$. 
+
+This recurrence can be solved using telescoping, assuming $T(1) = O(1) = 1$
+\begin{align*}
+    T(n) &= T(n / 2) + 1 \\
+    T(n / 2) &= T(n / 4) + 1 \\
+    &\vdots \\
+    T(4) &= T(2) + 1 \\
+    T(2) &= T(1) + 1
+\end{align*}
+Summing these equations,
+$$ T(n) + T(n / 2) + \ldots + T(4) + T(2) = T(n / 2) + T(n / 4) + \ldots +
+T(2) + T(1) + (1 + \ldots) $$
+Given the branching factor of the recurrence tree, the number of leaves is
+$\log n$. Thus, there are $\log n$ $1$'s. After cancelling terms,
+$$ T(n) = 1 + \log n \in O(\log n)$$
+
+In short, this is the same recurrence as Binary Search,
+$$ T(n) \in O(\log n) $$
+
 \problempart % Problem 2c
+
+\textbf{Assumptions} From the wording of the problem, it appears that each of
+the board members has a positive, integer weight given by $w_i$. These votes
+satisfy the condition,
+$$ \sum_{i = 0}^{n} w_i = W $$
+This assumption will be used throughout the remainder of the algorithm. However,
+this method should be robust enough to handle real-valued (including negative)
+weights as long as the condition for a majority decision remains $W / 2$.
+Nonetheless, we will maintain the assumption of positive, integral weights.
+
+\textbf{Description} If there is only a single member, $x_1$, their ideal
+salary for Melon, $s_1$, is the highest salary Melon can propose. If there are
+only two members, $x_1$ and $x_2$, the ideal salary from member with more votes,
+WLOG $s_1$, is the highest salary Melon can propose. 
+
+If there are more than two members, use the \texttt{select} algorithm provided
+in lecture to find the median salary, $s_m$, among $S = s_1, s_2, \ldots, s_n$.
+Use the modified \texttt{partition} algorithm to partition the voters into
+groups $L$ and $G$ such that $L = \{x_i \in X \mid s_i < s_m\}$ and $G = \{x_i
+\in X \mid s_i >  s_m\}$. Calculate the weight of each group as $W_L =
+\sum_{x_i \in L} w_i$ and $W_G = \sum_{x_i \in G} w_i$. If $W_L,\ W_G < W / 2$
+$s_m$ is the highest salary Melon can propose. If $W_L > W / 2$, set the weight
+$w_m = w_m + W_G$ and recurse on $L \cup \{x_m\}$. If $W_G > W / 2$, set the
+weight $w_m = w_m + W_L$ and recurse on $\{x_m\} \cup G$.
+
+\textbf{Correctness} The base cases are trivial. If there is only one voter,
+Melon must propose to satisfy that one voter. If there are only two voters,
+Melon must satisfy the one who has more votes.
+
+When there are more than two voters, the median weighted ideal salary is given
+by the ideal salary that has less than $W / 2$ weighted votes on either side.
+If the scale is tipped in the direction of lower salaries, that is, more than
+$W / 2$ is located $s < s_m$, then the weighted median must be less than $s_m$
+as voters with more weight want a lower salary. If the scale is tipped in the
+direction of higher, salaries, that is, more than $W / 2$ is located $s > s_m$,
+then the weighted median must be greater than $s_m$ as voters with more weight
+want a high salary. The adjustment of adding the weights of the ignored group
+ensure weighting remains consistent when examining smaller partitions.
+
+\textbf{Running Time} The recurrence that dictates this algorithm is given by
+$$ T(n) = T(n / 2) + O(n) $$
+The $T(n / 2)$ comes from the reduction of the problem by half upon each
+recursion as we ignore the lower weighted half each time. At each recursion, we
+first find the median of $n$ values. Using the algorithm \texttt{select}
+proved in lecture, this must be $O(n)$. Then, we need to sum the weights of
+each partition. This can be done trivially in $O(n)$ also.
+
+Solving by Master Theorem. Case III of the Master theorem applies as $ O(n) 
+\in \Omega(n^{\varepsilon}) $ for $\varepsilon \in (0, 1]$. Furthermore,
+$n / 2 \leq c n$ for $c \geq 1/2$. Thus,
+$$T(n) \in \Theta(n) $$
 
 \end{problemparts}
 
