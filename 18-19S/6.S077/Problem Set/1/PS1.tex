@@ -1,0 +1,250 @@
+%
+% 6.S077 problem set solutions template
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{bbm}
+
+\input{macros}
+\newcommand{\theproblemsetnum}{1}
+\newcommand{\releasedate}{Thursday, February 7}
+\newcommand{\partaduedate}{Thursday, February 14}
+
+\title{6.S077 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 2:30PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart % Problem 1a
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+An equivalent way to express the Weak Law of Large Numbers is,
+$$\lim_{n \to \infty} \mathbb{P}\left(\vert \hat{P}_i - p_i \vert > \varepsilon
+\right) = 0\quad \forall i $$
+Boole's inequality states,
+$$ \mathbb{P}\left(\bigcup_i A_i\right) \leq \sum_i \mathbb{P}(A_i) $$
+Thus, we can show that all $\hat{P}_i$ approach $p_i$ simultaneously,
+$$ \mathbb{P}\left(\bigcup_i \vert \hat{P}_i - p_i \vert > \varepsilon \right) 
+\leq \sum_i \mathbb{P} \left(\vert \hat{P}_i - p_i \vert > \varepsilon \right) $$
+But we know that the right hand side must be zero because of the Weak Law of
+Large Numbers. Therefore,
+$$ \mathbb{P}\left(\bigcup_i \vert \hat{P}_i - p_i \vert > \varepsilon \right) 
+= 0 $$
+Which is equivalent to
+$$ \mathbb{P} \left( \vert \hat{P}_i - p_i \vert \leq \varepsilon, \ \forall 
+i \right) = 1 $$
+
+\problempart % Problem 1b
+
+Let $\mathbbm{1}_i(x)$ be the indicator random variable with the following
+distribution,
+$$ \mathbbm{1}_i(x) = \begin{cases}
+    1 & \mathrm{if}\ X_i \leq x \\
+    0 & \mathrm{if}\ X_i > x
+\end{cases} $$
+Then, the definition of the empirical CDF can be written as
+$$ \hat{F}(x) = \frac{\sum_i \mathbbm{1}_i(x)}{n} $$
+From Chebyshev's inequality, we know,
+$$ \mathbb{P}\left(\left\vert \frac{\sum_i \mathbbm{1}_i(x)}{n} - \mathbb{F}(x)
+\right\vert > \varepsilon\right) \leq \frac{\mathrm{var}\left(\sum_i 
+\mathbbm{1}_i(x) / n\right)}{\varepsilon^2} $$
+Since $X$ is i.i.d., the variance of the empirical distribution can be written,
+$$ \mathrm{var}\left(\frac{\sum_i \mathbbm{1}_i(x)}{n}\right) = \frac{1}{n^2} 
+\sum_i \mathrm{var} \left(\mathbbm{1}_i(x)\right) $$
+And, the variance of the indicator random variable is given by
+$$ \mathbbm{1}_i(x) = \mathbb{P}(X_i \leq x)\left(1 - \mathbb{P}(X_i \leq x)
+\right) $$
+Since $X$ are i.i.d., the subscripts can be removed,
+$$ \mathbbm{1}(x) = \mathbb{P}(X \leq x)\left(1 - \mathbb{P}(X \leq x)
+\right) $$
+Now, the variance can be written,
+$$\mathrm{var}(\hat{F}(x)) = \frac{\mathbb{P}(X \leq x)\left(1 - \mathbb{P}
+(X \leq x) \right)}{n} $$
+Substituting back into the inequality,
+$$ \mathbb{P}\left(\left\vert \frac{\sum_i \mathbbm{1}_i(x)}{n} - \mathbb{F}(x)
+\right\vert > \varepsilon\right) \leq \frac{\mathbb{P}(X \leq x)\left(1 - 
+\mathbb{P}(X \leq x) \right)}{n \varepsilon^2} $$
+And, as $n$ approaches infinity, the right hand side goes to zero,
+$$ \mathbb{P}\left(\left\vert \hat{F}(x) - \mathbb{F}(x) \right\vert > 
+\varepsilon\right) = 0$$
+
+
+
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+
+\begin{problemparts}
+
+\problempart % Problem 2a
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Since $X_1, X_2, \ldots, X_n$ are independent, the joint distribution is given
+by multiplying the individual terms together,
+$$ f_{X_1\ldots X_n}^\theta(x_1, \ldots, x_n) = \prod_{i = 1}^n \theta e^{-
+\theta x_i} $$
+Taking the natural logarithm of both sides,
+$$ \ln f_{X_1\ldots X_n}^\theta(x_1, \ldots, x_n) = \sum_{i = 1}^n \left(\ln 
+\theta - \theta x_i\right) $$
+Breaking the sum apart,
+$$ \ln f_{X_1\ldots X_n}^\theta(x_1, \ldots, x_n) = n \ln \theta - \theta 
+\sum_{i = 1}^n x_i $$
+Taking the derivative with respect to $\theta$ and setting equal to zero,
+$$ 0 = \frac{n}{\hat{\theta}} - \sum_{i = 1}^n x_i $$
+Solving for $\hat{\theta}$ yields,
+$$ \hat{\theta} = \frac{n}{\sum_{i = 1}^n x_i} $$
+
+\problempart % Problem 2b
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We determine the empirical first moment from the observations,
+$$ \hat{\mathbb{E}}[X] = \frac{1}{n} \sum_{i = 1}^n x_i $$
+The first moment of the model dependent upon $\theta_1$ is given by the
+definition of the mean of an exponential distribution,
+$$ \mathbb{E}[X] = \frac{1}{\theta_1} $$
+Equating these two equations and solving for $\hat{\theta}_1$,
+$$ \hat{\theta}_1 = \frac{n}{\sum_{i = 1}^n x_i} $$
+
+Now we determine the empirical second moment from the observations,
+$$ \hat{\mathbb{E}}[X^2] = \frac{1}{n} \sum_{i = 1}^n x_i^2 $$
+The second moment of the model dependent upon $\theta_2$ is given through the
+definition of the variance of an exponential distribution,
+$$ \mathbb{E}[X^2] = \mathrm{var}(X) + \mathbb{E}[X]^2 = \frac{2}{\theta_2} $$
+Equating these two equations and solving for $\hat{\theta}_2$,
+$$ \hat{\theta}_2 = \sqrt{\frac{2n}{\sum_{i = 1}^n x_i^2}} $$
+
+\problempart % Problem 2c
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The definition of the median provided,
+$$ \mathbb{P}(X \leq a_\theta) = \frac{1}{2} $$
+This can be written in terms of the CDF,
+$$ F_X(a_\theta) = \frac{1}{2} $$ 
+The CDF for an exponential distribution is known, thus this becomes,
+$$ 1 - e^{-\theta a_\theta} = \frac{1}{2} $$
+Solving for $a_\theta$ yields,
+$$ a_\theta = -\frac{\ln(1/2)}{\theta} = \frac{\ln 2}{\theta} $$
+
+Given the empirical median $\hat{a}$, we can form an estimate of $\theta$ with
+feature matching,
+$$ \hat{a} = \frac{\ln 2}{\hat{\theta}_m} $$
+Solving for $\hat{\theta}_m$,
+$$ \hat{\theta}_m = \frac{\ln 2}{\hat{a}} $$
+
+\problempart % Problem 2d
+
+See Jupyter Notebook.
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 3
+
+\begin{problemparts}
+
+\problempart % Problem 3a
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The maximum likelihood function is of the form,
+$$ f_{X_1\ldots X_n}(x_1, \ldots, x_n) = \prod_{i = 1}^n \frac{1}{\sqrt{2 \pi 
+v}} e^{-(x_i - \mu)^2 / 2v} $$
+Taking the natural logarithm of both sides and simplifying,
+$$ \ln f_{X_1\ldots X_n}(x_1, \ldots, x_n) = n \ln \left(\frac{1}{\sqrt{2 \pi 
+v}}\right) - \sum_{i = 1}^n \frac{(x_i - \mu)^2}{2v} $$
+
+To determine the estimate for $\hat{\mu}$, take the partial derivative with
+respect to $\mu$ and set to zero,
+$$ 0 = \sum_{i = 1}^n \frac{x_i - \hat{\mu}}{v} = \sum_{i = 1}^n x_i - 
+\hat{\mu} = \sum_{i = 1}^n x_i - n \hat{\mu} $$
+Solving for $\hat{\mu}$
+$$ \hat{\mu} = \frac{1}{n} \sum_{i = 1}^n x_i $$
+
+To determine the estimate for $\hat{v}$, take the partial derivative with
+respect to $v$ and set to zero,
+$$ 0 = -\frac{n}{2\hat{v}} + \frac{1}{2 \hat{v}^2} \sum_{i = 1}^n (x_i - 
+\hat{\mu})^2 = -n + \frac{1}{\hat{v}} \sum_{i = 1}^n (x_i - \hat{\mu})^2 $$
+Solving for $\hat{v}$,
+$$ \hat{v} = \frac{1}{n} \sum_{i = 1}^n (x_i - \hat{\mu})^2 $$
+
+\problempart % Problem 3b
+
+See Jupyter Notebook.
+
+\problempart % Problem 3c
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Considering a mixture of two Gaussian distributions, the distribution of a $X_i$
+given a parameter vector $\theta$ would look like,
+$$ f_{X_i}^\theta(x_i) = \frac{\lambda}{\sqrt{2 \pi v_1}} e^{-(x_i - \mu_1)^2 
+/ 2 v_1} + \frac{1 - \lambda}{\sqrt{2 \pi v_2}} e^{-(x_i - \mu_2)^2 / 2 v_2} $$
+
+\problempart % Problem 3d
+
+When $v_1 \longrightarrow 0$, the likelihood approaches infinity. As a result,
+there is no definite maximum value of $L^\theta$ when optimizing over $\theta$.
+
+\problempart % Problem 3e
+
+See Jupyter Notebook.
+
+\problempart % Problem 3f
+
+See Jupyter Notebook.
+
+\problempart % Problem 3g
+
+The second moment of a normal random variable $Y$,
+$$ \mathbb{E}[Y^2] = \mathbb{E}[(\mu + \sigma Z)^2] = \mathbb{E}[\mu^2 + 2 \mu 
+\sigma Z  + \sigma^2 Z^2] = \mu^2 + \sigma^2 = \mu^2 + v $$
+The third moment of a normal random variable $Y$,
+$$ \mathbb{E}[Y^3] = \mathbb{E}[(\mu + \sigma Z)^2] = \mathbb{E}[\mu^3 + 3 
+\mu^2 \sigma Z + 3 \mu \sigma^2 Z^2 + \sigma^3 Z^3] = \mu^3 + 3 \mu \sigma^2 =
+\mu^3 + 3 \mu v $$
+
+Using the moments for individual Gaussian random variables and the law of
+total expectation, we can find the fifth moment of $X$, our mixture model. 
+Let $\Lambda$ be the indicator random variable such that the first Gaussian 
+is chosen when $\Lambda = 0$ with probability $\lambda$ and the second 
+Gaussian is chosen when $\Lambda = 1$ with probability $1 - \lambda$. The
+law of total expectation dictates,
+$$ \mathbb{E}[X^5] = \lambda \mathbb{E}[X^5 \mid \Lambda = 0] + (1 - 
+\lambda) \mathbb{E}[X^5 \mid \Lambda = 1] $$
+Let $Y$ be the first Gaussian with $(\mu_1, v_1)$ and let $Z$ be the second
+Gaussian with $(\mu_2, v_2)$. The equation simplifies,
+$$ \mathbb{E}[X^5] = \lambda \mathbb{E}[Y^5] + (1 - \lambda) \mathbb{E}[Z^5] $$
+From the definitions of the fifth moments of a Gaussian distribution,
+$$ \mathbb{E}[X^5] = \lambda (\mu_1^5 + 10 \mu_1^3 v_1 + 15 \mu_1 v_1^2) + (1
+- \lambda) (\mu_2^5 + 10 \mu_2^3 v_2 + 15 \mu_2 v_2^3) $$
+
+\problempart % Problem 3h
+
+If the evidence overwhelmingly suggests that two Gaussian distributions yielded
+the results observed (and one realizes the fact that traits are exhibited within
+populations normally), there are several explanations. One possibility might be
+a difference between male and female traits. Another could be that two different
+people did the measuring one was systematically worse at measuring than the other.
+Or, perhaps, someone was maliciously attempting to ambush the study by altering
+the data after-the-fact to make it look like to Gaussians were involved.
+
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
+
