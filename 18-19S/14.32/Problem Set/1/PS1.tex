@@ -1,0 +1,357 @@
+%
+% 6.S077 problem set solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros}
+\newcommand{\theproblemsetnum}{1}
+\newcommand{\releasedate}{Monday, February 11}
+\newcommand{\partaduedate}{Tuesday, February 19}
+
+\title{14.32 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 9:00AM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart % Problem 1a
+
+The definition for the expected value of a continuous random variable is,
+$$ \mathbb{E}[Y] = \int_{-\infty}^{\infty} y f_Y(y) dy $$
+
+Intuitively, this takes every possible $y$ value and weights it according to the
+probability of $Y = y$, which comes from the marginal distribution.
+
+\problempart % Problem 1b
+
+The definition for the expected value of a sample distribution is,
+$$ \hat{\mathbb{E}}\left[\left\{Y_i\right\}_{i = 1}^n\right] = \frac{1}{n} 
+\sum_{i = 1}^n Y_i $$
+
+Intuitively, similar logic applies from the continuous distribution in the 
+previous problem. However, instead of weighting each possible $y$ according to
+its known probability, we use a discrete uniform probability distribution to 
+represent the sample. 
+
+\problempart % Problem 1c
+
+The general definition of variance is,
+$$ \mathrm{var}(X) = \mathbb{E}\left[\left(X - \mathbb{E}[X]\right)^2\right] $$
+From this, it is easy to derive the definition of the variance of a continuous
+random variable,
+$$ \mathrm{var}(Y) = \int_{-\infty}^{\infty} \left(y - \mathbb{E}[Y]\right)^2
+f_Y(y) dy $$
+Or, equivalently,
+$$ \mathrm{var}(Y) = \int_{-\infty}^{\infty} y^2 f_Y(y) dy - \mathbb{E}[Y]^2 $$
+
+Intuitively, the variance measures how much, on average, the values vary from 
+the average value. Essentially, it determines how much spread there is in the
+distribution.
+
+\problempart % Problem 1d
+
+The definition of the variance of a sample distribution is,
+$$ \hat{\mathrm{var}}(\left\{Y_i\right\}_{i = 1}^n) = \frac{1}{n - 1} \sum_{i =
+1}^n \left(Y_i - \hat{\mathbb{E}}[\left\{Y_j\right\}_{j = 1}^n]\right)^2$$
+
+Intuitively, this is very similar to the continuous random variable version,
+with the same modifications made with the sample expectation. Instead of weighting
+each $y$ according to it's known distribution, we use a discrete uniform 
+distribution. Furthermore, since this produces a slightly biased estimate of the
+population, we subtract one from $n$ in our uniform distribution. This may be
+omitted if the sample is large enough.
+
+\problempart % Problem 1e
+
+The general definition of covariance is,
+$$ \mathrm{cov}(X, Y) = \mathbb{E}\left[\left(X - \mathbb{E}[X]\right)\left(Y - 
+\mathbb{E}[Y]\right)\right] $$
+From this, it is easy to derive the definition of the covariance between two
+continuous random variables,
+$$ \mathrm{cov}(X, Y) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \left(x
+- \mathbb{E}[X]\right) \left(y - \mathbb{E}[Y]\right) f_{XY}(x, y) dx dy $$
+Or, equivalently,
+$$ \mathrm{cov}(X, Y) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x y 
+f_{XY}(x, y) dx dy - \mathbb{E}[X] \mathbb{E}[Y] $$
+
+Intuitively, this is very similar to variance. However, instead of measuring how
+much a single variable varies in expectation from the expected value, we measure
+how much two variables \textit{together} vary in expectation from the expected
+value. It is clear to see this is the case because if the two tend to vary
+together (positively or negatively) the higher the product is.
+
+\problempart % Problem 1f
+
+The definition of the covariance of a sample distribution is,
+$$ \hat{\mathrm{cov}}(\left\{X_i, Y_i\right\}_{i = 1}^n) = \frac{1}{n - 1} 
+\sum_{i = 1}^{n} \left(X_i - \hat{\mathbb{E}}\left[\left\{X_j\right\}_{j =
+1}^n\right]\right) \left(Y_i - \hat{\mathbb{E}}\left[\left\{Y_j\right\}_{j = 
+1}^n\right]\right) $$
+
+Intuitively, this is very similar to the continuous random variable version,
+with the same modifications made with the sample variance. Instead of weighting
+each $y$ according to it's known distribution, we use a discrete uniform
+distribution. Also, remember that we make the same adjustment to account for the
+slight bias introduced in sampling. Ignore if sample size is large enough.
+
+\problempart % Problem 1g
+
+Using the definition reported above,
+$$ \mathbb{E}[aY + bX] = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \left(
+ay + bx\right) f_{XY}(x, y) dx dy $$
+Distributing the joint PDF and separating the integrals,
+$$ \mathbb{E}[aY + bX] = a \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} y
+f_{XY}(x, y) dx dy + b \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x
+f_{XY}(x, y) dx dy$$
+Using the definition of a marginal distribution and how it relates to a joint
+distribution,
+$$ \mathbb{E}[aY + bX] = a \int_{-\infty}^{\infty} y f_{Y}(y) dy + b 
+\int_{-\infty}^{\infty} x f_{X}(x) dx $$
+The integrals each represent an expectation as defined above,
+$$ \mathbb{E}[aY + bX] = a \mathbb{E}[Y] + b \mathbb{E}[X] $$
+This property is also known as the Linearity of Expectation.
+
+\problempart % Problem 1h
+
+For a single draw $i$ from the population, the expectation is not very interesting,
+$$ \hat{\mathbb{E}}[a Y_i + b X_i] = \frac{1}{1} \sum_{i = i}^i \left(a Y_i + b 
+X_i\right) = a Y_i + b X_i $$
+I am going to assume that the syntax was meant to convey the following,
+$$ \hat{\mathbb{E}}\left[\left\{a Y_i + b X_i \right\}_{i = 1}^n \right] = \frac{1}
+{n} \sum_{i = 1}^n \left(a Y_i + b X_i\right) $$
+By splitting apart the sum,
+$$ \hat{\mathbb{E}}\left[\left\{a Y_i + b X_i \right\}_{i = 1}^n \right] =
+\frac{a}{n} \sum_{i = 1}^n Y_i + \frac{b}{n} \sum_{i = 1}^n X_i $$
+By using the definition presented above, this is the same as,
+$$ \hat{\mathbb{E}}\left[\left\{a Y_i + b X_i \right\}_{i = 1}^n \right] = a
+\hat{\mathbb{E}}\left[\left\{Y_i\right\}_{i = 1}^n \right] +
+\hat{\mathbb{E}}\left[\left\{X_i\right\}_{i = 1}^n \right] $$
+Once again, the Linearity of Expectation holds.
+
+\problempart % Problem 1i
+
+From the definition for variance provided above,
+$$ \mathrm{var}(a Y + b X) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (a y
++ b x) f_{XY}(x, y) dx dy - \mathbb{E}[aY + bX]^2 $$
+Distributing and separating the integrals yields,
+\begin{align*}
+    \mathrm{var}(aY + bX) &= a^2 \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} 
+    y^2 f_{XY}(x, y) dx dy + 2ab \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} yx
+    f_{XY}(x, y) dx dy \\
+    &+ b^2 \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} x^2 f_{XY}(x, y) dx dy -
+    \mathbb{E}[aY + bX]^2
+\end{align*}
+Then, using the definition of a marginal distribution from a joint distribution,
+this can be simplified to,
+\begin{align*}
+    \mathrm{var}(aY + bX) &= a^2 \int_{-\infty}^{\infty} y^2 f_{Y}(y) dy + 2ab
+    \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} yx f_{XY}(x, y) dx dy \\
+    &+ b^2 \int_{-\infty}^{\infty} x^2 f_{X}(x) dx - \mathbb{E}[aY + bX]^2
+\end{align*}
+We can substitute the definition for expectation derived in Part G,
+\begin{align*}
+    \mathrm{var}(aY + bX) &= a^2 \int_{-\infty}^{\infty} y^2 f_{Y}(y) dy + 2ab
+    \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} yx f_{XY}(x, y) dx dy \\
+    &+ b^2 \int_{-\infty}^{\infty} x^2 f_{X}(x) dx - \left(a \mathbb{E}[Y] + b 
+    \mathbb{E}[X]\right)^2
+\end{align*}
+Factoring out the exponent yields,
+\begin{align*}
+    \mathrm{var}(aY + bX) &= a^2 \int_{-\infty}^{\infty} y^2 f_{Y}(y) dy + 2ab
+    \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} yx f_{XY}(x, y) dx dy \\
+    &+ b^2 \int_{-\infty}^{\infty} x^2 f_{X}(x) dx - a^2 \mathbb{E}[Y] - 2ab
+    \mathbb{E}[X] \mathbb{E}[Y] - b^2 \mathbb{E}[X]
+\end{align*}
+Rearranging terms,
+\begin{align*}
+    \mathrm{var}(aY + bX) &= a^2 \left(\int_{-\infty}^{\infty} y^2 f_{Y}(y) dy - 
+    \mathbb{E}[Y]^2\right) \\
+    &+  2ab \left(\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} yx f_{XY}(x, y) 
+    dx dy - \mathbb{E}[X] \mathbb{E}[Y]\right) \\
+    &+ b^2 \left(\int_{-\infty}^{\infty} x^2 f_{X}(x) dx - \mathbb{E}[X]^2\right)
+\end{align*}
+We can now substitute the definitions of variance and covariance provided above,
+$$ \mathrm{var}(aY + bX) = a^2 \mathrm{var}(Y) + b^2 \mathrm{var}(X) + 2ab
+\mathrm{cov}(X, Y) $$
+If $X$ and $Y$ are independent, this simplifies to,
+$$ \mathrm{var}(aY + bX) = a^2 \mathrm{var}(Y) + b^2 \mathrm{var}(X) $$
+
+\problempart % Problem 1j
+
+For a single draw $i$ from the population, the variance is not very interesting.
+In fact, it is, by definition, zero. I am going to assume that the syntax was 
+meant to convey the following,
+$$ \hat{\mathrm{var}}\left(\left\{aY_i + bX_i\right\}_{i = 1}^n\right) = \frac{1}
+{n - 1} \sum_{i = 1}^n \left( (aY_i + bX_i) - \hat{\mathbb{E}}\left[\left\{aY_j + 
+bX_j\right\}_{j = 1}^n\right]\right)^2 $$
+
+\problempart % Problem 1k
+
+\problempart % Problem 1l
+
+\problempart % Problem 1m
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 2
+
+The general equation for the inverse of a $2 \times 2$ matrix $D$ is,
+$$ \begin{pmatrix}
+    a & b \\
+    c & d
+\end{pmatrix}^{-1} = \frac{1}{ad - bc} \begin{pmatrix}
+    d & -b \\
+    -c & a
+\end{pmatrix} $$
+This can be verified using the Gauss-Jordan method,
+$$ \begin{pmatrix}
+    a & b & 1 & 0 \\
+    c & d & 0 & 1
+\end{pmatrix} \Longrightarrow \begin{pmatrix}
+    1 & 0 & \frac{d}{ad-bc} & \frac{b}{bc-ad} \\
+    0 & 1 & \frac{c}{bc-ad} & \frac{a}{ad-bc}
+\end{pmatrix} $$
+
+\problem  % Problem 3
+
+If $X^TX$ were invertible, then the expression would clearly simplify to the
+identity matrix $I$. The identity matrix is clearly both symmetric and 
+idempotent. However, $X^T X$ is not guaranteed to be invertible. Thus we examine
+each property individually.
+
+First we take check the condition for symmetry,
+$$ A^T = A $$
+We take the transpose,
+$$ \left(X \left(X^T X\right)^{-1} X^T\right)^T = X \left(\left(X^T
+X\right)^{-1}\right)^T X^T $$
+However, the transpose of an inverse is the same as the inverse of a transpose,
+therefore this expression becomes,
+$$ X \left(X^T X\right)^{-1} X^T $$
+Thus, the matrix $P_X$ is symmetric.
+
+Now we consider the condition for idempotent,
+$$ X^2 = X $$
+We take the power,
+$$ \left(X \left(X^T X\right)^{-1} X^T\right) \left(X \left(X^T X\right)^{-1} 
+X^T\right) $$
+Rewriting with different parentheses,
+$$ X \left(X^T X\right)^{-1} \left(X^T X\right) \left(X^T X\right)^{-1} 
+X^T $$
+We can cancel two of the inner terms to get,
+$$ X \left(X^T X\right)^{-1} X^T $$
+Thus, the matrix $P_X$ is idempotent.
+
+\problem  % Problem 4
+
+First we consider the condition for symmetry,
+$$ A^T = A $$
+We take the transpose,
+$$ \left(I - P_X\right)^T $$
+The transpose distributes, we are left with,
+$$ I^T - P_X^T $$
+But, both $I$ and $P$ are symmetric, thus this becomes,
+$$ I - P $$
+Therefore, $M_X$ is symmetric.
+
+Now we consider idempotency,
+$$ A^2 = A $$
+Taking the product,
+$$ (I - P_X)(I - P_X) $$
+Distributing the terms,
+$$ I^2 - 2P_X + P_X^2 $$
+Since $I$ and $P_X$ are idempotent,
+$$ I - 2P_X + P_X = I - P_X $$
+Therefore, $M_X$ is idempotent.
+
+\newpage
+
+\problem  % Problem 4
+
+The aggressive assumption
+$$ \mathbb{E}[\varepsilon_i \mid X_i = x] = 0\quad \forall i $$
+Is essentially assuming that the dependence of $Y$ on variables other than
+$X$ are not related to $X$. That is, given $X$, the mean of the distribution
+of other factors is zero (assigned randomly). This might not hold if
+
+\problem  % Problem 5
+
+\problem  % Problem 6
+
+\problem  % Problem 7
+
+\newpage
+
+\problem  % Problem 8
+
+\problem  % Problem 9
+
+\problem  % Problem 10
+
+\problem  % Problem 11
+
+\problem  % Problem 12
+
+\problem  % Problem 13
+
+\begin{problemparts}
+
+\problempart  % Problem 13a
+
+\problempart  % Problem 13b
+
+\problempart  % Problem 13c
+
+\end{problemparts}
+
+\problem  % Problem 14
+
+\problem  % Problem 15
+
+\begin{problemparts}
+
+\problempart  % Problem 15a
+
+\problempart  % Problem 15b
+
+\problempart  % Problem 15c
+
+\end{problemparts}
+
+\problem  % Problem 16
+
+\begin{problemparts}
+
+\problempart  % Problem 16a
+
+\problempart  % Problem 16b
+
+\problempart  % Problem 16c
+
+\end{problemparts}
+
+
+\end{problems}
+
+\end{document}
+
+
