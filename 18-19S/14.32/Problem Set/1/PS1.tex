@@ -35,7 +35,7 @@
 \problempart % Problem 1a
 
 The definition for the expected value of a continuous random variable is,
-$$ \mathbb{E}[Y] = \int_{-\infty}^{\infty} y f_Y(y) dy $$
+$$ \boxed{\mathbb{E}[Y] = \int_{-\infty}^{\infty} y f_Y(y) dy} $$
 
 Intuitively, this takes every possible $y$ value and weights it according to the
 probability of $Y = y$, which comes from the marginal distribution.
@@ -43,8 +43,8 @@ probability of $Y = y$, which comes from the marginal distribution.
 \problempart % Problem 1b
 
 The definition for the expected value of a sample distribution is,
-$$ \hat{\mathbb{E}}\left[\left\{Y_i\right\}_{i = 1}^n\right] = \frac{1}{n} 
-\sum_{i = 1}^n Y_i $$
+$$ \boxed{\hat{\mathbb{E}}\left[\left\{Y_i\right\}_{i = 1}^n\right] = \frac{1}{n} 
+\sum_{i = 1}^n Y_i} $$
 
 Intuitively, similar logic applies from the continuous distribution in the 
 previous problem. However, instead of weighting each possible $y$ according to
@@ -60,7 +60,7 @@ random variable,
 $$ \mathrm{var}(Y) = \int_{-\infty}^{\infty} \left(y - \mathbb{E}[Y]\right)^2
 f_Y(y) dy $$
 Or, equivalently,
-$$ \mathrm{var}(Y) = \int_{-\infty}^{\infty} y^2 f_Y(y) dy - \mathbb{E}[Y]^2 $$
+$$ \boxed{\mathrm{var}(Y) = \int_{-\infty}^{\infty} y^2 f_Y(y) dy - \mathbb{E}[Y]^2} $$
 
 Intuitively, the variance measures how much, on average, the values vary from 
 the average value. Essentially, it determines how much spread there is in the
@@ -69,8 +69,8 @@ distribution.
 \problempart % Problem 1d
 
 The definition of the variance of a sample distribution is,
-$$ \hat{\mathrm{var}}(\left\{Y_i\right\}_{i = 1}^n) = \frac{1}{n - 1} \sum_{i =
-1}^n \left(Y_i - \hat{\mathbb{E}}[\left\{Y_j\right\}_{j = 1}^n]\right)^2$$
+$$ \boxed{\hat{\mathrm{var}}(\left\{Y_i\right\}_{i = 1}^n) = \frac{1}{n - 1} \sum_{i =
+1}^n \left(Y_i - \hat{\mathbb{E}}[\left\{Y_j\right\}_{j = 1}^n]\right)^2}$$
 
 Intuitively, this is very similar to the continuous random variable version,
 with the same modifications made with the sample expectation. Instead of weighting
@@ -89,8 +89,8 @@ continuous random variables,
 $$ \mathrm{cov}(X, Y) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \left(x
 - \mathbb{E}[X]\right) \left(y - \mathbb{E}[Y]\right) f_{XY}(x, y) dx dy $$
 Or, equivalently,
-$$ \mathrm{cov}(X, Y) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x y 
-f_{XY}(x, y) dx dy - \mathbb{E}[X] \mathbb{E}[Y] $$
+$$ \boxed{\mathrm{cov}(X, Y) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x y 
+f_{XY}(x, y) dx dy - \mathbb{E}[X] \mathbb{E}[Y]} $$
 
 Intuitively, this is very similar to variance. However, instead of measuring how
 much a single variable varies in expectation from the expected value, we measure
@@ -101,10 +101,10 @@ together (positively or negatively) the higher the product is.
 \problempart % Problem 1f
 
 The definition of the covariance of a sample distribution is,
-$$ \hat{\mathrm{cov}}(\left\{X_i, Y_i\right\}_{i = 1}^n) = \frac{1}{n - 1} 
+$$ \boxed{\hat{\mathrm{cov}}(\left\{X_i, Y_i\right\}_{i = 1}^n) = \frac{1}{n - 1} 
 \sum_{i = 1}^{n} \left(X_i - \hat{\mathbb{E}}\left[\left\{X_j\right\}_{j =
 1}^n\right]\right) \left(Y_i - \hat{\mathbb{E}}\left[\left\{Y_j\right\}_{j = 
-1}^n\right]\right) $$
+1}^n\right]\right)} $$
 
 Intuitively, this is very similar to the continuous random variable version,
 with the same modifications made with the sample variance. Instead of weighting
@@ -126,24 +126,21 @@ distribution,
 $$ \mathbb{E}[aY + bX] = a \int_{-\infty}^{\infty} y f_{Y}(y) dy + b 
 \int_{-\infty}^{\infty} x f_{X}(x) dx $$
 The integrals each represent an expectation as defined above,
-$$ \mathbb{E}[aY + bX] = a \mathbb{E}[Y] + b \mathbb{E}[X] $$
+$$ \boxed{\mathbb{E}[aY + bX] = a \mathbb{E}[Y] + b \mathbb{E}[X]} $$
 This property is also known as the Linearity of Expectation.
 
 \problempart % Problem 1h
 
-For a single draw $i$ from the population, the expectation is not very interesting,
-$$ \hat{\mathbb{E}}[a Y_i + b X_i] = \frac{1}{1} \sum_{i = i}^i \left(a Y_i + b 
-X_i\right) = a Y_i + b X_i $$
-I am going to assume that the syntax was meant to convey the following,
+Using the definition of sample expectation established in Part B,
 $$ \hat{\mathbb{E}}\left[\left\{a Y_i + b X_i \right\}_{i = 1}^n \right] = \frac{1}
 {n} \sum_{i = 1}^n \left(a Y_i + b X_i\right) $$
 By splitting apart the sum,
 $$ \hat{\mathbb{E}}\left[\left\{a Y_i + b X_i \right\}_{i = 1}^n \right] =
 \frac{a}{n} \sum_{i = 1}^n Y_i + \frac{b}{n} \sum_{i = 1}^n X_i $$
 By using the definition presented above, this is the same as,
-$$ \hat{\mathbb{E}}\left[\left\{a Y_i + b X_i \right\}_{i = 1}^n \right] = a
-\hat{\mathbb{E}}\left[\left\{Y_i\right\}_{i = 1}^n \right] +
-\hat{\mathbb{E}}\left[\left\{X_i\right\}_{i = 1}^n \right] $$
+$$ \boxed{\hat{\mathbb{E}}\left[\left\{a Y_i + b X_i \right\}_{i = 1}^n \right] = a
+\hat{\mathbb{E}}\left[\left\{Y_i\right\}_{i = 1}^n \right] + b
+\hat{\mathbb{E}}\left[\left\{X_i\right\}_{i = 1}^n \right]} $$
 Once again, the Linearity of Expectation holds.
 
 \problempart % Problem 1i
@@ -189,25 +186,115 @@ Rearranging terms,
     &+ b^2 \left(\int_{-\infty}^{\infty} x^2 f_{X}(x) dx - \mathbb{E}[X]^2\right)
 \end{align*}
 We can now substitute the definitions of variance and covariance provided above,
-$$ \mathrm{var}(aY + bX) = a^2 \mathrm{var}(Y) + b^2 \mathrm{var}(X) + 2ab
-\mathrm{cov}(X, Y) $$
+$$ \boxed{\mathrm{var}(aY + bX) = a^2 \mathrm{var}(Y) + b^2 \mathrm{var}(X) + 2ab
+\mathrm{cov}(X, Y)} $$
 If $X$ and $Y$ are independent, this simplifies to,
 $$ \mathrm{var}(aY + bX) = a^2 \mathrm{var}(Y) + b^2 \mathrm{var}(X) $$
 
 \problempart % Problem 1j
 
-For a single draw $i$ from the population, the variance is not very interesting.
-In fact, it is, by definition, zero. I am going to assume that the syntax was 
-meant to convey the following,
+Using the definition of sample variance established in Part D,
 $$ \hat{\mathrm{var}}\left(\left\{aY_i + bX_i\right\}_{i = 1}^n\right) = \frac{1}
 {n - 1} \sum_{i = 1}^n \left( (aY_i + bX_i) - \hat{\mathbb{E}}\left[\left\{aY_j + 
 bX_j\right\}_{j = 1}^n\right]\right)^2 $$
 
+From Part H, we can break apart the expectation,
+$$ \hat{\mathrm{var}}\left(\left\{aY_i + bX_i\right\}_{i = 1}^n\right) = \frac{1}
+{n - 1} \sum_{i = 1}^n  \left(aY_i + bX_i - a \hat{\mathbb{E}}\left[\left\{Y_i
+\right\}_{i = 1}^n \right] - b \hat{\mathbb{E}}\left[\left\{X_i\right\}_{i = 1}^n 
+\right] \right)^2 $$
+After expanding and grouping terms,
+\begin{align*}
+    \frac{1} {n - 1} \sum_{i = 1}^n  \Bigg( &a^2\left(Y_i^2 - 2 Y_i \hat{\mathbb{E}}
+    \left[\left\{ Y_j \right\}_{j = 1}^n\right] + \hat{\mathbb{E}}\left[\left\{Y_j
+    \right\}_{j = 1}^n \right]^2 \right) \\
+    + &b^2 \left(X_i^2 - 2 X_i \hat{\mathbb{E}}\left[\left\{ X_j\right\}_{j = 1}^n\right] +
+    \hat{\mathbb{E}}\left[\left\{X_j\right\}_{j = 1}^n  \right]^2\right) \\
+    + &2ab \left( X_i Y_i - X_i \hat{\mathbb{E}}\left[\left\{Y_j\right\}_{j = 1}^n  \right] - Y_i
+    \hat{\mathbb{E}}\left[\left\{X_j\right\}_{j = 1}^n \right] +
+    \hat{\mathbb{E}}\left[\left\{X_j\right\}_{j = 1}^n 
+    \right]\hat{\mathbb{E}}\left[\left\{Y_j\right\}_{j = 1}^n  \right] \right) \Bigg)
+\end{align*}
+Using we can refactor each individual grouping and split the summation,
+\begin{align*}
+    &\frac{a^2} {n - 1} \sum_{i = 1}^n  \left(Y_i - \hat{\mathbb{E}}
+    \left[\left\{ Y_j \right\}_{j = 1}^n\right] \right)^2 
+    + \frac{b^2} {n - 1} \sum_{i = 1}^n \left(X_i - \hat{\mathbb{E}}\left[\left\{ 
+    X_j\right\}_{j = 1}^n\right] \right)^2 \\
+    + &\frac{2ab} {n - 1} \sum_{i = 1}^n \left( Y_i - \hat{\mathbb{E}}\left[\left\{
+    Y_j\right\}_{j = 1}^n  \right]\right)
+    \left(X_i - \hat{\mathbb{E}}\left[\left\{X_j\right\}_{j = 1}^n \right] \right) 
+\end{align*}
+Using the definitions of sample variance and covariance defined above, this simplifies,
+$$ \boxed{\hat{\mathrm{var}}\left(\left\{aY_i + bX_i\right\}_{i = 1}^n\right) = a^2
+\hat{\mathrm{var}}(\left\{Y_i\right\}_{i = 1}^n) + b^2 \hat{\mathrm{var}}(\left\{X_i
+\right\}_{i = 1}^n) + 2ab \hat{\mathrm{cov}}(\left\{X_i, Y_i\right\}_{i = 1}^n)} $$
+Once again, if $X$ and $Y$ are independent,
+$$ \hat{\mathrm{var}}\left(\left\{aY_i + bX_i\right\}_{i = 1}^n\right) = a^2
+\hat{\mathrm{var}}(\left\{Y_i\right\}_{i = 1}^n) + b^2 \hat{\mathrm{var}}(\left\{X_i
+\right\}_{i = 1}^n) $$
+
 \problempart % Problem 1k
+
+Using the definition of covariance established in Part E,
+$$ \mathrm{cov}(X, aY + bX) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x (ay + bx) 
+f_{XY}(x, y) dx dy - \mathbb{E}[X] \mathbb{E}[aY + bX] $$
+Distributing terms and using Linearity of Expectation described in Part G,
+\begin{align*}
+    \mathrm{cov}(X, aY + bX) &= a \left(\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} xy 
+    f_{XY}(x, y) dx dy - \mathbb{E}[X]\mathbb{E}[Y]\right) \\
+    &+ b \left(\int_{-\infty}^{\infty}
+    \int_{-\infty}^{\infty} x^2 f_{XY}(x, y) dx dy - \mathbb{E}[X]^2 \right)
+\end{align*}
+Using the definitions for variance and covariance (and marginal distributions), this 
+simplifies to,
+$$ \boxed{\mathrm{cov}(X, aY + bX) = a \mathrm{cov}(X, Y) + b \mathrm{var}(X)} $$
 
 \problempart % Problem 1l
 
+Using the definition of sample covariance established in Part F,
+\begin{align*}
+    \hat{\mathrm{cov}}(\left\{X_i, aY_i + bX_i\right\}_{i = 1}^n) = \frac{1}{n - 1} 
+    \sum_{i = 1}^{n} \Bigg( &\left(X_i - \hat{\mathbb{E}}\left[\left\{X_j\right\}_{j =
+    1}^n\right]\right) \\
+    &\left(\left(aY_i + b X_i\right) - \hat{\mathbb{E}}\left[\left\{aY_j + 
+    bX_j\right\}_{j = 1}^n\right]\right)\Bigg)
+\end{align*}
+Using Linearity of Expectation derived in Part H, distributing, and regrouping yields,
+\begin{align*}
+    \frac{1}{n - 1} \sum_{i = 1}^{n} \Bigg( &a\left(X_i Y_i - X_i \hat{\mathbb{E}}\left[\left\{Y_j\right\}_{j = 1}^n  \right] - Y_i
+    \hat{\mathbb{E}}\left[\left\{X_j\right\}_{j = 1}^n \right] +
+    \hat{\mathbb{E}}\left[\left\{X_j\right\}_{j = 1}^n 
+    \right]\hat{\mathbb{E}}\left[\left\{Y_j\right\}_{j = 1}^n  \right]\right) \\
+    + &b\left(X_i^2 - 2 X_i \hat{\mathbb{E}}\left[\left\{ X_j\right\}_{j = 1}^n\right] +
+    \hat{\mathbb{E}}\left[\left\{X_j\right\}_{j = 1}^n  \right]^2 \right)\Bigg)
+\end{align*}
+We can refactor each individual grouping and split the summation,
+\begin{align*}
+    &\frac{a} {n - 1} \sum_{i = 1}^n \left( Y_i - \hat{\mathbb{E}}\left[\left\{
+    Y_j\right\}_{j = 1}^n  \right]\right)
+    \left(X_i - \hat{\mathbb{E}}\left[\left\{X_j\right\}_{j = 1}^n \right] \right) \\ 
+    + &\frac{b} {n - 1} \sum_{i = 1}^n \left(X_i - \hat{\mathbb{E}}\left[\left\{ 
+    X_j\right\}_{j = 1}^n\right] \right)^2 \\
+\end{align*}
+Using the definitions of sample covariance and variance from above,
+$$ \boxed{\hat{\mathrm{cov}}(\left\{X_i, aY_i + bX_i\right\}_{i = 1}^n) = a
+\hat{\mathrm{cov}}( \left\{X_i, Y_i\right\}_{i = 1}^n) + b \hat{\mathrm{var}}
+(\left\{X_i\right\}_{i = 1}^n)}  $$
+
 \problempart % Problem 1m
+
+The general definition of covariance is
+$$ \mathrm{cov}(X, Y) = \mathbb{E}\left[\left(X - \mathbb{E}[X]\right)\left(Y - 
+\mathbb{E}[Y]\right)\right] $$
+Substituting the variables given,
+$$ \mathrm{cov}(X, a) = \mathbb{E}\left[\left(X - \mathbb{E}[X]\right)\left(a - 
+\mathbb{E}[a]\right)\right] $$
+The expected value of a constant is that constant. Therefore,
+$$ \mathrm{cov}(X, a) = \mathbb{E}\left[\left(X - \mathbb{E}[X]\right)\left(a - 
+a\right)\right] $$
+Clearly, this becomes zero.
+$$ \boxed{\mathrm{cov}(X, a) = 0} $$
 
 \end{problemparts}
 
@@ -216,13 +303,13 @@ bX_j\right\}_{j = 1}^n\right]\right)^2 $$
 \problem  % Problem 2
 
 The general equation for the inverse of a $2 \times 2$ matrix $D$ is,
-$$ \begin{pmatrix}
+$$ \boxed{\begin{pmatrix}
     a & b \\
     c & d
 \end{pmatrix}^{-1} = \frac{1}{ad - bc} \begin{pmatrix}
     d & -b \\
     -c & a
-\end{pmatrix} $$
+\end{pmatrix}} $$
 This can be verified using the Gauss-Jordan method,
 $$ \begin{pmatrix}
     a & b & 1 & 0 \\
@@ -246,11 +333,11 @@ $$ \left(X \left(X^T X\right)^{-1} X^T\right)^T = X \left(\left(X^T
 X\right)^{-1}\right)^T X^T $$
 However, the transpose of an inverse is the same as the inverse of a transpose,
 therefore this expression becomes,
-$$ X \left(X^T X\right)^{-1} X^T $$
+$$ \boxed{X \left(X^T X\right)^{-1} X^T} $$
 Thus, the matrix $P_X$ is symmetric.
 
 Now we consider the condition for idempotent,
-$$ X^2 = X $$
+$$ A^2 = A $$
 We take the power,
 $$ \left(X \left(X^T X\right)^{-1} X^T\right) \left(X \left(X^T X\right)^{-1} 
 X^T\right) $$
@@ -258,7 +345,7 @@ Rewriting with different parentheses,
 $$ X \left(X^T X\right)^{-1} \left(X^T X\right) \left(X^T X\right)^{-1} 
 X^T $$
 We can cancel two of the inner terms to get,
-$$ X \left(X^T X\right)^{-1} X^T $$
+$$ \boxed{X \left(X^T X\right)^{-1} X^T} $$
 Thus, the matrix $P_X$ is idempotent.
 
 \problem  % Problem 4
@@ -270,7 +357,7 @@ $$ \left(I - P_X\right)^T $$
 The transpose distributes, we are left with,
 $$ I^T - P_X^T $$
 But, both $I$ and $P$ are symmetric, thus this becomes,
-$$ I - P $$
+$$ \boxed{I - P} $$
 Therefore, $M_X$ is symmetric.
 
 Now we consider idempotency,
@@ -280,75 +367,116 @@ $$ (I - P_X)(I - P_X) $$
 Distributing the terms,
 $$ I^2 - 2P_X + P_X^2 $$
 Since $I$ and $P_X$ are idempotent,
-$$ I - 2P_X + P_X = I - P_X $$
+$$ I - 2P_X + P_X = \boxed{I - P_X} $$
 Therefore, $M_X$ is idempotent.
 
 \newpage
 
-\problem  % Problem 4
+\problem  % Problem 5
 
 The aggressive assumption
 $$ \mathbb{E}[\varepsilon_i \mid X_i = x] = 0\quad \forall i $$
-Is essentially assuming that the dependence of $Y$ on variables other than
+is essentially assuming that the dependence of $Y$ on variables other than
 $X$ are not related to $X$. That is, given $X$, the mean of the distribution
-of other factors is zero (assigned randomly). This might not hold if
-
-\problem  % Problem 5
+of other factors is zero (assigned randomly). In abstract, this might not 
+hold if it is reasonable to expect a higher $X_i$ will lead to a higher 
+$\varepsilon_i$. More concretely, it is likely that an individual with more
+education ($X_i$) has other factors ($\varepsilon_i$)---such as parental wealth, 
+charisma, innate intelligence, etc.---that will contribute to higher earnings ($Y_i$).
 
 \problem  % Problem 6
 
+The definition of covariance is,
+$$ \mathrm{cov}(X, Y) = \mathbb{E}[XY] - \mathbb{E}[X] \mathbb{E}[Y] $$
+Substituting provided values,
+$$ \mathrm{cov}(X_i, \varepsilon_i) = \mathbb{E}[X_i \varepsilon_i] - \mathbb{E}[X_i] 
+\mathbb{E}[\varepsilon_i] $$
+The Law of Iterated Expectation states,
+$$ \mathbb{E}[X] = \mathbb{E}\left[\mathbb{E}[X \mid Z]\right] $$
+Thus, we can condition on $X_i$,
+$$ \mathrm{cov}(X_i, \varepsilon_i) = \mathbb{E}\left[\mathbb{E}[X_i \varepsilon_i 
+\mid X_i]\right] - \mathbb{E}[X_i] \mathbb{E}\left[\mathbb{E}[\varepsilon_i \mid 
+X_i]\right] $$
+Given that $\mathbb{E}[\varepsilon_i \mid X_i] = 0$ and $\mathbb{E}[0] = 0$, this 
+simplifies,
+$$ \mathrm{cov}(X_i, \varepsilon_i) = \mathbb{E}\left[\mathbb{E}[X_i \varepsilon_i 
+\mid X_i]\right] $$
+Within the inner expectation, $X_i$ becomes a constant, so it can be pulled out,
+$$ \mathrm{cov}(X_i, \varepsilon_i) = \mathbb{E}\left[X_i \mathbb{E}[\varepsilon_i 
+\mid X_i]\right] $$
+Once again, $\mathbb{E}[\varepsilon \mid X_i] = 0$ and $\mathbb{E}[0] = 0$, therefore,
+$$ \boxed{\mathrm{cov}(X_i, \varepsilon_i) = 0} $$
+
 \problem  % Problem 7
 
-\newpage
+The definition of covariance is,
+$$ \mathrm{cov}(X, Y) = \mathbb{E}[XY] - \mathbb{E}[X] \mathbb{E}[Y] $$
+Substituting provided values,
+$$ \mathrm{cov}(X_i, \varepsilon_i) = \mathbb{E}[X_i \varepsilon] - \mathbb{E}[X_i]
+\mathbb{E}[\varepsilon_i] $$
+Using the model, solving for $\varepsilon_i$,
+$$ \varepsilon_i = Y_i - \beta_0 - \beta_1 X_i $$
+Substituting this expression into the covariance expression and setting to zero,
+$$ 0 = \mathbb{E}[X_i \left(Y_i - \beta_0 - \beta_1 X_i \right)] - \mathbb{E}[X_i]
+\mathbb{E}[Y_i - \beta_0 - \beta_1 X_i] $$
+Using Linearity of Expectation and distribution,
+$$ 0 = \mathbb{E}[X_i Y_i] - \beta_0 \mathbb{E}[X_i] - \beta_1 \mathbb{E}[X_i^2] - 
+\mathbb{E}[X_i] \mathbb{E}[Y_i] + \beta_0 \mathbb{E}[X_i] + \beta_1 \mathbb{E}[X_i]^2 $$
+Combining like terms and using the definitions of sample covariance and variance,
+$$ 0 = \hat{\mathrm{cov}}(X_i, Y_i) - \beta_1 \left(\hat{\mathrm{var}}(X_i)\right) $$
+Solving for $\beta_1$,
+$$ \boxed{\beta_1 = \frac{\hat{\mathrm{cov}}(X_i, Y_i)}{\hat{\mathrm{var}}(X_i)}} $$
 
 \problem  % Problem 8
 
+The solution $\beta_1$ in terms of expectations,
+$$ \beta_1 = \frac{\mathbb{E}[X_i Y_i] - \mathbb{E}[X_i] \mathbb{E}[Y_i]}
+{\mathbb{E}[X_i^2] - \mathbb{E}[X_i]^2} $$
+Let $X_i$ be a Bernoulli random variable which is $1$ with probability $p$. First,
+we derive $\mathbb{E}[X_i Y_i]$ using the Law of Total Expectation,
+$$ \mathbb{E}[X_i Y_i] = (1 - p) \mathbb{E}[X_i Y_i \mid X_i = 0] + p \mathbb{E}[X_i Y_i
+\mid X_i = 1] = p \bar{Y}_1 $$
+By definition of a Bernoulli random variable, $\mathbb{E}[X_i]$ can be determined,
+$$ \mathbb{E}[X_i] = p $$
+We can also determine $\mathbb{E}[Y_i]$ using the Law of Total Expectation,
+$$ \mathbb{E}[Y_i] = (1 - p) \mathbb{E}[Y_i \mid X_i = 0] + p \mathbb{E}[Y_i
+\mid X_i = 1] = (1 - p) \bar{Y}_0 + p \bar{Y}_1 $$
+Lastly, we need the expression for $\mathbb{E}[X_i^2]$. Using Total Expectation,
+$$ \mathbb{E}[X_i^2] = (1 - p) \mathbb{E}[X_i^2 \mid X = 0] + p \mathbb{E}[X_i^2 \mid 
+X_i = 1] = p $$
+Putting this all together,
+$$ \beta_1 = \frac{p \bar{Y}_1 - p (1 - p) \bar{Y}_0 - p^2 \bar{Y}_1}{p - p^2} $$
+We can cancel a $p$ from every term,
+$$ \beta_1 = \frac{\bar{Y}_1 - (1 - p) \bar{Y}_0 - p \bar{Y}_1}{1 - p} $$
+Rearranging shows that we can also cancel a $(1 - p)$ from every term,
+$$ \beta_1 = \frac{(1 - p) \bar{Y}_1 - (1 - p)}{1 - p} = \boxed{\bar{Y}_1 - \bar{Y}_0} $$
+
+\newpage
+
 \problem  % Problem 9
 
-\problem  % Problem 10
-
-\problem  % Problem 11
-
-\problem  % Problem 12
-
-\problem  % Problem 13
-
 \begin{problemparts}
 
-\problempart  % Problem 13a
+\problempart  % Problem 9a
 
-\problempart  % Problem 13b
+The $\beta_1$ coefficient from the regression of log weekly wages with years of education
+is,
+$$ \boxed{\beta_1 = 0.0709} $$
+Intuitively, this says that one more year of education results in (approximately) $7$\%
+higher weekly wage.
 
-\problempart  % Problem 13c
+\problempart  % Problem 9b
 
-\end{problemparts}
+The $R^2$ of the regression of log weekly wages with years of education is,
+$$ \boxed{R^2 = 0.1173} $$
+Intuitively, this number tells us how much variation in $Y$ is explained by our regression.
 
-\problem  % Problem 14
+\problempart  % Problem 9c
 
-\problem  % Problem 15
-
-\begin{problemparts}
-
-\problempart  % Problem 15a
-
-\problempart  % Problem 15b
-
-\problempart  % Problem 15c
-
-\end{problemparts}
-
-\problem  % Problem 16
-
-\begin{problemparts}
-
-\problempart  % Problem 16a
-
-\problempart  % Problem 16b
-
-\problempart  % Problem 16c
+The mean squared error of the regression is,
+$$ \boxed{\mathrm{MSE} = 0.6377^2 = 0.4067} $$
 
 \end{problemparts}
-
 
 \end{problems}
 
