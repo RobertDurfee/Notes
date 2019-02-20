@@ -1,0 +1,222 @@
+%
+% 6.046 problem set 2 solutions
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{multirow}
+
+\input{macros}
+\newcommand{\theproblemsetnum}{2}
+\newcommand{\releasedate}{Thursday, February 14}
+\newcommand{\partaduedate}{Wednesday, February 20}
+
+\title{6.046 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 10PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart % Problem 1a
+
+\textbf{Description} Let the $n$ people in the room be numbered $[1..n]$. 
+Let the query $Q(i, j)$ be defined as,
+$$ Q(i, j) = \begin{cases}
+    1 & \mathrm{if\ persons}\ i\ \mathrm{and}\ j \ \mathrm{are\ from\ the\ same\
+    universe} \\
+    0 & \mathrm{otherwise}
+\end{cases} $$
+Let $d$ be the index of the last person such that $Q(i, j) = 0$. Then, ask the 
+following set of queries,
+$$ \mathbb{S} = \{ Q(1, j) \mid j \in [2..n] \} $$
+While asking the queries, update $d$ whenever $s = 0$. After asking all the 
+queries, if
+$$ \sum_{s \in \mathbb{S}} s > \frac{\vert \mathbb{S} \vert}{2} $$
+then return the first person. Otherwise, return the person whose index is stored
+in $d$.
+
+\textbf{Correctness} This algorithm relies chiefly on the fact that the number
+of Xers is greater than the number of humans. We can compare a single person,
+$p_1$, (whose universe is unknown) to every other person to split the group 
+into Xers and Earthlings. Whichever group is larger must contain Xers. If the
+sum of persons from the same universe as $p_1$ is larger than half, that person
+must be an Xer. If not, the algorithm also keeps track of the last person from
+a different universe than $p_1$. This person must be an Xer.
+
+\textbf{Running Time} Only $n$ queries are made, as we only compare a single
+person to all others. Since each of the queries is $O(1)$, the total run time is
+$O(n)$.
+
+\problempart % Problem 1b
+
+Let there be exactly $n/2$ Xers and $n/2$ Earthlings. Let the Xers always report
+an Earthling as an Xer and an Xer as an Earthling. Conversely, an Earthling will
+always report another Earthling as an Earthling and an Xer as an Xer. This 
+creates a symmetry between responses such that it becomes impossible to
+differentiate between Xers and Earthlings.
+
+\problempart % Problem 1c
+
+To uncover the hidden states that yield each possible outcome, consider the
+following table. The axes represent the true identity of persons $A$ and $B$.
+
+\begin{center}
+    \begin{tabular}{c c|c c}
+        & & \multicolumn{2}{c}{B} \\
+        & & X & E \\
+        \hline 
+        \multirow{6}{*}{A} & \multirow{4}{*}{X} & $(A, B) \in (E, E)$ & \\
+        &  & $(A, B) \in (E, X)$ & $(A, B) \in (X, X)$ \\
+        & & $(A, B) \in (X, E)$ & $(A, B) \in (X, E)$ \\
+        & & $(A, B) \in (X, X)$ & \\
+        & \multirow{2}{*}{E} & $(A, B) \in (X, X)$ & \multirow{2}{*}{$(A, B) \in (E, E)$} \\
+        & & $(A, B) \in (E, X)$ & \\
+    \end{tabular}
+\end{center}
+
+Examining each case in detail,
+\begin{itemize}
+    \item  In the upper left case $(A, B) \in (X, X)$, both would be motivated 
+    to lie to keep each others' identities secret. However, they are not
+    constrained to lie, they could also tell the truth. Thus, anything is 
+    possible $(A, B) \in (E, E)$, $(A, B) \in (E, X)$, $(A, B) \in (X, E)$, 
+    $(A, B) \in (X, X)$.
+    \item In the upper right case $(A, B) \in (X, E)$, $B$ is required to tell 
+    the truth and will identify $A$ as an Xer. However, $A$ is not bound to the
+    truth and may report $B$ to be either an Xer or an Earthling. So there are
+    two reported possibilities $(A, B) \in (X, E)$ or $(A, B) \in (X, X)$.
+    \item In the lower left case $(A, B) \in (E, X)$, $A$ is required to tell
+    the truth and will identify $B$ as an Xer. However, $B$ is not bound to the
+    truth and may report $A$ to be either an Xer or an Earthling. So there are
+    two reported possibilities $(A, B) \in (E, X)$ or $(A, B) \in (X, X)$.
+    \item In the lower right case $(A, B) \in (E, E)$, both $A$ and $B$ would
+    tell the truth and report $(A, B) \in (E, E)$.
+\end{itemize}
+
+From this analysis, the reported cases have the following possibilities,
+\begin{itemize}
+    \item $(X, X)$: There may be 1 or 2 Xers. 
+    \item $(X, E)$: There may be 1 or 2 Xers.
+    \item $(E, X)$: There may be 1 or 2 Xers.
+    \item $(E, E)$: There may be 0 Xers (both Earthlings telling the truth) or
+    there may be 2 Xers (colluding to protect each others' identity).
+\end{itemize}
+
+\problempart % Problem 1d
+
+\textbf{Description} Pair up all the persons. For each pair, execute a query. If
+the response is not that both are Earthlings, remove the pairs. For all the
+responses that both are Earthlings, remove only one person from the pair. Repeat
+until only one person remains. This person is an Earthling. With this person as
+one of members of the pair, query all other people. Return this person 
+concatenated with the list of any person they identify as an Earthling.
+
+\textbf{Correctness} It is safe to remove all pairs that answer $(X, E)$, $(E, X)$,
+or $(X, X)$ as there can only be either $1$ or $2$ Xers in those pairs. Thus, the 
+invariant of a majority of Earthlings will remain correct. Among the responses of 
+$(E, E)$, we know that there are either $0$ or $2$ Xers. In either case, they 
+are from the same universe and one of the pair can be safely removed and the 
+invariant of a majority of Earthlings will be preserved. Since there are a
+majority of Earthlings in every subproblem, there is guaranteed to be an Earthling-
+Earthling pairing every step. This pairing will always report $(E, E)$ and thus
+our algorithm will always reduce to a terminating state of a single Earthling.
+
+Once a single Earthling is identified, we can use them to identify all other 
+Earthlings by pairing them will every other person. Their response must be
+truthful so reported Earthlings must be Earthlings.
+
+\textbf{Running Time} The recurrence that describes this process is,
+$$ T(n) = T(n / 2) + n / 2 $$
+At each subproblem, we (at worst) reduce the problem in half by discarding one
+member from each pairing reporting $(E, E)$. Furthermore, we pair up all the
+members so we only ask $n / 2$ queries.
+
+We use the Master Theorem to solve the recurrence. Using the standard notation,
+$a = 1$, $b = 2$, and $f(n) = n / 2$. If $\varepsilon > 1$, then $f(n) \in 
+\Omega(n^{a \log_b a + \varepsilon})$. Furthermore, if $c > 1/4$, then $a f(n/2) 
+\leq c f(n)$ for all $n$. Therefore, Case III of the Master Theorem applies and 
+the solution of the recurrence is,
+$$ T(n) \in \Theta(n) $$
+
+Additionally, to use the identified Earthling to find all the other Earthlings 
+also takes $\Theta(n)$ because every individual must be compared. From this, the
+overall run time is $\Theta(n)$.
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+
+\textbf{Description} Consider two binary strings $A$ and $B$ of lengths $2n$ 
+and $n$, respectively. Construct a polynomial $A(x)$ such that the coefficient
+$a_k = 1$ if $A[k] = 1$ and $a_k = -1$ if $A[k] = 0$. Construct a polynomial
+$B(x)$ such that coefficient $b_k = 1$ if $B[n - k] = 1$ and $b_k = -1$ if
+$B[n - k] = 0$. 
+
+Use the FFT algorithm discussed in lecture to compute the polynomial product 
+$A(x) \cdot B(x) = C(x)$ in coefficient representation. Consider the coefficients 
+of $C$ of degree $k \in [n - 1, 2n - 1]$. If coefficient $c_k \geq n - 2 d$, 
+add index $k - n + 1$ to the list of indexes with Hamming distance less than or 
+equal to $d$. After every $c_k$ in the specified range has been visited, return 
+the list of indices.
+
+\textbf{Correctness} Multiplying two polynomials is the same process as
+performing a discrete convolution of their coefficients. The convolution of 
+discrete arrays $A$ and $B$ reverses $B$ and then slides it along $A$, computing
+the dot product of the overlapping regions. 
+
+In our problem, we want to slide $B$ along $A$ and select the locations with 
+Hamming distance less than $d$. Because convolution reverses the list $B$---which
+we do not want---we first counter this by reversing $B$ before convolving. 
+
+Next we encode the Hamming distance into the dot product. Consider the dot product
+between two vectors $v, w \in \{-1, 1\}^n$. A Hamming distance of 
+$0$ is equivalent to the value $n$. This is clear to see as $1 \cdot 1 = 1$
+and $-1 \cdot -1 = 1$ which will be the same for all $n$ elements.
+Furthermore, a Hamming distance of $n$ is equivalent to the value $-n$. This
+is clear to see as $-1 \cdot 1 = -1$ which will be the same for all $n$ elements.
+From this, all Hamming distances can be related to the dot product result using the
+formula,
+$$ v \cdot w = n - 2d $$
+In other words, a single mistake will have $2 \times$ the effect on the value.
+
+Since the polynomial product will return the dot product of $B$ with $A$ along at
+each index, we just need to find the indexes with dot products greater than or 
+equal to $n - 2d$. However, another important note about convolution is that $A$
+is actually padded with zeros on either end. Thus, we need to ignore the beginning
+and end of the sequence and, hence, the lowermost and uppermost degree coefficients.
+There will be $n - 1$ padding at the upper and lower, so we ignore those 
+coefficients. This leaves coefficients with degree $k \in [n - 1, 2n - 1]$.
+
+Lastly, since we ignore some coefficients, we need to adjust the degree to
+correspond to an index. Since we ignore $n - 1$ elements, we subtract this from
+the degree with coefficients $c_k \geq n - 2d$. Thus, the returned indexes are
+$k - n + 1$.
+
+\textbf{Running Time} To construct the polynomials requires $O(n)$ time. 
+Multiplication of two polynomials in coefficient form requires $O(n \log n)$ 
+using the FFT algorithm presented in lecture. To iterate over the coefficients
+and transform them into into a list of indices requires $O(n)$ time. Overall,
+this must take $O(n + n \log n) \in O(n \log n) $.
+
+\end{problems}
+
+\end{document}
+
+
