@@ -1,0 +1,394 @@
+%
+% 6.S077 problem set solutions template
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{bbm}
+
+\input{macros}
+\newcommand{\theproblemsetnum}{2}
+\newcommand{\releasedate}{Thursday, February 14}
+\newcommand{\partaduedate}{Tuesday, February 26}
+\allowdisplaybreaks
+
+\title{6.S077 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 2:30PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart % Problem 1a
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The definition of our estimator is given by,
+$$ \hat{M} = \frac{1 + X_1 + \ldots + X_n}{n + 1} $$
+We take the expectation of this,
+\begin{align*}
+    \mathbb{E}[\hat{M}] &= \mathbb{E}\left[\frac{1 + X_1 + \ldots + X_n}{n + 1}
+    \right] \\
+    &= \frac{\mathbb{E}\left[1 + X_1 + \ldots + X_n \right]}{n + 1} \\
+    &= \frac{1 + \mathbb{E}[X_1] + \ldots + \mathbb{E}[X_n]}{n + 1} \\
+    &= \frac{1 + \mu + \ldots + \mu}{n + 1} \\
+    &= \boxed{\frac{1 + n \mu}{n + 1}}
+\end{align*}
+The bias of an estimator is defined as,
+$$ \mathrm{bias}(\hat{M}) = \mathbb{E}[\hat{M}] - \mu $$
+Substituting the expectation of $\hat{M}$,
+\begin{align*}
+    \mathrm{bias}(\hat{M}) &=  \frac{1 + n \mu}{n + 1} - \mu \\
+    &= \boxed{\frac{1 - \mu}{n + 1}}
+\end{align*}
+
+\problempart % Problem 1b
+
+We can also compute the variance of the estimator,
+\begin{align*}
+    \mathrm{var}(\hat{M}) &= \mathrm{var}\left(\frac{1 + X_1 + \ldots + X_n}{n 
+    + 1}\right) \\
+    &= \frac{\mathrm{var}\left(1 + X_1 + \ldots + X_n\right)}{\left(n + 1
+    \right)^2}
+\end{align*}
+Because the $X$ are i.i.d., the variance can be broken apart,
+\begin{align*}
+    \mathrm{var}(\hat{M}) &= \frac{1 + \mathrm{var}(X_1) + \ldots + 
+    \mathrm{var}(X_n)}{(n + 1)^2} \\
+    &= \frac{\sigma^2 + \ldots + \sigma^2}{(n + 1)^2} \\
+    &= \boxed{\frac{n \sigma^2}{(n + 1)^2}}
+\end{align*}
+
+\problempart % Problem 1c
+
+The definition of MSE is,
+$$ \mathrm{MSE}(\hat{M}) = \mathrm{var}(\hat{M}) + \mathrm{bias}(\hat{M})^2 $$
+Using this definition, substituting the values computed above,
+$$ \mathrm{MSE}(\hat{M}) = \frac{n \sigma^2}{(n + 1)^2} + \left(\frac{1 - \mu}
+{n + 1}\right)^2 $$
+We can use the method of partial fractions to break the variance term apart,
+$$ \mathrm{MSE}(\hat{M}) = \left(\frac{\sigma^2}{n + 1} - \frac{\sigma^2}{(n
++ 1)^2}\right) + \frac{\left(1 - \mu\right)^2}{(n + 1)^2} $$
+For significantly large $n$, it is clear that $1/n$ has greater magnitude than
+$1/n^2$. Therefore, it is safe to ignore the $1 / (n + 1)^2$ terms. We are left
+with only one term,
+$$ \mathrm{MSE}(\hat{M}) = \boxed{\frac{\sigma^2}{n + 1}} $$
+This term belongs to the variance. Therefore, asymptotically, only the variance
+terms is important when considering the mean squared error.
+    
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+
+\begin{problemparts}
+
+\problempart % Problem 2a
+
+Starting with the sample variance given,
+$$ \hat{V} = \frac{1}{n - 1} \sum_{i = 1}^n \left(X_i - \hat{M}\right)^2 $$
+Substituting the definitions of $X_i$ and $\hat{M}$ in terms of $W_i$,
+\begin{align*}
+    \hat{V} &= \frac{1}{n - 1} \sum_{i = 1}^n \left(\mu + \sigma W_i - \mu - 
+    \sigma \bar{W}\right)^2 \\
+    &= \frac{1}{n - 1} \sum_{i = 1}^n \left(\sigma W_i - \sigma \bar{W}\right)^2 \\
+    &= \frac{\sigma^2}{n - 1} \sum_{i = 1}^n \left(W_i - \bar{W}\right)^2
+\end{align*}
+Where $\bar{W}$ is taken to be
+$$ \bar{W} = \frac{1}{n} \sum_{i = 1}^n W_i $$
+Now we can show that this is unbiased by taking the expectation,
+\begin{align*}
+    \mathbb{E}[\hat{V}] &= \sigma^2 \mathbb{E}\left[\frac{1}{n - 1} \sum_{i = 
+    1}^n \left(W_i - \bar{W}\right)^2\right] \\
+    &= \sigma^2 \mathbb{E}\left[\frac{1}{n - 1} \sum_{i = 1}^n \left((W_i - \mu_W) 
+    - (\bar{W} - \mu_W)\right)^2\right] \\
+    &= \sigma^2 \mathbb{E}\left[\frac{1}{n - 1} \sum_{i = 1}^n (W_i - \mu_W)^2 + 2
+    (\bar{W} - \mu_W) (W_i - \mu_W) +(\bar{W} - \mu_W)^2\right] \\
+    &= \sigma^2 \mathbb{E}\left[\frac{1}{n - 1}\sum_{i = 1}^n (W_i - \mu_W)^2 - 
+    \frac{2}{n - 1} (\bar{W} - \mu_W) \sum_{i = 1}^n (W_i - \mu_W) + \frac{n}{n - 1}
+    (\bar{W} - \mu_W)^2\right] \\
+    &= \sigma^2 \mathbb{E}\left[\frac{1}{n - 1}\sum_{i = 1}^n (W_i - \mu_W)^2 - 
+    \frac{2n}{n - 1} (\bar{W} - \mu_W)^2 + \frac{n}{n - 1} (\bar{W} - \mu_W)^2\right] \\
+    &= \sigma^2 \mathbb{E}\left[\frac{1}{n - 1}\sum_{i = 1}^n (W_i - \mu_W)^2 - 
+    \frac{n}{n - 1} (\bar{W} - \mu_W)^2 \right] \\
+    &= \sigma^2 \left(\mathbb{E}\left[\frac{n}{n(n - 1)} \sum_{i = 1}^n (W_i - 
+    \mu_W)^2\right] - \mathbb{E}\left[\frac{n}{n - 1} (\bar{W} - \mu_W)^2\right]\right) \\
+    &= \frac{n \sigma^2}{n - 1} \left(\mathbb{E}\left[\frac{1}{n}\sum_{i = 1}^n (W_i - 
+    \mu_W)^2\right] - \mathbb{E}\left[(\bar{W} - \mu_W)^2\right]\right) \\
+    &= \frac{n \sigma^2}{n - 1} \left(\sigma_W^2 - \frac{\sigma_w^2}{n}\right) \\
+    &= \sigma^2 \sigma_W^2
+\end{align*}
+Since $\sigma_W$ is taken to equal $1$ WLOG, then,
+$$ \mathbb{E}[\hat{V}] = \boxed{\sigma^2} $$
+And, as a result, this is an unbiased estimator.
+
+\problempart % Problem 2b
+
+The definition of $\hat{M}$ is,
+$$ \hat{M} = \frac{1}{n} \sum_{i = 1}^n X_i $$
+Using the definition of $X_i$ in terms of $W_i$,
+$$ \hat{M} = \mu + \sigma \sum_{i = 1}^n W_i $$
+
+The definition of $\hat{\sigma}^2$ is,
+$$ \hat{\sigma}^2 = \frac{1}{n - 1} \sum_{i = 1}^n (X_i - \hat{M})^2 $$
+Substituting the definitions of $X_i$ and $\hat{M}$ in terms of $W_i$,
+$$ \hat{\sigma}^2 = \frac{\sigma^2}{n - 1} \sum_{i = 1}^n (W_i - \bar{W})^2 $$
+Where $\bar{W}$ is taken to be
+$$ \bar{W} = \frac{1}{n} \sum_{i = 1}^n W_i $$
+Taking the square root yields $\hat{sigma}$,
+$$ \hat{\sigma} = \sigma \sqrt{\frac{1}{n - 1} \sum_{i = 1}^n (W_i - \bar{W})^2} $$
+
+Using these two expressions, we can get $T$,
+\begin{align*}
+    T &= \frac{\sqrt{n} \left(\hat{M} - \mu\right)}{\hat{\sigma}} \\
+    &= \frac{\sqrt{n} \left(\mu + \sigma \sum_{i = 1}^n W_i - \mu \right)}{\sigma
+    \sqrt{\frac{1}{n - 1} \sum_{i = 1}^n (W_i - \bar{W})^2}} \\
+    &= \frac{\sigma \sqrt{n} \sum_{i = 1}^n W_i}{\sigma \sqrt{\frac{1}{n - 1} 
+    \sum_{i = 1}^n (W_i - \bar{W})^2}} \\
+    &= \boxed{\frac{\sqrt{n} \sum_{i = 1}^n W_i}{\sqrt{\frac{1}{n - 1} \sum_{i = 1}^n 
+    (W_i - \bar{W})^2}}} \\
+\end{align*}
+And this function does not depend on $\mu$ or $\sigma$, only $W_i$ and $n$
+   
+\problempart % Problem 2c
+
+Given the following,
+$$ \mathbb{P}(T < 2) = 0.025 $$
+$$ \mathbb{P}(T > 3) = 0.025 $$
+We can construct the probability,
+$$ \mathbb{P}(2 < T < 3) = 0.95 $$
+Substituting the definition of $T$,
+\begin{align*}
+    \mathbb{P}\left(2 < \frac{\sqrt{n} \left(\hat{M} - \mu\right)}{\hat{\sigma}} < 
+    3 \right) &= 0.95 \\
+    \mathbb{P}\left(2 \hat{\sigma} < \sqrt{n} \left(\hat{M} - \mu\right) < 3 
+    \hat{\sigma} \right) &= 0.95 \\
+    \mathbb{P}\left(2 \frac{\hat{\sigma}}{\sqrt{n}} < \hat{M} - \mu < 3 
+    \frac{\hat{\sigma}}{\sqrt{n}} \right) &= 0.95 \\
+    \mathbb{P}\left(2 \frac{\hat{\sigma}}{\sqrt{n}} - \hat{M} < -\mu < 3 
+    \frac{\hat{\sigma}}{\sqrt{n}} - \hat{M} \right) &= 0.95 \\
+    \mathbb{P}\left(\hat{M} - 3 \frac{\hat{\sigma}}{\sqrt{n}} < \mu < \hat{M} - 2
+    \frac{\hat{\sigma}}{\sqrt{n}} \right) &= 0.95 
+\end{align*}
+Therefore, the 95\% confidence interval is,
+$$ \boxed{\left(\hat{M} - 3 \frac{\hat{\sigma}}{\sqrt{n}}, \hat{M} - 2
+\frac{\hat{\sigma}}{\sqrt{n}}\right)} $$
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 3
+
+\begin{problemparts}
+
+\problempart % Problem 3a
+
+In the case where $n = 1$, we only have a single observation $X_1$. This must 
+be the empirical median by definition. When we take the expectation of this
+observation,
+$$ \mathbb{E}[\hat{M}] = \mathbb{E}[X_1] = \mu $$
+However, it is not guaranteed that the population mean is equal to the
+population median. As a result, this is not guaranteed to be an unbiased
+estimator.
+
+\problempart % Problem 3b
+
+See Jupyter Notebook for detailed results.
+
+The empirical mean of the data set is,
+$$ \bar{X} = \boxed{1.853} $$
+The empirical median of the data set is,
+$$ \hat{M} = \boxed{1.687} $$
+
+\problempart % Problem 3c
+
+See Jupyter Notebook for detailed results.
+
+\begin{center}
+    \includegraphics[scale=0.75]{PS2P3C.png}
+\end{center}
+
+\problempart % Problem 3d
+
+See Jupyter Notebook for detailed results.
+
+The bias of our estimate is,
+$$ \mathrm{bias}(\hat{M}) = \boxed{0} $$
+The standard error is,
+$$ s_{\bar{X}} = \boxed{0.209} $$
+
+\problempart % Problem 3e
+
+See Jupyter Notebook for detailed results.
+
+The confidence interval is,
+$$ \boxed{\left(1.378, 2.319\right)} $$
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 4
+
+\begin{problemparts}
+
+\problempart % Problem 4a
+
+Our estimator is defined as,
+$$ \hat{A}_a = \frac{K^2}{n^2} $$
+Taking the expectation of the estimator,
+\begin{align*}
+    \mathbb{E}[\hat{A}_a] &= \mathbb{E}\left[\frac{K^2}{n^2}\right] \\
+    &= \frac{\mathbb{E}[K^2]}{n^2}
+\end{align*}
+Since $K$ is a binomial random variable, we know the following,
+$$ \mathbb{E}[K] = np,\quad \mathrm{var}(K) = np(1 - p) $$
+From the definition of variance,
+\begin{align*}
+    \mathbb{E}[K^2] &= \mathrm{var}(K) + \mathbb{E}[K]^2 \\
+    &= np(1 - p) + n^2 p^2
+\end{align*}
+Substituting this into our equation above,
+\begin{align*}
+    \mathbb{E}[\hat{A}_a] &= \frac{np(1 - p) + n^2 p^2}{n^2} \\
+    &= \boxed{\frac{p(1 - p)}{n} + p^2}
+\end{align*}
+Using this, we can calculate the bias of the estimator,
+\begin{align*}
+    \mathrm{bias}(\hat{A}_a) &= \mathrm{E}[\hat{A}_a] - p^2 \\
+    &= \frac{p(1 - p)}{n} + p^2 - p^2 \\
+    &= \boxed{\frac{p(1 - p)}{n}}
+\end{align*}
+
+\problempart % Problem 4b
+
+Our new estimator is defined as,
+$$ \hat{A}_b = \frac{K^2}{n^2} - \frac{K (n - K)}{n^3} $$
+Calculating the expectation (and immediately substituting the result
+from Part A),
+\begin{align*}
+    \mathbb{E}[\hat{A}_b] &= \frac{p(1 - p)}{n} + p^2 - \mathbb{E}\left[\frac{K 
+    (n - K)}{n^3}\right] \\
+    &= \frac{p(1 - p)}{n} + p^2 - \frac{\mathbb{E}[K (n - K)]}{n^3} \\
+    &= \frac{p(1 - p)}{n} + p^2 - \frac{n\mathbb{E}[K] - \mathbb{E}[K^2]}{n^3} \\
+    &= \frac{p(1 - p)}{n} + p^2 - \frac{n^2 p - np(1 - p) - n^2 p^2}{n^3} \\
+    &= \frac{p(1 - p)}{n} + p^2 - \frac{p}{n} +\frac{p(1 - p)}{n^2} + \frac{p^2}{n} \\
+    &= \frac{np(1 - p) + n^2 p^2 - np + p(1 - p) + np^2}{n^2} \\
+    &= \boxed{\frac{p(n^2 p - p + 1)}{n^2}}
+\end{align*}
+Using this, we can calculate the bias of the estimator,
+\begin{align*}
+    \mathrm{bias}(\hat{A}_b) &= \frac{p(n^2 p - p + 1)}{n^2} - p^2 \\
+    &= \boxed{\frac{p (1 - p)}{n^2}}
+\end{align*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+This is smaller than the previous bias because, for all $n > 1$, $1 / n^2$ is 
+less than $1 / n$.
+
+\problempart % Problem 4c
+
+Let our new, unbiased estimator be,
+$$ \hat{A}_c = \frac{2\left(X_1 X_2 + X_3 X_4 + \ldots + X_{n - 1} X_n\right)}
+{n} $$
+We can show this is unbiased by taking the expectation,
+\begin{align*}
+    \mathbb{E}[\hat{A}_c] &= \mathbb{E}\left[\frac{2\left(X_1 X_2 + X_3 X_4 + 
+    \ldots + X_{n - 1} X_n\right)}{n}\right] \\
+    &= \frac{2 \mathbb{E}[X_1 X_2 + X_3 X_4 + \ldots + X_{n - 1} X_n]}{n} \\
+    &= \frac{2 \left(\mathbb{E}[X_1 X_2] + \mathbb{E}[X_3 X_4] + \ldots + 
+    \mathbb{E}[X_{n - 1} X_n]\right)}{n} \\
+    &= \frac{2 \left(p^2 + p^2 + \ldots + p^2\right)}{n} \\
+    &= \frac{2 n p^2}{2n} \\
+    &= \boxed{p^2}
+\end{align*}
+Since the expectation is $p^2$, this estimator is unbiased.
+
+We can also calculate the variance of our estimator,
+\begin{align*}
+    \mathrm{var}(\hat{A}_c) &= \mathrm{var}\left(\frac{2\left(X_1 X_2 + X_3 
+    X_4 + \ldots + X_{n - 1} X_n\right)}{n}\right) \\
+    &= \frac{4 \mathrm{var}\left(X_1 X_2 + X_3 X_4 + \ldots + X_{n - 1} 
+    X_n\right)}{n^2} \\
+    &= \frac{4 \left(\mathrm{var}(X_1 X_2) + \mathrm{var}(X_3 X_4) + \ldots 
+    + \mathrm{var}(X_{n - 1} X_n)\right)}{n^2} \\
+\end{align*}
+We can compute the individual variances using the definition,
+\begin{align*}
+    \mathrm{var}(X_i X_j) &= \mathbb{E}[(X_i X_j)^2] - \mathbb{E}[X_i X_j]^2 \\
+    &= \mathbb{E}[X_i^2 X_j^2] - \left(\mathbb{E}[X_i] \mathbb{E}[X_j]\right)^2 \\
+    &= \mathbb{E}[X_i^2] \mathbb{E}[X_j^2] - p^4 \\
+    &= \left(\mathrm{var}(X_i) + \mathbb{E}[X_i]^2\right) \left(\mathrm{var}(X_j) 
+    + \mathbb{E}[X_j]^2\right) - p^4 \\
+    &= \left(p(1 - p) + p^2\right) \left(p(1 - p) + p^2\right) - p^4 \\
+    &= \left(p(1 - p) + p^2\right)^2 - p^4 \\
+    &= p^2 - p^4
+\end{align*}
+Substituting this into the original equation,
+\begin{align*}
+    \mathrm{var}(\hat{A}_c) &= \frac{4 \left(p^2 - p^4 + \ldots + p^2 - p^4\right)}{n^2} \\
+    &= \frac{4n\left(p^2 - p^4\right)}{2 n^2} \\
+    &= \boxed{\frac{2 \left(p^2 - p^4\right)}{n}}
+\end{align*}
+
+\problempart % Problem 4d
+
+Our new estimator is of the form,
+$$ \hat{A}_d = \frac{K_1}{n / 2} \cdot \frac{K_2}{n / 2} $$
+We can take the expectation of this estimator,
+\begin{align*}
+    \mathbb{E}[\hat{A}_d] &= \mathbb{E}\left[\frac{K_1}{n / 2} \cdot \frac{K_2}{n / 2}
+    \right] \\
+    &= \frac{4 \mathbb{E}[K_1 K_2]}{n^2} \\
+    &= \frac{4 \mathbb{E}[\left(X_1 + \ldots + X_{n / 2}\right) \left(X_{n / 2 + 1} + 
+    \ldots + X_n\right)]}{n^2} \\
+    &= \frac{4 \mathbb{E}[X_1 X_{n / 2 + 1} + \ldots + X_{n / 2} X_n]}{n^2} \\
+    &= \frac{4 \left(\mathbb{E}[X_1 X_{n / 2 + 1}] + \ldots + \mathbb{E}[X_{n / 2} 
+    X_n]\right)}{n^2} \\
+    &= \frac{4 \left( p^2 + \ldots + p^2 \right)}{n^2} \\
+    &= \frac{4 n^2 p^2}{4 n^2} \\
+    &= \boxed{p^2}
+\end{align*}
+Therefore, the estimator is unbiased.
+
+\problempart % Problem 4e
+
+The final estimator takes the form,
+$$ \hat{A}_e = a + bK + c K^2 $$
+We can take the expectation and substitute our findings from before,
+\begin{align*}
+    \mathbb{E}[\hat{A}_e] &= \mathbb{E}[a + bK + cK^2] \\
+    &= a + b \mathbb{E}[K] + c \mathbb{E}[K^2] \\
+    &= a + b n p + c \left(n (n - 1) p^2 + np\right) \\
+    &= a + b n p + c n (n - 1) p^2 + cnp
+\end{align*}
+Since we want the $p^2$ by itself, we can set
+$$ c = \frac{1}{n(n - 1)} $$
+Substituting this in yields,
+$$ \mathbb{E}[\hat{A}_e] =  a + b n p + p^2 + \frac{p}{n - 1} $$
+Now we need to cancel the $p / (n - 1)$, so we set
+$$ b = \frac{-1}{n(n - 1)} $$
+Substituting this yields,
+$$ \mathbb{E}[\hat{A}_e] =  a + p^2 $$
+And we don't need $a$. The final unbiased estimator is,
+$$ \hat{A}_e = \boxed{-\frac{K}{n(n - 1)} + \frac{K^2}{n(n - 1)}} $$
+
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
+
