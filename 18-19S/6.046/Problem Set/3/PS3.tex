@@ -1,0 +1,436 @@
+%
+% 6.046 problem set 2 solutions
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{multirow}
+\usepackage{algorithm, algpseudocode, float}
+
+\input{macros}
+\newcommand{\theproblemsetnum}{3}
+\newcommand{\releasedate}{Thursday, February 21}
+\newcommand{\partaduedate}{Wednesday, February 27}
+\allowdisplaybreaks
+
+\title{6.046 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 10PM}}.
+
+\makeatletter
+\newenvironment{breakablealgorithm}
+  {% \begin{breakablealgorithm}
+   \begin{center}
+     \refstepcounter{algorithm}% New algorithm
+     \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+     \renewcommand{\caption}[2][\relax]{% Make a new \caption
+       {\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
+       \ifx\relax##1\relax % #1 is \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+       \else % #1 is not \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+       \fi
+       \kern2pt\hrule\kern2pt
+     }
+  }{% \end{breakablealgorithm}
+     \kern2pt\hrule\relax% \@fs@post for \@fs@ruled
+   \end{center}
+  }
+\makeatother
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart % Problem 1a
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{Description} While a crumb has yet to be found, travel to new locations 
+according to the following: Let the current location index be $i$ (i.e. this is 
+the $i$th location that Andy will visit, zero indexed). The location will be of 
+the form
+$$ \ell_i = (-1)^i \cdot 2^i $$
+
+\textbf{Correctness} The proof of correctness is trivial. Andy must travel over
+continuous sections back and forth from the origin, therefore, as he expands 
+his search, we will cover more of the log without missing any sections where a 
+possible crumb may be. 
+
+Note, however, that Andy might not find the nearest crumb. He might be on his 
+way to $\ell_i$ on the right side of the log and find a crumb and go home. Yet,
+there could be a crumb located before $-\ell_i$ on the left side of the log.
+
+\textbf{Running Time} To analyze the running time of this algorithm, we will
+compare it to the best off-line algorithm. Trivially, the best off-line
+algorithm can find a crumb located $d$ inches away in exactly $d$ steps. We
+denote this as the optimal cost, $C^*(d)$ given the crumb at $d$.
+
+Let $L_d$ be a log with with a single crumb on it located $d$ inches from the
+origin. From the on-line algorithm description, Andy will travel to locations
+$\ell_i = (-1)^i \cdot 2^i$. Therefore, at worst, Andy will visit $\ceil{
+\log_2 d} + 1$ locations before discovering the crumb at $d$. This can be
+seen if the crumb is located at $d = \ell_i + 1$, then Andy must visit 
+$\ell_{i + 1}$ (on the other side) before he finds the crumb at $d = \ell_i 
++ 1$. 
+
+Since the $\ell_i$ requires $2^i$ steps to reach and $2^i$ steps to return
+back to the origin to reset the invariant, each location $\ell_i$ takes $2^{i
++ 1}$ steps to visit. From this, the cost to visit the $\ceil{\log_2 d} + 1$
+steps is
+$$ \sum_{k = 1}^{\ceil{\log_2 d} + 1} 2^k $$
+To remove the floor function and leave an upper bound we add one to the
+number of previously visited locations,
+$$ \sum_{k = 1}^{\ceil{\log_2 d} + 1} 2^k \leq \sum_{k = 1}^{\log_2 d + 2} 
+2^k $$
+Using the rules governing geometric series, this simplifies to
+$$\sum_{k = 1}^{\log_2 d + 2} 2^k = 8d - 2 $$
+This is the total, worst-case cost to visit all other locations before the 
+crumb located at $d$ is found (and returning to the origin). Now, we just 
+need to travel $d$ more spaces to find the crumb. Therefore, total cost is
+$$ C(d) = 8d - 2 + d = 9d - 2 $$
+By comparison, the optimal cost was $C^*(d) = d$. Using the definition for
+an $\alpha$-competitive algorithm,
+$$ C(d) \leq \alpha \cdot C^*(d) + k $$
+It is clear that if $\alpha = 9$ and $k > -2$ this condition is satisfied.
+As a result, the algorithm is $9$-competitive.
+
+\problempart % Problem 1b
+
+If the starting direction is non-deterministic, then we can expect to
+visit $\ceil{\log_2 d}$ previous locations half the time and $\ceil{\log_2 
+d} + 1$ locations the other half of the time. This is clear because we no
+longer have the worst-case guarantee that we would have to visit one more
+location past the crumb on the opposite side of the log. We could get 
+lucky and not overshoot.
+
+Substituting the new, smaller number of previously visited locations, our
+cost to visit the previous locations (and return to the origin) is,
+$$ \sum_{k = 1}^{\ceil{\log_2 d}} 2^k \leq \sum_{k = 1}^{\log_2 d + 1} 
+2^k = 4d - 2 $$
+And our total cost of discovering the crumb in this case is
+$$ C(d) = 4d - 2 + d = 5d - 2 $$
+From this, our expected cost of discovering the crumb at location $d$ is
+$$ \mathbb{E}[C(d)] = 0.5 (9d - 2) + 0.5 (5d - 2) = 7d - 2 $$
+By comparison, the optimal cost was $C^*(d) = d$. Using the definition for
+an $\alpha$-competitive algorithm,
+$$ C(d) \leq \alpha \cdot C^*(d) + k $$
+It is clear that if $\alpha = 7$ and $k > -2$ this condition is satisfied.
+As a result, the algorithm is $7$-competitive in expectation.
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+
+\textbf{Note:} Parts A and B have been combined into a single section.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{Description} Let the data structure maintain the following attributes:
+
+\begin{itemize}
+    \item\ $emps$: An array of employees. Let the index $i$ represent the
+        unique identifier of the employee (for simplicity, imagine 1-indexed
+        array such that employees are in the range $[1, n]$). Each element of 
+        the array should contain two properties:
+        \begin{itemize}
+            \item\ $parent$: A pointer to the parent employee as maintained
+                by the union-find data structure.
+            \item\ $ratio$: The ratio of the employee's bonus to their 
+                `parent'.
+            \item\ $rank$: The height of the subtree rooted at this
+                employee.
+        \end{itemize}
+    \item\ $U$: An augmented union-find data structure. Initialize by 
+        adding all $n$ employees into the data structure by calling 
+        \texttt{uf.make\_set(i)} for all $i \in [1, n]$.
+    \item\ $n_{comp}$: An integer representing the number of connected
+        components in the union-find data structure. Initialize to $n$.
+\end{itemize}
+
+Let the augmented union-find data structure support the following altered
+methods. If the method or attribute is not described, it operates the same as
+presented in lecture.
+
+\begin{itemize}
+    \item\ \textproc{MakeSet}$(i)$: Creates a new set from a single employee. The
+        representative of the set is the employee.
+        \begin{breakablealgorithm}
+            \caption{Augmented Make Set with Ratio Initialization}
+            \begin{algorithmic}[1]
+                \Function{MakeSet}{$i$}
+                    \State $emps[i].parent \leftarrow emps[i]$
+                    \State $emps[i].ratio \leftarrow 1$
+                    \State $emps[i].rank \leftarrow 1$
+                \EndFunction
+            \end{algorithmic}
+        \end{breakablealgorithm}
+    \item\ \textproc{FindSet}$(i)$: Returns the representative for an element in a
+        set and also returns the ratio of that employee's bonus to the the
+        bonus of their representative. 
+        \begin{breakablealgorithm}
+            \caption{Augmented Find Set with Path Compression}
+            \begin{algorithmic}[1]
+                \Function{FindSet}{$i$}
+                    \State $S \leftarrow \emptyset$
+                    \State $emp \leftarrow emps[i]$
+                    \State \Call{Push}{$S$, $emp$}
+                    \While{$emp \neq emp.parent$}
+                        \State $emp \leftarrow emp.parent$
+                        \State \Call{Push}{$S$, $emp$}
+                    \EndWhile
+                    \State $root \leftarrow$ \Call{Pop}{$S$}
+                    \State $ratio \leftarrow 1$
+                    \While{$S \neq \emptyset$}
+                        \State $emp \leftarrow$ \Call{Pop}{$S$} 
+                        \State $ratio \leftarrow ratio \cdot emp.ratio$
+                        \State $emp.ratio \leftarrow ratio$
+                        \State $emp.parent \leftarrow root$
+                    \EndWhile
+                    \State \Return $root, ratio$
+                \EndFunction
+            \end{algorithmic}
+        \end{breakablealgorithm}
+    \item\ \textproc{Union}$(i, j)$: Replaces the separate sets containing the 
+        employees with the union of the two sets implementing both union by rank
+        and path compression. Updates the ratios such that they remain consistent.
+        \begin{breakablealgorithm}
+            \caption{Augmented Union by Rank Algorithm}
+            \begin{algorithmic}[1]
+                \Function{Union}{$i$, $j$, $x$}
+                    \State $rep_i, ratio_i \leftarrow \Call{FindSet}{i}$
+                    \State $rep_j, ratio_j \leftarrow \Call{FindSet}{j}$
+                    \If{$rep_i.rank = rep_j.ratio$}
+                        \State $rep_j.parent \leftarrow rep_i$
+                        \State $rep_i.rank \leftarrow rep_i.rank + 1$
+                        \State $rep_j.ratio \leftarrow ratio_i \cdot ratio_j^{-1} \cdot x^{-1}$
+                    \ElsIf{$rep_i.rank > rep_j.rank$}
+                        \State $rep_j.parent \leftarrow rep_i$
+                        \State $rep_j.ratio \leftarrow ratio_i \cdot ratio_j^{-1} \cdot x^{-1}$
+                    \ElsIf{$rep_i.rank < rep_j.rank$}
+                        \State $rep_i.parent \leftarrow rep_j$
+                        \State $rep_i.ratio \leftarrow ratio_i^{-1} \cdot ratio_j \cdot x$
+                    \EndIf
+                \EndFunction
+            \end{algorithmic}
+        \end{breakablealgorithm}
+\end{itemize}
+
+Let the data structure have the following methods:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+    \item\ \textproc{SetRatio}$(i, j, x)$: Performs the union between two 
+        employees and sets the ratio of bonuses between them. This is only
+        necessary if the employees has not yet been related implicitly or 
+        explicitly.
+        \begin{breakablealgorithm}
+            \caption{Set the ratio between two employees}
+            \begin{algorithmic}[1]
+                \Function{SetRatio}{$i$, $j$, $x$}
+                    \State $rep_i, _ \leftarrow \Call{FindSet}{i}$
+                    \State $rep_j, _ \leftarrow \Call{FindSet}{j}$
+                    \If{$rep_i \neq rep_j$}
+                        \State $n_{comp} \leftarrow n_{comp} - 1$
+                        \State \Call{Union}{$i$, $j$, $x$}
+                    \EndIf
+                \EndFunction
+            \end{algorithmic}
+        \end{breakablealgorithm}
+    \item\ \textproc{GetRatio}$(i, j)$: Confirms that the two employees have
+        been related either implicitly or explicitly and then returns the ratio
+        of bonuses.
+        \begin{breakablealgorithm}
+            \caption{Get the ratio between two employees}
+            \begin{algorithmic}[1]
+                \Function{GetRatio}{$i$, $j$}
+                    \State $rep_i, ratio_i \leftarrow \Call{FindSet}{i}$
+                    \State $rep_j, ratio_j \leftarrow \Call{FindSet}{j}$
+                    \If{$rep_i = rep_j$}
+                        \State \Return $ratio_i \cdot ratio_j^{-1}$ 
+                    \Else
+                        \State \Return \textsc{none}
+                    \EndIf
+                \EndFunction
+            \end{algorithmic}
+        \end{breakablealgorithm}
+    \item\ \textproc{PayDay}$()$: Checks if the number of connected components
+        in the union find data structure is 1.
+        \begin{breakablealgorithm}
+            \caption{Indicates if all of the employees have been related}
+            \begin{algorithmic}[1]
+                \Function{PayDay}{}
+                    \If{$n_{comp} = 1$}
+                        \State \Return \textsc{true}
+                    \Else
+                        \State \Return \textsc{false}
+                    \EndIf
+                \EndFunction
+            \end{algorithmic}
+        \end{breakablealgorithm}
+\end{itemize}
+
+\textbf{Correctness} We wish to maintain a few invariants we depend on 
+throughout execution:
+
+\begin{itemize}
+    \item\ Each employee's $ratio$ attribute represents the bonus ratio to 
+    their parent.
+    \item\ Each employee's $rank$ represents the size of their subtree.
+    \item\ The total number of connected components is correct.
+\end{itemize}
+
+We can examine the correctness of each of the functions in turn confirming
+correct results and maintenance of the invariants. Note the third invariant
+is true at initialization as there are $n$ employees and therefore $n$ 
+connected components (as none have been related yet).
+
+\begin{itemize}
+    \item\ \textproc{MakeSet}$(i)$: Each employee is currently unrelated.
+        Trivially, each employee's $ratio$ to their parent (themselves) is
+        $1$ and therefore correct. The size of their subtree is just
+        themselves so their $rank$ is trivially $1$. The third invariant is 
+        not used in this algorithm. Thus all invariants are upheld. 
+    \item\ \textproc{FindSet}$(i)$: The second invariant is held by appealing to
+        the proof given in lecture as the path compression functionality of the
+        algorithm is unchanged. The third invariant is not used in this algorithm.
+        
+        The first invariant needs to be examined. In 
+        the algorithm, we traverse parent pointers in reverse. Without loss of 
+        generality, assume the ancestors of employee $i$ are employees $[1..i 
+        - 1]$ such that employee $1$ is the root and employee $i - 1$ is employee
+        $i$'s parent. As we traverse, we compute the following product
+        $$ \frac{q(1)}{q(1)} \frac{q(2)}{q(1)} \ldots \frac{q(i - 1)}{q(i - 2)} 
+        \frac{q(i)}{q(i - 1)} = \frac{q(i)}{q(1)} $$
+        This is seen by assuming the invariant is true and that all employee's
+        $ratio$ is between themselves and their parent. The product collapses
+        and we are left with the ratio of the $i$th employee's bonus to the 
+        root's bonus. Thus, when we compress the and set the $i$th employee's
+        parent to the root, the employee's $ratio$ is maintained. Also, since
+        all the children depend only on their parent, the subtree ratios are
+        unchanged and thus correct.
+        
+        Furthermore, it is clear that the returned pointer is the representative
+        as each employee points to their parent and the final ancestor points
+        to themselves. When we reach this point, this is the representative as
+        stated in lecture.
+        
+        The returned ratio is correct as shown by the rank product 
+        calculated from top to bottom. It collapses to a ratio between the $i$th
+        employee and their representative.
+    \item\ \textproc{Union}$(i, j)$: The second invariant is held by appealing to
+        the proof given in lecture as the union by rank functionality of the
+        algorithm is unchanged. The third invariant is not used in this algorithm.
+        
+        The first invariant needs to be examined. It has been shown that the 
+        \textproc{FindSet}$(i)$ algorithm returns the correct ratio and
+        representative. Let $\bar{i}$ and $\bar{j}$ be the representatives for
+        employees $i$ and $j$ respectively. The returned ratios must be
+        $$ ratio_i = \frac{q(i)}{q(\bar{i})},\quad ratio_j = \frac{q(j)}{q(
+        \bar{j})} $$
+        Given that $x$ must be
+        $$ x = \frac{q(i)}{q(j)} $$
+        We can show that the update $rep_j.parent \leftarrow rep_i$ upholds the 
+        correct ratios. The update step written in detail,
+        \begin{align*}
+            rep_j.ratio &\leftarrow ratio_i \cdot ratio_j^{-1} \cdot x^{-1} \\
+            &\leftarrow \left(\frac{q(i)}{q(\bar{i})}\right) \left(
+            \frac{q(j)}{q(\bar{j})}\right)^{-1} \left(\frac{q(i)}{q(j)}
+            \right)^{-1} \\
+            &\leftarrow \left(\frac{q(i)}{q(\bar{i})}\right) \left(
+            \frac{q(\bar{j})}{q(j)}\right) \left(\frac{q(j)}{q(i)}
+            \right) \\
+            &\leftarrow \frac{q(\bar{j})}{q(\bar{i})}
+        \end{align*}
+        This is the correct ratio as the representative of $j$ should have a 
+        ratio with respect their new representative, which is the representative
+        of $i$. By inverting the result, we can also see this is correct with 
+        the update step $rep_i.parent \leftarrow rep_j$. 
+        
+        Furthermore, since the other ratios in either group only depend on their
+        parents, which are unchanged, ratios are maintained for all members. 
+        Thus, the first invariant is upheld.
+    \item\ \textproc{SetRatio}$(i, j, x)$: The first and second invariants are 
+        upheld by appealing to the proofs above.
+        
+        For the third invariant, we recognize that we only decrease the number of
+        connected components if we union two previously unconnected components.
+        This action decreases the number of connected components by one. Thus, the
+        invariant is maintained.
+        
+        The correctness of the action is apparent by appealing to the proof of 
+        \textproc{Union}.
+    \item\ \textproc{GetRatio}$(i, j)$: All three invariants are maintained as no
+        alterations to the data structure result.
+        
+        Given that \textproc{FindSet} returns the correct representatives, if $i$ and
+        $j$ have the same representative, then they must be implicitly related and 
+        therefore we can return the ratio. The returned ratios from \textproc{FindSet}
+        are
+        $$ ratio_i = \frac{q(i)}{q(\bar{i})},\quad ratio_j = \frac{q(j)}{q(\bar{j})} $$
+        The ratio between them is computed as
+        \begin{align*}
+            ratio &\leftarrow ratio_i \cdot ratio_j^{-1} \\
+            &\leftarrow \left(\frac{q(i)}{q(\bar{i})}\right)
+            \left(\frac{q(j)}{q(\bar{j})}\right)^{-1} \\
+            &\leftarrow \left(\frac{q(i)}{q(\bar{i})}\right)
+            \left(\frac{q(\bar{j})}{q(j)}\right)
+        \end{align*}
+        Since $\bar{i} = \bar{j}$, this becomes,
+        $$ ratio \leftarrow \frac{q(i)}{q(j)} $$
+        Therefore, the correct output is given.
+    \item\ \textproc{PayDay}$()$: All invariants are maintained because no 
+        modification of the data occurs.
+        
+        Given that the third invariant is maintained,  $n_{comp}$ must 
+        represent the number of connected components. If there is only one 
+        connected component, then all employees are related.
+\end{itemize}
+
+\textbf{Running Time} We can examine the running time of each method in the 
+union find data structure to confirm no changes in run time.
+
+\begin{itemize}
+    \item\ \textproc{MakeSet}$(i)$: The functionality of this algorithm remains
+        the same as that given in lecture, aside from constant time modifications
+        used to initialize an additional parameter $ratio$.
+    \item\ \textproc{FindSet}$(i)$: The functionality of this algorithm remains
+        the same as that given in lecture, aside from constant time modifications
+        used to uphold an additional parameter $ratio$.
+    \item\ \textproc{Union}$(i, j)$: The functionality of this algorithm remains
+        the same as that given in lecture, aside from constant time modifications
+        used to uphold an additional parameter $ratio$.
+\end{itemize}
+
+Since none of the functions alter the run time beyond additional constants, all
+operations remain amortized $O(\alpha(n))$ in the number of employees.
+
+\begin{itemize}
+    \item\ \textproc{SetRatio}$(i, j, x)$: This function calls \textproc{FindSet}
+        two times and \textproc{Union} at most once. Therefore, the cost is
+        amortized $O(2 \alpha(n) + \alpha(n)) \in O(\alpha(n))$.
+    \item\ \textproc{GetRatio}$(i, j)$: This function calls \textproc{FindSet}.
+        Therefore, the cost is amortized $O(2 \alpha(n)) \in O(\alpha(n))$
+    \item\ \textproc{PayDay}$()$: This algorithm only has a constant amount of
+        work as the $n_{comp}$ is maintained elsewhere. Thus it is trivially
+        amortized $O(\alpha(n))$.
+\end{itemize}
+
+Therefore, the data structure is amortized $O(\alpha(n))$ for all operations.
+
+\end{problems}
+
+\end{document}
+
+
