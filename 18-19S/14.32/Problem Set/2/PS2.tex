@@ -1,0 +1,235 @@
+%
+% 6.S077 problem set solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros}
+\newcommand{\theproblemsetnum}{2}
+\newcommand{\releasedate}{Monday, February 25}
+\newcommand{\partaduedate}{Monday, March 4}
+
+\title{14.32 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 9:00AM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+There are several reasons why multiple regression should be used instead of 
+bivariate regression. Some principle reasons include:
+
+\begin{enumerate}
+    \item\ Control for other confounding variables that impact the coefficient
+    you are trying to measure (e.g. including gender in a model designed to 
+    measure the impact of education on earnings).
+    \item\ Answer a question that simply involves multiple variables (e.g. 
+    which has more impact on my GPA: an extra hour of sleep or an extra hour of 
+    studying).
+    \item\ Model nonlinear effects (e.g. if a response variable follows a
+    quadratic trend with respect to a input variable, a model can be formed by
+    adding an additional input variable as the square of the original input).
+\end{enumerate}
+
+\problem  % Problem 2
+
+This is not a good econometric model and the resulting $R^2$ is not significant.
+
+Mathematically, in 15-dimensional space, it is possible to fit a hyperplane
+perfectly to exactly 15 data points. This is clearly understood in the 2-
+dimensional and 3-dimensional spaces as a line is uniquely defined by 2 points 
+and a plane is uniquely defined by 3 points. Extrapolating upwards, the same
+applies to $n$-dimensional space and an $n$-dimensional hyperplane.
+
+In a more statistical mindset, there are zero (or negative) degrees of freedom
+as there are $15$ data points and $15$ indicator variables.
+$$ df = n - k - 1 = 15 - 15 - 1 = -1 $$
+Therefore, the model is completely rigid and depends significantly on which 15
+observations were made. Furthermore, the model will not adequately represent
+the population and not extrapolate well to new predictions.
+
+\problem  % Problem 3
+
+This $p$-value is associated with a single coefficient hypothesis test. Most
+likely, the $t$-statistic and the Student's $t$-distribution were used. A $p$-
+value indicates the probability that the null hypothesis is true. Assuming the
+null hypothesis was that $x$ has no affect on the response variable, we can
+say the probability that there is no effect from $x$ is 0.25. Therefore, the,
+given a reasonable $\alpha$, we should not reject the null hypothesis as there
+isn't significant evidence to suggest that $x$ has an effect on the response.
+
+\newpage
+
+\problem  % Problem 4
+
+\begin{problemparts}
+
+\problempart % Problem 4a
+
+No, we do not know that $\mathbb{E}[\eta_i \mid chem_i] = 0$. 
+
+From the problem statement, we know
+$$ \mathbb{E}[\varepsilon_i \mid chem_i, dist_i] = 0 $$
+Without the information about $dist_i$ in our model, we are asked
+$$ \mathbb{E}[\eta_i \mid chem_i] = 0 $$
+Taking the provided model as ground truth, this expectation can be rewritten
+\begin{align*}
+    \mathbb{E}[\eta_i \mid chem_i] &= \mathbb{E}[\beta_2 dist_i + \varepsilon_i
+    \mid chem_i] \\
+    &= \boxed{\beta_2 \mathbb{E}[dist_i \mid chem_i] + \mathbb{E}[\varepsilon_i 
+    \mid chem_i]}
+\end{align*}
+In order for this to equal zero, both $\mathbb{E}[dist_i \mid chem_i]$ and
+$\mathbb{E}[\varepsilon_i \mid chem_i]$ must equal zero. Yet, this information
+is not specified and it is quite likely that it is not true as it makes sense
+that the access to healthcare is correlated to chemotherapy treatments.
+
+\problempart % Problem 4b
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+By definition, the equation for the estimated coefficient $\hat{b}_1$ is
+$$ \hat{b}_1 = \frac{\hat{\mathrm{cov}}(chem, y)}{\hat{\mathrm{var}}(chem)} $$
+We can substitute the definition for the `ground truth' of $y$,
+\begin{align*}
+    \mathbb{E}[\hat{b}_1] &= \frac{\mathrm{cov}(chem, \beta_0 + \beta_1 chem + \beta_2 
+    dist + \varepsilon)}{\mathrm{var}(chem)} \\
+    &= \frac{\mathrm{cov}(chem, \beta_0) + \beta_1 \mathrm{cov}(chem, 
+    chem) + \beta_2 \mathrm{cov}(chem, dist) + \mathrm{cov} (chem,
+    \varepsilon)}{\mathrm{var}(chem)} \\
+    &= \frac{\beta_1 \mathrm{var}(chem) + \beta_2\mathrm{cov}(chem, 
+    dist)}{\mathrm{var}(chem)} \\
+    &= \boxed{\beta_1 + \beta_2\frac{\mathrm{cov}(chem, dist)}{\mathrm{var}(chem)}}
+\end{align*}
+
+\problempart % Problem 4c
+
+Given that a lower $dist$ causes a higher $chem$, then the covariance between
+$dist$ and $chem$ must be less than zero and therefore the estimate is biased.
+Assuming the $\beta_1$ is positive (i.e. that increasing chemotherapy increases 
+survivability), then the effect of chemotherapy will be understated or less
+than the actual. 
+
+\problempart % Problem 4d
+
+Intuitively, someone with smaller distance to a hospital should have a higher 
+cancer survivability rate. Furthermore, the smaller the distance to a
+hospital should increase the probability of getting chemotherapy treatment.
+
+For simplicity, consider two groups: those close to a hospital and those far
+from a hospital (with arbitrary, reasonable distinctions between close and
+far). Those who receive chemotherapy in the close group should be reasonably 
+expected to have higher survivability while those far away who receive
+chemotherapy are likely to have lower survivability. It is reasonable to 
+suspect the same for the groups when given no chemotherapy (if not even 
+more reasonable). Thus, the measured relation of chemotherapy/no chemotherapy 
+on survivability will be diminished.
+
+\end{problemparts}
+
+\problem  % Problem 5
+
+\begin{problemparts}
+
+\problempart % Problem 5a
+
+Let the following be our hypothesis test,
+$$ H_0 : \beta_1 = \beta_{1,0} $$
+$$ H_1 : \beta_1 \neq \beta_{1,0} $$
+Then, the $t$-statistic is defined as
+$$ T_0 = \frac{\hat{\beta}_1 - \beta_{1,0}}{se(\hat{\beta}_1)} $$
+Substituting the provided hypothesis test values,
+$$ T_0 = \boxed{\frac{\hat{\beta}_1}{se(\hat{\beta}_1)}} $$
+
+\problempart % Problem 5b
+
+This test corresponds to the Student's $t$-distribution with $\boxed{n - (k + 1)}$
+degrees of freedom.
+
+\problempart % Problem 5c
+
+Since the Student's $t$-distribution is approximately normal for degrees of 
+freedom greater than $30$ and $49 > 30$, we can use the following values to 
+conclude a statistically significant $\hat{\beta}_1$ with $\alpha = 0.05$
+$$\vert T_0 \vert > 1.96$$
+To be more specific, we can use the Student's $t$-distribution to get
+$$\boxed{\vert T_0 \vert > 2.01}$$
+
+\problempart % Problem 5d
+
+Yes, we have sufficient evidence to reject the null hypothesis in favor of
+the alternative. This arises from the fact that $\vert -2.30 \vert > 2.01$
+and thus the probability that this $\hat{\beta}_1$ was measured if $\beta_1
+= 0$ is less than 5\%.
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 6
+
+The coefficient for education in the multivariate regression is
+$$ \hat{\beta}_{educ, m} = 0.0391199 $$
+The coefficient for education in the bivariate regression is
+$$ \hat{\beta}_{educ, s} = 0.0598392 $$
+The difference between these two is
+$$ \hat{\beta}_{educ, s} - \hat{\beta}_{educ, m} = 
+\boxed{0.0207193} $$
+These two values are different because there is a correlation between
+education and IQ and IQ is important for earnings. Therefore, there is omitted
+variable bias in the bivariate regression model and the actual effect of
+education is overstated.
+
+\problem  % Problem 7
+
+\begin{problemparts}
+
+\problempart % Problem 7a
+
+From the multivariate regression, the coefficient for IQ is determined
+$$ \beta_{IQ} = 0.0058631 $$
+The regression coefficient for the regression of $IQ$ with respect to $educ$ will
+give us the covariance vs the variance term,
+$$ \frac{\hat{\mathrm{cov}}(educ, IQ)}{\hat{\mathrm{var}}(educ)} = 3.533829 $$
+Therefore, the bias is 
+$$ \hat{\beta}_{IQ} \frac{\hat{\mathrm{cov}}(educ, IQ)}{\hat{\mathrm{var}}(educ)}
+= 0.0058631 \cdot 3.533829 = \boxed{0.0207192} $$ 
+
+\problempart % Problem 7b
+
+This value is almost exactly the same as the value from Part A. This makes sense
+as the bias represents the difference between the coefficient with the omitted
+variable and without. Therefore, the difference between coefficients with and
+without the $IQ$ variable should reflect the bias.
+
+\problempart % Problem 7c
+
+The amount of bias corrected between including $IQ$ and leaving it out is
+$\boxed{0.0207192}$.
+
+\end{problemparts}
+
+\problem  % Problem 8
+
+Although we reduced the bias with respect to a single omitted variable, this does
+not necessarily mean that there is not another omitted variable that is causing
+bias in our estimator for the coefficients. As a result, it is unlikely that our 
+estimator is \textit{completely} unbiased.
+
+\end{problems}
+
+\end{document}
+
+
