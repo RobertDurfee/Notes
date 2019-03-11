@@ -1,0 +1,253 @@
+%
+% 6.S077 problem set solutions template
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{bbm}
+
+\input{macros}
+\newcommand{\theproblemsetnum}{4}
+\newcommand{\releasedate}{Tuesday, March 5}
+\newcommand{\partaduedate}{Tuesday, March 12}
+\allowdisplaybreaks
+
+\title{6.S077 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 2:30PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart % Problem 1a
+
+We are solving the ordinary least squares estimate $\hat{\beta}$. This takes the
+form,
+$$ \beta^* = \arg\min_{\beta \in \mathbb{R}} \frac{1}{n} \sum_{j = 1}^n (y_j - 
+\beta x_j)^2 $$
+Taking the derivative,
+$$ \frac{\partial}{\partial \beta}(\cdot) = -\frac{2}{n} \sum_{j = 1}^n x_j (y_j - 
+\beta x_j) $$
+Setting to zero and solving for $\beta^*$,
+\begin{align*}
+    &0 = -\frac{2}{n} \sum_{j = 1}^n x_j (y_j - \beta x_j) \\
+    &\iff 0 = \sum_{j = 1}^n x_j y_j - \beta^* \sum_{j = 1}^n x_j^2 \\
+    &\iff \sum_{j = 1}^n x_j y_j = \beta^* \sum_{j = 1}^n x_j^2 \\
+    &\iff \beta^* = \frac{\sum_{j = 1}^n x_j y_j}{\sum_{j = 1}^n x_j^2}
+\end{align*}
+
+\problempart % Problem 1b
+
+The least squares estimate using all but the $i$th observation minimizes the
+following expression (which clearly removes the $i$th observation),
+$$ \beta_i^* = \arg\min_{\beta \in \mathbb{R}} \frac{1}{n} \sum_{j = 1}^n (y_j -
+\beta x_j)^2 - \frac{1}{n}(y_i - \beta x_i)^2 $$
+Taking the derivative,
+$$ \frac{\partial}{\partial \beta}(\cdot) = -\frac{2}{n} \sum_{j = 1}^n x_j (y_j - 
+\beta x_j) + \frac{2}{n} x_i (y_i - \beta x_i) $$
+Setting to zero and solving for $\beta_i^*$,
+\begin{align*}
+    &0 = -\frac{2}{n} \sum_{j = 1}^n x_j (y_j - \beta x_j) + \frac{2}{n} x_i 
+    (y_i - \beta x_i) \\
+    &\iff 0 = -\sum_{j = 1}^n x_j y_j + \beta_i^* \sum_{j = 1}^n x_j^2 + x_i y_i 
+    - \beta_i^* x_i^2 \\
+    &\iff 0 = x_i y_i - \sum_{j = 1}^n x_j y_j + \beta_i^*\left(\sum_{j = 1}^n x_j^2 
+    - x_j^2\right) \\
+    &\iff \beta_i^* \left(\sum_{j = 1}^n x_j^2 - x_i^2\right) = \sum_{j = 1}^n 
+    x_j y_j - x_i y_i \\
+    &\iff \beta_i^* = \frac{\sum_{j = 1}^n x_j y_j - x_i y_i}{\sum_{j = 1}^n x_j^2 
+    - x_i^2}
+\end{align*}
+
+\problempart % Problem 1c
+
+Starting with the provided expression and working backwards,
+$$ \beta_i^* = \frac{1}{1 - x_i^2 / \tilde{x}^2} \left(\beta^* - \frac{x_i y_i}{
+\tilde{x}^2}\right) $$
+Where
+$$ \tilde{x}^2 = \sum_{j = 1}^n x_j^2 $$
+We can substitute the definition of $\beta^*$ and transform to the expression
+proved in the previous section,
+\begin{align*}
+    \beta_i^* &= \frac{1}{1 - x_i^2 / \tilde{x}^2} \left(\beta^* - \frac{x_i y_i}{
+    \tilde{x}^2}\right) \\
+    &= \frac{1}{1 - x_i^2 / \tilde{x}^2} \left(\frac{\sum_{j = 1}^n x_j y_j}{
+    \tilde{x}^2} - \frac{x_i y_i}{ \tilde{x}^2}\right) \\
+    &= \frac{1}{1 - x_i^2 / \tilde{x}^2} \left(\frac{\sum_{j = 1}^n x_j y_j - x_i 
+    y_i}{\tilde{x}^2}\right) \\
+    &= \frac{\sum_{j = 1}^n x_j y_j - x_i y_i}{\tilde{x}^2 - x_i^2} \\
+    &= \frac{\sum_{j = 1}^n x_j y_j - x_i y_i}{\sum_{j = 1}^n x_j^2 - x_i^2}
+\end{align*}
+Thus, the two expressions are equivalent.
+
+\problempart % Problem 1d
+
+Starting with the provided expression and working backwards,
+$$ \mathrm{LOOCV}_n = \frac{1}{n} \sum_{i = 1}^n \frac{1}{h_i^2} \left(y_i - \beta^* 
+x_i\right)^2 $$
+Where
+$$ h_i = 1 - \frac{x_i^2}{\tilde{x}^2} $$
+Using the fact given in Part C,
+$$ \beta^* = h_i \beta_i^* + \frac{x_i y_i}{\tilde{x}^2} $$
+We can substitute the definition of $\beta^*$ and transform to the expression only
+in terms of $\beta_i^*$,
+\begin{align*}
+    \mathrm{LOOCV}_n &= \frac{1}{n} \sum_{i = 1}^n \frac{1}{h_i^2} \left(y_i - \beta^* 
+    x_i\right)^2 \\
+    &= \frac{1}{n} \sum_{i = 1}^n \frac{1}{h_i^2} \left(y_i - \left(h_i \beta_i^* + 
+    \frac{x_i y_i}{\tilde{x}^2}\right) x_i\right)^2 \\
+    &= \frac{1}{n} \sum_{i = 1}^n \left(\frac{y_i}{h_i} - \beta_i^* x_i - 
+    \frac{x_i^2 y_i}{h_i \tilde{x}^2}\right)^2 \\
+    &= \frac{1}{n} \sum_{i = 1}^n \left(y_i \left(\frac{1}{h_i} - \frac{x_i^2}{h_i 
+    \tilde{x}^2} \right) - \beta_i^* x_i \right)^2 \\
+    &= \frac{1}{n} \sum_{i = 1}^n \left(\frac{y_i}{h_i} \left(1 - \frac{x_i^2}{
+    \tilde{x}^2} \right) - \beta_i^* x_i \right)^2 \\
+    &= \frac{1}{n} \sum_{i = 1}^n \left(\frac{y_i h_i}{h_i} - \beta_i^* x_i 
+    \right)^2 \\
+    &= \frac{1}{n} \sum_{i = 1}^n \left(y_i - \beta_i^* x_i \right)^2 
+\end{align*}
+Thus, the two expressions are equivalent.
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 2
+
+\begin{problemparts}
+
+\problempart % Problem 1a
+
+\problempart % Problem 2b
+
+\problempart % Problem 2c
+
+\problempart % Problem 2d
+
+\problempart % Problem 2e
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 3
+
+\begin{problemparts}
+
+\problempart % Problem 3a
+
+The training error for the generated data had the following mean and standard
+deviation when run for 1000 trials,
+$$ \mu_{\mathrm{train}} = 1.066 $$
+$$ \sigma_{\mathrm{train}} = 0.212 $$
+
+\problempart % Problem 3b
+
+The actual test error for the generated data had the following mean and standard 
+deviation when run for 1000 trials (the second, simpler expression was used),
+$$ \mu_{\mathrm{test}} = 4.316 $$
+$$ \sigma_{\mathrm{test}} = 0.636 $$
+
+\problempart % Problem 3c
+
+The estimated test error for the generated data using the analytical form of leave 
+one out cross validation had the following mean and standard deviation when run 
+for 1000 trials,
+$$ \mu_{\mathrm{CV}_n} = 4.348 $$
+$$ \sigma_{\mathrm{CV}_n} = 0.862 $$
+
+\problempart % Problem 3d
+
+The estimated test error for the generated data using 10-fold cross validation
+had the following mean and standard deviation when run for 1000 trials,
+$$ \mu_{\mathrm{CV}_{10}} = 4.906 $$
+$$ \sigma_{\mathrm{CV}_{10}} = 1.090 $$
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 4
+
+\begin{problemparts}
+
+\problempart % Problem 4a
+
+We want to minimize the following expression,
+$$ x^* = \arg\min_{x \in \mathbb{R}} | x - y |^2 + 2 \lambda |x| $$
+Taking the subderivative
+$$ \frac{\partial}{\partial x}(\cdot) = \begin{cases}
+    2(x - y) + 2\lambda & x > 0 \\
+    2(x - y) - 2\lambda & x < 0 \\
+    0 & \mathrm{otherwise}
+\end{cases} $$
+Setting each part equal to zero and solving yields,
+$$ x^* = \begin{cases}
+    y - \lambda & y - \lambda > 0 \\
+    y + \lambda & y + \lambda < 0 \\
+    0 & \mathrm{otherwise}
+\end{cases} $$
+More concisely, this can be written using the soft thresholding function,
+$$ x^* = \mathrm{sgn}(y) (|y| - \lambda)^+ $$
+Where $\mathrm{sgn}(x)$ returns the sign of $x$ and $(x)^+ = \max(x, 0)$.
+
+\problempart % Problem 4b
+
+We want to minimize the following vector expression,
+$$ x^* = \arg\min_{x \in \mathbb{R}^n} \lVert x - y \rVert_2^2 + 2 \lambda 
+\lVert x \rVert_1 $$
+This can be written out component-wise,
+$$ x^* = \arg\min_{x \in \mathbb{R}^n} \sum_{i = 1}^n (x_i - y_i)^2 + 2 \lambda 
+| x_i | $$
+Now, we only need to consider the individual elements of the sum. That is,
+$$ x_i^* = \arg\min_{x_i \in \mathbb{R}} (x_i - y_i)^2 + 2 \lambda |x_i|\quad
+\forall i \in \{1, \ldots, n\} $$
+Taking the subderivative of this,
+$$ \frac{\partial}{\partial x_i}(\cdot) = \begin{cases}
+    2(x_i - y_i) + 2 \lambda & x_i > 0 \\
+    2(x_i - y_i) - 2 \lambda & x_i < 0 \\
+    0 & \mathrm{otherwise}
+\end{cases} $$
+This is the same form of the expression in the previous section. Thus, the 
+solution is
+$$ x_i^* = \mathrm{sgn}(y_i) (|y_i| - \lambda)^+ $$
+
+\problempart % Problem 4c
+
+We want to minimize the following vector expression on a constraint,
+$$ x^* = \arg\min_{\lVert x \rVert_1 \leq 2} \lVert x - y \rVert_2^2 $$
+This is equivalent, under the Lagrange Dual Problem, to,
+$$ x^* = \arg\min_{x \in \mathbb{R}^n} \lVert x - y \rVert_2^2 + \lambda 
+(\lVert x \rVert_1 - 2) $$
+Therefore, we just need to find a $\lambda$ such that $\lVert x \rVert_1 = 2$ 
+where the components are given from Part B. That is,
+$$ \lVert x \rVert_1 = \sum_{i = 1}^n \left| \mathrm{sgn}(y_i) (|y_i| - 
+\lambda)^+ \right| = \sum_{i = 1}^n (|y_i| - \lambda)^+ = 2 $$
+This can be solved iteratively using the subderivative,
+$$ \frac{\partial}{\partial \lambda} (\cdot) = \sum_{i = 1}^n -1_{|y_i| - 
+\lambda > 0} $$
+Using the provided $y$, the corresponding $x^*$  with $\lambda = 3.5$ is,
+$$ x^* = \begin{pmatrix} 0 & 0 & 0 & 0.5 & -1.5 \end{pmatrix}^T $$
+
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
+
