@@ -1,0 +1,443 @@
+%
+% 6.S077 problem set solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros}
+\usepackage{enumitem}
+\newcommand{\theproblemsetnum}{3}
+\newcommand{\releasedate}{Friday, March 8}
+\newcommand{\partaduedate}{Friday, March 15}
+
+\title{14.32 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 9:00AM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem  % Problem 1
+
+An $F$-test should be used when testing a join null hypothesis. That is, if the
+test involves multiple variables in the regression. For example, if, using a
+multiple regression on the effect of each color of jelly beans on acne, you
+wanted to know if {\it any} colors had an effect on acne. An $F$-test does {\it 
+not} need to be used by default in a multiple regression, however. In the same
+example, if you only wanted to know if blue jelly beans had an impact on acne,
+you could use a $t$-statistic.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem  % Problem 2
+
+\begin{problemparts}
+
+\problempart % Problem 2a
+
+For Gauss-Markov assumption A0:
+
+\begin{enumerate}[label=\textbf{\roman*})]
+
+    \item $\left(X^T X\right)^{-1}$ exists. Or, equivalently, $X$ has full 
+        column rank.
+        
+    \item When we have more observations than features, this is stating that 
+        all of our observations' features are linearly independent. This is a 
+        totally reasonable assumption assumption prohibiting, for example, using
+        both miles per gallon and kilometers per liter as features for fuel
+        efficiency of cars.
+        
+    \item This can go wrong if we have multiple features that are related to
+        other features linearly (or very nearly linearly). An example could be
+        the above comparison of mpg vs kpl. Other examples as more subtle like
+        using indicators for both female gender and male gender.
+        
+        This can also go wrong if we have more features than observations.
+        
+\end{enumerate}
+
+\problempart % Problem 2b
+
+For Gauss-Markov assumption A1:
+
+\begin{enumerate}[label=\textbf{\roman*})]
+
+    \item $\mathbb{E}\left[\mathcal{E} \mid X\right] = 0$.
+    
+    \item This is stating that, all other factors not included in our regressor 
+        that could contribute to differences in our regressand, are not 
+        systematically assigned. For example, if we are regressing income on 
+        education, this assumes that other factors that have a substantial 
+        impact on income (notably intelligence) doesn't increase systematically 
+        as education increases (which is unlikely the case).
+        
+    \item This can go wrong if the treatment is self-selective. That is, if the
+        individual chooses their treatment based off conditions they know about
+        themselves. For example, if we are regressing skin cancer on sunscreen
+        lotion usage, an individual would likely self-select to use lotion if 
+        they know they are fair skinned.
+        
+        This can also go wrong if there is reverse-causality. That is, if the
+        regressand causes the individual to have a certain treatment. Using the
+        skin cancer example, if someone has a history of skin cancer, they are
+        likely to use more sunscreen lotion.
+\end{enumerate}
+
+\problempart % Problem 2c
+
+For Gauss-Markov assumption A2:
+
+\begin{enumerate}[label=\textbf{\roman*})]
+
+    \item $\mathrm{var}(\mathcal{E} \mid X) = \sigma^2 $.
+    
+    \item This is stating that the variability of the error term (the features
+        not included as regressors in the model) is consistent regardless of 
+        conditioning on a specific value of the regressor. For example, when
+        regressing income on age, this assumes that income ranges are generally
+        consistent as age increases (which is unlikely the case).
+        
+    \item This can go wrong if the recorded regressor observations are divided 
+        into two groups where one is measured by a more precise tool and the
+        other is less precise.
+        
+        This can also go wrong (almost surely) if the regressand is a binary
+        variable.
+        
+\end{enumerate}
+
+\problempart % Problem 2d
+
+For Gauss-Markov assumption A3:
+
+\begin{enumerate}[label=\textbf{\roman*})]
+
+    \item $\mathrm{cov}(\varepsilon_i, \varepsilon_j \mid X) = 0\quad \forall i 
+        \neq j$.
+    
+    \item This is stating that the error terms between different observations 
+        are not related to each other. That is, if I know the error term for 
+        observation $i$, that should provided no information about the error
+        term for $j$.
+    
+    \item This typically occurs in time series data as the current observation
+        is likely related to the previous few current observations in some
+        functional form.
+        
+        This almost certainly occurs in panel data as we are making observations
+        about the same individual many times (who likely maintains their same 
+        error term over time).
+        
+        This can also occur in cross-sectional data when groups of individuals
+        are sampled from shared environments (like households).
+    
+\end{enumerate}
+
+\end{problemparts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem  % Problem 3
+
+When assumptions A0--A3 hold, we know that our OLS estimator is BLUE: the {\bf 
+b}est, {\bf l}inear, {\bf u}nbiased {\bf e}stimator. By `best', we mean the
+estimator with the least variance.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem  % Problem 4
+
+\begin{problemparts}
+
+\problempart % Problem 4a
+
+By making this assumption, we are justified in using Student's $t$-distribution
+as the model for our distribution of estimates if our null hypothesis is true
+when conducting a single parameter hypothesis test.
+
+\problempart % Problem 4b
+
+The central limit theorem tells us that the sum of random variables will 
+converge to a normal distribution. In this case, this is useful because it
+suggests that our the distribution of our estimates will tend toward a normal
+distribution for large enough samples. Thus, we can use Student's 
+$t$-distribution for large samples without assuming Gaussian error.
+
+\end{problemparts}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem  % Problem 5
+
+\begin{problemparts}
+
+\problempart % Problem 5a
+
+The general form of the linear regression $y_i = a + b x_i + \varepsilon_i$ of
+the form $Y = X \beta + \varepsilon$ written component-wise with the provided 
+data is 
+$$ \begin{pmatrix}
+    1 \\
+    3 \\
+    1 \\
+    2 \\
+    4 \\
+    1 \\
+    2 \\
+    1 \\
+    3 \\
+    2 \end{pmatrix} = \boxed{\begin{pmatrix}
+    1 & 1 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 1 \end{pmatrix}} \cdot \boxed{\begin{pmatrix}
+    a \\
+    b \end{pmatrix}} + \begin{pmatrix}
+    \varepsilon_1 \\
+    \varepsilon_2 \\
+    \varepsilon_3 \\
+    \varepsilon_4 \\
+    \varepsilon_5 \\
+    \varepsilon_6 \\
+    \varepsilon_7 \\
+    \varepsilon_8 \\
+    \varepsilon_9 \\
+    \varepsilon_{10} \end{pmatrix} $$
+
+\problempart % Problem 5b
+
+The vector $\beta$ is provided in the previous part.
+
+\problempart % Problem 5c
+
+The equation for ordinary least squares estimator is
+$$ \hat{\beta} = \left(X^T X\right)^{-1} X^T Y $$
+Substituting the provided data and solving,
+\begin{align*}
+    \hat{\beta} &= \left(X^T X\right)^{-1} X^T Y \\
+    &= \left(\begin{pmatrix}
+    1 & 1 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 1 \end{pmatrix}^T \begin{pmatrix}
+    1 & 1 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 1 \end{pmatrix}\right)^{-1} \begin{pmatrix}
+    1 & 1 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 1 \end{pmatrix}^T \begin{pmatrix}
+    1 \\
+    3 \\
+    1 \\
+    2 \\
+    4 \\
+    1 \\
+    2 \\
+    1 \\
+    3 \\
+    2 \end{pmatrix} \\
+    &= \begin{pmatrix}
+    10 & 6 \\
+    6 & 6 \end{pmatrix}^{-1} \begin{pmatrix}
+    20 \\
+    13 \end{pmatrix} \\
+    &= \frac{1}{12}\begin{pmatrix}
+    3 & -3 \\
+    -3 & 5 \end{pmatrix} \begin{pmatrix}
+    20 \\
+    12 \end{pmatrix} \\
+    &= \begin{pmatrix}
+    7/4 \\
+    5/12 \end{pmatrix}
+\end{align*}
+From this, $\boxed{\hat{a} = 7/4}$ and $\boxed{\hat{b} = 5/12}$.
+
+\problempart % Problem 5d
+
+To compute the standard errors, we first need the sum of squared residuals, 
+$\mathrm{SSR}$.
+\begin{align*}
+    \mathrm{SSR} &= \sum_{i = 1}^n (y_i - \hat{a} - \hat{b} x_i)^2 \\
+    &= \left(Y - X \hat{\beta}\right)^T \left(Y - \hat{\beta} X\right) \\
+    &= \left(\begin{pmatrix}
+    1 \\
+    3 \\
+    1 \\
+    2 \\
+    4 \\
+    1 \\
+    2 \\
+    1 \\
+    3 \\
+    2 \end{pmatrix} - \begin{pmatrix}
+    1 & 1 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 1 \end{pmatrix} \begin{pmatrix}
+    7/4 \\
+    5/12 \end{pmatrix}\right)^T \left(\begin{pmatrix}
+    1 \\
+    3 \\
+    1 \\
+    2 \\
+    4 \\
+    1 \\
+    2 \\
+    1 \\
+    3 \\
+    2 \end{pmatrix} - \begin{pmatrix}
+    1 & 1 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 1 \end{pmatrix} \begin{pmatrix}
+    7/4 \\
+    5/12 \end{pmatrix}\right) \\
+    &= \begin{pmatrix}
+    -5/3 \\
+    5/6 \\
+    -3/4 \\
+    -1/6 \\
+    9/4 \\
+    -3/4 \\
+    -1/6 \\
+    -3/4 \\
+    5/6 \\
+    -1/6 \end{pmatrix}^T \begin{pmatrix}
+    -5/3 \\
+    5/6 \\
+    -3/4 \\
+    -1/6 \\
+    9/4 \\
+    -3/4 \\
+    -1/6 \\
+    -3/4 \\
+    5/6 \\
+    -1/6 \end{pmatrix} \\
+    &= 115 / 12 \\
+    &\approx 9.583
+\end{align*}
+Next, using the $\mathrm{SSR}$, we can calculate the $\hat{\sigma}^2$,
+\begin{align*}
+    \hat{\sigma}^2 &= \frac{\mathrm{SSR}}{n - (k + 1)} \\
+    &= \frac{115 / 12}{10 - (1 + 1)} \\
+    &= 115 / 96 \\
+    &\approx 1.198
+\end{align*}
+Now we can compute the standard error for $\hat{b}$,
+\begin{align*}
+    \hat{se}(\hat{b}) &= \sqrt{\hat{\sigma}^2 \left(X^T X\right)^{-1}_{1,1}} \\
+    &= \sqrt{\frac{115}{96} \left(\begin{pmatrix}
+    1 & 1 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 1 \end{pmatrix}^T \begin{pmatrix}
+    1 & 1 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 0 \\
+    1 & 1 \\
+    1 & 1 \end{pmatrix}\right)^{-1}_{1, 1}} \\
+    &= \sqrt{\frac{115}{96} \begin{pmatrix}
+    10 & 6 \\
+    6 & 6 \end{pmatrix}^{-1}_{1,1}} \\
+    &= \sqrt{\frac{115}{96}\frac{1}{12}\begin{pmatrix}
+    3 & -3 \\
+    -3 & 5 \end{pmatrix}_{1, 1}} \\
+    &= \sqrt{\frac{115}{96}\frac{5}{12}} \\
+    &\approx 0.706
+\end{align*}
+From this, $\boxed{\hat{se}(\hat{b}) \approx 0.706}$. Using Student's
+$t$-distribution with $n - (k + 1) = 8$ degrees of freedom, we know that the
+critical value for an $\alpha = 0.05$ confidence interval is $2.306$. Using
+this, we can construct a 95\% confidence interval for $\hat{b}$,
+$$ \left[ 0.417 - 2.306 \cdot 0.706, 0.417 + 2.306 \cdot 0.706 \right] = \boxed{
+\left[ -1.213, 2.046\right]} $$
+Since this interval contains $b = 0$, we cannot reject the null hypothesis that
+there is no gender discrimination in the military.
+
+\problempart % Problem 5e
+
+We can take the mean of $Y$ for just the males and just the females separately,
+$$ \bar{Y}_m = 13/6,\quad \bar{Y}_f = 7/4 $$
+Taking the difference between the two yields,
+$$ \boxed{\bar{Y}_m - \bar{Y}_f = 5/12} $$
+It makes sense that this is equal to $\hat{b}$ as we have a binary feature. Thus,
+ordinary least squares will pass through the mean of the response from the first 
+binary value and the mean of the response from the second binary value. Since
+the two are separated by a single unit, the slope of ordinary least squares will
+be equal to the difference of the two means.
+
+\problempart % Problem 5f
+
+$\bar{Y}_f$ is equal to the value of $\hat{a}$. The $\hat{a}$ value is the
+intercept for ordinary least squares. The $\bar{Y}_f$ is the mean of the 
+responses for a single value of the independent variable. Since this value of
+the independent binary variable is $0$ for females, and ordinary least squares
+is minimizing squared error, these two must coincide as the intercept is the
+mean of the responses for when the independent binary variable is $0$.
+
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
