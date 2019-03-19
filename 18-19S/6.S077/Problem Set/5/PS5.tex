@@ -1,0 +1,265 @@
+%
+% 6.S077 problem set solutions template
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{bbm}
+
+\input{macros}
+\newcommand{\theproblemsetnum}{5}
+\newcommand{\releasedate}{Tuesday, March 12}
+\newcommand{\partaduedate}{Tuesday, March 19}
+\allowdisplaybreaks
+
+\title{6.S077 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 2:30PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart % Problem 1a
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The mean-squared error of this estimator is given by,
+\begin{align*}
+    \mathbb{E}\left[\left(\hat{\theta}(X) - \theta\right)^2\right] &= \mathbb{E}
+        \left[(X - \theta)^2\right] \\
+    &= \mathbb{E}\left[X^2 - 2X\theta + \theta^2\right] \\
+    &= \mathbb{E}\left[X^2\right] - 2\theta\mathbb{E}\left[X\right] + 
+        \theta^2
+\end{align*}
+Given that the variance of $X$ is $\sigma^2$ and the mean is $\theta$,
+\begin{align*}
+    \mathbb{E}\left[\left(\hat{\theta}(X) - \theta\right)^2\right] &= \sigma^2 + 
+        \theta^2 - 2\theta^2 + \theta^2 \\
+    &= \sigma^2
+\end{align*}
+
+\problempart % Problem 1b
+
+The mean-squared error of this estimator is given by,
+\begin{align*}
+    \mathbb{E}\left[(\hat{\theta}_\alpha(X) - \theta)^2\right] &= \mathbb{E}\left[
+        (\alpha X - \theta)^2\right] \\
+    &= \alpha^2 \left(\sigma^2 - \theta^2\right) - 2 \alpha \theta^2 + \theta^2 \\
+    &= \alpha^2 \sigma^2 + (1 - \alpha)^2 \theta^2
+\end{align*}
+
+\problempart % Problem 1c
+
+We can minimize this expressiong in terms of $\alpha$,
+$$ \alpha^* = \arg\min_{\alpha} \alpha^2 \sigma^2 + (1 - \alpha)^2 \theta^2 $$
+Taking the derivative with respect to $\alpha$,
+$$ \frac{\partial}{\partial \alpha}(\cdot) = 2 \alpha \sigma^2  - 2 (1 - \alpha) 
+    \theta^2 $$
+Setting equal to zero and solving for $\alpha^*$ yields,
+$$ \alpha^* = \frac{\theta^2}{\sigma^2 + \theta^2} $$
+
+\problempart % Problem 1d
+
+Taking the limit of this expression as $\sigma \rightarrow \infty$,
+$$ \lim_{\sigma \rightarrow \infty} \frac{\theta^2}{\sigma^2 + \theta^2} = 
+    \frac{1}{\infty} = 0 $$
+This suggests that as the variance of what we are estimating increases, we 
+should decrease $\alpha$. By substituting $\alpha = 0$ into the expression for
+mean square error, we get
+$$ \mathrm{MSE} = \theta^2 $$
+Therefore, we should just return $0$ as our estimator.
+
+\problempart % Problem 1e
+
+Taking the limit of this expression as $\sigma \rightarrow 0$,
+$$ \lim_{\sigma \rightarrow 0} \frac{\theta^2}{\sigma^2 + \theta^2} = 
+    \frac{\theta^2}{\theta^2} = 1 $$
+This suggests that as the variance of what we are estimating decreases, we 
+should increase $\alpha$. By substituting $\alpha = 1$ into the expression for
+mean sqaured error, we get
+$$ \mathrm{MSE} = \sigma^2 $$
+Therefore, we should just return $X$ as our estimator.
+
+\problempart % Problem 1f
+
+First, we look at the mean of $\hat{X}_n$,
+\begin{align*}
+    \mathbb{E}\left[\hat{X}_n\right] &= \mathbb{E}\left[\frac{1}{n} 
+        \sum_{i = 1}^n X_i \right] \\
+    &= \frac{1}{n} \sum_{i = 1}^n \mathbb{E}[X_i] \\
+    &= \frac{1}{n} \sum_{i = 1}^n \theta \\
+    &= \theta
+\end{align*}
+
+Next, we consider the variance $\hat{X}_n$,
+\begin{align*}
+    \mathrm{var}(\hat{X}_n) &= \mathrm{var}(\frac{1}{n} \sum_{i = 1}^n X_i) \\
+    &= \frac{1}{n^2} \sum_{i = 1}^n \mathrm{var}(X_i) \\
+    &= \frac{1}{n^2} \sum_{i = 1}^n \sigma^2 \\
+    &= \frac{\sigma}{n}
+\end{align*}
+
+Lastly, we know that the sum of Gaussian random variables must be Gaussian,
+therefore,
+$$ \hat{X}_n \sim  \mathcal{N}\left(\theta, \frac{\sigma}{n}\right) $$
+
+From the previous sections, we know that the $\alpha^*$ must take the form,
+$$ \alpha^* = \frac{\theta^2}{\frac{\sigma^2}{n} + \theta^2} $$
+Taking the limit as $n \rightarrow \infty$,
+$$ \lim_{n \rightarrow \infty} \frac{\theta^2}{\frac{\sigma^2}{n} + \theta^2}
+    = \frac{\theta^2}{\theta^2} = 1 $$
+This suggests that as the number of samples increases, we should increases
+$\alpha$. That is, we should favor $\hat{X}_n$ as an estimator over $0$ as the
+number of samples increases.
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 2
+
+\begin{problemparts}
+
+\problempart % Problem 1a
+
+Starting with the standard ridge regression optimization problem,
+$$ \beta^* = \arg\min_{\beta} \lVert Y - X \beta \rVert_2^2 + \lambda \lVert 
+\beta \rVert_2^2 $$
+After substituting the provided values,
+$$ \beta_1^*, \beta_2^* = \arg\min_{\beta_1, \beta_2} \left(y_1 - \beta_1
+x_{11} - \beta_2 x_{12}\right)^2 + \left(y_2 - \beta_1 x_{21} - \beta_2
+x_{22} \right)^2 + \lambda (\beta_1^2 + \beta_2^2) $$
+Using the fact that $x_{11} = x_{12}$ and $x_{21} = x_{22}$, this simplifies
+to
+$$ \beta_1^*, \beta_2^* = \arg\min_{\beta_1, \beta_2} \left(y_1 - (\beta_1 +
+\beta_2) x_{12}\right)^2 + \left(y_2 - (\beta_1 + \beta_2) x_{22} \right)^2 +
+\lambda (\beta_1^2 + \beta_2^2) $$
+Furthermore, since $x_{12} + x_{22} = 0$, this simplifies further to,
+$$ \beta_1^*, \beta_2^* = \arg\min_{\beta_1, \beta_2} \left(y_1 - (\beta_1 +
+\beta_2) x_{12}\right)^2 + \left(y_2 + (\beta_1 + \beta_2) x_{12} \right)^2 +
+\lambda (\beta_1^2 + \beta_2^2) $$
+Lastly, since $y_1 + y_2 = 0$, this simplifies to,
+$$ \beta_1^*, \beta_2^* = \arg\min_{\beta_1, \beta_2} 2 \left(y_1 - (\beta_1
++ \beta_2) x_{12}\right)^2 + \lambda (\beta_1^2 + \beta_2^2) $$
+
+\problempart % Problem 2b
+
+Taking the derivative of this expression with respect to $\beta_1$ and
+$\beta_2$ respectively,
+$$ \frac{\partial}{\partial \beta_1}(\cdot) = - 4 x_{12} \left(y_1 - (\beta_1
++ \beta_2) x_{12}\right) + 2 \lambda \beta_1 $$
+$$ \frac{\partial}{\partial \beta_2}(\cdot) = - 4 x_{12} \left(y_1 - (\beta_1
++ \beta_2) x_{12}\right) + 2 \lambda \beta_2 $$
+Setting equal to zero and solving for $\beta_1^*$ and $\beta_2^*$ yields,
+$$ \beta_1^* = \frac{2 x_{12} y_1}{\lambda + 4 x_{12}^2} $$
+$$ \beta_2^* = \frac{2 x_{12} y_1}{\lambda + 4 x_{12}^2} $$
+Therefore, $\beta_1^* = \beta_2^*$.
+
+\problempart % Problem 2c
+
+Using the same steps as in Part A, we are optimizing,
+$$ \beta_1^*, \beta_2^* = \arg\min_{\beta_1, \beta_2} 2 \left(y_1 - (\beta_1
++ \beta_2) x_{12}\right)^2 + 2 \lambda (|\beta_1| + |\beta_2|)$$
+
+\problempart % Problem 2d
+
+Taking the derivative of the expression with respect to $\beta_1$ and $\beta_2$
+respectively,
+$$ \frac{\partial}{\partial \beta_1}(\cdot) = - 4 x_{12} \left(y_1 - (\beta_1
++ \beta_2) x_{12}\right) + 2 \lambda \mathrm{sgn}(\beta_1) $$
+$$ \frac{\partial}{\partial \beta_2}(\cdot) = - 4 x_{12} \left(y_1 - (\beta_1
++ \beta_2) x_{12}\right) + 2 \lambda \mathrm{sgn}(\beta_2) $$
+After some simplification, we are left with,
+$$ (\beta_1 + \beta_2) = \frac{4 x_{12} y_1 - 2 \lambda
+\mathrm{sgn}(\beta_1)}{4 x_{12}^2} $$
+$$ (\beta_1 + \beta_2) = \frac{4 x_{12} y_1 - 2 \lambda
+\mathrm{sgn}(\beta_2)}{4 x_{12}^2} $$
+Thus, when $\beta_1, \beta_2 \leq 0$ or $\beta_1, \beta_2 > 0$, these equations
+have infinite solutions and are thus not unique.
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 3
+
+\begin{problemparts}
+
+\problempart % Problem 3a
+
+Starting with the definition of Gaussian distribution,
+\begin{align*}
+    \mathcal{N}(\mu, 1) &= \frac{1}{\sqrt{2 \pi}}
+        \mathrm{exp}\left\{-\frac{(y - \mu)^2}{2}\right\} \\
+    &= \frac{1}{\sqrt{2 \pi}} \mathrm{exp}\left\{-\frac{y^2}{2}\right\}
+        \mathrm{exp}\left\{y \mu - \frac{\mu^2}{2}\right\}
+\end{align*}
+Now, it is clear that the following are true,
+$$ b(y) = \frac{1}{\sqrt{2 \pi}} \mathrm{exp}\left\{-\frac{y^2}{2}\right\} $$
+$$ \eta = \mu $$
+$$ a(\eta) = \frac{\eta^2}{2} $$
+$$ T(y) = y $$
+
+\problempart % Problem 3b
+
+Starting with the definition of Bernoulli distribution,
+\begin{align*}
+    \mathrm{Bernoulli}(y; \mu) &= \mu^y (1 - \mu)^{1 - y} \\
+    &= \mathrm{exp}\left\{y \log \mu + (1 - y) \log(1 - \mu) \right\} \\
+    &= \mathrm{exp}\left\{y \log \left(\frac{\mu}{1 - \mu}\right) + \log(1 -
+    \mu) \right\}
+\end{align*}
+Now, it is clear that the following are true,
+$$ b(y) = 1 $$
+$$ \eta = \log \left(\frac{\mu}{1 - \mu}\right) $$
+$$ a(\eta) = \log \left(1 + e^\eta\right) $$
+$$ T(y) = y $$
+
+\problempart % Problem 3c
+
+Given that
+$$ \mathbb{E}\left[Y \mid X = x\right] = \mu $$
+And that, for Gaussian distributions $\mathcal{N}(\mu, 1)$,
+$$ \mu = \eta = \theta^T x $$
+It is clear that
+$$ \mathbb{E}\left[Y \mid X = x \right] = \theta^T x $$
+
+\problempart % Problem 3d
+
+Given that
+$$ \mathbb{E}\left[Y \mid X = x\right] = \mu $$
+And that, for Bernoulli distributions,
+$$ \eta = \theta^T x $$
+We just need to solve $\eta$ for $\mu$,
+\begin{align*}
+    \eta &= \log \left(\frac{\mu}{1 - \mu}\right) \\
+    &\iff e^\eta = \frac{\mu}{1 - \mu} \\
+    &\iff e^\eta - \mu e^\eta = \mu \\
+    &\iff e^\eta = \mu + \mu e^\eta \\
+    &\iff e^\eta = \mu \left(1 + e^\eta\right) \\
+    &\iff \mu = \frac{e^\eta}{1 + e^\eta}
+\end{align*}
+Substituting $\eta = \theta^T x$ gives us,
+$$ \mathbb{E}\left[Y \mid X = x\right] = \frac{e^{\theta^T x}}{1 +
+e^{\theta^T x}} $$
+
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
+
