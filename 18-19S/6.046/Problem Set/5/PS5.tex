@@ -1,0 +1,514 @@
+%
+% 6.046 problem set 2 solutions
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{multirow}
+\usepackage{algorithm, algpseudocode, float}
+
+\input{macros}
+\newcommand{\theproblemsetnum}{5}
+\newcommand{\releasedate}{Thursday, March 14}
+\newcommand{\partaduedate}{Wednesday, March 20}
+\allowdisplaybreaks
+
+\title{6.046 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 10PM}}.
+
+\makeatletter
+\newenvironment{breakablealgorithm}
+  {% \begin{breakablealgorithm}
+   \begin{center}
+     \refstepcounter{algorithm}% New algorithm
+     \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+     \renewcommand{\caption}[2][\relax]{% Make a new \caption
+       {\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
+       \ifx\relax##1\relax % #1 is \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+       \else % #1 is not \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+       \fi
+       \kern2pt\hrule\kern2pt
+     }
+  }{% \end{breakablealgorithm}
+     \kern2pt\hrule\relax% \@fs@post for \@fs@ruled
+   \end{center}
+  }
+\makeatother
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart % Problem 1a
+
+{\bf Description} The minimum disturbance linear program is:
+$$ \min_{k_{ij} \forall (i, j) \in E} \sum_{(i, j) \in E} k_{ij} \cdot c_{ij} $$
+Subject to:
+\begin{align*}
+  \sum_{i:(i, j) \in E} k_{ij} &= \sum_{\ell:(j, \ell) \in E} k_{j\ell}\quad
+  \forall j \in V \setminus \{s, t\} \\
+  \sum_{j:(s, j) \in E} k_{sj} - \sum_{i:(i, s) \in E} k_{is} &= p \\
+  \sum_{i:(i, t) \in E} k_{it} - \sum_{j:(t, j) \in E} k_{tj} &= p \\
+  k_{ij} &\leq u_{ij}\quad \forall (i, j) \in E \\
+  k_{ij} &\geq 0\quad \forall (i, j) \in E
+\end{align*}
+
+{\bf Correctness} To prove this linear program is correct, we consider both
+directions of the equality independently. That is, we show that a solution in
+terms of the network of hallways implies the solution to the linear program
+and we show that a solution of the linear program implies the solution in
+terms of the network of hallways.
+
+\begin{itemize}
+
+  \item {\it Network of Hallways $\implies$ Linear Program}: Consider MIT's
+  network of hallways. To represent this network, use a connected, directed
+  graph $G = (V, E)$ with no duplicate edges. Let each $(i, j) \in E$
+  represent a hallway and each $i,j \in V$ represent an intersection between
+  hallways. Each hallway has a maximum rate of tourists it can support. Let
+  this be $u_{ij}$ for hallway $(i, j) \in E$. Furthermore, each hallway $(i,
+  j) \in E$ has a disturbance coefficient $c_{ij}$. Let the disturbance
+  through hallway $(i, j) \in E$ be equal to $k_{ij} \cdot c_{ij}$. Along
+  these hallways, we want to transfer some $p$ tourists from Kendall Square
+  ($s$) to the student center ($t$) with as little disturbance as possible.
+
+  Suppose we find a collection of rates of tourists $k_{ij}$ through each of
+  the hallways $(i, j) \in E$ that minimizes the disturbance $k_{ij} \cdot
+  c_{ij}$ for all hallways $(i, j) \in E$. Because the whole is the sum of
+  its parts, this is implies the collection of rates of tourists $k_{ij}$
+  satisfies
+  $$ \min_{k_{ij} \forall (i, j) \in E} \sum_{(i, j) \in E} k_{ij} \cdot
+  c_{ij} $$
+  which is the optimization of the linear program. 
+  
+  This collection of rates of tourists $k_{ij}$ through each of the hallways
+  $(i, j) \in E$ must satisfy flow conservation (i.e. no tourists can
+  magically appear or disappear along the network, aside from at Kendall or
+  the student center). This implies we uphold
+  $$ \sum_{i:(i, j) \in E} k_{ij} = \sum_{\ell:(j, \ell) \in E}
+  k_{j\ell}\quad \forall j \in V \setminus \{s, t\} $$
+  which is the first constraint in the linear program. 
+  
+  We know that we want to push $p$ tourists from Kendall to the student
+  center. Then, clearly, we want to send exactly $p$ tourists into the
+  network of hallways at Kendall and have $p$ tourists come out at the
+  student center. This implies we uphold
+  $$ \sum_{j:(s, j) \in E} k_{sj} - \sum_{i:(i, s) \in E} k_{is} = p $$
+  $$ \sum_{i:(i, t) \in E} k_{it} - \sum_{j:(t, j) \in E} k_{tj} = p $$
+  which is the second (and third) contraint in the linear program.
+
+  We also must respect the maximum rates $u_{ij}$ of tourist flow $k_{ij}$
+  through any hallway $(i, j) \in E$. That is, we can't send more tourists
+  through a hallway than that hallway's capacity. This implies we uphold
+  $$ k_{ij} \leq u_{ij}\quad \forall (i, j) \in E $$
+  which is the fourth constraint in the linear program.
+
+  Lastly, and trivially, we cannot send a negative number of tourists
+  $k_{ij}$ through any hallway $(i, j) \in E$. This implies we uphold
+  $$ k_{ij} \geq 0\quad \forall (i, j) \in E $$
+  which is the last constraint in the linear program.
+
+  As a result, if we have a set of tourist flow rates $k_{ij}$ that minimizes
+  the disturbance according to the problem specification, we have a solution
+  to the linear program described.
+
+  \item {\it Linear Program $\implies$ Network of Hallways}: The
+  linear program is optimizing
+  $$ \min_{k_{ij} \forall (i, j) \in E} \sum_{(i, j) \in E} k_{ij} \cdot
+  c_{ij} $$
+  If we let the $k_{ij}$ be the flow of tourists across some hallway $(i, j)
+  \in E$ and $c_{ij}$ be the disturbance coefficient along that hallway (and
+  because the whole is equal to the sum of its parts), this implies we are
+  finding the minimum disturbance $k_{ij} \cdot c_{ij}$ of tourists flows
+  through all hallways $(i, j) \in E$.
+
+  The linear program has the first constraint
+  $$ \sum_{i:(i, j) \in E} k_{ij} = \sum_{\ell:(j, \ell) \in E}
+  k_{j\ell}\quad \forall j \in V \setminus \{s, t\} $$
+  If we, once again, let $k_{ij}$ be the flow of tourists across some hallway
+  $(i, j) \in E$ and $s$ be Kendall and $t$ be the student center, this
+  implies we cannot have tourists disappear or reppear arbitrarily within our
+  hallway network (except at Kendall and the student center).
+
+  The linear program's second (and third) constraint is
+  $$ \sum_{j:(s, j) \in E} k_{sj} - \sum_{i:(i, s) \in E} k_{is} = p $$
+  $$ \sum_{i:(i, t) \in E} k_{it} - \sum_{j:(t, j) \in E} k_{tj} = p $$
+  If we let $p$ be the number of tourists we want to send from Kendall to the
+  student center and $s$ be Kendall and $t$ be the student center, this
+  implies that the net flow of tourists from Kendall must be $p$ and the net
+  flow of tourists into the student center must also be $p$.
+
+  The linear program's fourth constraint is
+  $$ k_{ij} \leq u_{ij}\quad \forall (i, j) \in E $$
+  If we let $k_{ij}$ be the flow of tourists across hallway $(i, j) \in E$
+  and $u_{ij}$ be the corresponding capacity of that hallway, this implies we
+  cannot send more tourists through a hallway than that hallway's limit.
+
+  Lastly, the linear program's final constraint is
+  $$ k_{ij} \geq 0\quad \forall (i, j) \in E $$
+  If we let $k_{ij}$ be the flow of tourists across hallway $(i, j) \in E$,
+  this implies we cannot have a negative flow of tourists within our hallway
+  network.
+
+  As a result, if we have a set of $k_{ij}$ that minimizes the linear
+  program's objective and is subject to its constraints, we have a set of
+  flows in our hallway network $k_{ij}$ that minimizes the disturbance.
+
+\end{itemize}
+
+Since both implication directions are true, this linear program must be
+equivalent to the minimum disturbance tourist flow as interpreted in the
+solution presented above.
+
+\problempart % Problem 1b
+
+{\bf Description} First, we can write the linear program from the previous
+part in standard primal form. Let the vertices $v \in V$ be uniquely
+identified using $i \in {1, \ldots, |V|}$. Let the source $s$ have
+idenfifier $1$ and the sink $t$ have identifier $|V|$.
+$$ \max_{k_{ij} \forall (i, j) \in E} \sum_{(i, j) \in E} k_{ij} \cdot
+\left(- c_{ij}\right) $$
+Subject to:
+\begin{align*}
+  \sum_{i:(i, 1) \in E} k_{i1} - \sum_{\ell:(1, \ell) \in E} k_{1\ell} &\leq
+    -p \\
+  \sum_{i:(i, j) \in E} k_{ij} - \sum_{\ell:(j, \ell) \in E} k_{j\ell} &\leq
+    0 \quad \forall j \in \{2, \ldots, |V| - 1\} \\
+  \sum_{i:(i, |V|) \in E} k_{i|V|} - \sum_{\ell:(|V|, \ell) \in E}
+    k_{|V|\ell} &\leq p \\
+  -\left(\sum_{i:(i, 1) \in E} k_{i1} - \sum_{\ell:(1, \ell) \in E}
+    k_{1\ell}\right) &\leq p \\
+  -\left(\sum_{i:(i, j) \in E} k_{ij} - \sum_{\ell:(j, \ell) \in E}
+    k_{j\ell}\right) &\leq 0 \quad \forall j \in \{2, \ldots, |V| - 1\} \\
+  -\left(\sum_{i:(i, |V|) \in E} k_{i|V|} - \sum_{\ell:(|V|, \ell) \in E}
+    k_{|V|\ell}\right) &\leq -p \\
+  k_{ij} &\leq u_{ij}\quad \forall (i, j) \in E \\
+  k_{ij} &\geq 0\quad \forall (i, j) \in E
+\end{align*}
+For non-negative scaling factors $w_1, \ldots, w_{|V|}$, $y_1, \ldots,
+y_{|V|}$, and $z_1, \ldots, z_{|E|}$, we have the inequality
+\begin{alignat*}{2}
+  &w_1 \cdot \left(\sum_{i:(i, 1) \in E} k_{i1} - \sum_{\ell:(1, \ell) \in E}
+    k_{1\ell}\right) &&+ \ldots +\\
+  &w_{|V|} \cdot \left(\sum_{i:(i, |V|) \in E} k_{i|V|} - \sum_{\ell:(|V|,
+    \ell) \in E} k_{|V|\ell}\right) &&+ \\
+  &y_{1} \cdot -\left(\sum_{i:(i, 1) \in E} k_{i1} - \sum_{\ell:(1,
+    \ell) \in E} k_{1\ell}\right) &&+ \ldots + \\
+  &y_{|V|} \cdot -\left(\sum_{i:(i, |V|) \in E} k_{i|V|} - \sum_{\ell:(|V|,
+    \ell) \in E} k_{|V|\ell}\right) &&+ \\
+  &z_{1} \cdot k_{e_{1}} &&+ \ldots + \\
+  &z_{|E|} \cdot k_{e_{|E|}} \\
+  & \leq -w_1 p + w_{|V|} p + y_{1} p - y_{|V|} p + z_{1} u_{e_{1}} + \ldots
+    + z_{|E|} u_{e_{|E|}}
+\end{alignat*}
+We can rewrite this sum with the $k_{ij}$ isolated (assume for simplicity that
+the edges $k_{11}, k_{12}, k_{13}, \ldots, k_{21}, k_{22}, k_{23}$ exist).
+\begin{alignat*}{2}
+  &(z_{e_{11}})(k_{11}) &&+ \\
+  &\left(-(w_1 - y_{1}) + (w_2 - y_{2}) + z_{e_{12}}\right)(k_{12}) &&+ \\
+  &\left(-(w_1 - y_{1}) + (w_3 - y_{3}) + z_{e_{13}}\right)(k_{13}) &&+ \ldots + \\
+  &\left(-(w_2 - y_{2}) + (w_1 - y_{1}) + z_{e_{21}}\right)(k_{21}) &&+ \\
+  &(z_{e_{22}})(k_{22}) &&+ \\
+  &\left(-(w_2 - y_{2}) + (w_3 - y_{3}) + z_{e_{23}}\right)(k_{23}) &&+ \ldots + \\
+  & \leq -w_1 p + w_{|V|} p + y_{1} p - y_{|V|} p + z_{e_{1}}
+    u_{e_{1}} &&+ \ldots + z_{e_{|E|}} u_{e_{|E|}}
+\end{alignat*}
+From this, we extract the dual:
+$$ \min_{\{w\}_1^{|V|}, \{y\}_1^{|V|}, \{z\}_1^{|E|}} p \left(w_{|V|} - w_1 +
+y_1 - y_{|V|}\right) + \sum_{(i, j) \in E} z_{ij} \cdot u_{ij} $$
+Subject to:
+$$ -(w_i - y_i) + (w_j - y_j) + z_{ij} \geq c_{ij} \quad \forall (i, j) \in E $$
+$$ w_i \geq 0 \quad \forall i \in V $$
+$$ y_i \geq 0 \quad \forall i \in V $$
+$$ z_{ij} \geq 0 \quad \forall (i, j) \in E $$
+
+\problempart % Problem 1c
+
+{\bf Description} When $p = 1$ and $u_{ij} = \infty\ \forall (i, j) \in E$,
+the linear program reduces to
+$$ \min_{k_{ij} \forall (i, j) \in E} \sum_{(i, j) \in E} k_{ij} \cdot c_{ij} $$
+Subject to:
+\begin{align*}
+  \sum_{i:(i, j) \in E} k_{ij} &= \sum_{\ell:(j, \ell) \in E} k_{j\ell}\quad
+  \forall j \in V \setminus \{s, t\} \\
+  \sum_{j:(s, j) \in E} k_{sj} - \sum_{i:(i, s) \in E} k_{is} &= 1 \\
+  \sum_{i:(i, t) \in E} k_{it} - \sum_{j:(t, j) \in E} k_{tj} &= 1 \\
+  k_{ij} &\geq 0\quad \forall (i, j) \in E
+\end{align*}
+This is equivalent to finding the shortest path from $s$ to $t$ where
+`shortest' is measured as the minimum cost. That is, any edges $(i, j) \in E$
+that have a positive flow $k_{ij}$ (or, actually, a weight equal to $1$),
+these edges together yield the minimum cost path from $s$ to $t$.
+
+{\bf Correctness} To show that flow $k_{ij}$ through each hallway $(i, j) \in
+E$ yields the minimum cost path, we need to show the path goes from $s$ to
+$t$, it is a valid flow, that all $k_{ij} \in \{0, 1\}$, and that the path
+is, in fact, a minimum.
+
+\begin{itemize}
+
+  \item {\it Goes from $s$ to $t$}: From the second and third constraints of
+  the reduced linear program, we know that exactly $1$ net unit of flow exits
+  $s$. Furthermore, exactly $1$ net unit of flow arrives at $t$. Therefore,
+  whatever flow(s) result from this linear program, it must travel from $s$
+  to $t$.
+
+  \item {\it Valid flow}: Given the first constraint of the linear program,
+  we know that flow must be conserved within the network. We also know from
+  the fourth constraint that this flow must be net non-negative. As a result,
+  any flow that results from the linear program must be valid.
+
+  \item {\it All $k_{ij}$ are $0$ or $1$}: To show this, we consider the flow
+  decomposition lemma and show that fractional flows/cycles cannot be more
+  optimal.
+  
+  Assume for contradiction that there exists a $k_{ij} \not\in \{0, 1\}$.
+  Knowing that the total flow must be equal to $1$, we can decompose the flow
+  into more than one path from $s$ to $t$ or cycle.
+
+  Consider, WLOG, that there were two paths from $s$ to $t$ with flows. These
+  paths must be fractional as their total must sum to $1$ (and can't be
+  negative). Let the total disturbance along each path be $w_1$ and $w_2$. If
+  $w_1 > w_2$ or $w_2 > w_1$, then it would be more optimal to push all the
+  flow along the lesser disturbance path. Thus, this cannot occur without
+  contradiction. If $w_1 = w_2$, it is clear that it would be equivalent to
+  send all the flow along one or the other and thus it would not be more
+  optimal to have fractional flow.
+
+  Now suppose there exist cycles in the flow. If the weight of the cycle were
+  positive, it is obvious that it would yield lower cost to not go along the
+  cycle, but exit early. If the cycle is negative weight, then this will
+  yield a negative infinity shortest path.
+
+  Thus, all $k_{ij} \in \{0, 1\}$.
+
+  \item {\it Is a minimum}: By the objective function, it is clear that we
+  are minimizing the total disturbance. Thus, if the linear program is
+  solved, the result must be a minimum.
+
+\end{itemize}
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+
+\begin{problemparts}
+
+\problempart % Problem 2a
+
+The proof is by induction on the number of tiers of advisors Melon has. Let
+$P(n)$ be the induction hypothesis that if Beff uses a deterministic
+strategy, there is a strategy that allows Melon to consult at most $2^n$
+advisors (Beff's utility).
+
+{\it Base Case}: Let $n = 1$. In this case, Melon has only a single tier of
+advisors. Therefore, he only has $3$ possible advisors to consult. To
+determine the majority vote, he must, at minimum, consult $2$ of these $3$
+advisors. If Beff uses a deterministic strategy, there are four outcomes
+possible:
+
+\begin{itemize}
+  \item Three yes': Melon can choose to consult any two advisors to get the
+  majority decision.
+  \item Two yes' and one no: Melon can choose to consult the two advisors
+  Beff will set to yes to get the majority decision.
+  \item One yes and two no's: Melon can choose to consult the two advisors
+  Beff will set to no to get the majority decision.
+  \item Three no's: Melon can choose to consult any two advisors to get the
+  majority decision.
+\end{itemize}
+
+In all of the cases, Melon only needs to consult $2$ of his advisors. Since
+$2 = 2^1$, the induction hypothesis is upheld for the base case.
+
+{\it Inductive Step}: Assume by induction that Melon only has to consult
+$2^{n - 1}$ advisors when he has $n - 1$ Tiers. Now, since Melon has $n$
+tiers, his $2^{n - 1}$ advisors will refer him to each of their $3$ advisors.
+Once again, as in the base case, Beff's deterministic strategy has the same
+outcome: For every group of three advisors Melon needs to consult, he only
+needs to consult $2$ of them. Since he must talk to $2$ for every $2^{n -
+1}$, the total number of advisors he needs to consult is $2^n$. Therefore,
+the induction hypothesis is upheld in the inductive step.
+
+Since the induction hypothesis holds in the base case and the inductive step,
+by induction, the induction hypothesis must be true for all $n$.
+
+\problempart % Problem 2b
+
+The proof is by induction on the number of tiers of advisors Melon has. Let
+$P(n)$ be the induction hypothesis that if Melon has a deterministic
+strategy, there is a strategy that allows Beff to force Melon to consult at
+least $3^n$ of his advisors (Beff's utility).
+
+{\it Base Case}: Let $n = 1$. In this case, Melon has only a single tier of
+advisors. Therefore, he only has $3$ possible advisors to consult. Therefore,
+there are $6$ possible strategies he can have:
+
+\begin{itemize}
+  \item Consult $1$, $2$, then $3$: Beff can choose to set $1$ and $2$
+  opposite to force Melon to consult $3$.
+  \item Consult $1$, $3$, then $2$: Beff can choose to set $1$ and $3$
+  opposite to force Melon to consult $2$.
+  \item Consult $2$, $1$, then $3$: Similarly.
+  \item Consult $2$, $3$, then $1$: Similarly.
+  \item Consult $3$, $1$, then $2$: Similarly.
+  \item Consult $3$, $2$, then $1$: Similarly.
+\end{itemize}
+
+In all of the cases, Beff has a strategy that will force Melon to consult all
+three of his advisors. Since $3 = 3^1$, the induction hypothesis is upheld in
+the base case.
+
+{\it Inductive Step}: Assume by induction that Melon is forced to consult
+$3^{n - 1}$ of his advisors when he has $n - 1$ tiers. Now, since Melon has
+$n$ tiers, his $3^{n - 1}$ advisors will refer him to each of their $3$
+advisors. Once again, as in the base case, Melon's deterministic strategy has
+the same outcome: For every group of three advisors, there is a strategy that
+Beff can employ to force Melon to consult all $3$ of his advisors for each
+group. Since there are $3^{n - 1}$ groups and Melon needs to consult $3$
+advisors in each, he must consult at least $3^n$ advisors. Therefore, the
+induction hypothesis is upheld in the inductive step.
+
+Since the induction hypothesis is upheld in the base and inductive steps, by
+induction it must hold for all $n$ tiers.
+
+\problempart % Problem 2c
+
+If both Melon and Beff want to maximize their expected utilities, they will
+not want to use a deterministic strategy. 
+
+Let's consider why Beff would not want to use a deterministic strategy. As
+shown in Part A, no matter what deterministic strategy Beff chooses, there is
+a strategy for Melon that can be employed such that Beff get's his lowest
+possible utility.
+
+Now consider why Melon would not want to use a deterministic strategy. As
+shown in Part B, no matter what deterministic strategy Melon chooses, there
+is a strategy for Beff that can be employed such that Melon get's his lowest
+possible utility.
+
+\problempart % Problem 2d
+
+{\bf Description} Melon should choose to consult his advisors randomly from
+the following possible orders uniformly:
+
+\begin{itemize}
+  \item $1,2,3$
+  \item $1,3,2$
+  \item $2,1,3$
+  \item $2,3,1$
+  \item $3,1,2$
+  \item $3,2,1$
+\end{itemize}
+
+Beff should choose to set the opinions of Melon's advisors randomly from the
+following possible orders uniformly:
+
+\begin{itemize}
+  \item $Y,Y,N$
+  \item $Y,N,Y$
+  \item $N,Y,Y$
+  \item $Y,N,N$
+  \item $N,Y,N$
+  \item $N,N,Y$
+\end{itemize}
+
+This will yield both Melon and Beff an expected utility (magnitude) of
+$\left(8 / 3\right)^n$ when Melon has $n$ tiers of advisors.
+
+{\bf Correctness} First we must show that the expected utility is $\left(8 /
+3\right)^n$. The proof is by induction on the number of tiers of advisors
+Melon has. Let $P(n)$ be the induction hypothesis that if Beff and Melon both
+use non-deterministic strategies, Melon will have to consult, in expectation,
+$\left(8 / 3\right)^n$ of his advisors (Beff's utility).
+
+{\it Base Case} Let $n = 1$. In this case, Melon has only a single tier of
+advisors. Melon must consult either $2$ or $3$ of his advisors. Consider the
+case where he consults $2$ advisors.
+
+\begin{itemize}
+  \item If his advisors are $Y, Y, N$, then if Melon chooses orders $1, 2,
+  3$ or $2, 1, 3$, then he only needs to ask $2$ advisors.
+  \item If his advisors are $Y, N, Y$, then if Melon chooses orders $1, 3, 2$
+  or $3, 1, 2$, then he only needs to ask $2$ advisors.
+  \item If his advisors are $N, Y, Y$, then if Melon chooses orders $2, 3, 1$
+  or $3, 2, 1$, then he only needs to ask $2$ advisors.
+  \item If his advisors are $Y, N, N$, then if Melon chooses orders $2, 3, 1$
+  or $3, 2, 1$, then he only needs to ask $2$ advisors.
+  \item If his advisors are $N, Y, N$, then if Melon chooses orders $1, 3, 2$
+  or $3, 1, 2$, then he only needs to ask $2$ advisors.
+  \item If his advisors are $N, N, Y$, then if Melon chooses orders $2, 3, 1$
+  or $3, 2, 1$, then he only needs to ask $2$ advisors.
+\end{itemize}
+
+The probability of each of theses cases occuring is
+$$ \frac{1}{6} \cdot \frac{2}{6} = \frac{1}{18} $$
+Therefore, the total probability of Melon only needing to consult $2$
+advisors is
+$$ 6 \cdot \left(\frac{1}{6} \cdot \frac{2}{6}\right) = \frac{1}{3} $$
+For each of the cases, we can calculate the probability of Melon needing to,
+instead, consult $3$ of his advisors as
+$$ \frac{1}{6} \cdot \frac{4}{6} = \frac{1}{9} $$
+Therefore, the total probability of Melon needing to consult $3$ of his
+advisors is
+$$ 6 \cdot \left(\frac{1}{6} \cdot \frac{4}{6}\right) = \frac{2}{3} $$
+From this, the expected number of advisors he needs to consult for the first
+tier is
+$$ 2 \cdot \frac{1}{3} + 3 \cdot \frac{2}{3} = \frac{8}{3} $$
+Since $\left(8 / 3\right) = \left(8 / 3\right)^1$, the induction hypothesis
+holds for the base case.
+
+{\it Inductive Step} Assume by induction that Melon needs to consult $\left(8
+/ 3\right)^{n - 1}$ of his advisors in expectation when he has $n - 1$ tiers.
+Each of those $\left(8 / 3\right)^{n - 1}$ advisors now has another $3$
+advisors that they will refer Melon to. For each of those groups of three, as
+in the base case, we know Melon will need to consult, in expectation,
+$\left(8 / 3\right)$ of them. As a result, the total number of advisors he
+will need to consult is, in expectation $\left(8 / 3\right)^n$. Therefore,
+the induction hypothesis is upheld for the inductive step.
+
+Since the induction hypothesis is upheld in the base case and the inductive
+step, it must hold for all $n$. Therefore, the expected utility is $\left(8 /
+3\right)^n$.
+
+Now we need to show that is a Nash equilibrium. In Nash equilibrium, no
+player will want to switch strategies.
+
+First, we consider if Beff will want to change strategies. If Beff were to
+switch to any deterministic strategy, then it is possible for Melon to employ
+a strategy such that his utility goes from $2.667^n$ down to $2^n$ as shown
+in Part A.
+
+Now, we consider if Melon will want to change strategies. If Melon were to
+switch to any deterministic strategy, then it is possible for Beff to employ
+a strategy such that his utility goes from $-2.667^n$ down to $-3^n$ as shown
+in Part B.
+
+Therefore, neither player would prefer to switch strategies and thus this is
+a Nash equilibrium.
+
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
+
