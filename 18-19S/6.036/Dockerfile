@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 RUN pip3 install \
     jupyter \
     numpy \
-    tensorflow \
+    tensorflow==2.0.0-alpha0 \
     matplotlib
 
 RUN useradd -ms /bin/bash _6036

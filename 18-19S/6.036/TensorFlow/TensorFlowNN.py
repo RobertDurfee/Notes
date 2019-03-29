@@ -1,4 +1,10 @@
-import tensorflow as tf
+# IMPORTANT! I am using TensorFlow 2.0 Alpha release, but this guide is
+# for TensorFlow 1.X so I use the backwards compatible API 
+import tensorflow.compat.v1 as tf
+tf.disable_eager_execution()
+# IMPORTANT! If you are using TensorFlow 1.X (which is probably most
+# likely), you should use this import statement instead:
+# import tensorflow as tf
 import numpy as np
 %matplotlib inline
 from matplotlib.colors import ListedColormap
@@ -256,7 +262,7 @@ class Softmax(Layer):
             (Note: n and m are equal.)
             
         """
-        n = dLdA.shape[0].value
+        n = dLdA.shape[0]
         
         # This is just a way to compute dLdZ by using the provided dLdA
         # and softmax's dAdZ tensor. Or you can assume dLdZ is passed in.
