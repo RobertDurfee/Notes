@@ -1,0 +1,374 @@
+%
+% 6.046 problem set 2 solutions
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{multirow}
+\usepackage{algorithm, algpseudocode, float}
+
+\input{macros}
+\newcommand{\theproblemsetnum}{6}
+\newcommand{\releasedate}{Thursday, March 21}
+\newcommand{\partaduedate}{Wednesday, April 3}
+\allowdisplaybreaks
+
+\title{6.046 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 10PM}}.
+
+\makeatletter
+\newenvironment{breakablealgorithm}
+  {% \begin{breakablealgorithm}
+   \begin{center}
+     \refstepcounter{algorithm}% New algorithm
+     \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+     \renewcommand{\caption}[2][\relax]{% Make a new \caption
+       {\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
+       \ifx\relax##1\relax % #1 is \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+       \else % #1 is not \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+       \fi
+       \kern2pt\hrule\kern2pt
+     }
+  }{% \end{breakablealgorithm}
+     \kern2pt\hrule\relax% \@fs@post for \@fs@ruled
+   \end{center}
+  }
+\makeatother
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart % Problem 1a
+
+Assume for contradiction that there exists an algorithm that correctly
+returns {\tt SORTED} for a completely sorted array and correctly returns {\tt
+UNSORTED} for an array that is not mostly sorted which is not $\Omega(n)$.
+This implies that the algorithm makes a determination about the input by
+examining fewer than any fraction of $n$ (as any fraction of $n$ is
+$\Omega(n)$). This includes the fraction $9n/10$. Since an array can be
+switch from mostly sorted to not mostly sorted by changing these $9n/10$
+elements, the adversary could change these elements such that the algorithm
+is wrong. Thus, the algorithm is not always correct. This is a contradiction
+and thus a correct algorithm must be $\Omega(n)$.
+
+\problempart % Problem 1b
+
+Trivially, the algorithm will always correctly identify a completely sorted
+array (as all triples will be sorted). We just need to consider when a not
+mostly sorted array is labeled as {\tt SORTED}.
+
+Let the adversary provide an input that is initially completely sorted with
+the first (more than) $n/10$ distinct elements removed from the front of the
+sorted array and appended to the end of the array after the other (less than)
+$9n/10$ sorted elements. This yields an array which is sorted in two
+sections, the first with less than $9n/10$ and the second with more than
+$n/10$ elements. Now, there exist only two triples that are unsorted (located
+where the two sorted sections meet).
+
+The probability that these two triples are picked is
+$$ \frac{2}{n - 2} $$
+Therefore the probability that these two are not picked is
+$$ 1 - \frac{2}{n - 2} $$
+The probability that this algorithm incorrectly identifies an unsorted array
+as {\tt SORTED} after $k$ such random triple evaluations is,
+$$ \left(1 - \frac{2}{n - 2}\right)^k $$
+We want this probability to be less than $1/3$, therefore,
+$$ \left(1 - \frac{2}{n - 2}\right)^k < \frac{1}{3} $$
+Solving for $k$ yields
+$$ k < \frac{\log \frac{1}{3}}{\log\left(1 - \frac{2}{n - 2}\right)} $$
+Taking the limit of this over $n$,
+$$ \lim_{n \to \infty} \frac{\log \frac{1}{3}}{n \log\left(1 - \frac{2}{n -
+2}\right)} = \frac{\log 3}{2} $$
+Therefore $k \in \Theta(n)$ which shows it is $\Omega(n)$.
+
+\problempart % Problem 1c
+
+At some point, \textproc{ Binary-Search}($A$, $x_1$, $0$, $n$) and \textproc{
+Binary-Search}($A$, $x_2$, $0$, $n$) diverge. At this point, if {\tt NOT
+FOUND} and {\tt OUT OF ORDER} are not returned the median evaluation
+conditional evaluated differently (e.g. $x_1 < A[m]$ and $x_2 \geq A[m]$).
+If $x_1 < A[m]$ and $x_2 \geq A[m]$, since \textproc{ Binary-Search} would
+recurse left for $x_1$ and right for $x_2$, it must be true that \textproc{
+Binary-Search}($A$, $x_1$, $0$, $n$) $<$ \textproc{ Binary-Search}($A$, $x_2$,
+$0$, $n$). Furthermore, by transitivity, if $x_1 < A[m]$ and $x_2 \geq A[m]$,
+and $x_1$ and $x_2$ are distinct, $x_1 < x_2$.
+
+\problempart % Problem 1d
+
+Suppose for contradiction that $A$ is not mostly sorted and more than $9n/10$
+indices can pass the \textproc{ Binary-Search-Test}. From Part C, we know that
+if the \textproc{ Binary-Search} succeeds, we can use the output to construct
+the ordering of the more than $9n/10$ elements. Therefore, if more than
+$9n/10$ elements are ordered, then the array is mostly sorted and this is a
+contradiction.
+
+\problempart % Problem 1e
+
+{\bf Description} Randomly select an index and run \textproc{Binary-Search-Test}
+for that index. Repeat 22 times (total). If any of the results fail,
+terminate early and return {\tt UNSORTED}. If all of the results pass, return
+{\tt SORTED}
+
+{\bf Correctness} By definition, if the input is sorted, this algorithm will
+always correctly return {\tt SORTED} as all \textproc{ Binary-Search-Test} will 
+always pass. We just need to consider when the algorithm will take a not
+mostly sorted array as input and return {\tt SORTED}. In order for this
+algorithm to incorrectly return {\tt SORTED} for a not mostly sorted array.
+For this to occur, all of the $k$ \textproc{ Binary-Search-Test} would pass. For
+a not mostly sorted array, this will occur (from Part D) at most $9/10$ of
+the time. Therefore, the probability of incorrectly returning {\tt SORTED}
+for a not mostly sorted array is given by
+$$ \left(\frac{9}{10}\right)^k $$
+Since we want this to be less than $1/10$, we get the inequality,
+$$ \left(\frac{9}{10}\right)^k < \frac{1}{10} $$
+Solving for $k$ yields,
+$$ k \approx 21.8543 $$
+Therefore, by choosing $k = 22$, we can guarantee that the error is less than
+$1/10$ of the time.
+
+{\bf Running Time} Each \textproc{ Binary-Search-Test} takes $O(\log n)$. We
+execute this only a constant number of times, therefore the overall runtime
+is $O(\log n)$.
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+
+\begin{problemparts}
+
+\problempart % Problem 2a
+
+{\bf Description} The Markov chain $H$ describing the provided procedure has
+the following properties.
+
+\begin{itemize}
+  \item The set of all possible vertices $V_H$ represent all valid
+  $q$-colorings $f$ of the graph $G$.
+  \item The starting vertex $v_h$ is the initial valid $q$-coloring $f_0$ of
+  the graph $G$ before the procedure begins.
+  \item The edges $E_H$ represent transitions between one valid $q$-coloring
+  $i$ to another valid $q$-coloring $i + 1$ where only a single vertex $v$
+  changes color. Self-loops exist on all vertices.
+  \item The weight $p_e$ for an edge $e \in E_H$ that changes the color of a
+  vertex $v$ from $f_i(v)$ to $f_{i+1}(v)$ (such that $f_i(v) \neq f_{i +
+  1}(v)$, assuming such an edge exists) is given by
+  $$ \frac{1}{|V|} \cdot \frac{1}{|\{c \mid c \neq f_i(w)\ \forall w \in
+  N(v)\}|} $$
+  
+  And the weight $p_e$ for an edge $e \in E_H$ that is a self-loop such that
+  $f_i(v) = f_{i + 1}(v)\ \forall v \in V$ is given by
+  $$ \frac{1}{|V|} \sum_{v \in V} \frac{1}{|\{c \mid c \neq f_i(w)\ \forall w
+  \in N(v)\}|} $$
+\end{itemize}
+
+{\bf Correctness} We show that this procedure is correctly represented by the
+provided Markov chain.
+
+\begin{itemize}
+  \item All possible $q$-colorings represent all the states of the procedure.
+  As a result, they each have a vertex in the Markov chain. There is no other
+  state needed to remember within the procedure.
+  \item The first starting state of the procedure is the initial state. The
+  initial starting state is the initial coloring of the graph.
+  \item We can only transition between two states by changing a single
+  vertex's color to another valid color. Since the current vertex color is
+  also valid, there are self-loops.
+  \item To transition between two states where a single vertex changes color,
+  there are $|V|$ vertices to choose from and each vertex $v$ has $|\{c \mid
+  c \neq f_i(w)\ \forall w \in N(v)\}|$ possible colors to choose from.
+  Therefore, the probability of choosing one (since all are uniform) is 
+  $$ \frac{1}{|V|} \cdot \frac{1}{|\{c \mid c \neq f_i(w)\ \forall w \in
+  N(v)\}|} $$
+
+  Furthermore, if transitioning in a self-loop, each vertex can change back
+  to itself. Therefore, the same probability is summed over all vertices,
+  $$ \frac{1}{|V|} \sum_{v \in V} \frac{1}{|\{c \mid c \neq f_i(w)\ \forall w
+  \in N(v)\}|} $$
+\end{itemize}
+
+By definition, the the total weight going out from a vertex is summed to $1$.
+Also, each of the state transitions are independent of previous transitions.
+Therefore, this is a valid Markov chain.
+
+\problempart % Problem 2b
+
+To show that this Markov chain is strongly connected, we develop a process to
+convert any valid $q$-coloring to another valid $q$-coloring using a walk in
+the Markov chain (i.e. one vertex at a time such that each intermediate state
+is also a valid $q$-coloring).
+
+{\bf Description} Let $f_a$ be a valid, initial $q$-coloring for a graph $G$.
+Let $f_b$ be the valid $q$-coloring we wish to transition to from $f_a$ using
+the Markov chain defined in Part A. For every vertex $v \in V$, if $f_a(v) =
+f_b(v)$, don't make a change to the graph coloring. If $f_a(v) \neq f_b(v)$
+and $f_b(v) \not\in \{f_a(w) \mid\ \forall w \in N(v)\}$, change $f_a(v)$
+such that $f_a'(v) = f_b(v)$. If, on the other hand, $f_b(v) \in \{f_a(w)
+\mid\ \forall w \in N(v)\}$, find all vertices $w \in N(v)$ such that $f_a(w)
+= f_b(v)$ (i.e. the conflicting colored neighbor vertex) and change $f_a(w)$
+such that $f_a'(w) \neq f_b(v)$ and $f_a'(w) \neq f_a(u)\ \forall u \in
+N(w)$. Now change $f_a'(v)$ such that $f_a''(v) = f_b(v)$.
+
+{\bf Correctness} Considering case-by-case. If $f_a(v) = f_b(v)$, there is
+nothing that needs to be done as the vertex is already correctly colored. If
+$f_a(v) \neq f_b(v)$ and all the neighboring colors of $v$ in the current
+state do not conflict with $f_b(v)$, then it is trivial to simply change that
+color to the desired color. If $f_a(v) \neq f_b(v)$ and there are neighboring
+colors of $v$ in the current state that conflict with $f_b(v)$, they must
+first be changed before changing the color of $v$. Since $q$ is at least
+$d_{\mathrm{max}} + 2$, every vertex has at least one color it can be changed
+to without conflicting with any of its neighbors (the bound of the chromatic
+number is $d_{\mathrm{max}} + 1$). We use this fact to change the color of
+the conflicting neighbors to non-conflicting states. Then we are free to
+change $v$ to the desired color $f_b(v)$. Note: This will never overwrite the
+colors of previously corrected vertices as the resulting $q$-coloring $f_b$
+must be valid and therefore any already-touched vertices cannot be
+conflicting with $f_b(v)$.
+
+Therefore, the Markov chain is strongly connected as any two colorings can be
+transitioned to using the Markov chain.
+
+\problempart % Problem 2c
+
+Given that there are vertices in the Markov chain $H$ that have self-loops of
+length 1 (as shown in Part A) and the graph is strongly connected (as shown
+in Part B), the greatest common divisor of all cycle lengths in $H$ is
+trivially 1.
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 3
+
+\begin{problemparts}
+
+\problempart % Problem 3a
+
+{\bf Description} The walk matrix for graph $G$ is
+$$ W = \begin{pmatrix}
+    0 & 1/2 & 1/3 &   0 & 1/2 \\
+  1/3 &   0 & 1/3 &   0 &   0 \\
+  1/3 & 1/2 &   0 & 1/2 &   0 \\
+    0 &   0 & 1/3 &   0 & 1/2 \\
+  1/3 &   0 &   0 & 1/2 &   0
+\end{pmatrix} $$
+
+{\bf Correctness} The element in row $i$ and column $j$ of the matrix $W$
+represents the probability of transitioning from the $j$th vertex to the
+$i$th vertex of graph $G$.
+
+Vertex 1 in $G$ is connected to vertices 2, 3, and 5. Each have an equal
+likelihood of being chosen so transition probabilities are each $1/3$. Hence
+column 1 in matrix $W$ has elements 2, 3, and 5 equal to $1/3$ and the rest
+are equal to zero as these vertices are unreachable directly from vertex 1. A
+similar argument can be constructed for the remaining vertices of $G$ and
+columns of $W$.
+
+Furthermore, $W p_t = p_{t + 1}$ must be satisfied by definition. Given by
+the setup where each column of $W$ represents transitions from a single
+vertex of $G$ and the definition of matrix multiplication, this is trivially
+true.
+
+\problempart % Problem 3b
+
+{\bf Description} The stationary distribution of graph $G$ is
+$$ \pi = \begin{pmatrix}
+  1/4 \\
+  1/6 \\
+  1/4 \\
+  1/6 \\
+  1/6
+\end{pmatrix} $$
+
+{\bf Correctness} The eigendecomposition of the matrix $W$ yields the
+following eigenvalues
+$$ \lambda_1 = 1, \lambda_2 = -5/6, \lambda_3 = -1/2, \lambda_4 = 0,
+\lambda_5 = 1/3 $$
+The eigenvector corresponding to the largest, positive eigenvalue yields the
+stationary distribution. This eigenvector (normalized such that the sum is
+equal to 1) is
+$$ v_1 = \begin{pmatrix}
+  1/4 \\
+  1/6 \\
+  1/4 \\
+  1/6 \\
+  1/6
+\end{pmatrix} $$
+Thus, this is the stationary distribution $\pi$.
+
+Note: This can also be seen naively by computing $W^{100}$ which is
+$$ W^{100} \approx \begin{pmatrix}
+  1/4 & 1/4 & 1/4 & 1/4 & 1/4 \\
+  1/6 & 1/6 & 1/6 & 1/6 & 1/6 \\
+  1/4 & 1/4 & 1/4 & 1/4 & 1/4 \\
+  1/6 & 1/6 & 1/6 & 1/6 & 1/6 \\
+  1/6 & 1/6 & 1/6 & 1/6 & 1/6
+\end{pmatrix} $$
+
+\problempart % Problem 3c
+
+{\bf Description} The minimal value of $t$ such that each entry of $p_t$ is
+within an additive error of 0.01 of the corresponding entry of the stationary
+distribution from Part B is $t = 17$.
+
+{\bf Correctness} We can compute $W^{16} p_0 = p_{16}$
+$$ p_{16} \approx \begin{pmatrix}
+  0.261 \\
+  0.167 \\
+  0.239 \\
+  0.177 \\
+  0.156
+\end{pmatrix} $$
+The difference between $p_{16}$ and $p_{\infty}$ is
+$$ |p_{16} - p_{\infty}| \approx \begin{pmatrix}
+  0.011 \\
+  0.000 \\
+  0.011 \\
+  0.011 \\
+  0.011
+\end{pmatrix} $$
+Therefore, $p_{16}$ is not quite close enough to $p_{\infty}$. We can also
+compute $W^{17} p_0 = p_{17}$
+$$ p_{17} \approx \begin{pmatrix}
+  0.241 \\
+  0.167 \\
+  0.259 \\
+  0.158 \\
+  0.176
+\end{pmatrix} $$
+The difference between $p_{17}$ and $p_{\infty}$ is
+$$ |p_{17} - p_{\infty}| \approx \begin{pmatrix}
+  0.009 \\
+  0.000 \\
+  0.009 \\
+  0.009 \\
+  0.009
+\end{pmatrix} $$
+Therefore, $p_{17}$ is the first $p_t$ close enough to $p_{\infty}$ within an
+additive error of 0.01.
+
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
+
