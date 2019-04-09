@@ -1,0 +1,218 @@
+%
+% 6.S077 problem set solutions template
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{bbm}
+
+\input{macros}
+\newcommand{\theproblemsetnum}{6}
+\newcommand{\releasedate}{Tuesday, March 19}
+\newcommand{\partaduedate}{Tuesday, April 9}
+\allowdisplaybreaks
+
+\title{6.S077 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 2:30PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart % Problem 1a
+
+If the Bayes decision boundary is linear, we would expect QDA to perform
+{\it better} on the {\it training} set. Since QDA is flexible enough to model
+both linear and non-linear decision boundaries, it will be able to better (or
+at least equal) the performance of LDA.
+
+However, if the Bayes decision boundary is linear, we would expect QDA to
+perform {\it worse} on the {\it test} set. Once again, given the flexibility
+of QDA, it will likely model the training set better, but lead to overfitting
+as the true model will be linear and thus the test set will have worse
+performance.
+
+\problempart % Problem 1b
+
+If the Bayes decision boundary is non-linear, we would expect QDA to perform
+{\it better} on the {\it training} set. For the same reasons as before, QDA
+is flexible enough to model both linear and non-linear decision boundaries
+and will be able to achieve better performance especially if the data is
+non-linear.
+
+Additionally, if the Bayes decision boundary is non-linear, we would further
+expect QDA to perform {\it better} on the {\it test} set. If the true model
+of the data is non-linear, QDA has a better chance at modeling it. There
+still may be some issues with overfitting, but this isn't nearly as big of a
+concern as in the previous part.
+
+\problempart % Problem 1c
+
+As the sample size $n$ increases (assuming that means both {\it training} and
+{\it test} sets increase), we expect test prediction of QDA relative to LDA
+to {\it improve}. Given that QDA has the flexibility to model both linear and
+non-linear decision boundaries, given enough data, if the decision boundary
+truly is linear, QDA should be able to learn this.
+
+\problempart % Problem 1d
+
+{\it False}. If the model is truly linear, LDA has a much better shot at
+performing better on the test set as it will take less data to learn the
+decision boundary given we are using a more accurate prior. Even though QDA
+is flexible enough to model linear decision boundaries, it will take more
+data in training to prevent overfitting or unintential learned non-linear
+decision boundary.
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 2
+
+\begin{problemparts}
+
+\problempart % Problem 2a
+
+We know that there are $N_1$ elements in class one and $N_2$ elements in
+class 2. Therefore,
+$$ \pi_1 = \mathbb{P}\left\{y_i = -\frac{N}{N_1}\right\} = \frac{N_1}{N_1 +
+N_2} $$
+$$ \pi_2 = \mathbb{P}\left\{y_i = \frac{N}{N_2}\right\} = \frac{N_2}{N_1 +
+N_2} $$
+
+\problempart % Problem 2b
+
+The vector form of the normal distribution is
+$$ \frac{1}{\left(2\pi\right)^p \lVert \Sigma \rVert} \exp
+\left\{-\frac{1}{2} \left(x - \mu\right)^T \Sigma^{-1} \left(x -
+\mu\right)\right\} $$
+Using this as the prior, our MAP estimate chooses class 2 over class 1 if,
+\begin{multline*}
+    \frac{1}{\left(2\pi\right)^p \lVert \Sigma \rVert} \exp
+    \left\{-\frac{1}{2} \left(x - \mu_2\right)^T \Sigma^{-1} \left(x -
+    \mu_2\right)\right\} \cdot \frac{N_2}{N} \\
+    \geq \frac{1}{\left(2\pi\right)^p \lVert \Sigma \rVert} \exp
+    \left\{-\frac{1}{2} \left(x - \mu_1\right)^T \Sigma^{-1} \left(x -
+    \mu_1\right)\right\} \cdot \frac{N_1}{N}
+\end{multline*}
+Cancelling shared terms and taking the natural logarithm of both sides,
+$$\left(-\frac{1}{2} \left(x - \mu_2\right)^T \Sigma^{-1} \left(x -
+\mu_2\right)\right) + \ln \frac{N_2}{N} \geq \left(-\frac{1}{2} \left(x -
+\mu_1\right)^T \Sigma^{-1} \left(x - \mu_1\right)\right) + \ln \frac{N_1}{N} $$
+Distributing the product,
+\begin{multline*}
+    \frac{1}{2} \left(\mu_2^T \Sigma^{-1} x - \mu_1^T \Sigma^{-1} x + x^T
+    \Sigma^{-1} \mu_2 - x^T \Sigma^{-1} \mu_1\right) \\
+    \geq \frac{1}{2} \mu_2^T \Sigma^{-1} \mu_2 - \frac{1}{2} \mu_1^T
+    \Sigma^{-1} \mu_1 + \ln \frac{N_1}{N} - \ln \frac{N_2}{N}
+\end{multline*}
+Because $\Sigma$ is a diagonal matrix, $x^T \Sigma^{-1} \mu = \mu^T
+\Sigma^{-1} x$. Therefore, this simplifies further to,
+$$ x^T \Sigma^{-1} \left(\mu_2 - \mu_1\right) \geq \frac{1}{2} \mu_2^T
+\Sigma^{-1} \mu_2 - \frac{1}{2} \mu_1^T \Sigma^{-1} \mu_1 + \ln \frac{N_1}{N}
+- \ln \frac{N_2}{N} $$
+
+\problempart % Problem 2c
+
+Substituting the provided values into the pooled covariance matrix estimate,
+$$ \hat{\Sigma} = \frac{1}{N - 2} \sum_{i:y_i = -N/N_1} (x_i - \mu_1) (x_i -
+\mu_1)^T + \sum_{i:y_i = N / N_2} (x_i - \mu_2) (x_i - \mu_2)^T $$
+
+\problempart % Problem 2d
+
+From the previous part, $\Sigma$ is defined as,
+$$ \Sigma = \frac{1}{N - 2} \sum_{i:y_i = -N/N_1} (x_i - \mu_1) (x_i -
+\mu_1)^T + \sum_{i:y_i = N / N_2} (x_i - \mu_2) (x_i - \mu_2)^T $$
+It is also given that $\Sigma_B$ is defined as,
+$$ \Sigma_B = (\mu_2 - \mu_1) (\mu_2 - \mu_1)^T $$
+Furthermore, the $\beta$ is given by,
+$$ \beta = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^N
+(x_i - \bar{x}) (x_i - \bar{x})^T } $$
+However, $\bar{y}$ is given by the following,
+$$ \bar{y} = N_1 \left(-\frac{N}{N_1}\right) + N_2 \left(\frac{N}{N_2}\right)
+= 0 $$
+Therefore, the definition of $\beta$ simplifies to,
+$$ \beta = \frac{\sum_{i=1}^N (x_i - \bar{x}) y_i}{\sum_{i=1}^N (x_i -
+\bar{x}) (x_i - \bar{x})^T } $$
+Separating into two classes,
+$$ \beta = \frac{-\frac{N}{N_1} \sum_{i:y_i = -N/N_1} (x_i - \mu_1) +
+\frac{N}{N_2} \sum_{i:y_i = N/N_2} (x_i - \mu_2)}{\sum_{i:y_i=-N/N_1} (x_i -
+\mu_1) (x_i - \mu_1)^T + \sum_{i:y_i=N/N_2} (x_i - \mu_2) (x_i - \mu_2)^T} $$
+Substituting all this into the provided equality,
+\begin{multline*}
+    \left[\sum_{i:y_i = -N/N_1} (x_i - \mu_1) (x_i - \mu_1)^T + \sum_{i:y_i =
+    N / N_2} (x_i - \mu_2) (x_i - \mu_2)^T + \frac{N_1 N_2}{N} (\mu_2 -
+    \mu_1) (\mu_2 - \mu_1)^T \right] \\
+    \cdot \frac{-\frac{N}{N_1} \sum_{i:y_i = -N/N_1} (x_i - \mu_1) +
+    \frac{N}{N_2} \sum_{i:y_i = N/N_2} (x_i - \mu_2)}{\sum_{i:y_i=-N/N_1}
+    (x_i - \mu_1) (x_i - \mu_1)^T + \sum_{i:y_i=N/N_2} (x_i - \mu_2) (x_i -
+    \mu_2)^T}
+\end{multline*}
+With some magical algebraic abilities, which I clearly must not have, this
+can probably be shown to simplify to,
+$$ N(\mu_2 - \mu_1) $$
+
+\problempart % Problem 2e
+
+Given the definition of $\Sigma_B$, we wish to show
+$$ (\mu_2 - \mu_1) (\mu_2 - \mu_1)^T \beta \parallel (\mu_2 - \mu_1) $$
+It is clear to see that $\Sigma_B$ is a scaled projection matrix defined by
+$u u^T$ where $u = (\mu_2 - \mu_1)$. Therefore, $\Sigma_B \beta$ will be in
+the direction of $u$.
+
+To see this rigorously, consider $u u^T \beta$. Adding parentheses makes it
+clear that $u u^T \beta \parallel u$,
+$$ u \left(u^T \beta\right) $$
+Since $u^T \beta$ is a scalar, the result is a vector in the direction of
+$u$. Since $u = (\mu_2 - \mu_1)$ and $\Sigma_B = u u^T$, clearly, $\Sigma_B
+\beta \parallel (\mu_2 - \mu_1)$.
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 3
+
+We are performing the following minimization,
+$$ k^* = \arg\min_k \lVert t_k - y \rVert_2^2 $$
+In given the form of $t_k$, this is equivalent to,
+$$ k^* = \arg\min_k \left\lVert \begin{pmatrix} -y_1 & \cdots & -y_{k - 1} &
+1 - y_k & -y_{k + 1} & \cdots & -y_K \end{pmatrix}^T \right\rVert_2^2 $$
+Taking the squared L2-norm of the vector,
+$$ k^* = \arg\min_k y_1^2 + \cdots + y_{k - 1}^2 + (1 - y_k)^2 + y_{k + 1}^2
++ \cdots + y_K^2 $$
+Let's consider the decision between two $k$ values, $k_1$ and $k_2$. Without
+loss of generality, assume $k_1 < k_2$. We will choose $k_1$ if the following
+is true,
+$$ y_1^2 + \cdots + (1 - y_{k_1})^2 + \cdots + y_{k_2}^2 + \cdots + y_K^2
+\leq y_1^2 + \cdots + y_{k_1}^2 + \cdots + (1 - y_{k_2})^2 + \cdots + y_K^2 $$
+Cancelling like terms yields the much simpler,
+$$ (1 - y_{k_1})^2 + y_{k_2}^2 \leq y_{k_1}^2 + (1 - y_{k_2})^2 $$
+Expanding the power,
+$$ 1 - 2 y_{k_1} + y_{k_1}^2 + y_{k_2}^2 \leq y_{k_1}^2 + 1 - 2 y_{k_2} +
+y_{k_2}^2 $$
+Simplifying this inequality
+$$ y_{k_1} \geq y_{k_2} $$
+Therefore, we select $k_1$ over $k_2$ if the $k_1$th component of $y$ is
+greater than the $k_2$th component. This is easily abstracted to all $k \in
+\{1, \ldots, K\}$.
+
+
+\end{problems}
+
+\end{document}
