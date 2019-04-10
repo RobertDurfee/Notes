@@ -17,6 +17,7 @@ RUN pip3 install \
     pandas \
     seaborn \
     statsmodels \
+    linearmodels \
     scikit-learn
 
 RUN useradd -ms /bin/bash jovyan
