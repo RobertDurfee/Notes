@@ -6,7 +6,7 @@
 \input{macros}
 \usepackage{enumitem}
 \newcommand{\theproblemsetnum}{4}
-\newcommand{\releasedate}{Monday, April 8}
+\newcommand{\releasedate}{Monday, April 5}
 \newcommand{\partaduedate}{Friday, April 12}
 
 \title{14.32 Problem Set \theproblemsetnum}
@@ -35,9 +35,68 @@
 
 \problempart  % Problem 1a
 
+We assume the population is governed by the following model,
+$$ y_i^* = \beta_0 + \beta_1 x_i^* + \varepsilon_i $$
+However, we have measurement error on $y_i$. Therefore, the model we have
+access to is,
+$$ y_i = \beta_0 + \beta_1 x_i^* + \varepsilon_i + \zeta_i $$
+To show that the estimate $\hat{\beta}_1$ is still consistent, we take the
+probability limit,
+\begin{align*}
+    \plim \hat{\beta}_1 &= \plim \left(\frac{\hat{\cov}(x_i^*,
+    y_i)}{\hat{\var}(x_i^*)}\right) \\
+    &= \plim \left(\frac{\hat{\cov} (x_i^*, \beta_0 + \beta_1 x_i^* +
+    \varepsilon_i + \zeta_i)}{\hat{\var}(x_i^*)}\right) \\
+    &= \plim \left(\frac{\beta_1 \hat{\var} (x_i^*) + \hat{\cov}(x_i^*,
+    \varepsilon_i) + \hat{\cov}(x_i^*, \zeta_i)}{\hat{\var} (x_i^*)}\right) \\
+    &= \plim \left(\beta_1 + \frac{\hat{\cov}(x_i^*, \varepsilon_i) +
+    \hat{\cov}(x_i^*, \zeta_i)}{\hat{\var} (x_i^*)}\right) \\
+    &= \beta_1 + \frac{\cov(x_i^*, \varepsilon_i) + \cov(x_i^*,
+    \zeta_i)}{\var (x_i^*)} \\
+\end{align*}
+If we assume $\cov(x_i^*, \varepsilon_i) = 0$ and $\cov(x_i^*, \zeta_i) = 0$,
+as stated in the problem, this reduces to,
+$$ \plim \hat{\beta}_1 = \beta_1 $$
+As a result, the estimate is consistent.
+
 \problempart  % Problem 1b
 
+Instead of considering consistency, we can also consider the variance of the
+estimate.
+\begin{align*}
+    \var(\hat{\beta}_1) &= \var\left(\frac{\hat{\cov}(x_i^*,
+    y_i)}{\hat{\var}(x_i^*)}\right) \\
+    &= \var\left(\frac{\sum_i (x_i^* - \bar{x}^*) (y_i - \bar{y})}{\sum_i
+    (x_i^* - \bar{x}^*)^2}\right) \\
+    &= \var\left(\frac{\sum_i (x_i^* - \bar{x}^*) y_i}{\sum_i (x_i^* -
+    \bar{x}^*)^2}\right) \\
+    &= \var\left(\frac{\sum_i (x_i^* - \bar{x}^*) (\beta_0 + \beta_1 x_i^* +
+    \varepsilon_i + \zeta_i)}{\sum_i (x_i^* - \bar{x}^*)^2}\right)
+\end{align*}
+Because only $\varepsilon_i$ and $\zeta_i$ are random, this reduces to,
+\begin{align*}
+    \var(\hat{\beta}_1) &= \var\left(\frac{\sum_i (x_i^* - \bar{x}^*)
+    (\varepsilon_i + \zeta_i)}{\sum_i (x_i^* - \bar{x}^*)^2}\right) \\
+    &= \frac{\sum_i (x_i^* - \bar{x}^*)(\var (\varepsilon_i) + \var
+    (\zeta_i))}{\sum_i (x_i^* - \bar{x}^*)^2}
+\end{align*}
+Assuming homoskedasticity,
+\begin{align*}
+    \var(\hat{\beta}_1) &= \frac{\sum_i (x_i^* - \bar{x}^*)}{\sum_i (x_i^* -
+    \bar{x}^*)^2}(\var (\varepsilon) + \var (\zeta))
+\end{align*}
+Comparing this to the case with no measurement error (i.e. no $\zeta_i$),
+\begin{align*}
+    \var(\hat{\beta}_1) &= \frac{\sum_i (x_i^* - \bar{x}^*)}{\sum_i (x_i^* -
+    \bar{x}^*)^2}\var (\varepsilon)
+\end{align*}
+Therefore, so long as $\var(\zeta) \neq 0$, the variance of the estimator
+$\hat{\beta}_1$ with measurement will be greater than the variance without
+measurement error.
+
 \end{problemparts}
+
+\newpage
 
 \problem  % Problem 2
 
@@ -45,15 +104,105 @@
 
 \problempart % Problem 2a
 
+We assume the population is governed by the following model,
+$$ y_i^* = \beta_0 + \beta_1 x_i^* + \varepsilon_i $$
+However, we have measurement error on $x_i = x_i^* + \nu_i$. To show that the
+estimate $\hat{\beta}_1$ is now inconsistent, we take the probability limit,
+\begin{align*}
+    \plim \hat{\beta}_1 &= \plim \left(\frac{\hat{\cov}(x_i,
+    y_i^*)}{\hat{\var}(x_i)}\right) \\
+    &= \plim \left(\frac{\hat{\cov}(x_i^* + \nu_i, \beta_0 + \beta_1 x_i^* +
+    \varepsilon_i)}{\hat{\var}(x_i^* + \nu_i)}\right) \\
+    &= \plim \left(\frac{\beta_1 \hat{\var}(x_i^*) + \beta_1
+    \hat{\cov}(\nu_i, x_i^*) + \hat{\cov}(x_i^*, \varepsilon_i) +
+    \hat{\cov}(\nu_i, \varepsilon_i)}{\hat{\var}(x_i^*) +
+    \hat{\var}(\nu_i)}\right) \\
+    &= \frac{\beta_1 \var(x_i^*) + \beta_1 \cov(\nu_i, x_i^*) + \cov(x_i^*,
+    \varepsilon_i) + \cov(\nu_i, \varepsilon_i)}{\var(x_i^*) +
+    \var(\nu_i)}
+\end{align*}
+If we assume $\cov(\nu_i, x_i^*) = 0$, $\cov(x_i^*, \varepsilon_i) = 0$, and
+$\cov(\nu_i, \varepsilon_i) = 0$, this simplifies to,
+\begin{align*}
+    \plim \hat{\beta}_1 &= \beta_1 \frac{\var(x_i^*)}{\var(x_i^*) +
+    \var(\nu_i)}
+\end{align*}
+However, this cannot simplify any further. As a result, the estimate
+$\hat{\beta}_1$ is inconsistent.
+
 \problempart % Problem 2b
+
+Using the same calculation as above, but substituting $x_i = x_i^* + \nu_i$
+with $z_i = x_i^* + \eta_i$ yields,
+\begin{align*}
+    \plim \hat{\beta}_1 &= \beta_1 \frac{\var(x_i^*)}{\var(x_i^*) +
+    \var(\eta_i)}
+\end{align*}
+This result is still inconsistent. Furthermore, since $\var(\eta_i)$ is
+likely greater than $\var(\nu_i)$ (and thus further from zero), this result
+is likely worse than the previous.
 
 \problempart % Problem 2c
 
+Suppose we are regressing using the following model,
+$$ x_i = \beta_0 + \beta_1 z_i + \varepsilon_i $$
+The estimate $\hat{\beta}_1$ will converge to the following,
+\begin{align*}
+    \plim \hat{\beta}_1 &= \plim \left(\frac{\hat{\cov}(x_i,
+    z_i)}{\hat{\var}(z_i)}\right) \\
+    &= \plim \left(\frac{\hat{\cov}(x_i^* + \nu_i, x_i^* +
+    \eta_i)}{\hat{\var}(x_i^* + \eta_i)}\right) \\
+    &= \plim \left(\frac{\hat{\var}(x_i^*) + \hat{\cov}(x_i^*, \eta_i) +
+    \hat{\cov}(\nu_i, x_i^*) + \hat{\cov}(\nu_i, \eta_i)}{\hat{\var}(x_i^*) +
+    \hat{\var}(\eta_i)}\right) \\
+    &= \frac{\var(x_i^*) + \cov(x_i^*, \eta_i) +
+    \cov(\nu_i, x_i^*) + \cov(\nu_i, \eta_i)}{\var(x_i^*) +
+    \var(\eta_i)}
+\end{align*}
+If we assume $\cov(\nu_i, x_i^*) = 0$, $\cov(x_i^*, \eta_i) = 0$, and
+$\cov(\nu_i, \eta_i) = 0$, this simplifies to,
+\begin{align*}
+    \plim \hat{\beta}_1 &= \frac{\var(x_i^*)}{\var(x_i^*) + \var(\eta_i)}
+\end{align*}
+
 \problempart % Problem 2d
+
+If we take the estimate from Part B,
+\begin{align*}
+    \plim \hat{\beta}_1^{yz} &= \beta_1 \frac{\var(x_i^*)}{\var(x_i^*) +
+    \var(\eta_i)}
+\end{align*}
+And divide it by the estimate from Part C,
+\begin{align*}
+    \plim \hat{\beta}_1^{xz} &= \frac{\var(x_i^*)}{\var(x_i^*) + \var(\eta_i)}
+\end{align*}
+We are left with the true $\beta_1$,
+$$\plim \left(\frac{\hat{\beta}_1^{yz}}{\hat{\beta}_1^{xz}}\right) = \beta_1 $$
 
 \problempart % Problem 2e
 
+First, we check the condition of exogeneity (i.e. $\cov (\varepsilon_i, z_i)
+= 0$).
+\begin{align*}
+    \cov (\varepsilon_i, z_i) &= \cov(\varepsilon_i, x_i^* + \eta_i) \\
+    &= \cov(\varepsilon_i, x_i^*) + \cov(\varepsilon_i, \eta_i) \\
+    &= 0
+\end{align*}
+Therefore, by the assumptions of the problem statement, the exogeneity
+requirement is satisfied.
+
+Next, we check the condition of relevance (i.e. $\cov(x_i^*, z_i) \neq 0$).
+\begin{align*}
+    \cov (x_i^*, z_i) &= \cov(x_i^*, x_i^* + \eta_i) \\
+    &= \var(x_i^*) + \cov(x_i^*, \eta_i) \\
+    &= \var(x_i^*)
+\end{align*}
+It is unlikely that the variance of $x_i^*$ will be zero. As a result, the
+instrument is relevant.
+
 \end{problemparts}
+
+\newpage
 
 \problem  % Problem 3
 
@@ -61,21 +210,211 @@
 
 \problempart % Problem 3a
 
+We consider the two simultaneous equations, 
+$$ cri_i = \alpha_0 + \alpha_1 pol_i + \alpha_2 pop_i +
+\varepsilon_i $$
+$$ pol_i = \beta_0 + \beta_1 cri_i + \beta_2 pop_i + \eta_i $$
+To show the estimate for $\alpha_1$ is biased, we prove $\cov(pol_i,
+\varepsilon_i) \neq 0$,
+\begin{align*}
+    \cov(pol_i, \varepsilon_i) &= \cov(\beta_0 + \beta_1 cri_i + \beta_2
+    pop_i + \eta_i, \varepsilon_i) \\
+    &= \cov(\beta_0 + \beta_1 (\alpha_0 + \alpha_1 pol_i + \alpha_2
+    pop_i + \varepsilon_i) + \beta_2 pop_i + \eta_i,
+    \varepsilon_i) \\
+    &= \cov(\beta_0 + \beta_1 (\alpha_0 + \alpha_1 pol_i + \alpha_2
+    pop_i) + \beta_2 pop_i + \eta_i,
+    \varepsilon_i) + \beta_1 \var(\varepsilon_i) 
+\end{align*}
+Since $\var (\varepsilon_i) \neq 0$, this shows that $\cov(pol_i,
+\varepsilon_i) \neq 0$.
+
 \problempart % Problem 3b
+
+We start with the equation for $pol_i$,
+\begin{align*}
+    pol_i &= \beta_0 + \beta_1 cri_i + \beta_2 pop_i + \eta_i \\
+    pol_i &= \beta_0 + \beta_1 (\alpha_0 + \alpha_1 pol_i +
+    \alpha_2 pop_i + \varepsilon_i)+ \beta_2 pop_i + \eta_i \\
+    (1 - \beta_1 \alpha_1) pol_i &= \beta_0 + \beta_1 \alpha_0 +
+    (\beta_1 \alpha_2 + \beta_2) pop_i + \beta_1 \varepsilon_i +
+    \eta_i \\
+    pol_i &= \frac{\beta_0 + \beta_1 \alpha_0}{1 - \beta_1 \alpha_1}
+    + \frac{\beta_1 \alpha_2 + \beta_2}{1 - \beta_1 \alpha_1} pop_i +
+    \frac{\beta_1 \varepsilon_i + \eta_i}{1 - \beta_1 \alpha_1}
+\end{align*}
+Using the same method, the equation for $cri_i$ can be derived,
+$$ cri_i = \frac{\alpha_0 + \alpha_1 \beta_0}{1 - \alpha_1 \beta_1} +
+\frac{\alpha_1 \beta_2 - \alpha_2}{1 - \alpha_1 \beta_1} pop_i +
+\frac{\alpha_1 \eta_i + \varepsilon_i}{1 - \alpha_1 \beta_1} $$
 
 \problempart % Problem 3c
 
+If we divide the coefficient of $pop_i$, let's call it
+$\gamma^{cri}$, from the $cri_i$ equation by the coefficient, lets call
+it $\gamma^{pol}$, from the $pol_i$ equation, our result doesn't
+converge to $\alpha_1$.
+\begin{align*}
+    \frac{\gamma^{cri}}{\gamma^{pol}} &= \frac{\alpha_1 \beta_2 -
+    \alpha_2}{1 - \alpha_1 \beta_1} \cdot \frac{1 - \beta_1 \alpha_1}{\beta_1
+    \alpha_2 + \beta_2} \\
+    &= \frac{\alpha_1 \beta_2 - \alpha_2}{\beta_1 \alpha_2 + \beta_2}
+\end{align*}
+This comes from the fact that $pop_i$ is accounted for twice in the
+original model.
+
 \problempart % Problem 3d
 
+Instead of accounting for $pop_i$ in both equations, we can limit it to
+a single equation, the $pol_i$ equation. The new model could be,
+$$ cri_i = \alpha_0 + \alpha_1 pol_i + \varepsilon_i $$
+$$ pol_i = \beta_0 + \beta_1 cri_i + \beta_2 pop_i + \eta_i $$
+The reduced form of this model becomes,
+$$ cri_i = \frac{\alpha_0 + \alpha_1 \beta_0}{1 - \alpha_1 \beta_1} +
+\frac{\alpha_1 \beta_2}{1 - \alpha_1\beta_1} pop_i + \frac{\alpha_1 \eta_i +
+\varepsilon_i}{1 - \alpha_1 \beta_1} $$
+$$ pol_i = \frac{\beta_0 + \beta_1 \alpha_0}{1 - \beta_1 \alpha_1} +
+\frac{\beta_2}{1 - \beta_1\alpha_1} pop_i + \frac{\beta_1 \varepsilon_i +
+\eta_i}{1 - \beta_1 \alpha_1} $$
+Now if we divide the coefficient of $pop_i$ from the $cri_i$ equation by the
+coefficient from the $pol_i$ equation, our result converges to $\alpha_1$.
+\begin{align*}
+    \frac{\gamma^{cri}}{\gamma^{pol}} &= \frac{\alpha_1 \beta_2}{1 -
+    \alpha_1\beta_1} \cdot \frac{1 - \beta_1\alpha_1}{\beta_2} \\
+    &= \alpha_1
+\end{align*}
+
 \end{problemparts}
+
+\newpage
 
 \problem  % Problem 4
 
 \begin{problemparts}
 
+\problempart % Problem 4a
+
+Refer to the attached Jupyter notebook printout.
+
 \problempart % Problem 4b
 
+There are several possibilities for bias in the estimate of the effect of
+education on weekly earnings. Some examples could be
+\begin{itemize}
+    \item Parent's Income
+    \item Intelligence
+    \item Confidence
+\end{itemize}
+
+Consider the effect of ommitted variables mathematically,
+\begin{align*}
+    \beta^{\mathrm{obs}} &= \beta^{\mathrm{true}} + \beta^{\mathrm{omit}}
+    \frac{\cov(x^{\mathrm{omit}},
+    x^{\mathrm{true}})}{\var(x^{\mathrm{true}})} \\
+    &= \beta^{\mathrm{true}} + \frac{\cov(y,
+    x^{\mathrm{omit}})}{\var(x^{\mathrm{omit}})}\frac{\cov(x^{\mathrm{omit}},
+    x^{\mathrm{true}})}{\var(x^{\mathrm{true}})} \\
+\end{align*}
+Therefore, to consider whether the coefficient is over- or under-stated for
+each of these omitted variables, we need to consider two correlations:
+$\cov(x^{\mathrm{omit}}, x^{\mathrm{true}})$ and $\cov(y,
+x^{\mathrm{omit}})$. If both have the same sign, the observed estimate is
+over-stated. If they have different signs, the observed estimate is
+under-stated.
+
+\begin{itemize}
+    \item For parent's income ($parinc$), we should expect $\cov(parinc,
+    educ)$ to be positive as the higher parent's income, the more likely
+    someone is to attend college, graduate school, etc. But this could also
+    be negative in some cases as rich children sometimes underperform and
+    rely on their parent's money alone.
+
+    On the other hand, for $\cov(lwklywge, parinc)$, we should expect
+    children of wealthier parents to make more money themselves. Thus, this
+    effect should also be positive. Nevertheless, trust fund babies do exist,
+    so this could also be negative.
+
+    In general, we should assume it's more likely that both are positive
+    which would lead to an over-stated estimate.
+
+    \item For intelligence ($intel$), we should expect $\cov(intel, educ)$ to
+    be positive as a more intelligent person would find school easier and
+    thus go further. However, even more intelligent individuals might find
+    school boring (or realize their opportunity cost is too high) and drop
+    out early. It's probably too difficult to say what the sign of this
+    correlation is without some evidence.
+
+    For $\cov(lwklywge, intel)$, it is very likely that more intelligent
+    individuals make more money than less intelligent individuals. But, then
+    again, there are professors who quite intelligent, but might not make as
+    much as less intelligent individuals in non-academic settings. Though,
+    overall, it's likely to be more positive.
+
+    Since the first correlation is a toss up and the second is likely
+    positive, it's hard to say whether this will lead to over- or
+    under-stated estimation. If I had to guess, I would go with
+    under-stated estimates.
+
+    \item For confidence ($conf$), similar arguments apply. For $\cov(conf,
+    educ)$, it's likely positive as more confident individuals are likely to
+    do well in school and continue longer than those who are not. Yet, they
+    might be so confident that they don't need school at all!
+
+    For $\cov(lwklywge, conf)$, it is very reasonable to expect more
+    confident individuals will make more money than less confident
+    individuals. I can't really see why more confident people who make less,
+    perhaps they take too many risks? All considered, this is likely
+    positive.
+
+    For the same reasons as intelligence, this could be over- or
+    under-stated, but if I had to guess, I would go with under-stated
+    estimation.
+
+\end{itemize}
+
 \problempart % Problem 4c
+
+The two conditions the instrument $z$ needs to satisfy are relevance ($\cov(x,
+z) \neq 0$) and exogeneity ($\cov(x, \varepsilon) = 0$).
+
+First we consider relevance. Given the argument given by Angrist and Krueger,
+it certainly seems reasonable that what time of the year would have an impact
+on how much schooling you would receive. For some individuals, they are
+planning to drop out as soon as they legally can. This will solely be
+determined by the time of year they were born. However, in today's world, a
+practice of "red-shirting" is common where parent's hold their kids back for
+a year or so such that they are older than their classmates. This would mess
+with the relevance. Nevertheless, I believe the practice was not nearly as
+common back when Angrist and Krueger did their study. Therefore, I expect
+this condition is reasonably satisfied.
+
+For exogeneity, the analysis is expected to be a little simpler. Surely what
+month you were born has a negligible effect on your earnings. After all, the
+distribution of birthdays should be almost random (economist's dream). In
+some cases or careers (like Malcolm Galdwell's analysis of birthdays of
+professional hockey players) there might be some correlation to time of year
+of birth and earnings, but on the average, this is likely negligible.
+Therefore, I expect this condition is reasonably satisfied.
+
+\problempart % Problem 4d
+
+Refer to the attached Jupyter notebook printout.
+
+\problempart % Problem 4e
+
+Refer to the attached Jupyter notebook printout.
+
+\problempart % Problem 4f
+
+Refer to the attached Jupyter notebook printout.
+
+\problempart % Problem 4g
+
+Refer to the attached Jupyter notebook printout.
+
+\problempart % Problem 4h
+
+Refer to the attached Jupyter notebook printout.
 
 \end{problemparts}
 
