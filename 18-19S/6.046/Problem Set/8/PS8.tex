@@ -1,0 +1,312 @@
+%
+% 6.046 problem set 2 solutions
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{multirow}
+\usepackage{algorithm, algpseudocode, float}
+
+\input{macros}
+\usepackage{enumitem}
+\newcommand{\theproblemsetnum}{8}
+\newcommand{\releasedate}{Thursday, April 11}
+\newcommand{\partaduedate}{Wednesday, April 17}
+\allowdisplaybreaks
+
+\title{6.046 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 10PM}}.
+
+\makeatletter
+\newenvironment{breakablealgorithm}
+  {% \begin{breakablealgorithm}
+   \begin{center}
+     \refstepcounter{algorithm}% New algorithm
+     \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+     \renewcommand{\caption}[2][\relax]{% Make a new \caption
+       {\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
+       \ifx\relax##1\relax % #1 is \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+       \else % #1 is not \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+       \fi
+       \kern2pt\hrule\kern2pt
+     }
+  }{% \end{breakablealgorithm}
+     \kern2pt\hrule\relax% \@fs@post for \@fs@ruled
+   \end{center}
+  }
+\makeatother
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+{\bf Subproblems Definition} Let $A$ be a sequence (of arbitrary order) of
+the $n$ boxes Kauricio has. Let the subproblem be $x(i, v)$, which represents
+the minimum number of uses of the machine to alter boxes $\{a_i, \ldots,
+a_n\}$ such that their total volume is exactly equal to $v$.
+
+To show this is the optimal subproblem, consider the optimal number of uses
+of Kauricio's machine for the boxes $\{a_1, \ldots, a_n\}$ so the total
+volume is $V$. If this optimal solution passes through the boxes $\{a_i,
+\ldots, a_n\}$ for a total volume of $v$, then the number of uses of the
+machine is also optimal if we simply started with boxes $\{a_i, \ldots,
+a_n\}$ and a volume of $v$. If there existed some smaller number of uses
+that yielded the same volume, we could swap in the fewer number of uses.
+However, this contradicts the statement that the original solution was
+optimal.
+
+{\bf Subproblems Relation} Let the function $dim(i, n)$ take a box $a_i$ with
+dimensions $x_i, y_i, z_i$ and use Kauricio's machine to shrink or expand the
+box $n$ times. Let any $n < 0$ represent shrinking the box $n$ times and let
+$n > 0$ represent expanding the box $n$ times. Let this function return the
+new dimensions of box $a_i'$: $x_i', y_i', z_i'$. Furthermore, let $vol(i,
+n)$ perform the same operation as $dim(i, n)$, but return the volume of the
+new box $a_i'$ instead of its dimensions.
+
+Let the subproblem relation be the following: In English, for all possible
+number, $n$, of shrinking, such that all the dimensions of the box $a_i$ are
+greater than zero, or expanding, such that the total volume is less than $v$,
+choose the minimum $|n|$ and recurse on the sequence of boxes without $a_i$
+with the updated volume limit. Mathematically, this is expressed as,
+$$ x(i, v) = \min_{n : 0 < dim(i, n)\ \mathrm{and}\ vol(i, n) \leq v} \{ |n|
++ x(i + 1, v - vol(i, n)) \} $$
+
+This is a directed, acyclic graph because every $x(i, v)$ depends on a
+smaller $x(i, v)$ as $i$ will always go to $i + 1$ and $v$ will always
+decrease by at least $1$ given that all boxes have positive volume.
+
+{\bf Base Cases} Suppose we have no more volume left, but we still have
+remaining boxes to use. This refers to subproblem $x(i, 0)$. This will yield
+an impossible solution as we must use all the boxes. To represent this as an
+undesirable result, which we want to avoid if at all possible, we will return
+$\infty$. Expressed mathematically,
+$$ x(i, 0) = \infty\quad \forall i \in \{1, \ldots, n\} $$
+
+Suppose instead we have no more boxes left, but we need to fill more volume.
+This refers to subproblem $x(n, v)$. This also yields an impossible solution
+as we must fill all of our volume. To represent this as an undesirable
+result, which we want to avoid if at all possible, we will return $\infty$.
+Expressed, mathematically,
+$$ x(n, v) = \infty\quad \forall v > 0 $$
+
+{\bf Solution from Subproblems} Since we only care about the minimum number
+of uses of the machine, we only need to return the output of a particular
+subproblem. In this case, we care about all values of $A$ so we start at
+index $0$. We also care about a given total volume $V$. Therefore, we return
+the value of the subproblem,
+$$ x(0, V) $$
+If the output of the subproblem is $\infty$, then we know we ran into some
+impossiblity where we either ran out of boxes or we ran out of space. Given
+the set up of the base cases, this will only be the result of the subproblem
+if there is no other number of uses of the machine that yields a feasible
+result. Therefore, if this is the case, we can return \textproc{Impossible}.
+
+To compute this subproblem, one can either use bottom-up iteration or
+top-down memoization. To use top-down memoization, set up a table for all
+keys $(i, v)$ and initialize them to \textproc{None}. Before executing a call
+for $x(i, v)$, check the table for a value in $(i, v)$. If there is a value,
+return it. If there is not a value (\textproc{None}), recurse and call $x(i,
+v)$ and save the value in the table. Continue until $(0, V)$ has a value in
+the table and return it.
+
+{\bf Running Time} The total number of subproblems is given by $n V$ as we
+need to examine $n$ elements and consider, at worst, every integer value from
+$0$ to $V$. Furthermore, each step in the subproblem requires at most
+$\sqrt[3]{V}$ iterations. To see this, consider a box whose volume is exactly
+$V$. We can shrink this box $n$ times before one of its dimensions equals
+$0$. To make $n$ as large as possible, this box must be a cube, otherwise one
+dimension will approach $0$ sooner than the others. Therefore, in the worst
+case, $n = \sqrt[3]{V}$. Overall, this yields a running time of $O(n
+V^{4/3})$.
+
+\newpage
+\problem  % Problem 2
+
+{\bf Subproblems Definition} Let $S$ be a sequence of students that request
+the shuttle such that $s_i$ is the $i$th person to request the shuttle. Let
+each student $s_i \in S$ correspond to a position $p_i \in P$. Let the
+subproblem be $x(i, \{p_{a-1}, p_{b-1}\})$, which represents the minimum
+total distance for both drivers $A$ and $B$ starting with student $s_i$ and
+given the previous stop for $A$ was $p_{a-1}$ and the previous stop for $B$
+was $p_{b-1}$.
+
+To show this is the optimal subproblem, consider the optimal schedules for
+all students $\{s_1, \ldots, s_n\}$ both starting from Kresge $\{p_K, p_K\}$.
+If the optimal solution passes through students $\{s_i, \ldots, s_n\}$
+starting at some location $\{p_j, p_k\}$, then the schedule is also optimal
+given that we started with student $s_i$ and buses were located at $p_j,
+p_k$ to start with. If some other schedule is more optimal starting with
+student $s_i$ at locations $p_j, p_k$, then this solution could be swapped in
+to produce a more optimal result. However, this contradicts the fact that the
+original schedule was optimal.
+
+{\bf Subproblems Relation} Let the subproblem relation be the following: In
+English, for both of the bus drivers' previous stops, compute the distance to
+the new student. Take the minimum and recurse on the sequence without $s_i$
+and update the previous stops to include $p_i$. Mathematically, this is
+expressed as,
+$$ x(i, \{p_{a-1}, p_{b-1}\}) = \min \begin{cases}
+  d(p_{a-1}, p_i) + x(i + 1, \{p_i, p_{b-1}\}) \\
+  d(p_{b-1}, p_i) + x(i + 1, \{p_{a-1}, p_i\})
+\end{cases} \bigg\}$$
+
+This is a directed, acyclic graph because each subproblem $x(i, \{p_{a-1},
+p_{b-1}\})$ only references a smaller subproblem as $i$ always goes to $i +
+1$ and the set $\{p_{a-1}, p_{b-1}\}$ is always updated such that one of the
+two approaches the final student location.
+
+{\bf Base Cases} Suppose there are no more students to pick up. Then, both
+buses will need to return to Kresge. This can be represented by the
+following,
+$$ x(n, \{p_{a-1}, p_{b-1}\}) = d(p_{a-1}, p_K) + d(p_{b-1}, p_K) $$
+
+{\bf Solution from Subproblems} We are interested in the optimal pickup
+schedule for all students and starting from Kresge. This corresponds to the
+following subproblem,
+$$ x(0, \{p_K, p_K\}) $$
+
+To compute this subproblem, one can either use bottom-up iteration or
+top-down memoization. To use top-down memoization, set up a table for all
+keys $(i, \{p_{a-1}, p_{b-1}\})$ and initialize them to \textproc{None}.
+Before executing a call for $x(i, \{p_{a-1}, p_{b-1}\})$, check the table for
+a value in $(i, \{p_{a-1}, p_{b-1}\})$. If there is a value, return it. If
+there is not a value (\textproc{None}), recurse and call $x(i, \{p_{a-1},
+p_{b-1}\})$ and save the value in the table. Continue until $(0, \{p_K,
+p_K\})$ has a value in the table and return it.
+
+However, in this problem, we do not care about the value of the shortest
+distance combined schedule, we wish to know each bus's schedule with the
+shortest distance. To recover this information, in addition to returning the
+distance of the optimal schedule for each subproblem, denoted as $x$, we also
+return a set of edges between locations, denoted as $y$. Consider a single
+subproblem's set of edges (here subproblems are denoted as $y$ to make clear
+the distinction that return values are sets of edges),
+$$ y(i, \{p_{a-1}, p_{b-1}\}) = \begin{cases}
+  \{(p_{a-1}, p_i)\} \cup y(i + 1, \{p_i, p_{b-1}\}) & \mathrm{if}\ d(p_{a-1}, p_i)
+  + x(i + 1, \{p_i, p_{b-1}\}) \\
+  & \ < d(p_{b-1}, p_i) + x(i + 1, \{p_{a-1}, p_i\}) \\
+  \{(p_{b-1}, p_i)\} \cup y(i + 1, \{p_{a-1}, p_1\}) & \mathrm{otherwise}
+\end{cases} $$
+With base case,
+$$ y(n, \{p_{a-1}, p_{b-1}\}) = \{(p_{a-1}, p_K), (p_{b-1}, p_K) \} $$
+
+Therefore, the optimal schedules can be reconstructed from the set of edges
+by forming a graph over all vertices $p \in P$ and running graph iteration to
+identify two distinct loops through $p_K$.
+
+{\bf Running Time} There are $n$ possible students to consider. For each
+student $s_i$, there are also $i$ unordered pairs $\{p_{a-1}, p_{b-1}\}$ to
+consider as all will have to contain $p_i$, but the other is only restricted
+to $\{p_1, \ldots, p_{i - 1}\}$. Therefore, the number of subproblems is
+given by,
+$$ 1 + 1 + 2 + 3 + \ldots + n \in O(n^2) $$
+Since each subproblem requires constant work, the runtime to compute
+subproblems is $O(n^2)$. 
+
+To reconstruct the schedules requires graph iteration. Assume for simplicity
+that all places are unique (if not, make them unique by request time). The
+constructed graph will have $n$ vertices. Since there are $n$ places to visit
+and only one driver visits each place, the number of edges is $O(n)$.
+Therefore, graph iteration will take $O(n)$ to reconstruct the schedules.
+
+Overall, the running time must be $O(n^2)$.
+
+\newpage
+\problem  % Problem 3
+
+{\bf Subproblems Definition} Let the subproblem be $x(v, t)$, which
+represents the maximum sum of coefficients of fun for a tree rooted at $v$
+where $v$ is included if $t = 1$ and $v$ is not included if $t = 0$.
+
+To show this subproblem is optimal, consider a simpler subproblem $x(v)$
+which represents the maximum sum of coefficients of fun for a tree rooted at
+$v$. It is shown later how this can be transformed into the subproblem $x(v,
+t)$. Now, consider the optimal sum of fun $x(r)$ for a hierarchy with Wusan
+Sojcicki as the root $r$. If the optimal solution passes through some $x(u)$,
+then the optimal sum of fun is the same from $u$ using all its descendants is
+the same as if $u$ was the overall root to begin with. If there is some
+other, more optimal sum of fun for the subtree rooted at $u$, then that
+solution can be substituted into the original solution. However, this
+contradicts the fact that the original solution was already optimal.
+
+{\bf Subproblems Relation} Let the subproblem relation be the following: In
+English, for a given vertex, you can either not take this vertex and recurse
+on all the children, or you can take this vertex and recurse on all the
+grandchildren. Mathematically, this is represented by,
+$$ x(v) = \max \begin{cases}
+  \sum_{u : (v, u) \in E} x(u) \\
+  c_v + \sum_{u : (v, u) \in E} \sum_{w : (u, w) \in E} x(w)
+\end{cases} \Bigg\} $$
+However, there is some duplicate work being done in this recurrence. To
+separate this work to maximize reuse, we introduce an indicator $t$. Now the
+relation is,
+$$ x(v, t) = \begin{cases}
+  \sum_{u : (v, u) \in E} \max \{ x(u, 0), x(u, 1) \} & t = 0 \\
+  c_v + \sum_{u : (v, u) \in E} x(u, 0) & t = 1
+\end{cases} $$
+This recurrence is equivalent to the previous, easier-to-understand
+recurrence, but effectively reuses previous work.
+
+This is a directed, acyclic graph because each subproblem $x(v, t)$ depends
+only on their decendants (children or grandchildren, directly). As a result,
+only smaller subproblems make up a given subproblem.
+
+{\bf Base Cases} Suppose we have reached the summer interns (the tree rooted
+at $v$ has no children, i.e. it is a leaf). If $t = 1$, then the intern is
+included and their coefficient of fun is added. If $t = 0$, then the intern
+is not included and their is no change to the sum of fun coefficients.
+$$ x(v, 0) = 0 \quad \not\exists u.(v, u) \in E $$
+$$ x(v, 1) = c_v \quad \not\exists u.(v, u) \in E $$
+
+{\bf Solution from Subproblems} We are interested in the maximum possible sum
+of the coefficients of fun of all the guests. Therefore, we construct a
+directed tree with its root, $r$, as Wusan Sojcicki. Since we don't know
+whether to include Wusan or not, we compute the following,
+$$ \max\{x(r, 0), x(r, 1)\} $$
+
+To compute this subproblem, one can use either a memoized top-down or
+iterative bottom-up approach. Let's consider the iterative bottom-up
+approach. Start by computing the $x(v, 0)$ and $x(v, 1)$ for all the interns.
+Then, work the way up the tree by computing $x(v, 0)$ and $x(v, 1)$ for all
+supervisors. Once the root $r$ is reached, return $\max \{ x(r, 0), x(r, 1)
+\}$.
+
+To reconstruct the invited guests (I am unclear as to if the problem asks for
+this or not), have each subproblem return a list of invited guests, denote
+this using $y$. Then, the additional return value is dictated by,
+$$ y(v, t) = \begin{cases}
+  \bigcup_{u : (v, u) \in E} \begin{cases}
+    y(u, 0) & x(u, 0) > x(u, 1) \\
+    y(u, 1) & \mathrm{otherwise}
+  \end{cases} & t = 0 \\
+  \{v\} \cup \bigcup_{u : (v, u) \in E} y(u, 0) & t = 1
+\end{cases} $$
+With base cases,
+$$ y(v, 0) = \emptyset \quad \not\exists u.(v, u) \in E $$
+$$ y(v, 1) = \{v\} \quad \not\exists u.(v, u) \in E $$
+Then, the return set of guests from either $y(r, 0)$ or $y(r, 1)$ represents
+the guest list.
+
+{\bf Running Time} By examining the iterative, bottom-up approach, it is
+clear that the vertices are being visited in DFS order. Therefore, each
+vertex is being visited only a consant number of times (two, since we
+calculate $x(v, 0)$ and $x(v, 1)$ only) so the runtime must be $O(n)$.
+
+\end{problems}
+
+\end{document}
