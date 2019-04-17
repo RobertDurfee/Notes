@@ -1,0 +1,305 @@
+%
+% 6.046 problem set 2 solutions
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{multirow}
+\usepackage{algorithm, algpseudocode, float}
+
+\input{macros}
+\usepackage{enumitem}
+\newcommand{\theproblemsetnum}{7}
+\newcommand{\releasedate}{Thursday, April 4}
+\newcommand{\partaduedate}{Wednesday, April 10}
+\allowdisplaybreaks
+
+\title{6.046 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 10PM}}.
+
+\makeatletter
+\newenvironment{breakablealgorithm}
+  {% \begin{breakablealgorithm}
+   \begin{center}
+     \refstepcounter{algorithm}% New algorithm
+     \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+     \renewcommand{\caption}[2][\relax]{% Make a new \caption
+       {\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
+       \ifx\relax##1\relax % #1 is \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+       \else % #1 is not \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+       \fi
+       \kern2pt\hrule\kern2pt
+     }
+  }{% \end{breakablealgorithm}
+     \kern2pt\hrule\relax% \@fs@post for \@fs@ruled
+   \end{center}
+  }
+\makeatother
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart % Problem 1a
+
+\begin{enumerate}[label=\textbf{(\roman*)}]
+
+  \item We first show that if $G$ has no cycles, then Ben can assign each of
+  the $n$ items to the slot of one of its hashed values without collisions.
+
+  Suppose Ben has an item $x$ and his first and second hash functions each
+  yield a previously alotted slot $a_i$ and $a_j$, respectively. If $i = j$,
+  this would yield a self-loop. Since cycles are not present in $G$, this
+  case is not possible. If $i \neq j$, this implies either of the following:
+  \begin{itemize}
+    \item There exists a single edge between $a_i$ and $a_j$.
+    \item There exist two edges, one with endpoint $a_i$ and another with
+    endpoint $a_j$.
+  \end{itemize}
+  Since there are no cycles, the first case is not possible as this would
+  lead to two parallel edges between $a_i$ and $a_j$.
+
+  Now we examine the second case. Note that if we can successfully reassign
+  the item in either $a_i$ or $a_j$ without collision, we can resolve the
+  conflict of $x$. Therefore, without loss of generality, consider $a_i$
+  only. As determined previously, for endpoint $a_i$, there must be an edge
+  with another endpoint $a_k$ such that $k \neq j$. If there is no element in
+  $a_k$, we can reassign the element in $a_i$ into $a_k$. If there is an
+  element in $a_k$, repeat until there is some slot that has not been
+  alotted. Since there are no cycles, there must eventually be a slot that
+  hasn't been alotted along this chain as $a_j$ cannot be along the chain
+  without a cycle forming. Therefore, if there are no cycles, a hashing can
+  be determined without conflicts.
+
+  \item We now demonstrate an algorithm to check for cycles and, if none are
+  present, we assign each of the $n$ items to one of the slots without
+  collisions.
+
+  {\bf Description} Using the two provided hash functions $h_1$ and $h_2$,
+  construct the vertices of the graph $G$ such that,
+  $$V = \{ h(x) \mid \forall h \in \{h_1, h_2\}\ \mathrm{and}\ \forall x \in
+  \{x_1, \ldots, x_n\}\}$$
+  For all $u, v \in V$, connect vertex $u$ to $v$ with an undirected edge if
+  the following is true,
+  $$ \exists x . h_1(x) = u\ \mathrm{and}\ h_2(x) = v $$
+  Let these edges make up the set $E$ for graph $G$.
+  
+  Now we will run a modified depth-first search on the graph $G$. If when
+  visiting a node $v$, an adjacent node $u$ (which is not the parent $p$) has
+  been visited before, return that a cycle has been detected. If a cycle
+  isn't detected, continue visiting all nodes $u$ adjacent to $v$ in a
+  depth-first manner as in 6.006. After visiting all nodes $u$ adjacent to
+  $v$, use the edge between the parent $p$ and the current note $v$ to
+  identify the corresponding $x_i$ such that $h_1(x_i) = p$ and $h_2(x_i) =
+  v$ (or vice versa). Without loss of generality, assume $h_2(x_i) = v$, then
+  assign $x_i$ to $v$ using hash function $h_2$. Continue this process
+  recursively until the graph has been completely iterated over and return
+  the mapping (if a cycle isn't detected before).
+
+  {\bf Correctness} If there is a cycle, there must a vertice that when
+  explored depth-first, one of its adjacent vertices is visited indirectly
+  prior to being directly checked in the depth-first search procedure. As a
+  result, this algorithm will correctly identify cycles. 
+  
+  The mapping will also be accurate for a graph with no cycles as depth-first
+  search will construct a spanning forest. Since each spanning tree will have
+  $\ell$ vertices and $\ell - 1$ edges, there will always be a way to assign
+  the $\ell - 1$ items to $\ell$ slots. The simplest way to do this is to
+  assign from the bottom of the tree's leaves up to the root which will
+  ensure no conflicts. This is the order in which we assign the hash
+  functions in the modified depth-first search procedure.
+
+  {\bf Running Time} To construct the graph vertices $V$ of graph $G$, $O(n)$
+  time is necessary as there are $n$ elements of which to compute hashes.
+  Since there are only $n$ edges, it also takes $O(n)$ time to construct the
+  edges of the graph.
+
+  Running depth-first search on a graph with $n$ vertices and $n$ edges will
+  take $O(n + n)$ time. As a result, the overall runtime is $O(n)$.
+
+\end{enumerate}
+
+\problempart % Problem 1b
+
+Consider the probability of choosing a single edge $e$. Let this edge be
+represented by an ordered tuple $(a, b)$. From the problem statement,
+$h_1(x) = a$ and $h_2(x) = b$. Furthermore, there are $m$ possible
+values for both $h_1(x)$ and $h_2(x)$. Thus, the number of different
+$(a, b)$ pairs is $m^2$. However, an edge $(b, a)$ is equivalent to
+$(a, b)$, so we divide the possible number of edges by $2$. Thus there
+are $m^2 / 2$ possible edges. Also, an edge $(h_1(x), h_2(x)) = (a, b)$ can
+be formed using any of $n$ different $x$ values. As a result, we further
+divide the number of edges by $n$. Therefore, there are $m^2 / 2n$ total
+edges to choose. Since each are equally likely, the probability of choosing
+one is $2n / m^2$.
+
+A $k$-length cycle is made up of $k$ {\it distinct} edges. Therefore, the
+probability of choosing a single $k$-length cycle is given by,
+$$ \left(\frac{2n}{m^2}\right) \left(\frac{2n}{m^2} - 1\right) \cdots
+\left(\frac{2n}{m^2} - (k - 1)\right) $$
+This is less than $\left(2n / m^2\right)^k$. Therefore, the probability of a
+given $k$-length cycle appearing in $G$ is at most $\left(2n / m^2\right)^k$.
+
+\problempart % Problem 1c
+
+Consider how many $k$-length cycles are possible in a graph with $m$
+vertices. Since a $k$-length cycle has $k - 1$ vertices, there are $k - 1$
+distinct vertices to choose. There are $m$ choices for the first vertex, $m -
+1$ choices for the second, and so on until $m - (k - 2)$ choices for the $k -
+1$th vertex. Therefore, in total, the number of $k$-length cycles is,
+$$ (m) (m - 1) \cdots (m - (k - 2)) $$
+This is less than $m^k$. Therefore, the probability of any $k$-length cycles
+appearing in $G$ is at most,
+$$ m^k \cdot \left(\frac{2n}{m^2}\right)^k = \left(\frac{2n}{m}\right)^k $$
+
+\problempart % Problem 1d
+
+The probability of a cycle of length 1 or greater is given by the sum,
+$$ \sum_{k = 1}^\infty \left(\frac{2n}{m}\right)^k $$
+If $m = 10n$, then this reduces to,
+$$ \sum_{k = 1}^\infty \left(\frac{2}{10}\right)^k $$
+Using the geometric series formula,
+$$ \sum_{k = 1}^\infty \left(\frac{2}{10}\right)^k = \frac{2/10}{1 - 2/10} =
+\frac{1}{4} $$
+This is less than $1/2$ therefore Ben can assign $n$ items to $10n$ slots
+using two hash functions with probability greater than $1/2$.
+
+\problempart % Problem 1e
+
+{\bf Description} Generate two hash functions $h_1$ and $h_2$. Run the
+algorithm in Part A with the provided $n$ values with $m = 10n$. If a cycle
+is detected, run the algorithm again and continue until no cycles are
+detected and a valid map is returned.
+
+{\bf Correctness} The algorithm in Part A will successfully assign a mapping
+of $n$ items into $10n$ slots using two hash functions or return a cycle was
+detected. This is proved above. By repeating, we will eventually get a
+correct mapping as the probability argued in Part D assures us there exists a
+pair of hash functions that lead to a graph with no cycles.
+
+{\bf Running Time} The running time of this algorithm is
+$\mathbb{E}[\mathrm{iterations}] \cdot O(n)$. Since we showed that the
+probability of getting a valid mapping on the first try is greater than
+$1/2$, we have the following inequality.
+$$ \mathbb{E}[\mathrm{iterations}] \leq \frac{1}{2} +
+\frac{1}{2}\left(\mathbb{E}[\mathrm{iterations}] + 1\right) $$
+Solving for $\mathbb{E}[\mathrm{iterations}] \leq 2 $. Therefore, the overall
+runtime of the algorithm is $O(n)$.
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+
+\begin{problemparts}
+
+\problempart % Problem 2a
+
+{\bf Description} Using a union-find data struture, for each vertices $v \in
+V$, call a \textproc{Make-Set} operation. For each edge $e_k$ between vertices
+$u$ and $v$, perform a \textproc{Find-Set} operation. If \textproc{Find-Set}
+determines that both $u$ and $v$ belong to the same set, return that a cycle
+has been detected. If $u$ and $v$ do not belong to the same set, perform a
+\textproc{Union} operation.
+
+{\bf Correctness} The standard union-find data structure allows us to keep
+track of connected components. Whenever an edge has endpoints both within the
+same connected component, a cycle must have been discovered as long as the
+edges in the stream are all unique and there are no self-loops. In this case,
+we are told the edges are all unique and it is safe to assume that someone is
+not an enemy to themselves.
+
+{\bf Space Complexity} The union-find data structure forms a forest of
+elements internally. There are always $|V|$ elements in the forest. 
+
+A forest with $n$ vertices and $m$ components will $n - m$ edges. This can be
+seen since each tree $i$ has $\ell_i - 1$ edges. Therefore,
+$$ \sum_{i = 1}^m (\ell_i - 1) = \sum_{i = 1}^m \ell_i - \sum_{i = 1}^m = n -
+m $$
+
+Therefore, in the worst case, there are $|V| - 1$ edges and $|V|$ vertices.
+Therefore, the space complexity is $O(|V|)$.
+
+{\bf Time Complexity} By using the union-by-rank or path compression
+union-find data structure, all operations are amortized $O(\log |V|)$.
+Therefore, in the worst case, if all $|E_k|$ edges are examined, the run time
+is $O(|E_k| \log |V|)$.
+
+\problempart % Problem 2b
+
+{\bf Description} Using a modified union-find data structure. Initialize the
+data structure by calling \textproc{Make-Set} for all vertices. For each
+vertex, keep track of the pairity of the element to it's representative. For
+\textproc{Make-Set}, initialize all pairities of the roots to $0$. For each
+edge $e_k$ between vertices $u$ and $v$, perform a \textproc{Find-Set}
+operation. Along the recursion, perform path compression. Update the
+pairities during path compression using the xor operation. If $u$ and $v$
+belong to different sets, perform the union of the two sets using
+\textproc{Union}. Compute the pairity of $u$ to its representative, let it be
+$x$. Compute the pairity of $v$ to it's representative, let it be $y$. Update
+the representative's pairity with
+$$ x \oplus y \oplus 1 $$
+If $u$ and $v$ belong to the same set and have the same pairities to the
+representative, there is an odd-length cycle.
+
+{\bf Correctness} In each component of the union-find data structure, we wish
+to maintain the pairity from an element to a common element. To initialize,
+the pairity to the representative from the representative is zero. If two
+elements are in the same component, if their pairities are both even, adding
+a new edge would make the pairity odd. If their pairities are both odd,
+adding a new edge would make the pairity odd.
+
+If two elements are in different components, we need a way to update the old
+representative. Since we are adding a single edge, the pairity needs to be
+the pairity of the first element to its representative with the pairity of
+the second element to its representative with one additional. This is
+accomplished with the expression,
+$$ x \oplus y \oplus 1 $$
+
+Therefore, we can maintain proper pairities and whenever two pairites in the
+same component are equal and connected, the result must be an odd cycle.
+
+{\bf Space Complexity} The union-find data structure forms a forest of
+elements internally. There are always $|V|$ elements in the forest. 
+
+A forest with $n$ vertices and $m$ components will $n - m$ edges. This can be
+seen since each tree $i$ has $\ell_i - 1$ edges. Therefore,
+$$ \sum_{i = 1}^m (\ell_i - 1) = \sum_{i = 1}^m \ell_i - \sum_{i = 1}^m = n -
+m $$
+
+Therefore, in the worst case, there are $|V| - 1$ edges and $|V|$ vertices.
+For each vertex, we only store constant extra space. Therefore, the space
+complexity is $O(|V|)$.
+
+{\bf Time Complexity} By using the path compression union-find data
+structure, all operations are amortized $O(\log |V|)$. Therefore, in the
+worst case, for all $|E|$ edges examined, the run time is $O(|E| \log |V|)$.
+
+\problempart % Problem 2c
+
+The running time requirement is already fulfilled in Part B.
+
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
+
+
