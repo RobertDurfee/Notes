@@ -1,0 +1,138 @@
+%
+% 6.S077 problem set solutions template
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{bbm}
+
+\input{macros}
+\newcommand{\theproblemsetnum}{7}
+\newcommand{\releasedate}{Tuesday, April 9}
+\newcommand{\partaduedate}{Tuesday, April 23}
+\allowdisplaybreaks
+
+\title{6.S077 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 2:30PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+A single-layer neural network can easily represent an ordinary least squares
+regression problem. For the single variable case, the input should be $x$.
+The single layer (output layer) should be made up of a single neuron. It
+should be connected to the input $x$ with weight $\beta_1$. The neuron should
+have a bias value of $\beta_0$. The activation function for this neuron
+should be the simple linear (identity) function $f(x) = x$. From this, the
+output from the neural network can be computed as,
+$$ \beta_0 + \beta_1 x $$
+The parameters of this neural network represented mathematically as,
+$$ W^{(1)} = \begin{bmatrix}
+    \beta_1
+\end{bmatrix},\ W_0^{(1)} = \begin{bmatrix}
+    \beta_0
+\end{bmatrix} $$
+This is equivalent to the single variable regression problem. To train this
+network, we use the mean-squared loss function. This leads to the
+minimization (or maximization) problem,
+$$ W^{(1)}, W_0^{(1)} = \arg\min_{W^{(1)}, W_0^{(1)}} \sum_{i = 1}^n (y_i -
+W_0^{(1)} - W^{(1)} x_i)^2 $$
+This is also equivalent to how we compute the ordinary least squares
+regression solution. 
+$$ \beta_0^*, \beta_1^* = \arg\min_{\beta_0, \beta_1} \sum_{i = 1}^n (y_i -
+\beta_0 - \beta_1 x-i)^2 $$
+To solve this minimization problem, we can use gradient descent instead of
+the analytical solution as in ordinary least squares regression. The
+gradients for this problem are,
+$$ \frac{\partial \mathrm{Loss}}{\partial W^{(1)}} = -2 \sum_{i = 1}^n x_i
+(y_i - W_0^{(1)} - W^{(1)} x_i) $$
+$$ \frac{\partial \mathrm{Loss}}{\partial W_0^{(1)}} = -2 \sum_{i = 1}^n (y_i
+- W_0^{(1)} - W^{(1)} x_i) $$
+
+\newpage
+
+\problem  % Problem 2
+
+\begin{problemparts}
+
+\problempart % Problem 2a
+
+By setting the following,
+$$ w_1 = \begin{bmatrix}
+    1 \\
+    1
+\end{bmatrix},\ w_2 = \begin{bmatrix}
+    1 \\
+    1
+\end{bmatrix},\ x_1 = \begin{bmatrix}
+    x \\
+    -a
+\end{bmatrix},\ x_2 = \begin{bmatrix}
+    x \\
+    -b
+\end{bmatrix} $$
+The function $f(x)$ can then be represented as,
+$$ f(x) = \mathrm{ReLU} (w_1^T x_1) - \mathrm{ReLU} (w_2^T x_2) $$
+This can be seen case-by-case. If $x \leq a$ (and assuming $a \leq b$),
+$$ \mathrm{ReLU}(w_1^T x_1) = \mathrm{ReLU} (x - a) = \max (x - a, 0) = 0 $$
+$$ \mathrm{ReLU}(w_2^T x_2) = \mathrm{ReLU} (x - b) = \max (x - b, 0) = 0 $$
+And therefore,
+$$ f(x) = 0$$
+If $a \leq x \leq b$,
+$$ \mathrm{ReLU}(w_1^T x_1) = \mathrm{ReLU} (x - a) = \max (x - a, 0) = x - a $$
+$$ \mathrm{ReLU}(w_2^T x_2) = \mathrm{ReLU} (x - b) = \max (x - b, 0) = 0 $$
+And therefore,
+$$ f(x) = x - a $$
+Lastly, if $x \geq b$ (and assuming $a \leq b$),
+$$ \mathrm{ReLU}(w_1^T x_1) = \mathrm{ReLU} (x - a) = \max (x - a, 0) = x - a $$
+$$ \mathrm{ReLU}(w_2^T x_2) = \mathrm{ReLU} (x - b) = \max (x - b, 0) = x - b $$
+And therefore,
+$$ f(x) = (x - a) - (x - b) = a - b $$
+
+\problempart % Problem 2b
+
+Now that we can represent the function using a linear combination of ReLU
+functions, we can design a simple neural network to represent $f(x)$. Let
+this neural network have a single input $x$. Let the it have a single hidden
+layer made up of two hidden units $A$, $B$. The first unit $A$ will be
+connected to input $x$ with weight $1$ and have a bias of $-a$. The second
+unit $B$ will be connected to input $x$ with weight $1$ and have a bias of
+$-b$. Let both of these units have an activation function of ReLU. The final
+layer will have a single output unit. It will be connected to hidden unit $A$
+with a weight of $1$ and connected to hidden unit $B$ with weight $-1$. This
+unit will have no bias and a simple linear (identity) activation function
+$f(x) = x$.
+
+Represented mathematically, the parameters of this network are,
+$$ W^{(1)} = \begin{bmatrix} 
+    1 \\
+    1
+\end{bmatrix},\ W_0^{(1)} = \begin{bmatrix}
+    -a \\
+    -b
+\end{bmatrix},\ W^{(2)} = \begin{bmatrix}
+    1 & -1
+\end{bmatrix},\ W_0^{(2)} = \begin{bmatrix}
+    0
+\end{bmatrix} $$
+Where layer $1$ has ReLU activation and layer $2$ has linear activation.
+
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
