@@ -16,7 +16,8 @@ RUN pip3 install \
     pandas \
     seaborn \
     statsmodels \
-    scikit-learn
+    scikit-learn \
+    tensorflow
 
 RUN useradd -ms /bin/bash jovyan
 USER jovyan
