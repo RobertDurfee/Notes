@@ -1,0 +1,1114 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{MNISTClassification}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    
+    
+
+    \section*{MNIST Classification}\label{mnist-classification}
+
+\subsection*{Problem 0}\label{problem-0}
+
+Load the MNIST data set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}val}\PY{p}{,} \PY{n}{Y\PYZus{}val}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{Y\PYZus{}test} \PY{o}{=} \PY{n}{get\PYZus{}data\PYZus{}extract}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Extracting MNIST\_data/train-images-idx3-ubyte.gz
+Extracting MNIST\_data/train-labels-idx1-ubyte.gz
+Extracting MNIST\_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST\_data/t10k-labels-idx1-ubyte.gz
+
+    \end{Verbatim}
+
+    \subsubsection*{Part A}\label{part-a}
+
+The dimensions of the data segments are as follows,
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training Images Shape: }\PY{l+s+si}{\PYZob{}X\PYZus{}train.shape\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training Images Shape: (16500, 784)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Validation Images Shape: }\PY{l+s+si}{\PYZob{}X\PYZus{}val.shape\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Validation Images Shape: (1500, 784)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Images Shape: }\PY{l+s+si}{\PYZob{}X\PYZus{}test.shape\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test Images Shape: (3000, 784)
+
+    \end{Verbatim}
+
+    \subsubsection*{Part B}\label{part-b}
+
+The first two images in the training set are,
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{First Image:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Greys}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+First Image:
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Second Image:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Greys}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Second Image:
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection*{Part C}\label{part-c}
+
+The first two labels in the training set are,
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{First Label: }\PY{l+s+si}{\PYZob{}Y\PYZus{}train[0]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+First Label: 8
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Second Label: }\PY{l+s+si}{\PYZob{}Y\PYZus{}train[1]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Second Label: 1
+
+    \end{Verbatim}
+
+    \subsection*{Problem 1}\label{problem-1}
+
+Here we attempt to use linear discriminant analysis to classify the
+MNIST digits.
+
+\subsubsection*{Part A}\label{part-a}
+
+We create a \texttt{LinearDiscriminatAnalysis} model using scikit-learn.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{lda\PYZus{}model} \PY{o}{=} \PY{n}{LinearDiscriminantAnalysis}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    Now we fit the model to the data and record training time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n}{lda\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LDA Train Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LDA Train Time: 4.187921299948357s
+
+    \end{Verbatim}
+
+    \subsubsection*{Part B}\label{part-b}
+
+Using the fitted model, we want to score the test data set (i.e. get the
+accuracy of the model) and record the prediction time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LDA Test Accuracy: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{lda\PYZus{}model.score(X\PYZus{}test, Y\PYZus{}test)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LDA Test Accuracy: 0.8643333333333333
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LDA Prediction Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LDA Prediction Time: 0.012812700006179512s
+
+    \end{Verbatim}
+
+    \subsection*{Problem 2}\label{problem-2}
+
+Here we attempt to use quadratic discriminant analysis to classify MNIST
+digits.
+
+\subsubsection*{Part A}\label{part-a}
+
+We create a \texttt{QuadraticDiscriminantAnalysis} model using
+scikit-learn.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{qda\PYZus{}model} \PY{o}{=} \PY{n}{QuadraticDiscriminantAnalysis}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    Now we fit the model to the data and record training time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n}{qda\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{QDA Train Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+QDA Train Time: 4.9459744999185205s
+
+    \end{Verbatim}
+
+    \subsubsection*{Part B}\label{part-b}
+
+Using the fitted model, we want to score the test data set (i.e. get the
+accuracy of the model) and record the prediction time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{QDA Test Accuracy: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{qda\PYZus{}model.score(X\PYZus{}test, Y\PYZus{}test)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+QDA Test Accuracy: 0.205
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{QDA Prediction Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+QDA Prediction Time: 0.47546149999834597s
+
+    \end{Verbatim}
+
+    \subsection*{Problem 3}\label{problem-3}
+
+Here we attempt to use logistic regression to classify MNIST digits.
+
+\subsubsection*{Part A}\label{part-a}
+
+We create a \texttt{LogisticRegression} model using scikit-learn.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{log\PYZus{}model} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{penalty}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+\end{Verbatim}
+
+    Now we fit the model to the data and record training time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n}{log\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LR Train Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LR Train Time: 3.5321534998947755s
+
+    \end{Verbatim}
+
+    \subsubsection*{Part B}\label{part-b}
+
+Using the fitted model, we want to score the test data set (i.e. get the
+accuracy of the model) and record the prediction time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LR Test Accuracy: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{log\PYZus{}model.score(X\PYZus{}test, Y\PYZus{}test)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LR Test Accuracy: 0.9153333333333333
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LR Prediction Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LR Prediction Time: 0.014556400012224913s
+
+    \end{Verbatim}
+
+    \subsection*{Problem 4}\label{problem-4}
+
+Here we attempt to use k-nearest neighbors to classify MNIST digits.
+
+\subsubsection*{Part A}\label{part-a}
+
+We create a \texttt{KNeighborsClassifier} model using scikit-learn.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{knn\PYZus{}model} \PY{o}{=} \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{algorithm}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kd\PYZus{}tree}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{minkowski}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    Now we fit the model to the data and record training time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n}{knn\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{KNN Training Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+KNN Training Time: 2.7918500000378117s
+
+    \end{Verbatim}
+
+    \subsubsection*{Part B}\label{part-b}
+
+Using the fitted model, we want to score the test data set (i.e. get the
+accuracy of the model) and record the prediction time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{KNN Test Accuracy: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{knn\PYZus{}model.score(X\PYZus{}test, Y\PYZus{}test)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+KNN Test Accuracy: 0.959
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{KNN Prediction Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+KNN Prediction Time: 87.20465970004443s
+
+    \end{Verbatim}
+
+    \subsubsection*{Part C}\label{part-c}
+
+Here we take a look at the training accuracy of the k-nearest neighbors
+model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{KNN Training Accuracy: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{knn\PYZus{}model.score(X\PYZus{}train, Y\PYZus{}train)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+KNN Training Accuracy: 1.0
+
+    \end{Verbatim}
+
+    And we can compare it with the training accuracy of logistic regression.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LR Training Accuracy: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{log\PYZus{}model.score(X\PYZus{}train, Y\PYZus{}train)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LR Training Accuracy: 0.9318787878787879
+
+    \end{Verbatim}
+
+    \subsubsection*{Part D}\label{part-d}
+
+It makes sense that the training accuracy of the k-nearest neighbors
+model should be 100\% as the data set is the model. That is, since we
+have seen all the training images before, the nearest neighbor will be
+itself. Therefore, it should predict prefectly on seen images.
+
+    \subsubsection*{Part E}\label{part-e}
+
+Once again, since the data set is the model for k-nearest neighbors, the
+fit procedure just needs to store the data in an efficient manner. No
+(really) complex computations are performed on the data, it is just
+retained.
+
+On the other hand, in the prediction phase, the model needs to search
+the provided data to find the closest neighbors. Even though the data is
+stored efficiently, it still takes time to find the closest neigbors
+(especially the more data one has).
+
+    \subsubsection*{Part F}\label{part-f}
+
+Here we try out different combinations of parameters for k-nearest
+neighbors models.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{param\PYZus{}grid} \PY{o}{=} \PY{n}{ParameterGrid}\PY{p}{(}\PY{p}{\PYZob{}} 
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}neighbors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2} \PY{p}{]}\PY{p}{,} 
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3} \PY{p}{]}\PY{p}{,} 
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{algorithm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kd\PYZus{}tree}\PY{l+s+s1}{\PYZsq{}} \PY{p}{]}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{metric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{minkowski}\PY{l+s+s1}{\PYZsq{}} \PY{p}{]}
+         \PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{knn\PYZus{}models} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{train\PYZus{}times} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{validation\PYZus{}accuracies} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{kwargs} \PY{o+ow}{in} \PY{n}{param\PYZus{}grid}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} Create New Model}
+             \PY{n}{knn\PYZus{}models}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Fit Model to Data}
+             \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+             \PY{n}{knn\PYZus{}models}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{)}
+             \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}    
+             \PY{n}{train\PYZus{}times}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{end} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Compute Validation Accuracy}
+             \PY{n}{validation\PYZus{}accuracies}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{knn\PYZus{}models}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}val}\PY{p}{,} \PY{n}{Y\PYZus{}val}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \subsubsection*{Part G}\label{part-g}
+
+Using the validation accuracies, we can get the best model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{best\PYZus{}knn} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{validation\PYZus{}accuracies}\PY{p}{)}
+\end{Verbatim}
+
+    Using this, we know the best parameters for the model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best KNN: }\PY{l+s+si}{\PYZob{}param\PYZus{}grid[best\PYZus{}knn]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best KNN: \{'p': 3, 'n\_neighbors': 1, 'metric': 'minkowski', 'algorithm': 'kd\_tree'\}
+
+    \end{Verbatim}
+
+    We can also determine how long it took to train this model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best KNN Training Time: }\PY{l+s+si}{\PYZob{}train\PYZus{}times[best\PYZus{}knn]\PYZcb{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best KNN Training Time: 2.3914602000731975s
+
+    \end{Verbatim}
+
+    \subsubsection*{Part H}\label{part-h}
+
+Using the best model, we want to score the test data set (i.e. get the
+accuracy of the model) and record the prediction time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best KNN Test Accuracy: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{knn\PYZus{}models[best\PYZus{}knn].score(X\PYZus{}test, Y\PYZus{}test)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best KNN Test Accuracy: 0.9613333333333334
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best KNN Prediction Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best KNN Prediction Time: 1308.0901673999615s
+
+    \end{Verbatim}
+
+    \subsection*{Problem 5}\label{problem-5}
+
+Here we attempt to use locality sensitive hashing to to classify MNIST
+digits.
+
+    Before we begin our validation process, we define a function to score a
+locality sensitive hashing model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{k}{def} \PY{n+nf}{lsh\PYZus{}score}\PY{p}{(}\PY{n}{lsh\PYZus{}model}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{Y\PYZus{}test}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Given a locality sensitive hashing model and some data,}
+         \PY{l+s+sd}{    computes the accuracy.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        lsh\PYZus{}model (LSHForest): An approximate nearest neighbor }
+         \PY{l+s+sd}{            model using LSH forest.}
+         \PY{l+s+sd}{        Y\PYZus{}train (ndarray): Labels from training data used to}
+         \PY{l+s+sd}{            build the lsh\PYZus{}model.}
+         \PY{l+s+sd}{        X\PYZus{}test (ndarray): Testing samples.}
+         \PY{l+s+sd}{        Y\PYZus{}test (ndarray): True labels for testing samples.}
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        float: Mean accuracy of predictions with respect to }
+         \PY{l+s+sd}{            true labels.}
+         \PY{l+s+sd}{            }
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{k\PYZus{}neighbors} \PY{o}{=} \PY{n}{lsh\PYZus{}model}\PY{o}{.}\PY{n}{kneighbors}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+             \PY{n}{Y\PYZus{}pred}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{mode}\PY{p}{(}\PY{n}{Y\PYZus{}train}\PY{p}{[}\PY{n}{k\PYZus{}neighbors}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{Y\PYZus{}test}\PY{p}{,} \PY{n}{Y\PYZus{}pred}\PY{p}{)}
+\end{Verbatim}
+
+    Now we try out several different parameters for our locality sensitive
+hashing models.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{param\PYZus{}grid} \PY{o}{=} \PY{n}{ParameterGrid}\PY{p}{(}\PY{p}{\PYZob{}} 
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}estimators}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{80} \PY{p}{]}\PY{p}{,} 
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}candidates}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20} \PY{p}{]}\PY{p}{,} 
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}neighbors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5} \PY{p}{]} 
+         \PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{lsh\PYZus{}models} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{train\PYZus{}times} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{validation\PYZus{}accuracies} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{kwargs} \PY{o+ow}{in} \PY{n}{param\PYZus{}grid}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} Create New Model}
+             \PY{n}{lsh\PYZus{}models}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{LSHForest}\PY{p}{(}\PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{)} 
+             
+             \PY{c+c1}{\PYZsh{} Fit Model to Data}
+             \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+             \PY{n}{lsh\PYZus{}models}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{)}
+             \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+             \PY{n}{train\PYZus{}times}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{end} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Compute Validation Accuracy}
+             \PY{n}{validation\PYZus{}accuracies}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{lsh\PYZus{}score}\PY{p}{(}\PY{n}{lsh\PYZus{}models}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}val}\PY{p}{,} \PY{n}{Y\PYZus{}val}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    Using the validation accuracies, we can find the best model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{best\PYZus{}lsh} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{validation\PYZus{}accuracies}\PY{p}{)}
+\end{Verbatim}
+
+    Using this, we know the best parametersfor the model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best LSH: }\PY{l+s+si}{\PYZob{}param\PYZus{}grid[best\PYZus{}lsh]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best LSH: \{'n\_neighbors': 3, 'n\_estimators': 80, 'n\_candidates': 10\}
+
+    \end{Verbatim}
+
+    We can also determine how long it took to train this model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best LSH Traing Time: }\PY{l+s+si}{\PYZob{}train\PYZus{}times[best\PYZus{}lsh]\PYZcb{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best LSH Traing Time: 8.270534699899144s
+
+    \end{Verbatim}
+
+    Using the best model, we want to score the test data set (i.e. get the
+accuracy of the model) and record the prediction time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best LSH Test Accuracy: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{lsh\PYZus{}score(lsh\PYZus{}models[best\PYZus{}lsh], Y\PYZus{}train, X\PYZus{}test, Y\PYZus{}test)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best LSH Test Accuracy: 0.952
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best LSH Prediction Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best LSH Prediction Time: 108.84070020006038s
+
+    \end{Verbatim}
+
+    It certainly seems like this method is faster with predictions, although
+training times are a little slower. It also seems like the difference in
+accuracy is only minimal and it still outperforms all other models
+considered up until this point. Therefore, I think it would be useful to
+use approximate k-nearest neighbors. This is especially true if there
+exists a more performant implementation of approximate k-nearest
+neighbors.
+
+    \subsection*{Problem 6}\label{problem-6}
+
+Here we attempt to use a simple neural network to classify MNIST digits.
+
+    First we create a label encoder to represent labels using one-hot.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{one\PYZus{}hot\PYZus{}encoder} \PY{o}{=} \PY{n}{OneHotEncoder}\PY{p}{(}\PY{n}{sparse}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Y\PYZus{}train}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    Now we can create and compile a simple neural network model using
+TensorFlow.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{dnn\PYZus{}model} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{[}
+             \PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{512}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{784}\PY{p}{,}\PY{p}{)}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{n}{relu}\PY{p}{)}\PY{p}{,}
+             \PY{n}{Dropout}\PY{p}{(}\PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{,}
+             \PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{n}{softmax}\PY{p}{)}
+         \PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{dnn\PYZus{}model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{optimizer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{adam}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                           \PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                           \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    Using this model, we fit it to the data and record the training time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{Y\PYZus{}train\PYZus{}one\PYZus{}hot} \PY{o}{=} \PY{n}{one\PYZus{}hot\PYZus{}encoder}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{Y\PYZus{}train}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n}{dnn\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train\PYZus{}one\PYZus{}hot}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DNN Traing Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+DNN Traing Time: 19.167890299926512s
+
+    \end{Verbatim}
+
+    Using the fitted model, we want to score the test data set (i.e. get the
+accuracy of the model) and record the prediction time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{Y\PYZus{}test\PYZus{}one\PYZus{}hot} \PY{o}{=} \PY{n}{one\PYZus{}hot\PYZus{}encoder}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{Y\PYZus{}test}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DNN Test Accuracy: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{dnn\PYZus{}model.evaluate(X\PYZus{}test, Y\PYZus{}test\PYZus{}one\PYZus{}hot, verbose=0)[1]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+DNN Test Accuracy: 0.9646666646003723
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DNN Prediction Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+DNN Prediction Time: 0.2821739000501111s
+
+    \end{Verbatim}
+
+    \subsection*{Problem 7}\label{problem-7}
+
+Here we attempt to use a convolutional neural network to classify MNIST
+digits.
+
+    First we create a method which defines the graph of our model in
+TensorFlow.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{k}{def} \PY{n+nf}{cnn\PYZus{}model\PYZus{}fn}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{mode}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{input\PYZus{}layer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}
+                 \PY{n}{tensor}\PY{o}{=}\PY{n}{features}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                 \PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{conv1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{conv2d}\PY{p}{(}
+                 \PY{n}{inputs}\PY{o}{=}\PY{n}{input\PYZus{}layer}\PY{p}{,}
+                 \PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{,}
+                 \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}
+                 \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{activation}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{)}
+         
+             \PY{n}{pool1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{max\PYZus{}pooling2d}\PY{p}{(}
+                 \PY{n}{inputs}\PY{o}{=}\PY{n}{conv1}\PY{p}{,} 
+                 \PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}
+                 \PY{n}{strides}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         
+             \PY{n}{conv2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{conv2d}\PY{p}{(}
+                 \PY{n}{inputs}\PY{o}{=}\PY{n}{pool1}\PY{p}{,}
+                 \PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{,}
+                 \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}
+                 \PY{n}{padding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{same}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                 \PY{n}{activation}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{)}
+             
+             \PY{n}{pool2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{max\PYZus{}pooling2d}\PY{p}{(}
+                 \PY{n}{inputs}\PY{o}{=}\PY{n}{conv2}\PY{p}{,} 
+                 \PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} 
+                 \PY{n}{strides}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         
+             \PY{n}{flatten1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}
+                 \PY{n}{tensor}\PY{o}{=}\PY{n}{pool2}\PY{p}{,} 
+                 \PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{7} \PY{o}{*} \PY{l+m+mi}{7} \PY{o}{*} \PY{l+m+mi}{64}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{dense1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{dense}\PY{p}{(}
+                 \PY{n}{inputs}\PY{o}{=}\PY{n}{flatten1}\PY{p}{,} 
+                 \PY{n}{units}\PY{o}{=}\PY{l+m+mi}{1024}\PY{p}{,} 
+                 \PY{n}{activation}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{)}
+                 
+             \PY{n}{dropout1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}
+                 \PY{n}{inputs}\PY{o}{=}\PY{n}{dense1}\PY{p}{,} 
+                 \PY{n}{rate}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{,} 
+                 \PY{n}{training}\PY{o}{=}\PY{p}{(}\PY{n}{mode} \PY{o}{==} \PY{n}{tf}\PY{o}{.}\PY{n}{estimator}\PY{o}{.}\PY{n}{ModeKeys}\PY{o}{.}\PY{n}{TRAIN}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{logits} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{dense}\PY{p}{(}
+                 \PY{n}{inputs}\PY{o}{=}\PY{n}{dropout1}\PY{p}{,} 
+                 \PY{n}{units}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         
+             \PY{n}{predictions} \PY{o}{=} \PY{p}{\PYZob{}}
+                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{tf}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}
+                     \PY{n+nb}{input}\PY{o}{=}\PY{n}{logits}\PY{p}{,} 
+                     \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{probabilities}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{softmax}\PY{p}{(}
+                     \PY{n}{logits}\PY{p}{,} 
+                     \PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{softmax\PYZus{}tensor}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{p}{\PYZcb{}}
+         
+             \PY{k}{if} \PY{n}{mode} \PY{o}{==} \PY{n}{tf}\PY{o}{.}\PY{n}{estimator}\PY{o}{.}\PY{n}{ModeKeys}\PY{o}{.}\PY{n}{PREDICT}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{tf}\PY{o}{.}\PY{n}{estimator}\PY{o}{.}\PY{n}{EstimatorSpec}\PY{p}{(}
+                     \PY{n}{mode}\PY{o}{=}\PY{n}{mode}\PY{p}{,} 
+                     \PY{n}{predictions}\PY{o}{=}\PY{n}{predictions}\PY{p}{)}
+         
+             \PY{n}{loss} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{losses}\PY{o}{.}\PY{n}{sparse\PYZus{}softmax\PYZus{}cross\PYZus{}entropy}\PY{p}{(}
+                 \PY{n}{labels}\PY{o}{=}\PY{n}{labels}\PY{p}{,} 
+                 \PY{n}{logits}\PY{o}{=}\PY{n}{logits}\PY{p}{)}
+         
+             \PY{k}{if} \PY{n}{mode} \PY{o}{==} \PY{n}{tf}\PY{o}{.}\PY{n}{estimator}\PY{o}{.}\PY{n}{ModeKeys}\PY{o}{.}\PY{n}{TRAIN}\PY{p}{:}
+                 \PY{n}{optimizer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{GradientDescentOptimizer}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{)}
+                 \PY{n}{train\PYZus{}op} \PY{o}{=} \PY{n}{optimizer}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}
+                     \PY{n}{loss}\PY{o}{=}\PY{n}{loss}\PY{p}{,}
+                     \PY{n}{global\PYZus{}step}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{get\PYZus{}global\PYZus{}step}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{tf}\PY{o}{.}\PY{n}{estimator}\PY{o}{.}\PY{n}{EstimatorSpec}\PY{p}{(}
+                     \PY{n}{mode}\PY{o}{=}\PY{n}{mode}\PY{p}{,} 
+                     \PY{n}{loss}\PY{o}{=}\PY{n}{loss}\PY{p}{,} 
+                     \PY{n}{train\PYZus{}op}\PY{o}{=}\PY{n}{train\PYZus{}op}\PY{p}{)}
+         
+             \PY{n}{eval\PYZus{}metric\PYZus{}ops} \PY{o}{=} \PY{p}{\PYZob{}}
+                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{tf}\PY{o}{.}\PY{n}{metrics}\PY{o}{.}\PY{n}{accuracy}\PY{p}{(}
+                     \PY{n}{labels}\PY{o}{=}\PY{n}{labels}\PY{p}{,} 
+                     \PY{n}{predictions}\PY{o}{=}\PY{n}{predictions}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{p}{\PYZcb{}}
+             
+             \PY{k}{return} \PY{n}{tf}\PY{o}{.}\PY{n}{estimator}\PY{o}{.}\PY{n}{EstimatorSpec}\PY{p}{(}
+                 \PY{n}{mode}\PY{o}{=}\PY{n}{mode}\PY{p}{,}
+                 \PY{n}{loss}\PY{o}{=}\PY{n}{loss}\PY{p}{,} 
+                 \PY{n}{eval\PYZus{}metric\PYZus{}ops}\PY{o}{=}\PY{n}{eval\PYZus{}metric\PYZus{}ops}\PY{p}{)}
+\end{Verbatim}
+
+    Using this model function, we compile our model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{cnn\PYZus{}model} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{estimator}\PY{o}{.}\PY{n}{Estimator}\PY{p}{(}\PY{n}{model\PYZus{}fn}\PY{o}{=}\PY{n}{cnn\PYZus{}model\PYZus{}fn}\PY{p}{)}
+\end{Verbatim}
+
+    We fit the model to the data and record the training time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{train\PYZus{}input\PYZus{}fn} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{estimator}\PY{o}{.}\PY{n}{inputs}\PY{o}{.}\PY{n}{numpy\PYZus{}input\PYZus{}fn}\PY{p}{(}
+             \PY{n}{x}\PY{o}{=}\PY{p}{\PYZob{}} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{X\PYZus{}train} \PY{p}{\PYZcb{}}\PY{p}{,}
+             \PY{n}{y}\PY{o}{=}\PY{n}{Y\PYZus{}train}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{int32}\PY{p}{)}\PY{p}{,}
+             \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,}
+             \PY{n}{num\PYZus{}epochs}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}
+             \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n}{cnn\PYZus{}model}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{input\PYZus{}fn}\PY{o}{=}\PY{n}{train\PYZus{}input\PYZus{}fn}\PY{p}{,} \PY{n}{steps}\PY{o}{=}\PY{l+m+mi}{1500}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CNN Traing Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CNN Traing Time: 469.696110400022s
+
+    \end{Verbatim}
+
+    Using the fitted model, we want to score the test data set (i.e. get the
+accuracy of the model) and record the prediction time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{eval\PYZus{}input\PYZus{}fn} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{estimator}\PY{o}{.}\PY{n}{inputs}\PY{o}{.}\PY{n}{numpy\PYZus{}input\PYZus{}fn}\PY{p}{(}
+             \PY{n}{x}\PY{o}{=}\PY{p}{\PYZob{}} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{X\PYZus{}test} \PY{p}{\PYZcb{}}\PY{p}{,}
+             \PY{n}{y}\PY{o}{=}\PY{n}{Y\PYZus{}test}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{int32}\PY{p}{)}\PY{p}{,}
+             \PY{n}{num\PYZus{}epochs}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+             \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{start} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CNN Test Accuracy: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{cnn\PYZus{}model.evaluate(input\PYZus{}fn=eval\PYZus{}input\PYZus{}fn)[}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{accuracy}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{end} \PY{o}{=} \PY{n}{timer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CNN Test Accuracy: 0.809333324432373
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CNN Prediction Time: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{end \PYZhy{} start\PYZcb{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CNN Prediction Time: 4.0268184000160545s
+
+    \end{Verbatim}
+
+    Overall, it seems like the simple neural network had the highest
+accuracy and the most computational efficiency. K-nearest neighbors did
+come close on accuracy, but it had very poor efficiency. Although the
+approximate k-nearest neighbors improved on this efficiency, it came at
+a reduction in accuracy. The convolutional neural network took a
+significant amount of time to train and its accuracy wasn't even as good
+as a simple neural network. With more complex images (and more training
+time), I would assume the convolutional neural network would surpass the
+accuracy of a simple neural network and k-nearest neighbors. Lastly, all
+of these models out-performed simple statistical methods like LDA, QDA,
+and logistic regression.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
