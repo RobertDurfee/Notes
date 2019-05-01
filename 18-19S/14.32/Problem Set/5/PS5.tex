@@ -1,0 +1,243 @@
+%
+% 6.S077 problem set solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros}
+\usepackage{enumitem}
+\newcommand{\theproblemsetnum}{5}
+\newcommand{\releasedate}{Friday, April 19}
+\newcommand{\partaduedate}{Wednesday, May 1}
+
+\title{14.32 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 9:00AM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart  % Problem 1a
+
+There are a few reasons why $x_i$ might be endogenous. Here are a couple:
+
+\begin{itemize}
+    \item {\bf Omitted variable bias}: It is possible that the number of
+    schools per student is correlated to the wealth of the area. Furthermore,
+    the wealth of the area is likely correlated to how well students perform
+    on exams.
+    \item {\bf Reverse causality}: It is possible that an increase in student
+    exam scores could cause an increase in number of schools in the region.
+    For example, if an area experiences a shock resulting in an increase in
+    student exam scores, some private/charter schools might come to the area
+    looking to capitalize on the more intelligent student base.
+\end{itemize}
+
+\problempart  % Problem 1b
+
+There are two criteria to consider for an instrument:
+
+\begin{itemize}
+    \item {\bf Relevance}: First we must consider if the instrument is
+    correlated to the explanatory variable. In this case, we must convince
+    ourselves that a major river running through a city will have an effect
+    on the number of schools in the city. As a stream reduces the space for
+    schools and other real estate, it is plausible that the presence of a
+    stream would affect the number of schools. I think it is worth testing
+    this condition as the number of student in the area might go down
+    proportionally thereby not significantly decreasing the number of schools
+    per 1,000 students.
+    \item {\bf Exclusion}: Next we must consider if the instrument is
+    correlated to the error term. In this case, we must convince ourselves
+    that a major river running through a city will have no direct affect on
+    the student's exam scores. This certainly seems plausible as proximity to
+    a body of water shouldn't alter an individual's intelligence.
+\end{itemize}
+
+\problempart  % Problem 1c
+
+In this case we are dealing with a just-identified regression. Since we only
+have a single regressor, this can be written as,
+$$ \hat{\beta}_1^{\mathrm{IV}} = \frac{\hat{\cov}(z_i, y_i)}{\hat{\cov}(z_i, x_i)} $$
+In the more general case, this is equivalent to,
+$$ \hat{\beta}_1^{\mathrm{IV}} = (Z^T X)^{-1} Z^T Y $$
+
+\problempart  % Problem 1d
+
+Starting with the estimator from Part C:
+\begin{align*}
+    \hat{\beta}_1^{\mathrm{IV}} &= \frac{\hat{\cov}(z_i, y_i)}{\hat{\cov}(z_i, x_i)} \\
+    &= \frac{\hat{\mathbb{E}}[z_i y_i] - \hat{\mathbb{E}}[z_i] \cdot
+    \hat{\mathbb{E}}[y_i]}{\hat{\mathbb{E}}[z_i x_i] - \hat{\mathbb{E}}[z_i] \cdot
+    \hat{\mathbb{E}}[x_i]} \\
+    &= \frac{p \cdot \hat{\mathbb{E}}[z_i y_i \mid z_i = 1] + (1 - p) \cdot
+    \hat{\mathbb{E}}[z_i y_i \mid z_i = 0] - p \cdot \hat{\mathbb{E}}[y_i]}{p
+    \cdot \hat{\mathbb{E}}[z_i x_i \mid z_i = 1] + (1 - p) \cdot
+    \hat{\mathbb{E}}[z_i x_i \mid z_i = 0] - p \cdot \hat{\mathbb{E}}[x_i])} \\
+    &= \frac{p \cdot \hat{\mathbb{E}}[y_i \mid z_i = 1] - p \cdot \left(p
+    \cdot \hat{\mathbb{E}}[y_i \mid z_i = 1] + (1 - p) \cdot
+    \hat{\mathbb{E}}[y_i \mid z_i = 0]\right)}{p \cdot \hat{\mathbb{E}}[x_i
+    \mid z_i = 1] - p \cdot \left(p \cdot \hat{\mathbb{E}}[x_i \mid z_i = 1]
+    + (1 - p) \cdot \hat{\mathbb{E}}[x_i \mid z_i = 0]\right)} \\
+    &= \frac{p \cdot (1 - p) \cdot \left(\hat{\mathbb{E}}[y_i \mid z_i = 1] -
+    \hat{\mathbb{E}}[y_i \mid z_i = 0]\right)}{p \cdot (1 - p) \cdot
+    \left(\hat{\mathbb{E}}[x_i \mid z_i = 1] - \hat{\mathbb{E}}[x_i \mid z_i
+    = 0]\right)} \\
+    &= \frac{\hat{\mathbb{E}}[y_i \mid z_i = 1] - \hat{\mathbb{E}}[y_i \mid
+    z_i = 0]}{\hat{\mathbb{E}}[x_i \mid z_i = 1] - \hat{\mathbb{E}}[x_i \mid
+    z_i = 0]}
+\end{align*}
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 2
+
+\begin{problemparts}
+
+\problempart % Problem 2a
+
+A very simple model (using only the current $r_t$ and $g_t$, but past terms
+could be added) accounting for quarterly seasonality (quarter indicators
+$q_1$, $q_2$, and $q_3$) and linear time trends (using time variable $t$)
+could be,
+$$ y_t = \beta_0 + \beta_1 r_t + \beta_2 g_t + \beta_3 q_1 + \beta_4 q_2 +
+\beta_5 q_3 + \beta_6 t + u_t $$
+
+\problempart % Problem 2b
+
+Serial correlation makes OLS no longer BLUE. Although the coefficient
+estimates will remain consistent and unbiased, the variance estimates will be
+inconsistent and biased. As a result, any hypothesis tests or confidence
+intervals will be incorrect. More often than not, the coefficient will appear
+more precise than it actually is.
+
+\problempart % Problem 2c
+
+To test for simple, weakly dependent, serial correlation, one can use the
+$\mathrm{AR}(1)$ test. To run this test, run OLS on the original model stated
+in Part A. Then calculate the residuals $u_t$. Run the following regression
+on the residuals:
+$$ u_t = \gamma u_{t - 1} + \varepsilon_t $$
+If the coefficient $\gamma$ is statistically significant (the confidence
+interval does not contain zero), then there is serial correlation. If the
+coefficient is not statistically significant, there is no serial correlation.
+
+\problempart % Problem 2d
+
+If there is serial correlation present, one should use an autoregressive
+or moving average model (assuming the dependence is weak) or a first
+differences model (if the dependence is strong).
+
+Assuming the dependence is weak, for the autoregressive model, choose a $p$
+and run the following regression,
+$$ y_t = \beta_0 + \beta_1 r_t + \beta_2 g_t + \beta_3 q_1 + \beta_4 q_2 +
+\beta_5 q_3 + \beta_6 t + \beta_{6 + 1} y_{t - 1} + \ldots + \beta_{6 + p}
+y_{t - p} + u_t $$
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 3
+
+\begin{problemparts}
+
+\problempart % Problem 3a
+
+Let $\varepsilon_{it} = \alpha_i + \eta_{it}$. It is possible that $x_{it}$
+is correlated with $\varepsilon_{it}$ if $x_{it}$ is correlated with
+$\alpha_i$. Suppose that states' population and number of high-security
+prisons have an inverse correlation. That is, more remote, less-populous
+states have more high-security prisons than other, more-populous states. In
+this situation, it is likely that prison guards in the less-populous states
+would be more likely to join a union for collective bargaining to ensure they
+aren't overworked, etc. Furthermore, these less-populated states would likely
+provide higher pensions to attract more workers to their prisons (along with
+higher wages, etc.). All this would cause a correlation of $x_{it}$ with
+$\alpha_i$ from omitted variable bias and thus also with $\varepsilon_{it}$.
+
+\problempart % Problem 3b
+
+The first differences model is defined as,
+\begin{align*}
+    y_{it} - y_{it - 1} &= \beta_0 + \beta_1 x_{it} + \alpha_i + u_{it} - \beta_0 - \beta_1 x_{it - 1} - \alpha_i - u_{it-1} \\
+    \Delta y_{it} &= \beta_1 \Delta x_{it} + \Delta u_{it} \\
+\end{align*}
+Using this model, the estimate for $\beta_1$ is given by,
+\begin{align*}
+    \plim \hat{\beta}_1 &= \plim\left(\frac{\hat{\cov}(\Delta x_{it}, \Delta
+    y_{it})}{\hat{\var}(\Delta x_{it})}\right) \\
+    &= \plim \left(\frac{\hat{\cov}(\Delta x_{it}, \beta_1 \Delta x_{it} +
+    \Delta u_{it})}{\hat{\var}(\Delta x_{it})} \right)\\
+    &= \plim \left(\frac{\beta_1 \hat{\var}(\Delta x_{it}) +
+    \hat{\cov}(\Delta x_{it}, \Delta u_{it})}{\hat{\var}(\Delta x_{it})}
+    \right)\\
+    &= \plim \left(\beta_1 + \frac{\hat{\cov}(x_{it} - x_{it-1}, u_{it} -
+    u_{it-1})}{\hat{\var}(x_{it} - x_{it-1})}\right) \\
+    &= \plim \left(\beta_1 + \frac{\hat{\cov}(x_{it}, u_{it}) -
+    \hat{\cov}(x_{it}, u_{it-1}) - \hat{\cov}(x_{it-1},u_{it}) +
+    \hat{\cov}(x_{it-1},u_{it-1})}{\hat{\var}(x_{it} - x_{it-1})}\right) \\
+    &= \beta_1 + \frac{\cov(x_{it}, u_{it}) - \cov(x_{it}, u_{it-1})
+    -\cov(x_{it-1},u_{it}) + \cov(x_{it-1},u_{it-1})}{\var(x_{it} -
+    x_{it-1})} \\
+\end{align*}
+If we assume the following (strict exogeneity),
+$$\cov(u_{it}, x_{it}) = 0,\ \cov(u_{it-1}, x_{it}) = 0,\ \cov(u_{it},
+x_{it-1}) = 0\quad \forall i, t $$
+Then this simplifies to,
+$$ \plim \hat{\beta}_1 = \beta_1 $$
+Therefore, the estimate is consistent.
+
+\problempart % Problem 3c
+
+The fixed effects models is defined as,
+\begin{align*}
+    y_{it} - \bar{y}_i &= \beta_0 + \beta_1 x_{it} + \alpha_i + u_{it} -
+    \beta_0 - \beta_1 \bar{x}_i - \bar{\alpha}_i - \bar{u}_i \\
+    \tilde{y}_{it} &= \beta_1 \tilde{x}_{it} + \tilde{u}_{it}
+\end{align*}
+This comes from the fact that $\alpha_i = \bar{\alpha}_i$. Using this model,
+the estimate for $\beta_1$ is given by,
+\begin{align*}
+    \plim \hat{\beta}_1 &= \plim \left( \frac{\hat{\cov}(\tilde{x}_{it},
+    \tilde{y}_{it})}{\hat{\var}(\tilde{x}_{it})} \right) \\
+    &= \plim \left(\frac{\hat{\cov}(\tilde{x}_{it}, \beta_1 \tilde{x}_{it} +
+    \tilde{u}_{it})}{\hat{\var}(\tilde{x}_{it})}\right) \\
+    &= \plim \left( \frac{\beta_1 \hat{\var}(\tilde{x}_{it}) +
+    \hat{\cov}(\tilde{x}_{it},
+    \tilde{u}_{it})}{\hat{\var}(\tilde{x}_{it})}\right) \\
+    &= \plim \left(\beta_1 + \frac{\hat{\cov}(x_{it} - \bar{x}_i, u_{it} -
+    \bar{u}_i)}{\hat{\var}(x_{it} - \bar{x}_i)}\right) \\
+    &= \beta_1 + \frac{\cov(x_{it} - \mu_{x_i}, u_{it} -
+    \mu_{u_i})}{\var(x_{it} - \mu_{x_i})} \\
+    &= \beta_1 + \frac{\cov(x_{it}, u_{it})}{\var(x_{it})} \\
+\end{align*}
+If we assume the following (strict exogeneity),
+$$ \cov(x_{it}, u_{it}) = 0\quad \forall i, t $$
+Then this simplifies to,
+$$ \plim \hat{\beta}_1 = \beta_1 $$
+Therefore, the estimate is consistent.
+
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
