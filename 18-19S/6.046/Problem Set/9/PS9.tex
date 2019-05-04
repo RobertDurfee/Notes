@@ -1,0 +1,480 @@
+%
+% 6.046 problem set 2 solutions
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{multirow}
+\usepackage{algorithm, algpseudocode, float}
+
+\input{macros}
+\usepackage{enumitem}
+\newcommand{\theproblemsetnum}{9}
+\newcommand{\releasedate}{Thursday, April 25}
+\newcommand{\partaduedate}{Wednesday, May 1}
+\allowdisplaybreaks
+
+\title{6.046 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 10PM}}.
+
+\makeatletter
+\newenvironment{breakablealgorithm}
+  {% \begin{breakablealgorithm}
+   \begin{center}
+     \refstepcounter{algorithm}% New algorithm
+     \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+     \renewcommand{\caption}[2][\relax]{% Make a new \caption
+       {\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
+       \ifx\relax##1\relax % #1 is \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+       \else % #1 is not \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+       \fi
+       \kern2pt\hrule\kern2pt
+     }
+  }{% \end{breakablealgorithm}
+     \kern2pt\hrule\relax% \@fs@post for \@fs@ruled
+   \end{center}
+  }
+\makeatother
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart  % Problem 1a
+
+To show that the scheduling problem is in NP, we show the size of the
+verification certificiate, $|y|$, is polynomial in the size of the decision
+problem input, $|x|$. That is, $|y| \leq |x|^c$ for some constant $c$.
+
+\begin{itemize}
+
+  \item {\bf Polynomial Certficate} In this problem, the input to the
+  decision problem, $x$, is a list of students, $S$, and each students' list
+  of classes (where each list if an element of $C$). To verify the scheduling
+  problem decision, we require a certificate, $y$, that is a list of students
+  $S$, a list of each students' classes $C$, and a list of exam slots
+  assigned to each class $E$.
+
+  This certificate is clearly polynomial in $|x|$ because we simply require
+  the original $S$ and $C$ input to the decision problem, which is $x$, and
+  an additional constant amount of information about each individual class
+  (the exam assignment for each class which is one of three options).
+
+  \item {\bf Polynomial Verification} The verifier of the certificate simply
+  needs to iterate over each student's classes and see if any of those
+  classes' exam assigments are equal. To check if any of the elements are
+  equal, just keep a set of all exam slots represented. If for all the
+  classes for each student do not have the same exam slot occupied more than
+  once, then the certificate is valid. 
+
+  Since the verifier only needs to look at each class for each student once,
+  the runtime is clearly polynomial in $|x|$.
+
+\end{itemize}
+
+Since there is a polynomial-sized certificate and a polynomial-time
+verification algorithm, the scheduling problem is in NP.
+
+\problempart  % Problem 1b
+
+To show the scheduling problem is equivalent to the 3-colorable problem,
+we first reduce the scheduling problem to the 3-colorable problem. Then we
+reduce the 3-colorable problem to the scheduling problem. In both cases, we
+show that both yield equivalent results.
+
+\begin{itemize}
+
+  \item {\bf 3-Colorable to Scheduling Reduction} Assume we have a method to
+  decide if a scheduling is possible for students $S$ with classes $C$ into
+  one of three non-conflicting exam slots. If we are given a graph $G = (V,
+  E)$, let $F$ be the algorithm which creates a vertex to represent each class.
+  Then, if two vertices $u, v$ have an edge going between them, let $F$
+  create a student and give them two classes corresponding to $u, v$. The
+  constructed schedule is clearly an instance of the scheduling problem.
+
+  The algorithm $F$ runs in polynomial time in the size of the input to the
+  3-colorable problem $|x|$ as each vertex is visited once and each edge is
+  also visited once.
+
+  \begin{itemize}
+
+    \item {\bf Scheduling $\implies$ 3-Coloring} If we are given a valid
+    scheduling of the classes into the exam slots, we can easily turn this
+    into a valid three coloring since there are only three exam slots. If a
+    class is scheduled to exam slot one, color the corresponding vertice with
+    the first color (respectively for the remaining two exam slots). Continue
+    until all classes are examined. Since vertices are only connected when
+    their exists a student taking both classes, if the scheduling is valid,
+    these classes won't have exams at the same time and thus the coloring is
+    valid.
+
+    \item {\bf 3-Coloring $\implies$ Scheduling} If we are given a valid
+    3-coloring of the graph, we can easily turn this into a valid scheduling
+    as there are only three exam slots. If a vertice is colored the first
+    color, schedule the class's exam into exam slot one (respectively for the
+    remaining two colors). Continue until all vertices are visited. Since
+    classes are taken by the same student only when the graph has an edge
+    between two vertices, if the coloring is valid, these adjacent vertices
+    won't have the same coloring and thus the scheduling is valid.
+
+  \end{itemize}
+
+  \item {\bf Scheduling to 3-Colorable Reduction} Assume we have a method to
+  determine if a graph has a valid 3-coloring. If we are given a set of
+  students $S$ and their corresponding classes $C$, let $F$ be the algorithm
+  which constructs a graph $G = (V, E)$ where the vertices represent all the
+  possible classes any student takes. Let $F$ connect any two vertices $u, v$
+  if a student is taking both classes represented by the vertices $u, v$. The
+  constructed graph $G$ is clearly an instance of the 3-colorable problem.
+
+  The algorithm $F$ runs in polynomial time in the size of input to the
+  scheduling problem $|x|$ as each student is visited only once and the edges
+  between the classes forms a complete subgraph which has $O(n^2)$ edges
+  (where $n$ is the number of classes the student is taking). Since $n$ is
+  bounded by the size of the input $|x|$, this can all be computed in
+  polynomial time.
+
+  \begin{itemize}
+
+    \item {\bf Scheduling $\implies$ 3-Coloring} Same proof as above.
+
+    \item {\bf 3-Coloring $\implies$ Scheduling} Same proof as above.
+
+  \end{itemize}
+
+\end{itemize}
+
+Since we have reduced the 3-colorable problem to the scheduling problem and
+the scheduling problem to the 3-colorable problem, these two must be
+equivalent.
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+
+\begin{problemparts}
+
+\problempart  % Problem 2a
+
+To show there exists a polynomial-time algorithm that finds an optimal subset
+of decides that there is no subset that satisfies the constraint, we
+demonstrate such an algorithm (not necessarily the most optimal).
+
+{\bf Description} Construct an undirected graph $G = (V, E)$ such that each
+vertice represents an individual at the hackathon. Let an edge $\{u, v\}$
+exist if hacker $u$ dislikes a hacker $v$. Furthermore, let there be a
+weight function $w : V \longrightarrow \mathbb{Z}^+$ which represents the
+leetness for each hacker. 
+
+Identify all the connected components in $G$ by running graph traversal. For
+each connected component, run the bipartite detection algorithm described in
+Problem Set 7 Part 2b. If any of the connected components is not bipartite
+(and contains more than one node), there is no subset that satisfies the
+constraint. 
+
+If all connected components are bipartite, start with a given node, color it
+one of two colors, and recursively visit each adjacent node, coloring it the
+opposite of parent. While traversing, keep track of the sum of weights $w$ of
+the vertices for each respective color.
+
+For each individual, connected component, choose the color with the highest
+weight and take all the vertices of that color to put in the tent.
+
+{\bf Correctness} The graph $G$ is bipartite if and only if the graph can be
+separated into two groups such that every edge connects from one group to the
+other. Equivalently, this is the same as all hackers who dislike each other
+being separated from each other. Therefore, if a bipartite matching is
+impossible, then the constraint cannot be met.
+
+Since an unconnected graph has non-unique bipartite groupings, we most
+consider each connected component individually. Each connected component does
+have a unique bipartite grouping. Therefore, for each component, we can start
+with a given node, color it one of two colors, and recursively visit each
+adjacent node, coloring it the opposite of the color of the parent. This will
+determine the unique 2-coloring.
+
+Then, each component will have a color which has a greater sum of leetness.
+Choose that color for each component and group them together to be in the
+tent. They cannot dislike each other because the components are disconnected.
+
+{\bf Running Time} Graph creation is clearly polynomial in the number of
+hackers as each vertice is a hacker and there are at most $O(n^2)$ dislike
+relationships. Graph traversal is also polynomial in the number of hackers.
+The algorithm for identifying bipartiteness is also polynomial in the number
+of hackers. Lastly, traversing each component is also polynomial if each
+vertex is visited only once. Since all aspects of the algorithm are
+polynomial, the complete algorithm is also polynomial.
+
+Since this algorithm is correct and runs in polynomial time, it is possible
+to solve the problem is polynomial time.
+
+\problempart  % Problem 2b
+
+To show the hackers problem is NP-complete, we first show that it is in NP.
+Then we reduce a special case of the 3-SAT problem (where not all elements
+can be equal) to the hackers problem.
+
+\begin{itemize}
+
+  \item {\bf Hackers is in NP} To show that the hackers problem is in NP, we
+  must show the size of the verification certificiate, $|y|$, is polynomial
+  in the size of the decision input, $|x|$. That is, $|y| \leq |x|^c$ for
+  some constant $c$.
+
+  \begin{itemize} 
+
+    \item {\bf Polynomial Certficate} In this problem, the input to the
+    decision problem $x$ is a set of groups of hackers $S_1, \ldots, S_m$
+    (not necessarily disjoint) who, if put together, will cause trouble. To
+    verify the hackers problem decision, we require a certificate $y$ that is
+    the groups of hackers $S_1, \ldots, S_m$ who are troublesome if placed
+    together and a list of each individual hacker's group placement $P$.
+
+    This certificate is clearly polynomial in $|x|$ because we simply require
+    the original $S_1, \ldots, S_m$, which is $x$, and an additional list of
+    the placement of each hacker. Since the number of hackers is bounded by
+    the number of hackers in each group, the overall size of the certificate
+    is polynomially bounded by $|x|$.
+
+    \item {\bf Polynomial Verification} The verifier of the certificate
+    simple needs to iterate over each group of troublesome hackers keeping
+    track of the hackers' corresponding assignments. If within each group,
+    both $V_1$ and $V_2$ are represented by the hackers, then the certificate
+    is valid.
+
+    Since the verifier only needs to look at each member of each group once,
+    the runtime is clearly polynomial in $|x|$.
+
+  \end{itemize}
+
+  \item {\bf Hackers is NP-Hard} To show that the hackers problem is NP-hard,
+  we reduce a special case of the 3-SAT problem (where not all elements can
+  be equal) to the hackers problem and show the two yield equivalent results.
+
+  \begin{itemize}
+
+    \item {\bf Special 3-SAT to Hackers Reduction} Assume we have a method to
+    determine if the hackers problem is possible. If we are given a boolean
+    expression for the special 3-SAT problem, let $F$ be the algorithm which
+    constructs two troublesome hackers for each variable in the boolean
+    expression. Let one hacker represent the variable and the other represent
+    the not of the variable. Have $F$ put both of these hackers in the same
+    troublesome group. Now for each clause, let $F$ place the hackers
+    corresponding to each literal in a troublesome group (choosing the hacker
+    representing the not literal as necessary). The constructed set of
+    troublesome groups is clearly an instance of the hackers problem.
+
+    The algorithm $F$ clearly runs in polynomial time in the size of the
+    input as each literal is visited once and then the expression is scanned
+    over once. (Note the number of literals is bounded by the size of the
+    expression.) At each step, only a constant amount of work is necessary to
+    create a troublesome group. Therefore, $F$ is polynomial in $|x|$.
+
+    \item {\bf Hackers $\implies$ Special 3-SAT} If we are given a valid
+    solution to the hackers problem, we can easily turn this into a valid
+    solution to the special 3-SAT problem. Each troublesome group must have
+    at least one member separated from the others. Then the special 3-SAT
+    solution must have at least one $\mathrm{False}$ literal and at least one
+    $\mathrm{True}$ literal corresponding to hackers in groups $V_1$ and
+    $V_2$. Furthermore, negated literal relationships are enforced by putting
+    both the hacker and the not-hacker in the same separate group such that
+    both cannot be in the same group.
+    
+    \item {\bf Special 3-SAT $\implies$ Hackers} If we are given a valid
+    solution to the special 3-SAT problem, we can easily turn this into a
+    valid solution to the hackers problem. Each literal in a clause
+    corresponds to a hacker in a troublesome group. Each clause must have at
+    least one $\mathrm{True}$ and one $\mathrm{False}$. Therefore, each group
+    of troublesome hackers must have at least one member in $V_1$ and at
+    least on member in $V_2$ for each clause. Therefore a valid special 3-SAT
+    implies a valid hacker partition.
+
+  \end{itemize}
+
+\end{itemize}
+
+Since we have shown that special 3-SAT (known to be NP-complete from Part C)
+can be correctly reduced to the hackers problem and that hackers problem is
+itself in NP, the hackers problem must be NP-complete.
+
+\problempart  % Problem 2c
+
+To show the special 3-SAT problem is NP-complete, we first show that it is in
+NP. Then we reduce regular 3-SAT problem to the special case of the 3-SAT
+problem (where not all elements can be equal).
+
+\begin{itemize}
+
+  \item {\bf Special 3-SAT is in NP} To show that the special 3-SAT problem
+  is in NP, we must show the size of the verification certificiate, $|y|$, is
+  polynomial in the size of the decision input, $|x|$. That is, $|y| \leq
+  |x|^c$ for some constant $c$.
+
+  \begin{itemize} 
+
+    \item {\bf Polynomial Certficate} In this problem, the input to the
+    decision problem $x$ is a boolean expression. To verify the
+    satisfiability of the expression, we require a certificate $y$ that is
+    the boolean expression and each literal's truth assignment. 
+
+    This certificate is clearly polynomial in $|x|$ becuase we simple require
+    the original expression, which is $|x|$ and information about each
+    literal's truth assignment. Since the number of literals is bounded by
+    the size of the boolean expression (you can't have more literals than the
+    size of the expression!), the certificate is bounded polynomially by
+    $|x|$.
+
+    \item {\bf Polynomial Verification} The verifier of the certificate
+    simply needs to iterate over all CNF clauses of three literals to check
+    if the clause equals to one and that at least one literal evaluates to
+    false. If all clauses evaluate to one and each clause has at least one
+    zero, the certificate is valid.
+
+    Since the verifier just needs to scan over the boolean expression once,
+    the runtime is clearly polynomial in $|x|$.
+
+  \end{itemize}
+
+  \item {\bf Special 3-SAT is NP-Hard} To show that the special 3-SAT problem
+  is NP-hard, we reduce the regular 3-SAT problem to the special case 3-SAT
+  problem (where not all elements can be equal) to the hackers problem and
+  show the two yield equivalent results.
+
+  \begin{itemize}
+
+    \item {\bf 3-SAT to Special 3-SAT Reduction} Assume we have a method to
+    determine if a boolean expression is satisfiable such that each CNF
+    clause of three variables has at least one false literal. If we are given
+    a CNF boolean expression with clauses of three literals as an input to
+    the regular 3-SAT problem, let $F$ be the algorithm that, for each
+    clause $(x_1 \lor x_2 \lor x_3)$, constructs the following two clauses:
+    $$ (x_1 \lor x_2 \lor c) \land (x_3 \lor \overline{c} \lor
+    \mathrm{False}) $$
+    If $x_1 \lor x_2 = \mathrm{True}$, then let $c = \mathrm{False}$
+    otherwise, let $c = \mathrm{True}$. Clearly this is an instance of the
+    special 3-SAT problem as the boolean expression is still in CNF with
+    three literals in each clause.
+
+    The algorithm $F$ runs in polynomial time in the size of the input to the
+    3-SAT problem $|x|$ as each clause is visited only once and the number of
+    clauses is bounded by the size of the boolean expression. At each visit,
+    only a constant amount of work is required to construct the corresponding
+    two clauses.
+
+    \item {\bf Special 3-SAT $\implies$ 3-SAT} If we are given a valid
+    literal assignment for a special 3-SAT problem, we can easily turn this
+    into a valid solution to regular 3-SAT. Consider the following truth
+    table for all possible satisfiable clause pairs in the special 3-SAT
+    problem,
+
+    \begin{center}
+      \begin{tabular}{c c c c c c c c c c c}
+        $(x_1$ & $\lor$ & $x_2$ & $\lor$ & $c)$ & $\land$ & $(x_3$ & $\lor$ &
+        $\overline{c}$ & $\lor$ & $\mathrm{F})$ \\
+        \hline \hline
+        1 && 1 && 0 && 1 && 1 && 0 \\
+        1 && 1 && 0 && 0 && 1 && 0 \\
+        0 && 1 && 0 && 1 && 1 && 0 \\
+        0 && 1 && 0 && 0 && 1 && 0 \\
+        1 && 0 && 0 && 1 && 1 && 0 \\
+        1 && 0 && 0 && 0 && 1 && 0 \\
+        0 && 0 && 1 && 1 && 0 && 0 \\
+        1 && 0 && 1 && 1 && 0 && 0 \\
+        0 && 1 && 1 && 1 && 0 && 0
+      \end{tabular}
+    \end{center}
+
+    Each of these imply a corresponding solution to regular 3-SAT,
+
+    \begin{center}
+      \begin{tabular}{c c c c c}
+        $(x_1$ & $\lor$ & $x_2$ & $\lor$ & $x_3)$ \\
+        \hline \hline
+        1 && 1 && 1 \\
+        1 && 1 && 0 \\
+        0 && 1 && 1 \\
+        0 && 1 && 0 \\
+        1 && 0 && 1 \\
+        1 && 0 && 0 \\
+        0 && 0 && 1 \\
+        1 && 0 && 1 \\
+        0 && 1 && 1 
+      \end{tabular}
+    \end{center}
+
+    Therefore, any satisfiable clause in special 3-SAT implies a satisfiable
+    clause in regular 3-SAT.
+
+    \item {\bf 3-SAT $\implies$ Special 3-SAT} If we are given a valid
+    literal assignment for a regular 3-SAT problem, we can easily turn this
+    into a valid solution to the special 3-SAT problem. Consider the
+    following truth table for all possible satisfiable clauses in the regular
+    3-SAT problem,
+    
+    \begin{center}
+      \begin{tabular}{c c c c c}
+        $(x_1$ & $\lor$ & $x_2$ & $\lor$ & $x_3)$ \\
+        \hline \hline
+        1 && 1 && 1 \\
+        1 && 1 && 0 \\
+        1 && 0 && 1 \\
+        0 && 1 && 1 \\
+        0 && 0 && 1 \\
+        0 && 1 && 0 \\
+        1 && 0 && 0
+      \end{tabular}
+    \end{center}
+
+    If we follow the rule that $c = \mathrm{False}$ if $x_1 \lor x_2 =
+    \mathrm{True}$, otherwise let $c = \mathrm{False}$, each of these imply a
+    solution to special 3-SAT,
+
+    \begin{center}
+      \begin{tabular}{c c c c c c c c c c c}
+        $(x_1$ & $\lor$ & $x_2$ & $\lor$ & $c)$ & $\land$ & $(x_3$ & $\lor$ &
+        $\overline{c}$ & $\lor$ & $\mathrm{F})$ \\
+        \hline \hline
+        1 && 1 && 0 && 1 && 1 && 0\\
+        1 && 1 && 0 && 0 && 1 && 0\\
+        1 && 0 && 0 && 1 && 1 && 0\\
+        0 && 1 && 0 && 1 && 1 && 0\\
+        0 && 0 && 1 && 1 && 0 && 0\\
+        0 && 1 && 0 && 0 && 1 && 0\\
+        1 && 0 && 0 && 0 && 1 && 0
+      \end{tabular}
+    \end{center}
+
+    Therefore, any satisfiable clause in regular 3-SAT implies a satisfiable
+    clause pair in special 3-SAT.
+    
+  \end{itemize}
+
+\end{itemize}
+
+Since we have shown that 3-SAT (known to be NP-complete) can be correctly
+reduced to special 3-SAT and that special 3-SAT is itself in NP, special
+3-SAT must be NP-complete.
+
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
