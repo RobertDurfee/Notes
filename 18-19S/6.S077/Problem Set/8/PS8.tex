@@ -305,8 +305,67 @@ Therefore, the likelihood ratio statistic is,
     &= \frac{1}{2}\sum_{i = 1}^n x_i^2 - (x_i - a_i)^2 \\
     &= \frac{1}{2}\sum_{i = 1}^n 2 x_i a_i - a_i^2
 \end{align*}
+The rejection rule would then become,
+$$ \boxed{\frac{1}{2}\sum_{i = 1}^n 2 x_i a_i - a_i^2 > t} $$
 
 \problempart  % Problem 4b
+
+First consider $\beta$ as defined,
+$$ \beta = \mathbb{P}\left(\frac{1}{2}\sum_{i = 1}^n 2 x_i a_i - a_i^2 > t |
+H_1 \right) $$
+To determine this, we need a distribution of $L$. Under the alternative
+hypothesis, $x_i \sim \mathcal{N}(a_i, 1)$. A sum of normal random variables
+is also normal. Thus, we need to find the mean and variance of this quantity.
+\begin{align*}
+    \mathbb{E}[L] &= \mathbb{E}\left[\frac{1}{2}\sum_{i = 1}^n 2 x_i a_i -
+    a_i^2\right] \\
+    &= \frac{1}{2}\sum_{i = 1}^n 2 \mathbb{E}[x_i] a_i - a_i^2 \\
+    &= \frac{1}{2}\sum_{i = 1}^n 2 a_i^2 - a_i^2 \\
+    &= \frac{1}{2}\sum_{i = 1}^n a_i^2 \\
+    &\approx \frac{1}{2}\int_{0}^{100} (0.1)^2 \sin^2 \frac{2 \pi i}{100} di \\
+    &= 1/4
+\end{align*}
+Now for the variance (which will be the same for both $\alpha$ and $\beta$),
+\begin{align*}
+    \mathrm{var}(L) &= \mathrm{var}\left(\frac{1}{2}\sum_{i = 1}^n 2 x_i a_i -
+    a_i^2\right) \\
+    &= \frac{1}{4} \sum_{i = 1}^n 4 \mathrm{var}(x_i) a_i \\
+    &= \sum_{i = 1}^n a_i^2 \\
+    &\approx \int_{0}^{100} (0.1)^2 \sin^2 \frac{2 \pi i}{100} di \\
+    &= 1/2
+\end{align*}
+Therfore, under the alternative, $L \sim \mathcal{N}(1/4, 1/2)$.
+
+Now consider $\alpha$ as defined,
+$$ \alpha = \mathbb{P}\left(\frac{1}{2}\sum_{i = 1}^n 2 x_i a_i - a_i^2 > t |
+H_0 \right) $$
+Once again, to determine this, we need a distribution of $L$. Under the
+null hypothesis, $x_i \sim \mathcal{N}(0, 1)$. A sum of normal random
+variables is also normal. Thus, we need to find the mean and variance of this
+quantity.
+\begin{align*}
+    \mathbb{E}[L] &= \mathbb{E}\left[\frac{1}{2}\sum_{i = 1}^n 2 x_i a_i -
+    a_i^2\right] \\
+    &= \frac{1}{2}\sum_{i = 1}^n 2 \mathbb{E}[x_i] a_i - a_i^2 \\
+    &= \frac{1}{2}\sum_{i = 1}^n -a_i^2 \\
+    &\approx \frac{1}{2}\int_{0}^{100} -(0.1)^2 \sin^2 \frac{2 \pi i}{100} di
+    \\
+    &= -1/4
+\end{align*}
+The variance under the null is the same as under the alternative. Therefore,
+under the null, $L \sim \mathcal{N}(-1/4, 1/2)$.
+
+Using these distributions, $\alpha$ and $\beta$ can be determined,
+$$ \beta = \mathbb{P}(L > t \mid H_1) = 1 - \mathbb{P}(L \leq t \mid H_1) = 1
+- \mathbb{P}\left(Z \leq \frac{t - 1/4}{\sqrt{1/2}}\right) = 1 -
+\Phi\left(\frac{t - 1/4}{\sqrt{1/2}}\right) $$
+$$ \alpha = \mathbb{P}(L > t \mid H_0) = 1 - \mathbb{P}(L \leq t \mid H_0) = 1
+- \mathbb{P}\left(Z \leq \frac{t + 1/4}{\sqrt{1/2}}\right) = 1 -
+\Phi\left(\frac{t + 1/4}{\sqrt{1/2}}\right) $$
+Sweeping through several $t$ values yields the following plot,
+\begin{center}
+    \includegraphics[scale=0.75]{ROCCurve.png}
+\end{center}
 
 \end{problemparts}
 
@@ -318,7 +377,34 @@ Therefore, the likelihood ratio statistic is,
 
 \problempart  % Problem 5a
 
+Using Bayes' rule, the PPV can be written as,
+$$ \mathbb{P}(H_1 \mid R) = \frac{\mathbb{P}(H_1) \cdot \mathbb{P}(R \mid
+H_1)}{\mathbb{P}(R)} $$
+Using the Law of Total Probability, this can be written in terms of known
+quantities (assuming $H_0$ and $H_1$ span the universe),
+\begin{align*}
+    \mathbb{P}(H_1 \mid R) &= \frac{\mathbb{P}(H_1) \cdot \mathbb{P}(R \mid
+    H_1)}{\mathbb{P}(H_0) \cdot \mathbb{P}(R \mid H_0) + \mathbb{P}(H_1)
+    \cdot \mathbb{P}(R \mid H_1)} \\
+    &= \boxed{\frac{\pi_1 \cdot \beta}{(1 - \pi_1) \cdot \alpha + \pi_1 \cdot
+    \beta}}
+\end{align*}
+Substituting numerical values,
+\begin{align*}
+    \mathbb{P}(H_1 \mid R) &= \frac{0.0001 \cdot 0.99999}{(1 - 0.0001) \cdot
+    0.05 + 0.0001 \cdot 0.99999} \\
+    &\approx \boxed{0.001996}
+\end{align*}
+Given the prior information that the alternative is expected to be very, very
+rare, the significance level $\alpha$ needs to be much smaller to account for
+this. If the $\alpha$ is reduced, the PPV will increase. An $\alpha =
+0.000005$ will make the PPV approximately 95\%.
+
 \problempart  % Problem 5b
+
+Using Bayes' rule, the new PPV can be written as,
+$$ \mathbb{P}(H_1 \mid R_m) = \frac{\mathbb{P}(H_1) \cdot \mathbb{P}(R_m \mid
+H_1)}{\mathbb{P}(R_m)} $$
 
 \problempart  % Problem 5c
 
@@ -347,10 +433,9 @@ $$ \hat{\mathrm{var}}(\hat{\beta}_0 - \hat{\beta}_1) =
 \hat{\mathrm{cov}}(\hat{\beta}_0, \hat{\beta}_1) $$
 From lecture, the following variances are known,
 $$ \hat{\mathrm{var}}(\hat{\beta}_0) = \frac{\hat{\sigma}^2(s_X^2 +
-\bar{X}^2)}{n s_X^2} $$
-$$ \hat{\mathrm{var}}(\hat{\beta}_1) = \frac{\hat{\sigma}^2}{n s_X^2} $$
-$$ \hat{\mathrm{cov}}(\hat{\beta}_0, \hat{\beta}_1) = - \frac{\hat{\sigma}^2
-\bar{X}}{n s_X^2} $$
+\bar{X}^2)}{n s_X^2},\ \hat{\mathrm{var}}(\hat{\beta}_1) =
+\frac{\hat{\sigma}^2}{n s_X^2},\ \hat{\mathrm{cov}}(\hat{\beta}_0,
+\hat{\beta}_1) = - \frac{\hat{\sigma}^2 \bar{X}}{n s_X^2} $$
 Using the following estimate for $\hat{\sigma}^2$,
 $$ \hat{\sigma}^2 = \frac{1}{n - 2} \sum_{i = 1}^n (y_i - \hat{\beta}_0 -
 \hat{\beta}_1 x_i)^2 $$
@@ -360,10 +445,10 @@ $$ W = \frac{\hat{\beta}_0 - \hat{\beta}_1}{\sqrt{\frac{\hat{\sigma}^2(s_X^2
 \hat{\sigma}^2 \bar{X}}{n s_X^2}}} $$
 The statistic will approach the standard normal distribution. A two-sided
 normal test with $\alpha = 0.05$, would be,
-$$ \mathbb{P}\left(\left|\frac{\hat{\beta}_0 -
+$$ \boxed{\mathbb{P}\left(\left|\frac{\hat{\beta}_0 -
 \hat{\beta}_1}{\sqrt{\frac{\hat{\sigma}^2(s_X^2 + \bar{X}^2)}{n s_X^2} +
 \frac{\hat{\sigma}^2}{n s_X^2} + \frac{2 \hat{\sigma}^2 \bar{X}}{n
-s_X^2}}}\right| \geq 1.96\right) = 0.05 $$
+s_X^2}}}\right| \geq 1.96\right) = 0.05} $$
 
 \end{problems}
 
