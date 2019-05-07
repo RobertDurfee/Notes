@@ -1,0 +1,370 @@
+%
+% 6.S077 problem set solutions template
+%
+\documentclass[12pt,twoside]{article}
+\usepackage{bbm}
+
+\input{macros}
+\newcommand{\theproblemsetnum}{8}
+\newcommand{\releasedate}{Tuesday, April 23}
+\newcommand{\partaduedate}{Tuesday, May 7}
+\allowdisplaybreaks
+
+\title{6.S077 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{\releasedate}
+\textbf{All parts are due {\bf \partaduedate} at {\bf 2:30PM}}.
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Robert Durfee
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+
+\problempart  % Problem 1a
+
+The definition of the $G$-statistic is,
+$$ G = -2 \log \left(\frac{\sup_{\theta \in
+\Theta_0}\mathcal{L}(\theta)}{\sup_{\theta \in \Theta}
+\mathcal{L}(\theta)}\right) $$
+Since we are testing the hypothesis,
+$$ H : p = 1/2 $$
+$$ K : p \neq 1/2 $$
+We have the following,
+$$ \Theta_0 = \{p\}, \quad \Theta = [0, 1] $$
+Using this, the $G$-statistic simplifies to,
+\begin{align*}
+    G &= -2 \log \left(\frac{\mathcal{L}(p)}{\max_{\theta \in [0, 1]}
+    \mathcal{L}(\theta)}\right) \\
+    &= -2 \log \left(\frac{\mathbb{P}(x_1, \ldots, x_n \mid p)}{\max_{\theta
+    \in [0, 1]} \mathbb{P}(x_1,\ldots,x_n \mid \theta)}\right)\\
+    &= -2 \log \left(\frac{\prod_{i = 1}^n \mathbb{P}(x_i\mid
+    p)}{\max_{\theta \in [0, 1]} \prod_{i = 1}^n \mathbb{P}(x_i\mid
+    \theta)}\right)
+\end{align*}
+If we define the following empirical quantity,
+$$ \bar{X}_n = \frac{1}{n} \sum_{i = 1}^n x_i $$
+We can write the $G$-statistic as,
+$$ G = -2 \log \left(\frac{p^{n \bar{X}_n} (1 - p)^{n(1 -
+\bar{X}_n)}}{\max_{\theta \in [0, 1]} \theta^{n \bar{X}_n} (1 - \theta)^{n(1
+- \bar{X}_n)}}\right) $$
+We can maximize the denominator to get $\theta^*$,
+\begin{align*}
+    \theta^* &= \arg\max_{\theta \in [0, 1]} \theta^{n \bar{X}_n} (1 -
+    \theta)^{n(1 - \bar{X}_n)} \\
+    &= \arg\max_{\theta \in [0, 1]} n \bar{X}_n \log \theta + n(1 -
+    \bar{X}_n) \log (1 - \theta) \\
+\end{align*}
+Taking the derivative of the expression with respect to $\theta$,
+$$ \frac{\partial}{\partial \theta}(\cdot) = \frac{n \bar{X}_n}{\theta} -
+\frac{n(1 - \bar{X}_n)}{1 - \theta} $$
+Setting this equal to zero and solving for $\theta^*$,
+\begin{align*}
+    0 &= \frac{n \bar{X}_n}{\theta^*} - \frac{n(1 - \bar{X}_n)}{1 - \theta^*} \\
+    \frac{n \bar{X}_n}{\theta^*} &= \frac{n(1 - \bar{X}_n)}{1 - \theta^*} \\
+    (1 - \theta^*) \bar{X}_n &= \theta^* (1 - \bar{X}_n) \\
+    \bar{X}_n - \theta^* \bar{X}_n &= \theta^* - \theta^* \bar{X}_n \\
+    \theta^* &= \bar{X}_n
+\end{align*}
+Therefore, the $G$-statistic becomes,
+\begin{align*}
+    G &= -2 \log \left(\frac{p^{n \bar{X}_n} (1 - p)^{n(1 -
+    \bar{X}_n)}}{\bar{X}_n^{n \bar{X}_n} (1 - \bar{X}_n)^{n(1 -
+    \bar{X}_n)}}\right) \\
+    &= -2 \left(n \bar{X}_n \log p + n(1 - \bar{X}_n) \log (1 - p) -
+    n\bar{X}_n \log \bar{X}_n - n(1 - \bar{X}_n)\log(1 - \bar{X}_n)\right)
+\end{align*}
+Since $p = 1/2$, this reduces to,
+$$ \boxed{G = 2n \left(1 + \bar{X}_n \log \bar{X}_n + (1 - \bar{X}_n)\log(1 -
+\bar{X}_n)\right)} $$
+To find the threshold value, consider the following probability,
+$$ \mathbb{P}\left(G > g_\alpha\right) = \alpha $$
+Substituting the $G$-statistic,
+\begin{align*}
+    \mathbb{P}\left(2 n \left(1 + \bar{X}_n \log \bar{X}_n + (1 -
+    \bar{X}_n)\log(1 - \bar{X}_n)\right) > g_\alpha\right) &= \alpha \\
+    \mathbb{P}\left(\bar{X}_n \log \bar{X}_n + (1 - \bar{X}_n)\log(1 -
+    \bar{X}_n) > \frac{g_\alpha}{2n} - 1\right) &= \alpha
+\end{align*}
+If we use the definition of binary entropy,
+$$ h(p) = - p \log p - (1 - p) \log (1 - p) $$
+This $G$-statistic further reduces to,
+$$ \mathbb{P}\left(h(\bar{X}_n) < 1 - \frac{g_\alpha}{2n}\right) = \alpha $$
+Given that $n \bar{X}_n \sim \mathrm{Binomial}(n, p)$ and $n = 10, p = 1/2,
+\alpha = 0.109375$, we note the following,
+$$ \mathbb{P}(10 \cdot \bar{X}_{10} > 7) = \mathbb{P}(10 \cdot \bar{X}_{10} <
+3) = \frac{0.109375}{2} $$
+Therefore, the $G$-statistic becomes,
+$$ \mathbb{P}\left(h(0.3) < 1 - \frac{g_\alpha}{20}\right) = 0.109375 $$
+Solving for the threshold $g_\alpha$ yields,
+$$ g_\alpha = 20(1 - h(0.3)) \approx \boxed{2.37418} $$
+
+\problempart  % Problem 1b
+
+The definition of the $Z$-statistic with known variance is,
+$$ Z = \frac{\sum_{i = 1}^n (x_i - \mu_0)}{\sqrt{n \sigma_0^2}} $$
+This is equivalent to,
+$$ Z = \left(\frac{1}{n} \sum_{i = 1}^n x_i - \mu_0\right)
+\sqrt{\frac{n}{\sigma_0^2}} $$
+In this case, since $x_i \sim \mathrm{Bernoulli}(p)$, this reduces to,
+$$ Z = \left(\frac{1}{n}\sum_{i = 1}^n x_i - p\right)\sqrt{\frac{n}{p(1 -
+p)}} $$
+If we define the same quantity as above,
+$$ \bar{X}_n = \frac{1}{n} \sum_{i = 1}^n x_i $$
+This then becomes,
+$$ \boxed{Z = \left(\bar{X}_n - p\right)\sqrt{\frac{n}{p(1 - p)}}} $$
+To compute the threshold, consider the following probability,
+$$ \mathbb{P}(|Z| > z_\alpha) = \alpha $$
+Substituting the $Z$-statistic,
+$$ \mathbb{P}\left(\left|\left(\bar{X}_n - p\right)\sqrt{\frac{n}{p(1 -
+p)}}\right| > z_\alpha\right) = \alpha $$
+Given that $n \bar{X}_n \sim \mathrm{Binomial}(n, p)$ and $n = 10, p = 1/2,
+\alpha = 0.109375$, we again note the following,
+$$ \mathbb{P}(10 \cdot \bar{X}_{10} > 7) = \mathbb{P}(10 \cdot \bar{X}_{10} <
+3) = \frac{0.109375}{2} $$
+Therefore, the $Z$-statistic becomes,
+$$ \mathbb{P}\left(\left|(0.7 - 1/2) \sqrt{\frac{10}{1/4}}\right| > z_\alpha
+\right) = \alpha $$
+Solving for $z_\alpha$ yields,
+$$ z_\alpha = \left|(0.7 - 1/2) \sqrt{\frac{10}{1/4}}\right| \approx
+\boxed{1.26491} $$
+
+\problempart  % Problem 1c
+
+First we consider the rejection region for the $G$-statistic,
+$$ \left\{h(\bar{X}_n) \leq 1 - \frac{g_\alpha}{2n}\right\} $$
+Let $t_1$ be some threshold such that
+$$ h(t_1) = 1 - \frac{g_\alpha}{2n} $$
+Due to the symmetry of the binary entropy function, the following will also
+hold,
+$$ h(1 - t_1) = 1 - \frac{g_\alpha}{2n} $$
+Therefore, the set of all $\bar{X}_n$ that satisfy this rejection region are,
+$$ \{\bar{X}_n \leq t_1\} \cup \{\bar{X}_n \geq 1 - t_1\} $$
+Applying a simple transformation yields,
+$$ \{\bar{X}_n - 1/2 \leq t_1 - 1/2\} \cup \{\bar{X}_n - 1/2 \geq 1/2 - t_1\}
+$$
+This can be rewritten as,
+$$ \boxed{\{| \bar{X}_n - 1/2 | \geq 1/2 - t_1 \}} $$
+
+Now we consider the rejection region for the $Z$-statistic,
+$$ \left\{\left|(\bar{X}_n - 1/2) \sqrt{\frac{n}{1/4}}\right| \geq
+z_\alpha\right\} $$
+If we let $t_2 = z_\alpha$, after some rearranging,
+$$ \boxed{\left\{\left|\bar{X}_n - 1/2 \right| \geq
+t_2\sqrt{\frac{1/4}{n}}\right\}} $$
+
+It is important to note that there exists a $t_1$ and $t_2$ such that both
+rejection regions are equivalent. Therefore, neither test is better than the
+other.
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 2
+
+\begin{problemparts}
+
+\problempart  % Problem 2a
+
+Consider the following hypothesis,
+$$ H_0 : \pi = 1/2 $$
+$$ H_1 : \pi \neq 1/2 $$
+Since this is a $x_1 \sim \mathrm{Bernoulli}(\pi)$, we know the variance
+under the null hypothesis. Thus, we use a $Z$-test. Consider the
+$Z$-statistic,
+\begin{align*}
+    Z &= \frac{\sum_{i = 1}^n (x_i - \mu_0)}{\sqrt{n \sigma_0^2}} \\
+    &= \frac{\sum_{i = 1}^{82} (b_i - 1/2)}{\sqrt{938223 \cdot (1/4)}} \\
+    &= \frac{484382 - 938223/2}{\sqrt{938223/4}} \\
+    &\approx 31.5305
+\end{align*}
+Using the standard normal approximation, the corresponding $p$-value is,
+$$ \mathbb{P}(|Z| > 31.5305) \approx \boxed{3.3187 \cdot 10^{-218}} $$
+Therefore, we have strong evidence to reject the null that $\pi = 1/2$
+
+\problempart  % Problem 2b
+
+Now consider the following hypothesis,
+$$ H_0 : \pi = 0.515 $$
+$$ H_1 : \pi \neq 0.515 $$
+Consider the $Z$-statistic,
+\begin{align*}
+    Z &= \frac{\sum_{i = 1}^n (x_i - \mu_0)}{\sqrt{n \sigma_0^2}} \\
+    &= \frac{\sum_{i = 1}^{82} (b_i - 0.515)}{\sqrt{938223 \cdot 0.515 \cdot
+    (1 - 0.515)}} \\
+    &= \frac{484382 - 938223 \cdot 0.515}{\sqrt{938223 \cdot 0.515 \cdot (1 -
+    0.515)}} \\
+    &\approx 2.47299
+\end{align*}
+Using the standard normal approximation, the corresponding $p$-value is,
+$$ \mathbb{P}(|Z| > 2.47299) \approx \boxed{0.0134} $$
+Therefore, it is not nearly as convincing to reject the null.
+
+\problempart  % Problem 2c
+
+Consider the empirical value of the variance under the null,
+$$ \hat{\sigma}_0^2 = \frac{1}{n} \sum_{i = 1}^{82} (b_i - n_i \pi)^2 $$
+This can be rewritten as,
+$$ \hat{\sigma}_0^2\frac{1}{n}\left(\sum_{i = 1}^{82} b_i^2 - 2 \pi \sum_{i =
+1}^{82} b_i n_i + \pi^2 \sum_{i = 1}^{82} n_i^2\right) $$
+Substituting provided terms,
+\begin{align*}
+    \hat{\sigma}_0^2 &= \frac{1}{938223}\left(3082550890 - 2 \cdot 18/35
+    \cdot 5975723599 + (18/35)^2 \cdot 11586072783\right) \\
+    &\approx \boxed{0.522644}
+\end{align*}
+
+Now consider the expected variance under the null,
+\begin{align*}
+    \mathbb{E}[\sigma_0^2] &= \mathbb{E}\left[\frac{1}{n} \sum_{i = 1}^{82}
+    (b_i - n_i \pi)^2\right] \\
+    &= \frac{1}{n} \sum_{i = 1}^{82} \mathbb{E}[b_i^2] - 2 \pi n_i
+    \mathbb{E}[b_i] + \pi^2 n_i^2
+\end{align*}
+Using the fact that $b_i \sim \mathrm{Binomial}(n_i, \pi)$, we know,
+$$ \mathbb{E}[b_i] = n_i \pi,\ \mathbb{E}[b_i^2] = n_i \pi (1 - \pi) + \pi^2
+n_i^2 $$
+Substituting into the expectation,
+\begin{align*}
+    \mathbb{E}[\sigma_0^2] &= \frac{1}{n} \sum_{i = 1}^{82} n_i \pi (1 - \pi) \\
+    &= \frac{\pi (1 - \pi)}{n} \sum_{i = 1}^{82} n_i \\
+    &= \pi (1 - \pi) \\
+    &= (18/35) (1 - 18/35) \\
+    &\approx \boxed{0.24979}
+\end{align*}
+
+From this, we do not think that the variance was too low. In fact, the
+variance is significantly higher than expected.
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 3
+
+Consider the following hypothesis,
+$$ H_0 : \mu_L = \mu_R $$
+$$ H_1 : \mu_L < \mu_R $$
+If we let $\theta = \mu_L - \mu_R$, this is equivalent to,
+$$ H_0 : \theta = 0 $$
+$$ H_1 : \theta < 0 $$
+We can construct the two sample $T$-statistic,
+$$ T = \frac{\bar{X}_L - \bar{X}_R}{\sqrt{\hat{\sigma}_L^2/n_L +
+\hat{\sigma}_R^2/n_R}} $$
+The empirical variance for a set of Bernoulli random variables is
+$$ \hat{\sigma}^2 = \frac{1}{n} \sum_{i = 1}^n (x_i - \bar{X})^2 = \bar{X} (1
+- \bar{X}) $$
+Therefore, from the data, we get the following proportions,
+$$ \bar{X}_L = \frac{130866}{130866 + 139782} \approx 0.483528 $$
+$$ \bar{X}_R = \frac{3083}{3083 + 3256} \approx 0.486354 $$
+Using these, we can get the variances,
+$$ \hat{\sigma}_L^2 = 0.483528 (1 - 0.483528) \approx 0.249729 $$
+$$ \hat{\sigma}_R^2 = 0.486354 (1 - 0.486354) \approx 0.249813 $$
+Substituting into the $T$-statistic,
+\begin{align*}
+    T &= \frac{0.483528 - 0.486354}{\sqrt{0.249729/270648 + 0.249813/6339}} \\
+    &\approx -0.444989
+\end{align*}
+Calculating the $p$-value using the normal approximation,
+$$ \boxed{\mathbb{P}(T \leq -0.444989) \approx 0.326355} $$
+Since the probability of this value occuring or a value more extreme is
+roughly 33\%, I do not think this result is significant.
+
+\newpage
+
+\problem  % Problem 4
+
+\begin{problemparts}
+
+\problempart  % Problem 4a
+
+Using the definition of $L$ given in the problem set,
+$$ L = \sum_{i = 1}^n \log \frac{P(X_i)}{Q(X_i)} $$
+In this sense, if the null is rejected what $L > t$, then when the null is
+incorrect, we want the ratio to approach infinity. Therefore,
+$$ P : X_i \sim \mathcal{N}(a_i, 1) $$
+$$ Q : X_i \sim \mathcal{N}(0, 1) $$
+Therefore, the likelihood ratio statistic is,
+\begin{align*}
+    L &= \sum_{i = 1}^n \log \frac{\exp\{-(x_i -
+    a_i)^2/2\}}{\exp\{-x_i^2/2\}} \\
+    &= \frac{1}{2}\sum_{i = 1}^n x_i^2 - (x_i - a_i)^2 \\
+    &= \frac{1}{2}\sum_{i = 1}^n 2 x_i a_i - a_i^2
+\end{align*}
+
+\problempart  % Problem 4b
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 5
+
+\begin{problemparts}
+
+\problempart  % Problem 5a
+
+\problempart  % Problem 5b
+
+\problempart  % Problem 5c
+
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 6
+
+Consider the following hypothesis,
+$$ H_0 : \beta_0 = \beta_1 $$
+$$ H_1 : \beta_0 \neq \beta_1 $$
+If we let $\theta = \beta_0 - \beta_1$, this is equivalent to,
+$$ H_0 : \theta = 0 $$
+$$ H_1 : \theta \neq 0 $$
+We can estimate $\beta_0$ and $\beta_1$,
+$$ \hat{\beta}_0 = \bar{Y} - \hat{\beta}_1 \bar{X} $$
+$$ \hat{\beta}_1 = \frac{\sum_{i = 1}^n (X_i - \bar{X})(Y_i -
+\bar{Y})}{\sum_{i = 1}^n (X_i - \bar{X})^2} $$
+We can write out the Wald statistic,
+$$ W = \frac{\hat{\beta}_0 -
+\hat{\beta}_1}{\sqrt{\hat{\mathrm{var}}(\hat{\beta}_0 - \hat{\beta}_1)}} $$
+The variance of the estimate is given by,
+$$ \hat{\mathrm{var}}(\hat{\beta}_0 - \hat{\beta}_1) =
+\hat{\mathrm{var}}(\hat{\beta}_0) + \hat{\mathrm{var}}(\hat{\beta}_1) - 2
+\hat{\mathrm{cov}}(\hat{\beta}_0, \hat{\beta}_1) $$
+From lecture, the following variances are known,
+$$ \hat{\mathrm{var}}(\hat{\beta}_0) = \frac{\hat{\sigma}^2(s_X^2 +
+\bar{X}^2)}{n s_X^2} $$
+$$ \hat{\mathrm{var}}(\hat{\beta}_1) = \frac{\hat{\sigma}^2}{n s_X^2} $$
+$$ \hat{\mathrm{cov}}(\hat{\beta}_0, \hat{\beta}_1) = - \frac{\hat{\sigma}^2
+\bar{X}}{n s_X^2} $$
+Using the following estimate for $\hat{\sigma}^2$,
+$$ \hat{\sigma}^2 = \frac{1}{n - 2} \sum_{i = 1}^n (y_i - \hat{\beta}_0 -
+\hat{\beta}_1 x_i)^2 $$
+Therefore, the $W$-statistic becomes,
+$$ W = \frac{\hat{\beta}_0 - \hat{\beta}_1}{\sqrt{\frac{\hat{\sigma}^2(s_X^2
++ \bar{X}^2)}{n s_X^2} + \frac{\hat{\sigma}^2}{n s_X^2} + \frac{2
+\hat{\sigma}^2 \bar{X}}{n s_X^2}}} $$
+The statistic will approach the standard normal distribution. A two-sided
+normal test with $\alpha = 0.05$, would be,
+$$ \mathbb{P}\left(\left|\frac{\hat{\beta}_0 -
+\hat{\beta}_1}{\sqrt{\frac{\hat{\sigma}^2(s_X^2 + \bar{X}^2)}{n s_X^2} +
+\frac{\hat{\sigma}^2}{n s_X^2} + \frac{2 \hat{\sigma}^2 \bar{X}}{n
+s_X^2}}}\right| \geq 1.96\right) = 0.05 $$
+
+\end{problems}
+
+\end{document}
