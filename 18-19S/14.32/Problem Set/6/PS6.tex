@@ -35,13 +35,50 @@
 
 \problempart  % Problem 1a
 
+In the case were $\alpha_i$ is correlated with some of the regressors (yet
+$\nu_{it}$ is still uncorrelated with all of the regressors), our estimates
+from OLS would be biased and inconsistent. This comes from the violation of
+the assumption,
+$$ \cov\left(\varepsilon_{it}, x_{it}\right) = 0 $$
+It is clear to see that this is violated as, $\varepsilon = \alpha_i +
+\nu_{it}$ and we are told $\cov\left(\alpha_i, x_{it}\right) \neq 0$.
+Therefore,
+$$ \cov\left(\varepsilon_{it}, x_{it}\right) \neq 0 $$
+Since this assumption is violated, the estimates from OLS will be
+biased and inconsistent.
+
+To fix this error, we have a few options. One option is to use the
+first-differences model. This will cancel out all $\alpha_i$ terms and yield
+a consistent estimator.
+
 \problempart  % Problem 1b
+
+If $\alpha_i$ is uncorrelated with the regressors (and $\nu_{it}$ is still
+uncorrelated with all of the regressors), then $\cov\left(\varepsilon_{it},
+x_{it}\right) = 0$ as $\varepsilon_{it} = \alpha_i + \nu_{it}$ and both of
+which are uncorrelated with regressors $x_{it}$. This allows us to assume the
+estimator is unbiased and consistent. However, this does not rule out serial
+correlation (and heteroskedasticity, for that matter) in the error term which
+would cause inconsistent hypothesis testing and confidence intervals.
 
 \problempart  % Problem 1c
 
 \problempart  % Problem 1d
 
+Now we guarantee that the errors are homoskedastic and not serially
+correlated. This will ensure our variance estimates are consistent and will
+lead to consistent hypothesis testing and confidence intervals. However, this
+does not fix the correlation between $\alpha_i$ and the regressors.
+Therefore, this method relies on the assumption $\cov\left(\alpha_i,
+x_{it}\right) = 0$.
+
 \problempart  % Problem 1e
+
+\begin{enumerate}[label=\textbf{(\roman*)}]
+    \item
+    \item
+    \item
+\end{enumerate}
 
 \end{problemparts}
 
@@ -53,13 +90,43 @@
 
 \problempart % Problem 2a
 
+One factor could cause a bias in the estimator is the presence of a natural
+trend. In other words, without the policy in place, obesity was already
+trending upward or downward. If the trend were naturally upward, the policy
+might've reduced the effect, but not enough to cause a net decrease in
+obesity between the two time periods compared. Thus the policy's effect would
+be understated (or even seem to increase obesity). The same could happen in
+the reverse.
+
 \problempart % Problem 2b
+
+This is also a biased estimator as the two cities are likely very different.
+The comparison would not take this into consideration. For example, a more
+rural city could have less access to fast food restaurants and therefore
+their obesity rate is just inherently lower than a more urban area. Thus, the
+effect of the policy would be understated as the more rural city just
+inherently has lower obesity. Different scenarios could lead to the opposite
+conclusion as well.
 
 \problempart % Problem 2c
 
 \problempart % Problem 2d
 
+The differences-in-differences estimator takes both ideas from Part A and
+Part B into consideration. Instead of comparing a singe individual over pre-
+and post-treatment and neglecting natural trends (or other time-related
+confounders) and instead of comparing two individuals over a single
+post-treatment time period and neglecting individual differences, the two are
+considered together.
+
 \problempart % Problem 2e
+
+You would still want the two individuals to share as much as possible to
+allow the un-treated group be as close of an approximation of the treated
+group before and after their treatment. If the two individuals are very
+different, then the differences from the untreated group would not be a good
+approximation of the expected changes in the treated group had it not been
+treated.
 
 \problempart % Problem 2f
 
