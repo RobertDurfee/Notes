@@ -14,7 +14,7 @@
 \begin{document}
 
 \handout{Problem Set \theproblemsetnum}{\releasedate}
-\textbf{All parts are due {\bf \partaduedate} at {\bf 9:00AM}}.
+\textbf{All parts are due {\bf \partaduedate} at {\bf 11:59PM}}.
 
 \setlength{\parindent}{0pt}
 \medskip\hrulefill\medskip
@@ -63,6 +63,98 @@ would cause inconsistent hypothesis testing and confidence intervals.
 
 \problempart  % Problem 1c
 
+First we show the errors are homoskedastic after the transformation. 
+$$ \var(\tilde{\varepsilon}_{it}) = \var(\varepsilon_{it} - \lambda
+\bar{\varepsilon}_i) $$
+First we split $\varepsilon_{it}$ into two uncorrelated components $\alpha_i$
+and $\eta_{it}$.
+$$ \var(\tilde{\varepsilon}_{it}) = \var((\alpha_i + \eta_{it}) - \lambda
+(\alpha_i + \bar{\eta}_i) ) $$
+Using the fact that $\alpha_i$ and $\eta_{it}$ are uncorrelated,
+$$ \var(\tilde{\varepsilon}_{it}) = (1 - \lambda)^2 \var(\alpha_i) +
+\var(\eta_{it} - \lambda \bar{\eta}_i) $$
+Breaking up the empirical average of $\eta$,
+\begin{align*}
+    \var(\tilde{\varepsilon}_{it}) &= (1 - \lambda)^2 \var(\alpha_i) +
+    \var\left(\eta_{it} - \frac{\lambda}{T} \sum_{r = 1}^T \eta_{ir}\right) \\
+    &= (1 - \lambda)^2 \var(\alpha_i) + \var\left(\left(\frac{T -
+    1}{T}\right) \eta_{it} - \frac{\lambda}{T} \sum_{r \neq t}
+    \eta_{ir}\right)
+\end{align*}
+Now the $\eta_{it}$ is independent from the other $\eta_{ir}$ (shown below),
+$$ \var(\tilde{\varepsilon}_{it}) = (1 - \lambda)^2 \var(\alpha_i) +
+\left(\frac{T - 1}{T}\right)^2\var(\eta_{it}) -
+\left(\frac{\lambda}{T}\right)^2\var\left(\sum_{r \neq t}\eta_{ir}\right) $$
+Since $\var(\alpha_i) = \sigma_\alpha^2$ and $\var(\eta_{it}) =
+\sigma_\eta^2$, this simplifies to,
+\begin{align*}
+    \var(\tilde{\varepsilon}_{it}) &= (1 - \lambda)^2 \sigma_\alpha^2 +
+    \left(\frac{T - 1}{T}\right)^2\sigma_\eta^2 - \left(\frac{\lambda(T -
+    1)}{T}\right)^2 \sigma_\eta^2 \\
+    &= \boxed{(1 - \lambda)^2 \sigma_\alpha^2 + (1 - \lambda^2) \left(\frac{T
+    - 1}{T}\right)^2 \sigma_\eta^2}
+\end{align*}
+Since this expression consists only of constants, it too is constant.
+Therefore, we have homoskedasticity.
+
+Now we show the errors are serially uncorrelated.
+$$ \cov(\tilde{\varepsilon}_{it}, \tilde{\varepsilon}_{js}) =
+\cov(\varepsilon_{it} - \lambda \bar{\varepsilon}_i, \varepsilon_{js} -
+\lambda \bar{\varepsilon}_j) $$
+If $i \neq j$, then this trivially reduces to zero as we can assume that no
+individuals are correlated to one another. Therefore, we consider the case
+where $t \neq s$. First we split $\varepsilon$ into two uncorrelated
+components $\alpha_i$ and $\eta_{it}$.
+$$ \cov(\tilde{\varepsilon}_{it}, \tilde{\varepsilon}_{js}) = \cov((\alpha_i
++ \eta_{it}) - \lambda (\alpha_i + \bar{\eta}_i), (\alpha_i + \eta_{is}) -
+\lambda (\alpha_i + \bar{\eta}_i)) $$
+Breaking this covariance up into components,
+\begin{align*}
+    \cov(\tilde{\varepsilon}_{it}, \tilde{\varepsilon}_{js}) &= \cov(\alpha_i
+    + \eta_{it}, \alpha_i + \eta_{is}) - \lambda \cov(\alpha_i + \eta_{it},
+    \alpha_i + \bar{\eta}_i) \\
+    &\quad - \lambda \cov(\alpha_i + \bar{\eta}_i, \alpha_i + \eta_{is}) +
+    \lambda^2 \var(\alpha_i + \bar{\eta}_i) \\
+    &= \var(\alpha_i) + \cov(\alpha_i, \eta_{is}) + \cov(\eta_{it}, \alpha_i)
+    + \cov(\eta_{it}, \eta_{is}) \\
+    &\quad - \lambda\left(\var(\alpha_i) + \cov(\alpha_i, \bar{\eta}_i) +
+    \cov(\eta_{it}, \alpha_i) + \cov(\eta_{it}, \bar{\eta}_i)\right) \\
+    &\quad - \lambda\left(\var(\alpha_i) + \cov(\alpha_i, \eta_{is}) +
+    \cov(\bar{\eta}_i, \alpha_i) + \cov(\bar{\eta}_i, \eta_{is})\right) \\
+    &\quad + \lambda^2\left(\var(\alpha_i) + \var(\bar{\eta}_i)\right)
+\end{align*}
+By definition, we know that all $\alpha_i$ are uncorrelated with
+$\eta_{i\cdot}$. Therefore, these covariances go to zero.
+\begin{align*}
+    \cov(\tilde{\varepsilon}_{it}, \tilde{\varepsilon}_{js}) &=
+    \var(\alpha_i) + \cov(\eta_{it}, \eta_{is}) - \lambda\left(\var(\alpha_i)
+    + \cov(\eta_{it}, \bar{\eta}_i)\right) \\
+    &\quad - \lambda\left(\var(\alpha_i) + \cov(\bar{\eta}_i,
+    \eta_{is})\right) + \lambda^2\left(\var(\alpha_i) +
+    \var(\bar{\eta}_i)\right) \\
+\end{align*}
+Furthermore, the covariance between any $\eta_{it}$ and $\eta_{is}$ for $t
+\neq s$ is taken to be zero. Therefore, we have,
+$$ \cov(\tilde{\varepsilon}_{it}, \tilde{\varepsilon}_{js}) = \var(\alpha_i)
+- 2\lambda\left(\var(\alpha_i) + \frac{1}{T}\var(\eta_{it})\right) +
+\lambda^2\left(\var(\alpha_i) + \frac{1}{T^2}\sum_{r =
+1}^T\var({\eta}_{ir})\right) $$
+Lastly, substituting $\var(\alpha_i) = \sigma_\alpha^2$ and $\var(\eta_{it})
+= \sigma_\eta^2$,
+\begin{align*}
+    \cov(\tilde{\varepsilon}_{it}, \tilde{\varepsilon}_{js}) &=
+    \sigma_\alpha^2 - 2\lambda\left(\sigma_\alpha^2 +
+    \frac{1}{T}\sigma_\eta^2\right) + \lambda^2\left(\sigma_\alpha^2 +
+    \frac{1}{T^2}\sum_{r = 1}^T\sigma_\eta^2\right) \\
+    &= \sigma_\alpha^2 - (2 - \lambda)\lambda\left(\sigma_\alpha^2 +
+    \frac{1}{T}\sigma_\eta^2\right) \\
+\end{align*}
+Using the following value of $\lambda$,
+$$ \lambda = 1 - \sqrt{\frac{\sigma_\eta^2}{\sigma_\eta^2 + T\sigma_\alpha^2}} $$
+This expression reduces to zero,
+$$ \cov(\tilde{\varepsilon}_{it}, \tilde{\varepsilon}_{js}) = \boxed{0} $$
+Therefore, the error terms are serially uncorrelated.
+
 \problempart  % Problem 1d
 
 Now we guarantee that the errors are homoskedastic and not serially
@@ -75,9 +167,66 @@ x_{it}\right) = 0$.
 \problempart  % Problem 1e
 
 \begin{enumerate}[label=\textbf{(\roman*)}]
-    \item
-    \item
-    \item
+
+    \item We can show that $\hat{\mathbb{E}}[\hat{u}_{it} \hat{u}_{is}]$ is a
+    consistent estimator for $\sigma_\alpha^2$. To do this, we take the limit
+    in probability,
+    \begin{align*}
+        \plim \hat{\mathbb{E}}[\hat{u}_{it} \hat{u}_{is}] &= \plim
+        \hat{\mathbb{E}}[(\hat{\alpha}_i + \hat{\eta}_{it}) (\hat{\alpha}_i +
+        \hat{\eta}_{is})] \\
+        &= \plim \left(\hat{\mathbb{E}}[\hat{\alpha}_i^2 + \hat{\alpha}_i
+        \hat{\eta}_{is} + \hat{\eta}_{it} \hat{\alpha}_i + \hat{\eta}_{it}
+        \hat{\eta}_{is})]\right) \\
+        &= \plim \left(\hat{\mathbb{E}}[\hat{\alpha}_i^2] +
+        \hat{\mathbb{E}}[\hat{\alpha}_i \hat{\eta}_{is}] +
+        \hat{\mathbb{E}}[\hat{\eta}_{it} \hat{\alpha}_i] +
+        \hat{\mathbb{E}}[\hat{\eta}_{it} \hat{\eta}_{is}]\right) \\
+    \end{align*}
+    Since $\alpha_i$ and $\eta_{i\cdot}$ are uncorrelated by definition and
+    so are $\eta_{it}$ and $\eta_{is}$, this reduces to,
+    $$ \plim \hat{\mathbb{E}}[\hat{u}_{it} \hat{u}_{is}]= \plim
+    \left(\hat{\mathbb{E}}[\hat{\alpha}_i^2] + \hat{\mathbb{E}}[\hat{\alpha}_i]
+    \left(\hat{\mathbb{E}}[\hat{\eta}_{it}] +
+    \hat{\mathbb{E}}[\hat{\eta}_{is}]\right) +
+    \hat{\mathbb{E}}[\hat{\eta}_{it}] \hat{\mathbb{E}}[\hat{\eta}_{is}]\right) $$
+    Taking the limit in probability,
+    $$ \plim \hat{\mathbb{E}}[\hat{u}_{it} \hat{u}_{is}]=
+    \mathbb{E}[\alpha_i^2] + \mathbb{E}[\alpha_i] \left(\mathbb{E}[\eta_{it}]
+    + \mathbb{E}[\eta_{is}]\right) + \mathbb{E}[\eta_{it}]
+    \mathbb{E}[\eta_{is}] $$
+    Since there is a constant in the regression, we can assume all errors'
+    average is zero. Therefore,
+    $$ \plim \hat{\mathbb{E}}[\hat{u}_{it} \hat{u}_{is}]=
+    \mathbb{E}[\alpha_i^2] $$
+    The variance of $\alpha_i$ is equivalent to,
+    $$ \var(\alpha_i) = \mathbb{E}[\alpha_i^2] - \mathbb{E}[\alpha_i]^2 $$
+    But, once again, the average of the error is zero. Thus,
+    $$ \var(\alpha_i) = \mathbb{E}[\alpha_i^2] $$
+    Putting everything together,
+    $$ \plim \hat{\mathbb{E}}[\hat{u}_{it} \hat{u}_{is}]= \boxed{\sigma_\alpha^2} $$
+
+    \item We can also show that $\hat{\var}(\hat{u}_{it})$ is a consistent
+    estimator for $\sigma_\alpha^2 + \sigma_\eta^2$. To do this, we take the
+    limit in probability,
+    $$ \plim \hat{\var}(\hat{u}_{it}) = \plim \hat{\var}(\hat{\alpha}_i +
+    \hat{\eta}_{it}) $$
+    Since $\alpha_i$ and $\eta_{it}$ are by definition uncorrelated,
+    $$ \plim \hat{\var}(\hat{u}_{it}) = \plim
+    \left(\hat{\var}(\hat{\alpha}_i) + \hat{\var}(\hat{\eta}_{it})\right) $$
+    Taking the probability limit yields,
+    $$ \plim \hat{\var}(\hat{u}_{it}) = \boxed{\sigma_\alpha^2 + \sigma_\eta^2} $$
+
+    \item If we have have consistent estimators for $\sigma_\alpha^2$ and
+    $\sigma_\alpha^2 + \sigma_\eta^2$, we can consistently estimate
+    $\sigma_\alpha^2$, $\sigma_\eta^2$, and $\lambda$,
+    $$ \hat{\sigma}_\alpha^2 = \boxed{\hat{\mathbb{E}}[\hat{u}_{it} \hat{u}_{is}]} $$
+    $$ \hat{\sigma}_\eta^2 = \boxed{\hat{\var}(\hat{u}_{it}) -
+    \hat{\mathbb{E}}[\hat{u}_{it} \hat{u}_{is}]} $$
+    $$ \hat{\lambda} = \boxed{1 -
+    \sqrt{\frac{\hat{\sigma}_\eta^2}{\hat{\sigma}_\eta^2 + T
+    \hat{\sigma}_\alpha^2}}} $$
+
 \end{enumerate}
 
 \end{problemparts}
@@ -110,6 +259,19 @@ conclusion as well.
 
 \problempart % Problem 2c
 
+The differences-in-differences estimator for the effect of the policy on
+obesity is,
+\begin{align*}
+    \delta &= \bar{Y}_{\mathrm{NYC}}^{\mathrm{after}} -
+    \left(\left(\bar{Y}_{\mathrm{WC}}^{\mathrm{after}} -
+    \bar{Y}_{\mathrm{WC}}^{\mathrm{before}}\right) +
+    \bar{Y}_{\mathrm{NYC}}^{\mathrm{before}}\right) \\
+    &= \boxed{\left(\bar{Y}_{\mathrm{NYC}}^{\mathrm{after}}
+    -\bar{Y}_{\mathrm{NYC}}^{\mathrm{before}}\right) -
+    \left(\bar{Y}_{\mathrm{WC}}^{\mathrm{after}} -
+    \bar{Y}_{\mathrm{WC}}^{\mathrm{before}}\right)}
+\end{align*}
+
 \problempart % Problem 2d
 
 The differences-in-differences estimator takes both ideas from Part A and
@@ -130,6 +292,25 @@ treated.
 
 \problempart % Problem 2f
 
+We can define each of the quantities used in Part C in terms of regression
+coefficients,
+$$ \bar{Y}_{\mathrm{NYC}}^{\mathrm{after}} = \beta_0 + \beta_1 + \beta_2 +
+\delta $$
+$$ \bar{Y}_{\mathrm{NYC}}^{\mathrm{before}} = \beta_0 + \beta_1 $$
+$$ \bar{Y}_{\mathrm{WC}}^{\mathrm{after}} = \beta_0 + \beta_2 $$
+$$ \bar{Y}_{\mathrm{WC}}^{\mathrm{before}} = \beta_0 $$
+Substituting into the differences-in-differences estimator from Part C,
+\begin{align*}
+    \delta &= \left(\bar{Y}_{\mathrm{NYC}}^{\mathrm{after}}
+    -\bar{Y}_{\mathrm{NYC}}^{\mathrm{before}}\right) -
+    \left(\bar{Y}_{\mathrm{WC}}^{\mathrm{after}} -
+    \bar{Y}_{\mathrm{WC}}^{\mathrm{before}}\right) \\
+    &= ((\beta_0 + \beta_1 + \beta_2 + \delta) - (\beta_0 + \beta_1)) -
+    ((\beta_0 + \beta_2) - (\beta_0)) \\
+    &= \delta
+\end{align*}
+Therefore, both specifications have the same result.
+
 \end{problemparts}
 
 \newpage
@@ -140,11 +321,70 @@ treated.
 
 \problempart % Problem 3a
 
+First consider the latent dependent variable $y_i^*$. We use the following
+model,
+$$ y_i^* = X_i^T \beta - \varepsilon_i^* $$
+We wish to derive the probability $\mathbb{P}(y_i = 1 \mid X_i)$. Using the
+latent dependent variable,
+\begin{align*}
+    \mathbb{P}(y_i = 1 \mid X_i) &= \mathbb{P}(y_i^* \geq 0 \mid X_i) \\
+    &= \mathbb{P}(X_i^T \beta - \varepsilon_i^* \geq 0 \mid X_i) \\
+    &= \mathbb{P}(\varepsilon_i^* \leq X_i^T \beta \mid X_i)
+\end{align*}
+Using the CDF of the normal distribution given,
+$$ \mathbb{P}(y_i = 1 \mid X_i) = \boxed{\Phi(X_i^T \beta)} $$
+
 \problempart % Problem 3b
+
+The likelihood of $\left\{y_i, X_i\right\}_{i = 1}^n$ is
+given by the joint distribution and a candidate $\beta$.
+$$ \mathcal{L}\left(\beta \mid \left\{y_i, X_i\right\}_{i = 1}^n\right) =
+\mathbb{P} \left(\{y_i\}_{i = 1}^n \mid \{X_i\}_{i = 1}^n, \beta\right) $$
+Since each $X_i$ is independent, the join distribution reduces to the product
+of individual probabilities,
+$$ \mathcal{L}\left(\beta \mid \left\{y_i, X_i\right\}_{i = 1}^n\right) =
+\prod_{i = 1}^n \mathbb{P} \left(y_i \mid X_i, \beta\right) $$
+To encode the choices between $y_i = 1$ and $y_i = 0$, we can write this as,
+\begin{align*}
+    \mathcal{L}\left(\beta \mid \left\{y_i, X_i\right\}_{i = 1}^n\right) &=
+    \prod_{i = 1}^n \mathbb{P} \left(y_i = 1 \mid X_i, \beta\right)^{y_i}
+    \mathbb{P} \left(y_i = 0 \mid X_i, \beta\right)^{(1 - y_i)} \\
+    &= \prod_{i = 1}^n \mathbb{P} \left(y_i = 1 \mid X_i, \beta\right)^{y_i}
+    \left(1 - \mathbb{P} \left(y_i = 1 \mid X_i, \beta\right)\right)^{(1 -
+    y_i)} \\
+    &= \boxed{\prod_{i = 1}^n \Phi \left(X_i^T \beta\right)^{y_i} \left(1 -
+    \Phi \left(X_i^T \beta\right)\right)^{(1 - y_i)}} \\
+\end{align*}
+Taking the logarithm of this yields,
+$$ \log \mathcal{L}\left(\beta \mid \left\{y_i, X_i\right\}_{i = 1}^n\right)
+= \boxed{\sum_{i = 1}^n y_i \log \Phi \left(X_i^T \beta\right) + (1 - y_i)
+\log \left(1 - \Phi \left(X_i^T \beta\right)\right)}$$
 
 \problempart % Problem 3c
 
+To find the estimate for $\beta$, we maximize the likelihood (or the
+logarithm of the likelihood).
+$$ \hat{\beta} = \arg\max_{\beta} \sum_{i = 1}^n y_i \log \Phi \left(X_i^T
+\beta\right) + (1 - y_i) \log \left(1 - \Phi \left(X_i^T \beta\right)\right) $$
+To find this maximum, we take the derivative with respect to $\beta$,
+$$ \frac{\partial}{\partial \beta}(\cdot) = \sum_{i = 1}^n
+\frac{y_i\Phi'\left(X_i^T \beta\right) X_i^T }{\Phi \left(X_i^T \beta\right)}
+- \frac{(1 - y_i)\Phi'\left(X_i^T \beta\right) X_i^T}{\left(1 - \Phi
+\left(X_i^T \beta\right)\right)}$$
+Setting this equal to zero and solving for $\beta$ will yield $\hat{\beta}$
+which maximizes the likelihood.
+$$ 0 = \boxed{\sum_{i = 1}^n \frac{y_i\Phi'\left(X_i^T \hat{\beta}\right) X_i^T
+}{\Phi \left(X_i^T \hat{\beta}\right)} - \frac{(1 - y_i)\Phi'\left(X_i^T
+\hat{\beta}\right) X_i^T}{\left(1 - \Phi \left(X_i^T
+\hat{\beta}\right)\right)}} $$
+There is no closed form for this equation.
+
 \problempart % Problem 3d
+
+Starting with the definition of the probability from above,
+$$ \mathbb{P}(y_i = 1 \mid X_i) = \boxed{\Phi(X_i^T \beta)} $$
+We take the derivative with respect to $X_i$,
+$$ \frac{\partial}{\partial X_i}(\cdot) = \boxed{\Phi'(X_i^T \beta) \beta} $$
 
 \end{problemparts}
 
