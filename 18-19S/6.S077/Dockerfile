@@ -19,9 +19,7 @@ RUN pip3 install \
     scikit-learn \
     tensorflow
 
-RUN useradd -ms /bin/bash jovyan
-USER jovyan
+RUN useradd -ms /bin/bash u6s077
+USER u6s077
 
-WORKDIR /home/jovyan/work
-
-ENTRYPOINT [ "jupyter", "notebook", "--ip=0.0.0.0" ]
+WORKDIR /home/u6s077/work

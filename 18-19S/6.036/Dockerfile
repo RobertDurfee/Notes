@@ -10,7 +10,7 @@ RUN pip3 install \
     tensorflow==2.0.0-alpha0 \
     matplotlib
 
-RUN useradd -ms /bin/bash _6036
-USER _6036
+RUN useradd -ms /bin/bash u6036
+USER u6036
 
-WORKDIR /home/_6036/work
+WORKDIR /home/u6036/work

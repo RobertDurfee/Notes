@@ -20,9 +20,7 @@ RUN pip3 install \
     linearmodels \
     scikit-learn
 
-RUN useradd -ms /bin/bash jovyan
-USER jovyan
+RUN useradd -ms /bin/bash u1432
+USER u1432
 
-WORKDIR /home/jovyan/work
-
-ENTRYPOINT [ "jupyter", "notebook", "--ip=0.0.0.0" ]
+WORKDIR /home/u1432/work
