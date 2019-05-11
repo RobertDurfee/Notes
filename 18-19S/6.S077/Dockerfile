@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     pandoc
 
 RUN pip3 install \
+    pylint \
     jupyter \
     numpy \
     scipy \
