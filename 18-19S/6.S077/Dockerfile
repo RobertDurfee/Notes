@@ -20,7 +20,9 @@ RUN pip3 install \
     scikit-learn \
     tensorflow
 
-RUN useradd -ms /bin/bash u6s077
-USER u6s077
+RUN mkdir /workspace
+WORKDIR /workspace
 
-WORKDIR /home/u6s077/work
+RUN apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
